@@ -1,0 +1,114 @@
+apiVersion: vpnipsec.ionoscloud.io/v1alpha1
+kind: VpnIpsecTunnel
+metadata:
+  annotations:
+    meta.upbound.io/example-id: vpnipsec/v1alpha1/vpnipsectunnel
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    auth:
+    - method: PSK
+      pskKeySecretRef:
+        key: example-key
+        name: example-secret
+        namespace: upbound-system
+    cloudNetworkCidrs:
+    - 0.0.0.0/0
+    description: Allows local subnet X to connect to virtual network Y.
+    esp:
+    - diffieHellmanGroup: 16-MODP4096
+      encryptionAlgorithm: AES256
+      integrityAlgorithm: SHA256
+      lifetime: 3600
+    gatewayIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    ike:
+    - diffieHellmanGroup: 16-MODP4096
+      encryptionAlgorithm: AES256
+      integrityAlgorithm: SHA256
+      lifetime: 86400
+    location: de/fra
+    name: example-tunnel
+    peerNetworkCidrs:
+    - 1.2.3.4/32
+    remoteHost: vpn.mycompany.com
+
+---
+
+apiVersion: compute.ionoscloud.io/v1alpha1
+kind: Datacenter
+metadata:
+  annotations:
+    meta.upbound.io/example-id: vpnipsec/v1alpha1/vpnipsectunnel
+  labels:
+    testing.upbound.io/example-name: test_datacenter
+  name: test-datacenter
+spec:
+  forProvider:
+    location: de/fra
+    name: test_vpn_gateway_basic
+
+---
+
+apiVersion: compute.ionoscloud.io/v1alpha1
+kind: Ipblock
+metadata:
+  annotations:
+    meta.upbound.io/example-id: vpnipsec/v1alpha1/vpnipsectunnel
+  labels:
+    testing.upbound.io/example-name: test_ipblock
+  name: test-ipblock
+spec:
+  forProvider:
+    location: de/fra
+    name: test_ipblock_basic
+    size: 1
+
+---
+
+apiVersion: compute.ionoscloud.io/v1alpha1
+kind: Lan
+metadata:
+  annotations:
+    meta.upbound.io/example-id: vpnipsec/v1alpha1/vpnipsectunnel
+  labels:
+    testing.upbound.io/example-name: test_lan
+  name: test-lan
+spec:
+  forProvider:
+    datacenterIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: test_datacenter
+    name: test_lan_basic
+    public: false
+
+---
+
+apiVersion: vpnipsec.ionoscloud.io/v1alpha1
+kind: VpnIpsecGateway
+metadata:
+  annotations:
+    meta.upbound.io/example-id: vpnipsec/v1alpha1/vpnipsectunnel
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    connections:
+    - datacenterIdSelector:
+        matchLabels:
+          testing.upbound.io/example-name: test_datacenter
+      ipv4Cidr: 192.168.100.10/24
+      lanIdSelector:
+        matchLabels:
+          testing.upbound.io/example-name: test_lan
+    description: This gateway connects site A to VDC X.
+    gatewayIpSelector:
+      matchLabels:
+        testing.upbound.io/example-name: test_ipblock
+    location: de/fra
+    name: ipsec_gateway_basic
+    version: IKEv2

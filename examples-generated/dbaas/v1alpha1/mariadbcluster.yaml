@@ -1,0 +1,104 @@
+apiVersion: dbaas.mariadb.ionoscloud.io/v1alpha1
+kind: MariadbCluster
+metadata:
+  annotations:
+    meta.upbound.io/example-id: dbaas/v1alpha1/mariadbcluster
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    connections:
+    - cidr: ${local.database_ip_cidr}
+      datacenterIdSelector:
+        matchLabels:
+          testing.upbound.io/example-name: example
+      lanIdSelector:
+        matchLabels:
+          testing.upbound.io/example-name: example
+    cores: 4
+    credentials:
+    - passwordSecretRef:
+        key: attribute.result
+        name: example-password
+        namespace: upbound-system
+      username: username
+    displayName: MariaDB_cluster
+    instances: 1
+    location: de/txl
+    maintenanceWindow:
+    - dayOfTheWeek: Sunday
+      time: "09:00:00"
+    mariadbVersion: "10.6"
+    ram: 4
+    storageSize: 10
+
+---
+
+apiVersion: compute.ionoscloud.io/v1alpha1
+kind: Datacenter
+metadata:
+  annotations:
+    meta.upbound.io/example-id: dbaas.mariadb/v1alpha1/mariadbcluster
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    description: Datacenter for testing DBaaS cluster
+    location: de/txl
+    name: example
+
+---
+
+apiVersion: compute.ionoscloud.io/v1alpha1
+kind: Lan
+metadata:
+  annotations:
+    meta.upbound.io/example-id: dbaas.mariadb/v1alpha1/mariadbcluster
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    datacenterIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    name: example
+    public: false
+
+---
+
+apiVersion: compute.ionoscloud.io/v1alpha1
+kind: Server
+metadata:
+  annotations:
+    meta.upbound.io/example-id: dbaas.mariadb/v1alpha1/mariadbcluster
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    availabilityZone: ZONE_1
+    cores: 2
+    cpuFamily: INTEL_SKYLAKE
+    datacenterIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    imageName: rockylinux-8-GenericCloud-20230518
+    imagePasswordSecretRef:
+      key: example-key
+      name: example-secret
+      namespace: upbound-system
+    name: example
+    nic:
+    - dhcp: true
+      lanSelector:
+        matchLabels:
+          testing.upbound.io/example-name: example
+      name: example
+    ram: 2048
+    volume:
+    - diskType: SSD Standard
+      name: example
+      size: 10

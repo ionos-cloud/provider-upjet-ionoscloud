@@ -1,0 +1,13 @@
+apiVersion: apigateway.ionoscloud.io/v1alpha1
+kind: Apigateway
+metadata:
+  name: example
+  labels:
+    testing.upbound.io/example-name: example
+spec:
+  managementPolicies:
+    - "*"
+  forProvider:
+    name: apigateway
+    metrics: true
+  #    secAuthProtection: true

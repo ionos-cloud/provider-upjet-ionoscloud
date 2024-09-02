@@ -1,0 +1,21 @@
+apiVersion: k8s.ionoscloud.io/v1alpha1
+kind: Cluster
+metadata:
+  annotations:
+    meta.upbound.io/example-id: k8s/v1alpha1/cluster
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    apiSubnetAllowList:
+    - 1.2.3.4/32
+    k8sVersion: 1.28.6
+    maintenanceWindow:
+    - dayOfTheWeek: Sunday
+      time: 09:00:00Z
+    name: k8sClusterExample
+    s3Buckets:
+    - nameSelector:
+        matchLabels:
+          testing.upbound.io/example-name: example

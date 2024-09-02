@@ -1,0 +1,23 @@
+apiVersion: nfs.ionoscloud.io/v1alpha1
+kind: NFSCluster
+metadata:
+  annotations:
+    meta.upbound.io/example-id: nfs/v1alpha1/nfscluster
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    connections:
+      - datacenterIdSelector:
+          matchLabels:
+            testing.upbound.io/example-name: nfs_dc
+        ipAddress: 192.168.100.10/24
+        lanSelector:
+          matchLabels:
+            testing.upbound.io/example-name: nfs_lan
+    location: de/txl
+    name: test
+    nfs:
+      - minVersion: "4.2"
+    size: 2

@@ -1,0 +1,84 @@
+apiVersion: compute.ionoscloud.io/v1alpha1
+kind: Crossconnect
+metadata:
+  annotations:
+    meta.upbound.io/example-id: compute/v1alpha1/crossconnect
+  labels:
+    testing.upbound.io/example-name: CrossConnectTestResource
+  name: crossconnecttestresource
+spec:
+  forProvider:
+    description: CrossConnectTestResource
+    name: CrossConnectTestResource
+
+---
+
+apiVersion: compute.ionoscloud.io/v1alpha1
+kind: Datacenter
+metadata:
+  annotations:
+    meta.upbound.io/example-id: compute/v1alpha1/crossconnect
+  labels:
+    testing.upbound.io/example-name: dc1
+  name: dc1
+spec:
+  forProvider:
+    location: de/txl
+    name: dc1
+
+---
+
+apiVersion: compute.ionoscloud.io/v1alpha1
+kind: Datacenter
+metadata:
+  annotations:
+    meta.upbound.io/example-id: compute/v1alpha1/crossconnect
+  labels:
+    testing.upbound.io/example-name: dc2
+  name: dc2
+spec:
+  forProvider:
+    location: de/txl
+    name: dc2
+
+---
+
+apiVersion: compute.ionoscloud.io/v1alpha1
+kind: Lan
+metadata:
+  annotations:
+    meta.upbound.io/example-id: compute/v1alpha1/crossconnect
+  labels:
+    testing.upbound.io/example-name: dc1lan
+  name: dc1lan
+spec:
+  forProvider:
+    datacenterIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: dc1
+    name: dc1lan
+    pccSelector:
+      matchLabels:
+        testing.upbound.io/example-name: CrossConnectTestResource
+    public: false
+
+---
+
+apiVersion: compute.ionoscloud.io/v1alpha1
+kind: Lan
+metadata:
+  annotations:
+    meta.upbound.io/example-id: compute/v1alpha1/crossconnect
+  labels:
+    testing.upbound.io/example-name: dc2lan
+  name: dc2lan
+spec:
+  forProvider:
+    datacenterIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: dc2
+    name: dc2lan
+    pccSelector:
+      matchLabels:
+        testing.upbound.io/example-name: CrossConnectTestResource
+    public: false

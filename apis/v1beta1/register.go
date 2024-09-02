@@ -13,7 +13,7 @@ import (
 
 // Package type metadata.
 const (
-	Group   = "template.upbound.io"
+	Group   = "upjet-ionoscloud.ionoscloud.io"
 	Version = "v1beta1"
 )
 

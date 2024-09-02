@@ -1,0 +1,58 @@
+apiVersion: kafka.ionoscloud.io/v1alpha1
+kind: Kafka
+metadata:
+  annotations:
+    meta.upbound.io/example-id: kafka/v1alpha1/kafka
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    connections:
+    - brokerAddresses:
+      - 192.168.1.101/24
+      - 192.168.1.102/24
+      - 192.168.1.103/24
+      datacenterIdSelector:
+        matchLabels:
+          testing.upbound.io/example-name: example
+      lanIdSelector:
+        matchLabels:
+          testing.upbound.io/example-name: example
+    location: de/fra
+    name: example-kafka-cluster
+    size: S
+    version: 3.7.0
+
+---
+
+apiVersion: compute.ionoscloud.io/v1alpha1
+kind: Datacenter
+metadata:
+  annotations:
+    meta.upbound.io/example-id: kafka/v1alpha1/kafka
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    location: de/fra
+    name: example-kafka-datacenter
+
+---
+
+apiVersion: compute.ionoscloud.io/v1alpha1
+kind: Lan
+metadata:
+  annotations:
+    meta.upbound.io/example-id: kafka/v1alpha1/kafka
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    datacenterIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    name: example-kafka-lan
+    public: false
