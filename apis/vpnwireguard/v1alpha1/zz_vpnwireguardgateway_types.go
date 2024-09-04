@@ -108,7 +108,7 @@ type VpnWireguardGatewayInitParameters struct {
 
 	// [String] The IP address of the WireGuard Gateway.
 	// +crossplane:generate:reference:type=github.com/ionos-cloud/provider-upjet-ionoscloud/apis/compute/v1alpha1.Ipblock
-	// +crossplane:generate:reference:extractor=github.com/ionos-cloud/provider-ionoscloud/config/common.FirstIPBlockIP()
+	// +crossplane:generate:reference:extractor=github.com/ionos-cloud/provider-upjet-ionoscloud/config/common.FirstIPBlockIP()
 	GatewayIP *string `json:"gatewayIp,omitempty" tf:"gateway_ip,omitempty"`
 
 	// Reference to a Ipblock in compute to populate gatewayIp.
@@ -196,7 +196,7 @@ type VpnWireguardGatewayParameters struct {
 
 	// [String] The IP address of the WireGuard Gateway.
 	// +crossplane:generate:reference:type=github.com/ionos-cloud/provider-upjet-ionoscloud/apis/compute/v1alpha1.Ipblock
-	// +crossplane:generate:reference:extractor=github.com/ionos-cloud/provider-ionoscloud/config/common.FirstIPBlockIP()
+	// +crossplane:generate:reference:extractor=github.com/ionos-cloud/provider-upjet-ionoscloud/config/common.FirstIPBlockIP()
 	// +kubebuilder:validation:Optional
 	GatewayIP *string `json:"gatewayIp,omitempty" tf:"gateway_ip,omitempty"`
 

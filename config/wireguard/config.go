@@ -11,7 +11,7 @@ func Configure(p *config.Provider) {
 		r.Kind = "VpnWireguardGateway"
 		r.References["gateway_ip"] = config.Reference{
 			TerraformName: "ionoscloud_ipblock",
-			Extractor:     "github.com/ionos-cloud/provider-ionoscloud/config/common.FirstIPBlockIP()",
+			Extractor:     "github.com/ionos-cloud/provider-upjet-ionoscloud/config/common.FirstIPBlockIP()",
 		}
 		r.References["connections.datacenter_id"] = config.Reference{
 			TerraformName: "ionoscloud_datacenter",
