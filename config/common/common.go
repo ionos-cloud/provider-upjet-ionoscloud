@@ -3,7 +3,7 @@ package common
 import (
 	"github.com/crossplane/crossplane-runtime/pkg/reference"
 	xpresource "github.com/crossplane/crossplane-runtime/pkg/resource"
-	"github.com/ionos-cloud/provider-ionoscloud/apis/compute/v1alpha1"
+	"github.com/ionos-cloud/provider-upjet-ionoscloud/apis/compute/v1alpha1"
 )
 
 // FirstIPBlockIP returns the first IP of an ipblock to assign to a wireguard gateway
