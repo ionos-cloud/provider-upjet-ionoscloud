@@ -99,20 +99,18 @@ spec:
                     description: |-
                       A maintenance window comprise of a day of the week and a time for maintenance to be allowed
                       A maintenance window comprise of a day of the week and a time for maintenance to be allowed
-                    items:
-                      properties:
-                        dayOfTheWeek:
-                          description: |-
-                            [string] Day of the week when maintenance is allowed
-                            Day of the week when maintenance is allowed
-                          type: string
-                        time:
-                          description: |-
-                            [string] A clock time in the day when maintenance is allowed
-                            A clock time in the day when maintenance is allowed
-                          type: string
-                      type: object
-                    type: array
+                    properties:
+                      dayOfTheWeek:
+                        description: |-
+                          [string] Day of the week when maintenance is allowed
+                          Day of the week when maintenance is allowed
+                        type: string
+                      time:
+                        description: |-
+                          [string] A clock time in the day when maintenance is allowed
+                          A clock time in the day when maintenance is allowed
+                        type: string
+                    type: object
                   name:
                     description: |-
                       [string] The name of the Kubernetes Cluster.
@@ -260,20 +258,18 @@ spec:
                     description: |-
                       A maintenance window comprise of a day of the week and a time for maintenance to be allowed
                       A maintenance window comprise of a day of the week and a time for maintenance to be allowed
-                    items:
-                      properties:
-                        dayOfTheWeek:
-                          description: |-
-                            [string] Day of the week when maintenance is allowed
-                            Day of the week when maintenance is allowed
-                          type: string
-                        time:
-                          description: |-
-                            [string] A clock time in the day when maintenance is allowed
-                            A clock time in the day when maintenance is allowed
-                          type: string
-                      type: object
-                    type: array
+                    properties:
+                      dayOfTheWeek:
+                        description: |-
+                          [string] Day of the week when maintenance is allowed
+                          Day of the week when maintenance is allowed
+                        type: string
+                      time:
+                        description: |-
+                          [string] A clock time in the day when maintenance is allowed
+                          A clock time in the day when maintenance is allowed
+                        type: string
+                    type: object
                   name:
                     description: |-
                       [string] The name of the Kubernetes Cluster.
@@ -587,20 +583,18 @@ spec:
                     description: |-
                       A maintenance window comprise of a day of the week and a time for maintenance to be allowed
                       A maintenance window comprise of a day of the week and a time for maintenance to be allowed
-                    items:
-                      properties:
-                        dayOfTheWeek:
-                          description: |-
-                            [string] Day of the week when maintenance is allowed
-                            Day of the week when maintenance is allowed
-                          type: string
-                        time:
-                          description: |-
-                            [string] A clock time in the day when maintenance is allowed
-                            A clock time in the day when maintenance is allowed
-                          type: string
-                      type: object
-                    type: array
+                    properties:
+                      dayOfTheWeek:
+                        description: |-
+                          [string] Day of the week when maintenance is allowed
+                          Day of the week when maintenance is allowed
+                        type: string
+                      time:
+                        description: |-
+                          [string] A clock time in the day when maintenance is allowed
+                          A clock time in the day when maintenance is allowed
+                        type: string
+                    type: object
                   name:
                     description: |-
                       [string] The name of the Kubernetes Cluster.

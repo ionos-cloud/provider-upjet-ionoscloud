@@ -14,12 +14,17 @@ import (
 )
 
 type VolumeInitParameters_2 struct {
+
+	// [string] The storage availability zone assigned to the volume: AUTO, ZONE_1, ZONE_2, or ZONE_3. This property is immutable
 	AvailabilityZone *string `json:"availabilityZone,omitempty" tf:"availability_zone,omitempty"`
 
+	// [string] The uuid of the Backup Unit that user has access to. The property is immutable and is only allowed to be set on a new volume creation. It is mandatory to provide either 'public image' or 'imageAlias' in conjunction with this property.
 	BackupUnitID *string `json:"backupUnitId,omitempty" tf:"backup_unit_id,omitempty"`
 
+	// [Boolean] The bus type of the volume: VIRTIO or IDE.
 	Bus *string `json:"bus,omitempty" tf:"bus,omitempty"`
 
+	// [string] The ID of a Virtual Data Center.
 	// +crossplane:generate:reference:type=github.com/ionos-cloud/provider-upjet-ionoscloud/apis/compute/v1alpha1.Datacenter
 	DatacenterID *string `json:"datacenterId,omitempty" tf:"datacenter_id,omitempty"`
 
@@ -31,20 +36,28 @@ type VolumeInitParameters_2 struct {
 	// +kubebuilder:validation:Optional
 	DatacenterIDSelector *v1.Selector `json:"datacenterIdSelector,omitempty" tf:"-"`
 
+	// [string] The volume type: HDD or SSD. This property is immutable.
 	DiskType *string `json:"diskType,omitempty" tf:"disk_type,omitempty"`
 
+	// [string] The name, ID or alias of the image. May also be a snapshot ID. It is required if licence_type is not provided. Attribute is immutable.
 	ImageName *string `json:"imageName,omitempty" tf:"image_name,omitempty"`
 
+	// [string] Required if sshkey_path is not provided.
 	ImagePassword *string `json:"imagePassword,omitempty" tf:"image_password,omitempty"`
 
+	// [string] Required if image_name is not provided.
 	LicenceType *string `json:"licenceType,omitempty" tf:"licence_type,omitempty"`
 
+	// [string] The name of the volume.
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
+	// [list] List of absolute paths to files containing a public SSH key that will be injected into IonosCloud provided Linux images. Also accepts ssh keys directly. Required for IonosCloud Linux images. Required if image_password is not provided. This property is immutable.
 	SSHKeyPath []*string `json:"sshKeyPath,omitempty" tf:"ssh_key_path,omitempty"`
 
+	// [list] List of absolute paths to files containing a public SSH key that will be injected into IonosCloud provided Linux images. Also accepts ssh keys directly. Required for IonosCloud Linux images. Required if image_password is not provided. This property is immutable.
 	SSHKeys []*string `json:"sshKeys,omitempty" tf:"ssh_keys,omitempty"`
 
+	// [string] The ID of a server.
 	// +crossplane:generate:reference:type=github.com/ionos-cloud/provider-upjet-ionoscloud/apis/compute/v1alpha1.Server
 	ServerID *string `json:"serverId,omitempty" tf:"server_id,omitempty"`
 
@@ -56,79 +69,111 @@ type VolumeInitParameters_2 struct {
 	// +kubebuilder:validation:Optional
 	ServerIDSelector *v1.Selector `json:"serverIdSelector,omitempty" tf:"-"`
 
+	// [integer] The size of the volume in GB.
 	Size *float64 `json:"size,omitempty" tf:"size,omitempty"`
 
+	// [string] The cloud-init configuration for the volume as base64 encoded string. The property is immutable and is only allowed to be set on a new volume creation. This option will work only with cloud-init compatible images.
 	UserData *string `json:"userData,omitempty" tf:"user_data,omitempty"`
 }
 
 type VolumeObservation_2 struct {
+
+	// [string] The storage availability zone assigned to the volume: AUTO, ZONE_1, ZONE_2, or ZONE_3. This property is immutable
 	AvailabilityZone *string `json:"availabilityZone,omitempty" tf:"availability_zone,omitempty"`
 
+	// [string] The uuid of the Backup Unit that user has access to. The property is immutable and is only allowed to be set on a new volume creation. It is mandatory to provide either 'public image' or 'imageAlias' in conjunction with this property.
 	BackupUnitID *string `json:"backupUnitId,omitempty" tf:"backup_unit_id,omitempty"`
 
+	// (Computed)[string] The UUID of the attached server.
 	// The UUID of the attached server.
 	BootServer *string `json:"bootServer,omitempty" tf:"boot_server,omitempty"`
 
+	// [Boolean] The bus type of the volume: VIRTIO or IDE.
 	Bus *string `json:"bus,omitempty" tf:"bus,omitempty"`
 
+	// (Computed)[string] Is capable of CPU hot plug (no reboot required)
 	CPUHotPlug *bool `json:"cpuHotPlug,omitempty" tf:"cpu_hot_plug,omitempty"`
 
+	// [string] The ID of a Virtual Data Center.
 	DatacenterID *string `json:"datacenterId,omitempty" tf:"datacenter_id,omitempty"`
 
+	// (Computed) The Logical Unit Number of the storage volume. Null for volumes not mounted to any VM.
 	DeviceNumber *float64 `json:"deviceNumber,omitempty" tf:"device_number,omitempty"`
 
+	// (Computed)[string] Is capable of Virt-IO drive hot plug (no reboot required)
 	DiscVirtioHotPlug *bool `json:"discVirtioHotPlug,omitempty" tf:"disc_virtio_hot_plug,omitempty"`
 
+	// (Computed)[string] Is capable of Virt-IO drive hot unplug (no reboot required). This works only for non-Windows virtual Machines.
 	DiscVirtioHotUnplug *bool `json:"discVirtioHotUnplug,omitempty" tf:"disc_virtio_hot_unplug,omitempty"`
 
+	// [string] The volume type: HDD or SSD. This property is immutable.
 	DiskType *string `json:"diskType,omitempty" tf:"disk_type,omitempty"`
 
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
+	// (Computed) The image or snapshot UUID.
 	Image *string `json:"image,omitempty" tf:"image,omitempty"`
 
 	ImageID *string `json:"imageId,omitempty" tf:"image_id,omitempty"`
 
+	// [string] The name, ID or alias of the image. May also be a snapshot ID. It is required if licence_type is not provided. Attribute is immutable.
 	ImageName *string `json:"imageName,omitempty" tf:"image_name,omitempty"`
 
+	// [string] Required if sshkey_path is not provided.
 	ImagePassword *string `json:"imagePassword,omitempty" tf:"image_password,omitempty"`
 
+	// [string] Required if image_name is not provided.
 	LicenceType *string `json:"licenceType,omitempty" tf:"licence_type,omitempty"`
 
+	// [string] The name of the volume.
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
+	// (Computed)[string] Is capable of nic hot plug (no reboot required)
 	NicHotPlug *bool `json:"nicHotPlug,omitempty" tf:"nic_hot_plug,omitempty"`
 
+	// (Computed)[string] Is capable of nic hot unplug (no reboot required)
 	NicHotUnplug *bool `json:"nicHotUnplug,omitempty" tf:"nic_hot_unplug,omitempty"`
 
+	// (Computed) The PCI slot number of the storage volume. Null for volumes not mounted to any VM.
 	PciSlot *float64 `json:"pciSlot,omitempty" tf:"pci_slot,omitempty"`
 
+	// (Computed)[string] Is capable of memory hot plug (no reboot required)
 	RAMHotPlug *bool `json:"ramHotPlug,omitempty" tf:"ram_hot_plug,omitempty"`
 
+	// [list] List of absolute paths to files containing a public SSH key that will be injected into IonosCloud provided Linux images. Also accepts ssh keys directly. Required for IonosCloud Linux images. Required if image_password is not provided. This property is immutable.
 	SSHKeyPath []*string `json:"sshKeyPath,omitempty" tf:"ssh_key_path,omitempty"`
 
+	// [list] List of absolute paths to files containing a public SSH key that will be injected into IonosCloud provided Linux images. Also accepts ssh keys directly. Required for IonosCloud Linux images. Required if image_password is not provided. This property is immutable.
 	SSHKeys []*string `json:"sshKeys,omitempty" tf:"ssh_keys,omitempty"`
 
+	// [string] The ID of a server.
 	ServerID *string `json:"serverId,omitempty" tf:"server_id,omitempty"`
 
+	// [integer] The size of the volume in GB.
 	Size *float64 `json:"size,omitempty" tf:"size,omitempty"`
 
+	// (Computed) The associated public SSH key.
 	Sshkey *string `json:"sshkey,omitempty" tf:"sshkey,omitempty"`
 
+	// [string] The cloud-init configuration for the volume as base64 encoded string. The property is immutable and is only allowed to be set on a new volume creation. This option will work only with cloud-init compatible images.
 	UserData *string `json:"userData,omitempty" tf:"user_data,omitempty"`
 }
 
 type VolumeParameters_2 struct {
 
+	// [string] The storage availability zone assigned to the volume: AUTO, ZONE_1, ZONE_2, or ZONE_3. This property is immutable
 	// +kubebuilder:validation:Optional
 	AvailabilityZone *string `json:"availabilityZone,omitempty" tf:"availability_zone,omitempty"`
 
+	// [string] The uuid of the Backup Unit that user has access to. The property is immutable and is only allowed to be set on a new volume creation. It is mandatory to provide either 'public image' or 'imageAlias' in conjunction with this property.
 	// +kubebuilder:validation:Optional
 	BackupUnitID *string `json:"backupUnitId,omitempty" tf:"backup_unit_id,omitempty"`
 
+	// [Boolean] The bus type of the volume: VIRTIO or IDE.
 	// +kubebuilder:validation:Optional
 	Bus *string `json:"bus,omitempty" tf:"bus,omitempty"`
 
+	// [string] The ID of a Virtual Data Center.
 	// +crossplane:generate:reference:type=github.com/ionos-cloud/provider-upjet-ionoscloud/apis/compute/v1alpha1.Datacenter
 	// +kubebuilder:validation:Optional
 	DatacenterID *string `json:"datacenterId,omitempty" tf:"datacenter_id,omitempty"`
@@ -141,27 +186,35 @@ type VolumeParameters_2 struct {
 	// +kubebuilder:validation:Optional
 	DatacenterIDSelector *v1.Selector `json:"datacenterIdSelector,omitempty" tf:"-"`
 
+	// [string] The volume type: HDD or SSD. This property is immutable.
 	// +kubebuilder:validation:Optional
 	DiskType *string `json:"diskType,omitempty" tf:"disk_type,omitempty"`
 
+	// [string] The name, ID or alias of the image. May also be a snapshot ID. It is required if licence_type is not provided. Attribute is immutable.
 	// +kubebuilder:validation:Optional
 	ImageName *string `json:"imageName,omitempty" tf:"image_name,omitempty"`
 
+	// [string] Required if sshkey_path is not provided.
 	// +kubebuilder:validation:Optional
 	ImagePassword *string `json:"imagePassword,omitempty" tf:"image_password,omitempty"`
 
+	// [string] Required if image_name is not provided.
 	// +kubebuilder:validation:Optional
 	LicenceType *string `json:"licenceType,omitempty" tf:"licence_type,omitempty"`
 
+	// [string] The name of the volume.
 	// +kubebuilder:validation:Optional
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
+	// [list] List of absolute paths to files containing a public SSH key that will be injected into IonosCloud provided Linux images. Also accepts ssh keys directly. Required for IonosCloud Linux images. Required if image_password is not provided. This property is immutable.
 	// +kubebuilder:validation:Optional
 	SSHKeyPath []*string `json:"sshKeyPath,omitempty" tf:"ssh_key_path,omitempty"`
 
+	// [list] List of absolute paths to files containing a public SSH key that will be injected into IonosCloud provided Linux images. Also accepts ssh keys directly. Required for IonosCloud Linux images. Required if image_password is not provided. This property is immutable.
 	// +kubebuilder:validation:Optional
 	SSHKeys []*string `json:"sshKeys,omitempty" tf:"ssh_keys,omitempty"`
 
+	// [string] The ID of a server.
 	// +crossplane:generate:reference:type=github.com/ionos-cloud/provider-upjet-ionoscloud/apis/compute/v1alpha1.Server
 	// +kubebuilder:validation:Optional
 	ServerID *string `json:"serverId,omitempty" tf:"server_id,omitempty"`
@@ -174,9 +227,11 @@ type VolumeParameters_2 struct {
 	// +kubebuilder:validation:Optional
 	ServerIDSelector *v1.Selector `json:"serverIdSelector,omitempty" tf:"-"`
 
+	// [integer] The size of the volume in GB.
 	// +kubebuilder:validation:Optional
 	Size *float64 `json:"size,omitempty" tf:"size,omitempty"`
 
+	// [string] The cloud-init configuration for the volume as base64 encoded string. The property is immutable and is only allowed to be set on a new volume creation. This option will work only with cloud-init compatible images.
 	// +kubebuilder:validation:Optional
 	UserData *string `json:"userData,omitempty" tf:"user_data,omitempty"`
 }
@@ -208,7 +263,7 @@ type VolumeStatus struct {
 // +kubebuilder:subresource:status
 // +kubebuilder:storageversion
 
-// Volume is the Schema for the Volumes API. <no value>
+// Volume is the Schema for the Volumes API. Creates and manages IonosCloud Volume objects.
 // +kubebuilder:printcolumn:name="SYNCED",type="string",JSONPath=".status.conditions[?(@.type=='Synced')].status"
 // +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"
 // +kubebuilder:printcolumn:name="EXTERNAL-NAME",type="string",JSONPath=".metadata.annotations.crossplane\\.io/external-name"

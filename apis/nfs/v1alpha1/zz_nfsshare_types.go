@@ -28,7 +28,7 @@ type ClientGroupsInitParameters struct {
 	IPNetworks []*string `json:"ipNetworks,omitempty" tf:"ip_networks,omitempty"`
 
 	// NFS specific configurations. Each configuration includes:
-	NFS []ClientGroupsNFSInitParameters `json:"nfs,omitempty" tf:"nfs,omitempty"`
+	NFS *ClientGroupsNFSInitParameters `json:"nfs,omitempty" tf:"nfs,omitempty"`
 }
 
 type ClientGroupsNFSInitParameters struct {
@@ -68,7 +68,7 @@ type ClientGroupsObservation struct {
 	IPNetworks []*string `json:"ipNetworks,omitempty" tf:"ip_networks,omitempty"`
 
 	// NFS specific configurations. Each configuration includes:
-	NFS []ClientGroupsNFSObservation `json:"nfs,omitempty" tf:"nfs,omitempty"`
+	NFS *ClientGroupsNFSObservation `json:"nfs,omitempty" tf:"nfs,omitempty"`
 }
 
 type ClientGroupsParameters struct {
@@ -90,7 +90,7 @@ type ClientGroupsParameters struct {
 
 	// NFS specific configurations. Each configuration includes:
 	// +kubebuilder:validation:Optional
-	NFS []ClientGroupsNFSParameters `json:"nfs,omitempty" tf:"nfs,omitempty"`
+	NFS *ClientGroupsNFSParameters `json:"nfs,omitempty" tf:"nfs,omitempty"`
 }
 
 type NFSShareInitParameters struct {

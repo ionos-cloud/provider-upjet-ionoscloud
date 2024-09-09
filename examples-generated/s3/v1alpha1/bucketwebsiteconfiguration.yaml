@@ -1,0 +1,31 @@
+apiVersion: s3.ionoscloud.io/v1alpha1
+kind: BucketWebsiteConfiguration
+metadata:
+  annotations:
+    meta.upbound.io/example-id: s3/v1alpha1/bucketwebsiteconfiguration
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    bucketSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    routingRule:
+    - condition:
+      - keyPrefixEquals: docs/
+      redirect:
+      - replaceKeyPrefixWith: documents/
+
+---
+
+apiVersion: s3.ionoscloud.io/v1alpha1
+kind: Bucket
+metadata:
+  annotations:
+    meta.upbound.io/example-id: s3/v1alpha1/bucketwebsiteconfiguration
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider: {}

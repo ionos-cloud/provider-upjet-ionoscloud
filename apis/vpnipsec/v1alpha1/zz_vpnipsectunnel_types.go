@@ -212,7 +212,7 @@ type VpnIpsecTunnelInitParameters struct {
 	// [string] Properties with all data needed to define IPSec Authentication. Minimum items: 1. Maximum
 	// items: 1.
 	// Properties with all data needed to define IPSec Authentication.
-	Auth []AuthInitParameters `json:"auth,omitempty" tf:"auth,omitempty"`
+	Auth *AuthInitParameters `json:"auth,omitempty" tf:"auth,omitempty"`
 
 	// [list] The network CIDRs on the "Left" side that are allowed to connect to the IPSec
 	// tunnel, i.e. the CIDRs within your IONOS Cloud LAN. Specify "0.0.0.0/0" or "::/0" for all addresses. Minimum items: 1.
@@ -243,7 +243,7 @@ type VpnIpsecTunnelInitParameters struct {
 
 	// [list] Settings for the initial security exchange phase. Minimum items: 1. Maximum items: 1.
 	// Settings for the initial security exchange phase.
-	Ike []IkeInitParameters `json:"ike,omitempty" tf:"ike,omitempty"`
+	Ike *IkeInitParameters `json:"ike,omitempty" tf:"ike,omitempty"`
 
 	// [string] The location of the IPSec Gateway Tunnel. Supported locations: de/fra, de/txl, es/vit,
 	// gb/lhr, us/ewr, us/las, us/mci, fr/par
@@ -269,7 +269,7 @@ type VpnIpsecTunnelObservation struct {
 	// [string] Properties with all data needed to define IPSec Authentication. Minimum items: 1. Maximum
 	// items: 1.
 	// Properties with all data needed to define IPSec Authentication.
-	Auth []AuthObservation `json:"auth,omitempty" tf:"auth,omitempty"`
+	Auth *AuthObservation `json:"auth,omitempty" tf:"auth,omitempty"`
 
 	// [list] The network CIDRs on the "Left" side that are allowed to connect to the IPSec
 	// tunnel, i.e. the CIDRs within your IONOS Cloud LAN. Specify "0.0.0.0/0" or "::/0" for all addresses. Minimum items: 1.
@@ -293,7 +293,7 @@ type VpnIpsecTunnelObservation struct {
 
 	// [list] Settings for the initial security exchange phase. Minimum items: 1. Maximum items: 1.
 	// Settings for the initial security exchange phase.
-	Ike []IkeObservation `json:"ike,omitempty" tf:"ike,omitempty"`
+	Ike *IkeObservation `json:"ike,omitempty" tf:"ike,omitempty"`
 
 	// [string] The location of the IPSec Gateway Tunnel. Supported locations: de/fra, de/txl, es/vit,
 	// gb/lhr, us/ewr, us/las, us/mci, fr/par
@@ -320,7 +320,7 @@ type VpnIpsecTunnelParameters struct {
 	// items: 1.
 	// Properties with all data needed to define IPSec Authentication.
 	// +kubebuilder:validation:Optional
-	Auth []AuthParameters `json:"auth,omitempty" tf:"auth,omitempty"`
+	Auth *AuthParameters `json:"auth,omitempty" tf:"auth,omitempty"`
 
 	// [list] The network CIDRs on the "Left" side that are allowed to connect to the IPSec
 	// tunnel, i.e. the CIDRs within your IONOS Cloud LAN. Specify "0.0.0.0/0" or "::/0" for all addresses. Minimum items: 1.
@@ -356,7 +356,7 @@ type VpnIpsecTunnelParameters struct {
 	// [list] Settings for the initial security exchange phase. Minimum items: 1. Maximum items: 1.
 	// Settings for the initial security exchange phase.
 	// +kubebuilder:validation:Optional
-	Ike []IkeParameters `json:"ike,omitempty" tf:"ike,omitempty"`
+	Ike *IkeParameters `json:"ike,omitempty" tf:"ike,omitempty"`
 
 	// [string] The location of the IPSec Gateway Tunnel. Supported locations: de/fra, de/txl, es/vit,
 	// gb/lhr, us/ewr, us/las, us/mci, fr/par

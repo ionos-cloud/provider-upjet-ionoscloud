@@ -101,14 +101,14 @@ type NFSClusterInitParameters struct {
 
 	// A list of connections for the Network File Storage cluster. You can specify only one connection. Connections are immutable. Each connection supports the following:
 	// The network connections for the Network File Storage Cluster.
-	Connections []ConnectionsInitParameters `json:"connections,omitempty" tf:"connections,omitempty"`
+	Connections *ConnectionsInitParameters `json:"connections,omitempty" tf:"connections,omitempty"`
 
 	// The location where the Network File Storage cluster is located.
 	// The location of the Network File Storage Cluster. Available locations: 'de/fra, 'de/txl'
 	Location *string `json:"location,omitempty" tf:"location,omitempty"`
 
 	// The NFS configuration for the Network File Storage cluster. Each NFS configuration supports the following:
-	NFS []NFSInitParameters `json:"nfs,omitempty" tf:"nfs,omitempty"`
+	NFS *NFSInitParameters `json:"nfs,omitempty" tf:"nfs,omitempty"`
 
 	// The name of the Network File Storage cluster.
 	// The name of the Network File Storage Cluster.
@@ -123,7 +123,7 @@ type NFSClusterObservation struct {
 
 	// A list of connections for the Network File Storage cluster. You can specify only one connection. Connections are immutable. Each connection supports the following:
 	// The network connections for the Network File Storage Cluster.
-	Connections []ConnectionsObservation `json:"connections,omitempty" tf:"connections,omitempty"`
+	Connections *ConnectionsObservation `json:"connections,omitempty" tf:"connections,omitempty"`
 
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
@@ -132,7 +132,7 @@ type NFSClusterObservation struct {
 	Location *string `json:"location,omitempty" tf:"location,omitempty"`
 
 	// The NFS configuration for the Network File Storage cluster. Each NFS configuration supports the following:
-	NFS []NFSObservation `json:"nfs,omitempty" tf:"nfs,omitempty"`
+	NFS *NFSObservation `json:"nfs,omitempty" tf:"nfs,omitempty"`
 
 	// The name of the Network File Storage cluster.
 	// The name of the Network File Storage Cluster.
@@ -148,7 +148,7 @@ type NFSClusterParameters struct {
 	// A list of connections for the Network File Storage cluster. You can specify only one connection. Connections are immutable. Each connection supports the following:
 	// The network connections for the Network File Storage Cluster.
 	// +kubebuilder:validation:Optional
-	Connections []ConnectionsParameters `json:"connections,omitempty" tf:"connections,omitempty"`
+	Connections *ConnectionsParameters `json:"connections,omitempty" tf:"connections,omitempty"`
 
 	// The location where the Network File Storage cluster is located.
 	// The location of the Network File Storage Cluster. Available locations: 'de/fra, 'de/txl'
@@ -157,7 +157,7 @@ type NFSClusterParameters struct {
 
 	// The NFS configuration for the Network File Storage cluster. Each NFS configuration supports the following:
 	// +kubebuilder:validation:Optional
-	NFS []NFSParameters `json:"nfs,omitempty" tf:"nfs,omitempty"`
+	NFS *NFSParameters `json:"nfs,omitempty" tf:"nfs,omitempty"`
 
 	// The name of the Network File Storage cluster.
 	// The name of the Network File Storage Cluster.

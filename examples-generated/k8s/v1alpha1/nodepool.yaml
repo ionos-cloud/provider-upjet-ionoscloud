@@ -23,7 +23,9 @@ spec:
     k8sClusterIdSelector:
       matchLabels:
         testing.upbound.io/example-name: example
-    k8sVersion: ${ionoscloud_k8s_cluster.example.k8s_version}
+    k8sVersionSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
     labels:
       lab1: value1
       lab2: value2

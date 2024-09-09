@@ -31,7 +31,17 @@ type KafkaTopicInitParameters struct {
 	// [string] The location of the Kafka Cluster Topic. Possible values: de/fra, de/txl,
 	// es/vit,gb/lhr, us/ewr, us/las, us/mci, fr/par
 	// The location of your Kafka Cluster Topic. Supported locations: de/fra, de/txl, es/vit, gb/lhr, us/ewr, us/las, us/mci, fr/par
+	// +crossplane:generate:reference:type=github.com/ionos-cloud/provider-upjet-ionoscloud/apis/kafka/v1alpha1.Kafka
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractParamPath("location",false)
 	Location *string `json:"location,omitempty" tf:"location,omitempty"`
+
+	// Reference to a Kafka in kafka to populate location.
+	// +kubebuilder:validation:Optional
+	LocationRef *v1.Reference `json:"locationRef,omitempty" tf:"-"`
+
+	// Selector for a Kafka in kafka to populate location.
+	// +kubebuilder:validation:Optional
+	LocationSelector *v1.Selector `json:"locationSelector,omitempty" tf:"-"`
 
 	// [string] Name of the Kafka Cluster.
 	// The name of your Kafka Cluster Topic. Must be 63 characters or less and must begin and end with an alphanumeric character (`[a-z0-9A-Z]`) with dashes (`-`), underscores (`_`), dots (`.`), and alphanumerics between.
@@ -124,8 +134,18 @@ type KafkaTopicParameters struct {
 	// [string] The location of the Kafka Cluster Topic. Possible values: de/fra, de/txl,
 	// es/vit,gb/lhr, us/ewr, us/las, us/mci, fr/par
 	// The location of your Kafka Cluster Topic. Supported locations: de/fra, de/txl, es/vit, gb/lhr, us/ewr, us/las, us/mci, fr/par
+	// +crossplane:generate:reference:type=github.com/ionos-cloud/provider-upjet-ionoscloud/apis/kafka/v1alpha1.Kafka
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractParamPath("location",false)
 	// +kubebuilder:validation:Optional
 	Location *string `json:"location,omitempty" tf:"location,omitempty"`
+
+	// Reference to a Kafka in kafka to populate location.
+	// +kubebuilder:validation:Optional
+	LocationRef *v1.Reference `json:"locationRef,omitempty" tf:"-"`
+
+	// Selector for a Kafka in kafka to populate location.
+	// +kubebuilder:validation:Optional
+	LocationSelector *v1.Selector `json:"locationSelector,omitempty" tf:"-"`
 
 	// [string] Name of the Kafka Cluster.
 	// The name of your Kafka Cluster Topic. Must be 63 characters or less and must begin and end with an alphanumeric character (`[a-z0-9A-Z]`) with dashes (`-`), underscores (`_`), dots (`.`), and alphanumerics between.
@@ -197,7 +217,6 @@ type KafkaTopicStatus struct {
 type KafkaTopic struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.location) || (has(self.initProvider) && has(self.initProvider.location))",message="spec.forProvider.location is a required parameter"
 	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.name) || (has(self.initProvider) && has(self.initProvider.name))",message="spec.forProvider.name is a required parameter"
 	Spec   KafkaTopicSpec   `json:"spec"`
 	Status KafkaTopicStatus `json:"status,omitempty"`

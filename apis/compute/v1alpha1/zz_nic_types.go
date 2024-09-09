@@ -110,7 +110,7 @@ type NicInitParameters struct {
 	// IP addresses, source and destination ports, number of packets, amount of bytes,
 	// the start and end time of the recording, and the type of protocol –
 	// and log the extent to which your instances are being accessed.
-	Flowlog []FlowlogInitParameters `json:"flowlog,omitempty" tf:"flowlog,omitempty"`
+	Flowlog *FlowlogInitParameters `json:"flowlog,omitempty" tf:"flowlog,omitempty"`
 
 	// (Computed, Optional) Automatically assigned /80 IPv6 CIDR block if the NIC is connected to an IPv6 enabled LAN. You can also specify an /80 IPv6 CIDR block for the NIC on your own, which must be inside the /64 IPv6 CIDR block of the LAN and unique.
 	// IPv6 CIDR block assigned to the NIC.
@@ -178,7 +178,7 @@ type NicObservation struct {
 	// IP addresses, source and destination ports, number of packets, amount of bytes,
 	// the start and end time of the recording, and the type of protocol –
 	// and log the extent to which your instances are being accessed.
-	Flowlog []FlowlogObservation `json:"flowlog,omitempty" tf:"flowlog,omitempty"`
+	Flowlog *FlowlogObservation `json:"flowlog,omitempty" tf:"flowlog,omitempty"`
 
 	// (Computed) The ID of the NIC.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
@@ -249,7 +249,7 @@ type NicParameters struct {
 	// the start and end time of the recording, and the type of protocol –
 	// and log the extent to which your instances are being accessed.
 	// +kubebuilder:validation:Optional
-	Flowlog []FlowlogParameters `json:"flowlog,omitempty" tf:"flowlog,omitempty"`
+	Flowlog *FlowlogParameters `json:"flowlog,omitempty" tf:"flowlog,omitempty"`
 
 	// (Computed, Optional) Automatically assigned /80 IPv6 CIDR block if the NIC is connected to an IPv6 enabled LAN. You can also specify an /80 IPv6 CIDR block for the NIC on your own, which must be inside the /64 IPv6 CIDR block of the LAN and unique.
 	// IPv6 CIDR block assigned to the NIC.

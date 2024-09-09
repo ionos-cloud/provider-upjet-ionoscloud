@@ -5,6 +5,7 @@ Copyright 2021 Upbound Inc.
 package main
 
 import (
+	"context"
 	"fmt"
 	"os"
 	"path/filepath"
@@ -23,5 +24,12 @@ func main() {
 	if err != nil {
 		panic(fmt.Sprintf("cannot calculate the absolute path with %s", rootDir))
 	}
-	pipeline.Run(config.GetProvider(), absRootDir)
+
+	ctx := context.Background()
+	provider, err := config.GetProvider(ctx)
+	if err != nil {
+		panic(fmt.Sprintf("cannot get provider configuration: %v", err))
+	}
+
+	pipeline.Run(provider, absRootDir)
 }

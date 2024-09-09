@@ -1750,6 +1750,7 @@ resources:
             - name: example
               manifest: |-
                 {
+                  "location": "es/vit",
                   "log": [
                     {
                       "destinations": [
@@ -1799,6 +1800,7 @@ resources:
                       }
                     ]
                   },
+                  "location": "es/vit",
                   "name": "examplepipeline"
                 }
               references:
@@ -1813,11 +1815,12 @@ resources:
         argumentDocs:
             destinations: '- (Optional)[list] The configuration of the logs datastore, a list that contains elements with the following structure:'
             grafana_address: '- (Computed)[string] The address of the client''s grafana instance.'
+            location: '- (Optional)[string] The location of the Logging pipeline. Default: de/txl One of de/fra, de/txl, gb/lhr, es/vit, fr/par.'
             log: '- (Required)[list] Pipeline logs, a list that contains elements with the following structure:'
             name: '- (Required)[string] The name of the Logging pipeline.'
             protocol: '- (Required)[string] "Protocol to use as intake. Possible values are: http, tcp."'
             public: '- (Computed)[bool]'
-            retention_in_days: '- (Optional)[int] Defines the number of days a log record should be kept in loki. Works with loki destination type only.'
+            retention_in_days: '- (Optional)[int] Defines the number of days a log record should be kept in loki. Works with loki destination type only. Can be one of: 7, 14, 30.'
             source: '- (Required)[string] The source parser to be used.'
             tag: '- (Required)[string] The tag is used to distinguish different pipelines. Must be unique amongst the pipeline''s array items.'
             type: '- (Optional)[string] The internal output stream to send logs to.'
@@ -1825,7 +1828,7 @@ resources:
             - |-
               terraform plan -var-file="vars.tfvars"
               terraform apply -var-file="vars.tfvars"
-            - terraform import ionoscloud_logging_pipeline.example {pipeline_id}
+            - terraform import ionoscloud_logging_pipeline.example {location}:{pipeline_id}
     ionoscloud_mariadb_cluster:
         subCategory: Database as a Service - MariaDB
         description: Creates and manages DBaaS MariaDB Cluster objects.
@@ -3172,8 +3175,14 @@ resources:
             - name: example
               manifest: |-
                 {
+                  "force_destroy": true,
                   "name": "example",
+                  "object_lock_enabled": true,
                   "region": "eu-central-3",
+                  "tags": {
+                    "key1": "value1",
+                    "key2": "value2"
+                  },
                   "timeouts": [
                     {
                       "create": "10m",
@@ -3182,11 +3191,161 @@ resources:
                   ]
                 }
         argumentDocs:
+            create: '- (Optional)[string] Time to wait for the bucket to be created. Default is 10m.'
+            delete: '- (Optional)[string] Time to wait for the bucket to be deleted. Default is 10m.'
+            force_destroy: '- (Optional)[bool] If true, the bucket and the contents of the bucket will be destroyed. Default is false.'
             id: '- (Computed) Name of the bucket'
             name: '- (Required)[string] The bucket name. [ 3 .. 63 ] characters'
-            region: '- (Optional)[string] Specifies the Region where the bucket will be created. Please refer to the list of available regions. Defaults to "eu-central-3".'
+            object_lock_enabled: '- (Optional)[bool] The object lock configuration status of the bucket. Must be true or false.'
+            region: '- (Optional)[string] Specifies the Region where the bucket will be created. Please refer to the list of available regions'
+            tags: '- (Optional) A mapping of tags to assign to the bucket.'
+            timeouts: '- (Optional)[block] Timeouts for this resource.'
         importStatements:
             - terraform import ionoscloud_s3_bucket.example example
+    ionoscloud_s3_bucket_cors_configuration:
+        subCategory: S3
+        description: Manages Buckets cors_configuration on IonosCloud.
+        name: ionoscloud_s3_bucket_cors_configuration
+        title: s3_bucket_cors_configuration
+        examples:
+            - name: test
+              manifest: |-
+                {
+                  "bucket": "${ionoscloud_s3_bucket.example.name}",
+                  "cors_rule": [
+                    {
+                      "allowed_headers": [
+                        "*"
+                      ],
+                      "allowed_methods": [
+                        "PUT",
+                        "POST"
+                      ],
+                      "allowed_origins": [
+                        "https://s3-website-test.hashicorp.com"
+                      ],
+                      "expose_headers": [
+                        "ETag"
+                      ],
+                      "id": 1234,
+                      "max_age_seconds": 3000
+                    }
+                  ]
+                }
+              references:
+                bucket: ionoscloud_s3_bucket.example.name
+              dependencies:
+                ionoscloud_s3_bucket.example: |-
+                    {
+                      "name": "example"
+                    }
+        argumentDocs:
+            allowed_headers: '- (Optional)[list] Specifies which headers are allowed in a preflight OPTIONS request through the Access-Control-Request-Headers header'
+            allowed_methods: '- (Required)[list] An HTTP method that you allow the origin to execute. Valid values are GET, PUT, HEAD, POST, DELETE.'
+            allowed_origins: '- (Required)[list] Specifies which origins are allowed to make requests to the resource.'
+            bucket: '- (Required)[string] The name of the bucket where the object will be stored.'
+            cors_rule: '- (Required)[block] A block of cors_rule as defined below.'
+            expose_headers: '- (Optional)[list] Specifies which headers are exposed to the browser.'
+            id: '- (Optional)[int] Container for the Contract Number of the owner'
+            max_age_seconds: '- (Optional)[int] Specifies how long the results of a pre-flight request can be cached in seconds.'
+        importStatements:
+            - terraform import ionoscloud_s3_bucket_cors_configuration.example example
+    ionoscloud_s3_bucket_lifecycle_configuration:
+        subCategory: S3
+        description: Manages Buckets lifecycle configuration on IonosCloud.
+        name: ionoscloud_s3_bucket_lifecycle_configuration
+        title: s3_bucket_lifecycle_configuration
+        examples:
+            - name: example
+              manifest: |-
+                {
+                  "bucket": "${ionoscloud_s3_bucket.example.name}",
+                  "rule": [
+                    {
+                      "abort_incomplete_multipart_upload": [
+                        {
+                          "days_after_initiation": 1
+                        }
+                      ],
+                      "expiration": [
+                        {
+                          "days": 90
+                        }
+                      ],
+                      "id": "Logs delete",
+                      "noncurrent_version_expiration": [
+                        {
+                          "noncurrent_days": 90
+                        }
+                      ],
+                      "prefix": "/logs",
+                      "status": "Enabled"
+                    }
+                  ]
+                }
+              references:
+                bucket: ionoscloud_s3_bucket.example.name
+              dependencies:
+                ionoscloud_s3_bucket.example: |-
+                    {
+                      "name": "example"
+                    }
+        argumentDocs:
+            abort_incomplete_multipart_upload: '- (Optional)[block] Specifies the days since the initiation of an incomplete multipart upload that IONOS S3 Object Storage will wait before permanently removing all parts of the upload.'
+            bucket: '- (Required)[string] The name of the bucket where the object will be stored.'
+            date: '- (Optional)[string] Specifies the date after which you want the specific rule action to take effect.'
+            days: '- (Optional)[int] Specifies the number of days after object creation when the object expires. Required if ''date'' is not specified.'
+            days_after_initiation: '- (Optional)[int] Specifies the number of days after which IONOS S3 Object Storage aborts an incomplete multipart upload.'
+            expiration: '- (Optional)[block]  A lifecycle rule for when an object expires.'
+            expired_object_delete_marker: '- (Optional)[bool] Indicates whether IONOS S3 Object Storage will remove a delete marker with no noncurrent versions. If set to true, the delete marker will be expired; if set to false the policy takes no operation. This cannot be specified with Days or Date in a Lifecycle Expiration Policy.'
+            id: '- (Optional)[int] Container for the Contract Number of the owner'
+            lifecycle_rule: '- (Required)[block] A block of lifecycle_rule as defined below.'
+            noncurrent_days: '- (Optional)[int] Specifies the number of days an object is noncurrent before Amazon S3 can perform the associated action.'
+            noncurrent_version_expiration: '- (Optional)[block] A lifecycle rule for when non-current object versions expire.'
+            prefix: '- (Required)[string] Prefix identifying one or more objects to which the rule applies.'
+            status: '- (Required)[string] The lifecycle rule status. Valid values are Enabled or Disabled.'
+        importStatements:
+            - terraform import ionoscloud_s3_bucket_lifecycle_configuration.example example
+    ionoscloud_s3_bucket_object_lock_configuration:
+        subCategory: S3
+        description: Manages Buckets object_lock_configuration on IonosCloud.
+        name: ionoscloud_s3_bucket_object_lock_configuration
+        title: s3_bucket_object_lock_configuration
+        examples:
+            - name: test
+              manifest: |-
+                {
+                  "bucket": "${ionoscloud_s3_bucket.example.name}",
+                  "object_lock_enabled": "Enabled",
+                  "rule": [
+                    {
+                      "default_retention": [
+                        {
+                          "days": 1,
+                          "mode": "GOVERNANCE"
+                        }
+                      ]
+                    }
+                  ]
+                }
+              references:
+                bucket: ionoscloud_s3_bucket.example.name
+              dependencies:
+                ionoscloud_s3_bucket.example: |-
+                    {
+                      "name": "example",
+                      "object_lock_enabled": true
+                    }
+        argumentDocs:
+            bucket: '- (Required)[string] The name of the bucket where the object will be stored.'
+            days: '- (Optional)[int] The default retention period of the bucket in days.'
+            default_retention: '- (Required)[block] A block of default_retention as defined below.'
+            mode: '- (Optional)[string] The default retention mode of the bucket. Can be GOVERNANCE or COMPLIANCE.'
+            object_lock_enabled: '- (Required)[Optional] The object lock configuration status of the bucket. Must be Enabled.'
+            rule: '- (Optional)[block] A block of rule as defined below.'
+            years: '- (Optional)[int] The default retention period of the bucket in years.'
+        importStatements:
+            - terraform import ionoscloud_s3_bucket_object_lock_configuration.example example
     ionoscloud_s3_bucket_policy:
         subCategory: S3
         description: Creates and manages IonosCloud S3 Buckets policies.
@@ -3196,14 +3355,176 @@ resources:
             - name: example
               manifest: |-
                 {
-                  "bucket": "your_bucket_name_here",
+                  "bucket": "${ionoscloud_s3_bucket.example.name}",
                   "policy": "${jsonencode({\n    Version = \"2012-10-17\"\n    Statement = [\n      {\n        Sid = \"Delegate certain actions to another user\"\n        Action = [\n          \"s3:ListBucket\",\n          \"s3:PutObject\",\n          \"s3:GetObject\"\n        ]\n        Effect = \"Allow\"\n        Resource = [\n          \"arn:aws:s3:::example\",\n          \"arn:aws:s3:::example/*\"\n        ]\n        Condition = {\n          IpAddress = [\n            \"123.123.123.123/32\"\n          ]\n        }\n        Principal = [\n          \"arn:aws:iam:::user/31000000:9acd8251-2857-410e-b1fd-ca86462bdcec\"\n        ]\n      }\n    ]\n  })}"
                 }
+              references:
+                bucket: ionoscloud_s3_bucket.example.name
+              dependencies:
+                ionoscloud_s3_bucket.example: |-
+                    {
+                      "name": "unique-bucket-name"
+                    }
         argumentDocs:
             bucket: '- (Required)[string] The name of the bucket where the object will be stored.'
             policy: '- (Required)[string] The policy document. This is a JSON formatted string.'
         importStatements:
             - terraform import ionoscloud_s3_bucket_policy.example example
+    ionoscloud_s3_bucket_public_access_block:
+        subCategory: S3
+        description: Creates and manages IonosCloud S3 Public Access Block for buckets.
+        name: ionoscloud_s3_bucket_public_access_block
+        title: s3_bucket_public_access_block
+        examples:
+            - name: example
+              manifest: |-
+                {
+                  "block_public_acls": false,
+                  "block_public_policy": false,
+                  "bucket": "${ionoscloud_s3_bucket.example.name}",
+                  "ignore_public_acls": true,
+                  "restrict_public_buckets": true
+                }
+              references:
+                bucket: ionoscloud_s3_bucket.example.name
+              dependencies:
+                ionoscloud_s3_bucket.example: |-
+                    {
+                      "name": "unique-bucket-name"
+                    }
+        argumentDocs:
+            block_public_acls: '- (Optional)[bool] Indicates that access to the bucket via Access Control Lists (ACLs) that grant public access is blocked. In other words, ACLs that allow public access are not permitted.'
+            block_public_policy: '- (Optional)[bool] Blocks public access to the bucket via bucket policies. Bucket policies that grant public access will not be allowed.'
+            bucket: '- (Required)[string] The name of the bucket where the object will be stored.'
+            ignore_public_acls: '- (Optional)[bool] Instructs the system to ignore any ACLs that grant public access. Even if ACLs are set to allow public access, they will be disregarded.'
+            restrict_public_buckets: '- (Optional)[bool] Restricts access to buckets that have public policies. Buckets with policies that grant public access will have their access restricted.'
+        importStatements:
+            - terraform import ionoscloud_s3_bucket_public_access_block.example example
+    ionoscloud_s3_bucket_server_side_encryption_configuration:
+        subCategory: S3
+        description: Manages Buckets server side encryption configuration on IonosCloud.
+        name: ionoscloud_s3_bucket_server_side_encryption_configuration
+        title: s3_bucket_server_side_encryption_configuration
+        examples:
+            - name: example
+              manifest: |-
+                {
+                  "bucket": "${ionoscloud_s3_bucket.example.name}",
+                  "rule": [
+                    {
+                      "apply_server_side_encryption_by_default": [
+                        {
+                          "sse_algorithm": "AES256"
+                        }
+                      ]
+                    }
+                  ]
+                }
+              references:
+                bucket: ionoscloud_s3_bucket.example.name
+              dependencies:
+                ionoscloud_s3_bucket.example: |-
+                    {
+                      "name": "example"
+                    }
+        argumentDocs:
+            apply_server_side_encryption_by_default: '- (Required)[block] Defines the default encryption settings.'
+            bucket: '- (Required)[string] The name of the bucket where the object will be stored.'
+            rule: '- (Required)[block] A block of rule as defined below.'
+            sse_algorithm: '- (Required)[string] Server-side encryption algorithm to use. Valid values are ''AES256'''
+        importStatements:
+            - terraform import ionoscloud_s3_bucket_server_side_encryption_configuration.example example
+    ionoscloud_s3_bucket_versioning:
+        subCategory: S3
+        description: Manages Buckets versioning on IonosCloud.
+        name: ionoscloud_s3_bucket_versioning
+        title: s3_bucket_versioning
+        examples:
+            - name: example
+              manifest: |-
+                {
+                  "bucket": "${ionoscloud_s3_bucket.example.id}",
+                  "versioning_configuration": [
+                    {
+                      "status": "Enabled"
+                    }
+                  ]
+                }
+              references:
+                bucket: ionoscloud_s3_bucket.example.id
+              dependencies:
+                ionoscloud_s3_bucket.example: |-
+                    {
+                      "name": "example"
+                    }
+        argumentDocs:
+            bucket: '- (Required)[string] The name of the bucket where the object will be stored.'
+            mfa_delete: '- (Optional)[string] Specifies whether MFA delete is enabled or not. Can be Enabled or Disabled.'
+            status: '- (Required)[string] The versioning state of the bucket. Can be Enabled or Suspended.'
+            versioning_configuration: '- (Required)[block] A block of versioning_configuration as defined below.'
+        importStatements:
+            - terraform import ionoscloud_s3_bucket_versioning.example example
+    ionoscloud_s3_bucket_website_configuration:
+        subCategory: S3
+        description: Manages Buckets website configuration on IonosCloud.
+        name: ionoscloud_s3_bucket_website_configuration
+        title: s3_bucket_website_configuration
+        examples:
+            - name: example
+              manifest: |-
+                {
+                  "bucket": "${ionoscloud_s3_bucket.example.name}",
+                  "error_document": [
+                    {
+                      "key": "error.html"
+                    }
+                  ],
+                  "index_document": [
+                    {
+                      "suffix": "index.html"
+                    }
+                  ],
+                  "routing_rule": [
+                    {
+                      "condition": [
+                        {
+                          "key_prefix_equals": "docs/"
+                        }
+                      ],
+                      "redirect": [
+                        {
+                          "replace_key_prefix_with": "documents/"
+                        }
+                      ]
+                    }
+                  ]
+                }
+              references:
+                bucket: ionoscloud_s3_bucket.example.name
+              dependencies:
+                ionoscloud_s3_bucket.example: |-
+                    {
+                      "name": "example"
+                    }
+        argumentDocs:
+            bucket: '- (Required)[string] The name of the bucket where the object will be stored.'
+            condition: '- (Required) A container for describing a condition that must be met for the specified redirect to apply.'
+            error_document: '- (Optional) The object key name to use when a 4XX class error occurs. Replacement must be made for object keys containing special characters (such as carriage returns) when using XML requests'
+            host_name: '- (Optional) Name of the host where requests will be redirected.'
+            http_error_code_returned_equals: '- (Optional) The HTTP error code when the redirect is applied. In the event of an error, if the error code equals this value, then the specified redirect is applied.'
+            http_redirect_code: '- (Optional) The HTTP redirect code to use on the response. Not required if one of the siblings is present.'
+            index_document: '- (Optional) Container for the Suffix element.'
+            key: '- (Required) The object key'
+            key_prefix_equals: '- (Optional) The object key name prefix when the redirect is applied. For example, to redirect requests for ExamplePage.html, the key prefix will be ExamplePage.html. To redirect request for all pages with the prefix example, the key prefix will be /example.'
+            protocol: '- (Optional) Protocol to use (http, https).'
+            redirect: '- (Required) Container for the redirect information.'
+            redirect_all_requests_to: '- (Optional) Container for redirect information. You can redirect requests to another host, to another page, or with another protocol. In the event of an error, you can can specify a different error code to return.'
+            replace_key_prefix_with: '- (Optional) The object key to be used in the redirect request. For example, redirect request to error.html, the replace key prefix will be /error.html. Not required if one of the siblings is present.'
+            replace_key_with: '- (Optional) The specific object key to use in the redirect request. For example, redirect request for error.html, the replace key will be /error.html. Not required if one of the siblings is present.'
+            routing_rule: '- (Optional) A container for describing a condition that must be met for the specified redirect to apply.'
+            suffix: '- (Required) A suffix that is appended to a request that is for a directory on the website endpoint (for example, if the suffix is index.html and you make a request to samplebucket/images/ the data that is returned will be for the object with the key name images/index.html) The suffix must not be empty and must not include a slash character. Replacement must be made for object keys containing special characters (such as carriage returns) when using XML requests.'
+        importStatements:
+            - terraform import ionoscloud_s3_bucket_website_configuration.example example
     ionoscloud_s3_key:
         subCategory: User Management
         description: Creates and manages IonosCloud S3 keys.
@@ -3243,7 +3564,7 @@ resources:
             - name: example
               manifest: |-
                 {
-                  "bucket": "example",
+                  "bucket": "${ionoscloud_s3_bucket.example.name}",
                   "cache_control": "no-cache",
                   "content": "body",
                   "content_disposition": "attachment",
@@ -3251,23 +3572,43 @@ resources:
                   "content_language": "en-GB",
                   "content_type": "text/plain",
                   "expires": "2024-10-07T12:34:56Z",
+                  "force_destroy": true,
                   "key": "object",
                   "metadata": {
                     "mk": "mv"
                   },
+                  "object_lock_legal_hold": "ON",
+                  "object_lock_mode": "GOVERNANCE",
+                  "object_lock_retain_until_date": "2024-10-07T12:34:56Z",
                   "server_side_encryption": "AES256",
                   "tags": {
                     "tk": "tv"
                   },
                   "website_redirect": "https://www.ionos.com"
                 }
+              references:
+                bucket: ionoscloud_s3_bucket.example.name
+              dependencies:
+                ionoscloud_s3_bucket.example: |-
+                    {
+                      "name": "example",
+                      "object_lock_enabled": true
+                    }
             - name: example
               manifest: |-
                 {
-                  "bucket": "example",
-                  "key": "object",
+                  "bucket": "${ionoscloud_s3_bucket.example.name}",
+                  "key": "file-object",
                   "source": "path/to/file"
                 }
+              references:
+                bucket: ionoscloud_s3_bucket.example.name
+              dependencies:
+                ionoscloud_s3_bucket.example: |-
+                    {
+                      "name": "example",
+                      "object_lock_enabled": true
+                    }
         argumentDocs:
             bucket: '- (Required)[string] The name of the bucket where the object will be stored. Must be between 3 and 63 characters.'
             cache_control: '- (Optional)[string] Specifies caching behavior along the request/reply chain.'
@@ -3276,11 +3617,15 @@ resources:
             content_encoding: '- (Optional)[string] Specifies what content encodings have been applied to the object.'
             content_language: '- (Optional)[string] The natural language or languages of the intended audience for the object.'
             content_type: '- (Optional)[string] A standard MIME type describing the format of the contents.'
-            etag: '- (Optional, Computed)[string] An entity tag (ETag) is an opaque identifier assigned by a web server to a specific version of a resource found at a URL.'
+            etag: '- (Computed)[string] An entity tag (ETag) is an opaque identifier assigned by a web server to a specific version of a resource found at a URL.'
             expires: '- (Optional)[string] The date and time at which the object is no longer cacheable.'
+            force_destroy: '- (Optional)[bool] If true, the object will be destroyed if versioning is enabled then all versions will be destroyed. Default is false.'
             key: '- (Required)[string] The key of the object. Must be at least 1 character long.'
             metadata: '- (Optional)[map] A map of metadata to store with the object in IONOS S3 Object Storage. Metadata keys must be lowercase alphanumeric characters.'
             mfa: '- (Optional) [string]The concatenation of the authentication device''s serial number, a space, and the value displayed on your authentication device.'
+            object_lock_legal_hold: '- (Optional)[string] Indicates whether a legal hold is in effect for the object. Valid values are ON and OFF.'
+            object_lock_mode: '- (Optional)[string] The object lock mode that you want to apply to the object. Valid values are GOVERNANCE and COMPLIANCE.'
+            object_lock_retain_until_date: '- (Optional)[string] The date and time when the object lock retention expires.Must be in RFC3999 format'
             request_payer: '- (Optional)[string] Confirms that the requester knows that they will be charged for the request.'
             server_side_encryption: '- (Optional)[string] The server-side encryption algorithm used when storing this object in IONOS S3 Object Storage. Valid value is AES256.'
             server_side_encryption_context: '- (Optional)[string] Specifies the IONOS S3 Object Storage Encryption Context for object encryption.'
@@ -3290,13 +3635,80 @@ resources:
             source: '- (Optional)[string] The path to the file to upload.'
             storage_class: '- (Optional)[string] The storage class of the object. Valid value is STANDARD. Default is STANDARD.'
             tags: '- (Optional)[map] The tag-set for the object.'
-            version_id: '- (Optional)[string] The version of the object.'
+            version_id: '- (Computed)[string] The version of the object.'
             website_redirect: '- (Optional)[string] Redirects requests for this object to another object in the same bucket or to an external URL.'
         importStatements:
             - terraform import ionoscloud_s3_object.example example/object
+    ionoscloud_s3_object_copy:
+        subCategory: S3
+        description: Creates a copy of an object that is already stored in IONOS S3 Object Storage.
+        name: ionoscloud_s3_object_copy
+        title: s3_object_copy
+        examples:
+            - name: example
+              manifest: |-
+                {
+                  "bucket": "${ionoscloud_s3_bucket.target.name}",
+                  "key": "example",
+                  "source": "${ionoscloud_s3_bucket.source.name}/${ionoscloud_s3_object.source.key}"
+                }
+              references:
+                bucket: ionoscloud_s3_bucket.target.name
+              dependencies:
+                ionoscloud_s3_bucket.source: |-
+                    {
+                      "name": "source"
+                    }
+                ionoscloud_s3_bucket.target: |-
+                    {
+                      "name": "target"
+                    }
+                ionoscloud_s3_object.source: |-
+                    {
+                      "bucket": "${ionoscloud_s3_bucket.source.name}",
+                      "content": "0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ",
+                      "content_type": "application/octet-stream",
+                      "key": "source_object"
+                    }
+        argumentDocs:
+            bucket: '- (Required)[string] The name of the bucket where the object will be stored. Must be between 3 and 63 characters.'
+            cache_control: '- (Optional)[string] Specifies caching behavior along the request/reply chain.'
+            content_disposition: '- (Optional)[string] Specifies presentational information for the object.'
+            content_encoding: '- (Optional)[string] Specifies what content encodings have been applied to the object.'
+            content_language: '- (Optional)[string] The natural language or languages of the intended audience for the object.'
+            content_type: '- (Optional)[string] A standard MIME type describing the format of the contents.'
+            copy_source_if_match: '- (Optional)[string] Copies the object if its entity tag (ETag) matches the specified tag.'
+            copy_source_if_modified_since: '- (Optional)[string] Copies the object if it has been modified since the specified time.'
+            copy_source_if_none_match: '- (Optional)[string] Copies the object if its entity tag (ETag) is different than the specified ETag.'
+            copy_source_if_unmodified_since: '- (Optional)[string] Copies the object if it hasn''t been modified since the specified time.'
+            etag: '- (Computed)[string] An entity tag (ETag) is an opaque identifier assigned by a web server to a specific version of a resource found at a URL.'
+            expires: '- (Optional)[string] The date and time at which the object is no longer cacheable.'
+            force_destroy: '- (Optional)[bool] If true, the object will be destroyed if versioning is enabled then all versions will be destroyed. Default is false.'
+            key: '- (Required)[string] The key of the object. Must be at least 1 character long.'
+            last_modified: '- (Computed)[string] The date and time at which the object was last modified.'
+            metadata: '- (Optional)[map] A map of metadata to store with the object in IONOS S3 Object Storage. Metadata keys must be lowercase alphanumeric characters.'
+            metadata_directive: '- (Optional)[string] Specifies whether the metadata is copied from the source object or replaced with metadata provided in the request. Valid values are COPY and REPLACE.'
+            object_lock_legal_hold: '- (Optional)[string] Indicates whether a legal hold is in effect for the object. Valid values are ON and OFF.'
+            object_lock_mode: '- (Optional)[string] The object lock mode that you want to apply to the object. Valid values are GOVERNANCE and COMPLIANCE.'
+            object_lock_retain_until_date: '- (Optional)[string] The date and time when the object lock retention expires.Must be in RFC3999 format'
+            server_side_encryption: '- (Optional)[string] The server-side encryption algorithm used when storing this object in IONOS S3 Object Storage. Valid value is AES256.'
+            server_side_encryption_context: '- (Optional)[string] Specifies the IONOS S3 Object Storage Encryption Context for object encryption.'
+            server_side_encryption_customer_algorithm: '- (Optional)[string] Specifies the algorithm to use for encrypting the object. Valid value is AES256.'
+            server_side_encryption_customer_key: '- (Optional)[string] Specifies the 256-bit, base64-encoded encryption key to use to encrypt and decrypt your data.'
+            server_side_encryption_customer_key_md5: '- (Optional)[string] Specifies the 128-bit MD5 digest of the encryption key.'
+            source: '- (Optional)[string] The source of the object to be copied'
+            source_customer_algorithm: '- (Optional)[string] Specifies the algorithm used for source object encryption. Valid value is AES256.'
+            source_customer_key: '- (Optional)[string] Specifies the 256-bit, base64-encoded encryption key for source object encryption.'
+            source_customer_key_md5: '- (Optional)[string] Specifies the 128-bit MD5 digest of the encryption key for source object encryption.'
+            storage_class: '- (Optional)[string] The storage class of the object. Valid value is STANDARD. Default is STANDARD.'
+            tagging_directive: '- (Optional)[string] Specifies whether the object tag-set is copied from the source object or replaced with tag-set provided in the request. Valid values are COPY and REPLACE.'
+            tags: '- (Optional)[map] The tag-set for the object.'
+            version_id: '- (Computed)[string] The version of the object.'
+            website_redirect: '- (Optional)[string] Redirects requests for this object to another object in the same bucket or to an external URL.'
+        importStatements: []
     ionoscloud_server:
         subCategory: Compute Engine
-        description: Creates and manages IonosCloud Volume objects.
+        description: Creates and manages IonosCloud Server objects.
         name: ionoscloud_server
         title: server
         examples:
@@ -3309,6 +3721,16 @@ resources:
                   "datacenter_id": "${ionoscloud_datacenter.example.id}",
                   "image_name": "${data.ionoscloud_image.example.name}",
                   "image_password": "${random_password.server_image_password.result}",
+                  "label": [
+                    {
+                      "key": "labelkey1",
+                      "value": "labelvalue1"
+                    },
+                    {
+                      "key": "labelkey2",
+                      "value": "labelvalue2"
+                    }
+                  ],
                   "name": "Server Example",
                   "nic": [
                     {
@@ -3375,56 +3797,218 @@ resources:
                       "name": "Lan Example",
                       "public": true
                     }
-                ionoscloud_volume.example: |-
+                random_password.server_image_password: |-
+                    {
+                      "length": 16,
+                      "special": false
+                    }
+            - name: example
+              manifest: |-
+                {
+                  "availability_zone": "ZONE_1",
+                  "cores": 1,
+                  "cpu_family": "INTEL_XEON",
+                  "datacenter_id": "${ionoscloud_datacenter.example.id}",
+                  "image_name": "ubuntu:latest",
+                  "image_password": "${random_password.server_image_password.result}",
+                  "name": "Resource Server Test",
+                  "nic": [
+                    {
+                      "dhcp": true,
+                      "dhcpv6": true,
+                      "firewall": [
+                        {
+                          "name": "SSH",
+                          "port_range_end": 22,
+                          "port_range_start": 22,
+                          "protocol": "TCP",
+                          "source_ip": "${ionoscloud_ipblock.webserver_ipblock.ips[2]}",
+                          "source_mac": "00:0a:95:9d:68:17",
+                          "target_ip": "${ionoscloud_ipblock.webserver_ipblock.ips[3]}",
+                          "type": "EGRESS"
+                        }
+                      ],
+                      "firewall_active": true,
+                      "firewall_type": "BIDIRECTIONAL",
+                      "ips": [
+                        "${ionoscloud_ipblock.webserver_ipblock.ips[0]}",
+                        "${ionoscloud_ipblock.webserver_ipblock.ips[1]}"
+                      ],
+                      "ipv6_cidr_block": "${cidrsubnet(ionoscloud_lan.example.ipv6_cidr_block,16,24)}",
+                      "ipv6_ips": [
+                        "${cidrhost(cidrsubnet(ionoscloud_lan.example.ipv6_cidr_block,16,24),10)}",
+                        "${cidrhost(cidrsubnet(ionoscloud_lan.example.ipv6_cidr_block,16,24),20)}",
+                        "${cidrhost(cidrsubnet(ionoscloud_lan.example.ipv6_cidr_block,16,24),30)}"
+                      ],
+                      "lan": "${ionoscloud_lan.example.id}",
+                      "name": "system"
+                    }
+                  ],
+                  "ram": 1024,
+                  "type": "ENTERPRISE",
+                  "volume": [
                     {
                       "availability_zone": "ZONE_1",
                       "bus": "VIRTIO",
-                      "datacenter_id": "${ionoscloud_datacenter.example.id}",
                       "disk_type": "SSD Standard",
-                      "licence_type": "OTHER",
-                      "name": "Another Volume Example",
-                      "server_id": "${ionoscloud_server.example.id}",
-                      "size": 5
+                      "name": "system",
+                      "size": 5,
+                      "user_data": "foo"
+                    }
+                  ]
+                }
+              references:
+                datacenter_id: ionoscloud_datacenter.example.id
+                image_password: random_password.server_image_password.result
+                nic.firewall.source_ip: ionoscloud_ipblock.webserver_ipblock.ips[2]
+                nic.firewall.target_ip: ionoscloud_ipblock.webserver_ipblock.ips[3]
+                nic.lan: ionoscloud_lan.example.id
+              dependencies:
+                ionoscloud_datacenter.example: |-
+                    {
+                      "location": "us/las",
+                      "name": "Resource Server Test"
+                    }
+                ionoscloud_ipblock.webserver_ipblock: |-
+                    {
+                      "location": "us/las",
+                      "name": "webserver_ipblock",
+                      "size": 4
+                    }
+                ionoscloud_lan.example: |-
+                    {
+                      "datacenter_id": "${ionoscloud_datacenter.example.id}",
+                      "ipv6_cidr_block": "${cidrsubnet(ionoscloud_datacenter.example.ipv6_cidr_block,8,10)}",
+                      "name": "public",
+                      "public": true
                     }
                 random_password.server_image_password: |-
                     {
                       "length": 16,
                       "special": false
                     }
-                random_password.volume_image_password: |-
+            - name: example
+              manifest: |-
+                {
+                  "availability_zone": "ZONE_2",
+                  "datacenter_id": "${ionoscloud_datacenter.example.id}",
+                  "image_name": "ubuntu:latest",
+                  "image_password": "${random_password.server_image_password.result}",
+                  "name": "Server Example",
+                  "nic": [
+                    {
+                      "dhcp": true,
+                      "firewall_active": true,
+                      "lan": "${ionoscloud_lan.example.id}",
+                      "name": "Nic Example"
+                    }
+                  ],
+                  "template_uuid": "${data.ionoscloud_template.example.id}",
+                  "type": "CUBE",
+                  "volume": [
+                    {
+                      "disk_type": "DAS",
+                      "licence_type": "LINUX",
+                      "name": "Volume Example"
+                    }
+                  ]
+                }
+              references:
+                datacenter_id: ionoscloud_datacenter.example.id
+                image_password: random_password.server_image_password.result
+                nic.lan: ionoscloud_lan.example.id
+                template_uuid: data.ionoscloud_template.example.id
+              dependencies:
+                ionoscloud_datacenter.example: |-
+                    {
+                      "location": "de/txl",
+                      "name": "Datacenter Example"
+                    }
+                ionoscloud_lan.example: |-
+                    {
+                      "datacenter_id": "${ionoscloud_datacenter.example.id}",
+                      "name": "Lan Example",
+                      "public": true
+                    }
+                random_password.server_image_password: |-
                     {
                       "length": 16,
                       "special": false
                     }
+            - name: test
+              manifest: |-
+                {
+                  "cores": 1,
+                  "cpu_family": "${ionoscloud_datacenter.cdrom.cpu_architecture[0].cpu_family}",
+                  "datacenter_id": "${ionoscloud_datacenter.cdrom.id}",
+                  "name": "ubuntu_latest_from_cdrom",
+                  "nic": [
+                    {
+                      "dhcp": true,
+                      "firewall_active": false,
+                      "lan": 1
+                    }
+                  ],
+                  "ram": 1024,
+                  "type": "ENTERPRISE",
+                  "volume": [
+                    {
+                      "disk_type": "HDD",
+                      "licence_type": "OTHER",
+                      "name": "hdd0",
+                      "size": 50
+                    }
+                  ]
+                }
+              references:
+                cpu_family: ionoscloud_datacenter.cdrom.cpu_architecture[0].cpu_family
+                datacenter_id: ionoscloud_datacenter.cdrom.id
+              dependencies:
+                ionoscloud_datacenter.cdrom: |-
+                    {
+                      "description": "CDROM image test",
+                      "location": "de/txl",
+                      "name": "CDROM Test",
+                      "sec_auth_protection": false
+                    }
+                ionoscloud_lan.public: |-
+                    {
+                      "datacenter_id": "${ionoscloud_datacenter.cdrom.id}",
+                      "name": "Uplink",
+                      "public": true
+                    }
         argumentDocs:
-            availability_zone: '- (Optional)[string] The storage availability zone assigned to the volume: AUTO, ZONE_1, ZONE_2, or ZONE_3. This property is immutable'
-            backup_unit_id: '- (Optional)[string] The uuid of the Backup Unit that user has access to. The property is immutable and is only allowed to be set on a new volume creation. It is mandatory to provide either ''public image'' or ''imageAlias'' in conjunction with this property.'
-            boot_server: '- (Computed)[string] The UUID of the attached server.'
-            bus: '- (Optional)[Boolean] The bus type of the volume: VIRTIO or IDE.'
-            cpu_hot_plug: '- (Computed)[string] Is capable of CPU hot plug (no reboot required)'
+            availability_zone: '- (Optional)[string] The availability zone in which the server should exist. E.g: AUTO, ZONE_1, ZONE_2. This property is immutable.'
+            boot_cdrom: '- DEPRECATED Please refer to ionoscloud_server_boot_device_selection (Optional)(Computed)[string] The associated boot drive, if any. Must be the UUID of a bootable CDROM image that can be retrieved using the ionoscloud_image data source.'
+            boot_image: '- (Optional)[string] The image or snapshot UUID / name. May also be an image alias. It is required if licence_type is not provided.'
+            boot_volume: '- (Computed) The associated boot volume.'
+            cores: '- (Optional)(Computed)[integer] Number of server CPU cores.'
+            cpu_family: '- (Optional)[string] CPU architecture on which server gets provisioned; not all CPU architectures are available in all datacenter regions; available CPU architectures can be retrieved from the datacenter resource. E.g.: "INTEL_SKYLAKE" or "INTEL_XEON".'
             datacenter_id: '- (Required)[string] The ID of a Virtual Data Center.'
-            device_number: '- (Computed) The Logical Unit Number of the storage volume. Null for volumes not mounted to any VM.'
-            disc_virtio_hot_plug: '- (Computed)[string] Is capable of Virt-IO drive hot plug (no reboot required)'
-            disc_virtio_hot_unplug: '- (Computed)[string] Is capable of Virt-IO drive hot unplug (no reboot required). This works only for non-Windows virtual Machines.'
-            disk_type: '- (Required)[string] The volume type: HDD or SSD. This property is immutable.'
-            image: '- (Computed) The image or snapshot UUID.'
-            image_alias: '- (Computed) The image alias.'
+            firewall: '- (Optional) Allows to define firewall rules inline in the server. See the Firewall section.'
+            firewallrule_id: '- (Computed) The associated firewall rule.'
+            firewallrule_ids: '- (Computed) The associated firewall rules.'
             image_name: '- (Optional)[string] The name, ID or alias of the image. May also be a snapshot ID. It is required if licence_type is not provided. Attribute is immutable.'
-            image_password: '- (Optional)[string] Required if sshkey_path is not provided.'
-            licence_type: '- (Optional)[string] Required if image_name is not provided.'
-            name: '- (Optional)[string] The name of the volume.'
-            nic_hot_plug: '- (Computed)[string] Is capable of nic hot plug (no reboot required)'
-            nic_hot_unplug: '- (Computed)[string] Is capable of nic hot unplug (no reboot required)'
-            pci_slot: '- (Computed) The PCI slot number of the storage volume. Null for volumes not mounted to any VM.'
-            ram_hot_plug: '- (Computed)[string] Is capable of memory hot plug (no reboot required)'
-            server_id: '- (Required)[string] The ID of a server.'
-            size: '-  (Required)[integer] The size of the volume in GB.'
-            ssh_key_path: '-  (Optional)[list] List of absolute paths to files containing a public SSH key that will be injected into IonosCloud provided Linux images. Also accepts ssh keys directly. Required for IonosCloud Linux images. Required if image_password is not provided. This property is immutable.'
-            ssh_keys: '-  (Optional)[list] List of absolute paths to files containing a public SSH key that will be injected into IonosCloud provided Linux images. Also accepts ssh keys directly. Required for IonosCloud Linux images. Required if image_password is not provided. This property is immutable.'
-            sshkey: '- (Computed) The associated public SSH key.'
-            user_data: '- (Optional)[string] The cloud-init configuration for the volume as base64 encoded string. The property is immutable and is only allowed to be set on a new volume creation. This option will work only with cloud-init compatible images.'
+            image_password: '- (Optional)[string] Required if ssh_key_path is not provided.'
+            inline_volume_ids: '- (Computed) A list with the IDs for the volumes that are defined inside the server resource.'
+            key: '- (Required)[string] The key of the label.'
+            label: '- (Optional)[set] A label can be seen as an object with only two required fields: key and value, both of the string type. Please check the example presented above to see how a label can be used in the plan. A server can have multiple labels.'
+            licence_type: '- (Optional)[string] Sets the OS type of the server.'
+            name: '- (Required)[string] The name of the server.'
+            nic: '- (Optional) See the Nic section.'
+            primary_ip: '- (Computed) The associated IP address.'
+            primary_nic: '- (Computed) The associated NIC.'
+            ram: '- (Optional)(Computed)[integer] The amount of memory for the server in MB.'
+            ssh_key_path: '- (Optional)[list] List of absolute paths to files containing a public SSH key that will be injected into IonosCloud provided Linux images.  Also accepts ssh keys directly. Required for IonosCloud Linux images. Required if image_password is not provided. Does not support ~ expansion to homedir in the given path. This property is immutable.'
+            ssh_keys: '- (Optional)[list] Immutable List of absolute or relative paths to files containing public SSH key that will be injected into IonosCloud provided Linux images. Also accepts ssh keys directly. Public SSH keys are set on the image as authorized keys for appropriate SSH login to the instance using the corresponding private key. This field may only be set in creation requests. When reading, it always returns null. SSH keys are only supported if a public Linux image is used for the volume creation. Does not support ~ expansion to homedir in the given path.'
+            template_uuid: '- (Optional)[string] The UUID of the template for creating a CUBE server; the available templates for CUBE servers can be found on the templates resource'
+            type: '- (Optional)(Computed)[string] Server usages: ENTERPRISE or CUBE. This property is immutable.'
+            value: '- (Required)[string] The value of the label.'
+            vm_state: '- (Optional)[string] Sets the power state of the server. E.g: RUNNING, SHUTOFF or SUSPENDED. SUSPENDED state is only valid for cube. SHUTOFF state is only valid for enterprise.'
+            volume: '- (Required) See the Volume section.'
         importStatements:
-            - terraform import ionoscloud_volume.myvolume {datacenter uuid}/{server uuid}/{volume uuid}
+            - terraform import ionoscloud_server.myserver {datacenter uuid}/{server uuid}
+            - terraform import ionoscloud_server.myserver {datacenter uuid}/{server uuid}/{primary nic id}/{firewall rule id}
     ionoscloud_share:
         subCategory: User Management
         description: Creates and manages share objects.
@@ -3811,6 +4395,229 @@ resources:
         importStatements:
             - terraform import ionoscloud_vcpu_server.myserver {datacenter uuid}/{server uuid}
             - terraform import ionoscloud_vcpu_server.myserver {datacenter uuid}/{server uuid}/{primary nic id}/{firewall rule id}
+    ionoscloud_volume:
+        subCategory: Compute Engine
+        description: Creates and manages IonosCloud Volume objects.
+        name: ionoscloud_volume
+        title: volume
+        examples:
+            - name: example
+              manifest: |-
+                {
+                  "availability_zone": "ZONE_1",
+                  "bus": "VIRTIO",
+                  "datacenter_id": "${ionoscloud_datacenter.example.id}",
+                  "disk_type": "SSD Standard",
+                  "image_name": "${data.ionoscloud_image.example.name}",
+                  "image_password": "${random_password.volume_image_password.result}",
+                  "name": "Volume Example",
+                  "server_id": "${ionoscloud_server.example.id}",
+                  "size": 5,
+                  "user_data": "foo"
+                }
+              references:
+                datacenter_id: ionoscloud_datacenter.example.id
+                image_name: data.ionoscloud_image.example.name
+                image_password: random_password.volume_image_password.result
+                server_id: ionoscloud_server.example.id
+              dependencies:
+                ionoscloud_datacenter.example: |-
+                    {
+                      "description": "Datacenter Description",
+                      "location": "us/las",
+                      "name": "Datacenter Example",
+                      "sec_auth_protection": false
+                    }
+                ionoscloud_ipblock.example: |-
+                    {
+                      "location": "${ionoscloud_datacenter.example.location}",
+                      "name": "IP Block Example",
+                      "size": 4
+                    }
+                ionoscloud_lan.example: |-
+                    {
+                      "datacenter_id": "${ionoscloud_datacenter.example.id}",
+                      "name": "Lan Example",
+                      "public": true
+                    }
+                ionoscloud_server.example: |-
+                    {
+                      "availability_zone": "ZONE_1",
+                      "cores": 1,
+                      "cpu_family": "INTEL_XEON",
+                      "datacenter_id": "${ionoscloud_datacenter.example.id}",
+                      "image_name": "${data.ionoscloud_image.example.name}",
+                      "image_password": "${random_password.server_image_password.result}",
+                      "name": "Server Example",
+                      "nic": [
+                        {
+                          "dhcp": true,
+                          "firewall": [
+                            {
+                              "name": "SSH",
+                              "port_range_end": 22,
+                              "port_range_start": 22,
+                              "protocol": "TCP",
+                              "source_ip": "${ionoscloud_ipblock.example.ips[2]}",
+                              "source_mac": "00:0a:95:9d:68:17",
+                              "target_ip": "${ionoscloud_ipblock.example.ips[3]}",
+                              "type": "EGRESS"
+                            }
+                          ],
+                          "firewall_active": true,
+                          "firewall_type": "BIDIRECTIONAL",
+                          "ips": [
+                            "${ionoscloud_ipblock.example.ips[0]}",
+                            "${ionoscloud_ipblock.example.ips[1]}"
+                          ],
+                          "lan": "${ionoscloud_lan.example.id}",
+                          "name": "system"
+                        }
+                      ],
+                      "ram": 1024,
+                      "type": "ENTERPRISE",
+                      "volume": [
+                        {
+                          "availability_zone": "ZONE_1",
+                          "bus": "VIRTIO",
+                          "disk_type": "SSD Standard",
+                          "name": "system",
+                          "size": 5,
+                          "user_data": "foo"
+                        }
+                      ]
+                    }
+                random_password.server_image_password: |-
+                    {
+                      "length": 16,
+                      "special": false
+                    }
+                random_password.volume_image_password: |-
+                    {
+                      "length": 16,
+                      "special": false
+                    }
+            - name: example
+              manifest: |-
+                {
+                  "availability_zone": "ZONE_1",
+                  "bus": "VIRTIO",
+                  "datacenter_id": "${ionoscloud_datacenter.example.id}",
+                  "disk_type": "SSD Standard",
+                  "licence_type": "OTHER",
+                  "name": "Another Volume Example",
+                  "server_id": "${ionoscloud_server.example.id}",
+                  "size": 5
+                }
+              references:
+                datacenter_id: ionoscloud_datacenter.example.id
+                server_id: ionoscloud_server.example.id
+              dependencies:
+                ionoscloud_datacenter.example: |-
+                    {
+                      "description": "Datacenter Description",
+                      "location": "us/las",
+                      "name": "Datacenter Example",
+                      "sec_auth_protection": false
+                    }
+                ionoscloud_ipblock.example: |-
+                    {
+                      "location": "${ionoscloud_datacenter.example.location}",
+                      "name": "IP Block Example",
+                      "size": 4
+                    }
+                ionoscloud_lan.example: |-
+                    {
+                      "datacenter_id": "${ionoscloud_datacenter.example.id}",
+                      "name": "Lan Example",
+                      "public": true
+                    }
+                ionoscloud_server.example: |-
+                    {
+                      "availability_zone": "ZONE_1",
+                      "cores": 1,
+                      "cpu_family": "INTEL_XEON",
+                      "datacenter_id": "${ionoscloud_datacenter.example.id}",
+                      "image_name": "${data.ionoscloud_image.example.name}",
+                      "image_password": "${random_password.server_image_password.result}",
+                      "name": "Server Example",
+                      "nic": [
+                        {
+                          "dhcp": true,
+                          "firewall": [
+                            {
+                              "name": "SSH",
+                              "port_range_end": 22,
+                              "port_range_start": 22,
+                              "protocol": "TCP",
+                              "source_ip": "${ionoscloud_ipblock.example.ips[2]}",
+                              "source_mac": "00:0a:95:9d:68:17",
+                              "target_ip": "${ionoscloud_ipblock.example.ips[3]}",
+                              "type": "EGRESS"
+                            }
+                          ],
+                          "firewall_active": true,
+                          "firewall_type": "BIDIRECTIONAL",
+                          "ips": [
+                            "${ionoscloud_ipblock.example.ips[0]}",
+                            "${ionoscloud_ipblock.example.ips[1]}"
+                          ],
+                          "lan": "${ionoscloud_lan.example.id}",
+                          "name": "system"
+                        }
+                      ],
+                      "ram": 1024,
+                      "type": "ENTERPRISE",
+                      "volume": [
+                        {
+                          "availability_zone": "ZONE_1",
+                          "bus": "VIRTIO",
+                          "disk_type": "SSD Standard",
+                          "name": "system",
+                          "size": 5,
+                          "user_data": "foo"
+                        }
+                      ]
+                    }
+                random_password.server_image_password: |-
+                    {
+                      "length": 16,
+                      "special": false
+                    }
+                random_password.volume_image_password: |-
+                    {
+                      "length": 16,
+                      "special": false
+                    }
+        argumentDocs:
+            availability_zone: '- (Optional)[string] The storage availability zone assigned to the volume: AUTO, ZONE_1, ZONE_2, or ZONE_3. This property is immutable'
+            backup_unit_id: '- (Optional)[string] The uuid of the Backup Unit that user has access to. The property is immutable and is only allowed to be set on a new volume creation. It is mandatory to provide either ''public image'' or ''imageAlias'' in conjunction with this property.'
+            boot_server: '- (Computed)[string] The UUID of the attached server.'
+            bus: '- (Optional)[Boolean] The bus type of the volume: VIRTIO or IDE.'
+            cpu_hot_plug: '- (Computed)[string] Is capable of CPU hot plug (no reboot required)'
+            datacenter_id: '- (Required)[string] The ID of a Virtual Data Center.'
+            device_number: '- (Computed) The Logical Unit Number of the storage volume. Null for volumes not mounted to any VM.'
+            disc_virtio_hot_plug: '- (Computed)[string] Is capable of Virt-IO drive hot plug (no reboot required)'
+            disc_virtio_hot_unplug: '- (Computed)[string] Is capable of Virt-IO drive hot unplug (no reboot required). This works only for non-Windows virtual Machines.'
+            disk_type: '- (Required)[string] The volume type: HDD or SSD. This property is immutable.'
+            image: '- (Computed) The image or snapshot UUID.'
+            image_alias: '- (Computed) The image alias.'
+            image_name: '- (Optional)[string] The name, ID or alias of the image. May also be a snapshot ID. It is required if licence_type is not provided. Attribute is immutable.'
+            image_password: '- (Optional)[string] Required if sshkey_path is not provided.'
+            licence_type: '- (Optional)[string] Required if image_name is not provided.'
+            name: '- (Optional)[string] The name of the volume.'
+            nic_hot_plug: '- (Computed)[string] Is capable of nic hot plug (no reboot required)'
+            nic_hot_unplug: '- (Computed)[string] Is capable of nic hot unplug (no reboot required)'
+            pci_slot: '- (Computed) The PCI slot number of the storage volume. Null for volumes not mounted to any VM.'
+            ram_hot_plug: '- (Computed)[string] Is capable of memory hot plug (no reboot required)'
+            server_id: '- (Required)[string] The ID of a server.'
+            size: '-  (Required)[integer] The size of the volume in GB.'
+            ssh_key_path: '-  (Optional)[list] List of absolute paths to files containing a public SSH key that will be injected into IonosCloud provided Linux images. Also accepts ssh keys directly. Required for IonosCloud Linux images. Required if image_password is not provided. This property is immutable.'
+            ssh_keys: '-  (Optional)[list] List of absolute paths to files containing a public SSH key that will be injected into IonosCloud provided Linux images. Also accepts ssh keys directly. Required for IonosCloud Linux images. Required if image_password is not provided. This property is immutable.'
+            sshkey: '- (Computed) The associated public SSH key.'
+            user_data: '- (Optional)[string] The cloud-init configuration for the volume as base64 encoded string. The property is immutable and is only allowed to be set on a new volume creation. This option will work only with cloud-init compatible images.'
+        importStatements:
+            - terraform import ionoscloud_volume.myvolume {datacenter uuid}/{server uuid}/{volume uuid}
     ionoscloud_vpn_ipsec_gateway:
         subCategory: VPN
         description: IPSec Gateway
@@ -4278,16 +5085,3 @@ resources:
             status: '- The current status of the WireGuard Gateway Peer.'
         importStatements:
             - terraform import ionoscloud_vpn_wireguard_peer.example <gateway_id>:<peer_id>
-    s3_bucket_access_block:
-        subCategory: S3
-        description: Creates and manages IonosCloud S3 Public Access Block for buckets.
-        name: s3_bucket_access_block
-        title: s3_bucket_access_block
-        argumentDocs:
-            block_public_acls: '- (Optional)[bool] Indicates that access to the bucket via Access Control Lists (ACLs) that grant public access is blocked. In other words, ACLs that allow public access are not permitted.'
-            block_public_policy: '- (Optional)[bool] Blocks public access to the bucket via bucket policies. Bucket policies that grant public access will not be allowed.'
-            bucket: '- (Required)[string] The name of the bucket where the object will be stored.'
-            ignore_public_acls: '- (Optional)[bool] Instructs the system to ignore any ACLs that grant public access. Even if ACLs are set to allow public access, they will be disregarded.'
-            restrict_public_buckets: '- (Optional)[bool] Restricts access to buckets that have public policies. Buckets with policies that grant public access will have their access restricted.'
-        importStatements:
-            - terraform import ionoscloud_s3_bucket_public_access_block.example example

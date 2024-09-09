@@ -1,0 +1,59 @@
+apiVersion: s3.ionoscloud.io/v1alpha1
+kind: Bucket
+metadata:
+  annotations:
+    meta.upbound.io/example-id: s3/v1alpha1/objectcopy
+  labels:
+    testing.upbound.io/example-name: source
+  name: source
+spec:
+  forProvider: {}
+
+---
+
+apiVersion: s3.ionoscloud.io/v1alpha1
+kind: Bucket
+metadata:
+  annotations:
+    meta.upbound.io/example-id: s3/v1alpha1/objectcopy
+  labels:
+    testing.upbound.io/example-name: target
+  name: target
+spec:
+  forProvider: {}
+
+---
+
+apiVersion: s3.ionoscloud.io/v1alpha1
+kind: Object
+metadata:
+  annotations:
+    meta.upbound.io/example-id: s3/v1alpha1/objectcopy
+  labels:
+    testing.upbound.io/example-name: source
+  name: source
+spec:
+  forProvider:
+    bucketSelector:
+      matchLabels:
+        testing.upbound.io/example-name: source
+    content: 0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ
+    contentType: application/octet-stream
+    key: source_object
+
+---
+apiVersion: s3.ionoscloud.io/v1alpha1
+kind: ObjectCopy
+metadata:
+  annotations:
+    meta.upbound.io/example-id: s3/v1alpha1/objectcopy
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    bucketSelector:
+      matchLabels:
+        testing.upbound.io/example-name: target
+    key: example
+    source: source/source_object

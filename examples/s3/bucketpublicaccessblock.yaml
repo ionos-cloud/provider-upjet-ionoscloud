@@ -1,0 +1,17 @@
+apiVersion: s3.ionoscloud.io/v1alpha1
+kind: BucketPublicAccessBlock
+metadata:
+  annotations:
+    meta.upbound.io/example-id: s3/v1alpha1/bucketpublicaccessblock
+  labels:
+    testing.upbound.io/example-name: example
+  name: unique-bucket-name
+spec:
+  forProvider:
+    blockPublicAcls: true
+    blockPublicPolicy: true
+    bucketSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    ignorePublicAcls: false
+    restrictPublicBuckets: false

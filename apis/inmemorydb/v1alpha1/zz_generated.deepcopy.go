@@ -148,10 +148,8 @@ func (in *CredentialsInitParameters) DeepCopyInto(out *CredentialsInitParameters
 	*out = *in
 	if in.HashedPassword != nil {
 		in, out := &in.HashedPassword, &out.HashedPassword
-		*out = make([]HashedPasswordInitParameters, len(*in))
-		for i := range *in {
-			(*in)[i].DeepCopyInto(&(*out)[i])
-		}
+		*out = new(HashedPasswordInitParameters)
+		(*in).DeepCopyInto(*out)
 	}
 	if in.PlainTextPasswordSecretRef != nil {
 		in, out := &in.PlainTextPasswordSecretRef, &out.PlainTextPasswordSecretRef
@@ -180,10 +178,8 @@ func (in *CredentialsObservation) DeepCopyInto(out *CredentialsObservation) {
 	*out = *in
 	if in.HashedPassword != nil {
 		in, out := &in.HashedPassword, &out.HashedPassword
-		*out = make([]HashedPasswordObservation, len(*in))
-		for i := range *in {
-			(*in)[i].DeepCopyInto(&(*out)[i])
-		}
+		*out = new(HashedPasswordObservation)
+		(*in).DeepCopyInto(*out)
 	}
 	if in.Username != nil {
 		in, out := &in.Username, &out.Username
@@ -207,10 +203,8 @@ func (in *CredentialsParameters) DeepCopyInto(out *CredentialsParameters) {
 	*out = *in
 	if in.HashedPassword != nil {
 		in, out := &in.HashedPassword, &out.HashedPassword
-		*out = make([]HashedPasswordParameters, len(*in))
-		for i := range *in {
-			(*in)[i].DeepCopyInto(&(*out)[i])
-		}
+		*out = new(HashedPasswordParameters)
+		(*in).DeepCopyInto(*out)
 	}
 	if in.PlainTextPasswordSecretRef != nil {
 		in, out := &in.PlainTextPasswordSecretRef, &out.PlainTextPasswordSecretRef
@@ -341,17 +335,13 @@ func (in *InMemoryDBReplicasetInitParameters) DeepCopyInto(out *InMemoryDBReplic
 	*out = *in
 	if in.Connections != nil {
 		in, out := &in.Connections, &out.Connections
-		*out = make([]ConnectionsInitParameters, len(*in))
-		for i := range *in {
-			(*in)[i].DeepCopyInto(&(*out)[i])
-		}
+		*out = new(ConnectionsInitParameters)
+		(*in).DeepCopyInto(*out)
 	}
 	if in.Credentials != nil {
 		in, out := &in.Credentials, &out.Credentials
-		*out = make([]CredentialsInitParameters, len(*in))
-		for i := range *in {
-			(*in)[i].DeepCopyInto(&(*out)[i])
-		}
+		*out = new(CredentialsInitParameters)
+		(*in).DeepCopyInto(*out)
 	}
 	if in.DisplayName != nil {
 		in, out := &in.DisplayName, &out.DisplayName
@@ -373,12 +363,20 @@ func (in *InMemoryDBReplicasetInitParameters) DeepCopyInto(out *InMemoryDBReplic
 		*out = new(string)
 		**out = **in
 	}
+	if in.LocationRef != nil {
+		in, out := &in.LocationRef, &out.LocationRef
+		*out = new(v1.Reference)
+		(*in).DeepCopyInto(*out)
+	}
+	if in.LocationSelector != nil {
+		in, out := &in.LocationSelector, &out.LocationSelector
+		*out = new(v1.Selector)
+		(*in).DeepCopyInto(*out)
+	}
 	if in.MaintenanceWindow != nil {
 		in, out := &in.MaintenanceWindow, &out.MaintenanceWindow
-		*out = make([]MaintenanceWindowInitParameters, len(*in))
-		for i := range *in {
-			(*in)[i].DeepCopyInto(&(*out)[i])
-		}
+		*out = new(MaintenanceWindowInitParameters)
+		(*in).DeepCopyInto(*out)
 	}
 	if in.PersistenceMode != nil {
 		in, out := &in.PersistenceMode, &out.PersistenceMode
@@ -392,10 +390,8 @@ func (in *InMemoryDBReplicasetInitParameters) DeepCopyInto(out *InMemoryDBReplic
 	}
 	if in.Resources != nil {
 		in, out := &in.Resources, &out.Resources
-		*out = make([]ResourcesInitParameters, len(*in))
-		for i := range *in {
-			(*in)[i].DeepCopyInto(&(*out)[i])
-		}
+		*out = new(ResourcesInitParameters)
+		(*in).DeepCopyInto(*out)
 	}
 	if in.Version != nil {
 		in, out := &in.Version, &out.Version
@@ -451,17 +447,13 @@ func (in *InMemoryDBReplicasetObservation) DeepCopyInto(out *InMemoryDBReplicase
 	*out = *in
 	if in.Connections != nil {
 		in, out := &in.Connections, &out.Connections
-		*out = make([]ConnectionsObservation, len(*in))
-		for i := range *in {
-			(*in)[i].DeepCopyInto(&(*out)[i])
-		}
+		*out = new(ConnectionsObservation)
+		(*in).DeepCopyInto(*out)
 	}
 	if in.Credentials != nil {
 		in, out := &in.Credentials, &out.Credentials
-		*out = make([]CredentialsObservation, len(*in))
-		for i := range *in {
-			(*in)[i].DeepCopyInto(&(*out)[i])
-		}
+		*out = new(CredentialsObservation)
+		(*in).DeepCopyInto(*out)
 	}
 	if in.DNSName != nil {
 		in, out := &in.DNSName, &out.DNSName
@@ -495,10 +487,8 @@ func (in *InMemoryDBReplicasetObservation) DeepCopyInto(out *InMemoryDBReplicase
 	}
 	if in.MaintenanceWindow != nil {
 		in, out := &in.MaintenanceWindow, &out.MaintenanceWindow
-		*out = make([]MaintenanceWindowObservation, len(*in))
-		for i := range *in {
-			(*in)[i].DeepCopyInto(&(*out)[i])
-		}
+		*out = new(MaintenanceWindowObservation)
+		(*in).DeepCopyInto(*out)
 	}
 	if in.PersistenceMode != nil {
 		in, out := &in.PersistenceMode, &out.PersistenceMode
@@ -512,10 +502,8 @@ func (in *InMemoryDBReplicasetObservation) DeepCopyInto(out *InMemoryDBReplicase
 	}
 	if in.Resources != nil {
 		in, out := &in.Resources, &out.Resources
-		*out = make([]ResourcesObservation, len(*in))
-		for i := range *in {
-			(*in)[i].DeepCopyInto(&(*out)[i])
-		}
+		*out = new(ResourcesObservation)
+		(*in).DeepCopyInto(*out)
 	}
 	if in.Version != nil {
 		in, out := &in.Version, &out.Version
@@ -539,17 +527,13 @@ func (in *InMemoryDBReplicasetParameters) DeepCopyInto(out *InMemoryDBReplicaset
 	*out = *in
 	if in.Connections != nil {
 		in, out := &in.Connections, &out.Connections
-		*out = make([]ConnectionsParameters, len(*in))
-		for i := range *in {
-			(*in)[i].DeepCopyInto(&(*out)[i])
-		}
+		*out = new(ConnectionsParameters)
+		(*in).DeepCopyInto(*out)
 	}
 	if in.Credentials != nil {
 		in, out := &in.Credentials, &out.Credentials
-		*out = make([]CredentialsParameters, len(*in))
-		for i := range *in {
-			(*in)[i].DeepCopyInto(&(*out)[i])
-		}
+		*out = new(CredentialsParameters)
+		(*in).DeepCopyInto(*out)
 	}
 	if in.DisplayName != nil {
 		in, out := &in.DisplayName, &out.DisplayName
@@ -571,12 +555,20 @@ func (in *InMemoryDBReplicasetParameters) DeepCopyInto(out *InMemoryDBReplicaset
 		*out = new(string)
 		**out = **in
 	}
+	if in.LocationRef != nil {
+		in, out := &in.LocationRef, &out.LocationRef
+		*out = new(v1.Reference)
+		(*in).DeepCopyInto(*out)
+	}
+	if in.LocationSelector != nil {
+		in, out := &in.LocationSelector, &out.LocationSelector
+		*out = new(v1.Selector)
+		(*in).DeepCopyInto(*out)
+	}
 	if in.MaintenanceWindow != nil {
 		in, out := &in.MaintenanceWindow, &out.MaintenanceWindow
-		*out = make([]MaintenanceWindowParameters, len(*in))
-		for i := range *in {
-			(*in)[i].DeepCopyInto(&(*out)[i])
-		}
+		*out = new(MaintenanceWindowParameters)
+		(*in).DeepCopyInto(*out)
 	}
 	if in.PersistenceMode != nil {
 		in, out := &in.PersistenceMode, &out.PersistenceMode
@@ -590,10 +582,8 @@ func (in *InMemoryDBReplicasetParameters) DeepCopyInto(out *InMemoryDBReplicaset
 	}
 	if in.Resources != nil {
 		in, out := &in.Resources, &out.Resources
-		*out = make([]ResourcesParameters, len(*in))
-		for i := range *in {
-			(*in)[i].DeepCopyInto(&(*out)[i])
-		}
+		*out = new(ResourcesParameters)
+		(*in).DeepCopyInto(*out)
 	}
 	if in.Version != nil {
 		in, out := &in.Version, &out.Version

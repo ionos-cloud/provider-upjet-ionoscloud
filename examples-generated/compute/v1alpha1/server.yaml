@@ -19,6 +19,11 @@ spec:
       key: attribute.result
       name: example-password
       namespace: upbound-system
+    label:
+    - key: labelkey1
+      value: labelvalue1
+    - key: labelkey2
+      value: labelvalue2
     name: Server Example
     nic:
     - dhcp: true

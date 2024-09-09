@@ -312,10 +312,8 @@ func (in *MariadbClusterInitParameters) DeepCopyInto(out *MariadbClusterInitPara
 	*out = *in
 	if in.Connections != nil {
 		in, out := &in.Connections, &out.Connections
-		*out = make([]ConnectionsInitParameters, len(*in))
-		for i := range *in {
-			(*in)[i].DeepCopyInto(&(*out)[i])
-		}
+		*out = new(ConnectionsInitParameters)
+		(*in).DeepCopyInto(*out)
 	}
 	if in.Cores != nil {
 		in, out := &in.Cores, &out.Cores
@@ -324,10 +322,8 @@ func (in *MariadbClusterInitParameters) DeepCopyInto(out *MariadbClusterInitPara
 	}
 	if in.Credentials != nil {
 		in, out := &in.Credentials, &out.Credentials
-		*out = make([]CredentialsInitParameters, len(*in))
-		for i := range *in {
-			(*in)[i].DeepCopyInto(&(*out)[i])
-		}
+		*out = new(CredentialsInitParameters)
+		(*in).DeepCopyInto(*out)
 	}
 	if in.DisplayName != nil {
 		in, out := &in.DisplayName, &out.DisplayName
@@ -346,10 +342,8 @@ func (in *MariadbClusterInitParameters) DeepCopyInto(out *MariadbClusterInitPara
 	}
 	if in.MaintenanceWindow != nil {
 		in, out := &in.MaintenanceWindow, &out.MaintenanceWindow
-		*out = make([]MaintenanceWindowInitParameters, len(*in))
-		for i := range *in {
-			(*in)[i].DeepCopyInto(&(*out)[i])
-		}
+		*out = new(MaintenanceWindowInitParameters)
+		(*in).DeepCopyInto(*out)
 	}
 	if in.MariadbVersion != nil {
 		in, out := &in.MariadbVersion, &out.MariadbVersion
@@ -415,10 +409,8 @@ func (in *MariadbClusterObservation) DeepCopyInto(out *MariadbClusterObservation
 	*out = *in
 	if in.Connections != nil {
 		in, out := &in.Connections, &out.Connections
-		*out = make([]ConnectionsObservation, len(*in))
-		for i := range *in {
-			(*in)[i].DeepCopyInto(&(*out)[i])
-		}
+		*out = new(ConnectionsObservation)
+		(*in).DeepCopyInto(*out)
 	}
 	if in.Cores != nil {
 		in, out := &in.Cores, &out.Cores
@@ -427,10 +419,8 @@ func (in *MariadbClusterObservation) DeepCopyInto(out *MariadbClusterObservation
 	}
 	if in.Credentials != nil {
 		in, out := &in.Credentials, &out.Credentials
-		*out = make([]CredentialsObservation, len(*in))
-		for i := range *in {
-			(*in)[i].DeepCopyInto(&(*out)[i])
-		}
+		*out = new(CredentialsObservation)
+		(*in).DeepCopyInto(*out)
 	}
 	if in.DNSName != nil {
 		in, out := &in.DNSName, &out.DNSName
@@ -459,10 +449,8 @@ func (in *MariadbClusterObservation) DeepCopyInto(out *MariadbClusterObservation
 	}
 	if in.MaintenanceWindow != nil {
 		in, out := &in.MaintenanceWindow, &out.MaintenanceWindow
-		*out = make([]MaintenanceWindowObservation, len(*in))
-		for i := range *in {
-			(*in)[i].DeepCopyInto(&(*out)[i])
-		}
+		*out = new(MaintenanceWindowObservation)
+		(*in).DeepCopyInto(*out)
 	}
 	if in.MariadbVersion != nil {
 		in, out := &in.MariadbVersion, &out.MariadbVersion
@@ -496,10 +484,8 @@ func (in *MariadbClusterParameters) DeepCopyInto(out *MariadbClusterParameters) 
 	*out = *in
 	if in.Connections != nil {
 		in, out := &in.Connections, &out.Connections
-		*out = make([]ConnectionsParameters, len(*in))
-		for i := range *in {
-			(*in)[i].DeepCopyInto(&(*out)[i])
-		}
+		*out = new(ConnectionsParameters)
+		(*in).DeepCopyInto(*out)
 	}
 	if in.Cores != nil {
 		in, out := &in.Cores, &out.Cores
@@ -508,10 +494,8 @@ func (in *MariadbClusterParameters) DeepCopyInto(out *MariadbClusterParameters) 
 	}
 	if in.Credentials != nil {
 		in, out := &in.Credentials, &out.Credentials
-		*out = make([]CredentialsParameters, len(*in))
-		for i := range *in {
-			(*in)[i].DeepCopyInto(&(*out)[i])
-		}
+		*out = new(CredentialsParameters)
+		(*in).DeepCopyInto(*out)
 	}
 	if in.DisplayName != nil {
 		in, out := &in.DisplayName, &out.DisplayName
@@ -530,10 +514,8 @@ func (in *MariadbClusterParameters) DeepCopyInto(out *MariadbClusterParameters) 
 	}
 	if in.MaintenanceWindow != nil {
 		in, out := &in.MaintenanceWindow, &out.MaintenanceWindow
-		*out = make([]MaintenanceWindowParameters, len(*in))
-		for i := range *in {
-			(*in)[i].DeepCopyInto(&(*out)[i])
-		}
+		*out = new(MaintenanceWindowParameters)
+		(*in).DeepCopyInto(*out)
 	}
 	if in.MariadbVersion != nil {
 		in, out := &in.MariadbVersion, &out.MariadbVersion

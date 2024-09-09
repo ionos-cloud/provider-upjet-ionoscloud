@@ -178,30 +178,28 @@ spec:
                       IP addresses, source and destination ports, number of packets, amount of bytes,
                       the start and end time of the recording, and the type of protocol –
                       and log the extent to which your instances are being accessed.
-                    items:
-                      properties:
-                        action:
-                          description: |-
-                            Specifies the action to be taken when the rule is matched. Possible values: ACCEPTED, REJECTED, ALL. Immutable, update forces re-creation.
-                            Specifies the traffic direction pattern. Valid values: ACCEPTED, REJECTED, ALL. Immutable, forces re-recreation of the nic resource.
-                          type: string
-                        bucket:
-                          description: |-
-                            Specifies the S3 IONOS bucket where the flow log data will be stored. The bucket must exist. Immutable, update forces re-creation.
-                            The S3 bucket name of an existing IONOS Cloud S3 bucket. Immutable, forces re-recreation of the nic resource.
-                          type: string
-                        direction:
-                          description: |-
-                            Specifies the traffic direction pattern. Valid values: INGRESS, EGRESS, BIDIRECTIONAL. Immutable, update forces re-creation.
-                            Specifies the traffic direction pattern. Valid values: INGRESS, EGRESS, BIDIRECTIONAL. Immutable, forces re-recreation of the nic resource.
-                          type: string
-                        name:
-                          description: |-
-                            [string] The name of the LAN.
-                            The resource name.
-                          type: string
-                      type: object
-                    type: array
+                    properties:
+                      action:
+                        description: |-
+                          Specifies the action to be taken when the rule is matched. Possible values: ACCEPTED, REJECTED, ALL. Immutable, update forces re-creation.
+                          Specifies the traffic direction pattern. Valid values: ACCEPTED, REJECTED, ALL. Immutable, forces re-recreation of the nic resource.
+                        type: string
+                      bucket:
+                        description: |-
+                          Specifies the S3 IONOS bucket where the flow log data will be stored. The bucket must exist. Immutable, update forces re-creation.
+                          The S3 bucket name of an existing IONOS Cloud S3 bucket. Immutable, forces re-recreation of the nic resource.
+                        type: string
+                      direction:
+                        description: |-
+                          Specifies the traffic direction pattern. Valid values: INGRESS, EGRESS, BIDIRECTIONAL. Immutable, update forces re-creation.
+                          Specifies the traffic direction pattern. Valid values: INGRESS, EGRESS, BIDIRECTIONAL. Immutable, forces re-recreation of the nic resource.
+                        type: string
+                      name:
+                        description: |-
+                          [string] The name of the LAN.
+                          The resource name.
+                        type: string
+                    type: object
                   ips:
                     description: |-
                       [list] Collection of IP addresses assigned to a NIC. Explicitly assigned public IPs need to come from reserved IP blocks, Passing value null or empty array will assign an IP address automatically.
@@ -497,30 +495,28 @@ spec:
                       IP addresses, source and destination ports, number of packets, amount of bytes,
                       the start and end time of the recording, and the type of protocol –
                       and log the extent to which your instances are being accessed.
-                    items:
-                      properties:
-                        action:
-                          description: |-
-                            Specifies the action to be taken when the rule is matched. Possible values: ACCEPTED, REJECTED, ALL. Immutable, update forces re-creation.
-                            Specifies the traffic direction pattern. Valid values: ACCEPTED, REJECTED, ALL. Immutable, forces re-recreation of the nic resource.
-                          type: string
-                        bucket:
-                          description: |-
-                            Specifies the S3 IONOS bucket where the flow log data will be stored. The bucket must exist. Immutable, update forces re-creation.
-                            The S3 bucket name of an existing IONOS Cloud S3 bucket. Immutable, forces re-recreation of the nic resource.
-                          type: string
-                        direction:
-                          description: |-
-                            Specifies the traffic direction pattern. Valid values: INGRESS, EGRESS, BIDIRECTIONAL. Immutable, update forces re-creation.
-                            Specifies the traffic direction pattern. Valid values: INGRESS, EGRESS, BIDIRECTIONAL. Immutable, forces re-recreation of the nic resource.
-                          type: string
-                        name:
-                          description: |-
-                            [string] The name of the LAN.
-                            The resource name.
-                          type: string
-                      type: object
-                    type: array
+                    properties:
+                      action:
+                        description: |-
+                          Specifies the action to be taken when the rule is matched. Possible values: ACCEPTED, REJECTED, ALL. Immutable, update forces re-creation.
+                          Specifies the traffic direction pattern. Valid values: ACCEPTED, REJECTED, ALL. Immutable, forces re-recreation of the nic resource.
+                        type: string
+                      bucket:
+                        description: |-
+                          Specifies the S3 IONOS bucket where the flow log data will be stored. The bucket must exist. Immutable, update forces re-creation.
+                          The S3 bucket name of an existing IONOS Cloud S3 bucket. Immutable, forces re-recreation of the nic resource.
+                        type: string
+                      direction:
+                        description: |-
+                          Specifies the traffic direction pattern. Valid values: INGRESS, EGRESS, BIDIRECTIONAL. Immutable, update forces re-creation.
+                          Specifies the traffic direction pattern. Valid values: INGRESS, EGRESS, BIDIRECTIONAL. Immutable, forces re-recreation of the nic resource.
+                        type: string
+                      name:
+                        description: |-
+                          [string] The name of the LAN.
+                          The resource name.
+                        type: string
+                    type: object
                   ips:
                     description: |-
                       [list] Collection of IP addresses assigned to a NIC. Explicitly assigned public IPs need to come from reserved IP blocks, Passing value null or empty array will assign an IP address automatically.
@@ -904,35 +900,33 @@ spec:
                       IP addresses, source and destination ports, number of packets, amount of bytes,
                       the start and end time of the recording, and the type of protocol –
                       and log the extent to which your instances are being accessed.
-                    items:
-                      properties:
-                        action:
-                          description: |-
-                            Specifies the action to be taken when the rule is matched. Possible values: ACCEPTED, REJECTED, ALL. Immutable, update forces re-creation.
-                            Specifies the traffic direction pattern. Valid values: ACCEPTED, REJECTED, ALL. Immutable, forces re-recreation of the nic resource.
-                          type: string
-                        bucket:
-                          description: |-
-                            Specifies the S3 IONOS bucket where the flow log data will be stored. The bucket must exist. Immutable, update forces re-creation.
-                            The S3 bucket name of an existing IONOS Cloud S3 bucket. Immutable, forces re-recreation of the nic resource.
-                          type: string
-                        direction:
-                          description: |-
-                            Specifies the traffic direction pattern. Valid values: INGRESS, EGRESS, BIDIRECTIONAL. Immutable, update forces re-creation.
-                            Specifies the traffic direction pattern. Valid values: INGRESS, EGRESS, BIDIRECTIONAL. Immutable, forces re-recreation of the nic resource.
-                          type: string
-                        id:
-                          description: |-
-                            (Computed) The ID of the NIC.
-                            The resource's unique identifier.
-                          type: string
-                        name:
-                          description: |-
-                            [string] The name of the LAN.
-                            The resource name.
-                          type: string
-                      type: object
-                    type: array
+                    properties:
+                      action:
+                        description: |-
+                          Specifies the action to be taken when the rule is matched. Possible values: ACCEPTED, REJECTED, ALL. Immutable, update forces re-creation.
+                          Specifies the traffic direction pattern. Valid values: ACCEPTED, REJECTED, ALL. Immutable, forces re-recreation of the nic resource.
+                        type: string
+                      bucket:
+                        description: |-
+                          Specifies the S3 IONOS bucket where the flow log data will be stored. The bucket must exist. Immutable, update forces re-creation.
+                          The S3 bucket name of an existing IONOS Cloud S3 bucket. Immutable, forces re-recreation of the nic resource.
+                        type: string
+                      direction:
+                        description: |-
+                          Specifies the traffic direction pattern. Valid values: INGRESS, EGRESS, BIDIRECTIONAL. Immutable, update forces re-creation.
+                          Specifies the traffic direction pattern. Valid values: INGRESS, EGRESS, BIDIRECTIONAL. Immutable, forces re-recreation of the nic resource.
+                        type: string
+                      id:
+                        description: |-
+                          (Computed) The ID of the NIC.
+                          The resource's unique identifier.
+                        type: string
+                      name:
+                        description: |-
+                          [string] The name of the LAN.
+                          The resource name.
+                        type: string
+                    type: object
                   id:
                     description: (Computed) The ID of the NIC.
                     type: string

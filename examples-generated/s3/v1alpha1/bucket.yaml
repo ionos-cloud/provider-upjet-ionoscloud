@@ -8,7 +8,12 @@ metadata:
   name: example
 spec:
   forProvider:
+    forceDestroy: true
+    objectLockEnabled: true
     region: eu-central-3
+    tags:
+      key1: value1
+      key2: value2
     timeouts:
     - create: 10m
       delete: 10m

@@ -9,6 +9,7 @@ package v1alpha1
 import (
 	"context"
 	reference "github.com/crossplane/crossplane-runtime/pkg/reference"
+	resource "github.com/crossplane/upjet/pkg/resource"
 	v1alpha11 "github.com/ionos-cloud/provider-upjet-ionoscloud/apis/compute/v1alpha1"
 	v1alpha1 "github.com/ionos-cloud/provider-upjet-ionoscloud/apis/s3/v1alpha1"
 	errors "github.com/pkg/errors"
@@ -101,6 +102,22 @@ func (mg *NodePool) ResolveReferences(ctx context.Context, c client.Reader) erro
 	mg.Spec.ForProvider.K8SClusterID = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.K8SClusterIDRef = rsp.ResolvedReference
 
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.K8SVersion),
+		Extract:      resource.ExtractParamPath("k8s_version", false),
+		Reference:    mg.Spec.ForProvider.K8SVersionRef,
+		Selector:     mg.Spec.ForProvider.K8SVersionSelector,
+		To: reference.To{
+			List:    &ClusterList{},
+			Managed: &Cluster{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.ForProvider.K8SVersion")
+	}
+	mg.Spec.ForProvider.K8SVersion = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.K8SVersionRef = rsp.ResolvedReference
+
 	for i3 := 0; i3 < len(mg.Spec.ForProvider.Lans); i3++ {
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromFloatPtrValue(mg.Spec.ForProvider.Lans[i3].ID),
@@ -150,6 +167,22 @@ func (mg *NodePool) ResolveReferences(ctx context.Context, c client.Reader) erro
 	}
 	mg.Spec.InitProvider.K8SClusterID = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.InitProvider.K8SClusterIDRef = rsp.ResolvedReference
+
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.K8SVersion),
+		Extract:      resource.ExtractParamPath("k8s_version", false),
+		Reference:    mg.Spec.InitProvider.K8SVersionRef,
+		Selector:     mg.Spec.InitProvider.K8SVersionSelector,
+		To: reference.To{
+			List:    &ClusterList{},
+			Managed: &Cluster{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.InitProvider.K8SVersion")
+	}
+	mg.Spec.InitProvider.K8SVersion = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.InitProvider.K8SVersionRef = rsp.ResolvedReference
 
 	for i3 := 0; i3 < len(mg.Spec.InitProvider.Lans); i3++ {
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{

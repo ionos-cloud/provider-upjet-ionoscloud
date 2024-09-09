@@ -21,76 +21,76 @@ func (mg *NFSCluster) ResolveReferences(ctx context.Context, c client.Reader) er
 	var rsp reference.ResolutionResponse
 	var err error
 
-	for i3 := 0; i3 < len(mg.Spec.ForProvider.Connections); i3++ {
+	if mg.Spec.ForProvider.Connections != nil {
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
-			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.Connections[i3].DatacenterID),
+			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.Connections.DatacenterID),
 			Extract:      reference.ExternalName(),
-			Reference:    mg.Spec.ForProvider.Connections[i3].DatacenterIDRef,
-			Selector:     mg.Spec.ForProvider.Connections[i3].DatacenterIDSelector,
+			Reference:    mg.Spec.ForProvider.Connections.DatacenterIDRef,
+			Selector:     mg.Spec.ForProvider.Connections.DatacenterIDSelector,
 			To: reference.To{
 				List:    &v1alpha1.DatacenterList{},
 				Managed: &v1alpha1.Datacenter{},
 			},
 		})
 		if err != nil {
-			return errors.Wrap(err, "mg.Spec.ForProvider.Connections[i3].DatacenterID")
+			return errors.Wrap(err, "mg.Spec.ForProvider.Connections.DatacenterID")
 		}
-		mg.Spec.ForProvider.Connections[i3].DatacenterID = reference.ToPtrValue(rsp.ResolvedValue)
-		mg.Spec.ForProvider.Connections[i3].DatacenterIDRef = rsp.ResolvedReference
+		mg.Spec.ForProvider.Connections.DatacenterID = reference.ToPtrValue(rsp.ResolvedValue)
+		mg.Spec.ForProvider.Connections.DatacenterIDRef = rsp.ResolvedReference
 
 	}
-	for i3 := 0; i3 < len(mg.Spec.ForProvider.Connections); i3++ {
+	if mg.Spec.ForProvider.Connections != nil {
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
-			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.Connections[i3].Lan),
+			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.Connections.Lan),
 			Extract:      reference.ExternalName(),
-			Reference:    mg.Spec.ForProvider.Connections[i3].LanRef,
-			Selector:     mg.Spec.ForProvider.Connections[i3].LanSelector,
+			Reference:    mg.Spec.ForProvider.Connections.LanRef,
+			Selector:     mg.Spec.ForProvider.Connections.LanSelector,
 			To: reference.To{
 				List:    &v1alpha1.LanList{},
 				Managed: &v1alpha1.Lan{},
 			},
 		})
 		if err != nil {
-			return errors.Wrap(err, "mg.Spec.ForProvider.Connections[i3].Lan")
+			return errors.Wrap(err, "mg.Spec.ForProvider.Connections.Lan")
 		}
-		mg.Spec.ForProvider.Connections[i3].Lan = reference.ToPtrValue(rsp.ResolvedValue)
-		mg.Spec.ForProvider.Connections[i3].LanRef = rsp.ResolvedReference
+		mg.Spec.ForProvider.Connections.Lan = reference.ToPtrValue(rsp.ResolvedValue)
+		mg.Spec.ForProvider.Connections.LanRef = rsp.ResolvedReference
 
 	}
-	for i3 := 0; i3 < len(mg.Spec.InitProvider.Connections); i3++ {
+	if mg.Spec.InitProvider.Connections != nil {
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
-			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.Connections[i3].DatacenterID),
+			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.Connections.DatacenterID),
 			Extract:      reference.ExternalName(),
-			Reference:    mg.Spec.InitProvider.Connections[i3].DatacenterIDRef,
-			Selector:     mg.Spec.InitProvider.Connections[i3].DatacenterIDSelector,
+			Reference:    mg.Spec.InitProvider.Connections.DatacenterIDRef,
+			Selector:     mg.Spec.InitProvider.Connections.DatacenterIDSelector,
 			To: reference.To{
 				List:    &v1alpha1.DatacenterList{},
 				Managed: &v1alpha1.Datacenter{},
 			},
 		})
 		if err != nil {
-			return errors.Wrap(err, "mg.Spec.InitProvider.Connections[i3].DatacenterID")
+			return errors.Wrap(err, "mg.Spec.InitProvider.Connections.DatacenterID")
 		}
-		mg.Spec.InitProvider.Connections[i3].DatacenterID = reference.ToPtrValue(rsp.ResolvedValue)
-		mg.Spec.InitProvider.Connections[i3].DatacenterIDRef = rsp.ResolvedReference
+		mg.Spec.InitProvider.Connections.DatacenterID = reference.ToPtrValue(rsp.ResolvedValue)
+		mg.Spec.InitProvider.Connections.DatacenterIDRef = rsp.ResolvedReference
 
 	}
-	for i3 := 0; i3 < len(mg.Spec.InitProvider.Connections); i3++ {
+	if mg.Spec.InitProvider.Connections != nil {
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
-			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.Connections[i3].Lan),
+			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.Connections.Lan),
 			Extract:      reference.ExternalName(),
-			Reference:    mg.Spec.InitProvider.Connections[i3].LanRef,
-			Selector:     mg.Spec.InitProvider.Connections[i3].LanSelector,
+			Reference:    mg.Spec.InitProvider.Connections.LanRef,
+			Selector:     mg.Spec.InitProvider.Connections.LanSelector,
 			To: reference.To{
 				List:    &v1alpha1.LanList{},
 				Managed: &v1alpha1.Lan{},
 			},
 		})
 		if err != nil {
-			return errors.Wrap(err, "mg.Spec.InitProvider.Connections[i3].Lan")
+			return errors.Wrap(err, "mg.Spec.InitProvider.Connections.Lan")
 		}
-		mg.Spec.InitProvider.Connections[i3].Lan = reference.ToPtrValue(rsp.ResolvedValue)
-		mg.Spec.InitProvider.Connections[i3].LanRef = rsp.ResolvedReference
+		mg.Spec.InitProvider.Connections.Lan = reference.ToPtrValue(rsp.ResolvedValue)
+		mg.Spec.InitProvider.Connections.LanRef = rsp.ResolvedReference
 
 	}
 

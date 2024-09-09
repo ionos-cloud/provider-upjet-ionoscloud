@@ -73,11 +73,29 @@ spec:
                 type: string
               forProvider:
                 properties:
+                  forceDestroy:
+                    description: |-
+                      [bool] If true, the bucket and the contents of the bucket will be destroyed. Default is false.
+                      Whether all objects should be deleted from the bucket so that the bucket can be destroyed
+                    type: boolean
+                  objectLockEnabled:
+                    description: |-
+                      [bool] The object lock configuration status of the bucket. Must be true or false.
+                      Whether object lock is enabled for the bucket
+                    type: boolean
                   region:
                     description: |-
-                      [string] Specifies the Region where the bucket will be created. Please refer to the list of available regions. Defaults to "eu-central-3".
+                      [string] Specifies the Region where the bucket will be created. Please refer to the list of available regions
                       The region of the bucket. Defaults to eu-central-3.
                     type: string
+                  tags:
+                    additionalProperties:
+                      type: string
+                    description: |-
+                      A mapping of tags to assign to the bucket.
+                      A mapping of tags to assign to the bucket
+                    type: object
+                    x-kubernetes-map-type: granular
                 type: object
               initProvider:
                 description: |-
@@ -92,11 +110,29 @@ spec:
                   for example because of an external controller is managing them, like an
                   autoscaler.
                 properties:
+                  forceDestroy:
+                    description: |-
+                      [bool] If true, the bucket and the contents of the bucket will be destroyed. Default is false.
+                      Whether all objects should be deleted from the bucket so that the bucket can be destroyed
+                    type: boolean
+                  objectLockEnabled:
+                    description: |-
+                      [bool] The object lock configuration status of the bucket. Must be true or false.
+                      Whether object lock is enabled for the bucket
+                    type: boolean
                   region:
                     description: |-
-                      [string] Specifies the Region where the bucket will be created. Please refer to the list of available regions. Defaults to "eu-central-3".
+                      [string] Specifies the Region where the bucket will be created. Please refer to the list of available regions
                       The region of the bucket. Defaults to eu-central-3.
                     type: string
+                  tags:
+                    additionalProperties:
+                      type: string
+                    description: |-
+                      A mapping of tags to assign to the bucket.
+                      A mapping of tags to assign to the bucket
+                    type: object
+                    x-kubernetes-map-type: granular
                 type: object
               managementPolicies:
                 default:
@@ -270,14 +306,32 @@ spec:
             properties:
               atProvider:
                 properties:
+                  forceDestroy:
+                    description: |-
+                      [bool] If true, the bucket and the contents of the bucket will be destroyed. Default is false.
+                      Whether all objects should be deleted from the bucket so that the bucket can be destroyed
+                    type: boolean
                   id:
                     description: (Computed) Name of the bucket
                     type: string
+                  objectLockEnabled:
+                    description: |-
+                      [bool] The object lock configuration status of the bucket. Must be true or false.
+                      Whether object lock is enabled for the bucket
+                    type: boolean
                   region:
                     description: |-
-                      [string] Specifies the Region where the bucket will be created. Please refer to the list of available regions. Defaults to "eu-central-3".
+                      [string] Specifies the Region where the bucket will be created. Please refer to the list of available regions
                       The region of the bucket. Defaults to eu-central-3.
                     type: string
+                  tags:
+                    additionalProperties:
+                      type: string
+                    description: |-
+                      A mapping of tags to assign to the bucket.
+                      A mapping of tags to assign to the bucket
+                    type: object
+                    x-kubernetes-map-type: granular
                 type: object
               conditions:
                 description: Conditions of the resource.

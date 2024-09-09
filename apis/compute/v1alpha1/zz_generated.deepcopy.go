@@ -2101,10 +2101,8 @@ func (in *NicInitParameters) DeepCopyInto(out *NicInitParameters) {
 	}
 	if in.Flowlog != nil {
 		in, out := &in.Flowlog, &out.Flowlog
-		*out = make([]FlowlogInitParameters, len(*in))
-		for i := range *in {
-			(*in)[i].DeepCopyInto(&(*out)[i])
-		}
+		*out = new(FlowlogInitParameters)
+		(*in).DeepCopyInto(*out)
 	}
 	if in.IPv6CidrBlock != nil {
 		in, out := &in.IPv6CidrBlock, &out.IPv6CidrBlock
@@ -2247,10 +2245,8 @@ func (in *NicObservation) DeepCopyInto(out *NicObservation) {
 	}
 	if in.Flowlog != nil {
 		in, out := &in.Flowlog, &out.Flowlog
-		*out = make([]FlowlogObservation, len(*in))
-		for i := range *in {
-			(*in)[i].DeepCopyInto(&(*out)[i])
-		}
+		*out = new(FlowlogObservation)
+		(*in).DeepCopyInto(*out)
 	}
 	if in.ID != nil {
 		in, out := &in.ID, &out.ID
@@ -2361,10 +2357,8 @@ func (in *NicParameters) DeepCopyInto(out *NicParameters) {
 	}
 	if in.Flowlog != nil {
 		in, out := &in.Flowlog, &out.Flowlog
-		*out = make([]FlowlogParameters, len(*in))
-		for i := range *in {
-			(*in)[i].DeepCopyInto(&(*out)[i])
-		}
+		*out = new(FlowlogParameters)
+		(*in).DeepCopyInto(*out)
 	}
 	if in.IPv6CidrBlock != nil {
 		in, out := &in.IPv6CidrBlock, &out.IPv6CidrBlock
@@ -2650,10 +2644,8 @@ func (in *ServerInitParameters) DeepCopyInto(out *ServerInitParameters) {
 	}
 	if in.Nic != nil {
 		in, out := &in.Nic, &out.Nic
-		*out = make([]ServerNicInitParameters, len(*in))
-		for i := range *in {
-			(*in)[i].DeepCopyInto(&(*out)[i])
-		}
+		*out = new(ServerNicInitParameters)
+		(*in).DeepCopyInto(*out)
 	}
 	if in.RAM != nil {
 		in, out := &in.RAM, &out.RAM
@@ -2699,10 +2691,8 @@ func (in *ServerInitParameters) DeepCopyInto(out *ServerInitParameters) {
 	}
 	if in.Volume != nil {
 		in, out := &in.Volume, &out.Volume
-		*out = make([]VolumeInitParameters, len(*in))
-		for i := range *in {
-			(*in)[i].DeepCopyInto(&(*out)[i])
-		}
+		*out = new(VolumeInitParameters)
+		(*in).DeepCopyInto(*out)
 	}
 }
 
@@ -3114,10 +3104,8 @@ func (in *ServerObservation) DeepCopyInto(out *ServerObservation) {
 	}
 	if in.Nic != nil {
 		in, out := &in.Nic, &out.Nic
-		*out = make([]ServerNicObservation, len(*in))
-		for i := range *in {
-			(*in)[i].DeepCopyInto(&(*out)[i])
-		}
+		*out = new(ServerNicObservation)
+		(*in).DeepCopyInto(*out)
 	}
 	if in.PrimaryIP != nil {
 		in, out := &in.PrimaryIP, &out.PrimaryIP
@@ -3173,10 +3161,8 @@ func (in *ServerObservation) DeepCopyInto(out *ServerObservation) {
 	}
 	if in.Volume != nil {
 		in, out := &in.Volume, &out.Volume
-		*out = make([]VolumeObservation, len(*in))
-		for i := range *in {
-			(*in)[i].DeepCopyInto(&(*out)[i])
-		}
+		*out = new(VolumeObservation)
+		(*in).DeepCopyInto(*out)
 	}
 }
 
@@ -3268,10 +3254,8 @@ func (in *ServerParameters) DeepCopyInto(out *ServerParameters) {
 	}
 	if in.Nic != nil {
 		in, out := &in.Nic, &out.Nic
-		*out = make([]ServerNicParameters, len(*in))
-		for i := range *in {
-			(*in)[i].DeepCopyInto(&(*out)[i])
-		}
+		*out = new(ServerNicParameters)
+		(*in).DeepCopyInto(*out)
 	}
 	if in.RAM != nil {
 		in, out := &in.RAM, &out.RAM
@@ -3317,10 +3301,8 @@ func (in *ServerParameters) DeepCopyInto(out *ServerParameters) {
 	}
 	if in.Volume != nil {
 		in, out := &in.Volume, &out.Volume
-		*out = make([]VolumeParameters, len(*in))
-		for i := range *in {
-			(*in)[i].DeepCopyInto(&(*out)[i])
-		}
+		*out = new(VolumeParameters)
+		(*in).DeepCopyInto(*out)
 	}
 }
 

@@ -30,7 +30,17 @@ import (
 	nfsshare "github.com/ionos-cloud/provider-upjet-ionoscloud/internal/controller/nfs/nfsshare"
 	providerconfig "github.com/ionos-cloud/provider-upjet-ionoscloud/internal/controller/providerconfig"
 	bucket "github.com/ionos-cloud/provider-upjet-ionoscloud/internal/controller/s3/bucket"
+	bucketcorsconfiguration "github.com/ionos-cloud/provider-upjet-ionoscloud/internal/controller/s3/bucketcorsconfiguration"
+	bucketlifecycleconfiguration "github.com/ionos-cloud/provider-upjet-ionoscloud/internal/controller/s3/bucketlifecycleconfiguration"
+	bucketobjectlockconfiguration "github.com/ionos-cloud/provider-upjet-ionoscloud/internal/controller/s3/bucketobjectlockconfiguration"
+	bucketpolicy "github.com/ionos-cloud/provider-upjet-ionoscloud/internal/controller/s3/bucketpolicy"
+	bucketpublicaccessblock "github.com/ionos-cloud/provider-upjet-ionoscloud/internal/controller/s3/bucketpublicaccessblock"
+	bucketserversideencryptionconfiguration "github.com/ionos-cloud/provider-upjet-ionoscloud/internal/controller/s3/bucketserversideencryptionconfiguration"
+	bucketversioning "github.com/ionos-cloud/provider-upjet-ionoscloud/internal/controller/s3/bucketversioning"
+	bucketwebsiteconfiguration "github.com/ionos-cloud/provider-upjet-ionoscloud/internal/controller/s3/bucketwebsiteconfiguration"
 	key "github.com/ionos-cloud/provider-upjet-ionoscloud/internal/controller/s3/key"
+	object "github.com/ionos-cloud/provider-upjet-ionoscloud/internal/controller/s3/object"
+	objectcopy "github.com/ionos-cloud/provider-upjet-ionoscloud/internal/controller/s3/objectcopy"
 	vpnipsecgateway "github.com/ionos-cloud/provider-upjet-ionoscloud/internal/controller/vpnipsec/vpnipsecgateway"
 	vpnipsectunnel "github.com/ionos-cloud/provider-upjet-ionoscloud/internal/controller/vpnipsec/vpnipsectunnel"
 	vpnwireguardgateway "github.com/ionos-cloud/provider-upjet-ionoscloud/internal/controller/vpnwireguard/vpnwireguardgateway"
@@ -62,7 +72,17 @@ func Setup(mgr ctrl.Manager, o controller.Options) error {
 		nfsshare.Setup,
 		providerconfig.Setup,
 		bucket.Setup,
+		bucketcorsconfiguration.Setup,
+		bucketlifecycleconfiguration.Setup,
+		bucketobjectlockconfiguration.Setup,
+		bucketpolicy.Setup,
+		bucketpublicaccessblock.Setup,
+		bucketserversideencryptionconfiguration.Setup,
+		bucketversioning.Setup,
+		bucketwebsiteconfiguration.Setup,
 		key.Setup,
+		object.Setup,
+		objectcopy.Setup,
 		vpnipsecgateway.Setup,
 		vpnipsectunnel.Setup,
 		vpnwireguardgateway.Setup,

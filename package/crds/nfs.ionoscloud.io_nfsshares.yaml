@@ -101,15 +101,13 @@ spec:
                         nfs:
                           description: 'NFS specific configurations. Each configuration
                             includes:'
-                          items:
-                            properties:
-                              squash:
-                                description: |-
-                                  The squash mode for the export. The squash mode can be:
-                                  The squash mode for the export. The squash mode can be: none - No squash mode. no mapping, root-anonymous - Map root user to anonymous uid, all-anonymous - Map all users to anonymous uid.
-                                type: string
-                            type: object
-                          type: array
+                          properties:
+                            squash:
+                              description: |-
+                                The squash mode for the export. The squash mode can be:
+                                The squash mode for the export. The squash mode can be: none - No squash mode. no mapping, root-anonymous - Map root user to anonymous uid, all-anonymous - Map all users to anonymous uid.
+                              type: string
+                          type: object
                       type: object
                     type: array
                   clusterId:
@@ -258,15 +256,13 @@ spec:
                         nfs:
                           description: 'NFS specific configurations. Each configuration
                             includes:'
-                          items:
-                            properties:
-                              squash:
-                                description: |-
-                                  The squash mode for the export. The squash mode can be:
-                                  The squash mode for the export. The squash mode can be: none - No squash mode. no mapping, root-anonymous - Map root user to anonymous uid, all-anonymous - Map all users to anonymous uid.
-                                type: string
-                            type: object
-                          type: array
+                          properties:
+                            squash:
+                              description: |-
+                                The squash mode for the export. The squash mode can be:
+                                The squash mode for the export. The squash mode can be: none - No squash mode. no mapping, root-anonymous - Map root user to anonymous uid, all-anonymous - Map all users to anonymous uid.
+                              type: string
+                          type: object
                       type: object
                     type: array
                   clusterId:
@@ -587,15 +583,13 @@ spec:
                         nfs:
                           description: 'NFS specific configurations. Each configuration
                             includes:'
-                          items:
-                            properties:
-                              squash:
-                                description: |-
-                                  The squash mode for the export. The squash mode can be:
-                                  The squash mode for the export. The squash mode can be: none - No squash mode. no mapping, root-anonymous - Map root user to anonymous uid, all-anonymous - Map all users to anonymous uid.
-                                type: string
-                            type: object
-                          type: array
+                          properties:
+                            squash:
+                              description: |-
+                                The squash mode for the export. The squash mode can be:
+                                The squash mode for the export. The squash mode can be: none - No squash mode. no mapping, root-anonymous - Map root user to anonymous uid, all-anonymous - Map all users to anonymous uid.
+                              type: string
+                          type: object
                       type: object
                     type: array
                   clusterId:

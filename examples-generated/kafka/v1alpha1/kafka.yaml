@@ -19,7 +19,9 @@ spec:
       lanIdSelector:
         matchLabels:
           testing.upbound.io/example-name: example
-    location: de/fra
+    locationSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
     name: example-kafka-cluster
     size: S
     version: 3.7.0

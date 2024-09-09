@@ -1,34 +1,34 @@
-apiVersion: vpnwireguard.ionoscloud.io/v1alpha1
-kind: VpnWireguardGateway
-metadata:
-  annotations:
-    meta.upbound.io/example-id: vpnwireguard/v1alpha1/vpnwireguardgateway
-  labels:
-    testing.upbound.io/example-name: gateway
-  name: gateway
-spec:
-  forProvider:
-    connections:
-    - datacenterIdSelector:
-        matchLabels:
-          testing.upbound.io/example-name: datacenter_example
-      ipv4Cidr: 192.168.1.108/24
-      lanIdSelector:
-        matchLabels:
-          testing.upbound.io/example-name: lan_example
-    description: description
-    gatewayIpSelector:
-      matchLabels:
-        testing.upbound.io/example-name: ipblock_example
-    interfaceIpv4Cidr: 192.168.1.100/24
-    location: de/fra
-    name: gateway_example
-    privateKeySecretRef:
-      key: example-key
-      name: example-secret
-      namespace: upbound-system
-
----
+#apiVersion: vpnwireguard.ionoscloud.io/v1alpha1
+#kind: VpnWireguardGateway
+#metadata:
+#  annotations:
+#    meta.upbound.io/example-id: vpnwireguard/v1alpha1/vpnwireguardgateway
+#  labels:
+#    testing.upbound.io/example-name: gateway
+#  name: gateway
+#spec:
+#  forProvider:
+#    connections:
+#    - datacenterIdSelector:
+#        matchLabels:
+#          testing.upbound.io/example-name: datacenter_example
+#      ipv4Cidr: 192.168.1.108/24
+#      lanIdSelector:
+#        matchLabels:
+#          testing.upbound.io/example-name: lan_example
+#    description: description
+#    gatewayIpSelector:
+#      matchLabels:
+#        testing.upbound.io/example-name: ipblock_example
+#    interfaceIpv4Cidr: 192.168.1.100/24
+#    location: de/fra
+#    name: gateway_example
+#    privateKeySecretRef:
+#      key: example-key
+#      name: example-secret
+#      namespace: upbound-system
+#
+#---
 
 apiVersion: compute.ionoscloud.io/v1alpha1
 kind: Datacenter
@@ -45,33 +45,33 @@ spec:
 
 ---
 
-apiVersion: compute.ionoscloud.io/v1alpha1
-kind: Ipblock
-metadata:
-  annotations:
-    meta.upbound.io/example-id: vpnwireguard/v1alpha1/vpnwireguardgateway
-  labels:
-    testing.upbound.io/example-name: ipblock_example
-  name: ipblock-example
-spec:
-  forProvider:
-    location: de/fra
-    name: ipblock_example
-    size: 1
+#apiVersion: compute.ionoscloud.io/v1alpha1
+#kind: Ipblock
+#metadata:
+#  annotations:
+#    meta.upbound.io/example-id: vpnwireguard/v1alpha1/vpnwireguardgateway
+#  labels:
+#    testing.upbound.io/example-name: ipblock_example
+#  name: ipblock-example
+#spec:
+#  forProvider:
+#    location: de/fra
+#    name: ipblock_example
+#    size: 1
+#
+#---
 
----
-
-apiVersion: compute.ionoscloud.io/v1alpha1
-kind: Lan
-metadata:
-  annotations:
-    meta.upbound.io/example-id: vpnwireguard/v1alpha1/vpnwireguardgateway
-  labels:
-    testing.upbound.io/example-name: lan_example
-  name: lan-example
-spec:
-  forProvider:
-    datacenterIdSelector:
-      matchLabels:
-        testing.upbound.io/example-name: datacenter_example
-    name: lan_example
+#apiVersion: compute.ionoscloud.io/v1alpha1
+#kind: Lan
+#metadata:
+#  annotations:
+#    meta.upbound.io/example-id: vpnwireguard/v1alpha1/vpnwireguardgateway
+#  labels:
+#    testing.upbound.io/example-name: lan_example
+#  name: lan-example
+#spec:
+#  forProvider:
+#    datacenterIdSelector:
+#      matchLabels:
+#        testing.upbound.io/example-name: datacenter_example
+#    name: lan_example
