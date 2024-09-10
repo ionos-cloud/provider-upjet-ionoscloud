@@ -13,6 +13,7 @@ import (
 	"github.com/ionos-cloud/provider-upjet-ionoscloud/config/apigatewayroute"
 	"github.com/ionos-cloud/provider-upjet-ionoscloud/config/crossconnect"
 	"github.com/ionos-cloud/provider-upjet-ionoscloud/config/datacenter"
+	"github.com/ionos-cloud/provider-upjet-ionoscloud/config/dns"
 	"github.com/ionos-cloud/provider-upjet-ionoscloud/config/inmemorydb"
 	"github.com/ionos-cloud/provider-upjet-ionoscloud/config/ipblock"
 	"github.com/ionos-cloud/provider-upjet-ionoscloud/config/ipsec"
@@ -81,6 +82,7 @@ func GetProvider() *ujconfig.Provider {
 		k8s.Configure,
 		user.Configure,
 		nic.Configure,
+		dns.Configure,
 	} {
 		configure(pc)
 	}

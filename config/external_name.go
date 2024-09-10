@@ -34,6 +34,8 @@ var ExternalNameConfigs = map[string]config.ExternalName{
 	"ionoscloud_group":                 config.IdentifierFromProvider,
 	"ionoscloud_nic":                   config.IdentifierFromProvider,
 	"ionoscloud_s3_key":                config.IdentifierFromProvider,
+	"ionoscloud_dns_zone":              config.IdentifierFromProvider,
+	"ionoscloud_dns_record":            config.IdentifierFromProvider,
 }
 
 // TerraformPluginFrameworkExternalNameConfigs will be used for plugin configured resources. not used yet

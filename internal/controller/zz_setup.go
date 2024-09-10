@@ -21,6 +21,8 @@ import (
 	user "github.com/ionos-cloud/provider-upjet-ionoscloud/internal/controller/compute/user"
 	volume "github.com/ionos-cloud/provider-upjet-ionoscloud/internal/controller/compute/volume"
 	mariadbcluster "github.com/ionos-cloud/provider-upjet-ionoscloud/internal/controller/dbaas/mariadbcluster"
+	dnsrecord "github.com/ionos-cloud/provider-upjet-ionoscloud/internal/controller/dns/dnsrecord"
+	dnszone "github.com/ionos-cloud/provider-upjet-ionoscloud/internal/controller/dns/dnszone"
 	inmemorydbreplicaset "github.com/ionos-cloud/provider-upjet-ionoscloud/internal/controller/inmemorydb/inmemorydbreplicaset"
 	cluster "github.com/ionos-cloud/provider-upjet-ionoscloud/internal/controller/k8s/cluster"
 	nodepool "github.com/ionos-cloud/provider-upjet-ionoscloud/internal/controller/k8s/nodepool"
@@ -53,6 +55,8 @@ func Setup(mgr ctrl.Manager, o controller.Options) error {
 		user.Setup,
 		volume.Setup,
 		mariadbcluster.Setup,
+		dnsrecord.Setup,
+		dnszone.Setup,
 		inmemorydbreplicaset.Setup,
 		cluster.Setup,
 		nodepool.Setup,
