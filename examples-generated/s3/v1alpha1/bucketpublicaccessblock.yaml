@@ -15,16 +15,3 @@ spec:
         testing.upbound.io/example-name: example
     ignorePublicAcls: true
     restrictPublicBuckets: true
-
----
-
-apiVersion: s3.ionoscloud.io/v1alpha1
-kind: Bucket
-metadata:
-  annotations:
-    meta.upbound.io/example-id: s3/v1alpha1/bucketpublicaccessblock
-  labels:
-    testing.upbound.io/example-name: example
-  name: example
-spec:
-  forProvider: {}

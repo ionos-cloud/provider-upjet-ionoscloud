@@ -9,7 +9,6 @@ package v1alpha1
 import (
 	"context"
 	reference "github.com/crossplane/crossplane-runtime/pkg/reference"
-	resource "github.com/crossplane/upjet/pkg/resource"
 	v1alpha1 "github.com/ionos-cloud/provider-upjet-ionoscloud/apis/compute/v1alpha1"
 	errors "github.com/pkg/errors"
 	client "sigs.k8s.io/controller-runtime/pkg/client"
@@ -276,7 +275,7 @@ func (mg *BucketVersioning) ResolveReferences(ctx context.Context, c client.Read
 
 	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 		CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.Bucket),
-		Extract:      resource.ExtractResourceID(),
+		Extract:      reference.ExternalName(),
 		Reference:    mg.Spec.ForProvider.BucketRef,
 		Selector:     mg.Spec.ForProvider.BucketSelector,
 		To: reference.To{
@@ -292,7 +291,7 @@ func (mg *BucketVersioning) ResolveReferences(ctx context.Context, c client.Read
 
 	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 		CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.Bucket),
-		Extract:      resource.ExtractResourceID(),
+		Extract:      reference.ExternalName(),
 		Reference:    mg.Spec.InitProvider.BucketRef,
 		Selector:     mg.Spec.InitProvider.BucketSelector,
 		To: reference.To{

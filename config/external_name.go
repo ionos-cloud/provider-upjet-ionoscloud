@@ -6,8 +6,9 @@ package config
 
 import (
 	"github.com/crossplane/upjet/pkg/config"
-	"github.com/ionos-cloud/provider-upjet-ionoscloud/config/common"
 )
+
+const Version = "v1alpha1"
 
 // TerraformPluginSDKExternalNameConfigs contains all external name configurations
 // belonging to Terraform Plugin SDKv2 resources to be reconciled
@@ -74,7 +75,7 @@ func ResourceConfigurator() config.ResourceOption {
 		if !configured {
 			return
 		}
-		r.Version = common.VersionV1Alpha1
+		r.Version = Version
 		r.ExternalName = e
 	}
 }

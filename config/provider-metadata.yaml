@@ -3199,7 +3199,7 @@ resources:
             object_lock_enabled: '- (Optional)[bool] The object lock configuration status of the bucket. Must be true or false.'
             region: '- (Optional)[string] Specifies the Region where the bucket will be created. Please refer to the list of available regions'
             tags: '- (Optional) A mapping of tags to assign to the bucket.'
-            timeouts: '- (Optional)[block] Timeouts for this resource.'
+            timeouts: '- (Optional) Timeouts for this resource.'
         importStatements:
             - terraform import ionoscloud_s3_bucket.example example
     ionoscloud_s3_bucket_cors_configuration:
@@ -3363,7 +3363,7 @@ resources:
               dependencies:
                 ionoscloud_s3_bucket.example: |-
                     {
-                      "name": "unique-bucket-name"
+                      "name": "example"
                     }
         argumentDocs:
             bucket: '- (Required)[string] The name of the bucket where the object will be stored.'
@@ -3387,11 +3387,6 @@ resources:
                 }
               references:
                 bucket: ionoscloud_s3_bucket.example.name
-              dependencies:
-                ionoscloud_s3_bucket.example: |-
-                    {
-                      "name": "unique-bucket-name"
-                    }
         argumentDocs:
             block_public_acls: '- (Optional)[bool] Indicates that access to the bucket via Access Control Lists (ACLs) that grant public access is blocked. In other words, ACLs that allow public access are not permitted.'
             block_public_policy: '- (Optional)[bool] Blocks public access to the bucket via bucket policies. Bucket policies that grant public access will not be allowed.'
@@ -3443,7 +3438,7 @@ resources:
             - name: example
               manifest: |-
                 {
-                  "bucket": "${ionoscloud_s3_bucket.example.id}",
+                  "bucket": "${ionoscloud_s3_bucket.example.name}",
                   "versioning_configuration": [
                     {
                       "status": "Enabled"
@@ -3451,7 +3446,7 @@ resources:
                   ]
                 }
               references:
-                bucket: ionoscloud_s3_bucket.example.id
+                bucket: ionoscloud_s3_bucket.example.name
               dependencies:
                 ionoscloud_s3_bucket.example: |-
                     {

@@ -6,9 +6,6 @@ import (
 	"github.com/ionos-cloud/provider-upjet-ionoscloud/apis/compute/v1alpha1"
 )
 
-// VersionV1Alpha1 is the version of the API
-const VersionV1Alpha1 = "v1alpha1"
-
 // FirstIPBlockIP returns the first IP of an ipblock to assign to a wireguard gateway
 func FirstIPBlockIP() reference.ExtractValueFn {
 	return func(mr xpresource.Managed) string {

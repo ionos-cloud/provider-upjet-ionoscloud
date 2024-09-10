@@ -16,7 +16,7 @@ export TERRAFORM_PROVIDER_REPO ?= https://github.com/ionos-cloud/terraform-provi
 export TERRAFORM_PROVIDER_VERSION ?= 6.5.3
 export TERRAFORM_PROVIDER_DOWNLOAD_NAME ?= terraform-provider-ionoscloud
 export TERRAFORM_PROVIDER_DOWNLOAD_URL_PREFIX ?= https://github.com/ionos-cloud/$(TERRAFORM_PROVIDER_DOWNLOAD_NAME)/releases/download/v$(TERRAFORM_PROVIDER_VERSION)
-export TERRAFORM_NATIVE_PROVIDER_BINARY ?= terraform-provider-ionoscloud_6_5_3
+export TERRAFORM_NATIVE_PROVIDER_BINARY ?= terraform-provider-ionoscloud_v6_5_3
 export TERRAFORM_DOCS_PATH ?= docs/resources
 
 
