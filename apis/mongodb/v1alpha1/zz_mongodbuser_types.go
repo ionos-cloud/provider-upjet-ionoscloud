@@ -15,8 +15,7 @@ import (
 
 type MongodbUserInitParameters struct {
 
-	// [string] The unique ID of the cluster. Updates to the value of the field force the cluster to
-	// be re-created.
+	// [string] The unique ID of the cluster. Updates to the value of the field force the cluster to be re-created.
 	// +crossplane:generate:reference:type=github.com/ionos-cloud/provider-upjet-ionoscloud/apis/mongodb/v1alpha1.MongodbCluster
 	ClusterID *string `json:"clusterId,omitempty" tf:"cluster_id,omitempty"`
 
@@ -31,36 +30,30 @@ type MongodbUserInitParameters struct {
 	// [string] User password. Updates to the value of the field force the cluster to be re-created.
 	PasswordSecretRef v1.SecretKeySelector `json:"passwordSecretRef" tf:"-"`
 
-	// [string] a list of mongodb user roles. Updates to the value of the field force the cluster to be
-	// re-created.
+	// [string] a list of mongodb user roles. Updates to the value of the field force the cluster to be re-created.
 	Roles []RolesInitParameters `json:"roles,omitempty" tf:"roles,omitempty"`
 
-	// [string] Used for authentication. Updates to the value of the field force the cluster to be
-	// re-created.
+	// [string] Used for authentication. Updates to the value of the field force the cluster to be re-created.
 	Username *string `json:"username,omitempty" tf:"username,omitempty"`
 }
 
 type MongodbUserObservation struct {
 
-	// [string] The unique ID of the cluster. Updates to the value of the field force the cluster to
-	// be re-created.
+	// [string] The unique ID of the cluster. Updates to the value of the field force the cluster to be re-created.
 	ClusterID *string `json:"clusterId,omitempty" tf:"cluster_id,omitempty"`
 
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
-	// [string] a list of mongodb user roles. Updates to the value of the field force the cluster to be
-	// re-created.
+	// [string] a list of mongodb user roles. Updates to the value of the field force the cluster to be re-created.
 	Roles []RolesObservation `json:"roles,omitempty" tf:"roles,omitempty"`
 
-	// [string] Used for authentication. Updates to the value of the field force the cluster to be
-	// re-created.
+	// [string] Used for authentication. Updates to the value of the field force the cluster to be re-created.
 	Username *string `json:"username,omitempty" tf:"username,omitempty"`
 }
 
 type MongodbUserParameters struct {
 
-	// [string] The unique ID of the cluster. Updates to the value of the field force the cluster to
-	// be re-created.
+	// [string] The unique ID of the cluster. Updates to the value of the field force the cluster to be re-created.
 	// +crossplane:generate:reference:type=github.com/ionos-cloud/provider-upjet-ionoscloud/apis/mongodb/v1alpha1.MongodbCluster
 	// +kubebuilder:validation:Optional
 	ClusterID *string `json:"clusterId,omitempty" tf:"cluster_id,omitempty"`
@@ -77,50 +70,42 @@ type MongodbUserParameters struct {
 	// +kubebuilder:validation:Optional
 	PasswordSecretRef v1.SecretKeySelector `json:"passwordSecretRef" tf:"-"`
 
-	// [string] a list of mongodb user roles. Updates to the value of the field force the cluster to be
-	// re-created.
+	// [string] a list of mongodb user roles. Updates to the value of the field force the cluster to be re-created.
 	// +kubebuilder:validation:Optional
 	Roles []RolesParameters `json:"roles,omitempty" tf:"roles,omitempty"`
 
-	// [string] Used for authentication. Updates to the value of the field force the cluster to be
-	// re-created.
+	// [string] Used for authentication. Updates to the value of the field force the cluster to be re-created.
 	// +kubebuilder:validation:Optional
 	Username *string `json:"username,omitempty" tf:"username,omitempty"`
 }
 
 type RolesInitParameters struct {
 
-	// [string] The user database to use for authentication. Updates to the value of the field force
-	// the cluster to be re-created.
+	// [string] The user database to use for authentication. Updates to the value of the field force the cluster to be re-created.
 	Database *string `json:"database,omitempty" tf:"database,omitempty"`
 
-	// [true] Mongodb user role. Examples: read, readWrite, readAnyDatabase, readWriteAnyDatabase,
-	// dbAdmin, dbAdminAnyDatabase, clusterMonitor.
+	// [true] Mongodb user role. Examples: read, readWrite, readAnyDatabase, readWriteAnyDatabase, dbAdmin, dbAdminAnyDatabase, clusterMonitor.
 	// A list of mongodb user roles. Examples: read, readWrite, readAnyDatabase
 	Role *string `json:"role,omitempty" tf:"role,omitempty"`
 }
 
 type RolesObservation struct {
 
-	// [string] The user database to use for authentication. Updates to the value of the field force
-	// the cluster to be re-created.
+	// [string] The user database to use for authentication. Updates to the value of the field force the cluster to be re-created.
 	Database *string `json:"database,omitempty" tf:"database,omitempty"`
 
-	// [true] Mongodb user role. Examples: read, readWrite, readAnyDatabase, readWriteAnyDatabase,
-	// dbAdmin, dbAdminAnyDatabase, clusterMonitor.
+	// [true] Mongodb user role. Examples: read, readWrite, readAnyDatabase, readWriteAnyDatabase, dbAdmin, dbAdminAnyDatabase, clusterMonitor.
 	// A list of mongodb user roles. Examples: read, readWrite, readAnyDatabase
 	Role *string `json:"role,omitempty" tf:"role,omitempty"`
 }
 
 type RolesParameters struct {
 
-	// [string] The user database to use for authentication. Updates to the value of the field force
-	// the cluster to be re-created.
+	// [string] The user database to use for authentication. Updates to the value of the field force the cluster to be re-created.
 	// +kubebuilder:validation:Optional
 	Database *string `json:"database,omitempty" tf:"database,omitempty"`
 
-	// [true] Mongodb user role. Examples: read, readWrite, readAnyDatabase, readWriteAnyDatabase,
-	// dbAdmin, dbAdminAnyDatabase, clusterMonitor.
+	// [true] Mongodb user role. Examples: read, readWrite, readAnyDatabase, readWriteAnyDatabase, dbAdmin, dbAdminAnyDatabase, clusterMonitor.
 	// A list of mongodb user roles. Examples: read, readWrite, readAnyDatabase
 	// +kubebuilder:validation:Optional
 	Role *string `json:"role,omitempty" tf:"role,omitempty"`

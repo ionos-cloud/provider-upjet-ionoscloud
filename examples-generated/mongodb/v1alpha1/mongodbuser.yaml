@@ -12,8 +12,8 @@ spec:
       matchLabels:
         testing.upbound.io/example-name: example_mongo_cluster
     passwordSecretRef:
-      key: example-key
-      name: example-secret
+      key: attribute.result
+      name: example-password
       namespace: upbound-system
     roles:
     - database: db1

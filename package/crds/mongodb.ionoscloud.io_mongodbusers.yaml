@@ -74,9 +74,8 @@ spec:
               forProvider:
                 properties:
                   clusterId:
-                    description: |-
-                      [string] The unique ID of the cluster. Updates to the value of the field force the cluster to
-                      be re-created.
+                    description: '[string] The unique ID of the cluster. Updates to
+                      the value of the field force the cluster to be re-created.'
                     type: string
                   clusterIdRef:
                     description: Reference to a MongodbCluster in mongodb to populate
@@ -173,28 +172,25 @@ spec:
                     - namespace
                     type: object
                   roles:
-                    description: |-
-                      [string] a list of mongodb user roles. Updates to the value of the field force the cluster to be
-                      re-created.
+                    description: '[string] a list of mongodb user roles. Updates to
+                      the value of the field force the cluster to be re-created.'
                     items:
                       properties:
                         database:
-                          description: |-
-                            [string] The user database to use for authentication. Updates to the value of the field force
-                            the cluster to be re-created.
+                          description: '[string] The user database to use for authentication.
+                            Updates to the value of the field force the cluster to
+                            be re-created.'
                           type: string
                         role:
                           description: |-
-                            [true] Mongodb user role. Examples: read, readWrite, readAnyDatabase, readWriteAnyDatabase,
-                            dbAdmin, dbAdminAnyDatabase, clusterMonitor.
+                            [true] Mongodb user role. Examples: read, readWrite, readAnyDatabase, readWriteAnyDatabase, dbAdmin, dbAdminAnyDatabase, clusterMonitor.
                             A list of mongodb user roles. Examples: read, readWrite, readAnyDatabase
                           type: string
                       type: object
                     type: array
                   username:
-                    description: |-
-                      [string] Used for authentication. Updates to the value of the field force the cluster to be
-                      re-created.
+                    description: '[string] Used for authentication. Updates to the
+                      value of the field force the cluster to be re-created.'
                     type: string
                 type: object
               initProvider:
@@ -211,9 +207,8 @@ spec:
                   autoscaler.
                 properties:
                   clusterId:
-                    description: |-
-                      [string] The unique ID of the cluster. Updates to the value of the field force the cluster to
-                      be re-created.
+                    description: '[string] The unique ID of the cluster. Updates to
+                      the value of the field force the cluster to be re-created.'
                     type: string
                   clusterIdRef:
                     description: Reference to a MongodbCluster in mongodb to populate
@@ -310,28 +305,25 @@ spec:
                     - namespace
                     type: object
                   roles:
-                    description: |-
-                      [string] a list of mongodb user roles. Updates to the value of the field force the cluster to be
-                      re-created.
+                    description: '[string] a list of mongodb user roles. Updates to
+                      the value of the field force the cluster to be re-created.'
                     items:
                       properties:
                         database:
-                          description: |-
-                            [string] The user database to use for authentication. Updates to the value of the field force
-                            the cluster to be re-created.
+                          description: '[string] The user database to use for authentication.
+                            Updates to the value of the field force the cluster to
+                            be re-created.'
                           type: string
                         role:
                           description: |-
-                            [true] Mongodb user role. Examples: read, readWrite, readAnyDatabase, readWriteAnyDatabase,
-                            dbAdmin, dbAdminAnyDatabase, clusterMonitor.
+                            [true] Mongodb user role. Examples: read, readWrite, readAnyDatabase, readWriteAnyDatabase, dbAdmin, dbAdminAnyDatabase, clusterMonitor.
                             A list of mongodb user roles. Examples: read, readWrite, readAnyDatabase
                           type: string
                       type: object
                     type: array
                   username:
-                    description: |-
-                      [string] Used for authentication. Updates to the value of the field force the cluster to be
-                      re-created.
+                    description: '[string] Used for authentication. Updates to the
+                      value of the field force the cluster to be re-created.'
                     type: string
                 required:
                 - passwordSecretRef
@@ -517,35 +509,31 @@ spec:
               atProvider:
                 properties:
                   clusterId:
-                    description: |-
-                      [string] The unique ID of the cluster. Updates to the value of the field force the cluster to
-                      be re-created.
+                    description: '[string] The unique ID of the cluster. Updates to
+                      the value of the field force the cluster to be re-created.'
                     type: string
                   id:
                     type: string
                   roles:
-                    description: |-
-                      [string] a list of mongodb user roles. Updates to the value of the field force the cluster to be
-                      re-created.
+                    description: '[string] a list of mongodb user roles. Updates to
+                      the value of the field force the cluster to be re-created.'
                     items:
                       properties:
                         database:
-                          description: |-
-                            [string] The user database to use for authentication. Updates to the value of the field force
-                            the cluster to be re-created.
+                          description: '[string] The user database to use for authentication.
+                            Updates to the value of the field force the cluster to
+                            be re-created.'
                           type: string
                         role:
                           description: |-
-                            [true] Mongodb user role. Examples: read, readWrite, readAnyDatabase, readWriteAnyDatabase,
-                            dbAdmin, dbAdminAnyDatabase, clusterMonitor.
+                            [true] Mongodb user role. Examples: read, readWrite, readAnyDatabase, readWriteAnyDatabase, dbAdmin, dbAdminAnyDatabase, clusterMonitor.
                             A list of mongodb user roles. Examples: read, readWrite, readAnyDatabase
                           type: string
                       type: object
                     type: array
                   username:
-                    description: |-
-                      [string] Used for authentication. Updates to the value of the field force the cluster to be
-                      re-created.
+                    description: '[string] Used for authentication. Updates to the
+                      value of the field force the cluster to be re-created.'
                     type: string
                 type: object
               conditions:
