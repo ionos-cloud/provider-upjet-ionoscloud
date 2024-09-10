@@ -1,0 +1,23 @@
+apiVersion: mongodb.ionoscloud.io/v1alpha1
+kind: MongodbUser
+metadata:
+  annotations:
+    meta.upbound.io/example-id: mongodb/v1alpha1/mongodbuser
+  labels:
+    testing.upbound.io/example-name: example_mongo_user
+  name: example-mongo-user
+spec:
+  forProvider:
+    clusterIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example_mongo_cluster
+    passwordSecretRef:
+      key: example-key
+      name: example-secret
+      namespace: crossplane-system
+    roles:
+      - database: db1
+        role: read
+      - database: db2
+        role: readWrite
+    username: myUser
