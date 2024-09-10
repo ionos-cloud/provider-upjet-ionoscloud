@@ -91,7 +91,7 @@ func main() {
 	metrics.Registry.MustRegister(metricRecorder)
 	metrics.Registry.MustRegister(stateMetrics)
 
-	p, err := config.GetProvider(context.Background())
+	p, err := config.GetProvider(false)
 	kingpin.FatalIfError(err, "Cannot get provider configuration")
 
 	o := tjcontroller.Options{

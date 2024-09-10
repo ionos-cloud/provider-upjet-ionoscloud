@@ -5,7 +5,6 @@ Copyright 2021 Upbound Inc.
 package config
 
 import (
-	"context"
 	"github.com/crossplane/upjet/pkg/config"
 	"github.com/crossplane/upjet/pkg/registry/reference"
 	"github.com/crossplane/upjet/pkg/schema/traverser"
@@ -51,22 +50,20 @@ var providerSchema string
 var providerMetadata string
 
 // GetProvider returns provider configuration
-func GetProvider(ctx context.Context) (*ujconfig.Provider, error) {
+func GetProvider(generationProvider bool) (*ujconfig.Provider, error) {
 	fwProvider, sdkProvider := xpprovider.GetProvider()
-	p, err := getProviderSchema(providerSchema)
-	if err != nil {
-		return nil, errors.Wrap(err, "cannot read the Terraform SDK provider from the JSON schema for code generation")
-	}
+	if generationProvider {
+		p, err := getProviderSchema(providerSchema)
+		if err != nil {
+			return nil, errors.Wrap(err, "cannot read the Terraform SDK provider from the JSON schema for code generation")
+		}
 
-	if err := traverser.TFResourceSchema(sdkProvider.ResourcesMap).Traverse(traverser.NewMaxItemsSync(p.ResourcesMap)); err != nil {
-		return nil, errors.Wrap(err, "cannot sync the MaxItems constraints between the Go schema and the JSON schema")
-	}
+		if err := traverser.TFResourceSchema(sdkProvider.ResourcesMap).Traverse(traverser.NewMaxItemsSync(p.ResourcesMap)); err != nil {
+			return nil, errors.Wrap(err, "cannot sync the MaxItems constraints between the Go schema and the JSON schema")
+		}
 
-	// use the JSON schema to temporarily prevent float64->int64
-	// conversions in the CRD APIs.
-	// We would like to convert to int64s with the next major release of
-	// the provider.
-	sdkProvider = p
+		sdkProvider = p
+	}
 
 	pc := ujconfig.NewProvider([]byte(providerSchema), resourcePrefix, modulePath, []byte(providerMetadata),
 		ujconfig.WithShortName("ionos"),

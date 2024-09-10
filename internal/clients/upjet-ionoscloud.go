@@ -8,6 +8,7 @@ import (
 	"context"
 	"encoding/json"
 	"github.com/hashicorp/terraform-plugin-framework/provider"
+	"github.com/ionos-cloud/terraform-provider-ionoscloud/v6/ionoscloud"
 
 	"github.com/crossplane/crossplane-runtime/pkg/resource"
 	"github.com/pkg/errors"
@@ -63,6 +64,15 @@ func TerraformSetupBuilder(version, providerSource, providerVersion string, fwPr
 		if err := json.Unmarshal(data, &creds); err != nil {
 			return ps, errors.Wrap(err, errUnmarshalCredentials)
 		}
+
+		ionosSDKBundleClient := ionoscloud.NewSDKBundleClient(ionoscloud.ClientOptions{
+			Username:         creds["user"],
+			Password:         creds["password"],
+			Token:            creds["token"],
+			TerraformVersion: version,
+		})
+
+		ps.Meta = ionosSDKBundleClient
 
 		// Set credentials in Terraform provider configuration.
 		ps.Configuration = map[string]any{
