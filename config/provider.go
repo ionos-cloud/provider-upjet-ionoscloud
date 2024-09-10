@@ -15,6 +15,7 @@ import (
 
 	// Note(turkenh): we are importing this to embed provider schema document
 	_ "embed"
+
 	"github.com/ionos-cloud/terraform-provider-ionoscloud/v6/xpprovider"
 
 	ujconfig "github.com/crossplane/upjet/pkg/config"

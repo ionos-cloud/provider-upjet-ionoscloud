@@ -8,6 +8,7 @@ import (
 	"github.com/crossplane/upjet/pkg/config"
 )
 
+// Version is the version of the resources to be reconciled.
 const Version = "v1alpha1"
 
 // TerraformPluginSDKExternalNameConfigs contains all external name configurations
@@ -94,6 +95,9 @@ func TerraformPluginSDKResourceList() []string {
 	return l
 }
 
+// TerraformPluginFrameworkResourceList returns the list of resources that have external
+// name configured in ExternalNameConfigs table and to be reconciled under
+// the TF Plugin Framework architecture.
 func TerraformPluginFrameworkResourceList() []string {
 	l := make([]string, len(TerraformPluginFrameworkExternalNameConfigs))
 	i := 0
