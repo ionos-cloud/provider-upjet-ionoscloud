@@ -20,8 +20,10 @@ import (
 	"github.com/ionos-cloud/provider-upjet-ionoscloud/config/kafka"
 	"github.com/ionos-cloud/provider-upjet-ionoscloud/config/lan"
 	"github.com/ionos-cloud/provider-upjet-ionoscloud/config/mariadb"
+	"github.com/ionos-cloud/provider-upjet-ionoscloud/config/mongodb"
 	"github.com/ionos-cloud/provider-upjet-ionoscloud/config/nfs"
 	"github.com/ionos-cloud/provider-upjet-ionoscloud/config/nic"
+	"github.com/ionos-cloud/provider-upjet-ionoscloud/config/postgresql"
 	"github.com/ionos-cloud/provider-upjet-ionoscloud/config/s3"
 	"github.com/ionos-cloud/provider-upjet-ionoscloud/config/server"
 	"github.com/ionos-cloud/provider-upjet-ionoscloud/config/user"
@@ -81,6 +83,8 @@ func GetProvider() *ujconfig.Provider {
 		k8s.Configure,
 		user.Configure,
 		nic.Configure,
+		mongodb.Configure,
+		postgresql.Configure,
 	} {
 		configure(pc)
 	}
