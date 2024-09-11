@@ -12,7 +12,7 @@ require (
 	github.com/hashicorp/terraform-json v0.22.1
 	github.com/hashicorp/terraform-plugin-framework v1.11.0
 	github.com/hashicorp/terraform-plugin-sdk/v2 v2.34.0
-	github.com/ionos-cloud/terraform-provider-ionoscloud/v6 v6.5.3
+	github.com/ionos-cloud/terraform-provider-ionoscloud/v6 v6.5.4
 	github.com/pkg/errors v0.9.1
 	gopkg.in/alecthomas/kingpin.v2 v2.2.6
 	k8s.io/apimachinery v0.29.1
@@ -20,8 +20,6 @@ require (
 	sigs.k8s.io/controller-runtime v0.17.0
 	sigs.k8s.io/controller-tools v0.14.0
 )
-
-replace github.com/ionos-cloud/terraform-provider-ionoscloud/v6 => /home/dinga/Work/repos/terraform-provider-ionoscloud
 
 require (
 	github.com/ProtonMail/go-crypto v1.1.0-alpha.5-proton // indirect

@@ -2081,6 +2081,61 @@ resources:
               manifest: |-
                 {
                   "cluster_id": "${ionoscloud_mongo_cluster.example_mongo_cluster.id}",
+                  "password": "strongPassword",
+                  "roles": [
+                    {
+                      "database": "db1",
+                      "role": "read"
+                    },
+                    {
+                      "database": "db2",
+                      "role": "readWrite"
+                    }
+                  ],
+                  "username": "myUser"
+                }
+              references:
+                cluster_id: ionoscloud_mongo_cluster.example_mongo_cluster.id
+              dependencies:
+                ionoscloud_datacenter.datacenter_example: |-
+                    {
+                      "description": "Datacenter for testing dbaas cluster",
+                      "location": "de/txl",
+                      "name": "example"
+                    }
+                ionoscloud_lan.lan_example: |-
+                    {
+                      "datacenter_id": "${ionoscloud_datacenter.datacenter_example.id}",
+                      "name": "example",
+                      "public": false
+                    }
+                ionoscloud_mongo_cluster.example_mongo_cluster: |-
+                    {
+                      "connections": [
+                        {
+                          "cidr_list": [
+                            "192.168.1.108/24"
+                          ],
+                          "datacenter_id": "${ionoscloud_datacenter.datacenter_example.id}",
+                          "lan_id": "${ionoscloud_lan.lan_example.id}"
+                        }
+                      ],
+                      "display_name": "example_mongo_cluster",
+                      "instances": 1,
+                      "location": "${ionoscloud_datacenter.datacenter_example.location}",
+                      "maintenance_window": [
+                        {
+                          "day_of_the_week": "Sunday",
+                          "time": "09:00:00"
+                        }
+                      ],
+                      "mongodb_version": "5.0",
+                      "template_id": "6b78ea06-ee0e-4689-998c-fc9c46e781f6"
+                    }
+            - name: example_mongo_user
+              manifest: |-
+                {
+                  "cluster_id": "${ionoscloud_mongo_cluster.example_mongo_cluster.id}",
                   "password": "${random_password.user_password.result}",
                   "roles": [
                     {
@@ -2951,6 +3006,55 @@ resources:
                 {
                   "connections": [
                     {
+                      "cidr": "192.168.100.1/24",
+                      "datacenter_id": "${ionoscloud_datacenter.example.id}",
+                      "lan_id": "${ionoscloud_lan.example.id}"
+                    }
+                  ],
+                  "cores": 4,
+                  "credentials": [
+                    {
+                      "password": "strongPassword",
+                      "username": "username"
+                    }
+                  ],
+                  "display_name": "PostgreSQL_cluster",
+                  "instances": 1,
+                  "location": "${ionoscloud_datacenter.example.location}",
+                  "maintenance_window": [
+                    {
+                      "day_of_the_week": "Sunday",
+                      "time": "09:00:00"
+                    }
+                  ],
+                  "postgres_version": "12",
+                  "ram": 2048,
+                  "storage_size": 2048,
+                  "storage_type": "HDD",
+                  "synchronization_mode": "ASYNCHRONOUS"
+                }
+              references:
+                connections.datacenter_id: ionoscloud_datacenter.example.id
+                connections.lan_id: ionoscloud_lan.example.id
+                location: ionoscloud_datacenter.example.location
+              dependencies:
+                ionoscloud_datacenter.example: |-
+                    {
+                      "description": "Datacenter for testing dbaas cluster",
+                      "location": "de/txl",
+                      "name": "example"
+                    }
+                ionoscloud_lan.example: |-
+                    {
+                      "datacenter_id": "${ionoscloud_datacenter.example.id}",
+                      "name": "example",
+                      "public": false
+                    }
+            - name: example
+              manifest: |-
+                {
+                  "connections": [
+                    {
                       "cidr": "${local.database_ip_cidr}",
                       "datacenter_id": "${ionoscloud_datacenter.example.id}",
                       "lan_id": "${ionoscloud_lan.example.id}"
@@ -2978,7 +3082,7 @@ resources:
                       "time": "09:00:00"
                     }
                   ],
-                  "postgres_version": 12,
+                  "postgres_version": "12",
                   "ram": 2048,
                   "storage_size": 2048,
                   "storage_type": "HDD",
