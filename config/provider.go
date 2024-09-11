@@ -12,7 +12,6 @@ import (
 	tfjson "github.com/hashicorp/terraform-json"
 	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/schema"
 	"github.com/pkg/errors"
-
 	// Note(turkenh): we are importing this to embed provider schema document
 	_ "embed"
 
@@ -106,7 +105,28 @@ func GetProvider(generationProvider bool) (*ujconfig.Provider, error) {
 		configure(pc)
 	}
 	pc.ConfigureResources()
+	addTFSingletonConversion(pc)
 	return pc, nil
+}
+
+func addTFSingletonConversion(pc *config.Provider) {
+	for name, r := range pc.Resources {
+		r := r
+		// nothing to do if no singleton list has been converted to
+		// an embedded object
+		if len(r.CRDListConversionPaths()) == 0 {
+			continue
+		}
+
+		// the controller will be reconciling on the CRD API version
+		// with the converted API (with embedded objects in place of
+		// singleton lists), so we need the appropriate Terraform
+		// converter in this case.
+		r.TerraformConversions = []config.TerraformConversion{
+			config.NewTFSingletonConversion(),
+		}
+		pc.Resources[name] = r
+	}
 }
 
 func getProviderSchema(s string) (*schema.Provider, error) {

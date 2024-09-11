@@ -83,7 +83,7 @@ spec:
       namespace: upbound-system
     name: Server Example
     nic:
-    - dhcp: true
+      dhcp: true
       firewall:
       - name: SSH
         portRangeEnd: 22
@@ -100,7 +100,7 @@ spec:
     ram: 1024
     type: ENTERPRISE
     volume:
-    - availabilityZone: ZONE_1
+      availabilityZone: ZONE_1
       bus: VIRTIO
       diskType: SSD Standard
       name: system

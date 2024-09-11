@@ -9,7 +9,7 @@ metadata:
 spec:
   forProvider:
     connections:
-    - cidr: "192.168.42.1/24"
+      cidr: "192.168.42.1/24"
       datacenterIdSelector:
         matchLabels:
           testing.upbound.io/example-name: example
@@ -17,7 +17,7 @@ spec:
         matchLabels:
           testing.upbound.io/example-name: example
     credentials:
-    - plainTextPasswordSecretRef:
+      plainTextPasswordSecretRef:
         key: password
         name: pwsecret
         namespace: upbound-system
@@ -26,12 +26,12 @@ spec:
     evictionPolicy: noeviction
     location: de/txl
     maintenanceWindow:
-    - dayOfTheWeek: Monday
+      dayOfTheWeek: Monday
       time: "10:00:00"
     persistenceMode: RDB
     replicas: 4
     resources:
-    - cores: 1
+      cores: 1
       ram: 6
     version: "7.2"
 

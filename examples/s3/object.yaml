@@ -34,9 +34,9 @@ spec:
     key: object
     metadata:
       mk: mv
-#    objectLockLegalHold: "ON"
-#    objectLockMode: GOVERNANCE
-#    objectLockRetainUntilDate: "2024-10-07T12:34:56Z"
+    objectLockLegalHold: "ON"
+    objectLockMode: GOVERNANCE
+    objectLockRetainUntilDate: "2024-10-07T12:34:56Z"
     serverSideEncryption: AES256
     tags:
       tk: tv

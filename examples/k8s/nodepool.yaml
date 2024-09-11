@@ -12,7 +12,7 @@ spec:
       ann1: value1
       ann2: value2
     autoScaling:
-    - maxNodeCount: 2
+      maxNodeCount: 2
       minNodeCount: 1
     availabilityZone: AUTO
     coresCount: 2
@@ -36,7 +36,7 @@ spec:
       - gatewayIp: 10.1.5.17
         network: 1.2.3.5/24
     maintenanceWindow:
-    - dayOfTheWeek: Monday
+      dayOfTheWeek: Monday
       time: 09:00:00Z
     name: k8sNodePoolExample
     nodeCount: 1
@@ -77,7 +77,7 @@ spec:
     - 1.2.3.6/32
     k8sVersion: 1.28.6
     maintenanceWindow:
-    - dayOfTheWeek: Sunday
+      dayOfTheWeek: Sunday
       time: 09:00:00Z
     name: k8sClusterExample
 

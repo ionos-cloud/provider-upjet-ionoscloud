@@ -9,7 +9,7 @@ metadata:
 spec:
   forProvider:
     auth:
-      - method: PSK
+        method: PSK
         pskKeySecretRef:
           key: example-key
           name: example-secret
@@ -26,7 +26,7 @@ spec:
       matchLabels:
         testing.upbound.io/example-name: example
     ike:
-      - diffieHellmanGroup: 16-MODP4096
+        diffieHellmanGroup: 16-MODP4096
         encryptionAlgorithm: AES256
         integrityAlgorithm: SHA256
         lifetime: 86400
