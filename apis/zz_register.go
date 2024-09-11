@@ -13,10 +13,13 @@ import (
 	v1alpha1 "github.com/ionos-cloud/provider-upjet-ionoscloud/apis/apigateway/v1alpha1"
 	v1alpha1compute "github.com/ionos-cloud/provider-upjet-ionoscloud/apis/compute/v1alpha1"
 	v1alpha1dbaas "github.com/ionos-cloud/provider-upjet-ionoscloud/apis/dbaas/v1alpha1"
+	v1alpha1dns "github.com/ionos-cloud/provider-upjet-ionoscloud/apis/dns/v1alpha1"
 	v1alpha1inmemorydb "github.com/ionos-cloud/provider-upjet-ionoscloud/apis/inmemorydb/v1alpha1"
 	v1alpha1k8s "github.com/ionos-cloud/provider-upjet-ionoscloud/apis/k8s/v1alpha1"
 	v1alpha1kafka "github.com/ionos-cloud/provider-upjet-ionoscloud/apis/kafka/v1alpha1"
+	v1alpha1mongodb "github.com/ionos-cloud/provider-upjet-ionoscloud/apis/mongodb/v1alpha1"
 	v1alpha1nfs "github.com/ionos-cloud/provider-upjet-ionoscloud/apis/nfs/v1alpha1"
+	v1alpha1postgresql "github.com/ionos-cloud/provider-upjet-ionoscloud/apis/postgresql/v1alpha1"
 	v1alpha1s3 "github.com/ionos-cloud/provider-upjet-ionoscloud/apis/s3/v1alpha1"
 	v1alpha1apis "github.com/ionos-cloud/provider-upjet-ionoscloud/apis/v1alpha1"
 	v1beta1 "github.com/ionos-cloud/provider-upjet-ionoscloud/apis/v1beta1"
@@ -30,10 +33,13 @@ func init() {
 		v1alpha1.SchemeBuilder.AddToScheme,
 		v1alpha1compute.SchemeBuilder.AddToScheme,
 		v1alpha1dbaas.SchemeBuilder.AddToScheme,
+		v1alpha1dns.SchemeBuilder.AddToScheme,
 		v1alpha1inmemorydb.SchemeBuilder.AddToScheme,
 		v1alpha1k8s.SchemeBuilder.AddToScheme,
 		v1alpha1kafka.SchemeBuilder.AddToScheme,
+		v1alpha1mongodb.SchemeBuilder.AddToScheme,
 		v1alpha1nfs.SchemeBuilder.AddToScheme,
+		v1alpha1postgresql.SchemeBuilder.AddToScheme,
 		v1alpha1s3.SchemeBuilder.AddToScheme,
 		v1alpha1apis.SchemeBuilder.AddToScheme,
 		v1beta1.SchemeBuilder.AddToScheme,

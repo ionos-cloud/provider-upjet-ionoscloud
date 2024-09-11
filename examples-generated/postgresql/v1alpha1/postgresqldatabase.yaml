@@ -1,0 +1,15 @@
+apiVersion: postgresql.ionoscloud.io/v1alpha1
+kind: PostgresqlDatabase
+metadata:
+  annotations:
+    meta.upbound.io/example-id: postgresql/v1alpha1/postgresqldatabase
+  labels:
+    testing.upbound.io/example-name: example_pg_database
+  name: example-pg-database
+spec:
+  forProvider:
+    clusterIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    name: exampledatabase
+    owner: exampleuser

@@ -21,13 +21,20 @@ import (
 	user "github.com/ionos-cloud/provider-upjet-ionoscloud/internal/controller/compute/user"
 	volume "github.com/ionos-cloud/provider-upjet-ionoscloud/internal/controller/compute/volume"
 	mariadbcluster "github.com/ionos-cloud/provider-upjet-ionoscloud/internal/controller/dbaas/mariadbcluster"
+	dnsrecord "github.com/ionos-cloud/provider-upjet-ionoscloud/internal/controller/dns/dnsrecord"
+	dnszone "github.com/ionos-cloud/provider-upjet-ionoscloud/internal/controller/dns/dnszone"
 	inmemorydbreplicaset "github.com/ionos-cloud/provider-upjet-ionoscloud/internal/controller/inmemorydb/inmemorydbreplicaset"
 	cluster "github.com/ionos-cloud/provider-upjet-ionoscloud/internal/controller/k8s/cluster"
 	nodepool "github.com/ionos-cloud/provider-upjet-ionoscloud/internal/controller/k8s/nodepool"
 	kafka "github.com/ionos-cloud/provider-upjet-ionoscloud/internal/controller/kafka/kafka"
 	kafkatopic "github.com/ionos-cloud/provider-upjet-ionoscloud/internal/controller/kafka/kafkatopic"
+	mongodbcluster "github.com/ionos-cloud/provider-upjet-ionoscloud/internal/controller/mongodb/mongodbcluster"
+	mongodbuser "github.com/ionos-cloud/provider-upjet-ionoscloud/internal/controller/mongodb/mongodbuser"
 	nfscluster "github.com/ionos-cloud/provider-upjet-ionoscloud/internal/controller/nfs/nfscluster"
 	nfsshare "github.com/ionos-cloud/provider-upjet-ionoscloud/internal/controller/nfs/nfsshare"
+	postgresqlcluster "github.com/ionos-cloud/provider-upjet-ionoscloud/internal/controller/postgresql/postgresqlcluster"
+	postgresqldatabase "github.com/ionos-cloud/provider-upjet-ionoscloud/internal/controller/postgresql/postgresqldatabase"
+	postgresqluser "github.com/ionos-cloud/provider-upjet-ionoscloud/internal/controller/postgresql/postgresqluser"
 	providerconfig "github.com/ionos-cloud/provider-upjet-ionoscloud/internal/controller/providerconfig"
 	bucket "github.com/ionos-cloud/provider-upjet-ionoscloud/internal/controller/s3/bucket"
 	bucketcorsconfiguration "github.com/ionos-cloud/provider-upjet-ionoscloud/internal/controller/s3/bucketcorsconfiguration"
@@ -63,13 +70,20 @@ func Setup(mgr ctrl.Manager, o controller.Options) error {
 		user.Setup,
 		volume.Setup,
 		mariadbcluster.Setup,
+		dnsrecord.Setup,
+		dnszone.Setup,
 		inmemorydbreplicaset.Setup,
 		cluster.Setup,
 		nodepool.Setup,
 		kafka.Setup,
 		kafkatopic.Setup,
+		mongodbcluster.Setup,
+		mongodbuser.Setup,
 		nfscluster.Setup,
 		nfsshare.Setup,
+		postgresqlcluster.Setup,
+		postgresqldatabase.Setup,
+		postgresqluser.Setup,
 		providerconfig.Setup,
 		bucket.Setup,
 		bucketcorsconfiguration.Setup,

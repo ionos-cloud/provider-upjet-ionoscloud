@@ -22,6 +22,7 @@ import (
 	"github.com/ionos-cloud/provider-upjet-ionoscloud/config/apigatewayroute"
 	"github.com/ionos-cloud/provider-upjet-ionoscloud/config/crossconnect"
 	"github.com/ionos-cloud/provider-upjet-ionoscloud/config/datacenter"
+	"github.com/ionos-cloud/provider-upjet-ionoscloud/config/dns"
 	"github.com/ionos-cloud/provider-upjet-ionoscloud/config/inmemorydb"
 	"github.com/ionos-cloud/provider-upjet-ionoscloud/config/ipblock"
 	"github.com/ionos-cloud/provider-upjet-ionoscloud/config/ipsec"
@@ -29,8 +30,10 @@ import (
 	"github.com/ionos-cloud/provider-upjet-ionoscloud/config/kafka"
 	"github.com/ionos-cloud/provider-upjet-ionoscloud/config/lan"
 	"github.com/ionos-cloud/provider-upjet-ionoscloud/config/mariadb"
+	"github.com/ionos-cloud/provider-upjet-ionoscloud/config/mongodb"
 	"github.com/ionos-cloud/provider-upjet-ionoscloud/config/nfs"
 	"github.com/ionos-cloud/provider-upjet-ionoscloud/config/nic"
+	"github.com/ionos-cloud/provider-upjet-ionoscloud/config/postgresql"
 	"github.com/ionos-cloud/provider-upjet-ionoscloud/config/s3"
 	"github.com/ionos-cloud/provider-upjet-ionoscloud/config/server"
 	"github.com/ionos-cloud/provider-upjet-ionoscloud/config/user"
@@ -101,6 +104,9 @@ func GetProvider(generationProvider bool) (*ujconfig.Provider, error) {
 		k8s.Configure,
 		user.Configure,
 		nic.Configure,
+		dns.Configure,
+		mongodb.Configure,
+		postgresql.Configure,
 	} {
 		configure(pc)
 	}
