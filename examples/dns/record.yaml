@@ -1,0 +1,19 @@
+apiVersion: dns.ionoscloud.io/v1alpha1
+kind: DnsRecord
+metadata:
+  annotations:
+    meta.upbound.io/example-id: dns/v1alpha1/dnsrecord
+  labels:
+    testing.upbound.io/example-name: recordexample
+  name: recordexample
+spec:
+  forProvider:
+    content: 1.2.3.4
+    enabled: false
+    name: recordexample
+    priority: 1024
+    ttl: 2000
+    type: CNAME
+    zoneIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
