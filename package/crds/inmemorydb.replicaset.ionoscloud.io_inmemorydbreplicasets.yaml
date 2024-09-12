@@ -248,44 +248,46 @@ spec:
                     description: |-
                       [object] Credentials for the InMemoryDB replicaset, only one type of password can be used since they are mutually exclusive. These values are used to create the initial InMemoryDB user, updating any of these will force recreation of the replica set resource.
                       Credentials for the InMemoryDB replicaset.
-                    properties:
-                      hashedPassword:
-                        description: |-
-                          [object] The hashed password for a InMemoryDB user.
-                          The hashed password for a InMemoryDB user.
-                        properties:
-                          algorithm:
-                            description: '[string] The value can be only: "SHA-256".'
-                            type: string
-                          hash:
-                            description: '[string] The hashed password.'
-                            type: string
-                        type: object
-                      plainTextPasswordSecretRef:
-                        description: |-
-                          [string] The password for a InMemoryDB user, this is a field that is marked as Sensitive.
-                          The password for a InMemoryDB user.
-                        properties:
-                          key:
-                            description: The key to select.
-                            type: string
-                          name:
-                            description: Name of the secret.
-                            type: string
-                          namespace:
-                            description: Namespace of the secret.
-                            type: string
-                        required:
-                        - key
-                        - name
-                        - namespace
-                        type: object
-                      username:
-                        description: |-
-                          [string] The username for the initial InMemoryDB user. Some system usernames are restricted (e.g. 'admin', 'standby').
-                          The username for the initial InMemoryDB user. Some system usernames are restricted (e.g. 'admin', 'standby').
-                        type: string
-                    type: object
+                    items:
+                      properties:
+                        hashedPassword:
+                          description: |-
+                            [object] The hashed password for a InMemoryDB user.
+                            The hashed password for a InMemoryDB user.
+                          properties:
+                            algorithm:
+                              description: '[string] The value can be only: "SHA-256".'
+                              type: string
+                            hash:
+                              description: '[string] The hashed password.'
+                              type: string
+                          type: object
+                        plainTextPasswordSecretRef:
+                          description: |-
+                            [string] The password for a InMemoryDB user, this is a field that is marked as Sensitive.
+                            The password for a InMemoryDB user.
+                          properties:
+                            key:
+                              description: The key to select.
+                              type: string
+                            name:
+                              description: Name of the secret.
+                              type: string
+                            namespace:
+                              description: Namespace of the secret.
+                              type: string
+                          required:
+                          - key
+                          - name
+                          - namespace
+                          type: object
+                        username:
+                          description: |-
+                            [string] The username for the initial InMemoryDB user. Some system usernames are restricted (e.g. 'admin', 'standby').
+                            The username for the initial InMemoryDB user. Some system usernames are restricted (e.g. 'admin', 'standby').
+                          type: string
+                      type: object
+                    type: array
                   displayName:
                     description: |-
                       [string] The human-readable name of your replica set.
@@ -618,44 +620,46 @@ spec:
                     description: |-
                       [object] Credentials for the InMemoryDB replicaset, only one type of password can be used since they are mutually exclusive. These values are used to create the initial InMemoryDB user, updating any of these will force recreation of the replica set resource.
                       Credentials for the InMemoryDB replicaset.
-                    properties:
-                      hashedPassword:
-                        description: |-
-                          [object] The hashed password for a InMemoryDB user.
-                          The hashed password for a InMemoryDB user.
-                        properties:
-                          algorithm:
-                            description: '[string] The value can be only: "SHA-256".'
-                            type: string
-                          hash:
-                            description: '[string] The hashed password.'
-                            type: string
-                        type: object
-                      plainTextPasswordSecretRef:
-                        description: |-
-                          [string] The password for a InMemoryDB user, this is a field that is marked as Sensitive.
-                          The password for a InMemoryDB user.
-                        properties:
-                          key:
-                            description: The key to select.
-                            type: string
-                          name:
-                            description: Name of the secret.
-                            type: string
-                          namespace:
-                            description: Namespace of the secret.
-                            type: string
-                        required:
-                        - key
-                        - name
-                        - namespace
-                        type: object
-                      username:
-                        description: |-
-                          [string] The username for the initial InMemoryDB user. Some system usernames are restricted (e.g. 'admin', 'standby').
-                          The username for the initial InMemoryDB user. Some system usernames are restricted (e.g. 'admin', 'standby').
-                        type: string
-                    type: object
+                    items:
+                      properties:
+                        hashedPassword:
+                          description: |-
+                            [object] The hashed password for a InMemoryDB user.
+                            The hashed password for a InMemoryDB user.
+                          properties:
+                            algorithm:
+                              description: '[string] The value can be only: "SHA-256".'
+                              type: string
+                            hash:
+                              description: '[string] The hashed password.'
+                              type: string
+                          type: object
+                        plainTextPasswordSecretRef:
+                          description: |-
+                            [string] The password for a InMemoryDB user, this is a field that is marked as Sensitive.
+                            The password for a InMemoryDB user.
+                          properties:
+                            key:
+                              description: The key to select.
+                              type: string
+                            name:
+                              description: Name of the secret.
+                              type: string
+                            namespace:
+                              description: Namespace of the secret.
+                              type: string
+                          required:
+                          - key
+                          - name
+                          - namespace
+                          type: object
+                        username:
+                          description: |-
+                            [string] The username for the initial InMemoryDB user. Some system usernames are restricted (e.g. 'admin', 'standby').
+                            The username for the initial InMemoryDB user. Some system usernames are restricted (e.g. 'admin', 'standby').
+                          type: string
+                      type: object
+                    type: array
                   displayName:
                     description: |-
                       [string] The human-readable name of your replica set.
@@ -1031,25 +1035,27 @@ spec:
                     description: |-
                       [object] Credentials for the InMemoryDB replicaset, only one type of password can be used since they are mutually exclusive. These values are used to create the initial InMemoryDB user, updating any of these will force recreation of the replica set resource.
                       Credentials for the InMemoryDB replicaset.
-                    properties:
-                      hashedPassword:
-                        description: |-
-                          [object] The hashed password for a InMemoryDB user.
-                          The hashed password for a InMemoryDB user.
-                        properties:
-                          algorithm:
-                            description: '[string] The value can be only: "SHA-256".'
-                            type: string
-                          hash:
-                            description: '[string] The hashed password.'
-                            type: string
-                        type: object
-                      username:
-                        description: |-
-                          [string] The username for the initial InMemoryDB user. Some system usernames are restricted (e.g. 'admin', 'standby').
-                          The username for the initial InMemoryDB user. Some system usernames are restricted (e.g. 'admin', 'standby').
-                        type: string
-                    type: object
+                    items:
+                      properties:
+                        hashedPassword:
+                          description: |-
+                            [object] The hashed password for a InMemoryDB user.
+                            The hashed password for a InMemoryDB user.
+                          properties:
+                            algorithm:
+                              description: '[string] The value can be only: "SHA-256".'
+                              type: string
+                            hash:
+                              description: '[string] The hashed password.'
+                              type: string
+                          type: object
+                        username:
+                          description: |-
+                            [string] The username for the initial InMemoryDB user. Some system usernames are restricted (e.g. 'admin', 'standby').
+                            The username for the initial InMemoryDB user. Some system usernames are restricted (e.g. 'admin', 'standby').
+                          type: string
+                      type: object
+                    type: array
                   displayName:
                     description: |-
                       [string] The human-readable name of your replica set.

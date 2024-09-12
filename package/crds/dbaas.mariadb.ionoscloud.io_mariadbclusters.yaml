@@ -253,32 +253,34 @@ spec:
                     description: |-
                       Credentials for the database user to be created.
                       Credentials for the database user to be created.
-                    properties:
-                      passwordSecretRef:
-                        description: |-
-                          [string] The password for a MariaDB user.
-                          The password for a MariaDB user.
-                        properties:
-                          key:
-                            description: The key to select.
-                            type: string
-                          name:
-                            description: Name of the secret.
-                            type: string
-                          namespace:
-                            description: Namespace of the secret.
-                            type: string
-                        required:
-                        - key
-                        - name
-                        - namespace
-                        type: object
-                      username:
-                        description: |-
-                          [string] The username for the initial MariaDB user. Some system usernames are restricted (e.g 'mariadb', 'admin', 'standby').
-                          The username for the initial MariaDB user. Some system usernames are restricted (e.g 'mariadb', 'admin', 'standby').
-                        type: string
-                    type: object
+                    items:
+                      properties:
+                        passwordSecretRef:
+                          description: |-
+                            [string] The password for a MariaDB user.
+                            The password for a MariaDB user.
+                          properties:
+                            key:
+                              description: The key to select.
+                              type: string
+                            name:
+                              description: Name of the secret.
+                              type: string
+                            namespace:
+                              description: Namespace of the secret.
+                              type: string
+                          required:
+                          - key
+                          - name
+                          - namespace
+                          type: object
+                        username:
+                          description: |-
+                            [string] The username for the initial MariaDB user. Some system usernames are restricted (e.g 'mariadb', 'admin', 'standby').
+                            The username for the initial MariaDB user. Some system usernames are restricted (e.g 'mariadb', 'admin', 'standby').
+                          type: string
+                      type: object
+                    type: array
                   displayName:
                     description: |-
                       [string] The friendly name of your cluster.
@@ -519,34 +521,36 @@ spec:
                     description: |-
                       Credentials for the database user to be created.
                       Credentials for the database user to be created.
-                    properties:
-                      passwordSecretRef:
-                        description: |-
-                          [string] The password for a MariaDB user.
-                          The password for a MariaDB user.
-                        properties:
-                          key:
-                            description: The key to select.
-                            type: string
-                          name:
-                            description: Name of the secret.
-                            type: string
-                          namespace:
-                            description: Namespace of the secret.
-                            type: string
-                        required:
-                        - key
-                        - name
-                        - namespace
-                        type: object
-                      username:
-                        description: |-
-                          [string] The username for the initial MariaDB user. Some system usernames are restricted (e.g 'mariadb', 'admin', 'standby').
-                          The username for the initial MariaDB user. Some system usernames are restricted (e.g 'mariadb', 'admin', 'standby').
-                        type: string
-                    required:
-                    - passwordSecretRef
-                    type: object
+                    items:
+                      properties:
+                        passwordSecretRef:
+                          description: |-
+                            [string] The password for a MariaDB user.
+                            The password for a MariaDB user.
+                          properties:
+                            key:
+                              description: The key to select.
+                              type: string
+                            name:
+                              description: Name of the secret.
+                              type: string
+                            namespace:
+                              description: Namespace of the secret.
+                              type: string
+                          required:
+                          - key
+                          - name
+                          - namespace
+                          type: object
+                        username:
+                          description: |-
+                            [string] The username for the initial MariaDB user. Some system usernames are restricted (e.g 'mariadb', 'admin', 'standby').
+                            The username for the initial MariaDB user. Some system usernames are restricted (e.g 'mariadb', 'admin', 'standby').
+                          type: string
+                      required:
+                      - passwordSecretRef
+                      type: object
+                    type: array
                   displayName:
                     description: |-
                       [string] The friendly name of your cluster.
@@ -829,13 +833,15 @@ spec:
                     description: |-
                       Credentials for the database user to be created.
                       Credentials for the database user to be created.
-                    properties:
-                      username:
-                        description: |-
-                          [string] The username for the initial MariaDB user. Some system usernames are restricted (e.g 'mariadb', 'admin', 'standby').
-                          The username for the initial MariaDB user. Some system usernames are restricted (e.g 'mariadb', 'admin', 'standby').
-                        type: string
-                    type: object
+                    items:
+                      properties:
+                        username:
+                          description: |-
+                            [string] The username for the initial MariaDB user. Some system usernames are restricted (e.g 'mariadb', 'admin', 'standby').
+                            The username for the initial MariaDB user. Some system usernames are restricted (e.g 'mariadb', 'admin', 'standby').
+                          type: string
+                      type: object
+                    type: array
                   displayName:
                     description: |-
                       [string] The friendly name of your cluster.

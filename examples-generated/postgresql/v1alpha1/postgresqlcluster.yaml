@@ -9,7 +9,7 @@ metadata:
 spec:
   forProvider:
     connections:
-    - cidr: ${local.database_ip_cidr}
+    - cidr: 192.168.100.1/24
       datacenterIdSelector:
         matchLabels:
           testing.upbound.io/example-name: example
@@ -19,14 +19,11 @@ spec:
     cores: 4
     credentials:
     - passwordSecretRef:
-        key: attribute.result
-        name: example-password
+        key: example-key
+        name: example-secret
         namespace: upbound-system
       username: username
     displayName: PostgreSQL_cluster
-    fromBackup:
-    - backupId: backup_uuid
-      recoveryTargetTime: "2021-12-06T13:54:08Z"
     instances: 1
     locationSelector:
       matchLabels:
@@ -34,7 +31,7 @@ spec:
     maintenanceWindow:
     - dayOfTheWeek: Sunday
       time: "09:00:00"
-    postgresVersion: 12
+    postgresVersion: "12"
     ram: 2048
     storageSize: 2048
     storageType: HDD
@@ -73,39 +70,3 @@ spec:
         testing.upbound.io/example-name: example
     name: example
     public: false
-
----
-
-apiVersion: compute.ionoscloud.io/v1alpha1
-kind: Server
-metadata:
-  annotations:
-    meta.upbound.io/example-id: postgresql/v1alpha1/postgresqlcluster
-  labels:
-    testing.upbound.io/example-name: example
-  name: example
-spec:
-  forProvider:
-    availabilityZone: ZONE_1
-    cores: 2
-    cpuFamily: INTEL_SKYLAKE
-    datacenterIdSelector:
-      matchLabels:
-        testing.upbound.io/example-name: example
-    imageName: Debian-10-cloud-init.qcow2
-    imagePasswordSecretRef:
-      key: example-key
-      name: example-secret
-      namespace: upbound-system
-    name: example
-    nic:
-    - dhcp: true
-      lanSelector:
-        matchLabels:
-          testing.upbound.io/example-name: example
-      name: example
-    ram: 2048
-    volume:
-    - diskType: SSD Standard
-      name: example
-      size: 6

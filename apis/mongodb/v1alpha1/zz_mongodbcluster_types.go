@@ -202,15 +202,15 @@ type MongodbClusterInitParameters struct {
 
 	// [list]
 	// Backup related properties.
-	Backup []BackupInitParameters `json:"backup,omitempty" tf:"backup,omitempty"`
+	Backup *BackupInitParameters `json:"backup,omitempty" tf:"backup,omitempty"`
 
 	// (Computed)The MongoDB Connector for Business Intelligence allows you to query a MongoDB database using SQL commands to aid in data analysis.
 	// The MongoDB Connector for Business Intelligence allows you to query a MongoDB database using SQL commands to aid in data analysis.
-	BiConnector []BiConnectorInitParameters `json:"biConnector,omitempty" tf:"bi_connector,omitempty"`
+	BiConnector *BiConnectorInitParameters `json:"biConnector,omitempty" tf:"bi_connector,omitempty"`
 
 	// [List] Details about the network connection for your cluster. Updates to the value of the field force the cluster to be re-created.
 	// Details about the network connection for your cluster.
-	Connections []ConnectionsInitParameters `json:"connections,omitempty" tf:"connections,omitempty"`
+	Connections *ConnectionsInitParameters `json:"connections,omitempty" tf:"connections,omitempty"`
 
 	// (Computed)[int] The number of CPU cores per replica. Required for enterprise edition.
 	// The number of CPU cores per instance.
@@ -244,7 +244,7 @@ type MongodbClusterInitParameters struct {
 
 	// (Computed)[string] A weekly 4 hour-long window, during which maintenance might occur.  Updates to the value of the field force the cluster to be re-created.
 	// A weekly 4 hour-long window, during which maintenance might occur
-	MaintenanceWindow []MaintenanceWindowInitParameters `json:"maintenanceWindow,omitempty" tf:"maintenance_window,omitempty"`
+	MaintenanceWindow *MaintenanceWindowInitParameters `json:"maintenanceWindow,omitempty" tf:"maintenance_window,omitempty"`
 
 	// [string] The MongoDB version of your cluster. Updates to the value of the field force the cluster to be re-created.
 	// The MongoDB version of your cluster. Update forces cluster re-creation.
@@ -279,11 +279,11 @@ type MongodbClusterObservation struct {
 
 	// [list]
 	// Backup related properties.
-	Backup []BackupObservation `json:"backup,omitempty" tf:"backup,omitempty"`
+	Backup *BackupObservation `json:"backup,omitempty" tf:"backup,omitempty"`
 
 	// (Computed)The MongoDB Connector for Business Intelligence allows you to query a MongoDB database using SQL commands to aid in data analysis.
 	// The MongoDB Connector for Business Intelligence allows you to query a MongoDB database using SQL commands to aid in data analysis.
-	BiConnector []BiConnectorObservation `json:"biConnector,omitempty" tf:"bi_connector,omitempty"`
+	BiConnector *BiConnectorObservation `json:"biConnector,omitempty" tf:"bi_connector,omitempty"`
 
 	// (Computed)[string] The physical location where the cluster will be created. This will be where all of your instances live. Updates to the value of the field force the cluster to be re-created. Available locations: de/txl, gb/lhr, es/vit
 	// The connection string for your cluster.
@@ -291,7 +291,7 @@ type MongodbClusterObservation struct {
 
 	// [List] Details about the network connection for your cluster. Updates to the value of the field force the cluster to be re-created.
 	// Details about the network connection for your cluster.
-	Connections []ConnectionsObservation `json:"connections,omitempty" tf:"connections,omitempty"`
+	Connections *ConnectionsObservation `json:"connections,omitempty" tf:"connections,omitempty"`
 
 	// (Computed)[int] The number of CPU cores per replica. Required for enterprise edition.
 	// The number of CPU cores per instance.
@@ -317,7 +317,7 @@ type MongodbClusterObservation struct {
 
 	// (Computed)[string] A weekly 4 hour-long window, during which maintenance might occur.  Updates to the value of the field force the cluster to be re-created.
 	// A weekly 4 hour-long window, during which maintenance might occur
-	MaintenanceWindow []MaintenanceWindowObservation `json:"maintenanceWindow,omitempty" tf:"maintenance_window,omitempty"`
+	MaintenanceWindow *MaintenanceWindowObservation `json:"maintenanceWindow,omitempty" tf:"maintenance_window,omitempty"`
 
 	// [string] The MongoDB version of your cluster. Updates to the value of the field force the cluster to be re-created.
 	// The MongoDB version of your cluster. Update forces cluster re-creation.
@@ -353,17 +353,17 @@ type MongodbClusterParameters struct {
 	// [list]
 	// Backup related properties.
 	// +kubebuilder:validation:Optional
-	Backup []BackupParameters `json:"backup,omitempty" tf:"backup,omitempty"`
+	Backup *BackupParameters `json:"backup,omitempty" tf:"backup,omitempty"`
 
 	// (Computed)The MongoDB Connector for Business Intelligence allows you to query a MongoDB database using SQL commands to aid in data analysis.
 	// The MongoDB Connector for Business Intelligence allows you to query a MongoDB database using SQL commands to aid in data analysis.
 	// +kubebuilder:validation:Optional
-	BiConnector []BiConnectorParameters `json:"biConnector,omitempty" tf:"bi_connector,omitempty"`
+	BiConnector *BiConnectorParameters `json:"biConnector,omitempty" tf:"bi_connector,omitempty"`
 
 	// [List] Details about the network connection for your cluster. Updates to the value of the field force the cluster to be re-created.
 	// Details about the network connection for your cluster.
 	// +kubebuilder:validation:Optional
-	Connections []ConnectionsParameters `json:"connections,omitempty" tf:"connections,omitempty"`
+	Connections *ConnectionsParameters `json:"connections,omitempty" tf:"connections,omitempty"`
 
 	// (Computed)[int] The number of CPU cores per replica. Required for enterprise edition.
 	// The number of CPU cores per instance.
@@ -403,7 +403,7 @@ type MongodbClusterParameters struct {
 	// (Computed)[string] A weekly 4 hour-long window, during which maintenance might occur.  Updates to the value of the field force the cluster to be re-created.
 	// A weekly 4 hour-long window, during which maintenance might occur
 	// +kubebuilder:validation:Optional
-	MaintenanceWindow []MaintenanceWindowParameters `json:"maintenanceWindow,omitempty" tf:"maintenance_window,omitempty"`
+	MaintenanceWindow *MaintenanceWindowParameters `json:"maintenanceWindow,omitempty" tf:"maintenance_window,omitempty"`
 
 	// [string] The MongoDB version of your cluster. Updates to the value of the field force the cluster to be re-created.
 	// The MongoDB version of your cluster. Update forces cluster re-creation.

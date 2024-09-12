@@ -730,8 +730,10 @@ func (in *VpnIpsecTunnelInitParameters) DeepCopyInto(out *VpnIpsecTunnelInitPara
 	*out = *in
 	if in.Auth != nil {
 		in, out := &in.Auth, &out.Auth
-		*out = new(AuthInitParameters)
-		(*in).DeepCopyInto(*out)
+		*out = make([]AuthInitParameters, len(*in))
+		for i := range *in {
+			(*in)[i].DeepCopyInto(&(*out)[i])
+		}
 	}
 	if in.CloudNetworkCidrs != nil {
 		in, out := &in.CloudNetworkCidrs, &out.CloudNetworkCidrs
@@ -851,8 +853,10 @@ func (in *VpnIpsecTunnelObservation) DeepCopyInto(out *VpnIpsecTunnelObservation
 	*out = *in
 	if in.Auth != nil {
 		in, out := &in.Auth, &out.Auth
-		*out = new(AuthObservation)
-		(*in).DeepCopyInto(*out)
+		*out = make([]AuthObservation, len(*in))
+		for i := range *in {
+			(*in)[i].DeepCopyInto(&(*out)[i])
+		}
 	}
 	if in.CloudNetworkCidrs != nil {
 		in, out := &in.CloudNetworkCidrs, &out.CloudNetworkCidrs
@@ -935,8 +939,10 @@ func (in *VpnIpsecTunnelParameters) DeepCopyInto(out *VpnIpsecTunnelParameters) 
 	*out = *in
 	if in.Auth != nil {
 		in, out := &in.Auth, &out.Auth
-		*out = new(AuthParameters)
-		(*in).DeepCopyInto(*out)
+		*out = make([]AuthParameters, len(*in))
+		for i := range *in {
+			(*in)[i].DeepCopyInto(&(*out)[i])
+		}
 	}
 	if in.CloudNetworkCidrs != nil {
 		in, out := &in.CloudNetworkCidrs, &out.CloudNetworkCidrs

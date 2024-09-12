@@ -178,7 +178,7 @@ type InMemoryDBReplicasetInitParameters struct {
 
 	// [object] Credentials for the InMemoryDB replicaset, only one type of password can be used since they are mutually exclusive. These values are used to create the initial InMemoryDB user, updating any of these will force recreation of the replica set resource.
 	// Credentials for the InMemoryDB replicaset.
-	Credentials *CredentialsInitParameters `json:"credentials,omitempty" tf:"credentials,omitempty"`
+	Credentials []CredentialsInitParameters `json:"credentials,omitempty" tf:"credentials,omitempty"`
 
 	// [string] The human-readable name of your replica set.
 	// The human readable name of your replica set.
@@ -235,7 +235,7 @@ type InMemoryDBReplicasetObservation struct {
 
 	// [object] Credentials for the InMemoryDB replicaset, only one type of password can be used since they are mutually exclusive. These values are used to create the initial InMemoryDB user, updating any of these will force recreation of the replica set resource.
 	// Credentials for the InMemoryDB replicaset.
-	Credentials *CredentialsObservation `json:"credentials,omitempty" tf:"credentials,omitempty"`
+	Credentials []CredentialsObservation `json:"credentials,omitempty" tf:"credentials,omitempty"`
 
 	// (Computed)[string] The DNS name pointing to your replica set. Will be used to connect to the active/standalone instance.
 	// The DNS name pointing to your replica set. Will be used to connect to the active/standalone instance.
@@ -290,7 +290,7 @@ type InMemoryDBReplicasetParameters struct {
 	// [object] Credentials for the InMemoryDB replicaset, only one type of password can be used since they are mutually exclusive. These values are used to create the initial InMemoryDB user, updating any of these will force recreation of the replica set resource.
 	// Credentials for the InMemoryDB replicaset.
 	// +kubebuilder:validation:Optional
-	Credentials *CredentialsParameters `json:"credentials,omitempty" tf:"credentials,omitempty"`
+	Credentials []CredentialsParameters `json:"credentials,omitempty" tf:"credentials,omitempty"`
 
 	// [string] The human-readable name of your replica set.
 	// The human readable name of your replica set.

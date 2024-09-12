@@ -9,7 +9,7 @@ metadata:
 spec:
   forProvider:
     auth:
-        method: PSK
+      - method: PSK
         pskKeySecretRef:
           key: example-key
           name: example-secret

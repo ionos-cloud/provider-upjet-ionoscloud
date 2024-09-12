@@ -322,8 +322,10 @@ func (in *MariadbClusterInitParameters) DeepCopyInto(out *MariadbClusterInitPara
 	}
 	if in.Credentials != nil {
 		in, out := &in.Credentials, &out.Credentials
-		*out = new(CredentialsInitParameters)
-		(*in).DeepCopyInto(*out)
+		*out = make([]CredentialsInitParameters, len(*in))
+		for i := range *in {
+			(*in)[i].DeepCopyInto(&(*out)[i])
+		}
 	}
 	if in.DisplayName != nil {
 		in, out := &in.DisplayName, &out.DisplayName
@@ -419,8 +421,10 @@ func (in *MariadbClusterObservation) DeepCopyInto(out *MariadbClusterObservation
 	}
 	if in.Credentials != nil {
 		in, out := &in.Credentials, &out.Credentials
-		*out = new(CredentialsObservation)
-		(*in).DeepCopyInto(*out)
+		*out = make([]CredentialsObservation, len(*in))
+		for i := range *in {
+			(*in)[i].DeepCopyInto(&(*out)[i])
+		}
 	}
 	if in.DNSName != nil {
 		in, out := &in.DNSName, &out.DNSName
@@ -494,8 +498,10 @@ func (in *MariadbClusterParameters) DeepCopyInto(out *MariadbClusterParameters) 
 	}
 	if in.Credentials != nil {
 		in, out := &in.Credentials, &out.Credentials
-		*out = new(CredentialsParameters)
-		(*in).DeepCopyInto(*out)
+		*out = make([]CredentialsParameters, len(*in))
+		for i := range *in {
+			(*in)[i].DeepCopyInto(&(*out)[i])
+		}
 	}
 	if in.DisplayName != nil {
 		in, out := &in.DisplayName, &out.DisplayName

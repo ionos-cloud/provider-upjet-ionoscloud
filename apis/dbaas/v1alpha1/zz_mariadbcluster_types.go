@@ -175,7 +175,7 @@ type MariadbClusterInitParameters struct {
 
 	// Credentials for the database user to be created.
 	// Credentials for the database user to be created.
-	Credentials *CredentialsInitParameters `json:"credentials,omitempty" tf:"credentials,omitempty"`
+	Credentials []CredentialsInitParameters `json:"credentials,omitempty" tf:"credentials,omitempty"`
 
 	// [string] The friendly name of your cluster.
 	// The friendly name of your cluster.
@@ -218,7 +218,7 @@ type MariadbClusterObservation struct {
 
 	// Credentials for the database user to be created.
 	// Credentials for the database user to be created.
-	Credentials *CredentialsObservation `json:"credentials,omitempty" tf:"credentials,omitempty"`
+	Credentials []CredentialsObservation `json:"credentials,omitempty" tf:"credentials,omitempty"`
 
 	// (Computed)[string] The DNS name pointing to your cluster.
 	// The DNS name pointing to your cluster.
@@ -270,7 +270,7 @@ type MariadbClusterParameters struct {
 	// Credentials for the database user to be created.
 	// Credentials for the database user to be created.
 	// +kubebuilder:validation:Optional
-	Credentials *CredentialsParameters `json:"credentials,omitempty" tf:"credentials,omitempty"`
+	Credentials []CredentialsParameters `json:"credentials,omitempty" tf:"credentials,omitempty"`
 
 	// [string] The friendly name of your cluster.
 	// The friendly name of your cluster.

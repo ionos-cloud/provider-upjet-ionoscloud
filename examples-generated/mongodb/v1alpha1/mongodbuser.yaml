@@ -12,8 +12,8 @@ spec:
       matchLabels:
         testing.upbound.io/example-name: example_mongo_cluster
     passwordSecretRef:
-      key: attribute.result
-      name: example-password
+      key: example-key
+      name: example-secret
       namespace: upbound-system
     roles:
     - database: db1
@@ -81,7 +81,7 @@ spec:
     instances: 1
     locationSelector:
       matchLabels:
-        testing.upbound.io/example-name: datacenter_example
+        testing.upbound.io/example-name: example
     maintenanceWindow:
     - dayOfTheWeek: Sunday
       time: "09:00:00"

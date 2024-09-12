@@ -128,11 +128,28 @@ func addTFSingletonConversion(pc *config.Provider) {
 		// with the converted API (with embedded objects in place of
 		// singleton lists), so we need the appropriate Terraform
 		// converter in this case.
-		r.TerraformConversions = []config.TerraformConversion{
-			config.NewTFSingletonConversion(),
+
+		// Workaround - disable singleton list conversion for sensitive fields
+		// There is a problem with expanding singleton lists wildcards
+		// See issue https://github.com/crossplane/upjet/issues/436
+		if hasSingletonListCredentialsSensitiveMarshallingProblems(r) {
+			r.RemoveSingletonListConversion("credentials")
+			r.RemoveSingletonListConversion("auth")
+		} else {
+			r.TerraformConversions = []config.TerraformConversion{
+				config.NewTFSingletonConversion(),
+			}
 		}
+
 		pc.Resources[name] = r
 	}
+}
+
+func hasSingletonListCredentialsSensitiveMarshallingProblems(r *config.Resource) bool {
+	return r.Name == "ionoscloud_inmemorydb_replicaset" ||
+		r.Name == "ionoscloud_pg_cluster" ||
+		r.Name == "ionoscloud_vpn_ipsec_tunnel" ||
+		r.Name == "ionoscloud_mariadb_cluster"
 }
 
 func getProviderSchema(s string) (*schema.Provider, error) {

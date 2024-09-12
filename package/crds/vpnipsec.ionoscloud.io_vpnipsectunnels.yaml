@@ -78,34 +78,36 @@ spec:
                       [string] Properties with all data needed to define IPSec Authentication. Minimum items: 1. Maximum
                       items: 1.
                       Properties with all data needed to define IPSec Authentication.
-                    properties:
-                      method:
-                        description: |-
-                          [string] The authentication method to use for IPSec Authentication. Possible values: PSK.
-                          Default value: PSK.
-                          The Authentication Method to use for IPSec Authentication.
-                        type: string
-                      pskKeySecretRef:
-                        description: |-
-                          [string] The pre-shared key to use for IPSec Authentication. Note: Required if method is
-                          PSK.
-                          The Pre-Shared Key to use for IPSec Authentication. Note: Required if method is PSK.
-                        properties:
-                          key:
-                            description: The key to select.
-                            type: string
-                          name:
-                            description: Name of the secret.
-                            type: string
-                          namespace:
-                            description: Namespace of the secret.
-                            type: string
-                        required:
-                        - key
-                        - name
-                        - namespace
-                        type: object
-                    type: object
+                    items:
+                      properties:
+                        method:
+                          description: |-
+                            [string] The authentication method to use for IPSec Authentication. Possible values: PSK.
+                            Default value: PSK.
+                            The Authentication Method to use for IPSec Authentication.
+                          type: string
+                        pskKeySecretRef:
+                          description: |-
+                            [string] The pre-shared key to use for IPSec Authentication. Note: Required if method is
+                            PSK.
+                            The Pre-Shared Key to use for IPSec Authentication. Note: Required if method is PSK.
+                          properties:
+                            key:
+                              description: The key to select.
+                              type: string
+                            name:
+                              description: Name of the secret.
+                              type: string
+                            namespace:
+                              description: Namespace of the secret.
+                              type: string
+                          required:
+                          - key
+                          - name
+                          - namespace
+                          type: object
+                      type: object
+                    type: array
                   cloudNetworkCidrs:
                     description: |-
                       [list] The network CIDRs on the "Left" side that are allowed to connect to the IPSec
@@ -310,34 +312,36 @@ spec:
                       [string] Properties with all data needed to define IPSec Authentication. Minimum items: 1. Maximum
                       items: 1.
                       Properties with all data needed to define IPSec Authentication.
-                    properties:
-                      method:
-                        description: |-
-                          [string] The authentication method to use for IPSec Authentication. Possible values: PSK.
-                          Default value: PSK.
-                          The Authentication Method to use for IPSec Authentication.
-                        type: string
-                      pskKeySecretRef:
-                        description: |-
-                          [string] The pre-shared key to use for IPSec Authentication. Note: Required if method is
-                          PSK.
-                          The Pre-Shared Key to use for IPSec Authentication. Note: Required if method is PSK.
-                        properties:
-                          key:
-                            description: The key to select.
-                            type: string
-                          name:
-                            description: Name of the secret.
-                            type: string
-                          namespace:
-                            description: Namespace of the secret.
-                            type: string
-                        required:
-                        - key
-                        - name
-                        - namespace
-                        type: object
-                    type: object
+                    items:
+                      properties:
+                        method:
+                          description: |-
+                            [string] The authentication method to use for IPSec Authentication. Possible values: PSK.
+                            Default value: PSK.
+                            The Authentication Method to use for IPSec Authentication.
+                          type: string
+                        pskKeySecretRef:
+                          description: |-
+                            [string] The pre-shared key to use for IPSec Authentication. Note: Required if method is
+                            PSK.
+                            The Pre-Shared Key to use for IPSec Authentication. Note: Required if method is PSK.
+                          properties:
+                            key:
+                              description: The key to select.
+                              type: string
+                            name:
+                              description: Name of the secret.
+                              type: string
+                            namespace:
+                              description: Namespace of the secret.
+                              type: string
+                          required:
+                          - key
+                          - name
+                          - namespace
+                          type: object
+                      type: object
+                    type: array
                   cloudNetworkCidrs:
                     description: |-
                       [list] The network CIDRs on the "Left" side that are allowed to connect to the IPSec
@@ -734,14 +738,16 @@ spec:
                       [string] Properties with all data needed to define IPSec Authentication. Minimum items: 1. Maximum
                       items: 1.
                       Properties with all data needed to define IPSec Authentication.
-                    properties:
-                      method:
-                        description: |-
-                          [string] The authentication method to use for IPSec Authentication. Possible values: PSK.
-                          Default value: PSK.
-                          The Authentication Method to use for IPSec Authentication.
-                        type: string
-                    type: object
+                    items:
+                      properties:
+                        method:
+                          description: |-
+                            [string] The authentication method to use for IPSec Authentication. Possible values: PSK.
+                            Default value: PSK.
+                            The Authentication Method to use for IPSec Authentication.
+                          type: string
+                      type: object
+                    type: array
                   cloudNetworkCidrs:
                     description: |-
                       [list] The network CIDRs on the "Left" side that are allowed to connect to the IPSec
