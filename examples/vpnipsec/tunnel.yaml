@@ -11,7 +11,7 @@ spec:
     auth:
       - method: PSK
         pskKeySecretRef:
-          key: example-key
+          key: password
           name: example-secret
           namespace: upbound-system
     cloudNetworkCidrs:
@@ -35,3 +35,12 @@ spec:
     peerNetworkCidrs:
       - 1.2.3.4/32
     remoteHost: vpn.mycompany.com
+---
+apiVersion: v1
+kind: Secret
+metadata:
+  name: example-secret
+  namespace: upbound-system
+stringData:
+  password: "Upboundtest!"
+

@@ -129,6 +129,9 @@ func addTFSingletonConversion(pc *config.Provider) {
 		// with the converted API (with embedded objects in place of
 		// singleton lists), so we need the appropriate Terraform
 		// converter in this case.
+		r.TerraformConversions = []config.TerraformConversion{
+			config.NewTFSingletonConversion(),
+		}
 
 		// Workaround - disable singleton list conversion for sensitive fields
 		// There is a problem with expanding singleton lists wildcards
@@ -136,10 +139,6 @@ func addTFSingletonConversion(pc *config.Provider) {
 		if hasSingletonListCredentialsSensitiveMarshallingProblems(r) {
 			r.RemoveSingletonListConversion("credentials")
 			r.RemoveSingletonListConversion("auth")
-		} else {
-			r.TerraformConversions = []config.TerraformConversion{
-				config.NewTFSingletonConversion(),
-			}
 		}
 
 		pc.Resources[name] = r

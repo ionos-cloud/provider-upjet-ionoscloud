@@ -12,12 +12,20 @@ spec:
       matchLabels:
         testing.upbound.io/example-name: example_mongo_cluster
     passwordSecretRef:
-      key: example-key
-      name: example-secret
-      namespace: crossplane-system
+      key: password
+      name: user-secret
+      namespace: upbound-system
     roles:
       - database: db1
         role: read
       - database: db2
         role: readWrite
     username: myUser
+---
+apiVersion: v1
+kind: Secret
+metadata:
+  name: user-secret
+  namespace: upbound-system
+stringData:
+  password: "Upboundtest!"
