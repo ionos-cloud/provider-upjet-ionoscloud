@@ -8,6 +8,15 @@ package v1alpha1
 
 import resource "github.com/crossplane/crossplane-runtime/pkg/resource"
 
+// GetItems of this BootDeviceSelectionList.
+func (l *BootDeviceSelectionList) GetItems() []resource.Managed {
+	items := make([]resource.Managed, len(l.Items))
+	for i := range l.Items {
+		items[i] = &l.Items[i]
+	}
+	return items
+}
+
 // GetItems of this CrossconnectList.
 func (l *CrossconnectList) GetItems() []resource.Managed {
 	items := make([]resource.Managed, len(l.Items))
@@ -19,6 +28,15 @@ func (l *CrossconnectList) GetItems() []resource.Managed {
 
 // GetItems of this DatacenterList.
 func (l *DatacenterList) GetItems() []resource.Managed {
+	items := make([]resource.Managed, len(l.Items))
+	for i := range l.Items {
+		items[i] = &l.Items[i]
+	}
+	return items
+}
+
+// GetItems of this FirewallList.
+func (l *FirewallList) GetItems() []resource.Managed {
 	items := make([]resource.Managed, len(l.Items))
 	for i := range l.Items {
 		items[i] = &l.Items[i]
@@ -44,8 +62,26 @@ func (l *IpblockList) GetItems() []resource.Managed {
 	return items
 }
 
+// GetItems of this IpfailoverList.
+func (l *IpfailoverList) GetItems() []resource.Managed {
+	items := make([]resource.Managed, len(l.Items))
+	for i := range l.Items {
+		items[i] = &l.Items[i]
+	}
+	return items
+}
+
 // GetItems of this LanList.
 func (l *LanList) GetItems() []resource.Managed {
+	items := make([]resource.Managed, len(l.Items))
+	for i := range l.Items {
+		items[i] = &l.Items[i]
+	}
+	return items
+}
+
+// GetItems of this LoadbalancerList.
+func (l *LoadbalancerList) GetItems() []resource.Managed {
 	items := make([]resource.Managed, len(l.Items))
 	for i := range l.Items {
 		items[i] = &l.Items[i]
@@ -64,6 +100,15 @@ func (l *NicList) GetItems() []resource.Managed {
 
 // GetItems of this ServerList.
 func (l *ServerList) GetItems() []resource.Managed {
+	items := make([]resource.Managed, len(l.Items))
+	for i := range l.Items {
+		items[i] = &l.Items[i]
+	}
+	return items
+}
+
+// GetItems of this SnapshotList.
+func (l *SnapshotList) GetItems() []resource.Managed {
 	items := make([]resource.Managed, len(l.Items))
 	for i := range l.Items {
 		items[i] = &l.Items[i]

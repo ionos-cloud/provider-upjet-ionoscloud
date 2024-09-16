@@ -1,17 +1,5 @@
 name: ionos-cloud/ionoscloud
 resources:
-    Server Boot Device Selection:
-        subCategory: ""
-        description: Manages the selection of boot devices for IonosCloud Server objects.
-        name: Server Boot Device Selection
-        title: Server Boot Device Selection
-        argumentDocs:
-            boot_device_id: |-
-                - (Optional)[string] The ID of a bootable device such as a volume or an image data source. If this field is omitted from the configuration, the VM will be restarted with no primary boot device, and it will enter the PXE shell for network booting.
-                Note: If the network booting process started by the PXE shell fails, the VM will still boot into the image of the attached storage as a fallback. This behavior imitates the "Boot from Network" option from DCD.
-            datacenter_id: '- (Required)[string] The ID of a Virtual Data Center.'
-            server_id: '- (Required)[string] The ID of a server.'
-        importStatements: []
     application_loadbalancer_forwarding_rule:
         subCategory: Application Load Balancer
         description: Creates and manages IonosCloud Application Load Balancer Forwarding Rule.
@@ -41,31 +29,6 @@ resources:
             value: '- (Optional)[string] Mandatory for conditions CONTAINS, EQUALS, MATCHES, STARTS_WITH, ENDS_WITH; must be null when condition is EXISTS; should be a valid CIDR if provided and if type is SOURCE_IP.'
         importStatements:
             - terraform import ionoscloud_application_loadbalancer_forwarding_rule.myAlbRule {datacenter uuid}/{applicationLoadBalancer uuid}/{applicationLoadBalancerForwardingRule uuid}
-    cube server:
-        subCategory: Compute Engine
-        description: Creates and manages IonosCloud Cube Server objects.
-        name: cube server
-        title: cube server
-        argumentDocs:
-            availability_zone: '- (Optional)[string] The availability zone in which the server should exist. This property is immutable.'
-            boot_cdrom: '- DEPRECATED Please refer to ionoscloud_server_boot_device_selection (Optional)[string] The associated boot drive, if any. Must be the UUID of a bootable CDROM image that can be retrieved using the ionoscloud_image data source.'
-            boot_image: '- (Optional)[string] The image or snapshot UUID / name. May also be an image alias. It is required if licence_type is not provided.'
-            boot_volume: '- (Computed) The associated boot volume.'
-            datacenter_id: '- (Required)[string] The ID of a Virtual Data Center.'
-            firewallrule_id: '- (Computed) The associated firewall rule.'
-            image_name: '- (Optional)[string] The name, ID or alias of the image. May also be a snapshot ID. It is required if licence_type is not provided. Attribute is immutable.'
-            image_password: '- (Optional)[string] Required if ssh_key_path is not provided.'
-            licence_type: '- (Optional)[string] Sets the OS type of the server.'
-            name: '- (Required)[string] The name of the server.'
-            nic: '- (Required) See the Nic section.'
-            primary_ip: '- (Computed) The associated IP address.'
-            primary_nic: '- (Computed) The associated NIC.'
-            ssh_key_path: '- (Optional)[list] List of paths to files containing a public SSH key that will be injected into IonosCloud provided Linux images. Required for IonosCloud Linux images. Required if image_password is not provided.'
-            template_uuid: '- (Required)[string] The UUID of the template for creating a CUBE server; the available templates for CUBE servers can be found on the templates resource'
-            vm_state: '- (Optional)[string] Sets the power state of the cube server. E.g: RUNNING or SUSPENDED.'
-            volume: '- (Required) See the Volume section.'
-        importStatements:
-            - terraform import ionoscloud_cube_server.myserver {datacenter uuid}/{server uuid}
     ionoscloud_apigateway:
         subCategory: API Gateway
         description: API Gateway is an application that acts as a "front door" for backend services and APIs, handling client requests and routing them to the appropriate backend.
@@ -222,7 +185,7 @@ resources:
                   "common_name": "www.example.com",
                   "key_algorithm": "rsa4096",
                   "location": "${ionoscloud_auto_certificate_provider.example.location}",
-                  "name": "My Auto renewed certificate",
+                  "name": "My Auto renewed certificatemanager",
                   "provider_id": "${ionoscloud_auto_certificate_provider.example.id}",
                   "subject_alternative_names": [
                     "app.example.com"
@@ -398,7 +361,7 @@ resources:
         subCategory: Certificate Manager Service
         description: Creates and manages a certificate.
         name: ionoscloud_certificate
-        title: certificate
+        title: ionoscloud_certificate
         examples:
             - name: cert
               manifest: |-
@@ -422,7 +385,7 @@ resources:
             name: '- (Required)[string] The certificate name'
             private_key: '- (Required)[string] The certificate private key. Immutable. Sensitive.'
         importStatements:
-            - terraform import ionoscloud_certificate.mycert {certificate uuid}
+            - terraform import ionoscloud_certificate.mycert {certificatemanager uuid}
     ionoscloud_container_registry:
         subCategory: Container Registry
         description: Creates and manages IonosCloud Container Registry.
@@ -509,6 +472,144 @@ resources:
             type: '- (Required)[string]'
         importStatements:
             - terraform import ionoscloud_container_registry_token.mycrtoken {container_registry uuid}/{container_registry_token uuid}
+    ionoscloud_cube_server:
+        subCategory: Compute Engine
+        description: Creates and manages IonosCloud Cube Server objects.
+        name: ionoscloud_cube_server
+        title: ionoscloud_cube_server
+        examples:
+            - name: example
+              manifest: |-
+                {
+                  "availability_zone": "ZONE_2",
+                  "datacenter_id": "${ionoscloud_datacenter.example.id}",
+                  "image_name": "ubuntu:latest",
+                  "image_password": "${random_password.server_image_password.result}",
+                  "name": "Server Example",
+                  "nic": [
+                    {
+                      "dhcp": true,
+                      "firewall_active": true,
+                      "lan": "${ionoscloud_lan.example.id}",
+                      "name": "Nic Example"
+                    }
+                  ],
+                  "template_uuid": "${data.ionoscloud_template.example.id}",
+                  "volume": [
+                    {
+                      "disk_type": "DAS",
+                      "licence_type": "LINUX",
+                      "name": "Volume Example"
+                    }
+                  ]
+                }
+              references:
+                datacenter_id: ionoscloud_datacenter.example.id
+                image_password: random_password.server_image_password.result
+                nic.lan: ionoscloud_lan.example.id
+                template_uuid: data.ionoscloud_template.example.id
+              dependencies:
+                ionoscloud_datacenter.example: |-
+                    {
+                      "location": "de/txl",
+                      "name": "Datacenter Example"
+                    }
+                ionoscloud_lan.example: |-
+                    {
+                      "datacenter_id": "${ionoscloud_datacenter.example.id}",
+                      "name": "Lan Example",
+                      "public": true
+                    }
+                random_password.server_image_password: |-
+                    {
+                      "length": 16,
+                      "special": false
+                    }
+            - name: example
+              manifest: |-
+                {
+                  "availability_zone": "AUTO",
+                  "datacenter_id": "${ionoscloud_datacenter.example.id}",
+                  "image_name": "ubuntu:latest",
+                  "image_password": "${random_password.server_image_password.result}",
+                  "name": "Server Example",
+                  "nic": [
+                    {
+                      "dhcp": true,
+                      "dhcpv6": false,
+                      "firewall_active": true,
+                      "ips": [
+                        "${ionoscloud_ipblock.webserver_ipblock.ips[0]}",
+                        "${ionoscloud_ipblock.webserver_ipblock.ips[1]}"
+                      ],
+                      "ipv6_cidr_block": "${cidrsubnet(ionoscloud_lan.example.ipv6_cidr_block,16,5)}",
+                      "ipv6_ips": [
+                        "${cidrhost(cidrsubnet(ionoscloud_lan.example.ipv6_cidr_block,16,5),1)}",
+                        "${cidrhost(cidrsubnet(ionoscloud_lan.example.ipv6_cidr_block,16,5),2)}",
+                        "${cidrhost(cidrsubnet(ionoscloud_lan.example.ipv6_cidr_block,16,5),3)}"
+                      ],
+                      "lan": "${ionoscloud_lan.example.id}",
+                      "name": "Nic Example"
+                    }
+                  ],
+                  "template_uuid": "${data.ionoscloud_template.example.id}",
+                  "volume": [
+                    {
+                      "disk_type": "DAS",
+                      "licence_type": "LINUX",
+                      "name": "Volume Example"
+                    }
+                  ]
+                }
+              references:
+                datacenter_id: ionoscloud_datacenter.example.id
+                image_password: random_password.server_image_password.result
+                nic.lan: ionoscloud_lan.example.id
+                template_uuid: data.ionoscloud_template.example.id
+              dependencies:
+                ionoscloud_datacenter.example: |-
+                    {
+                      "location": "de/txl",
+                      "name": "Datacenter Example"
+                    }
+                ionoscloud_ipblock.webserver_ipblock: |-
+                    {
+                      "location": "de/txl",
+                      "name": "webserver_ipblock",
+                      "size": 4
+                    }
+                ionoscloud_lan.example: |-
+                    {
+                      "datacenter_id": "${ionoscloud_datacenter.example.id}",
+                      "ipv6_cidr_block": "${cidrsubnet(ionoscloud_datacenter.example.ipv6_cidr_block,8,10)}",
+                      "name": "Lan Example",
+                      "public": true
+                    }
+                random_password.server_image_password: |-
+                    {
+                      "length": 16,
+                      "special": false
+                    }
+        argumentDocs:
+            availability_zone: '- (Optional)[string] The availability zone in which the server should exist. This property is immutable.'
+            boot_cdrom: '- DEPRECATED Please refer to ionoscloud_server_boot_device_selection (Optional)[string] The associated boot drive, if any. Must be the UUID of a bootable CDROM image that can be retrieved using the ionoscloud_image data source.'
+            boot_image: '- (Optional)[string] The image or snapshot UUID / name. May also be an image alias. It is required if licence_type is not provided.'
+            boot_volume: '- (Computed) The associated boot volume.'
+            datacenter_id: '- (Required)[string] The ID of a Virtual Data Center.'
+            firewallrule_id: '- (Computed) The associated firewall rule.'
+            image_name: '- (Optional)[string] The name, ID or alias of the image. May also be a snapshot ID. It is required if licence_type is not provided. Attribute is immutable.'
+            image_password: '- (Optional)[string] Required if ssh_key_path is not provided.'
+            licence_type: '- (Optional)[string] Sets the OS type of the server.'
+            name: '- (Required)[string] The name of the server.'
+            nic: '- (Required) See the Nic section.'
+            primary_ip: '- (Computed) The associated IP address.'
+            primary_nic: '- (Computed) The associated NIC.'
+            ssh_key_path: '- (Optional)[list] List of paths to files containing a public SSH key that will be injected into IonosCloud provided Linux images. Required for IonosCloud Linux images. Required if image_password is not provided.'
+            template_uuid: '- (Required)[string] The UUID of the template for creating a CUBE server; the available templates for CUBE servers can be found on the templates resource'
+            vm_state: '- (Optional)[string] Sets the power state of the cube server. E.g: RUNNING or SUSPENDED.'
+            volume: '- (Required) See the Volume section.'
+        importStatements:
+            - terraform import ionoscloud_cube_server.myserver {datacenter uuid}/{server uuid}
     ionoscloud_datacenter:
         subCategory: Compute Engine
         description: Creates and manages IonosCloud Virtual Data Center.
@@ -4108,6 +4209,217 @@ resources:
         importStatements:
             - terraform import ionoscloud_server.myserver {datacenter uuid}/{server uuid}
             - terraform import ionoscloud_server.myserver {datacenter uuid}/{server uuid}/{primary nic id}/{firewall rule id}
+    ionoscloud_server_boot_device_selection:
+        subCategory: ""
+        description: Manages the selection of boot devices for IonosCloud Server objects.
+        name: ionoscloud_server_boot_device_selection
+        title: ionoscloud_server_boot_device_selection
+        examples:
+            - name: example
+              manifest: |-
+                {
+                  "boot_device_id": "${ionoscloud_volume.example.id}",
+                  "datacenter_id": "${ionoscloud_datacenter.example.id}",
+                  "server_id": "${ionoscloud_server.example.id}"
+                }
+              references:
+                boot_device_id: ionoscloud_volume.example.id
+                datacenter_id: ionoscloud_datacenter.example.id
+                server_id: ionoscloud_server.example.id
+              dependencies:
+                ionoscloud_server.example: |-
+                    {
+                      "availability_zone": "ZONE_2",
+                      "cores": 2,
+                      "datacenter_id": "${ionoscloud_datacenter.example.id}",
+                      "image_name": "ubuntu:latest",
+                      "image_password": "${random_password.server_image_password.result}",
+                      "name": "Server Example",
+                      "nic": [
+                        {
+                          "dhcp": true,
+                          "firewall_active": true,
+                          "lan": "${ionoscloud_lan.example.id}",
+                          "name": "Nic Example"
+                        }
+                      ],
+                      "ram": 2048,
+                      "volume": [
+                        {
+                          "availability_zone": "AUTO",
+                          "bus": "VIRTIO",
+                          "disk_type": "SSD Standard",
+                          "name": "Inline Updated",
+                          "size": 20
+                        }
+                      ]
+                    }
+                ionoscloud_volume.example: |-
+                    {
+                      "availability_zone": "AUTO",
+                      "datacenter_id": "${ionoscloud_datacenter.example.id}",
+                      "disk_type": "HDD",
+                      "image_name": "debian:latest",
+                      "image_password": "${random_password.server_image_password.result}",
+                      "name": "External 1",
+                      "server_id": "${ionoscloud_server.example.id}",
+                      "size": 10
+                    }
+            - name: example
+              manifest: |-
+                {
+                  "boot_device_id": "${ionoscloud_server.example.inline_volume_ids[0]}",
+                  "datacenter_id": "${ionoscloud_datacenter.example.id}",
+                  "server_id": "${ionoscloud_server.example.id}"
+                }
+              references:
+                boot_device_id: ionoscloud_server.example.inline_volume_ids[0]
+                datacenter_id: ionoscloud_datacenter.example.id
+                server_id: ionoscloud_server.example.id
+              dependencies:
+                ionoscloud_server.example: |-
+                    {
+                      "availability_zone": "ZONE_2",
+                      "cores": 2,
+                      "datacenter_id": "${ionoscloud_datacenter.example.id}",
+                      "image_name": "ubuntu:latest",
+                      "image_password": "${random_password.server_image_password.result}",
+                      "name": "Server Example",
+                      "nic": [
+                        {
+                          "dhcp": true,
+                          "firewall_active": true,
+                          "lan": "${ionoscloud_lan.example.id}",
+                          "name": "Nic Example"
+                        }
+                      ],
+                      "ram": 2048,
+                      "volume": [
+                        {
+                          "availability_zone": "AUTO",
+                          "bus": "VIRTIO",
+                          "disk_type": "SSD Standard",
+                          "name": "Inline Updated",
+                          "size": 20
+                        }
+                      ]
+                    }
+                ionoscloud_volume.example: |-
+                    {
+                      "availability_zone": "AUTO",
+                      "datacenter_id": "${ionoscloud_datacenter.example.id}",
+                      "disk_type": "HDD",
+                      "image_name": "debian:latest",
+                      "image_password": "${random_password.server_image_password.result}",
+                      "name": "External 1",
+                      "server_id": "${ionoscloud_server.example.id}",
+                      "size": 10
+                    }
+            - name: example
+              manifest: |-
+                {
+                  "boot_device_id": "${data.ionoscloud_image.example.id}",
+                  "datacenter_id": "${ionoscloud_datacenter.example.id}",
+                  "server_id": "${ionoscloud_server.example.inline_volume_ids[0]}"
+                }
+              references:
+                boot_device_id: data.ionoscloud_image.example.id
+                datacenter_id: ionoscloud_datacenter.example.id
+                server_id: ionoscloud_server.example.inline_volume_ids[0]
+              dependencies:
+                ionoscloud_server.example: |-
+                    {
+                      "availability_zone": "ZONE_2",
+                      "cores": 2,
+                      "datacenter_id": "${ionoscloud_datacenter.example.id}",
+                      "image_name": "ubuntu:latest",
+                      "image_password": "${random_password.server_image_password.result}",
+                      "name": "Server Example",
+                      "nic": [
+                        {
+                          "dhcp": true,
+                          "firewall_active": true,
+                          "lan": "${ionoscloud_lan.example.id}",
+                          "name": "Nic Example"
+                        }
+                      ],
+                      "ram": 2048,
+                      "volume": [
+                        {
+                          "availability_zone": "AUTO",
+                          "bus": "VIRTIO",
+                          "disk_type": "SSD Standard",
+                          "name": "Inline Updated",
+                          "size": 20
+                        }
+                      ]
+                    }
+                ionoscloud_volume.example: |-
+                    {
+                      "availability_zone": "AUTO",
+                      "datacenter_id": "${ionoscloud_datacenter.example.id}",
+                      "disk_type": "HDD",
+                      "image_name": "debian:latest",
+                      "image_password": "${random_password.server_image_password.result}",
+                      "name": "External 1",
+                      "server_id": "${ionoscloud_server.example.id}",
+                      "size": 10
+                    }
+            - name: example
+              manifest: |-
+                {
+                  "datacenter_id": "${ionoscloud_datacenter.example.id}",
+                  "server_id": "${ionoscloud_server.example.inline_volume_ids[0]}"
+                }
+              references:
+                datacenter_id: ionoscloud_datacenter.example.id
+                server_id: ionoscloud_server.example.inline_volume_ids[0]
+              dependencies:
+                ionoscloud_server.example: |-
+                    {
+                      "availability_zone": "ZONE_2",
+                      "cores": 2,
+                      "datacenter_id": "${ionoscloud_datacenter.example.id}",
+                      "image_name": "ubuntu:latest",
+                      "image_password": "${random_password.server_image_password.result}",
+                      "name": "Server Example",
+                      "nic": [
+                        {
+                          "dhcp": true,
+                          "firewall_active": true,
+                          "lan": "${ionoscloud_lan.example.id}",
+                          "name": "Nic Example"
+                        }
+                      ],
+                      "ram": 2048,
+                      "volume": [
+                        {
+                          "availability_zone": "AUTO",
+                          "bus": "VIRTIO",
+                          "disk_type": "SSD Standard",
+                          "name": "Inline volume",
+                          "size": 20
+                        }
+                      ]
+                    }
+                ionoscloud_volume.example: |-
+                    {
+                      "availability_zone": "AUTO",
+                      "datacenter_id": "${ionoscloud_datacenter.example.id}",
+                      "disk_type": "HDD",
+                      "image_name": "debian:latest",
+                      "image_password": "${random_password.server_image_password.result}",
+                      "name": "External 1",
+                      "server_id": "${ionoscloud_server.example.id}",
+                      "size": 10
+                    }
+        argumentDocs:
+            boot_device_id: |-
+                - (Optional)[string] The ID of a bootable device such as a volume or an image data source. If this field is omitted from the configuration, the VM will be restarted with no primary boot device, and it will enter the PXE shell for network booting.
+                Note: If the network booting process started by the PXE shell fails, the VM will still boot into the image of the attached storage as a fallback. This behavior imitates the "Boot from Network" option from DCD.
+            datacenter_id: '- (Required)[string] The ID of a Virtual Data Center.'
+            server_id: '- (Required)[string] The ID of a server.'
+        importStatements: []
     ionoscloud_share:
         subCategory: User Management
         description: Creates and manages share objects.

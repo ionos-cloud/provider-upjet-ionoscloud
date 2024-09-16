@@ -11,6 +11,15 @@ import (
 	conversiontfjson "github.com/crossplane/upjet/pkg/types/conversion/tfjson"
 	tfjson "github.com/hashicorp/terraform-json"
 	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/schema"
+	asg "github.com/ionos-cloud/provider-upjet-ionoscloud/config/alb"
+	alb "github.com/ionos-cloud/provider-upjet-ionoscloud/config/asg"
+	"github.com/ionos-cloud/provider-upjet-ionoscloud/config/backupunit"
+	"github.com/ionos-cloud/provider-upjet-ionoscloud/config/certificatemanager"
+	"github.com/ionos-cloud/provider-upjet-ionoscloud/config/compute"
+	"github.com/ionos-cloud/provider-upjet-ionoscloud/config/containerregistry"
+	"github.com/ionos-cloud/provider-upjet-ionoscloud/config/dataplatform"
+	"github.com/ionos-cloud/provider-upjet-ionoscloud/config/natgateway"
+	"github.com/ionos-cloud/provider-upjet-ionoscloud/config/nlb"
 	"github.com/pkg/errors"
 
 	// Note(turkenh): we are importing this to embed provider schema document
@@ -20,25 +29,16 @@ import (
 
 	ujconfig "github.com/crossplane/upjet/pkg/config"
 	"github.com/ionos-cloud/provider-upjet-ionoscloud/config/apigateway"
-	"github.com/ionos-cloud/provider-upjet-ionoscloud/config/apigatewayroute"
-	"github.com/ionos-cloud/provider-upjet-ionoscloud/config/crossconnect"
-	"github.com/ionos-cloud/provider-upjet-ionoscloud/config/datacenter"
 	"github.com/ionos-cloud/provider-upjet-ionoscloud/config/dns"
 	"github.com/ionos-cloud/provider-upjet-ionoscloud/config/inmemorydb"
-	"github.com/ionos-cloud/provider-upjet-ionoscloud/config/ipblock"
 	"github.com/ionos-cloud/provider-upjet-ionoscloud/config/ipsec"
 	"github.com/ionos-cloud/provider-upjet-ionoscloud/config/k8s"
 	"github.com/ionos-cloud/provider-upjet-ionoscloud/config/kafka"
-	"github.com/ionos-cloud/provider-upjet-ionoscloud/config/lan"
 	"github.com/ionos-cloud/provider-upjet-ionoscloud/config/mariadb"
 	"github.com/ionos-cloud/provider-upjet-ionoscloud/config/mongodb"
 	"github.com/ionos-cloud/provider-upjet-ionoscloud/config/nfs"
-	"github.com/ionos-cloud/provider-upjet-ionoscloud/config/nic"
 	"github.com/ionos-cloud/provider-upjet-ionoscloud/config/postgresql"
 	"github.com/ionos-cloud/provider-upjet-ionoscloud/config/s3"
-	"github.com/ionos-cloud/provider-upjet-ionoscloud/config/server"
-	"github.com/ionos-cloud/provider-upjet-ionoscloud/config/user"
-	"github.com/ionos-cloud/provider-upjet-ionoscloud/config/volume"
 	"github.com/ionos-cloud/provider-upjet-ionoscloud/config/wireguard"
 )
 
@@ -88,26 +88,27 @@ func GetProvider(generationProvider bool) (*ujconfig.Provider, error) {
 	for _, configure := range []func(provider *ujconfig.Provider){
 		// add custom config functions
 		s3.Configure,
-		datacenter.Configure,
-		lan.Configure,
-		crossconnect.Configure,
+		compute.Configure,
 		apigateway.Configure,
-		apigatewayroute.Configure,
 		mariadb.Configure,
-		ipblock.Configure,
 		wireguard.Configure,
 		kafka.Configure,
 		inmemorydb.Configure,
-		server.Configure,
 		ipsec.Configure,
 		nfs.Configure,
-		volume.Configure,
 		k8s.Configure,
-		user.Configure,
-		nic.Configure,
 		dns.Configure,
 		mongodb.Configure,
 		postgresql.Configure,
+		backupunit.Configure,
+		alb.Configure,
+		certificatemanager.Configure,
+		asg.Configure,
+		compute.Configure,
+		nlb.Configure,
+		containerregistry.Configure,
+		natgateway.Configure,
+		dataplatform.Configure,
 	} {
 		configure(pc)
 	}

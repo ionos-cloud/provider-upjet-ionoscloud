@@ -7,10 +7,16 @@
 package v1alpha1
 
 // Hub marks this type as a conversion hub.
+func (tr *BootDeviceSelection) Hub() {}
+
+// Hub marks this type as a conversion hub.
 func (tr *Crossconnect) Hub() {}
 
 // Hub marks this type as a conversion hub.
 func (tr *Datacenter) Hub() {}
+
+// Hub marks this type as a conversion hub.
+func (tr *Firewall) Hub() {}
 
 // Hub marks this type as a conversion hub.
 func (tr *Group) Hub() {}
@@ -19,13 +25,22 @@ func (tr *Group) Hub() {}
 func (tr *Ipblock) Hub() {}
 
 // Hub marks this type as a conversion hub.
+func (tr *Ipfailover) Hub() {}
+
+// Hub marks this type as a conversion hub.
 func (tr *Lan) Hub() {}
+
+// Hub marks this type as a conversion hub.
+func (tr *Loadbalancer) Hub() {}
 
 // Hub marks this type as a conversion hub.
 func (tr *Nic) Hub() {}
 
 // Hub marks this type as a conversion hub.
 func (tr *Server) Hub() {}
+
+// Hub marks this type as a conversion hub.
+func (tr *Snapshot) Hub() {}
 
 // Hub marks this type as a conversion hub.
 func (tr *User) Hub() {}
