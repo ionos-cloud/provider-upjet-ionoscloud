@@ -70,7 +70,6 @@ var TerraformPluginSDKExternalNameConfigs = map[string]config.ExternalName{
 	"ionoscloud_dns_zone":   config.IdentifierFromProvider,
 	"ionoscloud_dns_record": config.IdentifierFromProvider,
 	// alb
-	"ionoscloud_target_group":                            config.IdentifierFromProvider,
 	"ionoscloud_application_loadbalancer":                config.IdentifierFromProvider,
 	"ionoscloud_application_loadbalancer_forwardingrule": config.IdentifierFromProvider,
 	// nlb
@@ -78,6 +77,7 @@ var TerraformPluginSDKExternalNameConfigs = map[string]config.ExternalName{
 	"ionoscloud_networkloadbalancer_forwardingrule": config.IdentifierFromProvider,
 	// asg
 	"ionoscloud_autoscaling_group": config.IdentifierFromProvider,
+	"ionoscloud_target_group":      config.IdentifierFromProvider,
 	// certificatemanager
 	"ionoscloud_certificate":               config.IdentifierFromProvider,
 	"ionoscloud_auto_certificate_provider": config.IdentifierFromProvider,

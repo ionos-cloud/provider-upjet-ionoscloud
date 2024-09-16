@@ -140,6 +140,7 @@ func addTFSingletonConversion(pc *config.Provider) {
 		if hasSingletonListCredentialsSensitiveMarshallingProblems(r) {
 			r.RemoveSingletonListConversion("credentials")
 			r.RemoveSingletonListConversion("auth")
+			r.RemoveSingletonListConversion("replica_configuration")
 		}
 
 		pc.Resources[name] = r
@@ -150,7 +151,9 @@ func hasSingletonListCredentialsSensitiveMarshallingProblems(r *config.Resource)
 	return r.Name == "ionoscloud_inmemorydb_replicaset" ||
 		r.Name == "ionoscloud_pg_cluster" ||
 		r.Name == "ionoscloud_vpn_ipsec_tunnel" ||
-		r.Name == "ionoscloud_mariadb_cluster"
+		r.Name == "ionoscloud_mariadb_cluster" ||
+		r.Name == "ionoscloud_mongo_cluster" ||
+		r.Name == "ionoscloud_autoscaling_group"
 }
 
 func getProviderSchema(s string) (*schema.Provider, error) {

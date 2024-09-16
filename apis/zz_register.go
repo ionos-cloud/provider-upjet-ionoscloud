@@ -26,9 +26,9 @@ import (
 	v1alpha1mongodb "github.com/ionos-cloud/provider-upjet-ionoscloud/apis/mongodb/v1alpha1"
 	v1alpha1natgateway "github.com/ionos-cloud/provider-upjet-ionoscloud/apis/natgateway/v1alpha1"
 	v1alpha1nfs "github.com/ionos-cloud/provider-upjet-ionoscloud/apis/nfs/v1alpha1"
+	v1alpha1nlb "github.com/ionos-cloud/provider-upjet-ionoscloud/apis/nlb/v1alpha1"
 	v1alpha1postgresql "github.com/ionos-cloud/provider-upjet-ionoscloud/apis/postgresql/v1alpha1"
 	v1alpha1s3 "github.com/ionos-cloud/provider-upjet-ionoscloud/apis/s3/v1alpha1"
-	v1alpha1targetgroup "github.com/ionos-cloud/provider-upjet-ionoscloud/apis/targetgroup/v1alpha1"
 	v1alpha1apis "github.com/ionos-cloud/provider-upjet-ionoscloud/apis/v1alpha1"
 	v1beta1 "github.com/ionos-cloud/provider-upjet-ionoscloud/apis/v1beta1"
 	v1alpha1vpnipsec "github.com/ionos-cloud/provider-upjet-ionoscloud/apis/vpnipsec/v1alpha1"
@@ -54,9 +54,9 @@ func init() {
 		v1alpha1mongodb.SchemeBuilder.AddToScheme,
 		v1alpha1natgateway.SchemeBuilder.AddToScheme,
 		v1alpha1nfs.SchemeBuilder.AddToScheme,
+		v1alpha1nlb.SchemeBuilder.AddToScheme,
 		v1alpha1postgresql.SchemeBuilder.AddToScheme,
 		v1alpha1s3.SchemeBuilder.AddToScheme,
-		v1alpha1targetgroup.SchemeBuilder.AddToScheme,
 		v1alpha1apis.SchemeBuilder.AddToScheme,
 		v1beta1.SchemeBuilder.AddToScheme,
 		v1alpha1vpnipsec.SchemeBuilder.AddToScheme,
