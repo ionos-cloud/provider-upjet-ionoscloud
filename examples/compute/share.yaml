@@ -1,0 +1,58 @@
+apiVersion: compute.ionoscloud.io/v1alpha1
+kind: Share
+metadata:
+  annotations:
+    meta.upbound.io/example-id: compute/v1alpha1/share
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    editPrivilege: true
+    groupIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    resourceIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    sharePrivilege: false
+
+---
+
+apiVersion: compute.ionoscloud.io/v1alpha1
+kind: Datacenter
+metadata:
+  annotations:
+    meta.upbound.io/example-id: compute/v1alpha1/share
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    description: Datacenter Description
+    location: us/las
+    name: Datacenter Example
+    secAuthProtection: false
+
+---
+
+apiVersion: compute.ionoscloud.io/v1alpha1
+kind: Group
+metadata:
+  annotations:
+    meta.upbound.io/example-id: compute/v1alpha1/share
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    accessActivityLog: true
+    createBackupUnit: true
+    createDatacenter: true
+    createInternetAccess: true
+    createK8SCluster: true
+    createPcc: true
+    createSnapshot: true
+    name: Group Example
+    reserveIp: true
+    s3Privilege: true

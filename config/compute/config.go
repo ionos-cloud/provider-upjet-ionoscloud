@@ -156,4 +156,15 @@ func Configure(p *config.Provider) {
 			TerraformName: "ionoscloud_volume",
 		}
 	})
+
+	p.AddResourceConfigurator("ionoscloud_share", func(r *config.Resource) {
+		r.ShortGroup = "compute"
+		r.References["group_id"] = config.Reference{
+			TerraformName: "ionoscloud_group",
+		}
+
+		r.References["resource_id"] = config.Reference{
+			TerraformName: "ionoscloud_datacenter",
+		}
+	})
 }

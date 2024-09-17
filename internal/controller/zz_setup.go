@@ -9,13 +9,12 @@ import (
 
 	"github.com/crossplane/upjet/pkg/controller"
 
-	forwardingrule "github.com/ionos-cloud/provider-upjet-ionoscloud/internal/controller/alb/forwardingrule"
 	loadbalancer "github.com/ionos-cloud/provider-upjet-ionoscloud/internal/controller/alb/loadbalancer"
 	loadbalancerforwardingrule "github.com/ionos-cloud/provider-upjet-ionoscloud/internal/controller/alb/loadbalancerforwardingrule"
-	networkloadbalancer "github.com/ionos-cloud/provider-upjet-ionoscloud/internal/controller/alb/networkloadbalancer"
 	apigateway "github.com/ionos-cloud/provider-upjet-ionoscloud/internal/controller/apigateway/apigateway"
 	route "github.com/ionos-cloud/provider-upjet-ionoscloud/internal/controller/apigateway/route"
-	group "github.com/ionos-cloud/provider-upjet-ionoscloud/internal/controller/asg/group"
+	autoscalinggroup "github.com/ionos-cloud/provider-upjet-ionoscloud/internal/controller/asg/autoscalinggroup"
+	targetgroup "github.com/ionos-cloud/provider-upjet-ionoscloud/internal/controller/asg/targetgroup"
 	unit "github.com/ionos-cloud/provider-upjet-ionoscloud/internal/controller/backupunit/unit"
 	autocertificate "github.com/ionos-cloud/provider-upjet-ionoscloud/internal/controller/certificatemanager/autocertificate"
 	autocertificateprovider "github.com/ionos-cloud/provider-upjet-ionoscloud/internal/controller/certificatemanager/autocertificateprovider"
@@ -24,13 +23,14 @@ import (
 	crossconnect "github.com/ionos-cloud/provider-upjet-ionoscloud/internal/controller/compute/crossconnect"
 	datacenter "github.com/ionos-cloud/provider-upjet-ionoscloud/internal/controller/compute/datacenter"
 	firewall "github.com/ionos-cloud/provider-upjet-ionoscloud/internal/controller/compute/firewall"
-	groupcompute "github.com/ionos-cloud/provider-upjet-ionoscloud/internal/controller/compute/group"
+	group "github.com/ionos-cloud/provider-upjet-ionoscloud/internal/controller/compute/group"
 	ipblock "github.com/ionos-cloud/provider-upjet-ionoscloud/internal/controller/compute/ipblock"
 	ipfailover "github.com/ionos-cloud/provider-upjet-ionoscloud/internal/controller/compute/ipfailover"
 	lan "github.com/ionos-cloud/provider-upjet-ionoscloud/internal/controller/compute/lan"
 	loadbalancercompute "github.com/ionos-cloud/provider-upjet-ionoscloud/internal/controller/compute/loadbalancer"
 	nic "github.com/ionos-cloud/provider-upjet-ionoscloud/internal/controller/compute/nic"
 	server "github.com/ionos-cloud/provider-upjet-ionoscloud/internal/controller/compute/server"
+	share "github.com/ionos-cloud/provider-upjet-ionoscloud/internal/controller/compute/share"
 	snapshot "github.com/ionos-cloud/provider-upjet-ionoscloud/internal/controller/compute/snapshot"
 	user "github.com/ionos-cloud/provider-upjet-ionoscloud/internal/controller/compute/user"
 	volume "github.com/ionos-cloud/provider-upjet-ionoscloud/internal/controller/compute/volume"
@@ -52,6 +52,8 @@ import (
 	rule "github.com/ionos-cloud/provider-upjet-ionoscloud/internal/controller/natgateway/rule"
 	nfscluster "github.com/ionos-cloud/provider-upjet-ionoscloud/internal/controller/nfs/nfscluster"
 	nfsshare "github.com/ionos-cloud/provider-upjet-ionoscloud/internal/controller/nfs/nfsshare"
+	forwardingrule "github.com/ionos-cloud/provider-upjet-ionoscloud/internal/controller/nlb/forwardingrule"
+	networkloadbalancer "github.com/ionos-cloud/provider-upjet-ionoscloud/internal/controller/nlb/networkloadbalancer"
 	postgresqlcluster "github.com/ionos-cloud/provider-upjet-ionoscloud/internal/controller/postgresql/postgresqlcluster"
 	postgresqldatabase "github.com/ionos-cloud/provider-upjet-ionoscloud/internal/controller/postgresql/postgresqldatabase"
 	postgresqluser "github.com/ionos-cloud/provider-upjet-ionoscloud/internal/controller/postgresql/postgresqluser"
@@ -68,7 +70,6 @@ import (
 	key "github.com/ionos-cloud/provider-upjet-ionoscloud/internal/controller/s3/key"
 	object "github.com/ionos-cloud/provider-upjet-ionoscloud/internal/controller/s3/object"
 	objectcopy "github.com/ionos-cloud/provider-upjet-ionoscloud/internal/controller/s3/objectcopy"
-	grouptargetgroup "github.com/ionos-cloud/provider-upjet-ionoscloud/internal/controller/targetgroup/group"
 	vpnipsecgateway "github.com/ionos-cloud/provider-upjet-ionoscloud/internal/controller/vpnipsec/vpnipsecgateway"
 	vpnipsectunnel "github.com/ionos-cloud/provider-upjet-ionoscloud/internal/controller/vpnipsec/vpnipsectunnel"
 	vpnwireguardgateway "github.com/ionos-cloud/provider-upjet-ionoscloud/internal/controller/vpnwireguard/vpnwireguardgateway"
@@ -79,13 +80,12 @@ import (
 // the supplied manager.
 func Setup(mgr ctrl.Manager, o controller.Options) error {
 	for _, setup := range []func(ctrl.Manager, controller.Options) error{
-		forwardingrule.Setup,
 		loadbalancer.Setup,
 		loadbalancerforwardingrule.Setup,
-		networkloadbalancer.Setup,
 		apigateway.Setup,
 		route.Setup,
-		group.Setup,
+		autoscalinggroup.Setup,
+		targetgroup.Setup,
 		unit.Setup,
 		autocertificate.Setup,
 		autocertificateprovider.Setup,
@@ -94,13 +94,14 @@ func Setup(mgr ctrl.Manager, o controller.Options) error {
 		crossconnect.Setup,
 		datacenter.Setup,
 		firewall.Setup,
-		groupcompute.Setup,
+		group.Setup,
 		ipblock.Setup,
 		ipfailover.Setup,
 		lan.Setup,
 		loadbalancercompute.Setup,
 		nic.Setup,
 		server.Setup,
+		share.Setup,
 		snapshot.Setup,
 		user.Setup,
 		volume.Setup,
@@ -122,6 +123,8 @@ func Setup(mgr ctrl.Manager, o controller.Options) error {
 		rule.Setup,
 		nfscluster.Setup,
 		nfsshare.Setup,
+		forwardingrule.Setup,
+		networkloadbalancer.Setup,
 		postgresqlcluster.Setup,
 		postgresqldatabase.Setup,
 		postgresqluser.Setup,
@@ -138,7 +141,6 @@ func Setup(mgr ctrl.Manager, o controller.Options) error {
 		key.Setup,
 		object.Setup,
 		objectcopy.Setup,
-		grouptargetgroup.Setup,
 		vpnipsecgateway.Setup,
 		vpnipsectunnel.Setup,
 		vpnwireguardgateway.Setup,
