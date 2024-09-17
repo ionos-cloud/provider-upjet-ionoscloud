@@ -26,3 +26,23 @@ spec:
       scheme: http
       weight: 100
     websocket: false
+
+---
+
+apiVersion: apigateway.ionoscloud.io/v1alpha1
+kind: Apigateway
+metadata:
+  annotations:
+    meta.upbound.io/example-id: apigateway/v1alpha1/route
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    customDomains:
+    - certificateId: 00000000-0000-0000-0000-000000000000
+      name: example.com
+    - certificateId: 00000000-0000-0000-0000-000000000000
+      name: example.org
+    metrics: true
+    name: example-gateway
