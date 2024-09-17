@@ -23,6 +23,7 @@ import (
 	v1alpha1inmemorydb "github.com/ionos-cloud/provider-upjet-ionoscloud/apis/inmemorydb/v1alpha1"
 	v1alpha1k8s "github.com/ionos-cloud/provider-upjet-ionoscloud/apis/k8s/v1alpha1"
 	v1alpha1kafka "github.com/ionos-cloud/provider-upjet-ionoscloud/apis/kafka/v1alpha1"
+	v1alpha1log "github.com/ionos-cloud/provider-upjet-ionoscloud/apis/log/v1alpha1"
 	v1alpha1mongodb "github.com/ionos-cloud/provider-upjet-ionoscloud/apis/mongodb/v1alpha1"
 	v1alpha1natgateway "github.com/ionos-cloud/provider-upjet-ionoscloud/apis/natgateway/v1alpha1"
 	v1alpha1nfs "github.com/ionos-cloud/provider-upjet-ionoscloud/apis/nfs/v1alpha1"
@@ -51,6 +52,7 @@ func init() {
 		v1alpha1inmemorydb.SchemeBuilder.AddToScheme,
 		v1alpha1k8s.SchemeBuilder.AddToScheme,
 		v1alpha1kafka.SchemeBuilder.AddToScheme,
+		v1alpha1log.SchemeBuilder.AddToScheme,
 		v1alpha1mongodb.SchemeBuilder.AddToScheme,
 		v1alpha1natgateway.SchemeBuilder.AddToScheme,
 		v1alpha1nfs.SchemeBuilder.AddToScheme,
