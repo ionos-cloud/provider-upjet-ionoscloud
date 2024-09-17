@@ -34,6 +34,23 @@ resources:
         description: API Gateway is an application that acts as a "front door" for backend services and APIs, handling client requests and routing them to the appropriate backend.
         name: ionoscloud_apigateway
         title: ionoscloud_apigateway
+        examples:
+            - name: example
+              manifest: |-
+                {
+                  "custom_domains": [
+                    {
+                      "certificate_id": "00000000-0000-0000-0000-000000000000",
+                      "name": "example.com"
+                    },
+                    {
+                      "certificate_id": "00000000-0000-0000-0000-000000000000",
+                      "name": "example.org"
+                    }
+                  ],
+                  "metrics": true,
+                  "name": "example-gateway"
+                }
         argumentDocs:
             certificate_id: '- (Required)[string] The certificate ID for the domain.'
             custom_domains: '- (Optional)[list] Custom domains for the API Gateway, a list that contains elements with the following structure:'

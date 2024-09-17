@@ -30,6 +30,7 @@ var TerraformPluginSDKExternalNameConfigs = map[string]config.ExternalName{
 	//"ionoscloud_vcpu_server":          config.IdentifierFromProvider,
 	"ionoscloud_user":     config.IdentifierFromProvider,
 	"ionoscloud_group":    config.IdentifierFromProvider,
+	"ionoscloud_share":    config.IdentifierFromProvider,
 	"ionoscloud_nic":      config.IdentifierFromProvider,
 	"ionoscloud_firewall": config.IdentifierFromProvider,
 	// api gateway
@@ -87,6 +88,8 @@ var TerraformPluginSDKExternalNameConfigs = map[string]config.ExternalName{
 	"ionoscloud_container_registry_token": config.IdentifierFromProvider,
 	// backupunit
 	"ionoscloud_backup_unit": config.IdentifierFromProvider,
+	// log
+	"ionoscloud_logging_pipeline": config.IdentifierFromProvider,
 }
 
 // TerraformPluginFrameworkExternalNameConfigs will be used for plugin configured resources. not used yet

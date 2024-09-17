@@ -18,6 +18,7 @@ import (
 	"github.com/ionos-cloud/provider-upjet-ionoscloud/config/compute"
 	"github.com/ionos-cloud/provider-upjet-ionoscloud/config/containerregistry"
 	"github.com/ionos-cloud/provider-upjet-ionoscloud/config/dataplatform"
+	"github.com/ionos-cloud/provider-upjet-ionoscloud/config/log"
 	"github.com/ionos-cloud/provider-upjet-ionoscloud/config/natgateway"
 	"github.com/ionos-cloud/provider-upjet-ionoscloud/config/nlb"
 	"github.com/pkg/errors"
@@ -109,6 +110,7 @@ func GetProvider(generationProvider bool) (*ujconfig.Provider, error) {
 		containerregistry.Configure,
 		natgateway.Configure,
 		dataplatform.Configure,
+		log.Configure,
 	} {
 		configure(pc)
 	}
