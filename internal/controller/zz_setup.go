@@ -46,6 +46,7 @@ import (
 	nodepoolk8s "github.com/ionos-cloud/provider-upjet-ionoscloud/internal/controller/k8s/nodepool"
 	kafka "github.com/ionos-cloud/provider-upjet-ionoscloud/internal/controller/kafka/kafka"
 	kafkatopic "github.com/ionos-cloud/provider-upjet-ionoscloud/internal/controller/kafka/kafkatopic"
+	pipeline "github.com/ionos-cloud/provider-upjet-ionoscloud/internal/controller/log/pipeline"
 	mongodbcluster "github.com/ionos-cloud/provider-upjet-ionoscloud/internal/controller/mongodb/mongodbcluster"
 	mongodbuser "github.com/ionos-cloud/provider-upjet-ionoscloud/internal/controller/mongodb/mongodbuser"
 	natgateway "github.com/ionos-cloud/provider-upjet-ionoscloud/internal/controller/natgateway/natgateway"
@@ -117,6 +118,7 @@ func Setup(mgr ctrl.Manager, o controller.Options) error {
 		nodepoolk8s.Setup,
 		kafka.Setup,
 		kafkatopic.Setup,
+		pipeline.Setup,
 		mongodbcluster.Setup,
 		mongodbuser.Setup,
 		natgateway.Setup,
