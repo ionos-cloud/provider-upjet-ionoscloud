@@ -4,18 +4,26 @@ metadata:
   annotations:
     meta.upbound.io/example-id: dataplatform/v1alpha1/cluster
   labels:
-    testing.upbound.io/example-name: dataplatform
-  name: dataplatform
+    testing.upbound.io/example-name: example
+  name: example
 spec:
   forProvider:
     datacenterIdSelector:
       matchLabels:
-        testing.upbound.io/example-name: dataplatform
+        testing.upbound.io/example-name: example
+    lans:
+    - dhcp: false
+      lanIdSelector:
+        matchLabels:
+          testing.upbound.io/example-name: example
+      routes:
+      - gateway: 192.168.42.1
+        network: 182.168.42.1/24
     maintenanceWindow:
     - dayOfTheWeek: Sunday
       time: "09:00:00"
     name: Dataplatform_Cluster_Example
-    version: "24.3"
+    version: "23.11"
 
 ---
 
@@ -25,8 +33,8 @@ metadata:
   annotations:
     meta.upbound.io/example-id: dataplatform/v1alpha1/cluster
   labels:
-    testing.upbound.io/example-name: dataplatform
-  name: dataplatform
+    testing.upbound.io/example-name: example
+  name: example
 spec:
   forProvider:
     description: Datacenter for testing Dataplatform Cluster
@@ -41,12 +49,12 @@ metadata:
   annotations:
     meta.upbound.io/example-id: dataplatform/v1alpha1/cluster
   labels:
-    testing.upbound.io/example-name: dataplatform
-  name: dataplatform
+    testing.upbound.io/example-name: example
+  name: example
 spec:
   forProvider:
     datacenterIdSelector:
       matchLabels:
-        testing.upbound.io/example-name: dataplatform
+        testing.upbound.io/example-name: example
     name: LAN_Example
     public: false

@@ -16,6 +16,7 @@ import (
 	autoscalinggroup "github.com/ionos-cloud/provider-upjet-ionoscloud/internal/controller/asg/autoscalinggroup"
 	targetgroup "github.com/ionos-cloud/provider-upjet-ionoscloud/internal/controller/asg/targetgroup"
 	unit "github.com/ionos-cloud/provider-upjet-ionoscloud/internal/controller/backupunit/unit"
+	distribution "github.com/ionos-cloud/provider-upjet-ionoscloud/internal/controller/cdn/distribution"
 	autocertificate "github.com/ionos-cloud/provider-upjet-ionoscloud/internal/controller/certificatemanager/autocertificate"
 	autocertificateprovider "github.com/ionos-cloud/provider-upjet-ionoscloud/internal/controller/certificatemanager/autocertificateprovider"
 	certificate "github.com/ionos-cloud/provider-upjet-ionoscloud/internal/controller/certificatemanager/certificate"
@@ -88,6 +89,7 @@ func Setup(mgr ctrl.Manager, o controller.Options) error {
 		autoscalinggroup.Setup,
 		targetgroup.Setup,
 		unit.Setup,
+		distribution.Setup,
 		autocertificate.Setup,
 		autocertificateprovider.Setup,
 		certificate.Setup,

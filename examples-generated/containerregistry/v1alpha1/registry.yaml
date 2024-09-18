@@ -11,9 +11,9 @@ spec:
     apiSubnetAllowList:
     - 1.2.3.4/32
     garbageCollectionSchedule:
-      days:
+    - days:
       - Monday
       - Tuesday
       time: 05:19:00+00:00
     location: de/fra
-    name: container-registry-unique-name
+    name: container-registry-example

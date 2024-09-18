@@ -15,72 +15,68 @@ spec:
     minReplicaCount: 1
     name: autoscaling_group_example
     policy:
-      metric: INSTANCE_CPU_UTILIZATION_AVERAGE
+    - metric: INSTANCE_CPU_UTILIZATION_AVERAGE
       range: PT24H
       scaleInAction:
-        amount: 1
+      - amount: 1
         amountType: ABSOLUTE
         cooldownPeriod: PT5M
         deleteVolumes: true
         terminationPolicyType: OLDEST_SERVER_FIRST
       scaleInThreshold: 33
       scaleOutAction:
-        amount: 1
+      - amount: 1
         amountType: ABSOLUTE
         cooldownPeriod: PT5M
       scaleOutThreshold: 77
       unit: PER_HOUR
     replicaConfiguration:
     - availabilityZone: AUTO
-      cores: 2
+      cores: "2"
       cpuFamily: INTEL_SKYLAKE
       nic:
-        - dhcp: true
-          lanSelector:
+      - dhcp: true
+        lanSelector:
+          matchLabels:
+            testing.upbound.io/example-name: lan_example_1
+        name: nic_example_1
+      - dhcp: true
+        firewallActive: true
+        firewallRule:
+        - name: rule_1
+          portRangeEnd: 1000
+          portRangeStart: 1
+          protocol: TCP
+          type: INGRESS
+        firewallType: INGRESS
+        flowLog:
+        - action: ALL
+          bucket: test-de-bucket
+          direction: BIDIRECTIONAL
+          name: flow_log_1
+        lanSelector:
+          matchLabels:
+            testing.upbound.io/example-name: lan_example_2
+        name: nic_example_2
+        targetGroup:
+        - port: 80
+          targetGroupIdSelector:
             matchLabels:
-              testing.upbound.io/example-name: lan_example_1
-          name: nic_example_1
-        - dhcp: true
-          firewallActive: true
-          firewallRule:
-            - name: rule_1
-              portRangeEnd: 1000
-              portRangeStart: 1
-              protocol: TCP
-              type: INGRESS
-          firewallType: INGRESS
-          lanSelector:
-            matchLabels:
-              testing.upbound.io/example-name: lan_example_2
-          name: nic_example_2
-          targetGroup:
-            port: 80
-            targetGroupIdSelector:
-              matchLabels:
-                testing.upbound.io/example-name: autoscaling_target_group
-            weight: 50
+              testing.upbound.io/example-name: autoscaling_target_group
+          weight: 50
       ram: 2048
       volume:
-        - bootOrder: AUTO
-          imageAlias: ubuntu:latest
-          imagePasswordSecretRef:
-            key: password
-            name: example-password
-            namespace: upbound-system
-          name: volume_example
-          size: 10
-          type: HDD
-          userData: ZWNobyAiSGVsbG8sIFdvcmxkIgo=
+      - bootOrder: AUTO
+        imageAlias: ubuntu:latest
+        imagePasswordSecretRef:
+          key: attribute.result
+          name: example-password
+          namespace: upbound-system
+        name: volume_example
+        size: 10
+        type: HDD
+        userData: ZWNobyAiSGVsbG8sIFdvcmxkIgo=
 
----
-
-apiVersion: v1
-kind: Secret
-metadata:
-  name: example-password
-  namespace: upbound-system
-stringData:
-  password: "Upboundtest1"
 ---
 
 apiVersion: compute.ionoscloud.io/v1alpha1
@@ -147,4 +143,3 @@ spec:
     algorithm: ROUND_ROBIN
     name: Target Group Example
     protocol: HTTP
-    protocolVersion: HTTP1

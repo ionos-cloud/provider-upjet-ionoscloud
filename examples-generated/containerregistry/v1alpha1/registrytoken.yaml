@@ -8,7 +8,7 @@ metadata:
   name: example
 spec:
   forProvider:
-    expiryDate: 2024-10-15 16:27:42Z
+    expiryDate: 2023-01-13 16:27:42Z
     name: container-registry-token-example
     registryIdSelector:
       matchLabels:
@@ -34,9 +34,9 @@ metadata:
 spec:
   forProvider:
     garbageCollectionSchedule:
-      days:
+    - days:
       - Monday
       - Tuesday
       time: 05:19:00+00:00
     location: de/fra
-    name: container-registry-unique-name
+    name: container-registry-example

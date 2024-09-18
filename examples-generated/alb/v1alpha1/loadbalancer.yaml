@@ -39,7 +39,7 @@ metadata:
 spec:
   forProvider:
     description: datacenter description
-    location: de/txl
+    location: us/las
     name: Datacenter Example
     secAuthProtection: false
 
@@ -59,7 +59,7 @@ spec:
       matchLabels:
         testing.upbound.io/example-name: example
     name: Lan Example
-    public: false
+    public: true
 
 ---
 
@@ -77,4 +77,4 @@ spec:
       matchLabels:
         testing.upbound.io/example-name: example
     name: Lan Example
-    public: false
+    public: true

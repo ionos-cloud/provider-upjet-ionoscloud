@@ -16,10 +16,87 @@ spec:
       matchLabels:
         testing.upbound.io/example-name: example
     protocol: TCP
-    publicIp: 192.96.159.108
+    publicIp: ${ionoscloud_ipblock.example.ips[0]}
     sourceSubnet: 10.0.1.0/24
     targetPortRange:
-      end: 1000
+    - end: 1000
       start: 500
     targetSubnet: 10.0.1.0/24
     type: SNAT
+
+---
+
+apiVersion: compute.ionoscloud.io/v1alpha1
+kind: Datacenter
+metadata:
+  annotations:
+    meta.upbound.io/example-id: natgateway/v1alpha1/rule
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    description: Datacenter Description
+    location: us/las
+    name: Datacenter Example
+    secAuthProtection: false
+
+---
+
+apiVersion: compute.ionoscloud.io/v1alpha1
+kind: Ipblock
+metadata:
+  annotations:
+    meta.upbound.io/example-id: natgateway/v1alpha1/rule
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    location: us/las
+    name: IP Block Example
+    size: 2
+
+---
+
+apiVersion: compute.ionoscloud.io/v1alpha1
+kind: Lan
+metadata:
+  annotations:
+    meta.upbound.io/example-id: natgateway/v1alpha1/rule
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    datacenterIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    name: Lan Example
+    public: true
+
+---
+
+apiVersion: natgateway.ionoscloud.io/v1alpha1
+kind: Natgateway
+metadata:
+  annotations:
+    meta.upbound.io/example-id: natgateway/v1alpha1/rule
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    datacenterIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    lans:
+    - gatewayIps:
+      - 10.11.2.5
+      idSelector:
+        matchLabels:
+          testing.upbound.io/example-name: example
+    name: example
+    publicIps:
+    - ${ionoscloud_ipblock.example.ips[0]}
+    - ${ionoscloud_ipblock.example.ips[1]}
