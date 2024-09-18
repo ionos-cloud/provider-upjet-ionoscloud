@@ -14,7 +14,17 @@ spec:
     rule:
     - expiration:
       - days: 90
-      id: Logs delete
+      id: "1"
+      prefix: /logs
+      status: Enabled
+    - id: "2"
+      noncurrentVersionExpiration:
+      - noncurrentDays: 90
+      prefix: /logs
+      status: Enabled
+    - abortIncompleteMultipartUpload:
+      - daysAfterInitiation: 90
+      id: "3"
       prefix: /logs
       status: Enabled
 
