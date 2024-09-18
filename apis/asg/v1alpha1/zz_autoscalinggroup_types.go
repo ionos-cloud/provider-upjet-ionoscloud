@@ -15,7 +15,6 @@ import (
 
 type AutoscalingGroupInitParameters struct {
 
-	// [string] Unique identifier for the resource
 	// Unique identifier for the resource
 	// +crossplane:generate:reference:type=github.com/ionos-cloud/provider-upjet-ionoscloud/apis/compute/v1alpha1.Datacenter
 	DatacenterID *string `json:"datacenterId,omitempty" tf:"datacenter_id,omitempty"`
@@ -28,61 +27,48 @@ type AutoscalingGroupInitParameters struct {
 	// +kubebuilder:validation:Optional
 	DatacenterIDSelector *v1.Selector `json:"datacenterIdSelector,omitempty" tf:"-"`
 
-	// [int] The maximum value for the number of replicas on a VM Auto Scaling Group. Must be >= 0 and <= 200. Will be enforced for both automatic and manual changes.
 	// The maximum value for the number of replicas on a VM Auto Scaling Group. Must be >= 0 and <= 200. Will be enforced for both automatic and manual changes.
 	MaxReplicaCount *float64 `json:"maxReplicaCount,omitempty" tf:"max_replica_count,omitempty"`
 
-	// [int] The minimum value for the number of replicas on a VM Auto Scaling Group. Must be >= 0 and <= 200. Will be enforced for both automatic and manual changes.
 	// The minimum value for the number of replicas on a VM Auto Scaling Group. Must be >= 0 and <= 200. Will be enforced for both automatic and manual changes
 	MinReplicaCount *float64 `json:"minReplicaCount,omitempty" tf:"min_replica_count,omitempty"`
 
-	// [string] User-defined name for the Autoscaling Group.
 	// User-defined name for the Autoscaling Group.
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
-	// [List] Specifies the behavior of this Autoscaling Group. A policy consists of Triggers and Actions, whereby an Action is some kind of automated behavior, and a Trigger is defined by the circumstances under which the Action is triggered. Currently, two separate Actions, namely Scaling In and Out are supported, triggered through Thresholds defined on a given Metric.
 	// Defines the behavior of this VM Auto Scaling Group. A policy consists of triggers and actions, where an action is an automated behavior, and the trigger defines the circumstances under which the action is triggered. Currently, two separate actions are supported, namely scaling inward and outward, triggered by the thresholds defined for a particular metric.
 	Policy *PolicyInitParameters `json:"policy,omitempty" tf:"policy,omitempty"`
 
-	// [List]
 	ReplicaConfiguration []ReplicaConfigurationInitParameters `json:"replicaConfiguration,omitempty" tf:"replica_configuration,omitempty"`
 }
 
 type AutoscalingGroupObservation struct {
 
-	// [string] Unique identifier for the resource
 	// Unique identifier for the resource
 	DatacenterID *string `json:"datacenterId,omitempty" tf:"datacenter_id,omitempty"`
 
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
-	// (Computed) Location of the data center.
 	// Location of the data center.
 	Location *string `json:"location,omitempty" tf:"location,omitempty"`
 
-	// [int] The maximum value for the number of replicas on a VM Auto Scaling Group. Must be >= 0 and <= 200. Will be enforced for both automatic and manual changes.
 	// The maximum value for the number of replicas on a VM Auto Scaling Group. Must be >= 0 and <= 200. Will be enforced for both automatic and manual changes.
 	MaxReplicaCount *float64 `json:"maxReplicaCount,omitempty" tf:"max_replica_count,omitempty"`
 
-	// [int] The minimum value for the number of replicas on a VM Auto Scaling Group. Must be >= 0 and <= 200. Will be enforced for both automatic and manual changes.
 	// The minimum value for the number of replicas on a VM Auto Scaling Group. Must be >= 0 and <= 200. Will be enforced for both automatic and manual changes
 	MinReplicaCount *float64 `json:"minReplicaCount,omitempty" tf:"min_replica_count,omitempty"`
 
-	// [string] User-defined name for the Autoscaling Group.
 	// User-defined name for the Autoscaling Group.
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
-	// [List] Specifies the behavior of this Autoscaling Group. A policy consists of Triggers and Actions, whereby an Action is some kind of automated behavior, and a Trigger is defined by the circumstances under which the Action is triggered. Currently, two separate Actions, namely Scaling In and Out are supported, triggered through Thresholds defined on a given Metric.
 	// Defines the behavior of this VM Auto Scaling Group. A policy consists of triggers and actions, where an action is an automated behavior, and the trigger defines the circumstances under which the action is triggered. Currently, two separate actions are supported, namely scaling inward and outward, triggered by the thresholds defined for a particular metric.
 	Policy *PolicyObservation `json:"policy,omitempty" tf:"policy,omitempty"`
 
-	// [List]
 	ReplicaConfiguration []ReplicaConfigurationObservation `json:"replicaConfiguration,omitempty" tf:"replica_configuration,omitempty"`
 }
 
 type AutoscalingGroupParameters struct {
 
-	// [string] Unique identifier for the resource
 	// Unique identifier for the resource
 	// +crossplane:generate:reference:type=github.com/ionos-cloud/provider-upjet-ionoscloud/apis/compute/v1alpha1.Datacenter
 	// +kubebuilder:validation:Optional
@@ -96,165 +82,130 @@ type AutoscalingGroupParameters struct {
 	// +kubebuilder:validation:Optional
 	DatacenterIDSelector *v1.Selector `json:"datacenterIdSelector,omitempty" tf:"-"`
 
-	// [int] The maximum value for the number of replicas on a VM Auto Scaling Group. Must be >= 0 and <= 200. Will be enforced for both automatic and manual changes.
 	// The maximum value for the number of replicas on a VM Auto Scaling Group. Must be >= 0 and <= 200. Will be enforced for both automatic and manual changes.
 	// +kubebuilder:validation:Optional
 	MaxReplicaCount *float64 `json:"maxReplicaCount,omitempty" tf:"max_replica_count,omitempty"`
 
-	// [int] The minimum value for the number of replicas on a VM Auto Scaling Group. Must be >= 0 and <= 200. Will be enforced for both automatic and manual changes.
 	// The minimum value for the number of replicas on a VM Auto Scaling Group. Must be >= 0 and <= 200. Will be enforced for both automatic and manual changes
 	// +kubebuilder:validation:Optional
 	MinReplicaCount *float64 `json:"minReplicaCount,omitempty" tf:"min_replica_count,omitempty"`
 
-	// [string] User-defined name for the Autoscaling Group.
 	// User-defined name for the Autoscaling Group.
 	// +kubebuilder:validation:Optional
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
-	// [List] Specifies the behavior of this Autoscaling Group. A policy consists of Triggers and Actions, whereby an Action is some kind of automated behavior, and a Trigger is defined by the circumstances under which the Action is triggered. Currently, two separate Actions, namely Scaling In and Out are supported, triggered through Thresholds defined on a given Metric.
 	// Defines the behavior of this VM Auto Scaling Group. A policy consists of triggers and actions, where an action is an automated behavior, and the trigger defines the circumstances under which the action is triggered. Currently, two separate actions are supported, namely scaling inward and outward, triggered by the thresholds defined for a particular metric.
 	// +kubebuilder:validation:Optional
 	Policy *PolicyParameters `json:"policy,omitempty" tf:"policy,omitempty"`
 
-	// [List]
 	// +kubebuilder:validation:Optional
 	ReplicaConfiguration []ReplicaConfigurationParameters `json:"replicaConfiguration,omitempty" tf:"replica_configuration,omitempty"`
 }
 
 type FirewallRuleInitParameters struct {
 
-	// [int] Defines the allowed code (from 0 to 254) if protocol ICMP is chosen.
 	// Sets the allowed code (from 0 to 254) when ICMP protocol is selected. The value 'null' allows all codes.
 	IcmpCode *float64 `json:"icmpCode,omitempty" tf:"icmp_code,omitempty"`
 
-	// [string] Defines the allowed code (from 0 to 254) if protocol ICMP is chosen. Value null allows all codes.
 	// Sets the allowed type (from 0 to 254) if the protocol ICMP is selected. The value 'null' allows all types.
 	IcmpType *float64 `json:"icmpType,omitempty" tf:"icmp_type,omitempty"`
 
-	// [string] User-defined name for the Autoscaling Group.
 	// The name of the firewall rule.
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
-	// [int] Defines the end range of the allowed port (from 1 to 65534) if the protocol TCP or UDP is chosen. Leave portRangeStart and portRangeEnd null to allow all ports.
 	// Sets the end range of the allowed port (from 1 to 65535) if the protocol TCP or UDP is selected. The value 'null' for 'port_range_start' and 'port_range_end' allows all ports.
 	PortRangeEnd *float64 `json:"portRangeEnd,omitempty" tf:"port_range_end,omitempty"`
 
-	// [int] Defines the start range of the allowed port (from 1 to 65534) if protocol TCP or UDP is chosen. Leave portRangeStart and portRangeEnd null to allow all ports.
 	// Sets the initial range of the allowed port (from 1 to 65535) if the protocol TCP or UDP is selected. The value 'null' for 'port_range_start' and 'port_range_end' allows all ports.
 	PortRangeStart *float64 `json:"portRangeStart,omitempty" tf:"port_range_start,omitempty"`
 
-	// [string] The protocol for the rule: TCP, UDP, ICMP, ANY. Property cannot be modified after creation (disallowed in update requests).
 	// The protocol for the rule. The property cannot be modified after its creation (not allowed in update requests).
 	Protocol *string `json:"protocol,omitempty" tf:"protocol,omitempty"`
 
-	// [string] Only traffic originating from the respective IPv4 address is allowed. Value null allows all source IPs.
 	// Only traffic originating from the respective IPv4 address is permitted. The value 'null' allows traffic from any IP address.
 	SourceIP *string `json:"sourceIp,omitempty" tf:"source_ip,omitempty"`
 
-	// [string] Only traffic originating from the respective MAC address is allowed. Valid format: aa:bb:cc:dd:ee:ff. Value null allows all source MAC address. Valid format: aa:bb:cc:dd:ee:ff.
 	// Only traffic originating from the respective MAC address is permitted. Valid format: 'aa:bb:cc:dd:ee:ff'. The value 'null' allows traffic from any MAC address.
 	SourceMac *string `json:"sourceMac,omitempty" tf:"source_mac,omitempty"`
 
-	// [string] In case the target NIC has multiple IP addresses, only traffic directed to the respective IP address of the NIC is allowed. Value null allows all target IPs.
 	// If the target NIC has multiple IP addresses, only the traffic directed to the respective IP address of the NIC is allowed. The value 'null' allows traffic to any target IP address.
 	TargetIP *string `json:"targetIp,omitempty" tf:"target_ip,omitempty"`
 
-	// [string] The type of firewall rule. If is not specified, it will take the default value INGRESS.
 	// The firewall rule type. If not specified, the default value 'INGRESS' is used.
 	Type *string `json:"type,omitempty" tf:"type,omitempty"`
 }
 
 type FirewallRuleObservation struct {
 
-	// [int] Defines the allowed code (from 0 to 254) if protocol ICMP is chosen.
 	// Sets the allowed code (from 0 to 254) when ICMP protocol is selected. The value 'null' allows all codes.
 	IcmpCode *float64 `json:"icmpCode,omitempty" tf:"icmp_code,omitempty"`
 
-	// [string] Defines the allowed code (from 0 to 254) if protocol ICMP is chosen. Value null allows all codes.
 	// Sets the allowed type (from 0 to 254) if the protocol ICMP is selected. The value 'null' allows all types.
 	IcmpType *float64 `json:"icmpType,omitempty" tf:"icmp_type,omitempty"`
 
-	// [string] User-defined name for the Autoscaling Group.
 	// The name of the firewall rule.
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
-	// [int] Defines the end range of the allowed port (from 1 to 65534) if the protocol TCP or UDP is chosen. Leave portRangeStart and portRangeEnd null to allow all ports.
 	// Sets the end range of the allowed port (from 1 to 65535) if the protocol TCP or UDP is selected. The value 'null' for 'port_range_start' and 'port_range_end' allows all ports.
 	PortRangeEnd *float64 `json:"portRangeEnd,omitempty" tf:"port_range_end,omitempty"`
 
-	// [int] Defines the start range of the allowed port (from 1 to 65534) if protocol TCP or UDP is chosen. Leave portRangeStart and portRangeEnd null to allow all ports.
 	// Sets the initial range of the allowed port (from 1 to 65535) if the protocol TCP or UDP is selected. The value 'null' for 'port_range_start' and 'port_range_end' allows all ports.
 	PortRangeStart *float64 `json:"portRangeStart,omitempty" tf:"port_range_start,omitempty"`
 
-	// [string] The protocol for the rule: TCP, UDP, ICMP, ANY. Property cannot be modified after creation (disallowed in update requests).
 	// The protocol for the rule. The property cannot be modified after its creation (not allowed in update requests).
 	Protocol *string `json:"protocol,omitempty" tf:"protocol,omitempty"`
 
-	// [string] Only traffic originating from the respective IPv4 address is allowed. Value null allows all source IPs.
 	// Only traffic originating from the respective IPv4 address is permitted. The value 'null' allows traffic from any IP address.
 	SourceIP *string `json:"sourceIp,omitempty" tf:"source_ip,omitempty"`
 
-	// [string] Only traffic originating from the respective MAC address is allowed. Valid format: aa:bb:cc:dd:ee:ff. Value null allows all source MAC address. Valid format: aa:bb:cc:dd:ee:ff.
 	// Only traffic originating from the respective MAC address is permitted. Valid format: 'aa:bb:cc:dd:ee:ff'. The value 'null' allows traffic from any MAC address.
 	SourceMac *string `json:"sourceMac,omitempty" tf:"source_mac,omitempty"`
 
-	// [string] In case the target NIC has multiple IP addresses, only traffic directed to the respective IP address of the NIC is allowed. Value null allows all target IPs.
 	// If the target NIC has multiple IP addresses, only the traffic directed to the respective IP address of the NIC is allowed. The value 'null' allows traffic to any target IP address.
 	TargetIP *string `json:"targetIp,omitempty" tf:"target_ip,omitempty"`
 
-	// [string] The type of firewall rule. If is not specified, it will take the default value INGRESS.
 	// The firewall rule type. If not specified, the default value 'INGRESS' is used.
 	Type *string `json:"type,omitempty" tf:"type,omitempty"`
 }
 
 type FirewallRuleParameters struct {
 
-	// [int] Defines the allowed code (from 0 to 254) if protocol ICMP is chosen.
 	// Sets the allowed code (from 0 to 254) when ICMP protocol is selected. The value 'null' allows all codes.
 	// +kubebuilder:validation:Optional
 	IcmpCode *float64 `json:"icmpCode,omitempty" tf:"icmp_code,omitempty"`
 
-	// [string] Defines the allowed code (from 0 to 254) if protocol ICMP is chosen. Value null allows all codes.
 	// Sets the allowed type (from 0 to 254) if the protocol ICMP is selected. The value 'null' allows all types.
 	// +kubebuilder:validation:Optional
 	IcmpType *float64 `json:"icmpType,omitempty" tf:"icmp_type,omitempty"`
 
-	// [string] User-defined name for the Autoscaling Group.
 	// The name of the firewall rule.
 	// +kubebuilder:validation:Optional
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
-	// [int] Defines the end range of the allowed port (from 1 to 65534) if the protocol TCP or UDP is chosen. Leave portRangeStart and portRangeEnd null to allow all ports.
 	// Sets the end range of the allowed port (from 1 to 65535) if the protocol TCP or UDP is selected. The value 'null' for 'port_range_start' and 'port_range_end' allows all ports.
 	// +kubebuilder:validation:Optional
 	PortRangeEnd *float64 `json:"portRangeEnd,omitempty" tf:"port_range_end,omitempty"`
 
-	// [int] Defines the start range of the allowed port (from 1 to 65534) if protocol TCP or UDP is chosen. Leave portRangeStart and portRangeEnd null to allow all ports.
 	// Sets the initial range of the allowed port (from 1 to 65535) if the protocol TCP or UDP is selected. The value 'null' for 'port_range_start' and 'port_range_end' allows all ports.
 	// +kubebuilder:validation:Optional
 	PortRangeStart *float64 `json:"portRangeStart,omitempty" tf:"port_range_start,omitempty"`
 
-	// [string] The protocol for the rule: TCP, UDP, ICMP, ANY. Property cannot be modified after creation (disallowed in update requests).
 	// The protocol for the rule. The property cannot be modified after its creation (not allowed in update requests).
 	// +kubebuilder:validation:Optional
 	Protocol *string `json:"protocol" tf:"protocol,omitempty"`
 
-	// [string] Only traffic originating from the respective IPv4 address is allowed. Value null allows all source IPs.
 	// Only traffic originating from the respective IPv4 address is permitted. The value 'null' allows traffic from any IP address.
 	// +kubebuilder:validation:Optional
 	SourceIP *string `json:"sourceIp,omitempty" tf:"source_ip,omitempty"`
 
-	// [string] Only traffic originating from the respective MAC address is allowed. Valid format: aa:bb:cc:dd:ee:ff. Value null allows all source MAC address. Valid format: aa:bb:cc:dd:ee:ff.
 	// Only traffic originating from the respective MAC address is permitted. Valid format: 'aa:bb:cc:dd:ee:ff'. The value 'null' allows traffic from any MAC address.
 	// +kubebuilder:validation:Optional
 	SourceMac *string `json:"sourceMac,omitempty" tf:"source_mac,omitempty"`
 
-	// [string] In case the target NIC has multiple IP addresses, only traffic directed to the respective IP address of the NIC is allowed. Value null allows all target IPs.
 	// If the target NIC has multiple IP addresses, only the traffic directed to the respective IP address of the NIC is allowed. The value 'null' allows traffic to any target IP address.
 	// +kubebuilder:validation:Optional
 	TargetIP *string `json:"targetIp,omitempty" tf:"target_ip,omitempty"`
 
-	// [string] The type of firewall rule. If is not specified, it will take the default value INGRESS.
 	// The firewall rule type. If not specified, the default value 'INGRESS' is used.
 	// +kubebuilder:validation:Optional
 	Type *string `json:"type,omitempty" tf:"type,omitempty"`
@@ -262,63 +213,51 @@ type FirewallRuleParameters struct {
 
 type FlowLogInitParameters struct {
 
-	// [string] Specifies the action to be taken when the rule is matched. Possible values: ACCEPTED, REJECTED, ALL. Immutable, forces re-creation.
 	// Specifies the traffic direction pattern. Valid values: ACCEPTED, REJECTED, ALL. Immutable, forces re-recreation of the nic resource.
 	Action *string `json:"action,omitempty" tf:"action,omitempty"`
 
-	// [string] Specifies the S3 IONOS bucket where the flow log data will be stored. The bucket must exist. Immutable, forces re-creation.
 	// The S3 bucket name of an existing IONOS Cloud S3 bucket. Immutable, forces re-recreation of the nic resource.
 	Bucket *string `json:"bucket,omitempty" tf:"bucket,omitempty"`
 
-	// [string] Specifies the traffic direction pattern. Valid values: INGRESS, EGRESS, BIDIRECTIONAL. Immutable, forces re-creation.
 	// Specifies the traffic direction pattern. Valid values: INGRESS, EGRESS, BIDIRECTIONAL. Immutable, forces re-recreation of the nic resource.
 	Direction *string `json:"direction,omitempty" tf:"direction,omitempty"`
 
-	// [string] User-defined name for the Autoscaling Group.
 	// The resource name.
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 }
 
 type FlowLogObservation struct {
 
-	// [string] Specifies the action to be taken when the rule is matched. Possible values: ACCEPTED, REJECTED, ALL. Immutable, forces re-creation.
 	// Specifies the traffic direction pattern. Valid values: ACCEPTED, REJECTED, ALL. Immutable, forces re-recreation of the nic resource.
 	Action *string `json:"action,omitempty" tf:"action,omitempty"`
 
-	// [string] Specifies the S3 IONOS bucket where the flow log data will be stored. The bucket must exist. Immutable, forces re-creation.
 	// The S3 bucket name of an existing IONOS Cloud S3 bucket. Immutable, forces re-recreation of the nic resource.
 	Bucket *string `json:"bucket,omitempty" tf:"bucket,omitempty"`
 
-	// [string] Specifies the traffic direction pattern. Valid values: INGRESS, EGRESS, BIDIRECTIONAL. Immutable, forces re-creation.
 	// Specifies the traffic direction pattern. Valid values: INGRESS, EGRESS, BIDIRECTIONAL. Immutable, forces re-recreation of the nic resource.
 	Direction *string `json:"direction,omitempty" tf:"direction,omitempty"`
 
 	// The resource's unique identifier.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
-	// [string] User-defined name for the Autoscaling Group.
 	// The resource name.
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 }
 
 type FlowLogParameters struct {
 
-	// [string] Specifies the action to be taken when the rule is matched. Possible values: ACCEPTED, REJECTED, ALL. Immutable, forces re-creation.
 	// Specifies the traffic direction pattern. Valid values: ACCEPTED, REJECTED, ALL. Immutable, forces re-recreation of the nic resource.
 	// +kubebuilder:validation:Optional
 	Action *string `json:"action" tf:"action,omitempty"`
 
-	// [string] Specifies the S3 IONOS bucket where the flow log data will be stored. The bucket must exist. Immutable, forces re-creation.
 	// The S3 bucket name of an existing IONOS Cloud S3 bucket. Immutable, forces re-recreation of the nic resource.
 	// +kubebuilder:validation:Optional
 	Bucket *string `json:"bucket" tf:"bucket,omitempty"`
 
-	// [string] Specifies the traffic direction pattern. Valid values: INGRESS, EGRESS, BIDIRECTIONAL. Immutable, forces re-creation.
 	// Specifies the traffic direction pattern. Valid values: INGRESS, EGRESS, BIDIRECTIONAL. Immutable, forces re-recreation of the nic resource.
 	// +kubebuilder:validation:Optional
 	Direction *string `json:"direction" tf:"direction,omitempty"`
 
-	// [string] User-defined name for the Autoscaling Group.
 	// The resource name.
 	// +kubebuilder:validation:Optional
 	Name *string `json:"name" tf:"name,omitempty"`
@@ -326,90 +265,64 @@ type FlowLogParameters struct {
 
 type NicInitParameters struct {
 
-	// [bool] Dhcp flag for this replica Nic. This is an optional attribute with default value of true if not given in the request payload or given as null.
 	// Dhcp flag for this replica Nic. This is an optional attribute with default value of 'true' if not given in the request payload or given as null.
 	DHCP *bool `json:"dhcp,omitempty" tf:"dhcp,omitempty"`
 
-	// [bool] Firewall active flag.
 	// Activate or deactivate the firewall. By default, an active firewall without any defined rules will block all incoming network traffic except for the firewall rules that explicitly allows certain protocols, IP addresses and ports.
 	FirewallActive *bool `json:"firewallActive,omitempty" tf:"firewall_active,omitempty"`
 
 	// List of all firewall rules for the specified NIC.
 	FirewallRule []FirewallRuleInitParameters `json:"firewallRule,omitempty" tf:"firewall_rule,omitempty"`
 
-	// [string] The type of firewall rules that will be allowed on the NIC. Valid values: INGRESS EGRESS BIDIRECTIONAL. If not specified, the default INGRESS value is used.
 	// The type of firewall rules that will be allowed on the NIC. If not specified, the default INGRESS value is used.
 	FirewallType *string `json:"firewallType,omitempty" tf:"firewall_type,omitempty"`
 
-	// [list] Only 1 flow log can be configured. Only the name field can change as part of an update. Flow logs holistically capture network information such as source and destination IP addresses, source and destination ports, number of packets, amount of bytes, the start and end time of the recording, and the type of protocol – and log the extent to which your instances are being accessed.
 	// List of all flow logs for the specified NIC.
 	FlowLog []FlowLogInitParameters `json:"flowLog,omitempty" tf:"flow_log,omitempty"`
 
-	// [int] Lan ID for this replica Nic.
 	// Lan ID for this replica Nic.
-	// +crossplane:generate:reference:type=github.com/ionos-cloud/provider-upjet-ionoscloud/apis/compute/v1alpha1.Lan
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
 	Lan *float64 `json:"lan,omitempty" tf:"lan,omitempty"`
 
-	// Reference to a Lan in compute to populate lan.
-	// +kubebuilder:validation:Optional
-	LanRef *v1.Reference `json:"lanRef,omitempty" tf:"-"`
-
-	// Selector for a Lan in compute to populate lan.
-	// +kubebuilder:validation:Optional
-	LanSelector *v1.Selector `json:"lanSelector,omitempty" tf:"-"`
-
-	// [string] User-defined name for the Autoscaling Group.
 	// Name for this replica NIC.
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
-	// [list] In order to link VM to ALB, target group must be provided
 	// In order to link VM to ALB, target group must be provided.
 	TargetGroup *TargetGroupInitParameters `json:"targetGroup,omitempty" tf:"target_group,omitempty"`
 }
 
 type NicObservation struct {
 
-	// [bool] Dhcp flag for this replica Nic. This is an optional attribute with default value of true if not given in the request payload or given as null.
 	// Dhcp flag for this replica Nic. This is an optional attribute with default value of 'true' if not given in the request payload or given as null.
 	DHCP *bool `json:"dhcp,omitempty" tf:"dhcp,omitempty"`
 
-	// [bool] Firewall active flag.
 	// Activate or deactivate the firewall. By default, an active firewall without any defined rules will block all incoming network traffic except for the firewall rules that explicitly allows certain protocols, IP addresses and ports.
 	FirewallActive *bool `json:"firewallActive,omitempty" tf:"firewall_active,omitempty"`
 
 	// List of all firewall rules for the specified NIC.
 	FirewallRule []FirewallRuleObservation `json:"firewallRule,omitempty" tf:"firewall_rule,omitempty"`
 
-	// [string] The type of firewall rules that will be allowed on the NIC. Valid values: INGRESS EGRESS BIDIRECTIONAL. If not specified, the default INGRESS value is used.
 	// The type of firewall rules that will be allowed on the NIC. If not specified, the default INGRESS value is used.
 	FirewallType *string `json:"firewallType,omitempty" tf:"firewall_type,omitempty"`
 
-	// [list] Only 1 flow log can be configured. Only the name field can change as part of an update. Flow logs holistically capture network information such as source and destination IP addresses, source and destination ports, number of packets, amount of bytes, the start and end time of the recording, and the type of protocol – and log the extent to which your instances are being accessed.
 	// List of all flow logs for the specified NIC.
 	FlowLog []FlowLogObservation `json:"flowLog,omitempty" tf:"flow_log,omitempty"`
 
-	// [int] Lan ID for this replica Nic.
 	// Lan ID for this replica Nic.
 	Lan *float64 `json:"lan,omitempty" tf:"lan,omitempty"`
 
-	// [string] User-defined name for the Autoscaling Group.
 	// Name for this replica NIC.
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
-	// [list] In order to link VM to ALB, target group must be provided
 	// In order to link VM to ALB, target group must be provided.
 	TargetGroup *TargetGroupObservation `json:"targetGroup,omitempty" tf:"target_group,omitempty"`
 }
 
 type NicParameters struct {
 
-	// [bool] Dhcp flag for this replica Nic. This is an optional attribute with default value of true if not given in the request payload or given as null.
 	// Dhcp flag for this replica Nic. This is an optional attribute with default value of 'true' if not given in the request payload or given as null.
 	// +kubebuilder:validation:Optional
 	DHCP *bool `json:"dhcp,omitempty" tf:"dhcp,omitempty"`
 
-	// [bool] Firewall active flag.
 	// Activate or deactivate the firewall. By default, an active firewall without any defined rules will block all incoming network traffic except for the firewall rules that explicitly allows certain protocols, IP addresses and ports.
 	// +kubebuilder:validation:Optional
 	FirewallActive *bool `json:"firewallActive,omitempty" tf:"firewall_active,omitempty"`
@@ -418,37 +331,22 @@ type NicParameters struct {
 	// +kubebuilder:validation:Optional
 	FirewallRule []FirewallRuleParameters `json:"firewallRule,omitempty" tf:"firewall_rule,omitempty"`
 
-	// [string] The type of firewall rules that will be allowed on the NIC. Valid values: INGRESS EGRESS BIDIRECTIONAL. If not specified, the default INGRESS value is used.
 	// The type of firewall rules that will be allowed on the NIC. If not specified, the default INGRESS value is used.
 	// +kubebuilder:validation:Optional
 	FirewallType *string `json:"firewallType,omitempty" tf:"firewall_type,omitempty"`
 
-	// [list] Only 1 flow log can be configured. Only the name field can change as part of an update. Flow logs holistically capture network information such as source and destination IP addresses, source and destination ports, number of packets, amount of bytes, the start and end time of the recording, and the type of protocol – and log the extent to which your instances are being accessed.
 	// List of all flow logs for the specified NIC.
 	// +kubebuilder:validation:Optional
 	FlowLog []FlowLogParameters `json:"flowLog,omitempty" tf:"flow_log,omitempty"`
 
-	// [int] Lan ID for this replica Nic.
 	// Lan ID for this replica Nic.
-	// +crossplane:generate:reference:type=github.com/ionos-cloud/provider-upjet-ionoscloud/apis/compute/v1alpha1.Lan
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
-	Lan *float64 `json:"lan,omitempty" tf:"lan,omitempty"`
+	Lan *float64 `json:"lan" tf:"lan,omitempty"`
 
-	// Reference to a Lan in compute to populate lan.
-	// +kubebuilder:validation:Optional
-	LanRef *v1.Reference `json:"lanRef,omitempty" tf:"-"`
-
-	// Selector for a Lan in compute to populate lan.
-	// +kubebuilder:validation:Optional
-	LanSelector *v1.Selector `json:"lanSelector,omitempty" tf:"-"`
-
-	// [string] User-defined name for the Autoscaling Group.
 	// Name for this replica NIC.
 	// +kubebuilder:validation:Optional
 	Name *string `json:"name" tf:"name,omitempty"`
 
-	// [list] In order to link VM to ALB, target group must be provided
 	// In order to link VM to ALB, target group must be provided.
 	// +kubebuilder:validation:Optional
 	TargetGroup *TargetGroupParameters `json:"targetGroup,omitempty" tf:"target_group,omitempty"`
@@ -456,99 +354,78 @@ type NicParameters struct {
 
 type PolicyInitParameters struct {
 
-	// [string] The Metric that should trigger the scaling actions. Metric values are checked at fixed intervals. Possible values: INSTANCE_CPU_UTILIZATION_AVERAGE, INSTANCE_NETWORK_IN_BYTES, INSTANCE_NETWORK_IN_PACKETS, INSTANCE_NETWORK_OUT_BYTES, INSTANCE_NETWORK_OUT_PACKETS
 	// The Metric that should trigger the scaling actions. Metric values are checked at fixed intervals.
 	Metric *string `json:"metric,omitempty" tf:"metric,omitempty"`
 
-	// [string] Defines the time range, for which the samples will be aggregated. Default is 120s. Note that when you set it to values like 5m the API will automatically transform it in PT5M, so the plan will show you a diff in state that should be ignored.
 	// Specifies the time range for which the samples are to be aggregated. Must be >= 2 minutes.
 	Range *string `json:"range,omitempty" tf:"range,omitempty"`
 
-	// [list] Specifies the action to take when the scaleInThreshold is exceeded. Hereby, scaling in is always about removing VMs that are currently associated with this autoscaling group. Default termination policy is OLDEST_SERVER_FIRST.
 	// Defines the action to be taken when the 'scaleInThreshold' is exceeded. Here, scaling is always about removing VMs associated with this VM Auto Scaling Group. By default, the termination policy is 'OLDEST_SERVER_FIRST' is effective.
 	ScaleInAction *ScaleInActionInitParameters `json:"scaleInAction,omitempty" tf:"scale_in_action,omitempty"`
 
-	// [int] A lower threshold on the value of metric. Will be used with less than (<) operator. Exceeding this will start a Scale-In Action as specified by the scaleInAction property. The value must have a higher minimum delta to the scaleOutThreshold depending on the metric to avoid competitive actions at the same time.
 	// The upper threshold for the value of the 'metric'. Used with the 'greater than' (>) operator. A scale-out action is triggered when this value is exceeded, specified by the 'scale_out_action' property. The value must have a lower minimum delta to the 'scale_in_threshold', depending on the metric, to avoid competing for actions simultaneously. If 'properties.policy.unit=TOTAL', a value >= 40 must be chosen.
 	ScaleInThreshold *float64 `json:"scaleInThreshold,omitempty" tf:"scale_in_threshold,omitempty"`
 
-	// [list] Specifies the action to take when the scaleOutThreshold is exceeded. Hereby, scaling out is always about adding new VMs to this autoscaling group.
 	// Defines the action to be performed when the 'scaleOutThreshold' is exceeded. Here, scaling is always about adding new VMs to this VM Auto Scaling Group.
 	ScaleOutAction *ScaleOutActionInitParameters `json:"scaleOutAction,omitempty" tf:"scale_out_action,omitempty"`
 
-	// [int] The upper threshold for the value of the metric. Used with the greater than (>) operator. A scale-out action is triggered when this value is exceeded, specified by the scaleOutAction property. The value must have a lower minimum delta to the scaleInThreshold, depending on the metric, to avoid competing for actions simultaneously. If properties.policy.unit=TOTAL, a value >= 40 must be chosen.
 	// The upper threshold for the value of the 'metric'. Used with the 'greater than' (>) operator. A scale-out action is triggered when this value is exceeded, specified by the 'scaleOutAction' property. The value must have a lower minimum delta to the 'scaleInThreshold', depending on the metric, to avoid competing for actions simultaneously. If 'properties.policy.unit=TOTAL', a value >= 40 must be chosen.
 	ScaleOutThreshold *float64 `json:"scaleOutThreshold,omitempty" tf:"scale_out_threshold,omitempty"`
 
-	// [string] Units of the applied Metric. Possible values are: PER_HOUR, PER_MINUTE, PER_SECOND, TOTAL.
 	// Units of the applied Metric. Possible values are: PER_HOUR, PER_MINUTE, PER_SECOND, TOTAL.
 	Unit *string `json:"unit,omitempty" tf:"unit,omitempty"`
 }
 
 type PolicyObservation struct {
 
-	// [string] The Metric that should trigger the scaling actions. Metric values are checked at fixed intervals. Possible values: INSTANCE_CPU_UTILIZATION_AVERAGE, INSTANCE_NETWORK_IN_BYTES, INSTANCE_NETWORK_IN_PACKETS, INSTANCE_NETWORK_OUT_BYTES, INSTANCE_NETWORK_OUT_PACKETS
 	// The Metric that should trigger the scaling actions. Metric values are checked at fixed intervals.
 	Metric *string `json:"metric,omitempty" tf:"metric,omitempty"`
 
-	// [string] Defines the time range, for which the samples will be aggregated. Default is 120s. Note that when you set it to values like 5m the API will automatically transform it in PT5M, so the plan will show you a diff in state that should be ignored.
 	// Specifies the time range for which the samples are to be aggregated. Must be >= 2 minutes.
 	Range *string `json:"range,omitempty" tf:"range,omitempty"`
 
-	// [list] Specifies the action to take when the scaleInThreshold is exceeded. Hereby, scaling in is always about removing VMs that are currently associated with this autoscaling group. Default termination policy is OLDEST_SERVER_FIRST.
 	// Defines the action to be taken when the 'scaleInThreshold' is exceeded. Here, scaling is always about removing VMs associated with this VM Auto Scaling Group. By default, the termination policy is 'OLDEST_SERVER_FIRST' is effective.
 	ScaleInAction *ScaleInActionObservation `json:"scaleInAction,omitempty" tf:"scale_in_action,omitempty"`
 
-	// [int] A lower threshold on the value of metric. Will be used with less than (<) operator. Exceeding this will start a Scale-In Action as specified by the scaleInAction property. The value must have a higher minimum delta to the scaleOutThreshold depending on the metric to avoid competitive actions at the same time.
 	// The upper threshold for the value of the 'metric'. Used with the 'greater than' (>) operator. A scale-out action is triggered when this value is exceeded, specified by the 'scale_out_action' property. The value must have a lower minimum delta to the 'scale_in_threshold', depending on the metric, to avoid competing for actions simultaneously. If 'properties.policy.unit=TOTAL', a value >= 40 must be chosen.
 	ScaleInThreshold *float64 `json:"scaleInThreshold,omitempty" tf:"scale_in_threshold,omitempty"`
 
-	// [list] Specifies the action to take when the scaleOutThreshold is exceeded. Hereby, scaling out is always about adding new VMs to this autoscaling group.
 	// Defines the action to be performed when the 'scaleOutThreshold' is exceeded. Here, scaling is always about adding new VMs to this VM Auto Scaling Group.
 	ScaleOutAction *ScaleOutActionObservation `json:"scaleOutAction,omitempty" tf:"scale_out_action,omitempty"`
 
-	// [int] The upper threshold for the value of the metric. Used with the greater than (>) operator. A scale-out action is triggered when this value is exceeded, specified by the scaleOutAction property. The value must have a lower minimum delta to the scaleInThreshold, depending on the metric, to avoid competing for actions simultaneously. If properties.policy.unit=TOTAL, a value >= 40 must be chosen.
 	// The upper threshold for the value of the 'metric'. Used with the 'greater than' (>) operator. A scale-out action is triggered when this value is exceeded, specified by the 'scaleOutAction' property. The value must have a lower minimum delta to the 'scaleInThreshold', depending on the metric, to avoid competing for actions simultaneously. If 'properties.policy.unit=TOTAL', a value >= 40 must be chosen.
 	ScaleOutThreshold *float64 `json:"scaleOutThreshold,omitempty" tf:"scale_out_threshold,omitempty"`
 
-	// [string] Units of the applied Metric. Possible values are: PER_HOUR, PER_MINUTE, PER_SECOND, TOTAL.
 	// Units of the applied Metric. Possible values are: PER_HOUR, PER_MINUTE, PER_SECOND, TOTAL.
 	Unit *string `json:"unit,omitempty" tf:"unit,omitempty"`
 }
 
 type PolicyParameters struct {
 
-	// [string] The Metric that should trigger the scaling actions. Metric values are checked at fixed intervals. Possible values: INSTANCE_CPU_UTILIZATION_AVERAGE, INSTANCE_NETWORK_IN_BYTES, INSTANCE_NETWORK_IN_PACKETS, INSTANCE_NETWORK_OUT_BYTES, INSTANCE_NETWORK_OUT_PACKETS
 	// The Metric that should trigger the scaling actions. Metric values are checked at fixed intervals.
 	// +kubebuilder:validation:Optional
 	Metric *string `json:"metric" tf:"metric,omitempty"`
 
-	// [string] Defines the time range, for which the samples will be aggregated. Default is 120s. Note that when you set it to values like 5m the API will automatically transform it in PT5M, so the plan will show you a diff in state that should be ignored.
 	// Specifies the time range for which the samples are to be aggregated. Must be >= 2 minutes.
 	// +kubebuilder:validation:Optional
 	Range *string `json:"range,omitempty" tf:"range,omitempty"`
 
-	// [list] Specifies the action to take when the scaleInThreshold is exceeded. Hereby, scaling in is always about removing VMs that are currently associated with this autoscaling group. Default termination policy is OLDEST_SERVER_FIRST.
 	// Defines the action to be taken when the 'scaleInThreshold' is exceeded. Here, scaling is always about removing VMs associated with this VM Auto Scaling Group. By default, the termination policy is 'OLDEST_SERVER_FIRST' is effective.
 	// +kubebuilder:validation:Optional
 	ScaleInAction *ScaleInActionParameters `json:"scaleInAction" tf:"scale_in_action,omitempty"`
 
-	// [int] A lower threshold on the value of metric. Will be used with less than (<) operator. Exceeding this will start a Scale-In Action as specified by the scaleInAction property. The value must have a higher minimum delta to the scaleOutThreshold depending on the metric to avoid competitive actions at the same time.
 	// The upper threshold for the value of the 'metric'. Used with the 'greater than' (>) operator. A scale-out action is triggered when this value is exceeded, specified by the 'scale_out_action' property. The value must have a lower minimum delta to the 'scale_in_threshold', depending on the metric, to avoid competing for actions simultaneously. If 'properties.policy.unit=TOTAL', a value >= 40 must be chosen.
 	// +kubebuilder:validation:Optional
 	ScaleInThreshold *float64 `json:"scaleInThreshold" tf:"scale_in_threshold,omitempty"`
 
-	// [list] Specifies the action to take when the scaleOutThreshold is exceeded. Hereby, scaling out is always about adding new VMs to this autoscaling group.
 	// Defines the action to be performed when the 'scaleOutThreshold' is exceeded. Here, scaling is always about adding new VMs to this VM Auto Scaling Group.
 	// +kubebuilder:validation:Optional
 	ScaleOutAction *ScaleOutActionParameters `json:"scaleOutAction" tf:"scale_out_action,omitempty"`
 
-	// [int] The upper threshold for the value of the metric. Used with the greater than (>) operator. A scale-out action is triggered when this value is exceeded, specified by the scaleOutAction property. The value must have a lower minimum delta to the scaleInThreshold, depending on the metric, to avoid competing for actions simultaneously. If properties.policy.unit=TOTAL, a value >= 40 must be chosen.
 	// The upper threshold for the value of the 'metric'. Used with the 'greater than' (>) operator. A scale-out action is triggered when this value is exceeded, specified by the 'scaleOutAction' property. The value must have a lower minimum delta to the 'scaleInThreshold', depending on the metric, to avoid competing for actions simultaneously. If 'properties.policy.unit=TOTAL', a value >= 40 must be chosen.
 	// +kubebuilder:validation:Optional
 	ScaleOutThreshold *float64 `json:"scaleOutThreshold" tf:"scale_out_threshold,omitempty"`
 
-	// [string] Units of the applied Metric. Possible values are: PER_HOUR, PER_MINUTE, PER_SECOND, TOTAL.
 	// Units of the applied Metric. Possible values are: PER_HOUR, PER_MINUTE, PER_SECOND, TOTAL.
 	// +kubebuilder:validation:Optional
 	Unit *string `json:"unit" tf:"unit,omitempty"`
@@ -556,69 +433,56 @@ type PolicyParameters struct {
 
 type ReplicaConfigurationInitParameters struct {
 
-	// [string] The zone where the VMs are created using this configuration. Possible values are: AUTO, ZONE_1, ZONE_2.
 	// The zone where the VMs are created using this configuration.
 	AvailabilityZone *string `json:"availabilityZone,omitempty" tf:"availability_zone,omitempty"`
 
-	// [string] PU family for the VMs created using this configuration. If null, the VM will be created with the default CPU family for the assigned location. Possible values are: INTEL_SKYLAKE, INTEL_XEON.
 	// The zone where the VMs are created using this configuration.
 	CPUFamily *string `json:"cpuFamily,omitempty" tf:"cpu_family,omitempty"`
 
-	// [int] The total number of cores for the VMs.
 	// The total number of cores for the VMs.
 	Cores *float64 `json:"cores,omitempty" tf:"cores,omitempty"`
 
 	// Set of NICs associated with this Replica.
 	Nic []NicInitParameters `json:"nic,omitempty" tf:"nic,omitempty"`
 
-	// [int] The amount of memory for the VMs in MB, e.g. 2048. Size must be specified in multiples of 256 MB with a minimum of 256 MB; however, if you set ramHotPlug to TRUE then you must use a minimum of 1024 MB. If you set the RAM size more than 240GB, then ramHotPlug will be set to FALSE and can not be set to TRUE unless RAM size not set to less than 240GB.
 	// The amount of memory for the VMs in MB, e.g. 2048. Size must be specified in multiples of 256 MB with a minimum of 256 MB; however, if you set ramHotPlug to TRUE then you must use a minimum of 1024 MB. If you set the RAM size more than 240GB, then ramHotPlug will be set to FALSE and can not be set to TRUE unless RAM size not set to less than 240GB.
 	RAM *float64 `json:"ram,omitempty" tf:"ram,omitempty"`
 
-	// [list] List of volumes associated with this Replica.
 	// List of volumes associated with this Replica.
 	Volume []VolumeInitParameters `json:"volume,omitempty" tf:"volume,omitempty"`
 }
 
 type ReplicaConfigurationObservation struct {
 
-	// [string] The zone where the VMs are created using this configuration. Possible values are: AUTO, ZONE_1, ZONE_2.
 	// The zone where the VMs are created using this configuration.
 	AvailabilityZone *string `json:"availabilityZone,omitempty" tf:"availability_zone,omitempty"`
 
-	// [string] PU family for the VMs created using this configuration. If null, the VM will be created with the default CPU family for the assigned location. Possible values are: INTEL_SKYLAKE, INTEL_XEON.
 	// The zone where the VMs are created using this configuration.
 	CPUFamily *string `json:"cpuFamily,omitempty" tf:"cpu_family,omitempty"`
 
-	// [int] The total number of cores for the VMs.
 	// The total number of cores for the VMs.
 	Cores *float64 `json:"cores,omitempty" tf:"cores,omitempty"`
 
 	// Set of NICs associated with this Replica.
 	Nic []NicObservation `json:"nic,omitempty" tf:"nic,omitempty"`
 
-	// [int] The amount of memory for the VMs in MB, e.g. 2048. Size must be specified in multiples of 256 MB with a minimum of 256 MB; however, if you set ramHotPlug to TRUE then you must use a minimum of 1024 MB. If you set the RAM size more than 240GB, then ramHotPlug will be set to FALSE and can not be set to TRUE unless RAM size not set to less than 240GB.
 	// The amount of memory for the VMs in MB, e.g. 2048. Size must be specified in multiples of 256 MB with a minimum of 256 MB; however, if you set ramHotPlug to TRUE then you must use a minimum of 1024 MB. If you set the RAM size more than 240GB, then ramHotPlug will be set to FALSE and can not be set to TRUE unless RAM size not set to less than 240GB.
 	RAM *float64 `json:"ram,omitempty" tf:"ram,omitempty"`
 
-	// [list] List of volumes associated with this Replica.
 	// List of volumes associated with this Replica.
 	Volume []VolumeObservation `json:"volume,omitempty" tf:"volume,omitempty"`
 }
 
 type ReplicaConfigurationParameters struct {
 
-	// [string] The zone where the VMs are created using this configuration. Possible values are: AUTO, ZONE_1, ZONE_2.
 	// The zone where the VMs are created using this configuration.
 	// +kubebuilder:validation:Optional
 	AvailabilityZone *string `json:"availabilityZone" tf:"availability_zone,omitempty"`
 
-	// [string] PU family for the VMs created using this configuration. If null, the VM will be created with the default CPU family for the assigned location. Possible values are: INTEL_SKYLAKE, INTEL_XEON.
 	// The zone where the VMs are created using this configuration.
 	// +kubebuilder:validation:Optional
 	CPUFamily *string `json:"cpuFamily,omitempty" tf:"cpu_family,omitempty"`
 
-	// [int] The total number of cores for the VMs.
 	// The total number of cores for the VMs.
 	// +kubebuilder:validation:Optional
 	Cores *float64 `json:"cores" tf:"cores,omitempty"`
@@ -627,12 +491,10 @@ type ReplicaConfigurationParameters struct {
 	// +kubebuilder:validation:Optional
 	Nic []NicParameters `json:"nic,omitempty" tf:"nic,omitempty"`
 
-	// [int] The amount of memory for the VMs in MB, e.g. 2048. Size must be specified in multiples of 256 MB with a minimum of 256 MB; however, if you set ramHotPlug to TRUE then you must use a minimum of 1024 MB. If you set the RAM size more than 240GB, then ramHotPlug will be set to FALSE and can not be set to TRUE unless RAM size not set to less than 240GB.
 	// The amount of memory for the VMs in MB, e.g. 2048. Size must be specified in multiples of 256 MB with a minimum of 256 MB; however, if you set ramHotPlug to TRUE then you must use a minimum of 1024 MB. If you set the RAM size more than 240GB, then ramHotPlug will be set to FALSE and can not be set to TRUE unless RAM size not set to less than 240GB.
 	// +kubebuilder:validation:Optional
 	RAM *float64 `json:"ram" tf:"ram,omitempty"`
 
-	// [list] List of volumes associated with this Replica.
 	// List of volumes associated with this Replica.
 	// +kubebuilder:validation:Optional
 	Volume []VolumeParameters `json:"volume,omitempty" tf:"volume,omitempty"`
@@ -640,73 +502,58 @@ type ReplicaConfigurationParameters struct {
 
 type ScaleInActionInitParameters struct {
 
-	// [int] When amountType == ABSOLUTE, this is the number of VMs removed in one step. When amountType == PERCENTAGE, this is a percentage value, which will be applied to the autoscaling group's current targetReplicaCount in order to derive the number of VMs that will be removed in one step. There will always be at least one VM removed. For SCALE_IN operation new volumes are NOT deleted after the server deletion.
 	// When 'amountType=ABSOLUTE' specifies the absolute number of VMs that are removed. The value must be between 1 to 10. 'amountType=PERCENTAGE' specifies the percentage value that is applied to the current number of replicas of the VM Auto Scaling Group. The value must be between 1 to 200. At least one VM is always removed. Note that for 'SCALE_IN' operations, volumes are not deleted after the server is deleted.
 	Amount *float64 `json:"amount,omitempty" tf:"amount,omitempty"`
 
-	// [string] The type for the given amount. Possible values are: ABSOLUTE, PERCENTAGE.
 	// The type for the given amount. Possible values are: [ABSOLUTE, PERCENTAGE].
 	AmountType *string `json:"amountType,omitempty" tf:"amount_type,omitempty"`
 
-	// [string] Minimum time to pass after this Scaling action has started, until the next Scaling action will be started. Additionally, if a Scaling action is currently in progress, no second Scaling action will be started for the same autoscaling group. Instead, the Metric will be re-evaluated after the current Scaling action is completed (either successfully or with failures). This is validated with a minimum value of 2 minutes and a maximum of 24 hours currently. Default value is 5 minutes if not given. Note that when you set it to values like 5m the API will automatically transform it in PT5M, so the plan will show you a diff in state that should be ignored.
 	// The minimum time that elapses after the start of this scaling action until the following scaling action is started. While a scaling action is in progress, no second action is initiated for the same VM Auto Scaling Group. Instead, the metric is re-evaluated after the current scaling action completes (either successfully or with errors). This is currently validated with a minimum value of 2 minutes and a maximum of 24 hours. The default value is 5 minutes if not specified.
 	CooldownPeriod *string `json:"cooldownPeriod,omitempty" tf:"cooldown_period,omitempty"`
 
-	// [bool] If set to true, when deleting a replica during scale in, any attached volume will also be deleted. When set to false, all volumes remain in the datacenter and must be deleted manually. Note that every scale-out creates new volumes. When they are not deleted, they will eventually use all of your contracts resource limits. At this point, scaling out would not be possible anymore.
 	// If set to 'true', when deleting an replica during scale in, any attached volume will also be deleted. When set to 'false', all volumes remain in the datacenter and must be deleted manually. Note that every scale-out creates new volumes. When they are not deleted, they will eventually use all of your contracts resource limits. At this point, scaling out would not be possible anymore.
 	DeleteVolumes *bool `json:"deleteVolumes,omitempty" tf:"delete_volumes,omitempty"`
 
-	// [string] The type of the termination policy for the autoscaling group so that a specific pattern is followed for Scaling-In replicas. Default termination policy is OLDEST_SERVER_FIRST. Possible values are: OLDEST_SERVER_FIRST, NEWEST_SERVER_FIRST, RANDOM
 	// The type of termination policy for the VM Auto Scaling Group to follow a specific pattern for scaling-in replicas. The default termination policy is 'OLDEST_SERVER_FIRST'.
 	TerminationPolicyType *string `json:"terminationPolicyType,omitempty" tf:"termination_policy_type,omitempty"`
 }
 
 type ScaleInActionObservation struct {
 
-	// [int] When amountType == ABSOLUTE, this is the number of VMs removed in one step. When amountType == PERCENTAGE, this is a percentage value, which will be applied to the autoscaling group's current targetReplicaCount in order to derive the number of VMs that will be removed in one step. There will always be at least one VM removed. For SCALE_IN operation new volumes are NOT deleted after the server deletion.
 	// When 'amountType=ABSOLUTE' specifies the absolute number of VMs that are removed. The value must be between 1 to 10. 'amountType=PERCENTAGE' specifies the percentage value that is applied to the current number of replicas of the VM Auto Scaling Group. The value must be between 1 to 200. At least one VM is always removed. Note that for 'SCALE_IN' operations, volumes are not deleted after the server is deleted.
 	Amount *float64 `json:"amount,omitempty" tf:"amount,omitempty"`
 
-	// [string] The type for the given amount. Possible values are: ABSOLUTE, PERCENTAGE.
 	// The type for the given amount. Possible values are: [ABSOLUTE, PERCENTAGE].
 	AmountType *string `json:"amountType,omitempty" tf:"amount_type,omitempty"`
 
-	// [string] Minimum time to pass after this Scaling action has started, until the next Scaling action will be started. Additionally, if a Scaling action is currently in progress, no second Scaling action will be started for the same autoscaling group. Instead, the Metric will be re-evaluated after the current Scaling action is completed (either successfully or with failures). This is validated with a minimum value of 2 minutes and a maximum of 24 hours currently. Default value is 5 minutes if not given. Note that when you set it to values like 5m the API will automatically transform it in PT5M, so the plan will show you a diff in state that should be ignored.
 	// The minimum time that elapses after the start of this scaling action until the following scaling action is started. While a scaling action is in progress, no second action is initiated for the same VM Auto Scaling Group. Instead, the metric is re-evaluated after the current scaling action completes (either successfully or with errors). This is currently validated with a minimum value of 2 minutes and a maximum of 24 hours. The default value is 5 minutes if not specified.
 	CooldownPeriod *string `json:"cooldownPeriod,omitempty" tf:"cooldown_period,omitempty"`
 
-	// [bool] If set to true, when deleting a replica during scale in, any attached volume will also be deleted. When set to false, all volumes remain in the datacenter and must be deleted manually. Note that every scale-out creates new volumes. When they are not deleted, they will eventually use all of your contracts resource limits. At this point, scaling out would not be possible anymore.
 	// If set to 'true', when deleting an replica during scale in, any attached volume will also be deleted. When set to 'false', all volumes remain in the datacenter and must be deleted manually. Note that every scale-out creates new volumes. When they are not deleted, they will eventually use all of your contracts resource limits. At this point, scaling out would not be possible anymore.
 	DeleteVolumes *bool `json:"deleteVolumes,omitempty" tf:"delete_volumes,omitempty"`
 
-	// [string] The type of the termination policy for the autoscaling group so that a specific pattern is followed for Scaling-In replicas. Default termination policy is OLDEST_SERVER_FIRST. Possible values are: OLDEST_SERVER_FIRST, NEWEST_SERVER_FIRST, RANDOM
 	// The type of termination policy for the VM Auto Scaling Group to follow a specific pattern for scaling-in replicas. The default termination policy is 'OLDEST_SERVER_FIRST'.
 	TerminationPolicyType *string `json:"terminationPolicyType,omitempty" tf:"termination_policy_type,omitempty"`
 }
 
 type ScaleInActionParameters struct {
 
-	// [int] When amountType == ABSOLUTE, this is the number of VMs removed in one step. When amountType == PERCENTAGE, this is a percentage value, which will be applied to the autoscaling group's current targetReplicaCount in order to derive the number of VMs that will be removed in one step. There will always be at least one VM removed. For SCALE_IN operation new volumes are NOT deleted after the server deletion.
 	// When 'amountType=ABSOLUTE' specifies the absolute number of VMs that are removed. The value must be between 1 to 10. 'amountType=PERCENTAGE' specifies the percentage value that is applied to the current number of replicas of the VM Auto Scaling Group. The value must be between 1 to 200. At least one VM is always removed. Note that for 'SCALE_IN' operations, volumes are not deleted after the server is deleted.
 	// +kubebuilder:validation:Optional
 	Amount *float64 `json:"amount" tf:"amount,omitempty"`
 
-	// [string] The type for the given amount. Possible values are: ABSOLUTE, PERCENTAGE.
 	// The type for the given amount. Possible values are: [ABSOLUTE, PERCENTAGE].
 	// +kubebuilder:validation:Optional
 	AmountType *string `json:"amountType" tf:"amount_type,omitempty"`
 
-	// [string] Minimum time to pass after this Scaling action has started, until the next Scaling action will be started. Additionally, if a Scaling action is currently in progress, no second Scaling action will be started for the same autoscaling group. Instead, the Metric will be re-evaluated after the current Scaling action is completed (either successfully or with failures). This is validated with a minimum value of 2 minutes and a maximum of 24 hours currently. Default value is 5 minutes if not given. Note that when you set it to values like 5m the API will automatically transform it in PT5M, so the plan will show you a diff in state that should be ignored.
 	// The minimum time that elapses after the start of this scaling action until the following scaling action is started. While a scaling action is in progress, no second action is initiated for the same VM Auto Scaling Group. Instead, the metric is re-evaluated after the current scaling action completes (either successfully or with errors). This is currently validated with a minimum value of 2 minutes and a maximum of 24 hours. The default value is 5 minutes if not specified.
 	// +kubebuilder:validation:Optional
 	CooldownPeriod *string `json:"cooldownPeriod,omitempty" tf:"cooldown_period,omitempty"`
 
-	// [bool] If set to true, when deleting a replica during scale in, any attached volume will also be deleted. When set to false, all volumes remain in the datacenter and must be deleted manually. Note that every scale-out creates new volumes. When they are not deleted, they will eventually use all of your contracts resource limits. At this point, scaling out would not be possible anymore.
 	// If set to 'true', when deleting an replica during scale in, any attached volume will also be deleted. When set to 'false', all volumes remain in the datacenter and must be deleted manually. Note that every scale-out creates new volumes. When they are not deleted, they will eventually use all of your contracts resource limits. At this point, scaling out would not be possible anymore.
 	// +kubebuilder:validation:Optional
 	DeleteVolumes *bool `json:"deleteVolumes" tf:"delete_volumes,omitempty"`
 
-	// [string] The type of the termination policy for the autoscaling group so that a specific pattern is followed for Scaling-In replicas. Default termination policy is OLDEST_SERVER_FIRST. Possible values are: OLDEST_SERVER_FIRST, NEWEST_SERVER_FIRST, RANDOM
 	// The type of termination policy for the VM Auto Scaling Group to follow a specific pattern for scaling-in replicas. The default termination policy is 'OLDEST_SERVER_FIRST'.
 	// +kubebuilder:validation:Optional
 	TerminationPolicyType *string `json:"terminationPolicyType,omitempty" tf:"termination_policy_type,omitempty"`
@@ -714,47 +561,38 @@ type ScaleInActionParameters struct {
 
 type ScaleOutActionInitParameters struct {
 
-	// [int] When amountType == ABSOLUTE, this is the number of VMs removed in one step. When amountType == PERCENTAGE, this is a percentage value, which will be applied to the autoscaling group's current targetReplicaCount in order to derive the number of VMs that will be removed in one step. There will always be at least one VM removed. For SCALE_IN operation new volumes are NOT deleted after the server deletion.
 	// When 'amountType=ABSOLUTE' specifies the absolute number of VMs that are added. The value must be between 1 to 10. 'amountType=PERCENTAGE' specifies the percentage value that is applied to the current number of replicas of the VM Auto Scaling Group. The value must be between 1 to 200. At least one VM is always added or removed.
 	Amount *float64 `json:"amount,omitempty" tf:"amount,omitempty"`
 
-	// [string] The type for the given amount. Possible values are: ABSOLUTE, PERCENTAGE.
 	// The type for the given amount. Possible values are: [ABSOLUTE, PERCENTAGE].
 	AmountType *string `json:"amountType,omitempty" tf:"amount_type,omitempty"`
 
-	// [string] Minimum time to pass after this Scaling action has started, until the next Scaling action will be started. Additionally, if a Scaling action is currently in progress, no second Scaling action will be started for the same autoscaling group. Instead, the Metric will be re-evaluated after the current Scaling action is completed (either successfully or with failures). This is validated with a minimum value of 2 minutes and a maximum of 24 hours currently. Default value is 5 minutes if not given. Note that when you set it to values like 5m the API will automatically transform it in PT5M, so the plan will show you a diff in state that should be ignored.
 	// The minimum time that elapses after the start of this scaling action until the following scaling action is started. While a scaling action is in progress, no second action is initiated for the same VM Auto Scaling Group. Instead, the metric is re-evaluated after the current scaling action completes (either successfully or with errors). This is currently validated with a minimum value of 2 minutes and a maximum of 24 hours. The default value is 5 minutes if not specified.
 	CooldownPeriod *string `json:"cooldownPeriod,omitempty" tf:"cooldown_period,omitempty"`
 }
 
 type ScaleOutActionObservation struct {
 
-	// [int] When amountType == ABSOLUTE, this is the number of VMs removed in one step. When amountType == PERCENTAGE, this is a percentage value, which will be applied to the autoscaling group's current targetReplicaCount in order to derive the number of VMs that will be removed in one step. There will always be at least one VM removed. For SCALE_IN operation new volumes are NOT deleted after the server deletion.
 	// When 'amountType=ABSOLUTE' specifies the absolute number of VMs that are added. The value must be between 1 to 10. 'amountType=PERCENTAGE' specifies the percentage value that is applied to the current number of replicas of the VM Auto Scaling Group. The value must be between 1 to 200. At least one VM is always added or removed.
 	Amount *float64 `json:"amount,omitempty" tf:"amount,omitempty"`
 
-	// [string] The type for the given amount. Possible values are: ABSOLUTE, PERCENTAGE.
 	// The type for the given amount. Possible values are: [ABSOLUTE, PERCENTAGE].
 	AmountType *string `json:"amountType,omitempty" tf:"amount_type,omitempty"`
 
-	// [string] Minimum time to pass after this Scaling action has started, until the next Scaling action will be started. Additionally, if a Scaling action is currently in progress, no second Scaling action will be started for the same autoscaling group. Instead, the Metric will be re-evaluated after the current Scaling action is completed (either successfully or with failures). This is validated with a minimum value of 2 minutes and a maximum of 24 hours currently. Default value is 5 minutes if not given. Note that when you set it to values like 5m the API will automatically transform it in PT5M, so the plan will show you a diff in state that should be ignored.
 	// The minimum time that elapses after the start of this scaling action until the following scaling action is started. While a scaling action is in progress, no second action is initiated for the same VM Auto Scaling Group. Instead, the metric is re-evaluated after the current scaling action completes (either successfully or with errors). This is currently validated with a minimum value of 2 minutes and a maximum of 24 hours. The default value is 5 minutes if not specified.
 	CooldownPeriod *string `json:"cooldownPeriod,omitempty" tf:"cooldown_period,omitempty"`
 }
 
 type ScaleOutActionParameters struct {
 
-	// [int] When amountType == ABSOLUTE, this is the number of VMs removed in one step. When amountType == PERCENTAGE, this is a percentage value, which will be applied to the autoscaling group's current targetReplicaCount in order to derive the number of VMs that will be removed in one step. There will always be at least one VM removed. For SCALE_IN operation new volumes are NOT deleted after the server deletion.
 	// When 'amountType=ABSOLUTE' specifies the absolute number of VMs that are added. The value must be between 1 to 10. 'amountType=PERCENTAGE' specifies the percentage value that is applied to the current number of replicas of the VM Auto Scaling Group. The value must be between 1 to 200. At least one VM is always added or removed.
 	// +kubebuilder:validation:Optional
 	Amount *float64 `json:"amount" tf:"amount,omitempty"`
 
-	// [string] The type for the given amount. Possible values are: ABSOLUTE, PERCENTAGE.
 	// The type for the given amount. Possible values are: [ABSOLUTE, PERCENTAGE].
 	// +kubebuilder:validation:Optional
 	AmountType *string `json:"amountType" tf:"amount_type,omitempty"`
 
-	// [string] Minimum time to pass after this Scaling action has started, until the next Scaling action will be started. Additionally, if a Scaling action is currently in progress, no second Scaling action will be started for the same autoscaling group. Instead, the Metric will be re-evaluated after the current Scaling action is completed (either successfully or with failures). This is validated with a minimum value of 2 minutes and a maximum of 24 hours currently. Default value is 5 minutes if not given. Note that when you set it to values like 5m the API will automatically transform it in PT5M, so the plan will show you a diff in state that should be ignored.
 	// The minimum time that elapses after the start of this scaling action until the following scaling action is started. While a scaling action is in progress, no second action is initiated for the same VM Auto Scaling Group. Instead, the metric is re-evaluated after the current scaling action completes (either successfully or with errors). This is currently validated with a minimum value of 2 minutes and a maximum of 24 hours. The default value is 5 minutes if not specified.
 	// +kubebuilder:validation:Optional
 	CooldownPeriod *string `json:"cooldownPeriod,omitempty" tf:"cooldown_period,omitempty"`
@@ -762,67 +600,38 @@ type ScaleOutActionParameters struct {
 
 type TargetGroupInitParameters struct {
 
-	// [int] The port of the target group.
 	// The port for the target group.
 	Port *float64 `json:"port,omitempty" tf:"port,omitempty"`
 
-	// [string] The ID of the target group.
 	// The ID of the target group.
-	// +crossplane:generate:reference:type=github.com/ionos-cloud/provider-upjet-ionoscloud/apis/asg/v1alpha1.TargetGroup
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
 	TargetGroupID *string `json:"targetGroupId,omitempty" tf:"target_group_id,omitempty"`
 
-	// Reference to a TargetGroup in asg to populate targetGroupId.
-	// +kubebuilder:validation:Optional
-	TargetGroupIDRef *v1.Reference `json:"targetGroupIdRef,omitempty" tf:"-"`
-
-	// Selector for a TargetGroup in asg to populate targetGroupId.
-	// +kubebuilder:validation:Optional
-	TargetGroupIDSelector *v1.Selector `json:"targetGroupIdSelector,omitempty" tf:"-"`
-
-	// [int] The weight of the target group.
 	// The weight for the target group.
 	Weight *float64 `json:"weight,omitempty" tf:"weight,omitempty"`
 }
 
 type TargetGroupObservation struct {
 
-	// [int] The port of the target group.
 	// The port for the target group.
 	Port *float64 `json:"port,omitempty" tf:"port,omitempty"`
 
-	// [string] The ID of the target group.
 	// The ID of the target group.
 	TargetGroupID *string `json:"targetGroupId,omitempty" tf:"target_group_id,omitempty"`
 
-	// [int] The weight of the target group.
 	// The weight for the target group.
 	Weight *float64 `json:"weight,omitempty" tf:"weight,omitempty"`
 }
 
 type TargetGroupParameters struct {
 
-	// [int] The port of the target group.
 	// The port for the target group.
 	// +kubebuilder:validation:Optional
 	Port *float64 `json:"port" tf:"port,omitempty"`
 
-	// [string] The ID of the target group.
 	// The ID of the target group.
-	// +crossplane:generate:reference:type=github.com/ionos-cloud/provider-upjet-ionoscloud/apis/asg/v1alpha1.TargetGroup
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
-	TargetGroupID *string `json:"targetGroupId,omitempty" tf:"target_group_id,omitempty"`
+	TargetGroupID *string `json:"targetGroupId" tf:"target_group_id,omitempty"`
 
-	// Reference to a TargetGroup in asg to populate targetGroupId.
-	// +kubebuilder:validation:Optional
-	TargetGroupIDRef *v1.Reference `json:"targetGroupIdRef,omitempty" tf:"-"`
-
-	// Selector for a TargetGroup in asg to populate targetGroupId.
-	// +kubebuilder:validation:Optional
-	TargetGroupIDSelector *v1.Selector `json:"targetGroupIdSelector,omitempty" tf:"-"`
-
-	// [int] The weight of the target group.
 	// The weight for the target group.
 	// +kubebuilder:validation:Optional
 	Weight *float64 `json:"weight" tf:"weight,omitempty"`
@@ -830,153 +639,118 @@ type TargetGroupParameters struct {
 
 type VolumeInitParameters struct {
 
-	// [string] The uuid of the Backup Unit that user has access to. The property is immutable and is only allowed to be set on a new volume creation. It is mandatory to provide either public image or imageAlias in conjunction with this property.
 	// The uuid of the Backup Unit that user has access to. The property is immutable and is only allowed to be set on a new volume creation. It is mandatory to provide either 'public image' or 'imageAlias' in conjunction with this property.
 	BackupUnitID *string `json:"backupUnitId,omitempty" tf:"backup_unit_id,omitempty"`
 
-	// [string] Determines whether the volume will be used as a boot volume. Set to NONE, the volume will not be used as boot volume. Set to PRIMARY, the volume will be used as boot volume and set to AUTO will delegate the decision to the provisioning engine to decide whether to use the volume as boot volume.
-	// Notice that exactly one volume can be set to PRIMARY or all of them set to AUTO.
 	// Determines whether the volume will be used as a boot volume. Set to NONE, the volume will not be used as boot volume.
 	// Set to PRIMARY, the volume will be used as boot volume and set to AUTO will delegate the decision to the provisioning engine to decide whether to use the volume as boot volume.
 	// Notice that exactly one volume can be set to PRIMARY or all of them set to AUTO.
 	BootOrder *string `json:"bootOrder,omitempty" tf:"boot_order,omitempty"`
 
-	// [string] The bus type of the volume. Default setting is VIRTIO. The bus type IDE is also supported.
 	// The bus type of the volume. Default setting is 'VIRTIO'. The bus type 'IDE' is also supported.
 	Bus *string `json:"bus,omitempty" tf:"bus,omitempty"`
 
-	// [string] The image installed on the volume. Only the UUID of the image is presently supported.
 	// The image installed on the disk. Currently, only the UUID of the image is supported. Note that either 'image' or 'imageAlias' must be specified, but not both.
 	Image *string `json:"image,omitempty" tf:"image,omitempty"`
 
-	// [string] The image installed on the volume. Must be an imageAlias as specified via the images API. Note that one of image or imageAlias must be set, but not both.
 	// The image installed on the volume. Must be an 'imageAlias' as specified via the images API. Note that one of 'image' or 'imageAlias' must be set, but not both.
 	ImageAlias *string `json:"imageAlias,omitempty" tf:"image_alias,omitempty"`
 
-	// [string] Image password for this replica volume.
 	// Image password for this replica volume.
 	ImagePasswordSecretRef *v1.SecretKeySelector `json:"imagePasswordSecretRef,omitempty" tf:"-"`
 
-	// [string] User-defined name for the Autoscaling Group.
 	// Name for this replica volume.
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
-	// List of ssh keys, supports values or paths to files. Cannot be changed at update.
 	SSHKeys []*string `json:"sshKeys,omitempty" tf:"ssh_keys,omitempty"`
 
-	// [int] Name for this replica volume.
 	// User-defined size for this replica volume in GB.
 	Size *float64 `json:"size,omitempty" tf:"size,omitempty"`
 
-	// [string] The type of firewall rule. If is not specified, it will take the default value INGRESS.
 	// Storage Type for this replica volume. Possible values: SSD, HDD, SSD_STANDARD or SSD_PREMIUM
 	Type *string `json:"type,omitempty" tf:"type,omitempty"`
 
-	// [string] User-data (Cloud Init) for this replica volume. Make sure you provide a Cloud Init compatible image in conjunction with this parameter.
 	// User-data (Cloud Init) for this replica volume.
 	UserData *string `json:"userData,omitempty" tf:"user_data,omitempty"`
 }
 
 type VolumeObservation struct {
 
-	// [string] The uuid of the Backup Unit that user has access to. The property is immutable and is only allowed to be set on a new volume creation. It is mandatory to provide either public image or imageAlias in conjunction with this property.
 	// The uuid of the Backup Unit that user has access to. The property is immutable and is only allowed to be set on a new volume creation. It is mandatory to provide either 'public image' or 'imageAlias' in conjunction with this property.
 	BackupUnitID *string `json:"backupUnitId,omitempty" tf:"backup_unit_id,omitempty"`
 
-	// [string] Determines whether the volume will be used as a boot volume. Set to NONE, the volume will not be used as boot volume. Set to PRIMARY, the volume will be used as boot volume and set to AUTO will delegate the decision to the provisioning engine to decide whether to use the volume as boot volume.
-	// Notice that exactly one volume can be set to PRIMARY or all of them set to AUTO.
 	// Determines whether the volume will be used as a boot volume. Set to NONE, the volume will not be used as boot volume.
 	// Set to PRIMARY, the volume will be used as boot volume and set to AUTO will delegate the decision to the provisioning engine to decide whether to use the volume as boot volume.
 	// Notice that exactly one volume can be set to PRIMARY or all of them set to AUTO.
 	BootOrder *string `json:"bootOrder,omitempty" tf:"boot_order,omitempty"`
 
-	// [string] The bus type of the volume. Default setting is VIRTIO. The bus type IDE is also supported.
 	// The bus type of the volume. Default setting is 'VIRTIO'. The bus type 'IDE' is also supported.
 	Bus *string `json:"bus,omitempty" tf:"bus,omitempty"`
 
-	// [string] The image installed on the volume. Only the UUID of the image is presently supported.
 	// The image installed on the disk. Currently, only the UUID of the image is supported. Note that either 'image' or 'imageAlias' must be specified, but not both.
 	Image *string `json:"image,omitempty" tf:"image,omitempty"`
 
-	// [string] The image installed on the volume. Must be an imageAlias as specified via the images API. Note that one of image or imageAlias must be set, but not both.
 	// The image installed on the volume. Must be an 'imageAlias' as specified via the images API. Note that one of 'image' or 'imageAlias' must be set, but not both.
 	ImageAlias *string `json:"imageAlias,omitempty" tf:"image_alias,omitempty"`
 
-	// [string] User-defined name for the Autoscaling Group.
 	// Name for this replica volume.
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
-	// List of ssh keys, supports values or paths to files. Cannot be changed at update.
 	SSHKeys []*string `json:"sshKeys,omitempty" tf:"ssh_keys,omitempty"`
 
-	// [int] Name for this replica volume.
 	// User-defined size for this replica volume in GB.
 	Size *float64 `json:"size,omitempty" tf:"size,omitempty"`
 
-	// [string] The type of firewall rule. If is not specified, it will take the default value INGRESS.
 	// Storage Type for this replica volume. Possible values: SSD, HDD, SSD_STANDARD or SSD_PREMIUM
 	Type *string `json:"type,omitempty" tf:"type,omitempty"`
 
-	// [string] User-data (Cloud Init) for this replica volume. Make sure you provide a Cloud Init compatible image in conjunction with this parameter.
 	// User-data (Cloud Init) for this replica volume.
 	UserData *string `json:"userData,omitempty" tf:"user_data,omitempty"`
 }
 
 type VolumeParameters struct {
 
-	// [string] The uuid of the Backup Unit that user has access to. The property is immutable and is only allowed to be set on a new volume creation. It is mandatory to provide either public image or imageAlias in conjunction with this property.
 	// The uuid of the Backup Unit that user has access to. The property is immutable and is only allowed to be set on a new volume creation. It is mandatory to provide either 'public image' or 'imageAlias' in conjunction with this property.
 	// +kubebuilder:validation:Optional
 	BackupUnitID *string `json:"backupUnitId,omitempty" tf:"backup_unit_id,omitempty"`
 
-	// [string] Determines whether the volume will be used as a boot volume. Set to NONE, the volume will not be used as boot volume. Set to PRIMARY, the volume will be used as boot volume and set to AUTO will delegate the decision to the provisioning engine to decide whether to use the volume as boot volume.
-	// Notice that exactly one volume can be set to PRIMARY or all of them set to AUTO.
 	// Determines whether the volume will be used as a boot volume. Set to NONE, the volume will not be used as boot volume.
 	// Set to PRIMARY, the volume will be used as boot volume and set to AUTO will delegate the decision to the provisioning engine to decide whether to use the volume as boot volume.
 	// Notice that exactly one volume can be set to PRIMARY or all of them set to AUTO.
 	// +kubebuilder:validation:Optional
 	BootOrder *string `json:"bootOrder" tf:"boot_order,omitempty"`
 
-	// [string] The bus type of the volume. Default setting is VIRTIO. The bus type IDE is also supported.
 	// The bus type of the volume. Default setting is 'VIRTIO'. The bus type 'IDE' is also supported.
 	// +kubebuilder:validation:Optional
 	Bus *string `json:"bus,omitempty" tf:"bus,omitempty"`
 
-	// [string] The image installed on the volume. Only the UUID of the image is presently supported.
 	// The image installed on the disk. Currently, only the UUID of the image is supported. Note that either 'image' or 'imageAlias' must be specified, but not both.
 	// +kubebuilder:validation:Optional
 	Image *string `json:"image,omitempty" tf:"image,omitempty"`
 
-	// [string] The image installed on the volume. Must be an imageAlias as specified via the images API. Note that one of image or imageAlias must be set, but not both.
 	// The image installed on the volume. Must be an 'imageAlias' as specified via the images API. Note that one of 'image' or 'imageAlias' must be set, but not both.
 	// +kubebuilder:validation:Optional
 	ImageAlias *string `json:"imageAlias,omitempty" tf:"image_alias,omitempty"`
 
-	// [string] Image password for this replica volume.
 	// Image password for this replica volume.
 	// +kubebuilder:validation:Optional
 	ImagePasswordSecretRef *v1.SecretKeySelector `json:"imagePasswordSecretRef,omitempty" tf:"-"`
 
-	// [string] User-defined name for the Autoscaling Group.
 	// Name for this replica volume.
 	// +kubebuilder:validation:Optional
 	Name *string `json:"name" tf:"name,omitempty"`
 
-	// List of ssh keys, supports values or paths to files. Cannot be changed at update.
 	// +kubebuilder:validation:Optional
 	SSHKeys []*string `json:"sshKeys,omitempty" tf:"ssh_keys,omitempty"`
 
-	// [int] Name for this replica volume.
 	// User-defined size for this replica volume in GB.
 	// +kubebuilder:validation:Optional
 	Size *float64 `json:"size" tf:"size,omitempty"`
 
-	// [string] The type of firewall rule. If is not specified, it will take the default value INGRESS.
 	// Storage Type for this replica volume. Possible values: SSD, HDD, SSD_STANDARD or SSD_PREMIUM
 	// +kubebuilder:validation:Optional
 	Type *string `json:"type" tf:"type,omitempty"`
 
-	// [string] User-data (Cloud Init) for this replica volume. Make sure you provide a Cloud Init compatible image in conjunction with this parameter.
 	// User-data (Cloud Init) for this replica volume.
 	// +kubebuilder:validation:Optional
 	UserData *string `json:"userData,omitempty" tf:"user_data,omitempty"`
@@ -1009,7 +783,7 @@ type AutoscalingGroupStatus struct {
 // +kubebuilder:subresource:status
 // +kubebuilder:storageversion
 
-// AutoscalingGroup is the Schema for the AutoscalingGroups API. Creates and manages IonosCloud Autoscaling Group.
+// AutoscalingGroup is the Schema for the AutoscalingGroups API. <no value>
 // +kubebuilder:printcolumn:name="SYNCED",type="string",JSONPath=".status.conditions[?(@.type=='Synced')].status"
 // +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"
 // +kubebuilder:printcolumn:name="EXTERNAL-NAME",type="string",JSONPath=".metadata.annotations.crossplane\\.io/external-name"

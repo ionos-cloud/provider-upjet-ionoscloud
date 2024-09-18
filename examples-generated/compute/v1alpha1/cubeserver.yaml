@@ -8,26 +8,26 @@ metadata:
   name: example
 spec:
   forProvider:
-    availabilityZone: AUTO
+    availabilityZone: ZONE_2
     datacenterIdSelector:
       matchLabels:
         testing.upbound.io/example-name: example
     imageName: ubuntu:latest
     imagePasswordSecretRef:
-      key: password
+      key: attribute.result
       name: example-password
       namespace: upbound-system
     name: Server Example
     nic:
-      dhcp: true
+    - dhcp: true
       firewallActive: true
       lanSelector:
         matchLabels:
           testing.upbound.io/example-name: example
       name: Nic Example
-    templateUuid: 15c6dd2f-02d2-4987-b439-9a58dd59ecc3
+    templateUuid: ${data.ionoscloud_template.example.id}
     volume:
-      diskType: DAS
+    - diskType: DAS
       licenceType: LINUX
       name: Volume Example
 
@@ -63,12 +63,3 @@ spec:
         testing.upbound.io/example-name: example
     name: Lan Example
     public: true
-
----
-apiVersion: v1
-kind: Secret
-metadata:
-  name: example-password
-  namespace: upbound-system
-stringData:
-  password: "Upboundtest1"

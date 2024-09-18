@@ -13,7 +13,7 @@ spec:
     locationSelector:
       matchLabels:
         testing.upbound.io/example-name: example
-    name: My Auto renewed certificatemanager
+    name: My Auto renewed certificate
     providerIdSelector:
       matchLabels:
         testing.upbound.io/example-name: example

@@ -35,7 +35,7 @@ spec:
     schema:
       openAPIV3Schema:
         description: BootDeviceSelection is the Schema for the BootDeviceSelections
-          API. Manages the selection of boot devices for IonosCloud Server objects.
+          API. <no value>
         properties:
           apiVersion:
             description: |-
@@ -74,10 +74,9 @@ spec:
               forProvider:
                 properties:
                   bootDeviceId:
-                    description: |-
-                      [string] The ID of a bootable device such as a volume or an image data source. If this field is omitted from the configuration, the VM will be restarted with no primary boot device, and it will enter the PXE shell for network booting.
-                      Note: If the network booting process started by the PXE shell fails, the VM will still boot into the image of the attached storage as a fallback. This behavior imitates the "Boot from Network" option from DCD.
-                      ID of the entity to set as primary boot device. Possible boot devices are CDROM Images and Volumes. If omitted, server will boot from PXE
+                    description: ID of the entity to set as primary boot device. Possible
+                      boot devices are CDROM Images and Volumes. If omitted, server
+                      will boot from PXE
                     type: string
                   bootDeviceIdRef:
                     description: Reference to a Volume in compute to populate bootDeviceId.
@@ -154,9 +153,8 @@ spec:
                         type: object
                     type: object
                   datacenterId:
-                    description: |-
-                      [string] The ID of a Virtual Data Center.
-                      ID of the Datacenter that holds the server for which the boot volume is selected
+                    description: ID of the Datacenter that holds the server for which
+                      the boot volume is selected
                     type: string
                   datacenterIdRef:
                     description: Reference to a Datacenter in compute to populate
@@ -235,9 +233,8 @@ spec:
                         type: object
                     type: object
                   serverId:
-                    description: |-
-                      [string] The ID of a server.
-                      ID of the Server for which the boot device will be selected.
+                    description: ID of the Server for which the boot device will be
+                      selected.
                     type: string
                   serverIdRef:
                     description: Reference to a Server in compute to populate serverId.
@@ -328,10 +325,9 @@ spec:
                   autoscaler.
                 properties:
                   bootDeviceId:
-                    description: |-
-                      [string] The ID of a bootable device such as a volume or an image data source. If this field is omitted from the configuration, the VM will be restarted with no primary boot device, and it will enter the PXE shell for network booting.
-                      Note: If the network booting process started by the PXE shell fails, the VM will still boot into the image of the attached storage as a fallback. This behavior imitates the "Boot from Network" option from DCD.
-                      ID of the entity to set as primary boot device. Possible boot devices are CDROM Images and Volumes. If omitted, server will boot from PXE
+                    description: ID of the entity to set as primary boot device. Possible
+                      boot devices are CDROM Images and Volumes. If omitted, server
+                      will boot from PXE
                     type: string
                   bootDeviceIdRef:
                     description: Reference to a Volume in compute to populate bootDeviceId.
@@ -408,9 +404,8 @@ spec:
                         type: object
                     type: object
                   datacenterId:
-                    description: |-
-                      [string] The ID of a Virtual Data Center.
-                      ID of the Datacenter that holds the server for which the boot volume is selected
+                    description: ID of the Datacenter that holds the server for which
+                      the boot volume is selected
                     type: string
                   datacenterIdRef:
                     description: Reference to a Datacenter in compute to populate
@@ -489,9 +484,8 @@ spec:
                         type: object
                     type: object
                   serverId:
-                    description: |-
-                      [string] The ID of a server.
-                      ID of the Server for which the boot device will be selected.
+                    description: ID of the Server for which the boot device will be
+                      selected.
                     type: string
                   serverIdRef:
                     description: Reference to a Server in compute to populate serverId.
@@ -741,15 +735,13 @@ spec:
               atProvider:
                 properties:
                   bootDeviceId:
-                    description: |-
-                      [string] The ID of a bootable device such as a volume or an image data source. If this field is omitted from the configuration, the VM will be restarted with no primary boot device, and it will enter the PXE shell for network booting.
-                      Note: If the network booting process started by the PXE shell fails, the VM will still boot into the image of the attached storage as a fallback. This behavior imitates the "Boot from Network" option from DCD.
-                      ID of the entity to set as primary boot device. Possible boot devices are CDROM Images and Volumes. If omitted, server will boot from PXE
+                    description: ID of the entity to set as primary boot device. Possible
+                      boot devices are CDROM Images and Volumes. If omitted, server
+                      will boot from PXE
                     type: string
                   datacenterId:
-                    description: |-
-                      [string] The ID of a Virtual Data Center.
-                      ID of the Datacenter that holds the server for which the boot volume is selected
+                    description: ID of the Datacenter that holds the server for which
+                      the boot volume is selected
                     type: string
                   defaultBootVolumeId:
                     description: ID of the first attached volume of the Server, which
@@ -758,9 +750,8 @@ spec:
                   id:
                     type: string
                   serverId:
-                    description: |-
-                      [string] The ID of a server.
-                      ID of the Server for which the boot device will be selected.
+                    description: ID of the Server for which the boot device will be
+                      selected.
                     type: string
                 type: object
               conditions:
