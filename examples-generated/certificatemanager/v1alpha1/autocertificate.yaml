@@ -1,0 +1,44 @@
+apiVersion: certificatemanager.ionoscloud.io/v1alpha1
+kind: AutoCertificate
+metadata:
+  annotations:
+    meta.upbound.io/example-id: certificatemanager/v1alpha1/autocertificate
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    commonName: www.example.com
+    keyAlgorithm: rsa4096
+    locationSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    name: My Auto renewed certificatemanager
+    providerIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    subjectAlternativeNames:
+    - app.example.com
+
+---
+
+apiVersion: certificatemanager.ionoscloud.io/v1alpha1
+kind: AutoCertificateProvider
+metadata:
+  annotations:
+    meta.upbound.io/example-id: certificatemanager/v1alpha1/autocertificate
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    email: user@example.com
+    externalAccountBinding:
+    - keyId: some-key-id
+      keySecretSecretRef:
+        key: example-key
+        name: example-secret
+        namespace: upbound-system
+    location: de/fra
+    name: Let's Encrypt
+    server: https://acme-v02.api.letsencrypt.org/directory

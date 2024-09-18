@@ -90,6 +90,8 @@ var TerraformPluginSDKExternalNameConfigs = map[string]config.ExternalName{
 	"ionoscloud_backup_unit": config.IdentifierFromProvider,
 	// log
 	"ionoscloud_logging_pipeline": config.IdentifierFromProvider,
+	// cdn
+	"ionoscloud_cdn_distribution": config.IdentifierFromProvider,
 }
 
 // TerraformPluginFrameworkExternalNameConfigs will be used for plugin configured resources. not used yet

@@ -55,3 +55,19 @@ func ServerPrimaryNIC() reference.ExtractValueFn {
 		return result
 	}
 }
+
+func AutoCertificateProviderLocation() reference.ExtractValueFn {
+	return func(mr xpresource.Managed) string {
+		obj, err := fieldpath.PaveObject(mr)
+		if err != nil {
+			return ""
+		}
+
+		result, err := obj.GetString("status.atProvider.location")
+		if err != nil {
+			return ""
+		}
+
+		return result
+	}
+}

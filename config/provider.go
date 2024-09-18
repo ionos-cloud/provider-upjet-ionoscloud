@@ -14,6 +14,7 @@ import (
 	asg "github.com/ionos-cloud/provider-upjet-ionoscloud/config/alb"
 	alb "github.com/ionos-cloud/provider-upjet-ionoscloud/config/asg"
 	"github.com/ionos-cloud/provider-upjet-ionoscloud/config/backupunit"
+	"github.com/ionos-cloud/provider-upjet-ionoscloud/config/cdn"
 	"github.com/ionos-cloud/provider-upjet-ionoscloud/config/certificatemanager"
 	"github.com/ionos-cloud/provider-upjet-ionoscloud/config/compute"
 	"github.com/ionos-cloud/provider-upjet-ionoscloud/config/containerregistry"
@@ -111,6 +112,7 @@ func GetProvider(generationProvider bool) (*ujconfig.Provider, error) {
 		natgateway.Configure,
 		dataplatform.Configure,
 		log.Configure,
+		cdn.Configure,
 	} {
 		configure(pc)
 	}
@@ -143,6 +145,7 @@ func addTFSingletonConversion(pc *config.Provider) {
 			r.RemoveSingletonListConversion("credentials")
 			r.RemoveSingletonListConversion("auth")
 			r.RemoveSingletonListConversion("replica_configuration")
+			r.RemoveSingletonListConversion("external_account_binding")
 		}
 
 		pc.Resources[name] = r
@@ -155,7 +158,8 @@ func hasSingletonListCredentialsSensitiveMarshallingProblems(r *config.Resource)
 		r.Name == "ionoscloud_vpn_ipsec_tunnel" ||
 		r.Name == "ionoscloud_mariadb_cluster" ||
 		r.Name == "ionoscloud_mongo_cluster" ||
-		r.Name == "ionoscloud_autoscaling_group"
+		r.Name == "ionoscloud_autoscaling_group" ||
+		r.Name == "ionoscloud_auto_certificate_provider"
 }
 
 func getProviderSchema(s string) (*schema.Provider, error) {
