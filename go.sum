@@ -224,8 +224,8 @@ github.com/ionos-cloud/sdk-go-vm-autoscaling v1.0.1 h1:KABL25MC7DrIHn9lQzKSPkwXh
 github.com/ionos-cloud/sdk-go-vm-autoscaling v1.0.1/go.mod h1:Q5d1R6silarsX5jWLPBHd/1PSC5zZNf2ONvXB+fygC0=
 github.com/ionos-cloud/sdk-go/v6 v6.2.1 h1:mxxN+frNVmbFrmmFfXnBC3g2USYJrl6mc1LW2iNYbFY=
 github.com/ionos-cloud/sdk-go/v6 v6.2.1/go.mod h1:SXrO9OGyWjd2rZhAhEpdYN6VUAODzzqRdqA9BCviQtI=
-github.com/ionos-cloud/terraform-provider-ionoscloud/v6 v6.5.4 h1:F5ADd3v9d3WPio95N+GQJUNjwcawQpgayW2/2fg7X7A=
-github.com/ionos-cloud/terraform-provider-ionoscloud/v6 v6.5.4/go.mod h1:iQNr+0BYaQJKAGCo3JIYMeeSxWCo9c7NtV/aRMThknQ=
+github.com/ionos-cloud/terraform-provider-ionoscloud/v6 v6.5.5 h1:kO32w2iytkQgROekpZ+VNkq+sbviqf3Oi2+IHnFH71U=
+github.com/ionos-cloud/terraform-provider-ionoscloud/v6 v6.5.5/go.mod h1:f3YpoJZ1o/z4jeyGmtMDOe4ELKaeDOH+AnBODgW4lSo=
 github.com/jbenet/go-context v0.0.0-20150711004518-d14ea06fba99 h1:BQSFePA1RWJOlocH6Fxy8MmwDt+yVQYULKfN0RoTN8A=
 github.com/jbenet/go-context v0.0.0-20150711004518-d14ea06fba99/go.mod h1:1lJo3i6rXxKeerYnT8Nvf0QmHCRC1n8sfWVwXF2Frvo=
 github.com/jhump/protoreflect v1.15.1 h1:HUMERORf3I3ZdX05WaQ6MIpd/NJ434hTp5YiKgfCL6c=
@@ -314,8 +314,8 @@ github.com/prometheus/common v0.45.0 h1:2BGz0eBc2hdMDLnO/8n0jeB3oPrt2D08CekT0lne
 github.com/prometheus/common v0.45.0/go.mod h1:YJmSTw9BoKxJplESWWxlbyttQR4uaEcGyv9MZjVOJsY=
 github.com/prometheus/procfs v0.12.0 h1:jluTpSng7V9hY0O2R9DzzJHYb2xULk9VTR1V1R/k6Bo=
 github.com/prometheus/procfs v0.12.0/go.mod h1:pcuDEFsWDnvcgNzo4EEweacyhjeA9Zk3cnaOZAZEfOo=
-github.com/rogpeppe/go-internal v1.10.0 h1:TMyTOH3F/DB16zRVcYyreMH6GnZZrwQVAoYjRBZyWFQ=
-github.com/rogpeppe/go-internal v1.10.0/go.mod h1:UQnix2H7Ngw/k4C5ijL5+65zddjncjaFoBhdsK/akog=
+github.com/rogpeppe/go-internal v1.12.0 h1:exVL4IDcn6na9z1rAb56Vxr+CgyK3nn3O+epU5NdKM8=
+github.com/rogpeppe/go-internal v1.12.0/go.mod h1:E+RYuTGaKKdloAfM02xzb0FW3Paa99yedzYV+kq4uf4=
 github.com/russross/blackfriday/v2 v2.1.0/go.mod h1:+Rmxgy9KzJVeS9/2gXHxylqXiyQDYRxCVz55jmeOWTM=
 github.com/sergi/go-diff v1.0.0/go.mod h1:0CfEIISq7TuYL3j771MWULgwwjU+GofnZX9QAmXWZgo=
 github.com/sergi/go-diff v1.3.2-0.20230802210424-5b0b94c5c0d3 h1:n661drycOFuPLCN3Uc8sB6B/s6Z4t2xvBgU1htSHuq8=

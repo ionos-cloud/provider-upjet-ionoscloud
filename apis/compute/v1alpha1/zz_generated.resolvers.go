@@ -121,6 +121,85 @@ func (mg *BootDeviceSelection) ResolveReferences(ctx context.Context, c client.R
 	return nil
 }
 
+// ResolveReferences of this CubeServer.
+func (mg *CubeServer) ResolveReferences(ctx context.Context, c client.Reader) error {
+	r := reference.NewAPIResolver(c, mg)
+
+	var rsp reference.ResolutionResponse
+	var err error
+
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.DatacenterID),
+		Extract:      reference.ExternalName(),
+		Reference:    mg.Spec.ForProvider.DatacenterIDRef,
+		Selector:     mg.Spec.ForProvider.DatacenterIDSelector,
+		To: reference.To{
+			List:    &DatacenterList{},
+			Managed: &Datacenter{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.ForProvider.DatacenterID")
+	}
+	mg.Spec.ForProvider.DatacenterID = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.DatacenterIDRef = rsp.ResolvedReference
+
+	if mg.Spec.ForProvider.Nic != nil {
+		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+			CurrentValue: reference.FromFloatPtrValue(mg.Spec.ForProvider.Nic.Lan),
+			Extract:      reference.ExternalName(),
+			Reference:    mg.Spec.ForProvider.Nic.LanRef,
+			Selector:     mg.Spec.ForProvider.Nic.LanSelector,
+			To: reference.To{
+				List:    &LanList{},
+				Managed: &Lan{},
+			},
+		})
+		if err != nil {
+			return errors.Wrap(err, "mg.Spec.ForProvider.Nic.Lan")
+		}
+		mg.Spec.ForProvider.Nic.Lan = reference.ToFloatPtrValue(rsp.ResolvedValue)
+		mg.Spec.ForProvider.Nic.LanRef = rsp.ResolvedReference
+
+	}
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.DatacenterID),
+		Extract:      reference.ExternalName(),
+		Reference:    mg.Spec.InitProvider.DatacenterIDRef,
+		Selector:     mg.Spec.InitProvider.DatacenterIDSelector,
+		To: reference.To{
+			List:    &DatacenterList{},
+			Managed: &Datacenter{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.InitProvider.DatacenterID")
+	}
+	mg.Spec.InitProvider.DatacenterID = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.InitProvider.DatacenterIDRef = rsp.ResolvedReference
+
+	if mg.Spec.InitProvider.Nic != nil {
+		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+			CurrentValue: reference.FromFloatPtrValue(mg.Spec.InitProvider.Nic.Lan),
+			Extract:      reference.ExternalName(),
+			Reference:    mg.Spec.InitProvider.Nic.LanRef,
+			Selector:     mg.Spec.InitProvider.Nic.LanSelector,
+			To: reference.To{
+				List:    &LanList{},
+				Managed: &Lan{},
+			},
+		})
+		if err != nil {
+			return errors.Wrap(err, "mg.Spec.InitProvider.Nic.Lan")
+		}
+		mg.Spec.InitProvider.Nic.Lan = reference.ToFloatPtrValue(rsp.ResolvedValue)
+		mg.Spec.InitProvider.Nic.LanRef = rsp.ResolvedReference
+
+	}
+
+	return nil
+}
+
 // ResolveReferences of this Firewall.
 func (mg *Firewall) ResolveReferences(ctx context.Context, c client.Reader) error {
 	r := reference.NewAPIResolver(c, mg)
@@ -916,6 +995,85 @@ func (mg *Snapshot) ResolveReferences(ctx context.Context, c client.Reader) erro
 	}
 	mg.Spec.InitProvider.VolumeID = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.InitProvider.VolumeIDRef = rsp.ResolvedReference
+
+	return nil
+}
+
+// ResolveReferences of this VCPUServer.
+func (mg *VCPUServer) ResolveReferences(ctx context.Context, c client.Reader) error {
+	r := reference.NewAPIResolver(c, mg)
+
+	var rsp reference.ResolutionResponse
+	var err error
+
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.DatacenterID),
+		Extract:      reference.ExternalName(),
+		Reference:    mg.Spec.ForProvider.DatacenterIDRef,
+		Selector:     mg.Spec.ForProvider.DatacenterIDSelector,
+		To: reference.To{
+			List:    &DatacenterList{},
+			Managed: &Datacenter{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.ForProvider.DatacenterID")
+	}
+	mg.Spec.ForProvider.DatacenterID = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.DatacenterIDRef = rsp.ResolvedReference
+
+	if mg.Spec.ForProvider.Nic != nil {
+		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+			CurrentValue: reference.FromFloatPtrValue(mg.Spec.ForProvider.Nic.Lan),
+			Extract:      reference.ExternalName(),
+			Reference:    mg.Spec.ForProvider.Nic.LanRef,
+			Selector:     mg.Spec.ForProvider.Nic.LanSelector,
+			To: reference.To{
+				List:    &LanList{},
+				Managed: &Lan{},
+			},
+		})
+		if err != nil {
+			return errors.Wrap(err, "mg.Spec.ForProvider.Nic.Lan")
+		}
+		mg.Spec.ForProvider.Nic.Lan = reference.ToFloatPtrValue(rsp.ResolvedValue)
+		mg.Spec.ForProvider.Nic.LanRef = rsp.ResolvedReference
+
+	}
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.DatacenterID),
+		Extract:      reference.ExternalName(),
+		Reference:    mg.Spec.InitProvider.DatacenterIDRef,
+		Selector:     mg.Spec.InitProvider.DatacenterIDSelector,
+		To: reference.To{
+			List:    &DatacenterList{},
+			Managed: &Datacenter{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.InitProvider.DatacenterID")
+	}
+	mg.Spec.InitProvider.DatacenterID = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.InitProvider.DatacenterIDRef = rsp.ResolvedReference
+
+	if mg.Spec.InitProvider.Nic != nil {
+		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+			CurrentValue: reference.FromFloatPtrValue(mg.Spec.InitProvider.Nic.Lan),
+			Extract:      reference.ExternalName(),
+			Reference:    mg.Spec.InitProvider.Nic.LanRef,
+			Selector:     mg.Spec.InitProvider.Nic.LanSelector,
+			To: reference.To{
+				List:    &LanList{},
+				Managed: &Lan{},
+			},
+		})
+		if err != nil {
+			return errors.Wrap(err, "mg.Spec.InitProvider.Nic.Lan")
+		}
+		mg.Spec.InitProvider.Nic.Lan = reference.ToFloatPtrValue(rsp.ResolvedValue)
+		mg.Spec.InitProvider.Nic.LanRef = rsp.ResolvedReference
+
+	}
 
 	return nil
 }

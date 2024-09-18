@@ -15,8 +15,6 @@ import (
 
 type BootDeviceSelectionInitParameters struct {
 
-	// [string] The ID of a bootable device such as a volume or an image data source. If this field is omitted from the configuration, the VM will be restarted with no primary boot device, and it will enter the PXE shell for network booting.
-	// Note: If the network booting process started by the PXE shell fails, the VM will still boot into the image of the attached storage as a fallback. This behavior imitates the "Boot from Network" option from DCD.
 	// ID of the entity to set as primary boot device. Possible boot devices are CDROM Images and Volumes. If omitted, server will boot from PXE
 	// +crossplane:generate:reference:type=github.com/ionos-cloud/provider-upjet-ionoscloud/apis/compute/v1alpha1.Volume
 	BootDeviceID *string `json:"bootDeviceId,omitempty" tf:"boot_device_id,omitempty"`
@@ -29,7 +27,6 @@ type BootDeviceSelectionInitParameters struct {
 	// +kubebuilder:validation:Optional
 	BootDeviceIDSelector *v1.Selector `json:"bootDeviceIdSelector,omitempty" tf:"-"`
 
-	// [string] The ID of a Virtual Data Center.
 	// ID of the Datacenter that holds the server for which the boot volume is selected
 	// +crossplane:generate:reference:type=github.com/ionos-cloud/provider-upjet-ionoscloud/apis/compute/v1alpha1.Datacenter
 	DatacenterID *string `json:"datacenterId,omitempty" tf:"datacenter_id,omitempty"`
@@ -42,7 +39,6 @@ type BootDeviceSelectionInitParameters struct {
 	// +kubebuilder:validation:Optional
 	DatacenterIDSelector *v1.Selector `json:"datacenterIdSelector,omitempty" tf:"-"`
 
-	// [string] The ID of a server.
 	// ID of the Server for which the boot device will be selected.
 	// +crossplane:generate:reference:type=github.com/ionos-cloud/provider-upjet-ionoscloud/apis/compute/v1alpha1.Server
 	ServerID *string `json:"serverId,omitempty" tf:"server_id,omitempty"`
@@ -58,12 +54,9 @@ type BootDeviceSelectionInitParameters struct {
 
 type BootDeviceSelectionObservation struct {
 
-	// [string] The ID of a bootable device such as a volume or an image data source. If this field is omitted from the configuration, the VM will be restarted with no primary boot device, and it will enter the PXE shell for network booting.
-	// Note: If the network booting process started by the PXE shell fails, the VM will still boot into the image of the attached storage as a fallback. This behavior imitates the "Boot from Network" option from DCD.
 	// ID of the entity to set as primary boot device. Possible boot devices are CDROM Images and Volumes. If omitted, server will boot from PXE
 	BootDeviceID *string `json:"bootDeviceId,omitempty" tf:"boot_device_id,omitempty"`
 
-	// [string] The ID of a Virtual Data Center.
 	// ID of the Datacenter that holds the server for which the boot volume is selected
 	DatacenterID *string `json:"datacenterId,omitempty" tf:"datacenter_id,omitempty"`
 
@@ -72,15 +65,12 @@ type BootDeviceSelectionObservation struct {
 
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
-	// [string] The ID of a server.
 	// ID of the Server for which the boot device will be selected.
 	ServerID *string `json:"serverId,omitempty" tf:"server_id,omitempty"`
 }
 
 type BootDeviceSelectionParameters struct {
 
-	// [string] The ID of a bootable device such as a volume or an image data source. If this field is omitted from the configuration, the VM will be restarted with no primary boot device, and it will enter the PXE shell for network booting.
-	// Note: If the network booting process started by the PXE shell fails, the VM will still boot into the image of the attached storage as a fallback. This behavior imitates the "Boot from Network" option from DCD.
 	// ID of the entity to set as primary boot device. Possible boot devices are CDROM Images and Volumes. If omitted, server will boot from PXE
 	// +crossplane:generate:reference:type=github.com/ionos-cloud/provider-upjet-ionoscloud/apis/compute/v1alpha1.Volume
 	// +kubebuilder:validation:Optional
@@ -94,7 +84,6 @@ type BootDeviceSelectionParameters struct {
 	// +kubebuilder:validation:Optional
 	BootDeviceIDSelector *v1.Selector `json:"bootDeviceIdSelector,omitempty" tf:"-"`
 
-	// [string] The ID of a Virtual Data Center.
 	// ID of the Datacenter that holds the server for which the boot volume is selected
 	// +crossplane:generate:reference:type=github.com/ionos-cloud/provider-upjet-ionoscloud/apis/compute/v1alpha1.Datacenter
 	// +kubebuilder:validation:Optional
@@ -108,7 +97,6 @@ type BootDeviceSelectionParameters struct {
 	// +kubebuilder:validation:Optional
 	DatacenterIDSelector *v1.Selector `json:"datacenterIdSelector,omitempty" tf:"-"`
 
-	// [string] The ID of a server.
 	// ID of the Server for which the boot device will be selected.
 	// +crossplane:generate:reference:type=github.com/ionos-cloud/provider-upjet-ionoscloud/apis/compute/v1alpha1.Server
 	// +kubebuilder:validation:Optional
@@ -150,7 +138,7 @@ type BootDeviceSelectionStatus struct {
 // +kubebuilder:subresource:status
 // +kubebuilder:storageversion
 
-// BootDeviceSelection is the Schema for the BootDeviceSelections API. Manages the selection of boot devices for IonosCloud Server objects.
+// BootDeviceSelection is the Schema for the BootDeviceSelections API. <no value>
 // +kubebuilder:printcolumn:name="SYNCED",type="string",JSONPath=".status.conditions[?(@.type=='Synced')].status"
 // +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"
 // +kubebuilder:printcolumn:name="EXTERNAL-NAME",type="string",JSONPath=".metadata.annotations.crossplane\\.io/external-name"

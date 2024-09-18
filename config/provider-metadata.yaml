@@ -1,5 +1,17 @@
 name: ionos-cloud/ionoscloud
 resources:
+    Server Boot Device Selection:
+        subCategory: ""
+        description: Manages the selection of boot devices for IonosCloud Server objects.
+        name: Server Boot Device Selection
+        title: Server Boot Device Selection
+        argumentDocs:
+            boot_device_id: |-
+                - (Optional)[string] The ID of a bootable device such as a volume or an image data source. If this field is omitted from the configuration, the VM will be restarted with no primary boot device, and it will enter the PXE shell for network booting.
+                Note: If the network booting process started by the PXE shell fails, the VM will still boot into the image of the attached storage as a fallback. This behavior imitates the "Boot from Network" option from DCD.
+            datacenter_id: '- (Required)[string] The ID of a Virtual Data Center.'
+            server_id: '- (Required)[string] The ID of a server.'
+        importStatements: []
     application_loadbalancer_forwarding_rule:
         subCategory: Application Load Balancer
         description: Creates and manages IonosCloud Application Load Balancer Forwarding Rule.
@@ -202,7 +214,7 @@ resources:
                   "common_name": "www.example.com",
                   "key_algorithm": "rsa4096",
                   "location": "${ionoscloud_auto_certificate_provider.example.location}",
-                  "name": "My Auto renewed certificatemanager",
+                  "name": "My Auto renewed certificate",
                   "provider_id": "${ionoscloud_auto_certificate_provider.example.id}",
                   "subject_alternative_names": [
                     "app.example.com"
@@ -265,197 +277,6 @@ resources:
             server: '- (Required)[string] The URL of the certificate provider.'
         importStatements:
             - terraform import ionoscloud_auto_certificate_provider.example {location}:{provider_id}
-    ionoscloud_autoscaling_group:
-        subCategory: ""
-        description: Creates and manages IonosCloud Autoscaling Group.
-        name: ionoscloud_autoscaling_group
-        title: autoscaling_group
-        examples:
-            - name: autoscaling_group_example
-              manifest: |-
-                {
-                  "datacenter_id": "${ionoscloud_datacenter.datacenter_example.id}",
-                  "max_replica_count": 2,
-                  "min_replica_count": 1,
-                  "name": "autoscaling_group_example",
-                  "policy": [
-                    {
-                      "metric": "INSTANCE_CPU_UTILIZATION_AVERAGE",
-                      "range": "PT24H",
-                      "scale_in_action": [
-                        {
-                          "amount": 1,
-                          "amount_type": "ABSOLUTE",
-                          "cooldown_period": "PT5M",
-                          "delete_volumes": true,
-                          "termination_policy_type": "OLDEST_SERVER_FIRST"
-                        }
-                      ],
-                      "scale_in_threshold": 33,
-                      "scale_out_action": [
-                        {
-                          "amount": 1,
-                          "amount_type": "ABSOLUTE",
-                          "cooldown_period": "PT5M"
-                        }
-                      ],
-                      "scale_out_threshold": 77,
-                      "unit": "PER_HOUR"
-                    }
-                  ],
-                  "replica_configuration": [
-                    {
-                      "availability_zone": "AUTO",
-                      "cores": "2",
-                      "cpu_family": "INTEL_SKYLAKE",
-                      "nic": [
-                        {
-                          "dhcp": true,
-                          "lan": "${ionoscloud_lan.lan_example_1.id}",
-                          "name": "nic_example_1"
-                        },
-                        {
-                          "dhcp": true,
-                          "firewall_active": true,
-                          "firewall_rule": [
-                            {
-                              "name": "rule_1",
-                              "port_range_end": 1000,
-                              "port_range_start": 1,
-                              "protocol": "TCP",
-                              "type": "INGRESS"
-                            }
-                          ],
-                          "firewall_type": "INGRESS",
-                          "flow_log": [
-                            {
-                              "action": "ALL",
-                              "bucket": "test-de-bucket",
-                              "direction": "BIDIRECTIONAL",
-                              "name": "flow_log_1"
-                            }
-                          ],
-                          "lan": "${ionoscloud_lan.lan_example_2.id}",
-                          "name": "nic_example_2",
-                          "target_group": [
-                            {
-                              "port": 80,
-                              "target_group_id": "${ionoscloud_target_group.autoscaling_target_group.id}",
-                              "weight": 50
-                            }
-                          ]
-                        }
-                      ],
-                      "ram": 2048,
-                      "volume": [
-                        {
-                          "boot_order": "AUTO",
-                          "image_alias": "ubuntu:latest",
-                          "image_password": "${random_password.server_image_password.result}",
-                          "name": "volume_example",
-                          "size": 10,
-                          "type": "HDD",
-                          "user_data": "ZWNobyAiSGVsbG8sIFdvcmxkIgo="
-                        }
-                      ]
-                    }
-                  ]
-                }
-              references:
-                datacenter_id: ionoscloud_datacenter.datacenter_example.id
-                replica_configuration.nic.lan: ionoscloud_lan.lan_example_2.id
-                replica_configuration.nic.target_group.target_group_id: ionoscloud_target_group.autoscaling_target_group.id
-                replica_configuration.volume.image_password: random_password.server_image_password.result
-              dependencies:
-                ionoscloud_datacenter.datacenter_example: |-
-                    {
-                      "location": "de/fra",
-                      "name": "datacenter_example"
-                    }
-                ionoscloud_lan.lan_example_1: |-
-                    {
-                      "datacenter_id": "${ionoscloud_datacenter.datacenter_example.id}",
-                      "name": "lan_example_1",
-                      "public": false
-                    }
-                ionoscloud_lan.lan_example_2: |-
-                    {
-                      "datacenter_id": "${ionoscloud_datacenter.datacenter_example.id}",
-                      "name": "lan_example_2",
-                      "public": false
-                    }
-                ionoscloud_target_group.autoscaling_target_group: |-
-                    {
-                      "algorithm": "ROUND_ROBIN",
-                      "name": "Target Group Example",
-                      "protocol": "HTTP"
-                    }
-                random_password.server_image_password: |-
-                    {
-                      "length": 16,
-                      "special": false
-                    }
-        argumentDocs:
-            action: '- (Required)[string] Specifies the action to be taken when the rule is matched. Possible values: ACCEPTED, REJECTED, ALL. Immutable, forces re-creation.'
-            amount: '- (Required)[int] When amountType == ABSOLUTE, this is the number of VMs removed in one step. When amountType == PERCENTAGE, this is a percentage value, which will be applied to the autoscaling group''s current targetReplicaCount in order to derive the number of VMs that will be removed in one step. There will always be at least one VM removed. For SCALE_IN operation new volumes are NOT deleted after the server deletion.'
-            amount_type: '- (Required)[string] The type for the given amount. Possible values are: ABSOLUTE, PERCENTAGE.'
-            availability_zone: '- (Required)[string] The zone where the VMs are created using this configuration. Possible values are: AUTO, ZONE_1, ZONE_2.'
-            backup_unit_id: '- (Optional)[string] The uuid of the Backup Unit that user has access to. The property is immutable and is only allowed to be set on a new volume creation. It is mandatory to provide either public image or imageAlias in conjunction with this property.'
-            boot_order: |-
-                - (Optional)[string] Determines whether the volume will be used as a boot volume. Set to NONE, the volume will not be used as boot volume. Set to PRIMARY, the volume will be used as boot volume and set to AUTO will delegate the decision to the provisioning engine to decide whether to use the volume as boot volume.
-                Notice that exactly one volume can be set to PRIMARY or all of them set to AUTO.
-            bucket: '- (Required)[string] Specifies the S3 IONOS bucket where the flow log data will be stored. The bucket must exist. Immutable, forces re-creation.'
-            bus: '- (Optional)[string] The bus type of the volume. Default setting is VIRTIO. The bus type IDE is also supported.'
-            cooldown_period: '- (Optional)[string] Minimum time to pass after this Scaling action has started, until the next Scaling action will be started. Additionally, if a Scaling action is currently in progress, no second Scaling action will be started for the same autoscaling group. Instead, the Metric will be re-evaluated after the current Scaling action is completed (either successfully or with failures). This is validated with a minimum value of 2 minutes and a maximum of 24 hours currently. Default value is 5 minutes if not given. Note that when you set it to values like 5m the API will automatically transform it in PT5M, so the plan will show you a diff in state that should be ignored.'
-            cores: '- (Required)[int] The total number of cores for the VMs.'
-            cpu_family: '- (Optional)[string] PU family for the VMs created using this configuration. If null, the VM will be created with the default CPU family for the assigned location. Possible values are: INTEL_SKYLAKE, INTEL_XEON.'
-            datacenter_id: '- (Required)[string] Unique identifier for the resource'
-            delete_volumes: '- (Required)[bool] If set to true, when deleting a replica during scale in, any attached volume will also be deleted. When set to false, all volumes remain in the datacenter and must be deleted manually. Note that every scale-out creates new volumes. When they are not deleted, they will eventually use all of your contracts resource limits. At this point, scaling out would not be possible anymore.'
-            dhcp: '- (Optional)[bool] Dhcp flag for this replica Nic. This is an optional attribute with default value of true if not given in the request payload or given as null.'
-            direction: '- (Required)[string] Specifies the traffic direction pattern. Valid values: INGRESS, EGRESS, BIDIRECTIONAL. Immutable, forces re-creation.'
-            firewall_active: '- (Optional)[bool] Firewall active flag.'
-            firewall_rules: '- (Optional)[list] List of firewall rules associated with this NIC.'
-            firewall_type: '- (Optional)[string] The type of firewall rules that will be allowed on the NIC. Valid values: INGRESS EGRESS BIDIRECTIONAL. If not specified, the default INGRESS value is used.'
-            flow_log: '- (Optional)[list] Only 1 flow log can be configured. Only the name field can change as part of an update. Flow logs holistically capture network information such as source and destination IP addresses, source and destination ports, number of packets, amount of bytes, the start and end time of the recording, and the type of protocol – and log the extent to which your instances are being accessed.'
-            icmp_code: '- (Optional)[int] Defines the allowed code (from 0 to 254) if protocol ICMP is chosen.'
-            icmp_type: '- (Optional)[string] Defines the allowed code (from 0 to 254) if protocol ICMP is chosen. Value null allows all codes.'
-            image: '- (Optional)[string] The image installed on the volume. Only the UUID of the image is presently supported.'
-            image_alias: '- (Optional)[string] The image installed on the volume. Must be an imageAlias as specified via the images API. Note that one of image or imageAlias must be set, but not both.'
-            image_password: '- (Optional)[string] Image password for this replica volume.'
-            lan: '- (Required)[int] Lan ID for this replica Nic.'
-            location: '- (Computed) Location of the data center.'
-            max_replica_count: '- (Required)[int] The maximum value for the number of replicas on a VM Auto Scaling Group. Must be >= 0 and <= 200. Will be enforced for both automatic and manual changes.'
-            metric: '- (Required)[string] The Metric that should trigger the scaling actions. Metric values are checked at fixed intervals. Possible values: INSTANCE_CPU_UTILIZATION_AVERAGE, INSTANCE_NETWORK_IN_BYTES, INSTANCE_NETWORK_IN_PACKETS, INSTANCE_NETWORK_OUT_BYTES, INSTANCE_NETWORK_OUT_PACKETS'
-            min_replica_count: '- (Required)[int] The minimum value for the number of replicas on a VM Auto Scaling Group. Must be >= 0 and <= 200. Will be enforced for both automatic and manual changes.'
-            name: '- (Required)[string] User-defined name for the Autoscaling Group.'
-            nics: '- (Optional)[set] List of NICs associated with this Replica.'
-            policy: '- (Required)[List] Specifies the behavior of this Autoscaling Group. A policy consists of Triggers and Actions, whereby an Action is some kind of automated behavior, and a Trigger is defined by the circumstances under which the Action is triggered. Currently, two separate Actions, namely Scaling In and Out are supported, triggered through Thresholds defined on a given Metric.'
-            port: (Optional)[int] The port of the target group.
-            port_range_end: '- (Optional)[int] Defines the end range of the allowed port (from 1 to 65534) if the protocol TCP or UDP is chosen. Leave portRangeStart and portRangeEnd null to allow all ports.'
-            port_range_start: '- (Optional)[int] Defines the start range of the allowed port (from 1 to 65534) if protocol TCP or UDP is chosen. Leave portRangeStart and portRangeEnd null to allow all ports.'
-            protocol: '- (Required)[string] The protocol for the rule: TCP, UDP, ICMP, ANY. Property cannot be modified after creation (disallowed in update requests).'
-            ram: '- (Required)[int] The amount of memory for the VMs in MB, e.g. 2048. Size must be specified in multiples of 256 MB with a minimum of 256 MB; however, if you set ramHotPlug to TRUE then you must use a minimum of 1024 MB. If you set the RAM size more than 240GB, then ramHotPlug will be set to FALSE and can not be set to TRUE unless RAM size not set to less than 240GB.'
-            range: '- (Optional)[string] Defines the time range, for which the samples will be aggregated. Default is 120s. Note that when you set it to values like 5m the API will automatically transform it in PT5M, so the plan will show you a diff in state that should be ignored.'
-            replica_configuration: '- (Required)[List]'
-            scale_in_action: '- (Required)[list] Specifies the action to take when the scaleInThreshold is exceeded. Hereby, scaling in is always about removing VMs that are currently associated with this autoscaling group. Default termination policy is OLDEST_SERVER_FIRST.'
-            scale_in_threshold: '- (Required)[int] A lower threshold on the value of metric. Will be used with less than (<) operator. Exceeding this will start a Scale-In Action as specified by the scaleInAction property. The value must have a higher minimum delta to the scaleOutThreshold depending on the metric to avoid competitive actions at the same time.'
-            scale_out_action: '- (Required)[list] Specifies the action to take when the scaleOutThreshold is exceeded. Hereby, scaling out is always about adding new VMs to this autoscaling group.'
-            scale_out_threshold: '- (Required)[int] The upper threshold for the value of the metric. Used with the greater than (>) operator. A scale-out action is triggered when this value is exceeded, specified by the scaleOutAction property. The value must have a lower minimum delta to the scaleInThreshold, depending on the metric, to avoid competing for actions simultaneously. If properties.policy.unit=TOTAL, a value >= 40 must be chosen.'
-            size: '- (Required)[int] Name for this replica volume.'
-            source_ip: '-  (Optional)[string] Only traffic originating from the respective IPv4 address is allowed. Value null allows all source IPs.'
-            source_mac: '- (Optional)[string] Only traffic originating from the respective MAC address is allowed. Valid format: aa:bb:cc:dd:ee:ff. Value null allows all source MAC address. Valid format: aa:bb:cc:dd:ee:ff.'
-            ssh_keys: '- (Optional) List of ssh keys, supports values or paths to files. Cannot be changed at update.'
-            target_group: '- (Optional)[list] In order to link VM to ALB, target group must be provided'
-            target_group_id: (Required)[string] The ID of the target group.
-            target_ip: '- (Optional)[string] In case the target NIC has multiple IP addresses, only traffic directed to the respective IP address of the NIC is allowed. Value null allows all target IPs.'
-            target_replica_count: '- (Optional)[int] The target number of VMs in this Group. Depending on the scaling policy, this number will be adjusted automatically. VMs will be created or destroyed automatically in order to adjust the actual number of VMs to this number. If targetReplicaCount is given in the request body then it must be >= minReplicaCount and <= maxReplicaCount.'
-            termination_policy_type: '- (Optional)[string] The type of the termination policy for the autoscaling group so that a specific pattern is followed for Scaling-In replicas. Default termination policy is OLDEST_SERVER_FIRST. Possible values are: OLDEST_SERVER_FIRST, NEWEST_SERVER_FIRST, RANDOM'
-            type: '- (Optional)[string] The type of firewall rule. If is not specified, it will take the default value INGRESS.'
-            unit: '- (Required)[string] Units of the applied Metric. Possible values are: PER_HOUR, PER_MINUTE, PER_SECOND, TOTAL.'
-            user_data: '- (Optional)[string] User-data (Cloud Init) for this replica volume. Make sure you provide a Cloud Init compatible image in conjunction with this parameter.'
-            volume: '- (Optional)[list] List of volumes associated with this Replica.'
-            weight: (Optional)[int] The weight of the target group.
-        importStatements: []
     ionoscloud_backup_unit:
         subCategory: Managed Backup
         description: Creates and manages IonosCloud Backup Units.
@@ -569,7 +390,7 @@ resources:
         subCategory: Certificate Manager Service
         description: Creates and manages a certificate.
         name: ionoscloud_certificate
-        title: ionoscloud_certificate
+        title: certificate
         examples:
             - name: cert
               manifest: |-
@@ -593,7 +414,7 @@ resources:
             name: '- (Required)[string] The certificate name'
             private_key: '- (Required)[string] The certificate private key. Immutable. Sensitive.'
         importStatements:
-            - terraform import ionoscloud_certificate.mycert {certificatemanager uuid}
+            - terraform import ionoscloud_certificate.mycert {certificate uuid}
     ionoscloud_container_registry:
         subCategory: Container Registry
         description: Creates and manages IonosCloud Container Registry.
@@ -3675,22 +3496,32 @@ resources:
                   "bucket": "${ionoscloud_s3_bucket.example.name}",
                   "rule": [
                     {
-                      "abort_incomplete_multipart_upload": [
-                        {
-                          "days_after_initiation": 1
-                        }
-                      ],
                       "expiration": [
                         {
                           "days": 90
                         }
                       ],
-                      "id": "Logs delete",
+                      "id": "1",
+                      "prefix": "/logs",
+                      "status": "Enabled"
+                    },
+                    {
+                      "id": "2",
                       "noncurrent_version_expiration": [
                         {
                           "noncurrent_days": 90
                         }
                       ],
+                      "prefix": "/logs",
+                      "status": "Enabled"
+                    },
+                    {
+                      "abort_incomplete_multipart_upload": [
+                        {
+                          "days_after_initiation": 90
+                        }
+                      ],
+                      "id": "3",
                       "prefix": "/logs",
                       "status": "Enabled"
                     }
@@ -4417,217 +4248,6 @@ resources:
         importStatements:
             - terraform import ionoscloud_server.myserver {datacenter uuid}/{server uuid}
             - terraform import ionoscloud_server.myserver {datacenter uuid}/{server uuid}/{primary nic id}/{firewall rule id}
-    ionoscloud_server_boot_device_selection:
-        subCategory: ""
-        description: Manages the selection of boot devices for IonosCloud Server objects.
-        name: ionoscloud_server_boot_device_selection
-        title: ionoscloud_server_boot_device_selection
-        examples:
-            - name: example
-              manifest: |-
-                {
-                  "boot_device_id": "${ionoscloud_volume.example.id}",
-                  "datacenter_id": "${ionoscloud_datacenter.example.id}",
-                  "server_id": "${ionoscloud_server.example.id}"
-                }
-              references:
-                boot_device_id: ionoscloud_volume.example.id
-                datacenter_id: ionoscloud_datacenter.example.id
-                server_id: ionoscloud_server.example.id
-              dependencies:
-                ionoscloud_server.example: |-
-                    {
-                      "availability_zone": "ZONE_2",
-                      "cores": 2,
-                      "datacenter_id": "${ionoscloud_datacenter.example.id}",
-                      "image_name": "ubuntu:latest",
-                      "image_password": "${random_password.server_image_password.result}",
-                      "name": "Server Example",
-                      "nic": [
-                        {
-                          "dhcp": true,
-                          "firewall_active": true,
-                          "lan": "${ionoscloud_lan.example.id}",
-                          "name": "Nic Example"
-                        }
-                      ],
-                      "ram": 2048,
-                      "volume": [
-                        {
-                          "availability_zone": "AUTO",
-                          "bus": "VIRTIO",
-                          "disk_type": "SSD Standard",
-                          "name": "Inline Updated",
-                          "size": 20
-                        }
-                      ]
-                    }
-                ionoscloud_volume.example: |-
-                    {
-                      "availability_zone": "AUTO",
-                      "datacenter_id": "${ionoscloud_datacenter.example.id}",
-                      "disk_type": "HDD",
-                      "image_name": "debian:latest",
-                      "image_password": "${random_password.server_image_password.result}",
-                      "name": "External 1",
-                      "server_id": "${ionoscloud_server.example.id}",
-                      "size": 10
-                    }
-            - name: example
-              manifest: |-
-                {
-                  "boot_device_id": "${ionoscloud_server.example.inline_volume_ids[0]}",
-                  "datacenter_id": "${ionoscloud_datacenter.example.id}",
-                  "server_id": "${ionoscloud_server.example.id}"
-                }
-              references:
-                boot_device_id: ionoscloud_server.example.inline_volume_ids[0]
-                datacenter_id: ionoscloud_datacenter.example.id
-                server_id: ionoscloud_server.example.id
-              dependencies:
-                ionoscloud_server.example: |-
-                    {
-                      "availability_zone": "ZONE_2",
-                      "cores": 2,
-                      "datacenter_id": "${ionoscloud_datacenter.example.id}",
-                      "image_name": "ubuntu:latest",
-                      "image_password": "${random_password.server_image_password.result}",
-                      "name": "Server Example",
-                      "nic": [
-                        {
-                          "dhcp": true,
-                          "firewall_active": true,
-                          "lan": "${ionoscloud_lan.example.id}",
-                          "name": "Nic Example"
-                        }
-                      ],
-                      "ram": 2048,
-                      "volume": [
-                        {
-                          "availability_zone": "AUTO",
-                          "bus": "VIRTIO",
-                          "disk_type": "SSD Standard",
-                          "name": "Inline Updated",
-                          "size": 20
-                        }
-                      ]
-                    }
-                ionoscloud_volume.example: |-
-                    {
-                      "availability_zone": "AUTO",
-                      "datacenter_id": "${ionoscloud_datacenter.example.id}",
-                      "disk_type": "HDD",
-                      "image_name": "debian:latest",
-                      "image_password": "${random_password.server_image_password.result}",
-                      "name": "External 1",
-                      "server_id": "${ionoscloud_server.example.id}",
-                      "size": 10
-                    }
-            - name: example
-              manifest: |-
-                {
-                  "boot_device_id": "${data.ionoscloud_image.example.id}",
-                  "datacenter_id": "${ionoscloud_datacenter.example.id}",
-                  "server_id": "${ionoscloud_server.example.inline_volume_ids[0]}"
-                }
-              references:
-                boot_device_id: data.ionoscloud_image.example.id
-                datacenter_id: ionoscloud_datacenter.example.id
-                server_id: ionoscloud_server.example.inline_volume_ids[0]
-              dependencies:
-                ionoscloud_server.example: |-
-                    {
-                      "availability_zone": "ZONE_2",
-                      "cores": 2,
-                      "datacenter_id": "${ionoscloud_datacenter.example.id}",
-                      "image_name": "ubuntu:latest",
-                      "image_password": "${random_password.server_image_password.result}",
-                      "name": "Server Example",
-                      "nic": [
-                        {
-                          "dhcp": true,
-                          "firewall_active": true,
-                          "lan": "${ionoscloud_lan.example.id}",
-                          "name": "Nic Example"
-                        }
-                      ],
-                      "ram": 2048,
-                      "volume": [
-                        {
-                          "availability_zone": "AUTO",
-                          "bus": "VIRTIO",
-                          "disk_type": "SSD Standard",
-                          "name": "Inline Updated",
-                          "size": 20
-                        }
-                      ]
-                    }
-                ionoscloud_volume.example: |-
-                    {
-                      "availability_zone": "AUTO",
-                      "datacenter_id": "${ionoscloud_datacenter.example.id}",
-                      "disk_type": "HDD",
-                      "image_name": "debian:latest",
-                      "image_password": "${random_password.server_image_password.result}",
-                      "name": "External 1",
-                      "server_id": "${ionoscloud_server.example.id}",
-                      "size": 10
-                    }
-            - name: example
-              manifest: |-
-                {
-                  "datacenter_id": "${ionoscloud_datacenter.example.id}",
-                  "server_id": "${ionoscloud_server.example.inline_volume_ids[0]}"
-                }
-              references:
-                datacenter_id: ionoscloud_datacenter.example.id
-                server_id: ionoscloud_server.example.inline_volume_ids[0]
-              dependencies:
-                ionoscloud_server.example: |-
-                    {
-                      "availability_zone": "ZONE_2",
-                      "cores": 2,
-                      "datacenter_id": "${ionoscloud_datacenter.example.id}",
-                      "image_name": "ubuntu:latest",
-                      "image_password": "${random_password.server_image_password.result}",
-                      "name": "Server Example",
-                      "nic": [
-                        {
-                          "dhcp": true,
-                          "firewall_active": true,
-                          "lan": "${ionoscloud_lan.example.id}",
-                          "name": "Nic Example"
-                        }
-                      ],
-                      "ram": 2048,
-                      "volume": [
-                        {
-                          "availability_zone": "AUTO",
-                          "bus": "VIRTIO",
-                          "disk_type": "SSD Standard",
-                          "name": "Inline volume",
-                          "size": 20
-                        }
-                      ]
-                    }
-                ionoscloud_volume.example: |-
-                    {
-                      "availability_zone": "AUTO",
-                      "datacenter_id": "${ionoscloud_datacenter.example.id}",
-                      "disk_type": "HDD",
-                      "image_name": "debian:latest",
-                      "image_password": "${random_password.server_image_password.result}",
-                      "name": "External 1",
-                      "server_id": "${ionoscloud_server.example.id}",
-                      "size": 10
-                    }
-        argumentDocs:
-            boot_device_id: |-
-                - (Optional)[string] The ID of a bootable device such as a volume or an image data source. If this field is omitted from the configuration, the VM will be restarted with no primary boot device, and it will enter the PXE shell for network booting.
-                Note: If the network booting process started by the PXE shell fails, the VM will still boot into the image of the attached storage as a fallback. This behavior imitates the "Boot from Network" option from DCD.
-            datacenter_id: '- (Required)[string] The ID of a Virtual Data Center.'
-            server_id: '- (Required)[string] The ID of a server.'
-        importStatements: []
     ionoscloud_share:
         subCategory: User Management
         description: Creates and manages share objects.

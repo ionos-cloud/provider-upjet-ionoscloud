@@ -14,18 +14,18 @@ import (
 	"github.com/crossplane/upjet/pkg/resource/json"
 )
 
-// GetTerraformResourceType returns Terraform resource type for this Firewall
-func (mg *Firewall) GetTerraformResourceType() string {
-	return "ionoscloud_firewall"
+// GetTerraformResourceType returns Terraform resource type for this CubeServer
+func (mg *CubeServer) GetTerraformResourceType() string {
+	return "ionoscloud_cube_server"
 }
 
-// GetConnectionDetailsMapping for this Firewall
-func (tr *Firewall) GetConnectionDetailsMapping() map[string]string {
-	return nil
+// GetConnectionDetailsMapping for this CubeServer
+func (tr *CubeServer) GetConnectionDetailsMapping() map[string]string {
+	return map[string]string{"image_password": "imagePasswordSecretRef"}
 }
 
-// GetObservation of this Firewall
-func (tr *Firewall) GetObservation() (map[string]any, error) {
+// GetObservation of this CubeServer
+func (tr *CubeServer) GetObservation() (map[string]any, error) {
 	o, err := json.TFParser.Marshal(tr.Status.AtProvider)
 	if err != nil {
 		return nil, err
@@ -34,8 +34,8 @@ func (tr *Firewall) GetObservation() (map[string]any, error) {
 	return base, json.TFParser.Unmarshal(o, &base)
 }
 
-// SetObservation for this Firewall
-func (tr *Firewall) SetObservation(obs map[string]any) error {
+// SetObservation for this CubeServer
+func (tr *CubeServer) SetObservation(obs map[string]any) error {
 	p, err := json.TFParser.Marshal(obs)
 	if err != nil {
 		return err
@@ -43,16 +43,16 @@ func (tr *Firewall) SetObservation(obs map[string]any) error {
 	return json.TFParser.Unmarshal(p, &tr.Status.AtProvider)
 }
 
-// GetID returns ID of underlying Terraform resource of this Firewall
-func (tr *Firewall) GetID() string {
+// GetID returns ID of underlying Terraform resource of this CubeServer
+func (tr *CubeServer) GetID() string {
 	if tr.Status.AtProvider.ID == nil {
 		return ""
 	}
 	return *tr.Status.AtProvider.ID
 }
 
-// GetParameters of this Firewall
-func (tr *Firewall) GetParameters() (map[string]any, error) {
+// GetParameters of this CubeServer
+func (tr *CubeServer) GetParameters() (map[string]any, error) {
 	p, err := json.TFParser.Marshal(tr.Spec.ForProvider)
 	if err != nil {
 		return nil, err
@@ -61,8 +61,8 @@ func (tr *Firewall) GetParameters() (map[string]any, error) {
 	return base, json.TFParser.Unmarshal(p, &base)
 }
 
-// SetParameters for this Firewall
-func (tr *Firewall) SetParameters(params map[string]any) error {
+// SetParameters for this CubeServer
+func (tr *CubeServer) SetParameters(params map[string]any) error {
 	p, err := json.TFParser.Marshal(params)
 	if err != nil {
 		return err
@@ -70,8 +70,8 @@ func (tr *Firewall) SetParameters(params map[string]any) error {
 	return json.TFParser.Unmarshal(p, &tr.Spec.ForProvider)
 }
 
-// GetInitParameters of this Firewall
-func (tr *Firewall) GetInitParameters() (map[string]any, error) {
+// GetInitParameters of this CubeServer
+func (tr *CubeServer) GetInitParameters() (map[string]any, error) {
 	p, err := json.TFParser.Marshal(tr.Spec.InitProvider)
 	if err != nil {
 		return nil, err
@@ -80,8 +80,8 @@ func (tr *Firewall) GetInitParameters() (map[string]any, error) {
 	return base, json.TFParser.Unmarshal(p, &base)
 }
 
-// GetInitParameters of this Firewall
-func (tr *Firewall) GetMergedParameters(shouldMergeInitProvider bool) (map[string]any, error) {
+// GetInitParameters of this CubeServer
+func (tr *CubeServer) GetMergedParameters(shouldMergeInitProvider bool) (map[string]any, error) {
 	params, err := tr.GetParameters()
 	if err != nil {
 		return nil, errors.Wrapf(err, "cannot get parameters for resource '%q'", tr.GetName())
@@ -110,10 +110,10 @@ func (tr *Firewall) GetMergedParameters(shouldMergeInitProvider bool) (map[strin
 	return params, nil
 }
 
-// LateInitialize this Firewall using its observed tfState.
+// LateInitialize this CubeServer using its observed tfState.
 // returns True if there are any spec changes for the resource.
-func (tr *Firewall) LateInitialize(attrs []byte) (bool, error) {
-	params := &FirewallParameters_2{}
+func (tr *CubeServer) LateInitialize(attrs []byte) (bool, error) {
+	params := &CubeServerParameters{}
 	if err := json.TFParser.Unmarshal(attrs, params); err != nil {
 		return false, errors.Wrap(err, "failed to unmarshal Terraform state parameters for late-initialization")
 	}
@@ -124,6 +124,6 @@ func (tr *Firewall) LateInitialize(attrs []byte) (bool, error) {
 }
 
 // GetTerraformSchemaVersion returns the associated Terraform schema version
-func (tr *Firewall) GetTerraformSchemaVersion() int {
+func (tr *CubeServer) GetTerraformSchemaVersion() int {
 	return 0
 }

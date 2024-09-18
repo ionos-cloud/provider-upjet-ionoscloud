@@ -13,6 +13,9 @@ func (tr *BootDeviceSelection) Hub() {}
 func (tr *Crossconnect) Hub() {}
 
 // Hub marks this type as a conversion hub.
+func (tr *CubeServer) Hub() {}
+
+// Hub marks this type as a conversion hub.
 func (tr *Datacenter) Hub() {}
 
 // Hub marks this type as a conversion hub.
@@ -47,6 +50,9 @@ func (tr *Snapshot) Hub() {}
 
 // Hub marks this type as a conversion hub.
 func (tr *User) Hub() {}
+
+// Hub marks this type as a conversion hub.
+func (tr *VCPUServer) Hub() {}
 
 // Hub marks this type as a conversion hub.
 func (tr *Volume) Hub() {}

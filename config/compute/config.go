@@ -123,25 +123,28 @@ func Configure(p *config.Provider) {
 		}
 	})
 
-	//p.AddResourceConfigurator("ionoscloud_cube_server", func(r *config.Resource) {
-	//	r.ShortGroup = "compute"
-	//	r.References["datacenter_id"] = config.Reference{
-	//		TerraformName: "ionoscloud_datacenter",
-	//	}
-	//	r.References["nic.lan"] = config.Reference{
-	//		TerraformName: "ionoscloud_lan",
-	//	}
-	//})
+	p.AddResourceConfigurator("ionoscloud_cube_server", func(r *config.Resource) {
+		r.ShortGroup = "compute"
+		r.Kind = "CubeServer"
 
-	//p.AddResourceConfigurator("ionoscloud_vcpu_server", func(r *config.Resource) {
-	//	r.ShortGroup = "compute"
-	//	r.References["datacenter_id"] = config.Reference{
-	//		TerraformName: "ionoscloud_datacenter",
-	//	}
-	//	r.References["nic.lan"] = config.Reference{
-	//		TerraformName: "ionoscloud_lan",
-	//	}
-	//})
+		r.References["datacenter_id"] = config.Reference{
+			TerraformName: "ionoscloud_datacenter",
+		}
+		r.References["nic.lan"] = config.Reference{
+			TerraformName: "ionoscloud_lan",
+		}
+	})
+
+	p.AddResourceConfigurator("ionoscloud_vcpu_server", func(r *config.Resource) {
+		r.ShortGroup = "compute"
+		r.Kind = "VCPUServer"
+		r.References["datacenter_id"] = config.Reference{
+			TerraformName: "ionoscloud_datacenter",
+		}
+		r.References["nic.lan"] = config.Reference{
+			TerraformName: "ionoscloud_lan",
+		}
+	})
 
 	p.AddResourceConfigurator("ionoscloud_server_boot_device_selection", func(r *config.Resource) {
 		r.ShortGroup = "compute"

@@ -26,6 +26,15 @@ func (l *CrossconnectList) GetItems() []resource.Managed {
 	return items
 }
 
+// GetItems of this CubeServerList.
+func (l *CubeServerList) GetItems() []resource.Managed {
+	items := make([]resource.Managed, len(l.Items))
+	for i := range l.Items {
+		items[i] = &l.Items[i]
+	}
+	return items
+}
+
 // GetItems of this DatacenterList.
 func (l *DatacenterList) GetItems() []resource.Managed {
 	items := make([]resource.Managed, len(l.Items))
@@ -127,6 +136,15 @@ func (l *SnapshotList) GetItems() []resource.Managed {
 
 // GetItems of this UserList.
 func (l *UserList) GetItems() []resource.Managed {
+	items := make([]resource.Managed, len(l.Items))
+	for i := range l.Items {
+		items[i] = &l.Items[i]
+	}
+	return items
+}
+
+// GetItems of this VCPUServerList.
+func (l *VCPUServerList) GetItems() []resource.Managed {
 	items := make([]resource.Managed, len(l.Items))
 	for i := range l.Items {
 		items[i] = &l.Items[i]

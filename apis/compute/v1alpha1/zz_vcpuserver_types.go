@@ -13,39 +13,89 @@ import (
 	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
 )
 
-type LabelInitParameters struct {
+type VCPUServerInitParameters struct {
 
-	// [string] The key of the label.
+	// [string] The availability zone in which the server should exist. E.g: AUTO, ZONE_1, ZONE_2. This property is immutable.
+	AvailabilityZone *string `json:"availabilityZone,omitempty" tf:"availability_zone,omitempty"`
+
+	// DEPRECATED Please refer to ionoscloud_server_boot_device_selection [string] The associated boot drive, if any. Must be the UUID of a bootable CDROM image that can be retrieved using the ionoscloud_image data source.
+	// The associated boot drive, if any. Must be the UUID of a bootable CDROM image that can be retrieved using the ionoscloud_image data source.
+	BootCdrom *string `json:"bootCdrom,omitempty" tf:"boot_cdrom,omitempty"`
+
+	// [string] The image or snapshot UUID / name. May also be an image alias. It is required if licence_type is not provided.
+	BootImage *string `json:"bootImage,omitempty" tf:"boot_image,omitempty"`
+
+	// [integer] Number of server CPU cores.
+	Cores *float64 `json:"cores,omitempty" tf:"cores,omitempty"`
+
+	// [string] The ID of a Virtual Data Center.
+	// +crossplane:generate:reference:type=github.com/ionos-cloud/provider-upjet-ionoscloud/apis/compute/v1alpha1.Datacenter
+	DatacenterID *string `json:"datacenterId,omitempty" tf:"datacenter_id,omitempty"`
+
+	// Reference to a Datacenter in compute to populate datacenterId.
+	// +kubebuilder:validation:Optional
+	DatacenterIDRef *v1.Reference `json:"datacenterIdRef,omitempty" tf:"-"`
+
+	// Selector for a Datacenter in compute to populate datacenterId.
+	// +kubebuilder:validation:Optional
+	DatacenterIDSelector *v1.Selector `json:"datacenterIdSelector,omitempty" tf:"-"`
+
+	// (Computed) The associated firewall rules.
+	FirewallruleIds []*string `json:"firewallruleIds,omitempty" tf:"firewallrule_ids,omitempty"`
+
+	// [string] The name, ID or alias of the image. May also be a snapshot ID. It is required if licence_type is not provided. Attribute is immutable.
+	ImageName *string `json:"imageName,omitempty" tf:"image_name,omitempty"`
+
+	// [string] The password for the image.
+	ImagePasswordSecretRef *v1.SecretKeySelector `json:"imagePasswordSecretRef,omitempty" tf:"-"`
+
+	// A label can be seen as an object with only two required fields: key and value, both of the string type. Please check the example presented above to see how a label can be used in the plan. A server can have multiple labels.
+	Label []VCPUServerLabelInitParameters `json:"label,omitempty" tf:"label,omitempty"`
+
+	// [string] The name of the server.
+	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+
+	// See the Nic section.
+	Nic *VCPUServerNicInitParameters `json:"nic,omitempty" tf:"nic,omitempty"`
+
+	// [integer] The amount of memory for the server in MB.
+	RAM *float64 `json:"ram,omitempty" tf:"ram,omitempty"`
+
+	// [list] Immutable List of absolute or relative paths to files containing public SSH key that will be injected into IonosCloud provided Linux images. Also accepts ssh keys directly. Public SSH keys are set on the image as authorized keys for appropriate SSH login to the instance using the corresponding private key. This field may only be set in creation requests. When reading, it always returns null. SSH keys are only supported if a public Linux image is used for the volume creation. Does not support ~ expansion to homedir in the given path.
+	// Public SSH keys are set on the image as authorized keys for appropriate SSH login to the instance using the corresponding private key. This field may only be set in creation requests. When reading, it always returns null. SSH keys are only supported if a public Linux image is used for the volume creation.
+	SSHKeys []*string `json:"sshKeys,omitempty" tf:"ssh_keys,omitempty"`
+
+	// Sets the power state of the vcpu server. Possible values: `RUNNING` or `SHUTOFF`.
+	VMState *string `json:"vmState,omitempty" tf:"vm_state,omitempty"`
+
+	// See the Volume section.
+	Volume *VCPUServerVolumeInitParameters `json:"volume,omitempty" tf:"volume,omitempty"`
+}
+
+type VCPUServerLabelInitParameters struct {
 	Key *string `json:"key,omitempty" tf:"key,omitempty"`
 
-	// [string] The value of the label.
 	Value *string `json:"value,omitempty" tf:"value,omitempty"`
 }
 
-type LabelObservation struct {
-
-	// [string] The key of the label.
+type VCPUServerLabelObservation struct {
 	Key *string `json:"key,omitempty" tf:"key,omitempty"`
 
-	// [string] The value of the label.
 	Value *string `json:"value,omitempty" tf:"value,omitempty"`
 }
 
-type LabelParameters struct {
+type VCPUServerLabelParameters struct {
 
-	// [string] The key of the label.
 	// +kubebuilder:validation:Optional
 	Key *string `json:"key" tf:"key,omitempty"`
 
-	// [string] The value of the label.
 	// +kubebuilder:validation:Optional
 	Value *string `json:"value" tf:"value,omitempty"`
 }
 
-type NicFirewallInitParameters struct {
+type VCPUServerNicFirewallInitParameters struct {
 	IcmpCode *string `json:"icmpCode,omitempty" tf:"icmp_code,omitempty"`
 
-	// (Computed)[string] Server usages: ENTERPRISE or CUBE. This property is immutable.
 	IcmpType *string `json:"icmpType,omitempty" tf:"icmp_type,omitempty"`
 
 	// [string] The name of the server.
@@ -63,16 +113,14 @@ type NicFirewallInitParameters struct {
 
 	TargetIP *string `json:"targetIp,omitempty" tf:"target_ip,omitempty"`
 
-	// (Computed)[string] Server usages: ENTERPRISE or CUBE. This property is immutable.
 	Type *string `json:"type,omitempty" tf:"type,omitempty"`
 }
 
-type NicFirewallObservation struct {
+type VCPUServerNicFirewallObservation struct {
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
 	IcmpCode *string `json:"icmpCode,omitempty" tf:"icmp_code,omitempty"`
 
-	// (Computed)[string] Server usages: ENTERPRISE or CUBE. This property is immutable.
 	IcmpType *string `json:"icmpType,omitempty" tf:"icmp_type,omitempty"`
 
 	// [string] The name of the server.
@@ -90,16 +138,14 @@ type NicFirewallObservation struct {
 
 	TargetIP *string `json:"targetIp,omitempty" tf:"target_ip,omitempty"`
 
-	// (Computed)[string] Server usages: ENTERPRISE or CUBE. This property is immutable.
 	Type *string `json:"type,omitempty" tf:"type,omitempty"`
 }
 
-type NicFirewallParameters struct {
+type VCPUServerNicFirewallParameters struct {
 
 	// +kubebuilder:validation:Optional
 	IcmpCode *string `json:"icmpCode,omitempty" tf:"icmp_code,omitempty"`
 
-	// (Computed)[string] Server usages: ENTERPRISE or CUBE. This property is immutable.
 	// +kubebuilder:validation:Optional
 	IcmpType *string `json:"icmpType,omitempty" tf:"icmp_type,omitempty"`
 
@@ -125,104 +171,25 @@ type NicFirewallParameters struct {
 	// +kubebuilder:validation:Optional
 	TargetIP *string `json:"targetIp,omitempty" tf:"target_ip,omitempty"`
 
-	// (Computed)[string] Server usages: ENTERPRISE or CUBE. This property is immutable.
 	// +kubebuilder:validation:Optional
 	Type *string `json:"type,omitempty" tf:"type,omitempty"`
 }
 
-type ServerInitParameters struct {
-
-	// [string] The availability zone in which the server should exist. E.g: AUTO, ZONE_1, ZONE_2. This property is immutable.
-	AvailabilityZone *string `json:"availabilityZone,omitempty" tf:"availability_zone,omitempty"`
-
-	// DEPRECATED Please refer to ionoscloud_server_boot_device_selection (Computed)[string] The associated boot drive, if any. Must be the UUID of a bootable CDROM image that can be retrieved using the ionoscloud_image data source.
-	// The associated boot drive, if any. Must be the UUID of a bootable CDROM image that you can retrieve using the image data source
-	BootCdrom *string `json:"bootCdrom,omitempty" tf:"boot_cdrom,omitempty"`
-
-	// [string] The image or snapshot UUID / name. May also be an image alias. It is required if licence_type is not provided.
-	BootImage *string `json:"bootImage,omitempty" tf:"boot_image,omitempty"`
-
-	// [string] CPU architecture on which server gets provisioned; not all CPU architectures are available in all datacenter regions; available CPU architectures can be retrieved from the datacenter resource. E.g.: "INTEL_SKYLAKE" or "INTEL_XEON".
-	CPUFamily *string `json:"cpuFamily,omitempty" tf:"cpu_family,omitempty"`
-
-	// (Computed)[integer] Number of server CPU cores.
-	Cores *float64 `json:"cores,omitempty" tf:"cores,omitempty"`
-
-	// [string] The ID of a Virtual Data Center.
-	// +crossplane:generate:reference:type=github.com/ionos-cloud/provider-upjet-ionoscloud/apis/compute/v1alpha1.Datacenter
-	DatacenterID *string `json:"datacenterId,omitempty" tf:"datacenter_id,omitempty"`
-
-	// Reference to a Datacenter in compute to populate datacenterId.
-	// +kubebuilder:validation:Optional
-	DatacenterIDRef *v1.Reference `json:"datacenterIdRef,omitempty" tf:"-"`
-
-	// Selector for a Datacenter in compute to populate datacenterId.
-	// +kubebuilder:validation:Optional
-	DatacenterIDSelector *v1.Selector `json:"datacenterIdSelector,omitempty" tf:"-"`
-
-	// (Computed) The associated firewall rules.
-	FirewallruleIds []*string `json:"firewallruleIds,omitempty" tf:"firewallrule_ids,omitempty"`
-
-	// [string] The name, ID or alias of the image. May also be a snapshot ID. It is required if licence_type is not provided. Attribute is immutable.
-	ImageName *string `json:"imageName,omitempty" tf:"image_name,omitempty"`
-
-	// [string] Required if ssh_key_path is not provided.
-	ImagePasswordSecretRef *v1.SecretKeySelector `json:"imagePasswordSecretRef,omitempty" tf:"-"`
-
-	// [set] A label can be seen as an object with only two required fields: key and value, both of the string type. Please check the example presented above to see how a label can be used in the plan. A server can have multiple labels.
-	Label []LabelInitParameters `json:"label,omitempty" tf:"label,omitempty"`
-
-	// [string] The name of the server.
-	Name *string `json:"name,omitempty" tf:"name,omitempty"`
-
-	// See the Nic section.
-	Nic *ServerNicInitParameters `json:"nic,omitempty" tf:"nic,omitempty"`
-
-	// (Computed)[integer] The amount of memory for the server in MB.
-	RAM *float64 `json:"ram,omitempty" tf:"ram,omitempty"`
-
-	// [list] List of absolute paths to files containing a public SSH key that will be injected into IonosCloud provided Linux images.  Also accepts ssh keys directly. Required for IonosCloud Linux images. Required if image_password is not provided. Does not support ~ expansion to homedir in the given path. This property is immutable.
-	// Immutable List of absolute or relative paths to files containing public SSH key that will be injected into IonosCloud provided Linux images. Does not support `~` expansion to homedir in the given path. Public SSH keys are set on the image as authorized keys for appropriate SSH login to the instance using the corresponding private key. This field may only be set in creation requests. When reading, it always returns null. SSH keys are only supported if a public Linux image is used for the volume creation. This property is immutable.
-	SSHKeyPath []*string `json:"sshKeyPath,omitempty" tf:"ssh_key_path,omitempty"`
-
-	// [list] Immutable List of absolute or relative paths to files containing public SSH key that will be injected into IonosCloud provided Linux images. Also accepts ssh keys directly. Public SSH keys are set on the image as authorized keys for appropriate SSH login to the instance using the corresponding private key. This field may only be set in creation requests. When reading, it always returns null. SSH keys are only supported if a public Linux image is used for the volume creation. Does not support ~ expansion to homedir in the given path.
-	// Public SSH keys are set on the image as authorized keys for appropriate SSH login to the instance using the corresponding private key. This field may only be set in creation requests. When reading, it always returns null. SSH keys are only supported if a public Linux image is used for the volume creation.
-	SSHKeys []*string `json:"sshKeys,omitempty" tf:"ssh_keys,omitempty"`
-
-	// [string] The UUID of the template for creating a CUBE server; the available templates for CUBE servers can be found on the templates resource
-	TemplateUUID *string `json:"templateUuid,omitempty" tf:"template_uuid,omitempty"`
-
-	// (Computed)[string] Server usages: ENTERPRISE or CUBE. This property is immutable.
-	// server usages: ENTERPRISE or CUBE
-	Type *string `json:"type,omitempty" tf:"type,omitempty"`
-
-	// [string] Sets the power state of the server. E.g: RUNNING, SHUTOFF or SUSPENDED. SUSPENDED state is only valid for cube. SHUTOFF state is only valid for enterprise.
-	// Sets the power state of the server. Possible values: `RUNNING`, `SHUTOFF` or `SUSPENDED`. SUSPENDED state is only valid for cube. SHUTOFF state is only valid for enterprise
-	VMState *string `json:"vmState,omitempty" tf:"vm_state,omitempty"`
-
-	// See the Volume section.
-	Volume *ServerVolumeInitParameters `json:"volume,omitempty" tf:"volume,omitempty"`
-}
-
-type ServerNicInitParameters struct {
+type VCPUServerNicInitParameters struct {
 	DHCP *bool `json:"dhcp,omitempty" tf:"dhcp,omitempty"`
 
-	// Indicates whether this NIC receives an IPv6 address through DHCP.
 	Dhcpv6 *bool `json:"dhcpv6,omitempty" tf:"dhcpv6,omitempty"`
 
 	// Allows to define firewall rules inline in the server. See the Firewall section.
 	// Firewall rules created in the server resource. The rules can also be created as separate resources outside the server resource
-	Firewall []NicFirewallInitParameters `json:"firewall,omitempty" tf:"firewall,omitempty"`
+	Firewall []VCPUServerNicFirewallInitParameters `json:"firewall,omitempty" tf:"firewall,omitempty"`
 
 	FirewallActive *bool `json:"firewallActive,omitempty" tf:"firewall_active,omitempty"`
 
-	// (Computed)[string] Server usages: ENTERPRISE or CUBE. This property is immutable.
 	FirewallType *string `json:"firewallType,omitempty" tf:"firewall_type,omitempty"`
 
-	// IPv6 CIDR block assigned to the NIC.
 	IPv6CidrBlock *string `json:"ipv6CidrBlock,omitempty" tf:"ipv6_cidr_block,omitempty"`
 
-	// Collection for IPv6 addresses assigned to a nic. Explicitly assigned IPv6 addresses need to come from inside the IPv6 CIDR block assigned to the nic.
 	IPv6Ips []*string `json:"ipv6Ips,omitempty" tf:"ipv6_ips,omitempty"`
 
 	// Collection of IP addresses assigned to a nic. Explicitly assigned public IPs need to come from reserved IP blocks, Passing value null or empty array will assign an IP address automatically.
@@ -243,29 +210,25 @@ type ServerNicInitParameters struct {
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 }
 
-type ServerNicObservation struct {
+type VCPUServerNicObservation struct {
 	DHCP *bool `json:"dhcp,omitempty" tf:"dhcp,omitempty"`
 
 	DeviceNumber *float64 `json:"deviceNumber,omitempty" tf:"device_number,omitempty"`
 
-	// Indicates whether this NIC receives an IPv6 address through DHCP.
 	Dhcpv6 *bool `json:"dhcpv6,omitempty" tf:"dhcpv6,omitempty"`
 
 	// Allows to define firewall rules inline in the server. See the Firewall section.
 	// Firewall rules created in the server resource. The rules can also be created as separate resources outside the server resource
-	Firewall []NicFirewallObservation `json:"firewall,omitempty" tf:"firewall,omitempty"`
+	Firewall []VCPUServerNicFirewallObservation `json:"firewall,omitempty" tf:"firewall,omitempty"`
 
 	FirewallActive *bool `json:"firewallActive,omitempty" tf:"firewall_active,omitempty"`
 
-	// (Computed)[string] Server usages: ENTERPRISE or CUBE. This property is immutable.
 	FirewallType *string `json:"firewallType,omitempty" tf:"firewall_type,omitempty"`
 
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
-	// IPv6 CIDR block assigned to the NIC.
 	IPv6CidrBlock *string `json:"ipv6CidrBlock,omitempty" tf:"ipv6_cidr_block,omitempty"`
 
-	// Collection for IPv6 addresses assigned to a nic. Explicitly assigned IPv6 addresses need to come from inside the IPv6 CIDR block assigned to the nic.
 	IPv6Ips []*string `json:"ipv6Ips,omitempty" tf:"ipv6_ips,omitempty"`
 
 	// Collection of IP addresses assigned to a nic. Explicitly assigned public IPs need to come from reserved IP blocks, Passing value null or empty array will assign an IP address automatically.
@@ -281,32 +244,28 @@ type ServerNicObservation struct {
 	PciSlot *float64 `json:"pciSlot,omitempty" tf:"pci_slot,omitempty"`
 }
 
-type ServerNicParameters struct {
+type VCPUServerNicParameters struct {
 
 	// +kubebuilder:validation:Optional
 	DHCP *bool `json:"dhcp,omitempty" tf:"dhcp,omitempty"`
 
-	// Indicates whether this NIC receives an IPv6 address through DHCP.
 	// +kubebuilder:validation:Optional
 	Dhcpv6 *bool `json:"dhcpv6,omitempty" tf:"dhcpv6,omitempty"`
 
 	// Allows to define firewall rules inline in the server. See the Firewall section.
 	// Firewall rules created in the server resource. The rules can also be created as separate resources outside the server resource
 	// +kubebuilder:validation:Optional
-	Firewall []NicFirewallParameters `json:"firewall,omitempty" tf:"firewall,omitempty"`
+	Firewall []VCPUServerNicFirewallParameters `json:"firewall,omitempty" tf:"firewall,omitempty"`
 
 	// +kubebuilder:validation:Optional
 	FirewallActive *bool `json:"firewallActive,omitempty" tf:"firewall_active,omitempty"`
 
-	// (Computed)[string] Server usages: ENTERPRISE or CUBE. This property is immutable.
 	// +kubebuilder:validation:Optional
 	FirewallType *string `json:"firewallType,omitempty" tf:"firewall_type,omitempty"`
 
-	// IPv6 CIDR block assigned to the NIC.
 	// +kubebuilder:validation:Optional
 	IPv6CidrBlock *string `json:"ipv6CidrBlock,omitempty" tf:"ipv6_cidr_block,omitempty"`
 
-	// Collection for IPv6 addresses assigned to a nic. Explicitly assigned IPv6 addresses need to come from inside the IPv6 CIDR block assigned to the nic.
 	// +kubebuilder:validation:Optional
 	IPv6Ips []*string `json:"ipv6Ips,omitempty" tf:"ipv6_ips,omitempty"`
 
@@ -331,13 +290,13 @@ type ServerNicParameters struct {
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 }
 
-type ServerObservation struct {
+type VCPUServerObservation struct {
 
 	// [string] The availability zone in which the server should exist. E.g: AUTO, ZONE_1, ZONE_2. This property is immutable.
 	AvailabilityZone *string `json:"availabilityZone,omitempty" tf:"availability_zone,omitempty"`
 
-	// DEPRECATED Please refer to ionoscloud_server_boot_device_selection (Computed)[string] The associated boot drive, if any. Must be the UUID of a bootable CDROM image that can be retrieved using the ionoscloud_image data source.
-	// The associated boot drive, if any. Must be the UUID of a bootable CDROM image that you can retrieve using the image data source
+	// DEPRECATED Please refer to ionoscloud_server_boot_device_selection [string] The associated boot drive, if any. Must be the UUID of a bootable CDROM image that can be retrieved using the ionoscloud_image data source.
+	// The associated boot drive, if any. Must be the UUID of a bootable CDROM image that can be retrieved using the ionoscloud_image data source.
 	BootCdrom *string `json:"bootCdrom,omitempty" tf:"boot_cdrom,omitempty"`
 
 	// [string] The image or snapshot UUID / name. May also be an image alias. It is required if licence_type is not provided.
@@ -346,10 +305,9 @@ type ServerObservation struct {
 	// (Computed) The associated boot volume.
 	BootVolume *string `json:"bootVolume,omitempty" tf:"boot_volume,omitempty"`
 
-	// [string] CPU architecture on which server gets provisioned; not all CPU architectures are available in all datacenter regions; available CPU architectures can be retrieved from the datacenter resource. E.g.: "INTEL_SKYLAKE" or "INTEL_XEON".
 	CPUFamily *string `json:"cpuFamily,omitempty" tf:"cpu_family,omitempty"`
 
-	// (Computed)[integer] Number of server CPU cores.
+	// [integer] Number of server CPU cores.
 	Cores *float64 `json:"cores,omitempty" tf:"cores,omitempty"`
 
 	// [string] The ID of a Virtual Data Center.
@@ -370,14 +328,14 @@ type ServerObservation struct {
 	// A list that contains the IDs for the volumes defined inside the server resource.
 	InlineVolumeIds []*string `json:"inlineVolumeIds,omitempty" tf:"inline_volume_ids,omitempty"`
 
-	// [set] A label can be seen as an object with only two required fields: key and value, both of the string type. Please check the example presented above to see how a label can be used in the plan. A server can have multiple labels.
-	Label []LabelObservation `json:"label,omitempty" tf:"label,omitempty"`
+	// A label can be seen as an object with only two required fields: key and value, both of the string type. Please check the example presented above to see how a label can be used in the plan. A server can have multiple labels.
+	Label []VCPUServerLabelObservation `json:"label,omitempty" tf:"label,omitempty"`
 
 	// [string] The name of the server.
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
 	// See the Nic section.
-	Nic *ServerNicObservation `json:"nic,omitempty" tf:"nic,omitempty"`
+	Nic *VCPUServerNicObservation `json:"nic,omitempty" tf:"nic,omitempty"`
 
 	// (Computed) The associated IP address.
 	PrimaryIP *string `json:"primaryIp,omitempty" tf:"primary_ip,omitempty"`
@@ -386,40 +344,30 @@ type ServerObservation struct {
 	// Id of the primary network interface
 	PrimaryNic *string `json:"primaryNic,omitempty" tf:"primary_nic,omitempty"`
 
-	// (Computed)[integer] The amount of memory for the server in MB.
+	// [integer] The amount of memory for the server in MB.
 	RAM *float64 `json:"ram,omitempty" tf:"ram,omitempty"`
-
-	// [list] List of absolute paths to files containing a public SSH key that will be injected into IonosCloud provided Linux images.  Also accepts ssh keys directly. Required for IonosCloud Linux images. Required if image_password is not provided. Does not support ~ expansion to homedir in the given path. This property is immutable.
-	// Immutable List of absolute or relative paths to files containing public SSH key that will be injected into IonosCloud provided Linux images. Does not support `~` expansion to homedir in the given path. Public SSH keys are set on the image as authorized keys for appropriate SSH login to the instance using the corresponding private key. This field may only be set in creation requests. When reading, it always returns null. SSH keys are only supported if a public Linux image is used for the volume creation. This property is immutable.
-	SSHKeyPath []*string `json:"sshKeyPath,omitempty" tf:"ssh_key_path,omitempty"`
 
 	// [list] Immutable List of absolute or relative paths to files containing public SSH key that will be injected into IonosCloud provided Linux images. Also accepts ssh keys directly. Public SSH keys are set on the image as authorized keys for appropriate SSH login to the instance using the corresponding private key. This field may only be set in creation requests. When reading, it always returns null. SSH keys are only supported if a public Linux image is used for the volume creation. Does not support ~ expansion to homedir in the given path.
 	// Public SSH keys are set on the image as authorized keys for appropriate SSH login to the instance using the corresponding private key. This field may only be set in creation requests. When reading, it always returns null. SSH keys are only supported if a public Linux image is used for the volume creation.
 	SSHKeys []*string `json:"sshKeys,omitempty" tf:"ssh_keys,omitempty"`
 
-	// [string] The UUID of the template for creating a CUBE server; the available templates for CUBE servers can be found on the templates resource
-	TemplateUUID *string `json:"templateUuid,omitempty" tf:"template_uuid,omitempty"`
-
-	// (Computed)[string] Server usages: ENTERPRISE or CUBE. This property is immutable.
-	// server usages: ENTERPRISE or CUBE
 	Type *string `json:"type,omitempty" tf:"type,omitempty"`
 
-	// [string] Sets the power state of the server. E.g: RUNNING, SHUTOFF or SUSPENDED. SUSPENDED state is only valid for cube. SHUTOFF state is only valid for enterprise.
-	// Sets the power state of the server. Possible values: `RUNNING`, `SHUTOFF` or `SUSPENDED`. SUSPENDED state is only valid for cube. SHUTOFF state is only valid for enterprise
+	// Sets the power state of the vcpu server. Possible values: `RUNNING` or `SHUTOFF`.
 	VMState *string `json:"vmState,omitempty" tf:"vm_state,omitempty"`
 
 	// See the Volume section.
-	Volume *ServerVolumeObservation `json:"volume,omitempty" tf:"volume,omitempty"`
+	Volume *VCPUServerVolumeObservation `json:"volume,omitempty" tf:"volume,omitempty"`
 }
 
-type ServerParameters struct {
+type VCPUServerParameters struct {
 
 	// [string] The availability zone in which the server should exist. E.g: AUTO, ZONE_1, ZONE_2. This property is immutable.
 	// +kubebuilder:validation:Optional
 	AvailabilityZone *string `json:"availabilityZone,omitempty" tf:"availability_zone,omitempty"`
 
-	// DEPRECATED Please refer to ionoscloud_server_boot_device_selection (Computed)[string] The associated boot drive, if any. Must be the UUID of a bootable CDROM image that can be retrieved using the ionoscloud_image data source.
-	// The associated boot drive, if any. Must be the UUID of a bootable CDROM image that you can retrieve using the image data source
+	// DEPRECATED Please refer to ionoscloud_server_boot_device_selection [string] The associated boot drive, if any. Must be the UUID of a bootable CDROM image that can be retrieved using the ionoscloud_image data source.
+	// The associated boot drive, if any. Must be the UUID of a bootable CDROM image that can be retrieved using the ionoscloud_image data source.
 	// +kubebuilder:validation:Optional
 	BootCdrom *string `json:"bootCdrom,omitempty" tf:"boot_cdrom,omitempty"`
 
@@ -427,11 +375,7 @@ type ServerParameters struct {
 	// +kubebuilder:validation:Optional
 	BootImage *string `json:"bootImage,omitempty" tf:"boot_image,omitempty"`
 
-	// [string] CPU architecture on which server gets provisioned; not all CPU architectures are available in all datacenter regions; available CPU architectures can be retrieved from the datacenter resource. E.g.: "INTEL_SKYLAKE" or "INTEL_XEON".
-	// +kubebuilder:validation:Optional
-	CPUFamily *string `json:"cpuFamily,omitempty" tf:"cpu_family,omitempty"`
-
-	// (Computed)[integer] Number of server CPU cores.
+	// [integer] Number of server CPU cores.
 	// +kubebuilder:validation:Optional
 	Cores *float64 `json:"cores,omitempty" tf:"cores,omitempty"`
 
@@ -456,13 +400,13 @@ type ServerParameters struct {
 	// +kubebuilder:validation:Optional
 	ImageName *string `json:"imageName,omitempty" tf:"image_name,omitempty"`
 
-	// [string] Required if ssh_key_path is not provided.
+	// [string] The password for the image.
 	// +kubebuilder:validation:Optional
 	ImagePasswordSecretRef *v1.SecretKeySelector `json:"imagePasswordSecretRef,omitempty" tf:"-"`
 
-	// [set] A label can be seen as an object with only two required fields: key and value, both of the string type. Please check the example presented above to see how a label can be used in the plan. A server can have multiple labels.
+	// A label can be seen as an object with only two required fields: key and value, both of the string type. Please check the example presented above to see how a label can be used in the plan. A server can have multiple labels.
 	// +kubebuilder:validation:Optional
-	Label []LabelParameters `json:"label,omitempty" tf:"label,omitempty"`
+	Label []VCPUServerLabelParameters `json:"label,omitempty" tf:"label,omitempty"`
 
 	// [string] The name of the server.
 	// +kubebuilder:validation:Optional
@@ -470,42 +414,27 @@ type ServerParameters struct {
 
 	// See the Nic section.
 	// +kubebuilder:validation:Optional
-	Nic *ServerNicParameters `json:"nic,omitempty" tf:"nic,omitempty"`
+	Nic *VCPUServerNicParameters `json:"nic,omitempty" tf:"nic,omitempty"`
 
-	// (Computed)[integer] The amount of memory for the server in MB.
+	// [integer] The amount of memory for the server in MB.
 	// +kubebuilder:validation:Optional
 	RAM *float64 `json:"ram,omitempty" tf:"ram,omitempty"`
-
-	// [list] List of absolute paths to files containing a public SSH key that will be injected into IonosCloud provided Linux images.  Also accepts ssh keys directly. Required for IonosCloud Linux images. Required if image_password is not provided. Does not support ~ expansion to homedir in the given path. This property is immutable.
-	// Immutable List of absolute or relative paths to files containing public SSH key that will be injected into IonosCloud provided Linux images. Does not support `~` expansion to homedir in the given path. Public SSH keys are set on the image as authorized keys for appropriate SSH login to the instance using the corresponding private key. This field may only be set in creation requests. When reading, it always returns null. SSH keys are only supported if a public Linux image is used for the volume creation. This property is immutable.
-	// +kubebuilder:validation:Optional
-	SSHKeyPath []*string `json:"sshKeyPath,omitempty" tf:"ssh_key_path,omitempty"`
 
 	// [list] Immutable List of absolute or relative paths to files containing public SSH key that will be injected into IonosCloud provided Linux images. Also accepts ssh keys directly. Public SSH keys are set on the image as authorized keys for appropriate SSH login to the instance using the corresponding private key. This field may only be set in creation requests. When reading, it always returns null. SSH keys are only supported if a public Linux image is used for the volume creation. Does not support ~ expansion to homedir in the given path.
 	// Public SSH keys are set on the image as authorized keys for appropriate SSH login to the instance using the corresponding private key. This field may only be set in creation requests. When reading, it always returns null. SSH keys are only supported if a public Linux image is used for the volume creation.
 	// +kubebuilder:validation:Optional
 	SSHKeys []*string `json:"sshKeys,omitempty" tf:"ssh_keys,omitempty"`
 
-	// [string] The UUID of the template for creating a CUBE server; the available templates for CUBE servers can be found on the templates resource
-	// +kubebuilder:validation:Optional
-	TemplateUUID *string `json:"templateUuid,omitempty" tf:"template_uuid,omitempty"`
-
-	// (Computed)[string] Server usages: ENTERPRISE or CUBE. This property is immutable.
-	// server usages: ENTERPRISE or CUBE
-	// +kubebuilder:validation:Optional
-	Type *string `json:"type,omitempty" tf:"type,omitempty"`
-
-	// [string] Sets the power state of the server. E.g: RUNNING, SHUTOFF or SUSPENDED. SUSPENDED state is only valid for cube. SHUTOFF state is only valid for enterprise.
-	// Sets the power state of the server. Possible values: `RUNNING`, `SHUTOFF` or `SUSPENDED`. SUSPENDED state is only valid for cube. SHUTOFF state is only valid for enterprise
+	// Sets the power state of the vcpu server. Possible values: `RUNNING` or `SHUTOFF`.
 	// +kubebuilder:validation:Optional
 	VMState *string `json:"vmState,omitempty" tf:"vm_state,omitempty"`
 
 	// See the Volume section.
 	// +kubebuilder:validation:Optional
-	Volume *ServerVolumeParameters `json:"volume,omitempty" tf:"volume,omitempty"`
+	Volume *VCPUServerVolumeParameters `json:"volume,omitempty" tf:"volume,omitempty"`
 }
 
-type ServerVolumeInitParameters struct {
+type VCPUServerVolumeInitParameters struct {
 
 	// [string] The availability zone in which the server should exist. E.g: AUTO, ZONE_1, ZONE_2. This property is immutable.
 	AvailabilityZone *string `json:"availabilityZone,omitempty" tf:"availability_zone,omitempty"`
@@ -515,25 +444,13 @@ type ServerVolumeInitParameters struct {
 
 	Bus *string `json:"bus,omitempty" tf:"bus,omitempty"`
 
-	// (Computed)[string] Server usages: ENTERPRISE or CUBE. This property is immutable.
 	DiskType *string `json:"diskType,omitempty" tf:"disk_type,omitempty"`
-
-	// [string] Required if ssh_key_path is not provided.
-	ImagePassword *string `json:"imagePassword,omitempty" tf:"image_password,omitempty"`
 
 	// [string] Sets the OS type of the server.
 	LicenceType *string `json:"licenceType,omitempty" tf:"licence_type,omitempty"`
 
 	// [string] The name of the server.
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
-
-	// [list] List of absolute paths to files containing a public SSH key that will be injected into IonosCloud provided Linux images.  Also accepts ssh keys directly. Required for IonosCloud Linux images. Required if image_password is not provided. Does not support ~ expansion to homedir in the given path. This property is immutable.
-	// Public SSH keys are set on the image as authorized keys for appropriate SSH login to the instance using the corresponding private key. This field may only be set in creation requests. When reading, it always returns null. SSH keys are only supported if a public Linux image is used for the volume creation.
-	SSHKeyPath []*string `json:"sshKeyPath,omitempty" tf:"ssh_key_path,omitempty"`
-
-	// [list] Immutable List of absolute or relative paths to files containing public SSH key that will be injected into IonosCloud provided Linux images. Also accepts ssh keys directly. Public SSH keys are set on the image as authorized keys for appropriate SSH login to the instance using the corresponding private key. This field may only be set in creation requests. When reading, it always returns null. SSH keys are only supported if a public Linux image is used for the volume creation. Does not support ~ expansion to homedir in the given path.
-	// Public SSH keys are set on the image as authorized keys for appropriate SSH login to the instance using the corresponding private key. This field may only be set in creation requests. When reading, it always returns null. SSH keys are only supported if a public Linux image is used for the volume creation.
-	SSHKeys []*string `json:"sshKeys,omitempty" tf:"ssh_keys,omitempty"`
 
 	// The size of the volume in GB.
 	Size *float64 `json:"size,omitempty" tf:"size,omitempty"`
@@ -542,7 +459,7 @@ type ServerVolumeInitParameters struct {
 	UserData *string `json:"userData,omitempty" tf:"user_data,omitempty"`
 }
 
-type ServerVolumeObservation struct {
+type VCPUServerVolumeObservation struct {
 
 	// [string] The availability zone in which the server should exist. E.g: AUTO, ZONE_1, ZONE_2. This property is immutable.
 	AvailabilityZone *string `json:"availabilityZone,omitempty" tf:"availability_zone,omitempty"`
@@ -563,11 +480,7 @@ type ServerVolumeObservation struct {
 
 	DiscVirtioHotUnplug *bool `json:"discVirtioHotUnplug,omitempty" tf:"disc_virtio_hot_unplug,omitempty"`
 
-	// (Computed)[string] Server usages: ENTERPRISE or CUBE. This property is immutable.
 	DiskType *string `json:"diskType,omitempty" tf:"disk_type,omitempty"`
-
-	// [string] Required if ssh_key_path is not provided.
-	ImagePassword *string `json:"imagePassword,omitempty" tf:"image_password,omitempty"`
 
 	// [string] Sets the OS type of the server.
 	LicenceType *string `json:"licenceType,omitempty" tf:"licence_type,omitempty"`
@@ -583,14 +496,6 @@ type ServerVolumeObservation struct {
 
 	RAMHotPlug *bool `json:"ramHotPlug,omitempty" tf:"ram_hot_plug,omitempty"`
 
-	// [list] List of absolute paths to files containing a public SSH key that will be injected into IonosCloud provided Linux images.  Also accepts ssh keys directly. Required for IonosCloud Linux images. Required if image_password is not provided. Does not support ~ expansion to homedir in the given path. This property is immutable.
-	// Public SSH keys are set on the image as authorized keys for appropriate SSH login to the instance using the corresponding private key. This field may only be set in creation requests. When reading, it always returns null. SSH keys are only supported if a public Linux image is used for the volume creation.
-	SSHKeyPath []*string `json:"sshKeyPath,omitempty" tf:"ssh_key_path,omitempty"`
-
-	// [list] Immutable List of absolute or relative paths to files containing public SSH key that will be injected into IonosCloud provided Linux images. Also accepts ssh keys directly. Public SSH keys are set on the image as authorized keys for appropriate SSH login to the instance using the corresponding private key. This field may only be set in creation requests. When reading, it always returns null. SSH keys are only supported if a public Linux image is used for the volume creation. Does not support ~ expansion to homedir in the given path.
-	// Public SSH keys are set on the image as authorized keys for appropriate SSH login to the instance using the corresponding private key. This field may only be set in creation requests. When reading, it always returns null. SSH keys are only supported if a public Linux image is used for the volume creation.
-	SSHKeys []*string `json:"sshKeys,omitempty" tf:"ssh_keys,omitempty"`
-
 	// The size of the volume in GB.
 	Size *float64 `json:"size,omitempty" tf:"size,omitempty"`
 
@@ -598,7 +503,7 @@ type ServerVolumeObservation struct {
 	UserData *string `json:"userData,omitempty" tf:"user_data,omitempty"`
 }
 
-type ServerVolumeParameters struct {
+type VCPUServerVolumeParameters struct {
 
 	// [string] The availability zone in which the server should exist. E.g: AUTO, ZONE_1, ZONE_2. This property is immutable.
 	// +kubebuilder:validation:Optional
@@ -611,13 +516,8 @@ type ServerVolumeParameters struct {
 	// +kubebuilder:validation:Optional
 	Bus *string `json:"bus,omitempty" tf:"bus,omitempty"`
 
-	// (Computed)[string] Server usages: ENTERPRISE or CUBE. This property is immutable.
 	// +kubebuilder:validation:Optional
 	DiskType *string `json:"diskType" tf:"disk_type,omitempty"`
-
-	// [string] Required if ssh_key_path is not provided.
-	// +kubebuilder:validation:Optional
-	ImagePassword *string `json:"imagePassword,omitempty" tf:"image_password,omitempty"`
 
 	// [string] Sets the OS type of the server.
 	// +kubebuilder:validation:Optional
@@ -626,16 +526,6 @@ type ServerVolumeParameters struct {
 	// [string] The name of the server.
 	// +kubebuilder:validation:Optional
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
-
-	// [list] List of absolute paths to files containing a public SSH key that will be injected into IonosCloud provided Linux images.  Also accepts ssh keys directly. Required for IonosCloud Linux images. Required if image_password is not provided. Does not support ~ expansion to homedir in the given path. This property is immutable.
-	// Public SSH keys are set on the image as authorized keys for appropriate SSH login to the instance using the corresponding private key. This field may only be set in creation requests. When reading, it always returns null. SSH keys are only supported if a public Linux image is used for the volume creation.
-	// +kubebuilder:validation:Optional
-	SSHKeyPath []*string `json:"sshKeyPath,omitempty" tf:"ssh_key_path,omitempty"`
-
-	// [list] Immutable List of absolute or relative paths to files containing public SSH key that will be injected into IonosCloud provided Linux images. Also accepts ssh keys directly. Public SSH keys are set on the image as authorized keys for appropriate SSH login to the instance using the corresponding private key. This field may only be set in creation requests. When reading, it always returns null. SSH keys are only supported if a public Linux image is used for the volume creation. Does not support ~ expansion to homedir in the given path.
-	// Public SSH keys are set on the image as authorized keys for appropriate SSH login to the instance using the corresponding private key. This field may only be set in creation requests. When reading, it always returns null. SSH keys are only supported if a public Linux image is used for the volume creation.
-	// +kubebuilder:validation:Optional
-	SSHKeys []*string `json:"sshKeys,omitempty" tf:"ssh_keys,omitempty"`
 
 	// The size of the volume in GB.
 	// +kubebuilder:validation:Optional
@@ -646,10 +536,10 @@ type ServerVolumeParameters struct {
 	UserData *string `json:"userData,omitempty" tf:"user_data,omitempty"`
 }
 
-// ServerSpec defines the desired state of Server
-type ServerSpec struct {
+// VCPUServerSpec defines the desired state of VCPUServer
+type VCPUServerSpec struct {
 	v1.ResourceSpec `json:",inline"`
-	ForProvider     ServerParameters `json:"forProvider"`
+	ForProvider     VCPUServerParameters `json:"forProvider"`
 	// THIS IS A BETA FIELD. It will be honored
 	// unless the Management Policies feature flag is disabled.
 	// InitProvider holds the same fields as ForProvider, with the exception
@@ -660,51 +550,53 @@ type ServerSpec struct {
 	// required on creation, but we do not desire to update them after creation,
 	// for example because of an external controller is managing them, like an
 	// autoscaler.
-	InitProvider ServerInitParameters `json:"initProvider,omitempty"`
+	InitProvider VCPUServerInitParameters `json:"initProvider,omitempty"`
 }
 
-// ServerStatus defines the observed state of Server.
-type ServerStatus struct {
+// VCPUServerStatus defines the observed state of VCPUServer.
+type VCPUServerStatus struct {
 	v1.ResourceStatus `json:",inline"`
-	AtProvider        ServerObservation `json:"atProvider,omitempty"`
+	AtProvider        VCPUServerObservation `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true
 // +kubebuilder:subresource:status
 // +kubebuilder:storageversion
 
-// Server is the Schema for the Servers API. Creates and manages IonosCloud Server objects.
+// VCPUServer is the Schema for the VCPUServers API. Creates and manages IonosCloud VCPU Server objects.
 // +kubebuilder:printcolumn:name="SYNCED",type="string",JSONPath=".status.conditions[?(@.type=='Synced')].status"
 // +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"
 // +kubebuilder:printcolumn:name="EXTERNAL-NAME",type="string",JSONPath=".metadata.annotations.crossplane\\.io/external-name"
 // +kubebuilder:printcolumn:name="AGE",type="date",JSONPath=".metadata.creationTimestamp"
 // +kubebuilder:resource:scope=Cluster,categories={crossplane,managed,ionos}
-type Server struct {
+type VCPUServer struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.cores) || (has(self.initProvider) && has(self.initProvider.cores))",message="spec.forProvider.cores is a required parameter"
 	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.name) || (has(self.initProvider) && has(self.initProvider.name))",message="spec.forProvider.name is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.ram) || (has(self.initProvider) && has(self.initProvider.ram))",message="spec.forProvider.ram is a required parameter"
 	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.volume) || (has(self.initProvider) && has(self.initProvider.volume))",message="spec.forProvider.volume is a required parameter"
-	Spec   ServerSpec   `json:"spec"`
-	Status ServerStatus `json:"status,omitempty"`
+	Spec   VCPUServerSpec   `json:"spec"`
+	Status VCPUServerStatus `json:"status,omitempty"`
 }
 
 // +kubebuilder:object:root=true
 
-// ServerList contains a list of Servers
-type ServerList struct {
+// VCPUServerList contains a list of VCPUServers
+type VCPUServerList struct {
 	metav1.TypeMeta `json:",inline"`
 	metav1.ListMeta `json:"metadata,omitempty"`
-	Items           []Server `json:"items"`
+	Items           []VCPUServer `json:"items"`
 }
 
 // Repository type metadata.
 var (
-	Server_Kind             = "Server"
-	Server_GroupKind        = schema.GroupKind{Group: CRDGroup, Kind: Server_Kind}.String()
-	Server_KindAPIVersion   = Server_Kind + "." + CRDGroupVersion.String()
-	Server_GroupVersionKind = CRDGroupVersion.WithKind(Server_Kind)
+	VCPUServer_Kind             = "VCPUServer"
+	VCPUServer_GroupKind        = schema.GroupKind{Group: CRDGroup, Kind: VCPUServer_Kind}.String()
+	VCPUServer_KindAPIVersion   = VCPUServer_Kind + "." + CRDGroupVersion.String()
+	VCPUServer_GroupVersionKind = CRDGroupVersion.WithKind(VCPUServer_Kind)
 )
 
 func init() {
-	SchemeBuilder.Register(&Server{}, &ServerList{})
+	SchemeBuilder.Register(&VCPUServer{}, &VCPUServerList{})
 }

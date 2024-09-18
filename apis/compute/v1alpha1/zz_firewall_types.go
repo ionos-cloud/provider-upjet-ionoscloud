@@ -13,7 +13,7 @@ import (
 	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
 )
 
-type FirewallInitParameters struct {
+type FirewallInitParameters_2 struct {
 
 	// [string] The Virtual Data Center ID.
 	// +crossplane:generate:reference:type=github.com/ionos-cloud/provider-upjet-ionoscloud/apis/compute/v1alpha1.Datacenter
@@ -100,7 +100,7 @@ type FirewallInitParameters struct {
 	Type *string `json:"type,omitempty" tf:"type,omitempty"`
 }
 
-type FirewallObservation struct {
+type FirewallObservation_2 struct {
 
 	// [string] The Virtual Data Center ID.
 	DatacenterID *string `json:"datacenterId,omitempty" tf:"datacenter_id,omitempty"`
@@ -144,7 +144,7 @@ type FirewallObservation struct {
 	Type *string `json:"type,omitempty" tf:"type,omitempty"`
 }
 
-type FirewallParameters struct {
+type FirewallParameters_2 struct {
 
 	// [string] The Virtual Data Center ID.
 	// +crossplane:generate:reference:type=github.com/ionos-cloud/provider-upjet-ionoscloud/apis/compute/v1alpha1.Datacenter
@@ -247,7 +247,7 @@ type FirewallParameters struct {
 // FirewallSpec defines the desired state of Firewall
 type FirewallSpec struct {
 	v1.ResourceSpec `json:",inline"`
-	ForProvider     FirewallParameters `json:"forProvider"`
+	ForProvider     FirewallParameters_2 `json:"forProvider"`
 	// THIS IS A BETA FIELD. It will be honored
 	// unless the Management Policies feature flag is disabled.
 	// InitProvider holds the same fields as ForProvider, with the exception
@@ -258,13 +258,13 @@ type FirewallSpec struct {
 	// required on creation, but we do not desire to update them after creation,
 	// for example because of an external controller is managing them, like an
 	// autoscaler.
-	InitProvider FirewallInitParameters `json:"initProvider,omitempty"`
+	InitProvider FirewallInitParameters_2 `json:"initProvider,omitempty"`
 }
 
 // FirewallStatus defines the observed state of Firewall.
 type FirewallStatus struct {
 	v1.ResourceStatus `json:",inline"`
-	AtProvider        FirewallObservation `json:"atProvider,omitempty"`
+	AtProvider        FirewallObservation_2 `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true

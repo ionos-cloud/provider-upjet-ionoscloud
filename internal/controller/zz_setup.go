@@ -22,6 +22,7 @@ import (
 	certificate "github.com/ionos-cloud/provider-upjet-ionoscloud/internal/controller/certificatemanager/certificate"
 	bootdeviceselection "github.com/ionos-cloud/provider-upjet-ionoscloud/internal/controller/compute/bootdeviceselection"
 	crossconnect "github.com/ionos-cloud/provider-upjet-ionoscloud/internal/controller/compute/crossconnect"
+	cubeserver "github.com/ionos-cloud/provider-upjet-ionoscloud/internal/controller/compute/cubeserver"
 	datacenter "github.com/ionos-cloud/provider-upjet-ionoscloud/internal/controller/compute/datacenter"
 	firewall "github.com/ionos-cloud/provider-upjet-ionoscloud/internal/controller/compute/firewall"
 	group "github.com/ionos-cloud/provider-upjet-ionoscloud/internal/controller/compute/group"
@@ -34,6 +35,7 @@ import (
 	share "github.com/ionos-cloud/provider-upjet-ionoscloud/internal/controller/compute/share"
 	snapshot "github.com/ionos-cloud/provider-upjet-ionoscloud/internal/controller/compute/snapshot"
 	user "github.com/ionos-cloud/provider-upjet-ionoscloud/internal/controller/compute/user"
+	vcpuserver "github.com/ionos-cloud/provider-upjet-ionoscloud/internal/controller/compute/vcpuserver"
 	volume "github.com/ionos-cloud/provider-upjet-ionoscloud/internal/controller/compute/volume"
 	registry "github.com/ionos-cloud/provider-upjet-ionoscloud/internal/controller/containerregistry/registry"
 	registrytoken "github.com/ionos-cloud/provider-upjet-ionoscloud/internal/controller/containerregistry/registrytoken"
@@ -95,6 +97,7 @@ func Setup(mgr ctrl.Manager, o controller.Options) error {
 		certificate.Setup,
 		bootdeviceselection.Setup,
 		crossconnect.Setup,
+		cubeserver.Setup,
 		datacenter.Setup,
 		firewall.Setup,
 		group.Setup,
@@ -107,6 +110,7 @@ func Setup(mgr ctrl.Manager, o controller.Options) error {
 		share.Setup,
 		snapshot.Setup,
 		user.Setup,
+		vcpuserver.Setup,
 		volume.Setup,
 		registry.Setup,
 		registrytoken.Setup,

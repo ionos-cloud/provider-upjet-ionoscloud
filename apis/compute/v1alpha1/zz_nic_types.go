@@ -78,7 +78,7 @@ type FlowlogParameters struct {
 	Name *string `json:"name" tf:"name,omitempty"`
 }
 
-type NicInitParameters struct {
+type NicInitParameters_2 struct {
 
 	// [Boolean] Indicates if the NIC should get an IP address using DHCP (true) or not (false).
 	DHCP *bool `json:"dhcp,omitempty" tf:"dhcp,omitempty"`
@@ -152,7 +152,7 @@ type NicInitParameters struct {
 	ServerIDSelector *v1.Selector `json:"serverIdSelector,omitempty" tf:"-"`
 }
 
-type NicObservation struct {
+type NicObservation_2 struct {
 
 	// [Boolean] Indicates if the NIC should get an IP address using DHCP (true) or not (false).
 	DHCP *bool `json:"dhcp,omitempty" tf:"dhcp,omitempty"`
@@ -211,7 +211,7 @@ type NicObservation struct {
 	ServerID *string `json:"serverId,omitempty" tf:"server_id,omitempty"`
 }
 
-type NicParameters struct {
+type NicParameters_2 struct {
 
 	// [Boolean] Indicates if the NIC should get an IP address using DHCP (true) or not (false).
 	// +kubebuilder:validation:Optional
@@ -300,7 +300,7 @@ type NicParameters struct {
 // NicSpec defines the desired state of Nic
 type NicSpec struct {
 	v1.ResourceSpec `json:",inline"`
-	ForProvider     NicParameters `json:"forProvider"`
+	ForProvider     NicParameters_2 `json:"forProvider"`
 	// THIS IS A BETA FIELD. It will be honored
 	// unless the Management Policies feature flag is disabled.
 	// InitProvider holds the same fields as ForProvider, with the exception
@@ -311,13 +311,13 @@ type NicSpec struct {
 	// required on creation, but we do not desire to update them after creation,
 	// for example because of an external controller is managing them, like an
 	// autoscaler.
-	InitProvider NicInitParameters `json:"initProvider,omitempty"`
+	InitProvider NicInitParameters_2 `json:"initProvider,omitempty"`
 }
 
 // NicStatus defines the observed state of Nic.
 type NicStatus struct {
 	v1.ResourceStatus `json:",inline"`
-	AtProvider        NicObservation `json:"atProvider,omitempty"`
+	AtProvider        NicObservation_2 `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true

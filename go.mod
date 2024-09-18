@@ -12,7 +12,7 @@ require (
 	github.com/hashicorp/terraform-json v0.22.1
 	github.com/hashicorp/terraform-plugin-framework v1.11.0
 	github.com/hashicorp/terraform-plugin-sdk/v2 v2.34.0
-	github.com/ionos-cloud/terraform-provider-ionoscloud/v6 v6.5.4
+	github.com/ionos-cloud/terraform-provider-ionoscloud/v6 v6.5.5
 	github.com/pkg/errors v0.9.1
 	gopkg.in/alecthomas/kingpin.v2 v2.2.6
 	k8s.io/apimachinery v0.29.1
