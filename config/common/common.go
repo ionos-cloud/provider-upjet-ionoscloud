@@ -40,6 +40,7 @@ func DatacenterLocation() reference.ExtractValueFn {
 	}
 }
 
+// ServerPrimaryNIC returns the primary NIC of a server to be used for cross-referencing
 func ServerPrimaryNIC() reference.ExtractValueFn {
 	return func(mr xpresource.Managed) string {
 		obj, err := fieldpath.PaveObject(mr)
@@ -56,6 +57,7 @@ func ServerPrimaryNIC() reference.ExtractValueFn {
 	}
 }
 
+// AutoCertificateProviderLocation returns the location of a certificate provider to be used for cross-referencing
 func AutoCertificateProviderLocation() reference.ExtractValueFn {
 	return func(mr xpresource.Managed) string {
 		obj, err := fieldpath.PaveObject(mr)
