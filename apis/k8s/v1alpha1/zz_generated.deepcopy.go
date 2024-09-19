@@ -146,10 +146,8 @@ func (in *ClusterInitParameters) DeepCopyInto(out *ClusterInitParameters) {
 	}
 	if in.MaintenanceWindow != nil {
 		in, out := &in.MaintenanceWindow, &out.MaintenanceWindow
-		*out = make([]MaintenanceWindowInitParameters, len(*in))
-		for i := range *in {
-			(*in)[i].DeepCopyInto(&(*out)[i])
-		}
+		*out = new(MaintenanceWindowInitParameters)
+		(*in).DeepCopyInto(*out)
 	}
 	if in.NATGatewayIP != nil {
 		in, out := &in.NATGatewayIP, &out.NATGatewayIP
@@ -258,10 +256,8 @@ func (in *ClusterObservation) DeepCopyInto(out *ClusterObservation) {
 	}
 	if in.MaintenanceWindow != nil {
 		in, out := &in.MaintenanceWindow, &out.MaintenanceWindow
-		*out = make([]MaintenanceWindowObservation, len(*in))
-		for i := range *in {
-			(*in)[i].DeepCopyInto(&(*out)[i])
-		}
+		*out = new(MaintenanceWindowObservation)
+		(*in).DeepCopyInto(*out)
 	}
 	if in.NATGatewayIP != nil {
 		in, out := &in.NATGatewayIP, &out.NATGatewayIP
@@ -344,10 +340,8 @@ func (in *ClusterParameters) DeepCopyInto(out *ClusterParameters) {
 	}
 	if in.MaintenanceWindow != nil {
 		in, out := &in.MaintenanceWindow, &out.MaintenanceWindow
-		*out = make([]MaintenanceWindowParameters, len(*in))
-		for i := range *in {
-			(*in)[i].DeepCopyInto(&(*out)[i])
-		}
+		*out = new(MaintenanceWindowParameters)
+		(*in).DeepCopyInto(*out)
 	}
 	if in.NATGatewayIP != nil {
 		in, out := &in.NATGatewayIP, &out.NATGatewayIP
@@ -667,10 +661,8 @@ func (in *NodePoolInitParameters) DeepCopyInto(out *NodePoolInitParameters) {
 	}
 	if in.AutoScaling != nil {
 		in, out := &in.AutoScaling, &out.AutoScaling
-		*out = make([]AutoScalingInitParameters, len(*in))
-		for i := range *in {
-			(*in)[i].DeepCopyInto(&(*out)[i])
-		}
+		*out = new(AutoScalingInitParameters)
+		(*in).DeepCopyInto(*out)
 	}
 	if in.AvailabilityZone != nil {
 		in, out := &in.AvailabilityZone, &out.AvailabilityZone
@@ -722,6 +714,16 @@ func (in *NodePoolInitParameters) DeepCopyInto(out *NodePoolInitParameters) {
 		*out = new(string)
 		**out = **in
 	}
+	if in.K8SVersionRef != nil {
+		in, out := &in.K8SVersionRef, &out.K8SVersionRef
+		*out = new(v1.Reference)
+		(*in).DeepCopyInto(*out)
+	}
+	if in.K8SVersionSelector != nil {
+		in, out := &in.K8SVersionSelector, &out.K8SVersionSelector
+		*out = new(v1.Selector)
+		(*in).DeepCopyInto(*out)
+	}
 	if in.Labels != nil {
 		in, out := &in.Labels, &out.Labels
 		*out = make(map[string]*string, len(*in))
@@ -747,10 +749,8 @@ func (in *NodePoolInitParameters) DeepCopyInto(out *NodePoolInitParameters) {
 	}
 	if in.MaintenanceWindow != nil {
 		in, out := &in.MaintenanceWindow, &out.MaintenanceWindow
-		*out = make([]NodePoolMaintenanceWindowInitParameters, len(*in))
-		for i := range *in {
-			(*in)[i].DeepCopyInto(&(*out)[i])
-		}
+		*out = new(NodePoolMaintenanceWindowInitParameters)
+		(*in).DeepCopyInto(*out)
 	}
 	if in.Name != nil {
 		in, out := &in.Name, &out.Name
@@ -933,10 +933,8 @@ func (in *NodePoolObservation) DeepCopyInto(out *NodePoolObservation) {
 	}
 	if in.AutoScaling != nil {
 		in, out := &in.AutoScaling, &out.AutoScaling
-		*out = make([]AutoScalingObservation, len(*in))
-		for i := range *in {
-			(*in)[i].DeepCopyInto(&(*out)[i])
-		}
+		*out = new(AutoScalingObservation)
+		(*in).DeepCopyInto(*out)
 	}
 	if in.AvailabilityZone != nil {
 		in, out := &in.AvailabilityZone, &out.AvailabilityZone
@@ -998,10 +996,8 @@ func (in *NodePoolObservation) DeepCopyInto(out *NodePoolObservation) {
 	}
 	if in.MaintenanceWindow != nil {
 		in, out := &in.MaintenanceWindow, &out.MaintenanceWindow
-		*out = make([]NodePoolMaintenanceWindowObservation, len(*in))
-		for i := range *in {
-			(*in)[i].DeepCopyInto(&(*out)[i])
-		}
+		*out = new(NodePoolMaintenanceWindowObservation)
+		(*in).DeepCopyInto(*out)
 	}
 	if in.Name != nil {
 		in, out := &in.Name, &out.Name
@@ -1077,10 +1073,8 @@ func (in *NodePoolParameters) DeepCopyInto(out *NodePoolParameters) {
 	}
 	if in.AutoScaling != nil {
 		in, out := &in.AutoScaling, &out.AutoScaling
-		*out = make([]AutoScalingParameters, len(*in))
-		for i := range *in {
-			(*in)[i].DeepCopyInto(&(*out)[i])
-		}
+		*out = new(AutoScalingParameters)
+		(*in).DeepCopyInto(*out)
 	}
 	if in.AvailabilityZone != nil {
 		in, out := &in.AvailabilityZone, &out.AvailabilityZone
@@ -1132,6 +1126,16 @@ func (in *NodePoolParameters) DeepCopyInto(out *NodePoolParameters) {
 		*out = new(string)
 		**out = **in
 	}
+	if in.K8SVersionRef != nil {
+		in, out := &in.K8SVersionRef, &out.K8SVersionRef
+		*out = new(v1.Reference)
+		(*in).DeepCopyInto(*out)
+	}
+	if in.K8SVersionSelector != nil {
+		in, out := &in.K8SVersionSelector, &out.K8SVersionSelector
+		*out = new(v1.Selector)
+		(*in).DeepCopyInto(*out)
+	}
 	if in.Labels != nil {
 		in, out := &in.Labels, &out.Labels
 		*out = make(map[string]*string, len(*in))
@@ -1157,10 +1161,8 @@ func (in *NodePoolParameters) DeepCopyInto(out *NodePoolParameters) {
 	}
 	if in.MaintenanceWindow != nil {
 		in, out := &in.MaintenanceWindow, &out.MaintenanceWindow
-		*out = make([]NodePoolMaintenanceWindowParameters, len(*in))
-		for i := range *in {
-			(*in)[i].DeepCopyInto(&(*out)[i])
-		}
+		*out = new(NodePoolMaintenanceWindowParameters)
+		(*in).DeepCopyInto(*out)
 	}
 	if in.Name != nil {
 		in, out := &in.Name, &out.Name

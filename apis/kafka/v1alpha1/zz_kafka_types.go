@@ -104,12 +104,22 @@ type KafkaInitParameters struct {
 
 	// Connection information of the Kafka Cluster. Minimum items: 1, maximum items: 1.
 	// The network connection for your Kafka Cluster. Only one connection is allowed.
-	Connections []ConnectionsInitParameters `json:"connections,omitempty" tf:"connections,omitempty"`
+	Connections *ConnectionsInitParameters `json:"connections,omitempty" tf:"connections,omitempty"`
 
 	// [string] The location of the Kafka Cluster. Possible values: de/fra, de/txl, es/vit,
 	// gb/lhr, us/ewr, us/las, us/mci, fr/par
 	// The location of your Kafka Cluster. Supported locations: de/fra, de/txl, es/vit, gb/lhr, us/ewr, us/las, us/mci, fr/par
+	// +crossplane:generate:reference:type=github.com/ionos-cloud/provider-upjet-ionoscloud/apis/compute/v1alpha1.Datacenter
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractParamPath("location",false)
 	Location *string `json:"location,omitempty" tf:"location,omitempty"`
+
+	// Reference to a Datacenter in compute to populate location.
+	// +kubebuilder:validation:Optional
+	LocationRef *v1.Reference `json:"locationRef,omitempty" tf:"-"`
+
+	// Selector for a Datacenter in compute to populate location.
+	// +kubebuilder:validation:Optional
+	LocationSelector *v1.Selector `json:"locationSelector,omitempty" tf:"-"`
 
 	// [string] Name of the Kafka Cluster.
 	// The name of your Kafka Cluster. Must be 63 characters or less and must begin and end with an alphanumeric character (`[a-z0-9A-Z]`) with dashes (`-`), underscores (`_`), dots (`.`), and alphanumerics between.
@@ -133,7 +143,7 @@ type KafkaObservation struct {
 
 	// Connection information of the Kafka Cluster. Minimum items: 1, maximum items: 1.
 	// The network connection for your Kafka Cluster. Only one connection is allowed.
-	Connections []ConnectionsObservation `json:"connections,omitempty" tf:"connections,omitempty"`
+	Connections *ConnectionsObservation `json:"connections,omitempty" tf:"connections,omitempty"`
 
 	// (Computed)[string] The UUID of the Kafka Cluster.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
@@ -161,13 +171,23 @@ type KafkaParameters struct {
 	// Connection information of the Kafka Cluster. Minimum items: 1, maximum items: 1.
 	// The network connection for your Kafka Cluster. Only one connection is allowed.
 	// +kubebuilder:validation:Optional
-	Connections []ConnectionsParameters `json:"connections,omitempty" tf:"connections,omitempty"`
+	Connections *ConnectionsParameters `json:"connections,omitempty" tf:"connections,omitempty"`
 
 	// [string] The location of the Kafka Cluster. Possible values: de/fra, de/txl, es/vit,
 	// gb/lhr, us/ewr, us/las, us/mci, fr/par
 	// The location of your Kafka Cluster. Supported locations: de/fra, de/txl, es/vit, gb/lhr, us/ewr, us/las, us/mci, fr/par
+	// +crossplane:generate:reference:type=github.com/ionos-cloud/provider-upjet-ionoscloud/apis/compute/v1alpha1.Datacenter
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractParamPath("location",false)
 	// +kubebuilder:validation:Optional
 	Location *string `json:"location,omitempty" tf:"location,omitempty"`
+
+	// Reference to a Datacenter in compute to populate location.
+	// +kubebuilder:validation:Optional
+	LocationRef *v1.Reference `json:"locationRef,omitempty" tf:"-"`
+
+	// Selector for a Datacenter in compute to populate location.
+	// +kubebuilder:validation:Optional
+	LocationSelector *v1.Selector `json:"locationSelector,omitempty" tf:"-"`
 
 	// [string] Name of the Kafka Cluster.
 	// The name of your Kafka Cluster. Must be 63 characters or less and must begin and end with an alphanumeric character (`[a-z0-9A-Z]`) with dashes (`-`), underscores (`_`), dots (`.`), and alphanumerics between.
@@ -222,7 +242,6 @@ type Kafka struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
 	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.connections) || (has(self.initProvider) && has(self.initProvider.connections))",message="spec.forProvider.connections is a required parameter"
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.location) || (has(self.initProvider) && has(self.initProvider.location))",message="spec.forProvider.location is a required parameter"
 	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.name) || (has(self.initProvider) && has(self.initProvider.name))",message="spec.forProvider.name is a required parameter"
 	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.size) || (has(self.initProvider) && has(self.initProvider.size))",message="spec.forProvider.size is a required parameter"
 	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.version) || (has(self.initProvider) && has(self.initProvider.version))",message="spec.forProvider.version is a required parameter"

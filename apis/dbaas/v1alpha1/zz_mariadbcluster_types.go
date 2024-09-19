@@ -167,7 +167,7 @@ type MariadbClusterInitParameters struct {
 
 	// The network connection for your cluster. Only one connection is allowed.
 	// The network connection for your cluster. Only one connection is allowed.
-	Connections []ConnectionsInitParameters `json:"connections,omitempty" tf:"connections,omitempty"`
+	Connections *ConnectionsInitParameters `json:"connections,omitempty" tf:"connections,omitempty"`
 
 	// [int] The number of CPU cores per instance.
 	// The number of CPU cores per instance.
@@ -191,7 +191,7 @@ type MariadbClusterInitParameters struct {
 
 	// (Computed) A weekly 4 hour-long window, during which maintenance might occur
 	// A weekly 4 hour-long window, during which maintenance might occur.
-	MaintenanceWindow []MaintenanceWindowInitParameters `json:"maintenanceWindow,omitempty" tf:"maintenance_window,omitempty"`
+	MaintenanceWindow *MaintenanceWindowInitParameters `json:"maintenanceWindow,omitempty" tf:"maintenance_window,omitempty"`
 
 	// [string] The MariaDB version of your cluster.
 	// The MariaDB version of your cluster.
@@ -210,7 +210,7 @@ type MariadbClusterObservation struct {
 
 	// The network connection for your cluster. Only one connection is allowed.
 	// The network connection for your cluster. Only one connection is allowed.
-	Connections []ConnectionsObservation `json:"connections,omitempty" tf:"connections,omitempty"`
+	Connections *ConnectionsObservation `json:"connections,omitempty" tf:"connections,omitempty"`
 
 	// [int] The number of CPU cores per instance.
 	// The number of CPU cores per instance.
@@ -240,7 +240,7 @@ type MariadbClusterObservation struct {
 
 	// (Computed) A weekly 4 hour-long window, during which maintenance might occur
 	// A weekly 4 hour-long window, during which maintenance might occur.
-	MaintenanceWindow []MaintenanceWindowObservation `json:"maintenanceWindow,omitempty" tf:"maintenance_window,omitempty"`
+	MaintenanceWindow *MaintenanceWindowObservation `json:"maintenanceWindow,omitempty" tf:"maintenance_window,omitempty"`
 
 	// [string] The MariaDB version of your cluster.
 	// The MariaDB version of your cluster.
@@ -260,7 +260,7 @@ type MariadbClusterParameters struct {
 	// The network connection for your cluster. Only one connection is allowed.
 	// The network connection for your cluster. Only one connection is allowed.
 	// +kubebuilder:validation:Optional
-	Connections []ConnectionsParameters `json:"connections,omitempty" tf:"connections,omitempty"`
+	Connections *ConnectionsParameters `json:"connections,omitempty" tf:"connections,omitempty"`
 
 	// [int] The number of CPU cores per instance.
 	// The number of CPU cores per instance.
@@ -290,7 +290,7 @@ type MariadbClusterParameters struct {
 	// (Computed) A weekly 4 hour-long window, during which maintenance might occur
 	// A weekly 4 hour-long window, during which maintenance might occur.
 	// +kubebuilder:validation:Optional
-	MaintenanceWindow []MaintenanceWindowParameters `json:"maintenanceWindow,omitempty" tf:"maintenance_window,omitempty"`
+	MaintenanceWindow *MaintenanceWindowParameters `json:"maintenanceWindow,omitempty" tf:"maintenance_window,omitempty"`
 
 	// [string] The MariaDB version of your cluster.
 	// The MariaDB version of your cluster.

@@ -1,3 +1,34 @@
+apiVersion: compute.ionoscloud.io/v1alpha1
+kind: Datacenter
+metadata:
+  annotations:
+    meta.upbound.io/example-id: compute/v1alpha1/datacenter
+  labels:
+    testing.upbound.io/example-name: datacenter_example
+  name: example
+spec:
+  forProvider:
+    description: datacenter description
+    location: es/vit
+    name: Datacenter Example
+    secAuthProtection: false
+---
+apiVersion: compute.ionoscloud.io/v1alpha1
+kind: Lan
+metadata:
+  annotations:
+    meta.upbound.io/example-id: compute/v1alpha1/lan
+  labels:
+    testing.upbound.io/example-name: lan_example
+  name: example
+spec:
+  forProvider:
+    datacenterIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: datacenter_example
+    name: Lan Example
+    public: false
+---
 apiVersion: postgresql.ionoscloud.io/v1alpha1
 kind: PostgresqlCluster
 metadata:
@@ -9,30 +40,39 @@ metadata:
 spec:
   forProvider:
     connections:
-      - cidr: 192.168.100.1/24
+        cidr: 192.168.100.1/24
         datacenterIdSelector:
           matchLabels:
-            testing.upbound.io/example-name: example
+            testing.upbound.io/example-name: datacenter_example
         lanIdSelector:
           matchLabels:
-            testing.upbound.io/example-name: example
-    cores: 4
+            testing.upbound.io/example-name: lan_example
+    cores: 1
     credentials:
       - passwordSecretRef:
-          key: example-key
-          name: example-secret
+          key: password
+          name: pwsecret
           namespace: upbound-system
         username: username
     displayName: PostgreSQL_cluster
     instances: 1
     locationSelector:
       matchLabels:
-        testing.upbound.io/example-name: example
+        testing.upbound.io/example-name: datacenter_example
     maintenanceWindow:
-      - dayOfTheWeek: Sunday
+        dayOfTheWeek: Sunday
         time: "09:00:00"
     postgresVersion: "12"
     ram: 2048
     storageSize: 2048
     storageType: HDD
     synchronizationMode: ASYNCHRONOUS
+
+---
+apiVersion: v1
+kind: Secret
+metadata:
+  name: pwsecret
+  namespace: upbound-system
+stringData:
+  password: "Upboundtest!"

@@ -9,15 +9,15 @@ metadata:
 spec:
   forProvider:
     connections:
-      - datacenterIdSelector:
+        datacenterIdSelector:
           matchLabels:
-            testing.upbound.io/example-name: nfs_dc
+            testing.upbound.io/example-name: example
         ipAddress: 192.168.100.10/24
         lanSelector:
           matchLabels:
-            testing.upbound.io/example-name: nfs_lan
+            testing.upbound.io/example-name: example
     location: de/txl
     name: test
     nfs:
-      - minVersion: "4.2"
+       minVersion: "4.2"
     size: 2

@@ -88,20 +88,18 @@ spec:
                     description: |-
                       [string] Wether the Node Pool should autoscale. For more details, please check the API documentation
                       The range defining the minimum and maximum number of worker nodes that the managed node group can scale in
-                    items:
-                      properties:
-                        maxNodeCount:
-                          description: |-
-                            [int] The maximum number of worker nodes that the node pool can scale to. Should be greater than min_node_count
-                            The maximum number of worker nodes that the node pool can scale to. Should be greater than min_node_count
-                          type: number
-                        minNodeCount:
-                          description: |-
-                            [int] The minimum number of worker nodes the node pool can scale down to. Should be less than max_node_count
-                            The minimum number of worker nodes the node pool can scale down to. Should be less than max_node_count
-                          type: number
-                      type: object
-                    type: array
+                    properties:
+                      maxNodeCount:
+                        description: |-
+                          [int] The maximum number of worker nodes that the node pool can scale to. Should be greater than min_node_count
+                          The maximum number of worker nodes that the node pool can scale to. Should be greater than min_node_count
+                        type: number
+                      minNodeCount:
+                        description: |-
+                          [int] The minimum number of worker nodes the node pool can scale down to. Should be less than max_node_count
+                          The minimum number of worker nodes the node pool can scale down to. Should be less than max_node_count
+                        type: number
+                    type: object
                   availabilityZone:
                     description: |-
                       [string] - The desired Compute availability zone - See the API documentation for more information. This attribute is immutable.
@@ -282,6 +280,80 @@ spec:
                       [string] The desired Kubernetes Version. For supported values, please check the API documentation. Downgrades are not supported. The provider will ignore downgrades of patch level.
                       The desired Kubernetes Version. For supported values, please check the API documentation. Downgrades are not supported. The provider will ignore downgrades of patch level.
                     type: string
+                  k8sVersionRef:
+                    description: Reference to a Cluster in k8s to populate k8sVersion.
+                    properties:
+                      name:
+                        description: Name of the referenced object.
+                        type: string
+                      policy:
+                        description: Policies for referencing.
+                        properties:
+                          resolution:
+                            default: Required
+                            description: |-
+                              Resolution specifies whether resolution of this reference is required.
+                              The default is 'Required', which means the reconcile will fail if the
+                              reference cannot be resolved. 'Optional' means this reference will be
+                              a no-op if it cannot be resolved.
+                            enum:
+                            - Required
+                            - Optional
+                            type: string
+                          resolve:
+                            description: |-
+                              Resolve specifies when this reference should be resolved. The default
+                              is 'IfNotPresent', which will attempt to resolve the reference only when
+                              the corresponding field is not present. Use 'Always' to resolve the
+                              reference on every reconcile.
+                            enum:
+                            - Always
+                            - IfNotPresent
+                            type: string
+                        type: object
+                    required:
+                    - name
+                    type: object
+                  k8sVersionSelector:
+                    description: Selector for a Cluster in k8s to populate k8sVersion.
+                    properties:
+                      matchControllerRef:
+                        description: |-
+                          MatchControllerRef ensures an object with the same controller reference
+                          as the selecting object is selected.
+                        type: boolean
+                      matchLabels:
+                        additionalProperties:
+                          type: string
+                        description: MatchLabels ensures an object with matching labels
+                          is selected.
+                        type: object
+                      policy:
+                        description: Policies for selection.
+                        properties:
+                          resolution:
+                            default: Required
+                            description: |-
+                              Resolution specifies whether resolution of this reference is required.
+                              The default is 'Required', which means the reconcile will fail if the
+                              reference cannot be resolved. 'Optional' means this reference will be
+                              a no-op if it cannot be resolved.
+                            enum:
+                            - Required
+                            - Optional
+                            type: string
+                          resolve:
+                            description: |-
+                              Resolve specifies when this reference should be resolved. The default
+                              is 'IfNotPresent', which will attempt to resolve the reference only when
+                              the corresponding field is not present. Use 'Always' to resolve the
+                              reference on every reconcile.
+                            enum:
+                            - Always
+                            - IfNotPresent
+                            type: string
+                        type: object
+                    type: object
                   labels:
                     additionalProperties:
                       type: string
@@ -402,20 +474,18 @@ spec:
                     description: |-
                       See the maintenance_window section in the example above
                       A maintenance window comprise of a day of the week and a time for maintenance to be allowed
-                    items:
-                      properties:
-                        dayOfTheWeek:
-                          description: |-
-                            [string] Day of the week when maintenance is allowed
-                            Day of the week when maintenance is allowed
-                          type: string
-                        time:
-                          description: |-
-                            [string] A clock time in the day when maintenance is allowed
-                            A clock time in the day when maintenance is allowed
-                          type: string
-                      type: object
-                    type: array
+                    properties:
+                      dayOfTheWeek:
+                        description: |-
+                          [string] Day of the week when maintenance is allowed
+                          Day of the week when maintenance is allowed
+                        type: string
+                      time:
+                        description: |-
+                          [string] A clock time in the day when maintenance is allowed
+                          A clock time in the day when maintenance is allowed
+                        type: string
+                    type: object
                   name:
                     description: |-
                       [string] The name of the Kubernetes Cluster. This attribute is immutable.
@@ -477,20 +547,18 @@ spec:
                     description: |-
                       [string] Wether the Node Pool should autoscale. For more details, please check the API documentation
                       The range defining the minimum and maximum number of worker nodes that the managed node group can scale in
-                    items:
-                      properties:
-                        maxNodeCount:
-                          description: |-
-                            [int] The maximum number of worker nodes that the node pool can scale to. Should be greater than min_node_count
-                            The maximum number of worker nodes that the node pool can scale to. Should be greater than min_node_count
-                          type: number
-                        minNodeCount:
-                          description: |-
-                            [int] The minimum number of worker nodes the node pool can scale down to. Should be less than max_node_count
-                            The minimum number of worker nodes the node pool can scale down to. Should be less than max_node_count
-                          type: number
-                      type: object
-                    type: array
+                    properties:
+                      maxNodeCount:
+                        description: |-
+                          [int] The maximum number of worker nodes that the node pool can scale to. Should be greater than min_node_count
+                          The maximum number of worker nodes that the node pool can scale to. Should be greater than min_node_count
+                        type: number
+                      minNodeCount:
+                        description: |-
+                          [int] The minimum number of worker nodes the node pool can scale down to. Should be less than max_node_count
+                          The minimum number of worker nodes the node pool can scale down to. Should be less than max_node_count
+                        type: number
+                    type: object
                   availabilityZone:
                     description: |-
                       [string] - The desired Compute availability zone - See the API documentation for more information. This attribute is immutable.
@@ -671,6 +739,80 @@ spec:
                       [string] The desired Kubernetes Version. For supported values, please check the API documentation. Downgrades are not supported. The provider will ignore downgrades of patch level.
                       The desired Kubernetes Version. For supported values, please check the API documentation. Downgrades are not supported. The provider will ignore downgrades of patch level.
                     type: string
+                  k8sVersionRef:
+                    description: Reference to a Cluster in k8s to populate k8sVersion.
+                    properties:
+                      name:
+                        description: Name of the referenced object.
+                        type: string
+                      policy:
+                        description: Policies for referencing.
+                        properties:
+                          resolution:
+                            default: Required
+                            description: |-
+                              Resolution specifies whether resolution of this reference is required.
+                              The default is 'Required', which means the reconcile will fail if the
+                              reference cannot be resolved. 'Optional' means this reference will be
+                              a no-op if it cannot be resolved.
+                            enum:
+                            - Required
+                            - Optional
+                            type: string
+                          resolve:
+                            description: |-
+                              Resolve specifies when this reference should be resolved. The default
+                              is 'IfNotPresent', which will attempt to resolve the reference only when
+                              the corresponding field is not present. Use 'Always' to resolve the
+                              reference on every reconcile.
+                            enum:
+                            - Always
+                            - IfNotPresent
+                            type: string
+                        type: object
+                    required:
+                    - name
+                    type: object
+                  k8sVersionSelector:
+                    description: Selector for a Cluster in k8s to populate k8sVersion.
+                    properties:
+                      matchControllerRef:
+                        description: |-
+                          MatchControllerRef ensures an object with the same controller reference
+                          as the selecting object is selected.
+                        type: boolean
+                      matchLabels:
+                        additionalProperties:
+                          type: string
+                        description: MatchLabels ensures an object with matching labels
+                          is selected.
+                        type: object
+                      policy:
+                        description: Policies for selection.
+                        properties:
+                          resolution:
+                            default: Required
+                            description: |-
+                              Resolution specifies whether resolution of this reference is required.
+                              The default is 'Required', which means the reconcile will fail if the
+                              reference cannot be resolved. 'Optional' means this reference will be
+                              a no-op if it cannot be resolved.
+                            enum:
+                            - Required
+                            - Optional
+                            type: string
+                          resolve:
+                            description: |-
+                              Resolve specifies when this reference should be resolved. The default
+                              is 'IfNotPresent', which will attempt to resolve the reference only when
+                              the corresponding field is not present. Use 'Always' to resolve the
+                              reference on every reconcile.
+                            enum:
+                            - Always
+                            - IfNotPresent
+                            type: string
+                        type: object
+                    type: object
                   labels:
                     additionalProperties:
                       type: string
@@ -791,20 +933,18 @@ spec:
                     description: |-
                       See the maintenance_window section in the example above
                       A maintenance window comprise of a day of the week and a time for maintenance to be allowed
-                    items:
-                      properties:
-                        dayOfTheWeek:
-                          description: |-
-                            [string] Day of the week when maintenance is allowed
-                            Day of the week when maintenance is allowed
-                          type: string
-                        time:
-                          description: |-
-                            [string] A clock time in the day when maintenance is allowed
-                            A clock time in the day when maintenance is allowed
-                          type: string
-                      type: object
-                    type: array
+                    properties:
+                      dayOfTheWeek:
+                        description: |-
+                          [string] Day of the week when maintenance is allowed
+                          Day of the week when maintenance is allowed
+                        type: string
+                      time:
+                        description: |-
+                          [string] A clock time in the day when maintenance is allowed
+                          A clock time in the day when maintenance is allowed
+                        type: string
+                    type: object
                   name:
                     description: |-
                       [string] The name of the Kubernetes Cluster. This attribute is immutable.
@@ -1018,10 +1158,6 @@ spec:
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
                 || ''Update'' in self.managementPolicies) || has(self.forProvider.cpuFamily)
                 || (has(self.initProvider) && has(self.initProvider.cpuFamily))'
-            - message: spec.forProvider.k8sVersion is a required parameter
-              rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
-                || ''Update'' in self.managementPolicies) || has(self.forProvider.k8sVersion)
-                || (has(self.initProvider) && has(self.initProvider.k8sVersion))'
             - message: spec.forProvider.name is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
                 || ''Update'' in self.managementPolicies) || has(self.forProvider.name)
@@ -1062,20 +1198,18 @@ spec:
                     description: |-
                       [string] Wether the Node Pool should autoscale. For more details, please check the API documentation
                       The range defining the minimum and maximum number of worker nodes that the managed node group can scale in
-                    items:
-                      properties:
-                        maxNodeCount:
-                          description: |-
-                            [int] The maximum number of worker nodes that the node pool can scale to. Should be greater than min_node_count
-                            The maximum number of worker nodes that the node pool can scale to. Should be greater than min_node_count
-                          type: number
-                        minNodeCount:
-                          description: |-
-                            [int] The minimum number of worker nodes the node pool can scale down to. Should be less than max_node_count
-                            The minimum number of worker nodes the node pool can scale down to. Should be less than max_node_count
-                          type: number
-                      type: object
-                    type: array
+                    properties:
+                      maxNodeCount:
+                        description: |-
+                          [int] The maximum number of worker nodes that the node pool can scale to. Should be greater than min_node_count
+                          The maximum number of worker nodes that the node pool can scale to. Should be greater than min_node_count
+                        type: number
+                      minNodeCount:
+                        description: |-
+                          [int] The minimum number of worker nodes the node pool can scale down to. Should be less than max_node_count
+                          The minimum number of worker nodes the node pool can scale down to. Should be less than max_node_count
+                        type: number
+                    type: object
                   availabilityZone:
                     description: |-
                       [string] - The desired Compute availability zone - See the API documentation for more information. This attribute is immutable.
@@ -1156,20 +1290,18 @@ spec:
                     description: |-
                       See the maintenance_window section in the example above
                       A maintenance window comprise of a day of the week and a time for maintenance to be allowed
-                    items:
-                      properties:
-                        dayOfTheWeek:
-                          description: |-
-                            [string] Day of the week when maintenance is allowed
-                            Day of the week when maintenance is allowed
-                          type: string
-                        time:
-                          description: |-
-                            [string] A clock time in the day when maintenance is allowed
-                            A clock time in the day when maintenance is allowed
-                          type: string
-                      type: object
-                    type: array
+                    properties:
+                      dayOfTheWeek:
+                        description: |-
+                          [string] Day of the week when maintenance is allowed
+                          Day of the week when maintenance is allowed
+                        type: string
+                      time:
+                        description: |-
+                          [string] A clock time in the day when maintenance is allowed
+                          A clock time in the day when maintenance is allowed
+                        type: string
+                    type: object
                   name:
                     description: |-
                       [string] The name of the Kubernetes Cluster. This attribute is immutable.

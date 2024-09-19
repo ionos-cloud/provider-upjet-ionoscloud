@@ -126,7 +126,7 @@ type NodePoolInitParameters struct {
 
 	// [string] Wether the Node Pool should autoscale. For more details, please check the API documentation
 	// The range defining the minimum and maximum number of worker nodes that the managed node group can scale in
-	AutoScaling []AutoScalingInitParameters `json:"autoScaling,omitempty" tf:"auto_scaling,omitempty"`
+	AutoScaling *AutoScalingInitParameters `json:"autoScaling,omitempty" tf:"auto_scaling,omitempty"`
 
 	// [string] - The desired Compute availability zone - See the API documentation for more information. This attribute is immutable.
 	// The compute availability zone in which the nodes should exist
@@ -168,7 +168,17 @@ type NodePoolInitParameters struct {
 
 	// [string] The desired Kubernetes Version. For supported values, please check the API documentation. Downgrades are not supported. The provider will ignore downgrades of patch level.
 	// The desired Kubernetes Version. For supported values, please check the API documentation. Downgrades are not supported. The provider will ignore downgrades of patch level.
+	// +crossplane:generate:reference:type=github.com/ionos-cloud/provider-upjet-ionoscloud/apis/k8s/v1alpha1.Cluster
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractParamPath("k8s_version",false)
 	K8SVersion *string `json:"k8sVersion,omitempty" tf:"k8s_version,omitempty"`
+
+	// Reference to a Cluster in k8s to populate k8sVersion.
+	// +kubebuilder:validation:Optional
+	K8SVersionRef *v1.Reference `json:"k8sVersionRef,omitempty" tf:"-"`
+
+	// Selector for a Cluster in k8s to populate k8sVersion.
+	// +kubebuilder:validation:Optional
+	K8SVersionSelector *v1.Selector `json:"k8sVersionSelector,omitempty" tf:"-"`
 
 	// [map] A key/value map of labels
 	// +mapType=granular
@@ -180,7 +190,7 @@ type NodePoolInitParameters struct {
 
 	// See the maintenance_window section in the example above
 	// A maintenance window comprise of a day of the week and a time for maintenance to be allowed
-	MaintenanceWindow []NodePoolMaintenanceWindowInitParameters `json:"maintenanceWindow,omitempty" tf:"maintenance_window,omitempty"`
+	MaintenanceWindow *NodePoolMaintenanceWindowInitParameters `json:"maintenanceWindow,omitempty" tf:"maintenance_window,omitempty"`
 
 	// [string] The name of the Kubernetes Cluster. This attribute is immutable.
 	// The desired name for the node pool
@@ -254,7 +264,7 @@ type NodePoolObservation struct {
 
 	// [string] Wether the Node Pool should autoscale. For more details, please check the API documentation
 	// The range defining the minimum and maximum number of worker nodes that the managed node group can scale in
-	AutoScaling []AutoScalingObservation `json:"autoScaling,omitempty" tf:"auto_scaling,omitempty"`
+	AutoScaling *AutoScalingObservation `json:"autoScaling,omitempty" tf:"auto_scaling,omitempty"`
 
 	// [string] - The desired Compute availability zone - See the API documentation for more information. This attribute is immutable.
 	// The compute availability zone in which the nodes should exist
@@ -293,7 +303,7 @@ type NodePoolObservation struct {
 
 	// See the maintenance_window section in the example above
 	// A maintenance window comprise of a day of the week and a time for maintenance to be allowed
-	MaintenanceWindow []NodePoolMaintenanceWindowObservation `json:"maintenanceWindow,omitempty" tf:"maintenance_window,omitempty"`
+	MaintenanceWindow *NodePoolMaintenanceWindowObservation `json:"maintenanceWindow,omitempty" tf:"maintenance_window,omitempty"`
 
 	// [string] The name of the Kubernetes Cluster. This attribute is immutable.
 	// The desired name for the node pool
@@ -335,7 +345,7 @@ type NodePoolParameters struct {
 	// [string] Wether the Node Pool should autoscale. For more details, please check the API documentation
 	// The range defining the minimum and maximum number of worker nodes that the managed node group can scale in
 	// +kubebuilder:validation:Optional
-	AutoScaling []AutoScalingParameters `json:"autoScaling,omitempty" tf:"auto_scaling,omitempty"`
+	AutoScaling *AutoScalingParameters `json:"autoScaling,omitempty" tf:"auto_scaling,omitempty"`
 
 	// [string] - The desired Compute availability zone - See the API documentation for more information. This attribute is immutable.
 	// The compute availability zone in which the nodes should exist
@@ -382,8 +392,18 @@ type NodePoolParameters struct {
 
 	// [string] The desired Kubernetes Version. For supported values, please check the API documentation. Downgrades are not supported. The provider will ignore downgrades of patch level.
 	// The desired Kubernetes Version. For supported values, please check the API documentation. Downgrades are not supported. The provider will ignore downgrades of patch level.
+	// +crossplane:generate:reference:type=github.com/ionos-cloud/provider-upjet-ionoscloud/apis/k8s/v1alpha1.Cluster
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractParamPath("k8s_version",false)
 	// +kubebuilder:validation:Optional
 	K8SVersion *string `json:"k8sVersion,omitempty" tf:"k8s_version,omitempty"`
+
+	// Reference to a Cluster in k8s to populate k8sVersion.
+	// +kubebuilder:validation:Optional
+	K8SVersionRef *v1.Reference `json:"k8sVersionRef,omitempty" tf:"-"`
+
+	// Selector for a Cluster in k8s to populate k8sVersion.
+	// +kubebuilder:validation:Optional
+	K8SVersionSelector *v1.Selector `json:"k8sVersionSelector,omitempty" tf:"-"`
 
 	// [map] A key/value map of labels
 	// +kubebuilder:validation:Optional
@@ -398,7 +418,7 @@ type NodePoolParameters struct {
 	// See the maintenance_window section in the example above
 	// A maintenance window comprise of a day of the week and a time for maintenance to be allowed
 	// +kubebuilder:validation:Optional
-	MaintenanceWindow []NodePoolMaintenanceWindowParameters `json:"maintenanceWindow,omitempty" tf:"maintenance_window,omitempty"`
+	MaintenanceWindow *NodePoolMaintenanceWindowParameters `json:"maintenanceWindow,omitempty" tf:"maintenance_window,omitempty"`
 
 	// [string] The name of the Kubernetes Cluster. This attribute is immutable.
 	// The desired name for the node pool
@@ -505,7 +525,6 @@ type NodePool struct {
 	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.availabilityZone) || (has(self.initProvider) && has(self.initProvider.availabilityZone))",message="spec.forProvider.availabilityZone is a required parameter"
 	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.coresCount) || (has(self.initProvider) && has(self.initProvider.coresCount))",message="spec.forProvider.coresCount is a required parameter"
 	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.cpuFamily) || (has(self.initProvider) && has(self.initProvider.cpuFamily))",message="spec.forProvider.cpuFamily is a required parameter"
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.k8sVersion) || (has(self.initProvider) && has(self.initProvider.k8sVersion))",message="spec.forProvider.k8sVersion is a required parameter"
 	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.name) || (has(self.initProvider) && has(self.initProvider.name))",message="spec.forProvider.name is a required parameter"
 	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.nodeCount) || (has(self.initProvider) && has(self.initProvider.nodeCount))",message="spec.forProvider.nodeCount is a required parameter"
 	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.ramSize) || (has(self.initProvider) && has(self.initProvider.ramSize))",message="spec.forProvider.ramSize is a required parameter"

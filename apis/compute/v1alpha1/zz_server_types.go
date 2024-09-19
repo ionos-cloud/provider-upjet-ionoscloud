@@ -16,9 +16,10 @@ import (
 type FirewallInitParameters struct {
 	IcmpCode *string `json:"icmpCode,omitempty" tf:"icmp_code,omitempty"`
 
+	// (Computed)[string] Server usages: ENTERPRISE or CUBE. This property is immutable.
 	IcmpType *string `json:"icmpType,omitempty" tf:"icmp_type,omitempty"`
 
-	// [string] The name of the volume.
+	// [string] The name of the server.
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
 	PortRangeEnd *float64 `json:"portRangeEnd,omitempty" tf:"port_range_end,omitempty"`
@@ -33,6 +34,7 @@ type FirewallInitParameters struct {
 
 	TargetIP *string `json:"targetIp,omitempty" tf:"target_ip,omitempty"`
 
+	// (Computed)[string] Server usages: ENTERPRISE or CUBE. This property is immutable.
 	Type *string `json:"type,omitempty" tf:"type,omitempty"`
 }
 
@@ -41,9 +43,10 @@ type FirewallObservation struct {
 
 	IcmpCode *string `json:"icmpCode,omitempty" tf:"icmp_code,omitempty"`
 
+	// (Computed)[string] Server usages: ENTERPRISE or CUBE. This property is immutable.
 	IcmpType *string `json:"icmpType,omitempty" tf:"icmp_type,omitempty"`
 
-	// [string] The name of the volume.
+	// [string] The name of the server.
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
 	PortRangeEnd *float64 `json:"portRangeEnd,omitempty" tf:"port_range_end,omitempty"`
@@ -58,6 +61,7 @@ type FirewallObservation struct {
 
 	TargetIP *string `json:"targetIp,omitempty" tf:"target_ip,omitempty"`
 
+	// (Computed)[string] Server usages: ENTERPRISE or CUBE. This property is immutable.
 	Type *string `json:"type,omitempty" tf:"type,omitempty"`
 }
 
@@ -66,10 +70,11 @@ type FirewallParameters struct {
 	// +kubebuilder:validation:Optional
 	IcmpCode *string `json:"icmpCode,omitempty" tf:"icmp_code,omitempty"`
 
+	// (Computed)[string] Server usages: ENTERPRISE or CUBE. This property is immutable.
 	// +kubebuilder:validation:Optional
 	IcmpType *string `json:"icmpType,omitempty" tf:"icmp_type,omitempty"`
 
-	// [string] The name of the volume.
+	// [string] The name of the server.
 	// +kubebuilder:validation:Optional
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
@@ -91,44 +96,56 @@ type FirewallParameters struct {
 	// +kubebuilder:validation:Optional
 	TargetIP *string `json:"targetIp,omitempty" tf:"target_ip,omitempty"`
 
+	// (Computed)[string] Server usages: ENTERPRISE or CUBE. This property is immutable.
 	// +kubebuilder:validation:Optional
 	Type *string `json:"type,omitempty" tf:"type,omitempty"`
 }
 
 type LabelInitParameters struct {
+
+	// [string] The key of the label.
 	Key *string `json:"key,omitempty" tf:"key,omitempty"`
 
+	// [string] The value of the label.
 	Value *string `json:"value,omitempty" tf:"value,omitempty"`
 }
 
 type LabelObservation struct {
+
+	// [string] The key of the label.
 	Key *string `json:"key,omitempty" tf:"key,omitempty"`
 
+	// [string] The value of the label.
 	Value *string `json:"value,omitempty" tf:"value,omitempty"`
 }
 
 type LabelParameters struct {
 
+	// [string] The key of the label.
 	// +kubebuilder:validation:Optional
 	Key *string `json:"key" tf:"key,omitempty"`
 
+	// [string] The value of the label.
 	// +kubebuilder:validation:Optional
 	Value *string `json:"value" tf:"value,omitempty"`
 }
 
 type ServerInitParameters struct {
 
-	// [string] The storage availability zone assigned to the volume: AUTO, ZONE_1, ZONE_2, or ZONE_3. This property is immutable
+	// [string] The availability zone in which the server should exist. E.g: AUTO, ZONE_1, ZONE_2. This property is immutable.
 	AvailabilityZone *string `json:"availabilityZone,omitempty" tf:"availability_zone,omitempty"`
 
+	// DEPRECATED Please refer to ionoscloud_server_boot_device_selection (Computed)[string] The associated boot drive, if any. Must be the UUID of a bootable CDROM image that can be retrieved using the ionoscloud_image data source.
 	// The associated boot drive, if any. Must be the UUID of a bootable CDROM image that you can retrieve using the image data source
 	BootCdrom *string `json:"bootCdrom,omitempty" tf:"boot_cdrom,omitempty"`
 
-	// (Computed) The image or snapshot UUID.
+	// [string] The image or snapshot UUID / name. May also be an image alias. It is required if licence_type is not provided.
 	BootImage *string `json:"bootImage,omitempty" tf:"boot_image,omitempty"`
 
+	// [string] CPU architecture on which server gets provisioned; not all CPU architectures are available in all datacenter regions; available CPU architectures can be retrieved from the datacenter resource. E.g.: "INTEL_SKYLAKE" or "INTEL_XEON".
 	CPUFamily *string `json:"cpuFamily,omitempty" tf:"cpu_family,omitempty"`
 
+	// (Computed)[integer] Number of server CPU cores.
 	Cores *float64 `json:"cores,omitempty" tf:"cores,omitempty"`
 
 	// [string] The ID of a Virtual Data Center.
@@ -143,40 +160,48 @@ type ServerInitParameters struct {
 	// +kubebuilder:validation:Optional
 	DatacenterIDSelector *v1.Selector `json:"datacenterIdSelector,omitempty" tf:"-"`
 
+	// (Computed) The associated firewall rules.
 	FirewallruleIds []*string `json:"firewallruleIds,omitempty" tf:"firewallrule_ids,omitempty"`
 
 	// [string] The name, ID or alias of the image. May also be a snapshot ID. It is required if licence_type is not provided. Attribute is immutable.
 	ImageName *string `json:"imageName,omitempty" tf:"image_name,omitempty"`
 
-	// [string] Required if sshkey_path is not provided.
+	// [string] Required if ssh_key_path is not provided.
 	ImagePasswordSecretRef *v1.SecretKeySelector `json:"imagePasswordSecretRef,omitempty" tf:"-"`
 
+	// [set] A label can be seen as an object with only two required fields: key and value, both of the string type. Please check the example presented above to see how a label can be used in the plan. A server can have multiple labels.
 	Label []LabelInitParameters `json:"label,omitempty" tf:"label,omitempty"`
 
-	// [string] The name of the volume.
+	// [string] The name of the server.
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
-	Nic []ServerNicInitParameters `json:"nic,omitempty" tf:"nic,omitempty"`
+	// See the Nic section.
+	Nic *ServerNicInitParameters `json:"nic,omitempty" tf:"nic,omitempty"`
 
+	// (Computed)[integer] The amount of memory for the server in MB.
 	RAM *float64 `json:"ram,omitempty" tf:"ram,omitempty"`
 
-	// [list] List of absolute paths to files containing a public SSH key that will be injected into IonosCloud provided Linux images. Also accepts ssh keys directly. Required for IonosCloud Linux images. Required if image_password is not provided. This property is immutable.
+	// [list] List of absolute paths to files containing a public SSH key that will be injected into IonosCloud provided Linux images.  Also accepts ssh keys directly. Required for IonosCloud Linux images. Required if image_password is not provided. Does not support ~ expansion to homedir in the given path. This property is immutable.
 	// Immutable List of absolute or relative paths to files containing public SSH key that will be injected into IonosCloud provided Linux images. Does not support `~` expansion to homedir in the given path. Public SSH keys are set on the image as authorized keys for appropriate SSH login to the instance using the corresponding private key. This field may only be set in creation requests. When reading, it always returns null. SSH keys are only supported if a public Linux image is used for the volume creation. This property is immutable.
 	SSHKeyPath []*string `json:"sshKeyPath,omitempty" tf:"ssh_key_path,omitempty"`
 
-	// [list] List of absolute paths to files containing a public SSH key that will be injected into IonosCloud provided Linux images. Also accepts ssh keys directly. Required for IonosCloud Linux images. Required if image_password is not provided. This property is immutable.
+	// [list] Immutable List of absolute or relative paths to files containing public SSH key that will be injected into IonosCloud provided Linux images. Also accepts ssh keys directly. Public SSH keys are set on the image as authorized keys for appropriate SSH login to the instance using the corresponding private key. This field may only be set in creation requests. When reading, it always returns null. SSH keys are only supported if a public Linux image is used for the volume creation. Does not support ~ expansion to homedir in the given path.
 	// Public SSH keys are set on the image as authorized keys for appropriate SSH login to the instance using the corresponding private key. This field may only be set in creation requests. When reading, it always returns null. SSH keys are only supported if a public Linux image is used for the volume creation.
 	SSHKeys []*string `json:"sshKeys,omitempty" tf:"ssh_keys,omitempty"`
 
+	// [string] The UUID of the template for creating a CUBE server; the available templates for CUBE servers can be found on the templates resource
 	TemplateUUID *string `json:"templateUuid,omitempty" tf:"template_uuid,omitempty"`
 
+	// (Computed)[string] Server usages: ENTERPRISE or CUBE. This property is immutable.
 	// server usages: ENTERPRISE or CUBE
 	Type *string `json:"type,omitempty" tf:"type,omitempty"`
 
+	// [string] Sets the power state of the server. E.g: RUNNING, SHUTOFF or SUSPENDED. SUSPENDED state is only valid for cube. SHUTOFF state is only valid for enterprise.
 	// Sets the power state of the server. Possible values: `RUNNING`, `SHUTOFF` or `SUSPENDED`. SUSPENDED state is only valid for cube. SHUTOFF state is only valid for enterprise
 	VMState *string `json:"vmState,omitempty" tf:"vm_state,omitempty"`
 
-	Volume []VolumeInitParameters `json:"volume,omitempty" tf:"volume,omitempty"`
+	// See the Volume section.
+	Volume *VolumeInitParameters `json:"volume,omitempty" tf:"volume,omitempty"`
 }
 
 type ServerNicInitParameters struct {
@@ -185,11 +210,13 @@ type ServerNicInitParameters struct {
 	// Indicates whether this NIC receives an IPv6 address through DHCP.
 	Dhcpv6 *bool `json:"dhcpv6,omitempty" tf:"dhcpv6,omitempty"`
 
+	// Allows to define firewall rules inline in the server. See the Firewall section.
 	// Firewall rules created in the server resource. The rules can also be created as separate resources outside the server resource
 	Firewall []FirewallInitParameters `json:"firewall,omitempty" tf:"firewall,omitempty"`
 
 	FirewallActive *bool `json:"firewallActive,omitempty" tf:"firewall_active,omitempty"`
 
+	// (Computed)[string] Server usages: ENTERPRISE or CUBE. This property is immutable.
 	FirewallType *string `json:"firewallType,omitempty" tf:"firewall_type,omitempty"`
 
 	// IPv6 CIDR block assigned to the NIC.
@@ -212,24 +239,25 @@ type ServerNicInitParameters struct {
 	// +kubebuilder:validation:Optional
 	LanSelector *v1.Selector `json:"lanSelector,omitempty" tf:"-"`
 
-	// [string] The name of the volume.
+	// [string] The name of the server.
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 }
 
 type ServerNicObservation struct {
 	DHCP *bool `json:"dhcp,omitempty" tf:"dhcp,omitempty"`
 
-	// (Computed) The Logical Unit Number of the storage volume. Null for volumes not mounted to any VM.
 	DeviceNumber *float64 `json:"deviceNumber,omitempty" tf:"device_number,omitempty"`
 
 	// Indicates whether this NIC receives an IPv6 address through DHCP.
 	Dhcpv6 *bool `json:"dhcpv6,omitempty" tf:"dhcpv6,omitempty"`
 
+	// Allows to define firewall rules inline in the server. See the Firewall section.
 	// Firewall rules created in the server resource. The rules can also be created as separate resources outside the server resource
 	Firewall []FirewallObservation `json:"firewall,omitempty" tf:"firewall,omitempty"`
 
 	FirewallActive *bool `json:"firewallActive,omitempty" tf:"firewall_active,omitempty"`
 
+	// (Computed)[string] Server usages: ENTERPRISE or CUBE. This property is immutable.
 	FirewallType *string `json:"firewallType,omitempty" tf:"firewall_type,omitempty"`
 
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
@@ -247,10 +275,9 @@ type ServerNicObservation struct {
 
 	Mac *string `json:"mac,omitempty" tf:"mac,omitempty"`
 
-	// [string] The name of the volume.
+	// [string] The name of the server.
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
-	// (Computed) The PCI slot number of the storage volume. Null for volumes not mounted to any VM.
 	PciSlot *float64 `json:"pciSlot,omitempty" tf:"pci_slot,omitempty"`
 }
 
@@ -263,6 +290,7 @@ type ServerNicParameters struct {
 	// +kubebuilder:validation:Optional
 	Dhcpv6 *bool `json:"dhcpv6,omitempty" tf:"dhcpv6,omitempty"`
 
+	// Allows to define firewall rules inline in the server. See the Firewall section.
 	// Firewall rules created in the server resource. The rules can also be created as separate resources outside the server resource
 	// +kubebuilder:validation:Optional
 	Firewall []FirewallParameters `json:"firewall,omitempty" tf:"firewall,omitempty"`
@@ -270,6 +298,7 @@ type ServerNicParameters struct {
 	// +kubebuilder:validation:Optional
 	FirewallActive *bool `json:"firewallActive,omitempty" tf:"firewall_active,omitempty"`
 
+	// (Computed)[string] Server usages: ENTERPRISE or CUBE. This property is immutable.
 	// +kubebuilder:validation:Optional
 	FirewallType *string `json:"firewallType,omitempty" tf:"firewall_type,omitempty"`
 
@@ -297,33 +326,39 @@ type ServerNicParameters struct {
 	// +kubebuilder:validation:Optional
 	LanSelector *v1.Selector `json:"lanSelector,omitempty" tf:"-"`
 
-	// [string] The name of the volume.
+	// [string] The name of the server.
 	// +kubebuilder:validation:Optional
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 }
 
 type ServerObservation struct {
 
-	// [string] The storage availability zone assigned to the volume: AUTO, ZONE_1, ZONE_2, or ZONE_3. This property is immutable
+	// [string] The availability zone in which the server should exist. E.g: AUTO, ZONE_1, ZONE_2. This property is immutable.
 	AvailabilityZone *string `json:"availabilityZone,omitempty" tf:"availability_zone,omitempty"`
 
+	// DEPRECATED Please refer to ionoscloud_server_boot_device_selection (Computed)[string] The associated boot drive, if any. Must be the UUID of a bootable CDROM image that can be retrieved using the ionoscloud_image data source.
 	// The associated boot drive, if any. Must be the UUID of a bootable CDROM image that you can retrieve using the image data source
 	BootCdrom *string `json:"bootCdrom,omitempty" tf:"boot_cdrom,omitempty"`
 
-	// (Computed) The image or snapshot UUID.
+	// [string] The image or snapshot UUID / name. May also be an image alias. It is required if licence_type is not provided.
 	BootImage *string `json:"bootImage,omitempty" tf:"boot_image,omitempty"`
 
+	// (Computed) The associated boot volume.
 	BootVolume *string `json:"bootVolume,omitempty" tf:"boot_volume,omitempty"`
 
+	// [string] CPU architecture on which server gets provisioned; not all CPU architectures are available in all datacenter regions; available CPU architectures can be retrieved from the datacenter resource. E.g.: "INTEL_SKYLAKE" or "INTEL_XEON".
 	CPUFamily *string `json:"cpuFamily,omitempty" tf:"cpu_family,omitempty"`
 
+	// (Computed)[integer] Number of server CPU cores.
 	Cores *float64 `json:"cores,omitempty" tf:"cores,omitempty"`
 
 	// [string] The ID of a Virtual Data Center.
 	DatacenterID *string `json:"datacenterId,omitempty" tf:"datacenter_id,omitempty"`
 
+	// (Computed) The associated firewall rule.
 	FirewallruleID *string `json:"firewallruleId,omitempty" tf:"firewallrule_id,omitempty"`
 
+	// (Computed) The associated firewall rules.
 	FirewallruleIds []*string `json:"firewallruleIds,omitempty" tf:"firewallrule_ids,omitempty"`
 
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
@@ -331,59 +366,72 @@ type ServerObservation struct {
 	// [string] The name, ID or alias of the image. May also be a snapshot ID. It is required if licence_type is not provided. Attribute is immutable.
 	ImageName *string `json:"imageName,omitempty" tf:"image_name,omitempty"`
 
+	// (Computed) A list with the IDs for the volumes that are defined inside the server resource.
 	// A list that contains the IDs for the volumes defined inside the server resource.
 	InlineVolumeIds []*string `json:"inlineVolumeIds,omitempty" tf:"inline_volume_ids,omitempty"`
 
+	// [set] A label can be seen as an object with only two required fields: key and value, both of the string type. Please check the example presented above to see how a label can be used in the plan. A server can have multiple labels.
 	Label []LabelObservation `json:"label,omitempty" tf:"label,omitempty"`
 
-	// [string] The name of the volume.
+	// [string] The name of the server.
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
-	Nic []ServerNicObservation `json:"nic,omitempty" tf:"nic,omitempty"`
+	// See the Nic section.
+	Nic *ServerNicObservation `json:"nic,omitempty" tf:"nic,omitempty"`
 
+	// (Computed) The associated IP address.
 	PrimaryIP *string `json:"primaryIp,omitempty" tf:"primary_ip,omitempty"`
 
+	// (Computed) The associated NIC.
 	// Id of the primary network interface
 	PrimaryNic *string `json:"primaryNic,omitempty" tf:"primary_nic,omitempty"`
 
+	// (Computed)[integer] The amount of memory for the server in MB.
 	RAM *float64 `json:"ram,omitempty" tf:"ram,omitempty"`
 
-	// [list] List of absolute paths to files containing a public SSH key that will be injected into IonosCloud provided Linux images. Also accepts ssh keys directly. Required for IonosCloud Linux images. Required if image_password is not provided. This property is immutable.
+	// [list] List of absolute paths to files containing a public SSH key that will be injected into IonosCloud provided Linux images.  Also accepts ssh keys directly. Required for IonosCloud Linux images. Required if image_password is not provided. Does not support ~ expansion to homedir in the given path. This property is immutable.
 	// Immutable List of absolute or relative paths to files containing public SSH key that will be injected into IonosCloud provided Linux images. Does not support `~` expansion to homedir in the given path. Public SSH keys are set on the image as authorized keys for appropriate SSH login to the instance using the corresponding private key. This field may only be set in creation requests. When reading, it always returns null. SSH keys are only supported if a public Linux image is used for the volume creation. This property is immutable.
 	SSHKeyPath []*string `json:"sshKeyPath,omitempty" tf:"ssh_key_path,omitempty"`
 
-	// [list] List of absolute paths to files containing a public SSH key that will be injected into IonosCloud provided Linux images. Also accepts ssh keys directly. Required for IonosCloud Linux images. Required if image_password is not provided. This property is immutable.
+	// [list] Immutable List of absolute or relative paths to files containing public SSH key that will be injected into IonosCloud provided Linux images. Also accepts ssh keys directly. Public SSH keys are set on the image as authorized keys for appropriate SSH login to the instance using the corresponding private key. This field may only be set in creation requests. When reading, it always returns null. SSH keys are only supported if a public Linux image is used for the volume creation. Does not support ~ expansion to homedir in the given path.
 	// Public SSH keys are set on the image as authorized keys for appropriate SSH login to the instance using the corresponding private key. This field may only be set in creation requests. When reading, it always returns null. SSH keys are only supported if a public Linux image is used for the volume creation.
 	SSHKeys []*string `json:"sshKeys,omitempty" tf:"ssh_keys,omitempty"`
 
+	// [string] The UUID of the template for creating a CUBE server; the available templates for CUBE servers can be found on the templates resource
 	TemplateUUID *string `json:"templateUuid,omitempty" tf:"template_uuid,omitempty"`
 
+	// (Computed)[string] Server usages: ENTERPRISE or CUBE. This property is immutable.
 	// server usages: ENTERPRISE or CUBE
 	Type *string `json:"type,omitempty" tf:"type,omitempty"`
 
+	// [string] Sets the power state of the server. E.g: RUNNING, SHUTOFF or SUSPENDED. SUSPENDED state is only valid for cube. SHUTOFF state is only valid for enterprise.
 	// Sets the power state of the server. Possible values: `RUNNING`, `SHUTOFF` or `SUSPENDED`. SUSPENDED state is only valid for cube. SHUTOFF state is only valid for enterprise
 	VMState *string `json:"vmState,omitempty" tf:"vm_state,omitempty"`
 
-	Volume []VolumeObservation `json:"volume,omitempty" tf:"volume,omitempty"`
+	// See the Volume section.
+	Volume *VolumeObservation `json:"volume,omitempty" tf:"volume,omitempty"`
 }
 
 type ServerParameters struct {
 
-	// [string] The storage availability zone assigned to the volume: AUTO, ZONE_1, ZONE_2, or ZONE_3. This property is immutable
+	// [string] The availability zone in which the server should exist. E.g: AUTO, ZONE_1, ZONE_2. This property is immutable.
 	// +kubebuilder:validation:Optional
 	AvailabilityZone *string `json:"availabilityZone,omitempty" tf:"availability_zone,omitempty"`
 
+	// DEPRECATED Please refer to ionoscloud_server_boot_device_selection (Computed)[string] The associated boot drive, if any. Must be the UUID of a bootable CDROM image that can be retrieved using the ionoscloud_image data source.
 	// The associated boot drive, if any. Must be the UUID of a bootable CDROM image that you can retrieve using the image data source
 	// +kubebuilder:validation:Optional
 	BootCdrom *string `json:"bootCdrom,omitempty" tf:"boot_cdrom,omitempty"`
 
-	// (Computed) The image or snapshot UUID.
+	// [string] The image or snapshot UUID / name. May also be an image alias. It is required if licence_type is not provided.
 	// +kubebuilder:validation:Optional
 	BootImage *string `json:"bootImage,omitempty" tf:"boot_image,omitempty"`
 
+	// [string] CPU architecture on which server gets provisioned; not all CPU architectures are available in all datacenter regions; available CPU architectures can be retrieved from the datacenter resource. E.g.: "INTEL_SKYLAKE" or "INTEL_XEON".
 	// +kubebuilder:validation:Optional
 	CPUFamily *string `json:"cpuFamily,omitempty" tf:"cpu_family,omitempty"`
 
+	// (Computed)[integer] Number of server CPU cores.
 	// +kubebuilder:validation:Optional
 	Cores *float64 `json:"cores,omitempty" tf:"cores,omitempty"`
 
@@ -400,6 +448,7 @@ type ServerParameters struct {
 	// +kubebuilder:validation:Optional
 	DatacenterIDSelector *v1.Selector `json:"datacenterIdSelector,omitempty" tf:"-"`
 
+	// (Computed) The associated firewall rules.
 	// +kubebuilder:validation:Optional
 	FirewallruleIds []*string `json:"firewallruleIds,omitempty" tf:"firewallrule_ids,omitempty"`
 
@@ -407,205 +456,191 @@ type ServerParameters struct {
 	// +kubebuilder:validation:Optional
 	ImageName *string `json:"imageName,omitempty" tf:"image_name,omitempty"`
 
-	// [string] Required if sshkey_path is not provided.
+	// [string] Required if ssh_key_path is not provided.
 	// +kubebuilder:validation:Optional
 	ImagePasswordSecretRef *v1.SecretKeySelector `json:"imagePasswordSecretRef,omitempty" tf:"-"`
 
+	// [set] A label can be seen as an object with only two required fields: key and value, both of the string type. Please check the example presented above to see how a label can be used in the plan. A server can have multiple labels.
 	// +kubebuilder:validation:Optional
 	Label []LabelParameters `json:"label,omitempty" tf:"label,omitempty"`
 
-	// [string] The name of the volume.
+	// [string] The name of the server.
 	// +kubebuilder:validation:Optional
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
+	// See the Nic section.
 	// +kubebuilder:validation:Optional
-	Nic []ServerNicParameters `json:"nic,omitempty" tf:"nic,omitempty"`
+	Nic *ServerNicParameters `json:"nic,omitempty" tf:"nic,omitempty"`
 
+	// (Computed)[integer] The amount of memory for the server in MB.
 	// +kubebuilder:validation:Optional
 	RAM *float64 `json:"ram,omitempty" tf:"ram,omitempty"`
 
-	// [list] List of absolute paths to files containing a public SSH key that will be injected into IonosCloud provided Linux images. Also accepts ssh keys directly. Required for IonosCloud Linux images. Required if image_password is not provided. This property is immutable.
+	// [list] List of absolute paths to files containing a public SSH key that will be injected into IonosCloud provided Linux images.  Also accepts ssh keys directly. Required for IonosCloud Linux images. Required if image_password is not provided. Does not support ~ expansion to homedir in the given path. This property is immutable.
 	// Immutable List of absolute or relative paths to files containing public SSH key that will be injected into IonosCloud provided Linux images. Does not support `~` expansion to homedir in the given path. Public SSH keys are set on the image as authorized keys for appropriate SSH login to the instance using the corresponding private key. This field may only be set in creation requests. When reading, it always returns null. SSH keys are only supported if a public Linux image is used for the volume creation. This property is immutable.
 	// +kubebuilder:validation:Optional
 	SSHKeyPath []*string `json:"sshKeyPath,omitempty" tf:"ssh_key_path,omitempty"`
 
-	// [list] List of absolute paths to files containing a public SSH key that will be injected into IonosCloud provided Linux images. Also accepts ssh keys directly. Required for IonosCloud Linux images. Required if image_password is not provided. This property is immutable.
+	// [list] Immutable List of absolute or relative paths to files containing public SSH key that will be injected into IonosCloud provided Linux images. Also accepts ssh keys directly. Public SSH keys are set on the image as authorized keys for appropriate SSH login to the instance using the corresponding private key. This field may only be set in creation requests. When reading, it always returns null. SSH keys are only supported if a public Linux image is used for the volume creation. Does not support ~ expansion to homedir in the given path.
 	// Public SSH keys are set on the image as authorized keys for appropriate SSH login to the instance using the corresponding private key. This field may only be set in creation requests. When reading, it always returns null. SSH keys are only supported if a public Linux image is used for the volume creation.
 	// +kubebuilder:validation:Optional
 	SSHKeys []*string `json:"sshKeys,omitempty" tf:"ssh_keys,omitempty"`
 
+	// [string] The UUID of the template for creating a CUBE server; the available templates for CUBE servers can be found on the templates resource
 	// +kubebuilder:validation:Optional
 	TemplateUUID *string `json:"templateUuid,omitempty" tf:"template_uuid,omitempty"`
 
+	// (Computed)[string] Server usages: ENTERPRISE or CUBE. This property is immutable.
 	// server usages: ENTERPRISE or CUBE
 	// +kubebuilder:validation:Optional
 	Type *string `json:"type,omitempty" tf:"type,omitempty"`
 
+	// [string] Sets the power state of the server. E.g: RUNNING, SHUTOFF or SUSPENDED. SUSPENDED state is only valid for cube. SHUTOFF state is only valid for enterprise.
 	// Sets the power state of the server. Possible values: `RUNNING`, `SHUTOFF` or `SUSPENDED`. SUSPENDED state is only valid for cube. SHUTOFF state is only valid for enterprise
 	// +kubebuilder:validation:Optional
 	VMState *string `json:"vmState,omitempty" tf:"vm_state,omitempty"`
 
+	// See the Volume section.
 	// +kubebuilder:validation:Optional
-	Volume []VolumeParameters `json:"volume,omitempty" tf:"volume,omitempty"`
+	Volume *VolumeParameters `json:"volume,omitempty" tf:"volume,omitempty"`
 }
 
 type VolumeInitParameters struct {
 
-	// [string] The storage availability zone assigned to the volume: AUTO, ZONE_1, ZONE_2, or ZONE_3. This property is immutable
+	// [string] The availability zone in which the server should exist. E.g: AUTO, ZONE_1, ZONE_2. This property is immutable.
 	AvailabilityZone *string `json:"availabilityZone,omitempty" tf:"availability_zone,omitempty"`
 
-	// [string] The uuid of the Backup Unit that user has access to. The property is immutable and is only allowed to be set on a new volume creation. It is mandatory to provide either 'public image' or 'imageAlias' in conjunction with this property.
 	// The uuid of the Backup Unit that user has access to. The property is immutable and is only allowed to be set on a new volume creation. It is mandatory to provide either 'public image' or 'imageAlias' in conjunction with this property.
 	BackupUnitID *string `json:"backupUnitId,omitempty" tf:"backup_unit_id,omitempty"`
 
-	// [Boolean] The bus type of the volume: VIRTIO or IDE.
 	Bus *string `json:"bus,omitempty" tf:"bus,omitempty"`
 
-	// [string] The volume type: HDD or SSD. This property is immutable.
+	// (Computed)[string] Server usages: ENTERPRISE or CUBE. This property is immutable.
 	DiskType *string `json:"diskType,omitempty" tf:"disk_type,omitempty"`
 
-	// [string] Required if sshkey_path is not provided.
+	// [string] Required if ssh_key_path is not provided.
 	ImagePassword *string `json:"imagePassword,omitempty" tf:"image_password,omitempty"`
 
-	// [string] Required if image_name is not provided.
+	// [string] Sets the OS type of the server.
 	LicenceType *string `json:"licenceType,omitempty" tf:"licence_type,omitempty"`
 
-	// [string] The name of the volume.
+	// [string] The name of the server.
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
-	// [list] List of absolute paths to files containing a public SSH key that will be injected into IonosCloud provided Linux images. Also accepts ssh keys directly. Required for IonosCloud Linux images. Required if image_password is not provided. This property is immutable.
+	// [list] List of absolute paths to files containing a public SSH key that will be injected into IonosCloud provided Linux images.  Also accepts ssh keys directly. Required for IonosCloud Linux images. Required if image_password is not provided. Does not support ~ expansion to homedir in the given path. This property is immutable.
 	// Public SSH keys are set on the image as authorized keys for appropriate SSH login to the instance using the corresponding private key. This field may only be set in creation requests. When reading, it always returns null. SSH keys are only supported if a public Linux image is used for the volume creation.
 	SSHKeyPath []*string `json:"sshKeyPath,omitempty" tf:"ssh_key_path,omitempty"`
 
-	// [list] List of absolute paths to files containing a public SSH key that will be injected into IonosCloud provided Linux images. Also accepts ssh keys directly. Required for IonosCloud Linux images. Required if image_password is not provided. This property is immutable.
+	// [list] Immutable List of absolute or relative paths to files containing public SSH key that will be injected into IonosCloud provided Linux images. Also accepts ssh keys directly. Public SSH keys are set on the image as authorized keys for appropriate SSH login to the instance using the corresponding private key. This field may only be set in creation requests. When reading, it always returns null. SSH keys are only supported if a public Linux image is used for the volume creation. Does not support ~ expansion to homedir in the given path.
 	// Public SSH keys are set on the image as authorized keys for appropriate SSH login to the instance using the corresponding private key. This field may only be set in creation requests. When reading, it always returns null. SSH keys are only supported if a public Linux image is used for the volume creation.
 	SSHKeys []*string `json:"sshKeys,omitempty" tf:"ssh_keys,omitempty"`
 
-	// [integer] The size of the volume in GB.
 	// The size of the volume in GB.
 	Size *float64 `json:"size,omitempty" tf:"size,omitempty"`
 
-	// [string] The cloud-init configuration for the volume as base64 encoded string. The property is immutable and is only allowed to be set on a new volume creation. This option will work only with cloud-init compatible images.
 	// The cloud-init configuration for the volume as base64 encoded string. The property is immutable and is only allowed to be set on a new volume creation. It is mandatory to provide either 'public image' or 'imageAlias' that has cloud-init compatibility in conjunction with this property.
 	UserData *string `json:"userData,omitempty" tf:"user_data,omitempty"`
 }
 
 type VolumeObservation struct {
 
-	// [string] The storage availability zone assigned to the volume: AUTO, ZONE_1, ZONE_2, or ZONE_3. This property is immutable
+	// [string] The availability zone in which the server should exist. E.g: AUTO, ZONE_1, ZONE_2. This property is immutable.
 	AvailabilityZone *string `json:"availabilityZone,omitempty" tf:"availability_zone,omitempty"`
 
-	// [string] The uuid of the Backup Unit that user has access to. The property is immutable and is only allowed to be set on a new volume creation. It is mandatory to provide either 'public image' or 'imageAlias' in conjunction with this property.
 	// The uuid of the Backup Unit that user has access to. The property is immutable and is only allowed to be set on a new volume creation. It is mandatory to provide either 'public image' or 'imageAlias' in conjunction with this property.
 	BackupUnitID *string `json:"backupUnitId,omitempty" tf:"backup_unit_id,omitempty"`
 
-	// (Computed)[string] The UUID of the attached server.
 	// The UUID of the attached server.
 	BootServer *string `json:"bootServer,omitempty" tf:"boot_server,omitempty"`
 
-	// [Boolean] The bus type of the volume: VIRTIO or IDE.
 	Bus *string `json:"bus,omitempty" tf:"bus,omitempty"`
 
-	// (Computed)[string] Is capable of CPU hot plug (no reboot required)
 	CPUHotPlug *bool `json:"cpuHotPlug,omitempty" tf:"cpu_hot_plug,omitempty"`
 
-	// (Computed) The Logical Unit Number of the storage volume. Null for volumes not mounted to any VM.
 	DeviceNumber *float64 `json:"deviceNumber,omitempty" tf:"device_number,omitempty"`
 
-	// (Computed)[string] Is capable of Virt-IO drive hot plug (no reboot required)
 	DiscVirtioHotPlug *bool `json:"discVirtioHotPlug,omitempty" tf:"disc_virtio_hot_plug,omitempty"`
 
-	// (Computed)[string] Is capable of Virt-IO drive hot unplug (no reboot required). This works only for non-Windows virtual Machines.
 	DiscVirtioHotUnplug *bool `json:"discVirtioHotUnplug,omitempty" tf:"disc_virtio_hot_unplug,omitempty"`
 
-	// [string] The volume type: HDD or SSD. This property is immutable.
+	// (Computed)[string] Server usages: ENTERPRISE or CUBE. This property is immutable.
 	DiskType *string `json:"diskType,omitempty" tf:"disk_type,omitempty"`
 
-	// [string] Required if sshkey_path is not provided.
+	// [string] Required if ssh_key_path is not provided.
 	ImagePassword *string `json:"imagePassword,omitempty" tf:"image_password,omitempty"`
 
-	// [string] Required if image_name is not provided.
+	// [string] Sets the OS type of the server.
 	LicenceType *string `json:"licenceType,omitempty" tf:"licence_type,omitempty"`
 
-	// [string] The name of the volume.
+	// [string] The name of the server.
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
-	// (Computed)[string] Is capable of nic hot plug (no reboot required)
 	NicHotPlug *bool `json:"nicHotPlug,omitempty" tf:"nic_hot_plug,omitempty"`
 
-	// (Computed)[string] Is capable of nic hot unplug (no reboot required)
 	NicHotUnplug *bool `json:"nicHotUnplug,omitempty" tf:"nic_hot_unplug,omitempty"`
 
-	// (Computed) The PCI slot number of the storage volume. Null for volumes not mounted to any VM.
 	PciSlot *float64 `json:"pciSlot,omitempty" tf:"pci_slot,omitempty"`
 
-	// (Computed)[string] Is capable of memory hot plug (no reboot required)
 	RAMHotPlug *bool `json:"ramHotPlug,omitempty" tf:"ram_hot_plug,omitempty"`
 
-	// [list] List of absolute paths to files containing a public SSH key that will be injected into IonosCloud provided Linux images. Also accepts ssh keys directly. Required for IonosCloud Linux images. Required if image_password is not provided. This property is immutable.
+	// [list] List of absolute paths to files containing a public SSH key that will be injected into IonosCloud provided Linux images.  Also accepts ssh keys directly. Required for IonosCloud Linux images. Required if image_password is not provided. Does not support ~ expansion to homedir in the given path. This property is immutable.
 	// Public SSH keys are set on the image as authorized keys for appropriate SSH login to the instance using the corresponding private key. This field may only be set in creation requests. When reading, it always returns null. SSH keys are only supported if a public Linux image is used for the volume creation.
 	SSHKeyPath []*string `json:"sshKeyPath,omitempty" tf:"ssh_key_path,omitempty"`
 
-	// [list] List of absolute paths to files containing a public SSH key that will be injected into IonosCloud provided Linux images. Also accepts ssh keys directly. Required for IonosCloud Linux images. Required if image_password is not provided. This property is immutable.
+	// [list] Immutable List of absolute or relative paths to files containing public SSH key that will be injected into IonosCloud provided Linux images. Also accepts ssh keys directly. Public SSH keys are set on the image as authorized keys for appropriate SSH login to the instance using the corresponding private key. This field may only be set in creation requests. When reading, it always returns null. SSH keys are only supported if a public Linux image is used for the volume creation. Does not support ~ expansion to homedir in the given path.
 	// Public SSH keys are set on the image as authorized keys for appropriate SSH login to the instance using the corresponding private key. This field may only be set in creation requests. When reading, it always returns null. SSH keys are only supported if a public Linux image is used for the volume creation.
 	SSHKeys []*string `json:"sshKeys,omitempty" tf:"ssh_keys,omitempty"`
 
-	// [integer] The size of the volume in GB.
 	// The size of the volume in GB.
 	Size *float64 `json:"size,omitempty" tf:"size,omitempty"`
 
-	// [string] The cloud-init configuration for the volume as base64 encoded string. The property is immutable and is only allowed to be set on a new volume creation. This option will work only with cloud-init compatible images.
 	// The cloud-init configuration for the volume as base64 encoded string. The property is immutable and is only allowed to be set on a new volume creation. It is mandatory to provide either 'public image' or 'imageAlias' that has cloud-init compatibility in conjunction with this property.
 	UserData *string `json:"userData,omitempty" tf:"user_data,omitempty"`
 }
 
 type VolumeParameters struct {
 
-	// [string] The storage availability zone assigned to the volume: AUTO, ZONE_1, ZONE_2, or ZONE_3. This property is immutable
+	// [string] The availability zone in which the server should exist. E.g: AUTO, ZONE_1, ZONE_2. This property is immutable.
 	// +kubebuilder:validation:Optional
 	AvailabilityZone *string `json:"availabilityZone,omitempty" tf:"availability_zone,omitempty"`
 
-	// [string] The uuid of the Backup Unit that user has access to. The property is immutable and is only allowed to be set on a new volume creation. It is mandatory to provide either 'public image' or 'imageAlias' in conjunction with this property.
 	// The uuid of the Backup Unit that user has access to. The property is immutable and is only allowed to be set on a new volume creation. It is mandatory to provide either 'public image' or 'imageAlias' in conjunction with this property.
 	// +kubebuilder:validation:Optional
 	BackupUnitID *string `json:"backupUnitId,omitempty" tf:"backup_unit_id,omitempty"`
 
-	// [Boolean] The bus type of the volume: VIRTIO or IDE.
 	// +kubebuilder:validation:Optional
 	Bus *string `json:"bus,omitempty" tf:"bus,omitempty"`
 
-	// [string] The volume type: HDD or SSD. This property is immutable.
+	// (Computed)[string] Server usages: ENTERPRISE or CUBE. This property is immutable.
 	// +kubebuilder:validation:Optional
 	DiskType *string `json:"diskType" tf:"disk_type,omitempty"`
 
-	// [string] Required if sshkey_path is not provided.
+	// [string] Required if ssh_key_path is not provided.
 	// +kubebuilder:validation:Optional
 	ImagePassword *string `json:"imagePassword,omitempty" tf:"image_password,omitempty"`
 
-	// [string] Required if image_name is not provided.
+	// [string] Sets the OS type of the server.
 	// +kubebuilder:validation:Optional
 	LicenceType *string `json:"licenceType,omitempty" tf:"licence_type,omitempty"`
 
-	// [string] The name of the volume.
+	// [string] The name of the server.
 	// +kubebuilder:validation:Optional
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
-	// [list] List of absolute paths to files containing a public SSH key that will be injected into IonosCloud provided Linux images. Also accepts ssh keys directly. Required for IonosCloud Linux images. Required if image_password is not provided. This property is immutable.
+	// [list] List of absolute paths to files containing a public SSH key that will be injected into IonosCloud provided Linux images.  Also accepts ssh keys directly. Required for IonosCloud Linux images. Required if image_password is not provided. Does not support ~ expansion to homedir in the given path. This property is immutable.
 	// Public SSH keys are set on the image as authorized keys for appropriate SSH login to the instance using the corresponding private key. This field may only be set in creation requests. When reading, it always returns null. SSH keys are only supported if a public Linux image is used for the volume creation.
 	// +kubebuilder:validation:Optional
 	SSHKeyPath []*string `json:"sshKeyPath,omitempty" tf:"ssh_key_path,omitempty"`
 
-	// [list] List of absolute paths to files containing a public SSH key that will be injected into IonosCloud provided Linux images. Also accepts ssh keys directly. Required for IonosCloud Linux images. Required if image_password is not provided. This property is immutable.
+	// [list] Immutable List of absolute or relative paths to files containing public SSH key that will be injected into IonosCloud provided Linux images. Also accepts ssh keys directly. Public SSH keys are set on the image as authorized keys for appropriate SSH login to the instance using the corresponding private key. This field may only be set in creation requests. When reading, it always returns null. SSH keys are only supported if a public Linux image is used for the volume creation. Does not support ~ expansion to homedir in the given path.
 	// Public SSH keys are set on the image as authorized keys for appropriate SSH login to the instance using the corresponding private key. This field may only be set in creation requests. When reading, it always returns null. SSH keys are only supported if a public Linux image is used for the volume creation.
 	// +kubebuilder:validation:Optional
 	SSHKeys []*string `json:"sshKeys,omitempty" tf:"ssh_keys,omitempty"`
 
-	// [integer] The size of the volume in GB.
 	// The size of the volume in GB.
 	// +kubebuilder:validation:Optional
 	Size *float64 `json:"size,omitempty" tf:"size,omitempty"`
 
-	// [string] The cloud-init configuration for the volume as base64 encoded string. The property is immutable and is only allowed to be set on a new volume creation. This option will work only with cloud-init compatible images.
 	// The cloud-init configuration for the volume as base64 encoded string. The property is immutable and is only allowed to be set on a new volume creation. It is mandatory to provide either 'public image' or 'imageAlias' that has cloud-init compatibility in conjunction with this property.
 	// +kubebuilder:validation:Optional
 	UserData *string `json:"userData,omitempty" tf:"user_data,omitempty"`
@@ -638,7 +673,7 @@ type ServerStatus struct {
 // +kubebuilder:subresource:status
 // +kubebuilder:storageversion
 
-// Server is the Schema for the Servers API. Creates and manages IonosCloud Volume objects.
+// Server is the Schema for the Servers API. Creates and manages IonosCloud Server objects.
 // +kubebuilder:printcolumn:name="SYNCED",type="string",JSONPath=".status.conditions[?(@.type=='Synced')].status"
 // +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"
 // +kubebuilder:printcolumn:name="EXTERNAL-NAME",type="string",JSONPath=".metadata.annotations.crossplane\\.io/external-name"

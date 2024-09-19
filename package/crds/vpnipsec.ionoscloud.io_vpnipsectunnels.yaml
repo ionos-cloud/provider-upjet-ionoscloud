@@ -241,36 +241,34 @@ spec:
                     description: |-
                       [list] Settings for the initial security exchange phase. Minimum items: 1. Maximum items: 1.
                       Settings for the initial security exchange phase.
-                    items:
-                      properties:
-                        diffieHellmanGroup:
-                          description: |-
-                            [string] The Diffie-Hellman Group to use for IPSec Encryption. Possible
-                            values: 15-MODP3072, 16-MODP4096, 19-ECP256, 20-ECP384, 21-ECP521, 28-ECP256BP, 29-ECP384BP, 30-ECP512BP.
-                            Default value: 16-MODP4096.
-                            The Diffie-Hellman Group to use for IPSec Encryption.
-                          type: string
-                        encryptionAlgorithm:
-                          description: |-
-                            [string] The encryption algorithm to use for IPSec Encryption. Possible
-                            values: AES128, AES256, AES128-CTR, AES256-CTR, AES128-GCM-16, AES256-GCM-16, AES128-GCM-12, AES256-GCM-12, AES128-CCM-12,
-                            AES256-CCM-12. Default value: AES256.
-                            The encryption algorithm to use for IPSec Encryption.
-                          type: string
-                        integrityAlgorithm:
-                          description: |-
-                            [string] The integrity algorithm to use for IPSec Encryption. Possible
-                            values: SHA256, SHA384, SHA512, AES-XCBC. Default value: SHA256.
-                            The integrity algorithm to use for IPSec Encryption.
-                          type: string
-                        lifetime:
-                          description: |-
-                            [string] The phase lifetime in seconds. Minimum value: 3600. Maximum value: 86400.
-                            Default value: 86400.
-                            The phase lifetime in seconds.
-                          type: number
-                      type: object
-                    type: array
+                    properties:
+                      diffieHellmanGroup:
+                        description: |-
+                          [string] The Diffie-Hellman Group to use for IPSec Encryption. Possible
+                          values: 15-MODP3072, 16-MODP4096, 19-ECP256, 20-ECP384, 21-ECP521, 28-ECP256BP, 29-ECP384BP, 30-ECP512BP.
+                          Default value: 16-MODP4096.
+                          The Diffie-Hellman Group to use for IPSec Encryption.
+                        type: string
+                      encryptionAlgorithm:
+                        description: |-
+                          [string] The encryption algorithm to use for IPSec Encryption. Possible
+                          values: AES128, AES256, AES128-CTR, AES256-CTR, AES128-GCM-16, AES256-GCM-16, AES128-GCM-12, AES256-GCM-12, AES128-CCM-12,
+                          AES256-CCM-12. Default value: AES256.
+                          The encryption algorithm to use for IPSec Encryption.
+                        type: string
+                      integrityAlgorithm:
+                        description: |-
+                          [string] The integrity algorithm to use for IPSec Encryption. Possible
+                          values: SHA256, SHA384, SHA512, AES-XCBC. Default value: SHA256.
+                          The integrity algorithm to use for IPSec Encryption.
+                        type: string
+                      lifetime:
+                        description: |-
+                          [string] The phase lifetime in seconds. Minimum value: 3600. Maximum value: 86400.
+                          Default value: 86400.
+                          The phase lifetime in seconds.
+                        type: number
+                    type: object
                   location:
                     description: |-
                       [string] The location of the IPSec Gateway Tunnel. Supported locations: de/fra, de/txl, es/vit,
@@ -477,36 +475,34 @@ spec:
                     description: |-
                       [list] Settings for the initial security exchange phase. Minimum items: 1. Maximum items: 1.
                       Settings for the initial security exchange phase.
-                    items:
-                      properties:
-                        diffieHellmanGroup:
-                          description: |-
-                            [string] The Diffie-Hellman Group to use for IPSec Encryption. Possible
-                            values: 15-MODP3072, 16-MODP4096, 19-ECP256, 20-ECP384, 21-ECP521, 28-ECP256BP, 29-ECP384BP, 30-ECP512BP.
-                            Default value: 16-MODP4096.
-                            The Diffie-Hellman Group to use for IPSec Encryption.
-                          type: string
-                        encryptionAlgorithm:
-                          description: |-
-                            [string] The encryption algorithm to use for IPSec Encryption. Possible
-                            values: AES128, AES256, AES128-CTR, AES256-CTR, AES128-GCM-16, AES256-GCM-16, AES128-GCM-12, AES256-GCM-12, AES128-CCM-12,
-                            AES256-CCM-12. Default value: AES256.
-                            The encryption algorithm to use for IPSec Encryption.
-                          type: string
-                        integrityAlgorithm:
-                          description: |-
-                            [string] The integrity algorithm to use for IPSec Encryption. Possible
-                            values: SHA256, SHA384, SHA512, AES-XCBC. Default value: SHA256.
-                            The integrity algorithm to use for IPSec Encryption.
-                          type: string
-                        lifetime:
-                          description: |-
-                            [string] The phase lifetime in seconds. Minimum value: 3600. Maximum value: 86400.
-                            Default value: 86400.
-                            The phase lifetime in seconds.
-                          type: number
-                      type: object
-                    type: array
+                    properties:
+                      diffieHellmanGroup:
+                        description: |-
+                          [string] The Diffie-Hellman Group to use for IPSec Encryption. Possible
+                          values: 15-MODP3072, 16-MODP4096, 19-ECP256, 20-ECP384, 21-ECP521, 28-ECP256BP, 29-ECP384BP, 30-ECP512BP.
+                          Default value: 16-MODP4096.
+                          The Diffie-Hellman Group to use for IPSec Encryption.
+                        type: string
+                      encryptionAlgorithm:
+                        description: |-
+                          [string] The encryption algorithm to use for IPSec Encryption. Possible
+                          values: AES128, AES256, AES128-CTR, AES256-CTR, AES128-GCM-16, AES256-GCM-16, AES128-GCM-12, AES256-GCM-12, AES128-CCM-12,
+                          AES256-CCM-12. Default value: AES256.
+                          The encryption algorithm to use for IPSec Encryption.
+                        type: string
+                      integrityAlgorithm:
+                        description: |-
+                          [string] The integrity algorithm to use for IPSec Encryption. Possible
+                          values: SHA256, SHA384, SHA512, AES-XCBC. Default value: SHA256.
+                          The integrity algorithm to use for IPSec Encryption.
+                        type: string
+                      lifetime:
+                        description: |-
+                          [string] The phase lifetime in seconds. Minimum value: 3600. Maximum value: 86400.
+                          Default value: 86400.
+                          The phase lifetime in seconds.
+                        type: number
+                    type: object
                   location:
                     description: |-
                       [string] The location of the IPSec Gateway Tunnel. Supported locations: de/fra, de/txl, es/vit,
@@ -811,36 +807,34 @@ spec:
                     description: |-
                       [list] Settings for the initial security exchange phase. Minimum items: 1. Maximum items: 1.
                       Settings for the initial security exchange phase.
-                    items:
-                      properties:
-                        diffieHellmanGroup:
-                          description: |-
-                            [string] The Diffie-Hellman Group to use for IPSec Encryption. Possible
-                            values: 15-MODP3072, 16-MODP4096, 19-ECP256, 20-ECP384, 21-ECP521, 28-ECP256BP, 29-ECP384BP, 30-ECP512BP.
-                            Default value: 16-MODP4096.
-                            The Diffie-Hellman Group to use for IPSec Encryption.
-                          type: string
-                        encryptionAlgorithm:
-                          description: |-
-                            [string] The encryption algorithm to use for IPSec Encryption. Possible
-                            values: AES128, AES256, AES128-CTR, AES256-CTR, AES128-GCM-16, AES256-GCM-16, AES128-GCM-12, AES256-GCM-12, AES128-CCM-12,
-                            AES256-CCM-12. Default value: AES256.
-                            The encryption algorithm to use for IPSec Encryption.
-                          type: string
-                        integrityAlgorithm:
-                          description: |-
-                            [string] The integrity algorithm to use for IPSec Encryption. Possible
-                            values: SHA256, SHA384, SHA512, AES-XCBC. Default value: SHA256.
-                            The integrity algorithm to use for IPSec Encryption.
-                          type: string
-                        lifetime:
-                          description: |-
-                            [string] The phase lifetime in seconds. Minimum value: 3600. Maximum value: 86400.
-                            Default value: 86400.
-                            The phase lifetime in seconds.
-                          type: number
-                      type: object
-                    type: array
+                    properties:
+                      diffieHellmanGroup:
+                        description: |-
+                          [string] The Diffie-Hellman Group to use for IPSec Encryption. Possible
+                          values: 15-MODP3072, 16-MODP4096, 19-ECP256, 20-ECP384, 21-ECP521, 28-ECP256BP, 29-ECP384BP, 30-ECP512BP.
+                          Default value: 16-MODP4096.
+                          The Diffie-Hellman Group to use for IPSec Encryption.
+                        type: string
+                      encryptionAlgorithm:
+                        description: |-
+                          [string] The encryption algorithm to use for IPSec Encryption. Possible
+                          values: AES128, AES256, AES128-CTR, AES256-CTR, AES128-GCM-16, AES256-GCM-16, AES128-GCM-12, AES256-GCM-12, AES128-CCM-12,
+                          AES256-CCM-12. Default value: AES256.
+                          The encryption algorithm to use for IPSec Encryption.
+                        type: string
+                      integrityAlgorithm:
+                        description: |-
+                          [string] The integrity algorithm to use for IPSec Encryption. Possible
+                          values: SHA256, SHA384, SHA512, AES-XCBC. Default value: SHA256.
+                          The integrity algorithm to use for IPSec Encryption.
+                        type: string
+                      lifetime:
+                        description: |-
+                          [string] The phase lifetime in seconds. Minimum value: 3600. Maximum value: 86400.
+                          Default value: 86400.
+                          The phase lifetime in seconds.
+                        type: number
+                    type: object
                   location:
                     description: |-
                       [string] The location of the IPSec Gateway Tunnel. Supported locations: de/fra, de/txl, es/vit,

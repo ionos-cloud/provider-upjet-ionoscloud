@@ -258,22 +258,22 @@ func (mg *Server) ResolveReferences(ctx context.Context, c client.Reader) error 
 	mg.Spec.ForProvider.DatacenterID = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.DatacenterIDRef = rsp.ResolvedReference
 
-	for i3 := 0; i3 < len(mg.Spec.ForProvider.Nic); i3++ {
+	if mg.Spec.ForProvider.Nic != nil {
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
-			CurrentValue: reference.FromFloatPtrValue(mg.Spec.ForProvider.Nic[i3].Lan),
+			CurrentValue: reference.FromFloatPtrValue(mg.Spec.ForProvider.Nic.Lan),
 			Extract:      reference.ExternalName(),
-			Reference:    mg.Spec.ForProvider.Nic[i3].LanRef,
-			Selector:     mg.Spec.ForProvider.Nic[i3].LanSelector,
+			Reference:    mg.Spec.ForProvider.Nic.LanRef,
+			Selector:     mg.Spec.ForProvider.Nic.LanSelector,
 			To: reference.To{
 				List:    &LanList{},
 				Managed: &Lan{},
 			},
 		})
 		if err != nil {
-			return errors.Wrap(err, "mg.Spec.ForProvider.Nic[i3].Lan")
+			return errors.Wrap(err, "mg.Spec.ForProvider.Nic.Lan")
 		}
-		mg.Spec.ForProvider.Nic[i3].Lan = reference.ToFloatPtrValue(rsp.ResolvedValue)
-		mg.Spec.ForProvider.Nic[i3].LanRef = rsp.ResolvedReference
+		mg.Spec.ForProvider.Nic.Lan = reference.ToFloatPtrValue(rsp.ResolvedValue)
+		mg.Spec.ForProvider.Nic.LanRef = rsp.ResolvedReference
 
 	}
 	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
@@ -292,22 +292,22 @@ func (mg *Server) ResolveReferences(ctx context.Context, c client.Reader) error 
 	mg.Spec.InitProvider.DatacenterID = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.InitProvider.DatacenterIDRef = rsp.ResolvedReference
 
-	for i3 := 0; i3 < len(mg.Spec.InitProvider.Nic); i3++ {
+	if mg.Spec.InitProvider.Nic != nil {
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
-			CurrentValue: reference.FromFloatPtrValue(mg.Spec.InitProvider.Nic[i3].Lan),
+			CurrentValue: reference.FromFloatPtrValue(mg.Spec.InitProvider.Nic.Lan),
 			Extract:      reference.ExternalName(),
-			Reference:    mg.Spec.InitProvider.Nic[i3].LanRef,
-			Selector:     mg.Spec.InitProvider.Nic[i3].LanSelector,
+			Reference:    mg.Spec.InitProvider.Nic.LanRef,
+			Selector:     mg.Spec.InitProvider.Nic.LanSelector,
 			To: reference.To{
 				List:    &LanList{},
 				Managed: &Lan{},
 			},
 		})
 		if err != nil {
-			return errors.Wrap(err, "mg.Spec.InitProvider.Nic[i3].Lan")
+			return errors.Wrap(err, "mg.Spec.InitProvider.Nic.Lan")
 		}
-		mg.Spec.InitProvider.Nic[i3].Lan = reference.ToFloatPtrValue(rsp.ResolvedValue)
-		mg.Spec.InitProvider.Nic[i3].LanRef = rsp.ResolvedReference
+		mg.Spec.InitProvider.Nic.Lan = reference.ToFloatPtrValue(rsp.ResolvedValue)
+		mg.Spec.InitProvider.Nic.LanRef = rsp.ResolvedReference
 
 	}
 

@@ -45,10 +45,8 @@ func (in *ClientGroupsInitParameters) DeepCopyInto(out *ClientGroupsInitParamete
 	}
 	if in.NFS != nil {
 		in, out := &in.NFS, &out.NFS
-		*out = make([]ClientGroupsNFSInitParameters, len(*in))
-		for i := range *in {
-			(*in)[i].DeepCopyInto(&(*out)[i])
-		}
+		*out = new(ClientGroupsNFSInitParameters)
+		(*in).DeepCopyInto(*out)
 	}
 }
 
@@ -154,10 +152,8 @@ func (in *ClientGroupsObservation) DeepCopyInto(out *ClientGroupsObservation) {
 	}
 	if in.NFS != nil {
 		in, out := &in.NFS, &out.NFS
-		*out = make([]ClientGroupsNFSObservation, len(*in))
-		for i := range *in {
-			(*in)[i].DeepCopyInto(&(*out)[i])
-		}
+		*out = new(ClientGroupsNFSObservation)
+		(*in).DeepCopyInto(*out)
 	}
 }
 
@@ -203,10 +199,8 @@ func (in *ClientGroupsParameters) DeepCopyInto(out *ClientGroupsParameters) {
 	}
 	if in.NFS != nil {
 		in, out := &in.NFS, &out.NFS
-		*out = make([]ClientGroupsNFSParameters, len(*in))
-		for i := range *in {
-			(*in)[i].DeepCopyInto(&(*out)[i])
-		}
+		*out = new(ClientGroupsNFSParameters)
+		(*in).DeepCopyInto(*out)
 	}
 }
 
@@ -382,10 +376,8 @@ func (in *NFSClusterInitParameters) DeepCopyInto(out *NFSClusterInitParameters) 
 	*out = *in
 	if in.Connections != nil {
 		in, out := &in.Connections, &out.Connections
-		*out = make([]ConnectionsInitParameters, len(*in))
-		for i := range *in {
-			(*in)[i].DeepCopyInto(&(*out)[i])
-		}
+		*out = new(ConnectionsInitParameters)
+		(*in).DeepCopyInto(*out)
 	}
 	if in.Location != nil {
 		in, out := &in.Location, &out.Location
@@ -394,10 +386,8 @@ func (in *NFSClusterInitParameters) DeepCopyInto(out *NFSClusterInitParameters) 
 	}
 	if in.NFS != nil {
 		in, out := &in.NFS, &out.NFS
-		*out = make([]NFSInitParameters, len(*in))
-		for i := range *in {
-			(*in)[i].DeepCopyInto(&(*out)[i])
-		}
+		*out = new(NFSInitParameters)
+		(*in).DeepCopyInto(*out)
 	}
 	if in.Name != nil {
 		in, out := &in.Name, &out.Name
@@ -458,10 +448,8 @@ func (in *NFSClusterObservation) DeepCopyInto(out *NFSClusterObservation) {
 	*out = *in
 	if in.Connections != nil {
 		in, out := &in.Connections, &out.Connections
-		*out = make([]ConnectionsObservation, len(*in))
-		for i := range *in {
-			(*in)[i].DeepCopyInto(&(*out)[i])
-		}
+		*out = new(ConnectionsObservation)
+		(*in).DeepCopyInto(*out)
 	}
 	if in.ID != nil {
 		in, out := &in.ID, &out.ID
@@ -475,10 +463,8 @@ func (in *NFSClusterObservation) DeepCopyInto(out *NFSClusterObservation) {
 	}
 	if in.NFS != nil {
 		in, out := &in.NFS, &out.NFS
-		*out = make([]NFSObservation, len(*in))
-		for i := range *in {
-			(*in)[i].DeepCopyInto(&(*out)[i])
-		}
+		*out = new(NFSObservation)
+		(*in).DeepCopyInto(*out)
 	}
 	if in.Name != nil {
 		in, out := &in.Name, &out.Name
@@ -507,10 +493,8 @@ func (in *NFSClusterParameters) DeepCopyInto(out *NFSClusterParameters) {
 	*out = *in
 	if in.Connections != nil {
 		in, out := &in.Connections, &out.Connections
-		*out = make([]ConnectionsParameters, len(*in))
-		for i := range *in {
-			(*in)[i].DeepCopyInto(&(*out)[i])
-		}
+		*out = new(ConnectionsParameters)
+		(*in).DeepCopyInto(*out)
 	}
 	if in.Location != nil {
 		in, out := &in.Location, &out.Location
@@ -519,10 +503,8 @@ func (in *NFSClusterParameters) DeepCopyInto(out *NFSClusterParameters) {
 	}
 	if in.NFS != nil {
 		in, out := &in.NFS, &out.NFS
-		*out = make([]NFSParameters, len(*in))
-		for i := range *in {
-			(*in)[i].DeepCopyInto(&(*out)[i])
-		}
+		*out = new(NFSParameters)
+		(*in).DeepCopyInto(*out)
 	}
 	if in.Name != nil {
 		in, out := &in.Name, &out.Name

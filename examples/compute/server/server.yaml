@@ -21,7 +21,7 @@ spec:
       namespace: upbound-system
     name: Crossplane Server Example2
     nic:
-    - dhcp: true
+      dhcp: true
       firewall:
       - name: SSH2
         portRangeEnd: 23
@@ -38,7 +38,7 @@ spec:
     ram: 1024
     type: ENTERPRISE
     volume:
-    - availabilityZone: ZONE_1
+      availabilityZone: ZONE_1
       bus: VIRTIO
       diskType: SSD Standard
       name: system
@@ -76,7 +76,7 @@ spec:
   forProvider:
     location: us/las
     name: IP Block Example
-    size: 4
+    size: 1
 
 ---
 

@@ -210,7 +210,7 @@ type PostgresqlClusterInitParameters struct {
 
 	// [string] Details about the network connection for your cluster.
 	// Details about the network connection for your cluster.
-	Connections []ConnectionsInitParameters `json:"connections,omitempty" tf:"connections,omitempty"`
+	Connections *ConnectionsInitParameters `json:"connections,omitempty" tf:"connections,omitempty"`
 
 	// [int] The number of CPU cores per replica.
 	// The number of CPU cores per replica.
@@ -226,7 +226,7 @@ type PostgresqlClusterInitParameters struct {
 
 	// [string] The unique ID of the backup you want to restore. This attribute is immutable(disallowed in update requests).
 	// Creates the cluster based on the existing backup.
-	FromBackup []FromBackupInitParameters `json:"fromBackup,omitempty" tf:"from_backup,omitempty"`
+	FromBackup *FromBackupInitParameters `json:"fromBackup,omitempty" tf:"from_backup,omitempty"`
 
 	// [int] The total number of instances in the cluster (one master and n-1 standbys)
 	// The total number of instances in the cluster (one master and n-1 standbys)
@@ -248,7 +248,7 @@ type PostgresqlClusterInitParameters struct {
 
 	// (Computed)[string] A weekly 4 hour-long window, during which maintenance might occur
 	// a weekly 4 hour-long window, during which maintenance might occur
-	MaintenanceWindow []MaintenanceWindowInitParameters `json:"maintenanceWindow,omitempty" tf:"maintenance_window,omitempty"`
+	MaintenanceWindow *MaintenanceWindowInitParameters `json:"maintenanceWindow,omitempty" tf:"maintenance_window,omitempty"`
 
 	// [string] The PostgreSQL version of your cluster.
 	// The PostgreSQL version of your cluster.
@@ -279,7 +279,7 @@ type PostgresqlClusterObservation struct {
 
 	// [string] Details about the network connection for your cluster.
 	// Details about the network connection for your cluster.
-	Connections []ConnectionsObservation `json:"connections,omitempty" tf:"connections,omitempty"`
+	Connections *ConnectionsObservation `json:"connections,omitempty" tf:"connections,omitempty"`
 
 	// [int] The number of CPU cores per replica.
 	// The number of CPU cores per replica.
@@ -299,7 +299,7 @@ type PostgresqlClusterObservation struct {
 
 	// [string] The unique ID of the backup you want to restore. This attribute is immutable(disallowed in update requests).
 	// Creates the cluster based on the existing backup.
-	FromBackup []FromBackupObservation `json:"fromBackup,omitempty" tf:"from_backup,omitempty"`
+	FromBackup *FromBackupObservation `json:"fromBackup,omitempty" tf:"from_backup,omitempty"`
 
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
@@ -313,7 +313,7 @@ type PostgresqlClusterObservation struct {
 
 	// (Computed)[string] A weekly 4 hour-long window, during which maintenance might occur
 	// a weekly 4 hour-long window, during which maintenance might occur
-	MaintenanceWindow []MaintenanceWindowObservation `json:"maintenanceWindow,omitempty" tf:"maintenance_window,omitempty"`
+	MaintenanceWindow *MaintenanceWindowObservation `json:"maintenanceWindow,omitempty" tf:"maintenance_window,omitempty"`
 
 	// [string] The PostgreSQL version of your cluster.
 	// The PostgreSQL version of your cluster.
@@ -346,7 +346,7 @@ type PostgresqlClusterParameters struct {
 	// [string] Details about the network connection for your cluster.
 	// Details about the network connection for your cluster.
 	// +kubebuilder:validation:Optional
-	Connections []ConnectionsParameters `json:"connections,omitempty" tf:"connections,omitempty"`
+	Connections *ConnectionsParameters `json:"connections,omitempty" tf:"connections,omitempty"`
 
 	// [int] The number of CPU cores per replica.
 	// The number of CPU cores per replica.
@@ -366,7 +366,7 @@ type PostgresqlClusterParameters struct {
 	// [string] The unique ID of the backup you want to restore. This attribute is immutable(disallowed in update requests).
 	// Creates the cluster based on the existing backup.
 	// +kubebuilder:validation:Optional
-	FromBackup []FromBackupParameters `json:"fromBackup,omitempty" tf:"from_backup,omitempty"`
+	FromBackup *FromBackupParameters `json:"fromBackup,omitempty" tf:"from_backup,omitempty"`
 
 	// [int] The total number of instances in the cluster (one master and n-1 standbys)
 	// The total number of instances in the cluster (one master and n-1 standbys)
@@ -391,7 +391,7 @@ type PostgresqlClusterParameters struct {
 	// (Computed)[string] A weekly 4 hour-long window, during which maintenance might occur
 	// a weekly 4 hour-long window, during which maintenance might occur
 	// +kubebuilder:validation:Optional
-	MaintenanceWindow []MaintenanceWindowParameters `json:"maintenanceWindow,omitempty" tf:"maintenance_window,omitempty"`
+	MaintenanceWindow *MaintenanceWindowParameters `json:"maintenanceWindow,omitempty" tf:"maintenance_window,omitempty"`
 
 	// [string] The PostgreSQL version of your cluster.
 	// The PostgreSQL version of your cluster.

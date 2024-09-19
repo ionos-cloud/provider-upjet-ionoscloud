@@ -40,6 +40,22 @@ spec:
 ---
 
 apiVersion: compute.ionoscloud.io/v1alpha1
+kind: Ipblock
+metadata:
+  annotations:
+    meta.upbound.io/example-id: compute/v1alpha1/ipblock
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    location: de/fra
+    name: IP Block Example
+    size: 1
+
+---
+
+apiVersion: compute.ionoscloud.io/v1alpha1
 kind: Lan
 metadata:
   annotations:

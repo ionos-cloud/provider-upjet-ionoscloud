@@ -392,10 +392,8 @@ func (in *PostgresqlClusterInitParameters) DeepCopyInto(out *PostgresqlClusterIn
 	}
 	if in.Connections != nil {
 		in, out := &in.Connections, &out.Connections
-		*out = make([]ConnectionsInitParameters, len(*in))
-		for i := range *in {
-			(*in)[i].DeepCopyInto(&(*out)[i])
-		}
+		*out = new(ConnectionsInitParameters)
+		(*in).DeepCopyInto(*out)
 	}
 	if in.Cores != nil {
 		in, out := &in.Cores, &out.Cores
@@ -416,10 +414,8 @@ func (in *PostgresqlClusterInitParameters) DeepCopyInto(out *PostgresqlClusterIn
 	}
 	if in.FromBackup != nil {
 		in, out := &in.FromBackup, &out.FromBackup
-		*out = make([]FromBackupInitParameters, len(*in))
-		for i := range *in {
-			(*in)[i].DeepCopyInto(&(*out)[i])
-		}
+		*out = new(FromBackupInitParameters)
+		(*in).DeepCopyInto(*out)
 	}
 	if in.Instances != nil {
 		in, out := &in.Instances, &out.Instances
@@ -443,10 +439,8 @@ func (in *PostgresqlClusterInitParameters) DeepCopyInto(out *PostgresqlClusterIn
 	}
 	if in.MaintenanceWindow != nil {
 		in, out := &in.MaintenanceWindow, &out.MaintenanceWindow
-		*out = make([]MaintenanceWindowInitParameters, len(*in))
-		for i := range *in {
-			(*in)[i].DeepCopyInto(&(*out)[i])
-		}
+		*out = new(MaintenanceWindowInitParameters)
+		(*in).DeepCopyInto(*out)
 	}
 	if in.PostgresVersion != nil {
 		in, out := &in.PostgresVersion, &out.PostgresVersion
@@ -527,10 +521,8 @@ func (in *PostgresqlClusterObservation) DeepCopyInto(out *PostgresqlClusterObser
 	}
 	if in.Connections != nil {
 		in, out := &in.Connections, &out.Connections
-		*out = make([]ConnectionsObservation, len(*in))
-		for i := range *in {
-			(*in)[i].DeepCopyInto(&(*out)[i])
-		}
+		*out = new(ConnectionsObservation)
+		(*in).DeepCopyInto(*out)
 	}
 	if in.Cores != nil {
 		in, out := &in.Cores, &out.Cores
@@ -556,10 +548,8 @@ func (in *PostgresqlClusterObservation) DeepCopyInto(out *PostgresqlClusterObser
 	}
 	if in.FromBackup != nil {
 		in, out := &in.FromBackup, &out.FromBackup
-		*out = make([]FromBackupObservation, len(*in))
-		for i := range *in {
-			(*in)[i].DeepCopyInto(&(*out)[i])
-		}
+		*out = new(FromBackupObservation)
+		(*in).DeepCopyInto(*out)
 	}
 	if in.ID != nil {
 		in, out := &in.ID, &out.ID
@@ -578,10 +568,8 @@ func (in *PostgresqlClusterObservation) DeepCopyInto(out *PostgresqlClusterObser
 	}
 	if in.MaintenanceWindow != nil {
 		in, out := &in.MaintenanceWindow, &out.MaintenanceWindow
-		*out = make([]MaintenanceWindowObservation, len(*in))
-		for i := range *in {
-			(*in)[i].DeepCopyInto(&(*out)[i])
-		}
+		*out = new(MaintenanceWindowObservation)
+		(*in).DeepCopyInto(*out)
 	}
 	if in.PostgresVersion != nil {
 		in, out := &in.PostgresVersion, &out.PostgresVersion
@@ -630,10 +618,8 @@ func (in *PostgresqlClusterParameters) DeepCopyInto(out *PostgresqlClusterParame
 	}
 	if in.Connections != nil {
 		in, out := &in.Connections, &out.Connections
-		*out = make([]ConnectionsParameters, len(*in))
-		for i := range *in {
-			(*in)[i].DeepCopyInto(&(*out)[i])
-		}
+		*out = new(ConnectionsParameters)
+		(*in).DeepCopyInto(*out)
 	}
 	if in.Cores != nil {
 		in, out := &in.Cores, &out.Cores
@@ -654,10 +640,8 @@ func (in *PostgresqlClusterParameters) DeepCopyInto(out *PostgresqlClusterParame
 	}
 	if in.FromBackup != nil {
 		in, out := &in.FromBackup, &out.FromBackup
-		*out = make([]FromBackupParameters, len(*in))
-		for i := range *in {
-			(*in)[i].DeepCopyInto(&(*out)[i])
-		}
+		*out = new(FromBackupParameters)
+		(*in).DeepCopyInto(*out)
 	}
 	if in.Instances != nil {
 		in, out := &in.Instances, &out.Instances
@@ -681,10 +665,8 @@ func (in *PostgresqlClusterParameters) DeepCopyInto(out *PostgresqlClusterParame
 	}
 	if in.MaintenanceWindow != nil {
 		in, out := &in.MaintenanceWindow, &out.MaintenanceWindow
-		*out = make([]MaintenanceWindowParameters, len(*in))
-		for i := range *in {
-			(*in)[i].DeepCopyInto(&(*out)[i])
-		}
+		*out = new(MaintenanceWindowParameters)
+		(*in).DeepCopyInto(*out)
 	}
 	if in.PostgresVersion != nil {
 		in, out := &in.PostgresVersion, &out.PostgresVersion

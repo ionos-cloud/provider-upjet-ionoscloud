@@ -89,20 +89,18 @@ spec:
                     description: |-
                       [block] An endpoint configuration block for the WireGuard Gateway. The structure of this block is as follows:
                       Endpoint configuration for the WireGuard Peer.
-                    items:
-                      properties:
-                        host:
-                          description: |-
-                            [string] The hostname or IPV4 address that the WireGuard Server will connect to.
-                            Hostname or IPV4 address that the WireGuard Server will connect to.
-                          type: string
-                        port:
-                          description: |-
-                            [int] The port that the WireGuard Server will connect to. Defaults to 51820.
-                            Port that the WireGuard Server will connect to.
-                          type: number
-                      type: object
-                    type: array
+                    properties:
+                      host:
+                        description: |-
+                          [string] The hostname or IPV4 address that the WireGuard Server will connect to.
+                          Hostname or IPV4 address that the WireGuard Server will connect to.
+                        type: string
+                      port:
+                        description: |-
+                          [int] The port that the WireGuard Server will connect to. Defaults to 51820.
+                          Port that the WireGuard Server will connect to.
+                        type: number
+                    type: object
                   gatewayId:
                     description: |-
                       [string] The ID of the WireGuard Gateway that the Peer will connect to.
@@ -229,20 +227,18 @@ spec:
                     description: |-
                       [block] An endpoint configuration block for the WireGuard Gateway. The structure of this block is as follows:
                       Endpoint configuration for the WireGuard Peer.
-                    items:
-                      properties:
-                        host:
-                          description: |-
-                            [string] The hostname or IPV4 address that the WireGuard Server will connect to.
-                            Hostname or IPV4 address that the WireGuard Server will connect to.
-                          type: string
-                        port:
-                          description: |-
-                            [int] The port that the WireGuard Server will connect to. Defaults to 51820.
-                            Port that the WireGuard Server will connect to.
-                          type: number
-                      type: object
-                    type: array
+                    properties:
+                      host:
+                        description: |-
+                          [string] The hostname or IPV4 address that the WireGuard Server will connect to.
+                          Hostname or IPV4 address that the WireGuard Server will connect to.
+                        type: string
+                      port:
+                        description: |-
+                          [int] The port that the WireGuard Server will connect to. Defaults to 51820.
+                          Port that the WireGuard Server will connect to.
+                        type: number
+                    type: object
                   gatewayId:
                     description: |-
                       [string] The ID of the WireGuard Gateway that the Peer will connect to.
@@ -545,20 +541,18 @@ spec:
                     description: |-
                       [block] An endpoint configuration block for the WireGuard Gateway. The structure of this block is as follows:
                       Endpoint configuration for the WireGuard Peer.
-                    items:
-                      properties:
-                        host:
-                          description: |-
-                            [string] The hostname or IPV4 address that the WireGuard Server will connect to.
-                            Hostname or IPV4 address that the WireGuard Server will connect to.
-                          type: string
-                        port:
-                          description: |-
-                            [int] The port that the WireGuard Server will connect to. Defaults to 51820.
-                            Port that the WireGuard Server will connect to.
-                          type: number
-                      type: object
-                    type: array
+                    properties:
+                      host:
+                        description: |-
+                          [string] The hostname or IPV4 address that the WireGuard Server will connect to.
+                          Hostname or IPV4 address that the WireGuard Server will connect to.
+                        type: string
+                      port:
+                        description: |-
+                          [int] The port that the WireGuard Server will connect to. Defaults to 51820.
+                          Port that the WireGuard Server will connect to.
+                        type: number
+                    type: object
                   gatewayId:
                     description: |-
                       [string] The ID of the WireGuard Gateway that the Peer will connect to.

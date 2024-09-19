@@ -1,0 +1,32 @@
+apiVersion: s3.ionoscloud.io/v1alpha1
+kind: BucketObjectLockConfiguration
+metadata:
+  annotations:
+    meta.upbound.io/example-id: s3/v1alpha1/bucketobjectlockconfiguration
+  labels:
+    testing.upbound.io/example-name: test
+  name: test
+spec:
+  forProvider:
+    bucketSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    objectLockEnabled: Enabled
+    rule:
+    - defaultRetention:
+      - days: 1
+        mode: GOVERNANCE
+
+---
+
+apiVersion: s3.ionoscloud.io/v1alpha1
+kind: Bucket
+metadata:
+  annotations:
+    meta.upbound.io/example-id: s3/v1alpha1/bucketobjectlockconfiguration
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    objectLockEnabled: true

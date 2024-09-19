@@ -583,10 +583,8 @@ func (in *VpnWireguardPeerInitParameters) DeepCopyInto(out *VpnWireguardPeerInit
 	}
 	if in.Endpoint != nil {
 		in, out := &in.Endpoint, &out.Endpoint
-		*out = make([]EndpointInitParameters, len(*in))
-		for i := range *in {
-			(*in)[i].DeepCopyInto(&(*out)[i])
-		}
+		*out = new(EndpointInitParameters)
+		(*in).DeepCopyInto(*out)
 	}
 	if in.GatewayID != nil {
 		in, out := &in.GatewayID, &out.GatewayID
@@ -683,10 +681,8 @@ func (in *VpnWireguardPeerObservation) DeepCopyInto(out *VpnWireguardPeerObserva
 	}
 	if in.Endpoint != nil {
 		in, out := &in.Endpoint, &out.Endpoint
-		*out = make([]EndpointObservation, len(*in))
-		for i := range *in {
-			(*in)[i].DeepCopyInto(&(*out)[i])
-		}
+		*out = new(EndpointObservation)
+		(*in).DeepCopyInto(*out)
 	}
 	if in.GatewayID != nil {
 		in, out := &in.GatewayID, &out.GatewayID
@@ -751,10 +747,8 @@ func (in *VpnWireguardPeerParameters) DeepCopyInto(out *VpnWireguardPeerParamete
 	}
 	if in.Endpoint != nil {
 		in, out := &in.Endpoint, &out.Endpoint
-		*out = make([]EndpointParameters, len(*in))
-		for i := range *in {
-			(*in)[i].DeepCopyInto(&(*out)[i])
-		}
+		*out = new(EndpointParameters)
+		(*in).DeepCopyInto(*out)
 	}
 	if in.GatewayID != nil {
 		in, out := &in.GatewayID, &out.GatewayID

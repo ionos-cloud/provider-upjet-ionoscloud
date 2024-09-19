@@ -15,27 +15,69 @@ import (
 
 type BucketInitParameters struct {
 
-	// [string] Specifies the Region where the bucket will be created. Please refer to the list of available regions. Defaults to "eu-central-3".
+	// [bool] If true, the bucket and the contents of the bucket will be destroyed. Default is false.
+	// Whether all objects should be deleted from the bucket so that the bucket can be destroyed
+	ForceDestroy *bool `json:"forceDestroy,omitempty" tf:"force_destroy,omitempty"`
+
+	// [bool] The object lock configuration status of the bucket. Must be true or false.
+	// Whether object lock is enabled for the bucket
+	ObjectLockEnabled *bool `json:"objectLockEnabled,omitempty" tf:"object_lock_enabled,omitempty"`
+
+	// [string] Specifies the Region where the bucket will be created. Please refer to the list of available regions
 	// The region of the bucket. Defaults to eu-central-3.
 	Region *string `json:"region,omitempty" tf:"region,omitempty"`
+
+	// A mapping of tags to assign to the bucket.
+	// A mapping of tags to assign to the bucket
+	// +mapType=granular
+	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 }
 
 type BucketObservation struct {
 
+	// [bool] If true, the bucket and the contents of the bucket will be destroyed. Default is false.
+	// Whether all objects should be deleted from the bucket so that the bucket can be destroyed
+	ForceDestroy *bool `json:"forceDestroy,omitempty" tf:"force_destroy,omitempty"`
+
 	// (Computed) Name of the bucket
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
-	// [string] Specifies the Region where the bucket will be created. Please refer to the list of available regions. Defaults to "eu-central-3".
+	// [bool] The object lock configuration status of the bucket. Must be true or false.
+	// Whether object lock is enabled for the bucket
+	ObjectLockEnabled *bool `json:"objectLockEnabled,omitempty" tf:"object_lock_enabled,omitempty"`
+
+	// [string] Specifies the Region where the bucket will be created. Please refer to the list of available regions
 	// The region of the bucket. Defaults to eu-central-3.
 	Region *string `json:"region,omitempty" tf:"region,omitempty"`
+
+	// A mapping of tags to assign to the bucket.
+	// A mapping of tags to assign to the bucket
+	// +mapType=granular
+	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 }
 
 type BucketParameters struct {
 
-	// [string] Specifies the Region where the bucket will be created. Please refer to the list of available regions. Defaults to "eu-central-3".
+	// [bool] If true, the bucket and the contents of the bucket will be destroyed. Default is false.
+	// Whether all objects should be deleted from the bucket so that the bucket can be destroyed
+	// +kubebuilder:validation:Optional
+	ForceDestroy *bool `json:"forceDestroy,omitempty" tf:"force_destroy,omitempty"`
+
+	// [bool] The object lock configuration status of the bucket. Must be true or false.
+	// Whether object lock is enabled for the bucket
+	// +kubebuilder:validation:Optional
+	ObjectLockEnabled *bool `json:"objectLockEnabled,omitempty" tf:"object_lock_enabled,omitempty"`
+
+	// [string] Specifies the Region where the bucket will be created. Please refer to the list of available regions
 	// The region of the bucket. Defaults to eu-central-3.
 	// +kubebuilder:validation:Optional
 	Region *string `json:"region,omitempty" tf:"region,omitempty"`
+
+	// A mapping of tags to assign to the bucket.
+	// A mapping of tags to assign to the bucket
+	// +kubebuilder:validation:Optional
+	// +mapType=granular
+	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 }
 
 // BucketSpec defines the desired state of Bucket

@@ -8,6 +8,9 @@ import (
 	"context"
 	"encoding/json"
 
+	"github.com/hashicorp/terraform-plugin-framework/provider"
+	"github.com/ionos-cloud/terraform-provider-ionoscloud/v6/ionoscloud"
+
 	"github.com/crossplane/crossplane-runtime/pkg/resource"
 	"github.com/pkg/errors"
 	"k8s.io/apimachinery/pkg/types"
@@ -29,7 +32,7 @@ const (
 
 // TerraformSetupBuilder builds Terraform a terraform.SetupFn function which
 // returns Terraform provider setup configuration
-func TerraformSetupBuilder(version, providerSource, providerVersion string) terraform.SetupFn {
+func TerraformSetupBuilder(version, providerSource, providerVersion string, fwProvider provider.Provider) terraform.SetupFn {
 	return func(ctx context.Context, client client.Client, mg resource.Managed) (terraform.Setup, error) {
 		ps := terraform.Setup{
 			Version: version,
@@ -37,6 +40,7 @@ func TerraformSetupBuilder(version, providerSource, providerVersion string) terr
 				Source:  providerSource,
 				Version: providerVersion,
 			},
+			FrameworkProvider: fwProvider,
 		}
 
 		configRef := mg.GetProviderConfigReference()
@@ -62,6 +66,15 @@ func TerraformSetupBuilder(version, providerSource, providerVersion string) terr
 			return ps, errors.Wrap(err, errUnmarshalCredentials)
 		}
 
+		ionosSDKBundleClient := ionoscloud.NewSDKBundleClient(ionoscloud.ClientOptions{
+			Username:         creds["user"],
+			Password:         creds["password"],
+			Token:            creds["token"],
+			TerraformVersion: version,
+		})
+
+		ps.Meta = ionosSDKBundleClient
+
 		// Set credentials in Terraform provider configuration.
 		ps.Configuration = map[string]any{
 			"username":      creds["user"],
@@ -69,6 +82,7 @@ func TerraformSetupBuilder(version, providerSource, providerVersion string) terr
 			"s3_access_key": creds["s3_access_key"],
 			"s3_secret_key": creds["s3_secret_key"],
 		}
+
 		return ps, nil
 	}
 }

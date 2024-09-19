@@ -15,7 +15,7 @@ spec:
         ipNetworks:
           - 10.234.50.0/24
         nfs:
-          - squash: all-anonymous
+           squash: all-anonymous
     clusterIdSelector:
       matchLabels:
         testing.upbound.io/example-name: example

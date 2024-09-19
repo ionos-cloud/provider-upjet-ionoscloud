@@ -428,24 +428,18 @@ func (in *MongodbClusterInitParameters) DeepCopyInto(out *MongodbClusterInitPara
 	*out = *in
 	if in.Backup != nil {
 		in, out := &in.Backup, &out.Backup
-		*out = make([]BackupInitParameters, len(*in))
-		for i := range *in {
-			(*in)[i].DeepCopyInto(&(*out)[i])
-		}
+		*out = new(BackupInitParameters)
+		(*in).DeepCopyInto(*out)
 	}
 	if in.BiConnector != nil {
 		in, out := &in.BiConnector, &out.BiConnector
-		*out = make([]BiConnectorInitParameters, len(*in))
-		for i := range *in {
-			(*in)[i].DeepCopyInto(&(*out)[i])
-		}
+		*out = new(BiConnectorInitParameters)
+		(*in).DeepCopyInto(*out)
 	}
 	if in.Connections != nil {
 		in, out := &in.Connections, &out.Connections
-		*out = make([]ConnectionsInitParameters, len(*in))
-		for i := range *in {
-			(*in)[i].DeepCopyInto(&(*out)[i])
-		}
+		*out = new(ConnectionsInitParameters)
+		(*in).DeepCopyInto(*out)
 	}
 	if in.Cores != nil {
 		in, out := &in.Cores, &out.Cores
@@ -484,10 +478,8 @@ func (in *MongodbClusterInitParameters) DeepCopyInto(out *MongodbClusterInitPara
 	}
 	if in.MaintenanceWindow != nil {
 		in, out := &in.MaintenanceWindow, &out.MaintenanceWindow
-		*out = make([]MaintenanceWindowInitParameters, len(*in))
-		for i := range *in {
-			(*in)[i].DeepCopyInto(&(*out)[i])
-		}
+		*out = new(MaintenanceWindowInitParameters)
+		(*in).DeepCopyInto(*out)
 	}
 	if in.MongodbVersion != nil {
 		in, out := &in.MongodbVersion, &out.MongodbVersion
@@ -573,17 +565,13 @@ func (in *MongodbClusterObservation) DeepCopyInto(out *MongodbClusterObservation
 	*out = *in
 	if in.Backup != nil {
 		in, out := &in.Backup, &out.Backup
-		*out = make([]BackupObservation, len(*in))
-		for i := range *in {
-			(*in)[i].DeepCopyInto(&(*out)[i])
-		}
+		*out = new(BackupObservation)
+		(*in).DeepCopyInto(*out)
 	}
 	if in.BiConnector != nil {
 		in, out := &in.BiConnector, &out.BiConnector
-		*out = make([]BiConnectorObservation, len(*in))
-		for i := range *in {
-			(*in)[i].DeepCopyInto(&(*out)[i])
-		}
+		*out = new(BiConnectorObservation)
+		(*in).DeepCopyInto(*out)
 	}
 	if in.ConnectionString != nil {
 		in, out := &in.ConnectionString, &out.ConnectionString
@@ -592,10 +580,8 @@ func (in *MongodbClusterObservation) DeepCopyInto(out *MongodbClusterObservation
 	}
 	if in.Connections != nil {
 		in, out := &in.Connections, &out.Connections
-		*out = make([]ConnectionsObservation, len(*in))
-		for i := range *in {
-			(*in)[i].DeepCopyInto(&(*out)[i])
-		}
+		*out = new(ConnectionsObservation)
+		(*in).DeepCopyInto(*out)
 	}
 	if in.Cores != nil {
 		in, out := &in.Cores, &out.Cores
@@ -629,10 +615,8 @@ func (in *MongodbClusterObservation) DeepCopyInto(out *MongodbClusterObservation
 	}
 	if in.MaintenanceWindow != nil {
 		in, out := &in.MaintenanceWindow, &out.MaintenanceWindow
-		*out = make([]MaintenanceWindowObservation, len(*in))
-		for i := range *in {
-			(*in)[i].DeepCopyInto(&(*out)[i])
-		}
+		*out = new(MaintenanceWindowObservation)
+		(*in).DeepCopyInto(*out)
 	}
 	if in.MongodbVersion != nil {
 		in, out := &in.MongodbVersion, &out.MongodbVersion
@@ -686,24 +670,18 @@ func (in *MongodbClusterParameters) DeepCopyInto(out *MongodbClusterParameters) 
 	*out = *in
 	if in.Backup != nil {
 		in, out := &in.Backup, &out.Backup
-		*out = make([]BackupParameters, len(*in))
-		for i := range *in {
-			(*in)[i].DeepCopyInto(&(*out)[i])
-		}
+		*out = new(BackupParameters)
+		(*in).DeepCopyInto(*out)
 	}
 	if in.BiConnector != nil {
 		in, out := &in.BiConnector, &out.BiConnector
-		*out = make([]BiConnectorParameters, len(*in))
-		for i := range *in {
-			(*in)[i].DeepCopyInto(&(*out)[i])
-		}
+		*out = new(BiConnectorParameters)
+		(*in).DeepCopyInto(*out)
 	}
 	if in.Connections != nil {
 		in, out := &in.Connections, &out.Connections
-		*out = make([]ConnectionsParameters, len(*in))
-		for i := range *in {
-			(*in)[i].DeepCopyInto(&(*out)[i])
-		}
+		*out = new(ConnectionsParameters)
+		(*in).DeepCopyInto(*out)
 	}
 	if in.Cores != nil {
 		in, out := &in.Cores, &out.Cores
@@ -742,10 +720,8 @@ func (in *MongodbClusterParameters) DeepCopyInto(out *MongodbClusterParameters) 
 	}
 	if in.MaintenanceWindow != nil {
 		in, out := &in.MaintenanceWindow, &out.MaintenanceWindow
-		*out = make([]MaintenanceWindowParameters, len(*in))
-		for i := range *in {
-			(*in)[i].DeepCopyInto(&(*out)[i])
-		}
+		*out = new(MaintenanceWindowParameters)
+		(*in).DeepCopyInto(*out)
 	}
 	if in.MongodbVersion != nil {
 		in, out := &in.MongodbVersion, &out.MongodbVersion

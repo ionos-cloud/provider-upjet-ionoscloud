@@ -101,7 +101,7 @@ type CredentialsInitParameters struct {
 
 	// [object] The hashed password for a InMemoryDB user.
 	// The hashed password for a InMemoryDB user.
-	HashedPassword []HashedPasswordInitParameters `json:"hashedPassword,omitempty" tf:"hashed_password,omitempty"`
+	HashedPassword *HashedPasswordInitParameters `json:"hashedPassword,omitempty" tf:"hashed_password,omitempty"`
 
 	// [string] The password for a InMemoryDB user, this is a field that is marked as Sensitive.
 	// The password for a InMemoryDB user.
@@ -116,7 +116,7 @@ type CredentialsObservation struct {
 
 	// [object] The hashed password for a InMemoryDB user.
 	// The hashed password for a InMemoryDB user.
-	HashedPassword []HashedPasswordObservation `json:"hashedPassword,omitempty" tf:"hashed_password,omitempty"`
+	HashedPassword *HashedPasswordObservation `json:"hashedPassword,omitempty" tf:"hashed_password,omitempty"`
 
 	// [string] The username for the initial InMemoryDB user. Some system usernames are restricted (e.g. 'admin', 'standby').
 	// The username for the initial InMemoryDB user. Some system usernames are restricted (e.g. 'admin', 'standby').
@@ -128,7 +128,7 @@ type CredentialsParameters struct {
 	// [object] The hashed password for a InMemoryDB user.
 	// The hashed password for a InMemoryDB user.
 	// +kubebuilder:validation:Optional
-	HashedPassword []HashedPasswordParameters `json:"hashedPassword,omitempty" tf:"hashed_password,omitempty"`
+	HashedPassword *HashedPasswordParameters `json:"hashedPassword,omitempty" tf:"hashed_password,omitempty"`
 
 	// [string] The password for a InMemoryDB user, this is a field that is marked as Sensitive.
 	// The password for a InMemoryDB user.
@@ -174,7 +174,7 @@ type InMemoryDBReplicasetInitParameters struct {
 
 	// [object] The network connection for your replica set. Only one connection is allowed. Updates to the value of the fields force the replica set to be re-created.
 	// The network connection for your replica set. Only one connection is allowed.
-	Connections []ConnectionsInitParameters `json:"connections,omitempty" tf:"connections,omitempty"`
+	Connections *ConnectionsInitParameters `json:"connections,omitempty" tf:"connections,omitempty"`
 
 	// [object] Credentials for the InMemoryDB replicaset, only one type of password can be used since they are mutually exclusive. These values are used to create the initial InMemoryDB user, updating any of these will force recreation of the replica set resource.
 	// Credentials for the InMemoryDB replicaset.
@@ -194,11 +194,21 @@ type InMemoryDBReplicasetInitParameters struct {
 
 	// [string] The location of your replica set. Updates to the value of the field force the replica set to be re-created.
 	// The replica set location
+	// +crossplane:generate:reference:type=github.com/ionos-cloud/provider-upjet-ionoscloud/apis/compute/v1alpha1.Datacenter
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractParamPath("location",false)
 	Location *string `json:"location,omitempty" tf:"location,omitempty"`
+
+	// Reference to a Datacenter in compute to populate location.
+	// +kubebuilder:validation:Optional
+	LocationRef *v1.Reference `json:"locationRef,omitempty" tf:"-"`
+
+	// Selector for a Datacenter in compute to populate location.
+	// +kubebuilder:validation:Optional
+	LocationSelector *v1.Selector `json:"locationSelector,omitempty" tf:"-"`
 
 	// (Computed) A weekly 4 hour-long window, during which maintenance might occur.
 	// A weekly 4 hour-long window, during which maintenance might occur.
-	MaintenanceWindow []MaintenanceWindowInitParameters `json:"maintenanceWindow,omitempty" tf:"maintenance_window,omitempty"`
+	MaintenanceWindow *MaintenanceWindowInitParameters `json:"maintenanceWindow,omitempty" tf:"maintenance_window,omitempty"`
 
 	// [string] Specifies How and If data is persisted, possible values are:
 	// Specifies How and If data is persisted.
@@ -210,7 +220,7 @@ type InMemoryDBReplicasetInitParameters struct {
 
 	// [object] The resources of the individual replicas.
 	// The resources of the individual replicas.
-	Resources []ResourcesInitParameters `json:"resources,omitempty" tf:"resources,omitempty"`
+	Resources *ResourcesInitParameters `json:"resources,omitempty" tf:"resources,omitempty"`
 
 	// [string] The InMemoryDB version of your replica set.
 	// The InMemoryDB version of your replica set.
@@ -221,7 +231,7 @@ type InMemoryDBReplicasetObservation struct {
 
 	// [object] The network connection for your replica set. Only one connection is allowed. Updates to the value of the fields force the replica set to be re-created.
 	// The network connection for your replica set. Only one connection is allowed.
-	Connections []ConnectionsObservation `json:"connections,omitempty" tf:"connections,omitempty"`
+	Connections *ConnectionsObservation `json:"connections,omitempty" tf:"connections,omitempty"`
 
 	// [object] Credentials for the InMemoryDB replicaset, only one type of password can be used since they are mutually exclusive. These values are used to create the initial InMemoryDB user, updating any of these will force recreation of the replica set resource.
 	// Credentials for the InMemoryDB replicaset.
@@ -251,7 +261,7 @@ type InMemoryDBReplicasetObservation struct {
 
 	// (Computed) A weekly 4 hour-long window, during which maintenance might occur.
 	// A weekly 4 hour-long window, during which maintenance might occur.
-	MaintenanceWindow []MaintenanceWindowObservation `json:"maintenanceWindow,omitempty" tf:"maintenance_window,omitempty"`
+	MaintenanceWindow *MaintenanceWindowObservation `json:"maintenanceWindow,omitempty" tf:"maintenance_window,omitempty"`
 
 	// [string] Specifies How and If data is persisted, possible values are:
 	// Specifies How and If data is persisted.
@@ -263,7 +273,7 @@ type InMemoryDBReplicasetObservation struct {
 
 	// [object] The resources of the individual replicas.
 	// The resources of the individual replicas.
-	Resources []ResourcesObservation `json:"resources,omitempty" tf:"resources,omitempty"`
+	Resources *ResourcesObservation `json:"resources,omitempty" tf:"resources,omitempty"`
 
 	// [string] The InMemoryDB version of your replica set.
 	// The InMemoryDB version of your replica set.
@@ -275,7 +285,7 @@ type InMemoryDBReplicasetParameters struct {
 	// [object] The network connection for your replica set. Only one connection is allowed. Updates to the value of the fields force the replica set to be re-created.
 	// The network connection for your replica set. Only one connection is allowed.
 	// +kubebuilder:validation:Optional
-	Connections []ConnectionsParameters `json:"connections,omitempty" tf:"connections,omitempty"`
+	Connections *ConnectionsParameters `json:"connections,omitempty" tf:"connections,omitempty"`
 
 	// [object] Credentials for the InMemoryDB replicaset, only one type of password can be used since they are mutually exclusive. These values are used to create the initial InMemoryDB user, updating any of these will force recreation of the replica set resource.
 	// Credentials for the InMemoryDB replicaset.
@@ -299,13 +309,23 @@ type InMemoryDBReplicasetParameters struct {
 
 	// [string] The location of your replica set. Updates to the value of the field force the replica set to be re-created.
 	// The replica set location
+	// +crossplane:generate:reference:type=github.com/ionos-cloud/provider-upjet-ionoscloud/apis/compute/v1alpha1.Datacenter
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractParamPath("location",false)
 	// +kubebuilder:validation:Optional
 	Location *string `json:"location,omitempty" tf:"location,omitempty"`
+
+	// Reference to a Datacenter in compute to populate location.
+	// +kubebuilder:validation:Optional
+	LocationRef *v1.Reference `json:"locationRef,omitempty" tf:"-"`
+
+	// Selector for a Datacenter in compute to populate location.
+	// +kubebuilder:validation:Optional
+	LocationSelector *v1.Selector `json:"locationSelector,omitempty" tf:"-"`
 
 	// (Computed) A weekly 4 hour-long window, during which maintenance might occur.
 	// A weekly 4 hour-long window, during which maintenance might occur.
 	// +kubebuilder:validation:Optional
-	MaintenanceWindow []MaintenanceWindowParameters `json:"maintenanceWindow,omitempty" tf:"maintenance_window,omitempty"`
+	MaintenanceWindow *MaintenanceWindowParameters `json:"maintenanceWindow,omitempty" tf:"maintenance_window,omitempty"`
 
 	// [string] Specifies How and If data is persisted, possible values are:
 	// Specifies How and If data is persisted.
@@ -320,7 +340,7 @@ type InMemoryDBReplicasetParameters struct {
 	// [object] The resources of the individual replicas.
 	// The resources of the individual replicas.
 	// +kubebuilder:validation:Optional
-	Resources []ResourcesParameters `json:"resources,omitempty" tf:"resources,omitempty"`
+	Resources *ResourcesParameters `json:"resources,omitempty" tf:"resources,omitempty"`
 
 	// [string] The InMemoryDB version of your replica set.
 	// The InMemoryDB version of your replica set.
@@ -442,7 +462,6 @@ type InMemoryDBReplicaset struct {
 	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.credentials) || (has(self.initProvider) && has(self.initProvider.credentials))",message="spec.forProvider.credentials is a required parameter"
 	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.displayName) || (has(self.initProvider) && has(self.initProvider.displayName))",message="spec.forProvider.displayName is a required parameter"
 	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.evictionPolicy) || (has(self.initProvider) && has(self.initProvider.evictionPolicy))",message="spec.forProvider.evictionPolicy is a required parameter"
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.location) || (has(self.initProvider) && has(self.initProvider.location))",message="spec.forProvider.location is a required parameter"
 	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.persistenceMode) || (has(self.initProvider) && has(self.initProvider.persistenceMode))",message="spec.forProvider.persistenceMode is a required parameter"
 	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.replicas) || (has(self.initProvider) && has(self.initProvider.replicas))",message="spec.forProvider.replicas is a required parameter"
 	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.resources) || (has(self.initProvider) && has(self.initProvider.resources))",message="spec.forProvider.resources is a required parameter"

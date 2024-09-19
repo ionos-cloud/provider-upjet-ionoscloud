@@ -23,5 +23,11 @@ func main() {
 	if err != nil {
 		panic(fmt.Sprintf("cannot calculate the absolute path with %s", rootDir))
 	}
-	pipeline.Run(config.GetProvider(), absRootDir)
+
+	provider, err := config.GetProvider(true)
+	if err != nil {
+		panic(fmt.Sprintf("cannot get provider configuration: %v", err))
+	}
+
+	pipeline.Run(provider, absRootDir)
 }

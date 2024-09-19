@@ -243,7 +243,7 @@ type VpnIpsecTunnelInitParameters struct {
 
 	// [list] Settings for the initial security exchange phase. Minimum items: 1. Maximum items: 1.
 	// Settings for the initial security exchange phase.
-	Ike []IkeInitParameters `json:"ike,omitempty" tf:"ike,omitempty"`
+	Ike *IkeInitParameters `json:"ike,omitempty" tf:"ike,omitempty"`
 
 	// [string] The location of the IPSec Gateway Tunnel. Supported locations: de/fra, de/txl, es/vit,
 	// gb/lhr, us/ewr, us/las, us/mci, fr/par
@@ -293,7 +293,7 @@ type VpnIpsecTunnelObservation struct {
 
 	// [list] Settings for the initial security exchange phase. Minimum items: 1. Maximum items: 1.
 	// Settings for the initial security exchange phase.
-	Ike []IkeObservation `json:"ike,omitempty" tf:"ike,omitempty"`
+	Ike *IkeObservation `json:"ike,omitempty" tf:"ike,omitempty"`
 
 	// [string] The location of the IPSec Gateway Tunnel. Supported locations: de/fra, de/txl, es/vit,
 	// gb/lhr, us/ewr, us/las, us/mci, fr/par
@@ -356,7 +356,7 @@ type VpnIpsecTunnelParameters struct {
 	// [list] Settings for the initial security exchange phase. Minimum items: 1. Maximum items: 1.
 	// Settings for the initial security exchange phase.
 	// +kubebuilder:validation:Optional
-	Ike []IkeParameters `json:"ike,omitempty" tf:"ike,omitempty"`
+	Ike *IkeParameters `json:"ike,omitempty" tf:"ike,omitempty"`
 
 	// [string] The location of the IPSec Gateway Tunnel. Supported locations: de/fra, de/txl, es/vit,
 	// gb/lhr, us/ewr, us/las, us/mci, fr/par

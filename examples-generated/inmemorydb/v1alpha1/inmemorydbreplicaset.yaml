@@ -24,7 +24,9 @@ spec:
       username: myuser
     displayName: ExampleReplicaSet
     evictionPolicy: noeviction
-    location: us/las
+    locationSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
     maintenanceWindow:
     - dayOfTheWeek: Monday
       time: "10:00:00"

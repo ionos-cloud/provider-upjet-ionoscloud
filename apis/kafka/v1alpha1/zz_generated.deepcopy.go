@@ -193,15 +193,23 @@ func (in *KafkaInitParameters) DeepCopyInto(out *KafkaInitParameters) {
 	*out = *in
 	if in.Connections != nil {
 		in, out := &in.Connections, &out.Connections
-		*out = make([]ConnectionsInitParameters, len(*in))
-		for i := range *in {
-			(*in)[i].DeepCopyInto(&(*out)[i])
-		}
+		*out = new(ConnectionsInitParameters)
+		(*in).DeepCopyInto(*out)
 	}
 	if in.Location != nil {
 		in, out := &in.Location, &out.Location
 		*out = new(string)
 		**out = **in
+	}
+	if in.LocationRef != nil {
+		in, out := &in.LocationRef, &out.LocationRef
+		*out = new(v1.Reference)
+		(*in).DeepCopyInto(*out)
+	}
+	if in.LocationSelector != nil {
+		in, out := &in.LocationSelector, &out.LocationSelector
+		*out = new(v1.Selector)
+		(*in).DeepCopyInto(*out)
 	}
 	if in.Name != nil {
 		in, out := &in.Name, &out.Name
@@ -278,10 +286,8 @@ func (in *KafkaObservation) DeepCopyInto(out *KafkaObservation) {
 	}
 	if in.Connections != nil {
 		in, out := &in.Connections, &out.Connections
-		*out = make([]ConnectionsObservation, len(*in))
-		for i := range *in {
-			(*in)[i].DeepCopyInto(&(*out)[i])
-		}
+		*out = new(ConnectionsObservation)
+		(*in).DeepCopyInto(*out)
 	}
 	if in.ID != nil {
 		in, out := &in.ID, &out.ID
@@ -325,15 +331,23 @@ func (in *KafkaParameters) DeepCopyInto(out *KafkaParameters) {
 	*out = *in
 	if in.Connections != nil {
 		in, out := &in.Connections, &out.Connections
-		*out = make([]ConnectionsParameters, len(*in))
-		for i := range *in {
-			(*in)[i].DeepCopyInto(&(*out)[i])
-		}
+		*out = new(ConnectionsParameters)
+		(*in).DeepCopyInto(*out)
 	}
 	if in.Location != nil {
 		in, out := &in.Location, &out.Location
 		*out = new(string)
 		**out = **in
+	}
+	if in.LocationRef != nil {
+		in, out := &in.LocationRef, &out.LocationRef
+		*out = new(v1.Reference)
+		(*in).DeepCopyInto(*out)
+	}
+	if in.LocationSelector != nil {
+		in, out := &in.LocationSelector, &out.LocationSelector
+		*out = new(v1.Selector)
+		(*in).DeepCopyInto(*out)
 	}
 	if in.Name != nil {
 		in, out := &in.Name, &out.Name
@@ -446,6 +460,16 @@ func (in *KafkaTopicInitParameters) DeepCopyInto(out *KafkaTopicInitParameters) 
 		in, out := &in.Location, &out.Location
 		*out = new(string)
 		**out = **in
+	}
+	if in.LocationRef != nil {
+		in, out := &in.LocationRef, &out.LocationRef
+		*out = new(v1.Reference)
+		(*in).DeepCopyInto(*out)
+	}
+	if in.LocationSelector != nil {
+		in, out := &in.LocationSelector, &out.LocationSelector
+		*out = new(v1.Selector)
+		(*in).DeepCopyInto(*out)
 	}
 	if in.Name != nil {
 		in, out := &in.Name, &out.Name
@@ -593,6 +617,16 @@ func (in *KafkaTopicParameters) DeepCopyInto(out *KafkaTopicParameters) {
 		in, out := &in.Location, &out.Location
 		*out = new(string)
 		**out = **in
+	}
+	if in.LocationRef != nil {
+		in, out := &in.LocationRef, &out.LocationRef
+		*out = new(v1.Reference)
+		(*in).DeepCopyInto(*out)
+	}
+	if in.LocationSelector != nil {
+		in, out := &in.LocationSelector, &out.LocationSelector
+		*out = new(v1.Selector)
+		(*in).DeepCopyInto(*out)
 	}
 	if in.Name != nil {
 		in, out := &in.Name, &out.Name

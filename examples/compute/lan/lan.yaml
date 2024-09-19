@@ -16,3 +16,16 @@ spec:
       matchLabels:
         testing.upbound.io/example-name: example
     public: false
+---
+apiVersion: compute.ionoscloud.io/v1alpha1
+kind: Crossconnect
+metadata:
+  annotations:
+    meta.upbound.io/example-id: compute/v1alpha1/lan
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    description: Cross Connect Description
+    name: Cross Connect Example

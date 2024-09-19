@@ -34,7 +34,8 @@ spec:
     name: v1alpha1
     schema:
       openAPIV3Schema:
-        description: Volume is the Schema for the Volumes API. <no value>
+        description: Volume is the Schema for the Volumes API. Creates and manages
+          IonosCloud Volume objects.
         properties:
           apiVersion:
             description: |-
@@ -73,12 +74,23 @@ spec:
               forProvider:
                 properties:
                   availabilityZone:
+                    description: '[string] The storage availability zone assigned
+                      to the volume: AUTO, ZONE_1, ZONE_2, or ZONE_3. This property
+                      is immutable'
                     type: string
                   backupUnitId:
+                    description: '[string] The uuid of the Backup Unit that user has
+                      access to. The property is immutable and is only allowed to
+                      be set on a new volume creation. It is mandatory to provide
+                      either ''public image'' or ''imageAlias'' in conjunction with
+                      this property.'
                     type: string
                   bus:
+                    description: '[Boolean] The bus type of the volume: VIRTIO or
+                      IDE.'
                     type: string
                   datacenterId:
+                    description: '[string] The ID of a Virtual Data Center.'
                     type: string
                   datacenterIdRef:
                     description: Reference to a Datacenter in compute to populate
@@ -157,16 +169,25 @@ spec:
                         type: object
                     type: object
                   diskType:
+                    description: '[string] The volume type: HDD or SSD. This property
+                      is immutable.'
                     type: string
                   imageName:
+                    description: '[string] The name, ID or alias of the image. May
+                      also be a snapshot ID. It is required if licence_type is not
+                      provided. Attribute is immutable.'
                     type: string
                   imagePassword:
+                    description: '[string] Required if sshkey_path is not provided.'
                     type: string
                   licenceType:
+                    description: '[string] Required if image_name is not provided.'
                     type: string
                   name:
+                    description: '[string] The name of the volume.'
                     type: string
                   serverId:
+                    description: '[string] The ID of a server.'
                     type: string
                   serverIdRef:
                     description: Reference to a Server in compute to populate serverId.
@@ -243,16 +264,31 @@ spec:
                         type: object
                     type: object
                   size:
+                    description: '[integer] The size of the volume in GB.'
                     type: number
                   sshKeyPath:
+                    description: '[list] List of absolute paths to files containing
+                      a public SSH key that will be injected into IonosCloud provided
+                      Linux images. Also accepts ssh keys directly. Required for IonosCloud
+                      Linux images. Required if image_password is not provided. This
+                      property is immutable.'
                     items:
                       type: string
                     type: array
                   sshKeys:
+                    description: '[list] List of absolute paths to files containing
+                      a public SSH key that will be injected into IonosCloud provided
+                      Linux images. Also accepts ssh keys directly. Required for IonosCloud
+                      Linux images. Required if image_password is not provided. This
+                      property is immutable.'
                     items:
                       type: string
                     type: array
                   userData:
+                    description: '[string] The cloud-init configuration for the volume
+                      as base64 encoded string. The property is immutable and is only
+                      allowed to be set on a new volume creation. This option will
+                      work only with cloud-init compatible images.'
                     type: string
                 type: object
               initProvider:
@@ -269,12 +305,23 @@ spec:
                   autoscaler.
                 properties:
                   availabilityZone:
+                    description: '[string] The storage availability zone assigned
+                      to the volume: AUTO, ZONE_1, ZONE_2, or ZONE_3. This property
+                      is immutable'
                     type: string
                   backupUnitId:
+                    description: '[string] The uuid of the Backup Unit that user has
+                      access to. The property is immutable and is only allowed to
+                      be set on a new volume creation. It is mandatory to provide
+                      either ''public image'' or ''imageAlias'' in conjunction with
+                      this property.'
                     type: string
                   bus:
+                    description: '[Boolean] The bus type of the volume: VIRTIO or
+                      IDE.'
                     type: string
                   datacenterId:
+                    description: '[string] The ID of a Virtual Data Center.'
                     type: string
                   datacenterIdRef:
                     description: Reference to a Datacenter in compute to populate
@@ -353,16 +400,25 @@ spec:
                         type: object
                     type: object
                   diskType:
+                    description: '[string] The volume type: HDD or SSD. This property
+                      is immutable.'
                     type: string
                   imageName:
+                    description: '[string] The name, ID or alias of the image. May
+                      also be a snapshot ID. It is required if licence_type is not
+                      provided. Attribute is immutable.'
                     type: string
                   imagePassword:
+                    description: '[string] Required if sshkey_path is not provided.'
                     type: string
                   licenceType:
+                    description: '[string] Required if image_name is not provided.'
                     type: string
                   name:
+                    description: '[string] The name of the volume.'
                     type: string
                   serverId:
+                    description: '[string] The ID of a server.'
                     type: string
                   serverIdRef:
                     description: Reference to a Server in compute to populate serverId.
@@ -439,16 +495,31 @@ spec:
                         type: object
                     type: object
                   size:
+                    description: '[integer] The size of the volume in GB.'
                     type: number
                   sshKeyPath:
+                    description: '[list] List of absolute paths to files containing
+                      a public SSH key that will be injected into IonosCloud provided
+                      Linux images. Also accepts ssh keys directly. Required for IonosCloud
+                      Linux images. Required if image_password is not provided. This
+                      property is immutable.'
                     items:
                       type: string
                     type: array
                   sshKeys:
+                    description: '[list] List of absolute paths to files containing
+                      a public SSH key that will be injected into IonosCloud provided
+                      Linux images. Also accepts ssh keys directly. Required for IonosCloud
+                      Linux images. Required if image_password is not provided. This
+                      property is immutable.'
                     items:
                       type: string
                     type: array
                   userData:
+                    description: '[string] The cloud-init configuration for the volume
+                      as base64 encoded string. The property is immutable and is only
+                      allowed to be set on a new volume creation. This option will
+                      work only with cloud-init compatible images.'
                     type: string
                 type: object
               managementPolicies:
@@ -633,63 +704,119 @@ spec:
               atProvider:
                 properties:
                   availabilityZone:
+                    description: '[string] The storage availability zone assigned
+                      to the volume: AUTO, ZONE_1, ZONE_2, or ZONE_3. This property
+                      is immutable'
                     type: string
                   backupUnitId:
+                    description: '[string] The uuid of the Backup Unit that user has
+                      access to. The property is immutable and is only allowed to
+                      be set on a new volume creation. It is mandatory to provide
+                      either ''public image'' or ''imageAlias'' in conjunction with
+                      this property.'
                     type: string
                   bootServer:
-                    description: The UUID of the attached server.
+                    description: |-
+                      (Computed)[string] The UUID of the attached server.
+                      The UUID of the attached server.
                     type: string
                   bus:
+                    description: '[Boolean] The bus type of the volume: VIRTIO or
+                      IDE.'
                     type: string
                   cpuHotPlug:
+                    description: (Computed)[string] Is capable of CPU hot plug (no
+                      reboot required)
                     type: boolean
                   datacenterId:
+                    description: '[string] The ID of a Virtual Data Center.'
                     type: string
                   deviceNumber:
+                    description: (Computed) The Logical Unit Number of the storage
+                      volume. Null for volumes not mounted to any VM.
                     type: number
                   discVirtioHotPlug:
+                    description: (Computed)[string] Is capable of Virt-IO drive hot
+                      plug (no reboot required)
                     type: boolean
                   discVirtioHotUnplug:
+                    description: (Computed)[string] Is capable of Virt-IO drive hot
+                      unplug (no reboot required). This works only for non-Windows
+                      virtual Machines.
                     type: boolean
                   diskType:
+                    description: '[string] The volume type: HDD or SSD. This property
+                      is immutable.'
                     type: string
                   id:
                     type: string
                   image:
+                    description: (Computed) The image or snapshot UUID.
                     type: string
                   imageId:
                     type: string
                   imageName:
+                    description: '[string] The name, ID or alias of the image. May
+                      also be a snapshot ID. It is required if licence_type is not
+                      provided. Attribute is immutable.'
                     type: string
                   imagePassword:
+                    description: '[string] Required if sshkey_path is not provided.'
                     type: string
                   licenceType:
+                    description: '[string] Required if image_name is not provided.'
                     type: string
                   name:
+                    description: '[string] The name of the volume.'
                     type: string
                   nicHotPlug:
+                    description: (Computed)[string] Is capable of nic hot plug (no
+                      reboot required)
                     type: boolean
                   nicHotUnplug:
+                    description: (Computed)[string] Is capable of nic hot unplug (no
+                      reboot required)
                     type: boolean
                   pciSlot:
+                    description: (Computed) The PCI slot number of the storage volume.
+                      Null for volumes not mounted to any VM.
                     type: number
                   ramHotPlug:
+                    description: (Computed)[string] Is capable of memory hot plug
+                      (no reboot required)
                     type: boolean
                   serverId:
+                    description: '[string] The ID of a server.'
                     type: string
                   size:
+                    description: '[integer] The size of the volume in GB.'
                     type: number
                   sshKeyPath:
+                    description: '[list] List of absolute paths to files containing
+                      a public SSH key that will be injected into IonosCloud provided
+                      Linux images. Also accepts ssh keys directly. Required for IonosCloud
+                      Linux images. Required if image_password is not provided. This
+                      property is immutable.'
                     items:
                       type: string
                     type: array
                   sshKeys:
+                    description: '[list] List of absolute paths to files containing
+                      a public SSH key that will be injected into IonosCloud provided
+                      Linux images. Also accepts ssh keys directly. Required for IonosCloud
+                      Linux images. Required if image_password is not provided. This
+                      property is immutable.'
                     items:
                       type: string
                     type: array
                   sshkey:
+                    description: (Computed) The associated public SSH key.
                     type: string
                   userData:
+                    description: '[string] The cloud-init configuration for the volume
+                      as base64 encoded string. The property is immutable and is only
+                      allowed to be set on a new volume creation. This option will
+                      work only with cloud-init compatible images.'
                     type: string
                 type: object
               conditions:

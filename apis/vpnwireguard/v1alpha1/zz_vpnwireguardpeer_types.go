@@ -60,7 +60,7 @@ type VpnWireguardPeerInitParameters struct {
 
 	// [block] An endpoint configuration block for the WireGuard Gateway. The structure of this block is as follows:
 	// Endpoint configuration for the WireGuard Peer.
-	Endpoint []EndpointInitParameters `json:"endpoint,omitempty" tf:"endpoint,omitempty"`
+	Endpoint *EndpointInitParameters `json:"endpoint,omitempty" tf:"endpoint,omitempty"`
 
 	// [string] The ID of the WireGuard Gateway that the Peer will connect to.
 	// The ID of the WireGuard Peer that the peer will connect to.
@@ -100,7 +100,7 @@ type VpnWireguardPeerObservation struct {
 
 	// [block] An endpoint configuration block for the WireGuard Gateway. The structure of this block is as follows:
 	// Endpoint configuration for the WireGuard Peer.
-	Endpoint []EndpointObservation `json:"endpoint,omitempty" tf:"endpoint,omitempty"`
+	Endpoint *EndpointObservation `json:"endpoint,omitempty" tf:"endpoint,omitempty"`
 
 	// [string] The ID of the WireGuard Gateway that the Peer will connect to.
 	// The ID of the WireGuard Peer that the peer will connect to.
@@ -140,7 +140,7 @@ type VpnWireguardPeerParameters struct {
 	// [block] An endpoint configuration block for the WireGuard Gateway. The structure of this block is as follows:
 	// Endpoint configuration for the WireGuard Peer.
 	// +kubebuilder:validation:Optional
-	Endpoint []EndpointParameters `json:"endpoint,omitempty" tf:"endpoint,omitempty"`
+	Endpoint *EndpointParameters `json:"endpoint,omitempty" tf:"endpoint,omitempty"`
 
 	// [string] The ID of the WireGuard Gateway that the Peer will connect to.
 	// The ID of the WireGuard Peer that the peer will connect to.
