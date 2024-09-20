@@ -600,15 +600,6 @@ spec:
             required:
             - forProvider
             type: object
-            x-kubernetes-validations:
-            - message: spec.forProvider.errorDocument is a required parameter
-              rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
-                || ''Update'' in self.managementPolicies) || has(self.forProvider.errorDocument)
-                || (has(self.initProvider) && has(self.initProvider.errorDocument))'
-            - message: spec.forProvider.indexDocument is a required parameter
-              rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
-                || ''Update'' in self.managementPolicies) || has(self.forProvider.indexDocument)
-                || (has(self.initProvider) && has(self.initProvider.indexDocument))'
           status:
             description: BucketWebsiteConfigurationStatus defines the observed state
               of BucketWebsiteConfiguration.

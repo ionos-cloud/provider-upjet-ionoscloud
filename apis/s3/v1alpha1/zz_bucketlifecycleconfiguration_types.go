@@ -32,7 +32,7 @@ type AbortIncompleteMultipartUploadParameters struct {
 	// [int] Specifies the number of days after which IONOS S3 Object Storage aborts an incomplete multipart upload.
 	// Specifies the number of days after which IONOS S3 Object Storage aborts an incomplete multipart upload.
 	// +kubebuilder:validation:Optional
-	DaysAfterInitiation *float64 `json:"daysAfterInitiation" tf:"days_after_initiation,omitempty"`
+	DaysAfterInitiation *float64 `json:"daysAfterInitiation,omitempty" tf:"days_after_initiation,omitempty"`
 }
 
 type BucketLifecycleConfigurationInitParameters struct {
@@ -155,7 +155,7 @@ type NoncurrentVersionExpirationParameters struct {
 	// [int] Specifies the number of days an object is noncurrent before Amazon S3 can perform the associated action.
 	// Specifies the number of days an object is noncurrent before Amazon S3 can perform the associated action.
 	// +kubebuilder:validation:Optional
-	NoncurrentDays *float64 `json:"noncurrentDays" tf:"noncurrent_days,omitempty"`
+	NoncurrentDays *float64 `json:"noncurrentDays,omitempty" tf:"noncurrent_days,omitempty"`
 }
 
 type RuleInitParameters struct {
@@ -217,7 +217,7 @@ type RuleParameters struct {
 	// [block] Specifies the days since the initiation of an incomplete multipart upload that IONOS S3 Object Storage will wait before permanently removing all parts of the upload.
 	// Specifies the days since the initiation of an incomplete multipart upload that IONOS S3 Object Storage will wait before permanently removing all parts of the upload.
 	// +kubebuilder:validation:Optional
-	AbortIncompleteMultipartUpload *AbortIncompleteMultipartUploadParameters `json:"abortIncompleteMultipartUpload" tf:"abort_incomplete_multipart_upload,omitempty"`
+	AbortIncompleteMultipartUpload *AbortIncompleteMultipartUploadParameters `json:"abortIncompleteMultipartUpload,omitempty" tf:"abort_incomplete_multipart_upload,omitempty"`
 
 	// [block]  A lifecycle rule for when an object expires.
 	// A lifecycle rule for when an object expires.
@@ -232,7 +232,7 @@ type RuleParameters struct {
 	// [block] A lifecycle rule for when non-current object versions expire.
 	// A lifecycle rule for when non-current object versions expire.
 	// +kubebuilder:validation:Optional
-	NoncurrentVersionExpiration *NoncurrentVersionExpirationParameters `json:"noncurrentVersionExpiration" tf:"noncurrent_version_expiration,omitempty"`
+	NoncurrentVersionExpiration *NoncurrentVersionExpirationParameters `json:"noncurrentVersionExpiration,omitempty" tf:"noncurrent_version_expiration,omitempty"`
 
 	// [string] Prefix identifying one or more objects to which the rule applies.
 	// Object key prefix identifying one or more objects to which the rule applies.

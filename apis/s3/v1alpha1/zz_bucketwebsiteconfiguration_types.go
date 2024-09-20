@@ -161,7 +161,7 @@ type ErrorDocumentParameters struct {
 	// The object key
 	// The object key.
 	// +kubebuilder:validation:Optional
-	Key *string `json:"key" tf:"key,omitempty"`
+	Key *string `json:"key,omitempty" tf:"key,omitempty"`
 }
 
 type IndexDocumentInitParameters struct {
@@ -183,7 +183,7 @@ type IndexDocumentParameters struct {
 	// A suffix that is appended to a request that is for a directory on the website endpoint (for example, if the suffix is index.html and you make a request to samplebucket/images/ the data that is returned will be for the object with the key name images/index.html) The suffix must not be empty and must not include a slash character. Replacement must be made for object keys containing special characters (such as carriage returns) when using XML requests.
 	// A suffix that is appended to a request that is for a directory on the website endpoint (for example, if the suffix is index.html and you make a request to samplebucket/images/ the data that is returned will be for the object with the key name images/index.html) The suffix must not be empty and must not include a slash character. Replacement must be made for object keys containing special characters (such as carriage returns) when using XML requests.
 	// +kubebuilder:validation:Optional
-	Suffix *string `json:"suffix" tf:"suffix,omitempty"`
+	Suffix *string `json:"suffix,omitempty" tf:"suffix,omitempty"`
 }
 
 type RedirectAllRequestsToInitParameters struct {
@@ -366,10 +366,8 @@ type BucketWebsiteConfigurationStatus struct {
 type BucketWebsiteConfiguration struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.errorDocument) || (has(self.initProvider) && has(self.initProvider.errorDocument))",message="spec.forProvider.errorDocument is a required parameter"
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.indexDocument) || (has(self.initProvider) && has(self.initProvider.indexDocument))",message="spec.forProvider.indexDocument is a required parameter"
-	Spec   BucketWebsiteConfigurationSpec   `json:"spec"`
-	Status BucketWebsiteConfigurationStatus `json:"status,omitempty"`
+	Spec              BucketWebsiteConfigurationSpec   `json:"spec"`
+	Status            BucketWebsiteConfigurationStatus `json:"status,omitempty"`
 }
 
 // +kubebuilder:object:root=true

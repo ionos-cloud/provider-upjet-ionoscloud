@@ -13,7 +13,36 @@ import (
 	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
 )
 
-type FirewallInitParameters struct {
+type LabelInitParameters struct {
+
+	// [string] The key of the label.
+	Key *string `json:"key,omitempty" tf:"key,omitempty"`
+
+	// [string] The value of the label.
+	Value *string `json:"value,omitempty" tf:"value,omitempty"`
+}
+
+type LabelObservation struct {
+
+	// [string] The key of the label.
+	Key *string `json:"key,omitempty" tf:"key,omitempty"`
+
+	// [string] The value of the label.
+	Value *string `json:"value,omitempty" tf:"value,omitempty"`
+}
+
+type LabelParameters struct {
+
+	// [string] The key of the label.
+	// +kubebuilder:validation:Optional
+	Key *string `json:"key" tf:"key,omitempty"`
+
+	// [string] The value of the label.
+	// +kubebuilder:validation:Optional
+	Value *string `json:"value" tf:"value,omitempty"`
+}
+
+type NicFirewallInitParameters struct {
 	IcmpCode *string `json:"icmpCode,omitempty" tf:"icmp_code,omitempty"`
 
 	// (Computed)[string] Server usages: ENTERPRISE or CUBE. This property is immutable.
@@ -38,7 +67,7 @@ type FirewallInitParameters struct {
 	Type *string `json:"type,omitempty" tf:"type,omitempty"`
 }
 
-type FirewallObservation struct {
+type NicFirewallObservation struct {
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
 	IcmpCode *string `json:"icmpCode,omitempty" tf:"icmp_code,omitempty"`
@@ -65,7 +94,7 @@ type FirewallObservation struct {
 	Type *string `json:"type,omitempty" tf:"type,omitempty"`
 }
 
-type FirewallParameters struct {
+type NicFirewallParameters struct {
 
 	// +kubebuilder:validation:Optional
 	IcmpCode *string `json:"icmpCode,omitempty" tf:"icmp_code,omitempty"`
@@ -99,35 +128,6 @@ type FirewallParameters struct {
 	// (Computed)[string] Server usages: ENTERPRISE or CUBE. This property is immutable.
 	// +kubebuilder:validation:Optional
 	Type *string `json:"type,omitempty" tf:"type,omitempty"`
-}
-
-type LabelInitParameters struct {
-
-	// [string] The key of the label.
-	Key *string `json:"key,omitempty" tf:"key,omitempty"`
-
-	// [string] The value of the label.
-	Value *string `json:"value,omitempty" tf:"value,omitempty"`
-}
-
-type LabelObservation struct {
-
-	// [string] The key of the label.
-	Key *string `json:"key,omitempty" tf:"key,omitempty"`
-
-	// [string] The value of the label.
-	Value *string `json:"value,omitempty" tf:"value,omitempty"`
-}
-
-type LabelParameters struct {
-
-	// [string] The key of the label.
-	// +kubebuilder:validation:Optional
-	Key *string `json:"key" tf:"key,omitempty"`
-
-	// [string] The value of the label.
-	// +kubebuilder:validation:Optional
-	Value *string `json:"value" tf:"value,omitempty"`
 }
 
 type ServerInitParameters struct {
@@ -201,7 +201,7 @@ type ServerInitParameters struct {
 	VMState *string `json:"vmState,omitempty" tf:"vm_state,omitempty"`
 
 	// See the Volume section.
-	Volume *VolumeInitParameters `json:"volume,omitempty" tf:"volume,omitempty"`
+	Volume *ServerVolumeInitParameters `json:"volume,omitempty" tf:"volume,omitempty"`
 }
 
 type ServerNicInitParameters struct {
@@ -212,7 +212,7 @@ type ServerNicInitParameters struct {
 
 	// Allows to define firewall rules inline in the server. See the Firewall section.
 	// Firewall rules created in the server resource. The rules can also be created as separate resources outside the server resource
-	Firewall []FirewallInitParameters `json:"firewall,omitempty" tf:"firewall,omitempty"`
+	Firewall []NicFirewallInitParameters `json:"firewall,omitempty" tf:"firewall,omitempty"`
 
 	FirewallActive *bool `json:"firewallActive,omitempty" tf:"firewall_active,omitempty"`
 
@@ -253,7 +253,7 @@ type ServerNicObservation struct {
 
 	// Allows to define firewall rules inline in the server. See the Firewall section.
 	// Firewall rules created in the server resource. The rules can also be created as separate resources outside the server resource
-	Firewall []FirewallObservation `json:"firewall,omitempty" tf:"firewall,omitempty"`
+	Firewall []NicFirewallObservation `json:"firewall,omitempty" tf:"firewall,omitempty"`
 
 	FirewallActive *bool `json:"firewallActive,omitempty" tf:"firewall_active,omitempty"`
 
@@ -293,7 +293,7 @@ type ServerNicParameters struct {
 	// Allows to define firewall rules inline in the server. See the Firewall section.
 	// Firewall rules created in the server resource. The rules can also be created as separate resources outside the server resource
 	// +kubebuilder:validation:Optional
-	Firewall []FirewallParameters `json:"firewall,omitempty" tf:"firewall,omitempty"`
+	Firewall []NicFirewallParameters `json:"firewall,omitempty" tf:"firewall,omitempty"`
 
 	// +kubebuilder:validation:Optional
 	FirewallActive *bool `json:"firewallActive,omitempty" tf:"firewall_active,omitempty"`
@@ -409,7 +409,7 @@ type ServerObservation struct {
 	VMState *string `json:"vmState,omitempty" tf:"vm_state,omitempty"`
 
 	// See the Volume section.
-	Volume *VolumeObservation `json:"volume,omitempty" tf:"volume,omitempty"`
+	Volume *ServerVolumeObservation `json:"volume,omitempty" tf:"volume,omitempty"`
 }
 
 type ServerParameters struct {
@@ -502,10 +502,10 @@ type ServerParameters struct {
 
 	// See the Volume section.
 	// +kubebuilder:validation:Optional
-	Volume *VolumeParameters `json:"volume,omitempty" tf:"volume,omitempty"`
+	Volume *ServerVolumeParameters `json:"volume,omitempty" tf:"volume,omitempty"`
 }
 
-type VolumeInitParameters struct {
+type ServerVolumeInitParameters struct {
 
 	// [string] The availability zone in which the server should exist. E.g: AUTO, ZONE_1, ZONE_2. This property is immutable.
 	AvailabilityZone *string `json:"availabilityZone,omitempty" tf:"availability_zone,omitempty"`
@@ -542,7 +542,7 @@ type VolumeInitParameters struct {
 	UserData *string `json:"userData,omitempty" tf:"user_data,omitempty"`
 }
 
-type VolumeObservation struct {
+type ServerVolumeObservation struct {
 
 	// [string] The availability zone in which the server should exist. E.g: AUTO, ZONE_1, ZONE_2. This property is immutable.
 	AvailabilityZone *string `json:"availabilityZone,omitempty" tf:"availability_zone,omitempty"`
@@ -598,7 +598,7 @@ type VolumeObservation struct {
 	UserData *string `json:"userData,omitempty" tf:"user_data,omitempty"`
 }
 
-type VolumeParameters struct {
+type ServerVolumeParameters struct {
 
 	// [string] The availability zone in which the server should exist. E.g: AUTO, ZONE_1, ZONE_2. This property is immutable.
 	// +kubebuilder:validation:Optional

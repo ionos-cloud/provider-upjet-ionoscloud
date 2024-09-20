@@ -1,0 +1,60 @@
+apiVersion: dataplatform.ionoscloud.io/v1alpha1
+kind: Cluster
+metadata:
+  annotations:
+    meta.upbound.io/example-id: dataplatform/v1alpha1/cluster
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    datacenterIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    lans:
+    - dhcp: false
+      lanIdSelector:
+        matchLabels:
+          testing.upbound.io/example-name: example
+      routes:
+      - gateway: 192.168.42.1
+        network: 182.168.42.1/24
+    maintenanceWindow:
+    - dayOfTheWeek: Sunday
+      time: "09:00:00"
+    name: Dataplatform_Cluster_Example
+    version: "23.11"
+
+---
+
+apiVersion: compute.ionoscloud.io/v1alpha1
+kind: Datacenter
+metadata:
+  annotations:
+    meta.upbound.io/example-id: dataplatform/v1alpha1/cluster
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    description: Datacenter for testing Dataplatform Cluster
+    location: de/txl
+    name: Datacenter_Example
+
+---
+
+apiVersion: compute.ionoscloud.io/v1alpha1
+kind: Lan
+metadata:
+  annotations:
+    meta.upbound.io/example-id: dataplatform/v1alpha1/cluster
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    datacenterIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    name: LAN_Example
+    public: false
