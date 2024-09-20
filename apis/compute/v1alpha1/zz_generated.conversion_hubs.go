@@ -49,6 +49,9 @@ func (tr *Share) Hub() {}
 func (tr *Snapshot) Hub() {}
 
 // Hub marks this type as a conversion hub.
+func (tr *Unit) Hub() {}
+
+// Hub marks this type as a conversion hub.
 func (tr *User) Hub() {}
 
 // Hub marks this type as a conversion hub.

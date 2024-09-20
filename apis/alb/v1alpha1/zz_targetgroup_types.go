@@ -139,7 +139,7 @@ type HealthCheckParameters struct {
 	Retries *float64 `json:"retries,omitempty" tf:"retries,omitempty"`
 }
 
-type TargetGroupInitParameters_2 struct {
+type TargetGroupInitParameters struct {
 
 	// [string] Balancing algorithm.
 	// Balancing algorithm.
@@ -170,7 +170,7 @@ type TargetGroupInitParameters_2 struct {
 	Targets []TargetsInitParameters `json:"targets,omitempty" tf:"targets,omitempty"`
 }
 
-type TargetGroupObservation_2 struct {
+type TargetGroupObservation struct {
 
 	// [string] Balancing algorithm.
 	// Balancing algorithm.
@@ -203,7 +203,7 @@ type TargetGroupObservation_2 struct {
 	Targets []TargetsObservation `json:"targets,omitempty" tf:"targets,omitempty"`
 }
 
-type TargetGroupParameters_2 struct {
+type TargetGroupParameters struct {
 
 	// [string] Balancing algorithm.
 	// Balancing algorithm.
@@ -331,7 +331,7 @@ type TargetsParameters struct {
 // TargetGroupSpec defines the desired state of TargetGroup
 type TargetGroupSpec struct {
 	v1.ResourceSpec `json:",inline"`
-	ForProvider     TargetGroupParameters_2 `json:"forProvider"`
+	ForProvider     TargetGroupParameters `json:"forProvider"`
 	// THIS IS A BETA FIELD. It will be honored
 	// unless the Management Policies feature flag is disabled.
 	// InitProvider holds the same fields as ForProvider, with the exception
@@ -342,13 +342,13 @@ type TargetGroupSpec struct {
 	// required on creation, but we do not desire to update them after creation,
 	// for example because of an external controller is managing them, like an
 	// autoscaler.
-	InitProvider TargetGroupInitParameters_2 `json:"initProvider,omitempty"`
+	InitProvider TargetGroupInitParameters `json:"initProvider,omitempty"`
 }
 
 // TargetGroupStatus defines the observed state of TargetGroup.
 type TargetGroupStatus struct {
 	v1.ResourceStatus `json:",inline"`
-	AtProvider        TargetGroupObservation_2 `json:"atProvider,omitempty"`
+	AtProvider        TargetGroupObservation `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true

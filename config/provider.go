@@ -13,7 +13,6 @@ import (
 	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/schema"
 	asg "github.com/ionos-cloud/provider-upjet-ionoscloud/config/alb"
 	alb "github.com/ionos-cloud/provider-upjet-ionoscloud/config/asg"
-	"github.com/ionos-cloud/provider-upjet-ionoscloud/config/backupunit"
 	"github.com/ionos-cloud/provider-upjet-ionoscloud/config/cdn"
 	"github.com/ionos-cloud/provider-upjet-ionoscloud/config/certificatemanager"
 	"github.com/ionos-cloud/provider-upjet-ionoscloud/config/compute"
@@ -102,7 +101,6 @@ func GetProvider(generationProvider bool) (*ujconfig.Provider, error) {
 		dns.Configure,
 		mongodb.Configure,
 		postgresql.Configure,
-		backupunit.Configure,
 		alb.Configure,
 		certificatemanager.Configure,
 		asg.Configure,

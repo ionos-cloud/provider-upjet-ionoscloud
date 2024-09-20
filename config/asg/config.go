@@ -20,9 +20,4 @@ func Configure(p *config.Provider) {
 			TerraformName: "ionoscloud_lan",
 		}
 	})
-
-	p.AddResourceConfigurator("ionoscloud_target_group", func(r *config.Resource) {
-		r.Kind = "TargetGroup"
-		r.ShortGroup = "asg"
-	})
 }

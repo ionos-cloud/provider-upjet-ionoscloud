@@ -32,6 +32,10 @@ func Configure(p *config.Provider) {
 		}
 	})
 
+	p.AddResourceConfigurator("ionoscloud_backup_unit", func(r *config.Resource) {
+		r.ShortGroup = "compute"
+	})
+
 	p.AddResourceConfigurator("ionoscloud_lan", func(r *config.Resource) {
 		r.ShortGroup = shortGroupName
 		r.References["datacenter_id"] = config.Reference{

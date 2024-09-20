@@ -13,7 +13,6 @@ import (
 	v1alpha1 "github.com/ionos-cloud/provider-upjet-ionoscloud/apis/alb/v1alpha1"
 	v1alpha1apigateway "github.com/ionos-cloud/provider-upjet-ionoscloud/apis/apigateway/v1alpha1"
 	v1alpha1asg "github.com/ionos-cloud/provider-upjet-ionoscloud/apis/asg/v1alpha1"
-	v1alpha1backupunit "github.com/ionos-cloud/provider-upjet-ionoscloud/apis/backupunit/v1alpha1"
 	v1alpha1cdn "github.com/ionos-cloud/provider-upjet-ionoscloud/apis/cdn/v1alpha1"
 	v1alpha1certificatemanager "github.com/ionos-cloud/provider-upjet-ionoscloud/apis/certificatemanager/v1alpha1"
 	v1alpha1compute "github.com/ionos-cloud/provider-upjet-ionoscloud/apis/compute/v1alpha1"
@@ -43,7 +42,6 @@ func init() {
 		v1alpha1.SchemeBuilder.AddToScheme,
 		v1alpha1apigateway.SchemeBuilder.AddToScheme,
 		v1alpha1asg.SchemeBuilder.AddToScheme,
-		v1alpha1backupunit.SchemeBuilder.AddToScheme,
 		v1alpha1cdn.SchemeBuilder.AddToScheme,
 		v1alpha1certificatemanager.SchemeBuilder.AddToScheme,
 		v1alpha1compute.SchemeBuilder.AddToScheme,

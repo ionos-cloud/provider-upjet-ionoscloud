@@ -11,3 +11,6 @@ func (tr *Loadbalancer) Hub() {}
 
 // Hub marks this type as a conversion hub.
 func (tr *LoadbalancerForwardingrule) Hub() {}
+
+// Hub marks this type as a conversion hub.
+func (tr *TargetGroup) Hub() {}

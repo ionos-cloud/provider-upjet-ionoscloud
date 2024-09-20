@@ -134,11 +134,11 @@ spec:
 
 ---
 
-apiVersion: asg.ionoscloud.io/v1alpha1
+apiVersion: alb.ionoscloud.io/v1alpha1
 kind: TargetGroup
 metadata:
   annotations:
-    meta.upbound.io/example-id: asg/v1alpha1/autoscalinggroup
+    meta.upbound.io/example-id: alb/v1alpha1/autoscalinggroup
   labels:
     testing.upbound.io/example-name: autoscaling_target_group
   name: autoscaling-target-group

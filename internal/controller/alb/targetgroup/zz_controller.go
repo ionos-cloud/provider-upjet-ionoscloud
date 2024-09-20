@@ -21,7 +21,7 @@ import (
 	"github.com/pkg/errors"
 	ctrl "sigs.k8s.io/controller-runtime"
 
-	v1alpha1 "github.com/ionos-cloud/provider-upjet-ionoscloud/apis/asg/v1alpha1"
+	v1alpha1 "github.com/ionos-cloud/provider-upjet-ionoscloud/apis/alb/v1alpha1"
 	features "github.com/ionos-cloud/provider-upjet-ionoscloud/internal/features"
 )
 

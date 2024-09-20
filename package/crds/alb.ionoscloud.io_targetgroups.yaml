@@ -4,9 +4,9 @@ kind: CustomResourceDefinition
 metadata:
   annotations:
     controller-gen.kubebuilder.io/version: v0.14.0
-  name: targetgroups.asg.ionoscloud.io
+  name: targetgroups.alb.ionoscloud.io
 spec:
-  group: asg.ionoscloud.io
+  group: alb.ionoscloud.io
   names:
     categories:
     - crossplane

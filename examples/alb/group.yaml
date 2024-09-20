@@ -1,8 +1,8 @@
-apiVersion: targetgroup.ionoscloud.io/v1alpha1
+apiVersion: alb.ionoscloud.io/v1alpha1
 kind: Group
 metadata:
   annotations:
-    meta.upbound.io/example-id: targetgroup/v1alpha1/group
+    meta.upbound.io/example-id: alb/v1alpha1/group
   labels:
     testing.upbound.io/example-name: example
   name: example

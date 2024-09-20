@@ -1,8 +1,8 @@
-apiVersion: backupunit.ionoscloud.io/v1alpha1
+apiVersion: compute.ionoscloud.io/v1alpha1
 kind: Unit
 metadata:
   annotations:
-    meta.upbound.io/example-id: backupunit/v1alpha1/unit
+    meta.upbound.io/example-id: compute/v1alpha1/unit
   labels:
     testing.upbound.io/example-name: example
   name: example

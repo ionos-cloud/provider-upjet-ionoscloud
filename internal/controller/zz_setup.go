@@ -11,11 +11,10 @@ import (
 
 	loadbalancer "github.com/ionos-cloud/provider-upjet-ionoscloud/internal/controller/alb/loadbalancer"
 	loadbalancerforwardingrule "github.com/ionos-cloud/provider-upjet-ionoscloud/internal/controller/alb/loadbalancerforwardingrule"
+	targetgroup "github.com/ionos-cloud/provider-upjet-ionoscloud/internal/controller/alb/targetgroup"
 	apigateway "github.com/ionos-cloud/provider-upjet-ionoscloud/internal/controller/apigateway/apigateway"
 	route "github.com/ionos-cloud/provider-upjet-ionoscloud/internal/controller/apigateway/route"
 	autoscalinggroup "github.com/ionos-cloud/provider-upjet-ionoscloud/internal/controller/asg/autoscalinggroup"
-	targetgroup "github.com/ionos-cloud/provider-upjet-ionoscloud/internal/controller/asg/targetgroup"
-	unit "github.com/ionos-cloud/provider-upjet-ionoscloud/internal/controller/backupunit/unit"
 	distribution "github.com/ionos-cloud/provider-upjet-ionoscloud/internal/controller/cdn/distribution"
 	autocertificate "github.com/ionos-cloud/provider-upjet-ionoscloud/internal/controller/certificatemanager/autocertificate"
 	autocertificateprovider "github.com/ionos-cloud/provider-upjet-ionoscloud/internal/controller/certificatemanager/autocertificateprovider"
@@ -34,6 +33,7 @@ import (
 	server "github.com/ionos-cloud/provider-upjet-ionoscloud/internal/controller/compute/server"
 	share "github.com/ionos-cloud/provider-upjet-ionoscloud/internal/controller/compute/share"
 	snapshot "github.com/ionos-cloud/provider-upjet-ionoscloud/internal/controller/compute/snapshot"
+	unit "github.com/ionos-cloud/provider-upjet-ionoscloud/internal/controller/compute/unit"
 	user "github.com/ionos-cloud/provider-upjet-ionoscloud/internal/controller/compute/user"
 	vcpuserver "github.com/ionos-cloud/provider-upjet-ionoscloud/internal/controller/compute/vcpuserver"
 	volume "github.com/ionos-cloud/provider-upjet-ionoscloud/internal/controller/compute/volume"
@@ -86,11 +86,10 @@ func Setup(mgr ctrl.Manager, o controller.Options) error {
 	for _, setup := range []func(ctrl.Manager, controller.Options) error{
 		loadbalancer.Setup,
 		loadbalancerforwardingrule.Setup,
+		targetgroup.Setup,
 		apigateway.Setup,
 		route.Setup,
 		autoscalinggroup.Setup,
-		targetgroup.Setup,
-		unit.Setup,
 		distribution.Setup,
 		autocertificate.Setup,
 		autocertificateprovider.Setup,
@@ -109,6 +108,7 @@ func Setup(mgr ctrl.Manager, o controller.Options) error {
 		server.Setup,
 		share.Setup,
 		snapshot.Setup,
+		unit.Setup,
 		user.Setup,
 		vcpuserver.Setup,
 		volume.Setup,
