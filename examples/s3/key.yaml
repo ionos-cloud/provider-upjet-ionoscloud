@@ -27,7 +27,7 @@ spec:
   forProvider:
 #  needs to be set to true so that the user can create a key
     administrator: false
-    email: unique@email.com
+    email: ${Rand.RFC1123Subdomain}@email.com
     firstName: example
     forceSecAuth: false
     active: true

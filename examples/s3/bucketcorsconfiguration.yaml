@@ -4,8 +4,8 @@ metadata:
   annotations:
     meta.upbound.io/example-id: s3/v1alpha1/bucketcorsconfiguration
   labels:
-    testing.upbound.io/example-name: example
-  name: darius-v-test
+    testing.upbound.io/example-name: cors
+  name: ${Rand.RFC1123Subdomain}
 spec:
   forProvider: {}
 ---
@@ -21,7 +21,7 @@ spec:
   forProvider:
     bucketSelector:
       matchLabels:
-        testing.upbound.io/example-name: example
+        testing.upbound.io/example-name: cors
     corsRule:
     - allowedHeaders:
       - '*'

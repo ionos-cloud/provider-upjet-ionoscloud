@@ -4,8 +4,8 @@ metadata:
   annotations:
     meta.upbound.io/example-id: s3/v1alpha1/object
   labels:
-    testing.upbound.io/example-name: example
-  name: unique-bucket-name
+    testing.upbound.io/example-name: object
+  name: ${Rand.RFC1123Subdomain}
 spec:
   forProvider:
     objectLockEnabled: true
@@ -16,13 +16,13 @@ metadata:
   annotations:
     meta.upbound.io/example-id: s3/v1alpha1/object
   labels:
-    testing.upbound.io/example-name: example
+    testing.upbound.io/example-name: object
   name: example
 spec:
   forProvider:
     bucketSelector:
       matchLabels:
-        testing.upbound.io/example-name: example
+        testing.upbound.io/example-name: object
     cacheControl: no-cache
     content: body
     contentDisposition: attachment
