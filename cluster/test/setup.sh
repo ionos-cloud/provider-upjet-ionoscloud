@@ -1,6 +1,7 @@
 #!/usr/bin/env bash
 set -aeuo pipefail
 
+echo "Setting up test environment..."
 echo "Running setup.sh"
 echo "Creating cloud credential secret..."
 ${KUBECTL} -n upbound-system create secret generic provider-secret --from-literal=credentials="${UPTEST_CLOUD_CREDENTIALS}" --dry-run=client -o yaml | ${KUBECTL} apply -f -
@@ -13,7 +14,7 @@ ${KUBECTL} -n upbound-system wait --for=condition=Available deployment --all --t
 
 echo "Creating a default provider config..."
 cat <<EOF | ${KUBECTL} apply -f -
-apiVersion: upjet-ionoscloud.upbound.io/v1beta1
+apiVersion: upjet-ionoscloud.ionoscloud.io/v1beta1
 kind: ProviderConfig
 metadata:
   name: default
@@ -24,3 +25,4 @@ spec:
       name: provider-secret
       namespace: upbound-system
       key: credentials
+EOF
