@@ -93,7 +93,7 @@ func Configure(p *config.Provider) {
 		}
 	})
 
-	p.AddResourceConfigurator("ionoscloud_ipblock", func(r *config.Resource) {
+	p.AddResourceConfigurator("ionoscloud_ipblock", func(r *config.Resource) { // nolint: gocyclo
 		r.ShortGroup = shortGroupName
 		r.TerraformCustomDiff = func(diff *terraform.InstanceDiff, state *terraform.InstanceState, config *terraform.ResourceConfig) (*terraform.InstanceDiff, error) {
 			// skip diff customization on create
