@@ -1,9 +1,11 @@
 package common
 
 import (
+	"errors"
 	"github.com/crossplane/crossplane-runtime/pkg/fieldpath"
 	"github.com/crossplane/crossplane-runtime/pkg/reference"
 	xpresource "github.com/crossplane/crossplane-runtime/pkg/resource"
+	"github.com/hashicorp/terraform-plugin-sdk/v2/terraform"
 )
 
 // FirstIPBlockIP returns the first IP of an ipblock to assign to a wireguard gateway
@@ -71,5 +73,31 @@ func AutoCertificateProviderLocation() reference.ExtractValueFn {
 		}
 
 		return result
+	}
+}
+
+// IgnoreEmptyDiffForComputed gets a list of fields on which to ignore the diff from terraform. Computed arguments can throw this error when
+// the diff is empty. This should probably be solved by the generator
+func IgnoreEmptyDiffForComputed(ignoreList []string) func(diff *terraform.InstanceDiff, state *terraform.InstanceState, config *terraform.ResourceConfig) (*terraform.InstanceDiff, error) {
+	return func(diff *terraform.InstanceDiff, state *terraform.InstanceState, config *terraform.ResourceConfig) (*terraform.InstanceDiff, error) {
+		// skip diff customization on create
+		if state == nil || state.Empty() {
+			return diff, nil
+		}
+		if config == nil {
+			return nil, errors.New("resource config cannot be nil")
+		}
+		// skip no diff or destroy diffs
+		if diff == nil || diff.Empty() || diff.Destroy || diff.Attributes == nil {
+			return diff, nil
+		}
+
+		for _, key := range ignoreList {
+			if diff.Attributes[key] != nil && diff.Attributes[key].Old == "" && diff.Attributes[key].New == "" {
+				delete(diff.Attributes, key)
+			}
+		}
+
+		return diff, nil
 	}
 }
