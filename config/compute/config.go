@@ -1,6 +1,10 @@
 package compute
 
-import "github.com/crossplane/upjet/pkg/config"
+import (
+	"errors"
+	"github.com/crossplane/upjet/pkg/config"
+	"github.com/hashicorp/terraform-plugin-sdk/v2/terraform"
+)
 
 const shortGroupName = "compute"
 
@@ -91,6 +95,30 @@ func Configure(p *config.Provider) {
 
 	p.AddResourceConfigurator("ionoscloud_ipblock", func(r *config.Resource) {
 		r.ShortGroup = shortGroupName
+		r.TerraformCustomDiff = func(diff *terraform.InstanceDiff, state *terraform.InstanceState, config *terraform.ResourceConfig) (*terraform.InstanceDiff, error) {
+			// skip diff customization on create
+			if state == nil || state.Empty() {
+				return diff, nil
+			}
+			if config == nil {
+				return nil, errors.New("resource config cannot be nil")
+			}
+			// skip no diff or destroy diffs
+			if diff == nil || diff.Empty() || diff.Destroy || diff.Attributes == nil {
+				return diff, nil
+			}
+
+			lengthDiffKeys := []string{
+				"ip_consumers.#",
+			}
+			for _, key := range lengthDiffKeys {
+				if diff.Attributes[key] != nil && diff.Attributes[key].Old == "" && diff.Attributes[key].New == "" {
+					delete(diff.Attributes, key)
+				}
+			}
+
+			return diff, nil
+		}
 	})
 
 	p.AddResourceConfigurator("ionoscloud_private_crossconnect", func(r *config.Resource) {
