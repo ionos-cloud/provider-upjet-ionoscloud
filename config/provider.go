@@ -128,6 +128,10 @@ func addTFSingletonConversion(pc *config.Provider) {
 			continue
 		}
 
+		if r.ShouldUseTerraformPluginFrameworkClient() {
+			continue
+		}
+
 		// the controller will be reconciling on the CRD API version
 		// with the converted API (with embedded objects in place of
 		// singleton lists), so we need the appropriate Terraform

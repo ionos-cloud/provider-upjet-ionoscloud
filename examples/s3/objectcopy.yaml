@@ -5,7 +5,7 @@ metadata:
     meta.upbound.io/example-id: s3/v1alpha1/objectcopy
   labels:
     testing.upbound.io/example-name: source
-  name: source
+  name: source-x-test-object-copy
 spec:
   forProvider: {}
 
@@ -18,7 +18,7 @@ metadata:
     meta.upbound.io/example-id: s3/v1alpha1/objectcopy
   labels:
     testing.upbound.io/example-name: target
-  name: target
+  name: target-${Rand.RFC1123Subdomain}
 spec:
   forProvider: {}
 
@@ -56,4 +56,4 @@ spec:
       matchLabels:
         testing.upbound.io/example-name: target
     key: example
-    source: source/source_object
+    source: source-x-test-object-copy/source_object

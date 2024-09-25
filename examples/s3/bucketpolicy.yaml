@@ -4,8 +4,8 @@ metadata:
   annotations:
     meta.upbound.io/example-id: s3/v1alpha1/bucketpolicy
   labels:
-    testing.upbound.io/example-name: example
-  name: unique-bucket-name
+    testing.upbound.io/example-name: policy
+  name: ${Rand.RFC1123Subdomain}
 spec:
   forProvider: {}
 ---
@@ -21,7 +21,7 @@ spec:
   forProvider:
     bucketSelector:
       matchLabels:
-        testing.upbound.io/example-name: example
+        testing.upbound.io/example-name: policy
     policy: |-
       {
         "Version": "2012-10-17",
