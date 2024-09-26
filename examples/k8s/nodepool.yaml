@@ -98,15 +98,3 @@ spec:
         testing.upbound.io/example-name: example
     name: Lan Example
     public: false
----
-apiVersion: s3.ionoscloud.io/v1alpha1
-kind: Bucket
-metadata:
-  annotations:
-    meta.upbound.io/example-id: s3/v1alpha1/bucket
-  labels:
-    testing.upbound.io/example-name: k8s-bucket
-  name: k8s-bucket
-spec:
-  forProvider:
-    region: eu-central-3

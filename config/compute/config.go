@@ -1,6 +1,9 @@
 package compute
 
-import "github.com/crossplane/upjet/pkg/config"
+import (
+	"github.com/crossplane/upjet/pkg/config"
+	"github.com/ionos-cloud/provider-upjet-ionoscloud/config/common"
+)
 
 const shortGroupName = "compute"
 
@@ -44,6 +47,8 @@ func Configure(p *config.Provider) {
 		r.References["pcc"] = config.Reference{
 			TerraformName: "ionoscloud_private_crossconnect",
 		}
+		r.TerraformCustomDiff = common.IgnoreEmptyDiffForComputed([]string{"ip_failover.#"})
+
 	})
 
 	p.AddResourceConfigurator("ionoscloud_nic", func(r *config.Resource) {
@@ -89,8 +94,9 @@ func Configure(p *config.Provider) {
 		}
 	})
 
-	p.AddResourceConfigurator("ionoscloud_ipblock", func(r *config.Resource) {
+	p.AddResourceConfigurator("ionoscloud_ipblock", func(r *config.Resource) { // nolint: gocyclo
 		r.ShortGroup = shortGroupName
+		r.TerraformCustomDiff = common.IgnoreEmptyDiffForComputed([]string{"ip_consumers.#"})
 	})
 
 	p.AddResourceConfigurator("ionoscloud_private_crossconnect", func(r *config.Resource) {
