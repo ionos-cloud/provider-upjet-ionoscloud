@@ -16,4 +16,27 @@ spec:
       - Tuesday
       time: 05:19:00+00:00
     location: de/fra
-    name: container-registry-unique-name
+    name: ${Rand.RFC1123Subdomain}-registry
+---
+apiVersion: containerregistry.ionoscloud.io/v1alpha1
+kind: RegistryToken
+metadata:
+  annotations:
+    meta.upbound.io/example-id: containerregistry/v1alpha1/registrytoken
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    expiryDate: 2024-10-15 16:27:42Z
+    name: container-registry-token-example
+    registryIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    savePasswordToFile: pass.txt
+    scopes:
+      - actions:
+          - push
+        name: Scope1
+        type: repository
+    status: enabled
