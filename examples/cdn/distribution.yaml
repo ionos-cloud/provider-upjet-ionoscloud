@@ -11,7 +11,7 @@ spec:
     certificateIdSelector:
       matchLabels:
         testing.upbound.io/example-name: cert
-    domain: unique.name.example.com
+    domain: ${Rand.RFC1123Subdomain}.example.com
     routingRules:
     - prefix: /api
       scheme: https

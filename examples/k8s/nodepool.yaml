@@ -73,8 +73,6 @@ metadata:
   name: example
 spec:
   forProvider:
-    apiSubnetAllowList:
-    - 1.2.3.6/32
     k8sVersion: 1.28.6
     maintenanceWindow:
       dayOfTheWeek: Sunday
