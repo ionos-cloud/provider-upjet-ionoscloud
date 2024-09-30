@@ -14,8 +14,8 @@ spec:
       matchLabels:
         testing.upbound.io/example-name: example
     diskType: SSD Standard
-    imageName: ${data.ionoscloud_image.example.name}
-    imagePassword: ${random_password.volume_image_password.result}
+    imageName: ubuntu:latest
+    imagePassword: "replaceMe"
     name: Volume Example
     serverIdSelector:
       matchLabels:
@@ -36,25 +36,9 @@ metadata:
 spec:
   forProvider:
     description: Datacenter Description
-    location: us/las
+    location: de/fra
     name: Datacenter Example
     secAuthProtection: false
-
----
-
-apiVersion: compute.ionoscloud.io/v1alpha1
-kind: Ipblock
-metadata:
-  annotations:
-    meta.upbound.io/example-id: compute/v1alpha1/volume
-  labels:
-    testing.upbound.io/example-name: example
-  name: example
-spec:
-  forProvider:
-    location: us/las
-    name: IP Block Example
-    size: 4
 
 ---
 
@@ -92,9 +76,9 @@ spec:
     datacenterIdSelector:
       matchLabels:
         testing.upbound.io/example-name: example
-    imageName: ${data.ionoscloud_image.example.name}
+    imageName:  ubuntu:latest
     imagePasswordSecretRef:
-      key: attribute.result
+      key: password
       name: example-password
       namespace: upbound-system
     name: Server Example
@@ -105,15 +89,10 @@ spec:
         portRangeEnd: 22
         portRangeStart: 22
         protocol: TCP
-        sourceIp: ${ionoscloud_ipblock.example.ips[2]}
         sourceMac: 00:0a:95:9d:68:17
-        targetIp: ${ionoscloud_ipblock.example.ips[3]}
         type: EGRESS
       firewallActive: true
       firewallType: BIDIRECTIONAL
-      ips:
-      - ${ionoscloud_ipblock.example.ips[0]}
-      - ${ionoscloud_ipblock.example.ips[1]}
       lanSelector:
         matchLabels:
           testing.upbound.io/example-name: example

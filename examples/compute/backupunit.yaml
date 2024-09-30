@@ -8,12 +8,13 @@ metadata:
   name: example
 spec:
   forProvider:
-    email: example@example-domain.com
-    name: BackupUnitExample
+    email: ${Rand.RFC1123Subdomain}@exampledomain.com
+    name: ${Rand.RFC1123Subdomain}
     passwordSecretRef:
       key: password
       name: example-password
       namespace: upbound-system
+
 ---
 apiVersion: v1
 kind: Secret

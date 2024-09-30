@@ -257,7 +257,7 @@ func (mg *Firewall) ResolveReferences(ctx context.Context, c client.Reader) erro
 
 	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 		CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.SourceIP),
-		Extract:      reference.ExternalName(),
+		Extract:      common.FirstIPBlockIP(),
 		Reference:    mg.Spec.ForProvider.SourceIPRef,
 		Selector:     mg.Spec.ForProvider.SourceIPSelector,
 		To: reference.To{
@@ -273,7 +273,7 @@ func (mg *Firewall) ResolveReferences(ctx context.Context, c client.Reader) erro
 
 	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 		CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.TargetIP),
-		Extract:      reference.ExternalName(),
+		Extract:      common.FirstIPBlockIP(),
 		Reference:    mg.Spec.ForProvider.TargetIPRef,
 		Selector:     mg.Spec.ForProvider.TargetIPSelector,
 		To: reference.To{
@@ -337,7 +337,7 @@ func (mg *Firewall) ResolveReferences(ctx context.Context, c client.Reader) erro
 
 	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 		CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.SourceIP),
-		Extract:      reference.ExternalName(),
+		Extract:      common.FirstIPBlockIP(),
 		Reference:    mg.Spec.InitProvider.SourceIPRef,
 		Selector:     mg.Spec.InitProvider.SourceIPSelector,
 		To: reference.To{
@@ -353,7 +353,7 @@ func (mg *Firewall) ResolveReferences(ctx context.Context, c client.Reader) erro
 
 	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 		CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.TargetIP),
-		Extract:      reference.ExternalName(),
+		Extract:      common.FirstIPBlockIP(),
 		Reference:    mg.Spec.InitProvider.TargetIPRef,
 		Selector:     mg.Spec.InitProvider.TargetIPSelector,
 		To: reference.To{

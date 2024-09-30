@@ -32,25 +32,6 @@ spec:
     location: us/las
     name: Datacenter Example
     secAuthProtection: false
-
----
-
-apiVersion: compute.ionoscloud.io/v1alpha1
-kind: Lan
-metadata:
-  annotations:
-    meta.upbound.io/example-id: compute/v1alpha1/snapshot
-  labels:
-    testing.upbound.io/example-name: example
-  name: example
-spec:
-  forProvider:
-    datacenterIdSelector:
-      matchLabels:
-        testing.upbound.io/example-name: example
-    name: Lan Example
-    public: true
-
 ---
 
 apiVersion: compute.ionoscloud.io/v1alpha1
@@ -69,9 +50,9 @@ spec:
     datacenterIdSelector:
       matchLabels:
         testing.upbound.io/example-name: example
-    imageName: ${data.ionoscloud_image.example.id}
+    imageName: Ubuntu-20.04
     imagePasswordSecretRef:
-      key: attribute.result
+      key: password
       name: example-password
       namespace: upbound-system
     name: Server Example
@@ -84,3 +65,12 @@ spec:
       name: system
       size: 5
       userData: foo
+---
+
+apiVersion: v1
+kind: Secret
+metadata:
+  name: example-password
+  namespace: upbound-system
+stringData:
+  password: "Upboundtest1"
