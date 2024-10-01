@@ -620,6 +620,16 @@ func (in *NicInitParameters) DeepCopyInto(out *NicInitParameters) {
 		*out = new(float64)
 		**out = **in
 	}
+	if in.LanRef != nil {
+		in, out := &in.LanRef, &out.LanRef
+		*out = new(v1.Reference)
+		(*in).DeepCopyInto(*out)
+	}
+	if in.LanSelector != nil {
+		in, out := &in.LanSelector, &out.LanSelector
+		*out = new(v1.Selector)
+		(*in).DeepCopyInto(*out)
+	}
 	if in.Name != nil {
 		in, out := &in.Name, &out.Name
 		*out = new(string)
@@ -737,6 +747,16 @@ func (in *NicParameters) DeepCopyInto(out *NicParameters) {
 		in, out := &in.Lan, &out.Lan
 		*out = new(float64)
 		**out = **in
+	}
+	if in.LanRef != nil {
+		in, out := &in.LanRef, &out.LanRef
+		*out = new(v1.Reference)
+		(*in).DeepCopyInto(*out)
+	}
+	if in.LanSelector != nil {
+		in, out := &in.LanSelector, &out.LanSelector
+		*out = new(v1.Selector)
+		(*in).DeepCopyInto(*out)
 	}
 	if in.Name != nil {
 		in, out := &in.Name, &out.Name
@@ -1280,6 +1300,16 @@ func (in *TargetGroupInitParameters) DeepCopyInto(out *TargetGroupInitParameters
 		*out = new(string)
 		**out = **in
 	}
+	if in.TargetGroupIDRef != nil {
+		in, out := &in.TargetGroupIDRef, &out.TargetGroupIDRef
+		*out = new(v1.Reference)
+		(*in).DeepCopyInto(*out)
+	}
+	if in.TargetGroupIDSelector != nil {
+		in, out := &in.TargetGroupIDSelector, &out.TargetGroupIDSelector
+		*out = new(v1.Selector)
+		(*in).DeepCopyInto(*out)
+	}
 	if in.Weight != nil {
 		in, out := &in.Weight, &out.Weight
 		*out = new(float64)
@@ -1339,6 +1369,16 @@ func (in *TargetGroupParameters) DeepCopyInto(out *TargetGroupParameters) {
 		in, out := &in.TargetGroupID, &out.TargetGroupID
 		*out = new(string)
 		**out = **in
+	}
+	if in.TargetGroupIDRef != nil {
+		in, out := &in.TargetGroupIDRef, &out.TargetGroupIDRef
+		*out = new(v1.Reference)
+		(*in).DeepCopyInto(*out)
+	}
+	if in.TargetGroupIDSelector != nil {
+		in, out := &in.TargetGroupIDSelector, &out.TargetGroupIDSelector
+		*out = new(v1.Selector)
+		(*in).DeepCopyInto(*out)
 	}
 	if in.Weight != nil {
 		in, out := &in.Weight, &out.Weight

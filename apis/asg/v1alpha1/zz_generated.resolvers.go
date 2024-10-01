@@ -9,6 +9,7 @@ package v1alpha1
 import (
 	"context"
 	reference "github.com/crossplane/crossplane-runtime/pkg/reference"
+	v1alpha11 "github.com/ionos-cloud/provider-upjet-ionoscloud/apis/alb/v1alpha1"
 	v1alpha1 "github.com/ionos-cloud/provider-upjet-ionoscloud/apis/compute/v1alpha1"
 	errors "github.com/pkg/errors"
 	client "sigs.k8s.io/controller-runtime/pkg/client"
@@ -37,6 +38,48 @@ func (mg *AutoscalingGroup) ResolveReferences(ctx context.Context, c client.Read
 	mg.Spec.ForProvider.DatacenterID = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.DatacenterIDRef = rsp.ResolvedReference
 
+	for i3 := 0; i3 < len(mg.Spec.ForProvider.ReplicaConfiguration); i3++ {
+		for i4 := 0; i4 < len(mg.Spec.ForProvider.ReplicaConfiguration[i3].Nic); i4++ {
+			rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+				CurrentValue: reference.FromFloatPtrValue(mg.Spec.ForProvider.ReplicaConfiguration[i3].Nic[i4].Lan),
+				Extract:      reference.ExternalName(),
+				Reference:    mg.Spec.ForProvider.ReplicaConfiguration[i3].Nic[i4].LanRef,
+				Selector:     mg.Spec.ForProvider.ReplicaConfiguration[i3].Nic[i4].LanSelector,
+				To: reference.To{
+					List:    &v1alpha1.LanList{},
+					Managed: &v1alpha1.Lan{},
+				},
+			})
+			if err != nil {
+				return errors.Wrap(err, "mg.Spec.ForProvider.ReplicaConfiguration[i3].Nic[i4].Lan")
+			}
+			mg.Spec.ForProvider.ReplicaConfiguration[i3].Nic[i4].Lan = reference.ToFloatPtrValue(rsp.ResolvedValue)
+			mg.Spec.ForProvider.ReplicaConfiguration[i3].Nic[i4].LanRef = rsp.ResolvedReference
+
+		}
+	}
+	for i3 := 0; i3 < len(mg.Spec.ForProvider.ReplicaConfiguration); i3++ {
+		for i4 := 0; i4 < len(mg.Spec.ForProvider.ReplicaConfiguration[i3].Nic); i4++ {
+			if mg.Spec.ForProvider.ReplicaConfiguration[i3].Nic[i4].TargetGroup != nil {
+				rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+					CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.ReplicaConfiguration[i3].Nic[i4].TargetGroup.TargetGroupID),
+					Extract:      reference.ExternalName(),
+					Reference:    mg.Spec.ForProvider.ReplicaConfiguration[i3].Nic[i4].TargetGroup.TargetGroupIDRef,
+					Selector:     mg.Spec.ForProvider.ReplicaConfiguration[i3].Nic[i4].TargetGroup.TargetGroupIDSelector,
+					To: reference.To{
+						List:    &v1alpha11.TargetGroupList{},
+						Managed: &v1alpha11.TargetGroup{},
+					},
+				})
+				if err != nil {
+					return errors.Wrap(err, "mg.Spec.ForProvider.ReplicaConfiguration[i3].Nic[i4].TargetGroup.TargetGroupID")
+				}
+				mg.Spec.ForProvider.ReplicaConfiguration[i3].Nic[i4].TargetGroup.TargetGroupID = reference.ToPtrValue(rsp.ResolvedValue)
+				mg.Spec.ForProvider.ReplicaConfiguration[i3].Nic[i4].TargetGroup.TargetGroupIDRef = rsp.ResolvedReference
+
+			}
+		}
+	}
 	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 		CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.DatacenterID),
 		Extract:      reference.ExternalName(),
@@ -52,6 +95,49 @@ func (mg *AutoscalingGroup) ResolveReferences(ctx context.Context, c client.Read
 	}
 	mg.Spec.InitProvider.DatacenterID = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.InitProvider.DatacenterIDRef = rsp.ResolvedReference
+
+	for i3 := 0; i3 < len(mg.Spec.InitProvider.ReplicaConfiguration); i3++ {
+		for i4 := 0; i4 < len(mg.Spec.InitProvider.ReplicaConfiguration[i3].Nic); i4++ {
+			rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+				CurrentValue: reference.FromFloatPtrValue(mg.Spec.InitProvider.ReplicaConfiguration[i3].Nic[i4].Lan),
+				Extract:      reference.ExternalName(),
+				Reference:    mg.Spec.InitProvider.ReplicaConfiguration[i3].Nic[i4].LanRef,
+				Selector:     mg.Spec.InitProvider.ReplicaConfiguration[i3].Nic[i4].LanSelector,
+				To: reference.To{
+					List:    &v1alpha1.LanList{},
+					Managed: &v1alpha1.Lan{},
+				},
+			})
+			if err != nil {
+				return errors.Wrap(err, "mg.Spec.InitProvider.ReplicaConfiguration[i3].Nic[i4].Lan")
+			}
+			mg.Spec.InitProvider.ReplicaConfiguration[i3].Nic[i4].Lan = reference.ToFloatPtrValue(rsp.ResolvedValue)
+			mg.Spec.InitProvider.ReplicaConfiguration[i3].Nic[i4].LanRef = rsp.ResolvedReference
+
+		}
+	}
+	for i3 := 0; i3 < len(mg.Spec.InitProvider.ReplicaConfiguration); i3++ {
+		for i4 := 0; i4 < len(mg.Spec.InitProvider.ReplicaConfiguration[i3].Nic); i4++ {
+			if mg.Spec.InitProvider.ReplicaConfiguration[i3].Nic[i4].TargetGroup != nil {
+				rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+					CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.ReplicaConfiguration[i3].Nic[i4].TargetGroup.TargetGroupID),
+					Extract:      reference.ExternalName(),
+					Reference:    mg.Spec.InitProvider.ReplicaConfiguration[i3].Nic[i4].TargetGroup.TargetGroupIDRef,
+					Selector:     mg.Spec.InitProvider.ReplicaConfiguration[i3].Nic[i4].TargetGroup.TargetGroupIDSelector,
+					To: reference.To{
+						List:    &v1alpha11.TargetGroupList{},
+						Managed: &v1alpha11.TargetGroup{},
+					},
+				})
+				if err != nil {
+					return errors.Wrap(err, "mg.Spec.InitProvider.ReplicaConfiguration[i3].Nic[i4].TargetGroup.TargetGroupID")
+				}
+				mg.Spec.InitProvider.ReplicaConfiguration[i3].Nic[i4].TargetGroup.TargetGroupID = reference.ToPtrValue(rsp.ResolvedValue)
+				mg.Spec.InitProvider.ReplicaConfiguration[i3].Nic[i4].TargetGroup.TargetGroupIDRef = rsp.ResolvedReference
+
+			}
+		}
+	}
 
 	return nil
 }
