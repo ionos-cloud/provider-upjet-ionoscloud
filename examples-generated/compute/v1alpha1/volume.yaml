@@ -14,77 +14,8 @@ spec:
       matchLabels:
         testing.upbound.io/example-name: example
     diskType: SSD Standard
-    imageName: ubuntu:latest
-    imagePassword: "replaceMe"
-    name: Volume Example
-    serverIdSelector:
-      matchLabels:
-        testing.upbound.io/example-name: example
-    size: 5
-    userData: foo
-
----
-
-apiVersion: compute.ionoscloud.io/v1alpha1
-kind: Datacenter
-metadata:
-  annotations:
-    meta.upbound.io/example-id: compute/v1alpha1/volume
-  labels:
-    testing.upbound.io/example-name: example
-  name: example
-spec:
-  forProvider:
-    description: Datacenter Description
-    location: de/fra
-    name: Datacenter Example
-    secAuthProtection: false
-
----
-
-apiVersion: compute.ionoscloud.io/v1alpha1
-kind: Lan
-metadata:
-  annotations:
-    meta.upbound.io/example-id: compute/v1alpha1/volume
-  labels:
-    testing.upbound.io/example-name: example
-  name: example
-spec:
-  forProvider:
-    datacenterIdSelector:
-      matchLabels:
-        testing.upbound.io/example-name: example
-    name: Lan Example
-    public: true
-
----
-
-apiVersion: compute.ionoscloud.io/v1alpha1
-kind: Server
-metadata:
-  annotations:
-    meta.upbound.io/example-id: compute/v1alpha1/volume
-  labels:
-    testing.upbound.io/example-name: example
-  name: exampleapiVersion: compute.ionoscloud.io/v1alpha1
-kind: Volume
-metadata:
-  annotations:
-    meta.upbound.io/example-id: compute/v1alpha1/volume
-  labels:
-    testing.upbound.io/example-name: example
-  name: example
-spec:
-  forProvider:
-    availabilityZone: ZONE_1
-    bus: VIRTIO
-    datacenterIdSelector:
-      matchLabels:
-        testing.upbound.io/example-name: example
-    diskType: SSD Standard
-    imageName: "ubuntu:latest"
-    imagePassword: "Upboundtest1"
+    imageName: ${data.ionoscloud_image.example.name}
+    imagePassword: ${random_password.volume_image_password.result}
     name: Volume Example
     serverIdSelector:
       matchLabels:
@@ -112,6 +43,22 @@ spec:
 ---
 
 apiVersion: compute.ionoscloud.io/v1alpha1
+kind: Ipblock
+metadata:
+  annotations:
+    meta.upbound.io/example-id: compute/v1alpha1/volume
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    location: us/las
+    name: IP Block Example
+    size: 4
+
+---
+
+apiVersion: compute.ionoscloud.io/v1alpha1
 kind: Lan
 metadata:
   annotations:
@@ -145,56 +92,9 @@ spec:
     datacenterIdSelector:
       matchLabels:
         testing.upbound.io/example-name: example
-    imageName: "ubuntu:latest"
+    imageName: ${data.ionoscloud_image.example.name}
     imagePasswordSecretRef:
-      key: password
-      name: pwsecret
-      namespace: upbound-system
-    name: Server Example
-    nic:
-      dhcp: true
-      firewall:
-      - name: SSH
-        portRangeEnd: 22
-        portRangeStart: 22
-        protocol: TCP
-        sourceMac: 00:0a:95:9d:68:17
-        type: EGRESS
-      firewallActive: true
-      firewallType: BIDIRECTIONAL
-      lanSelector:
-        matchLabels:
-          testing.upbound.io/example-name: example
-      name: system
-    ram: 1024
-    type: ENTERPRISE
-    volume:
-      availabilityZone: ZONE_1
-      bus: VIRTIO
-      diskType: SSD Standard
-      name: system
-      size: 5
-      userData: foo
----
-
-  apiVersion: v1
-  kind: Secret
-  metadata:
-    name: pwsecret
-    namespace: upbound-system
-  stringData:
-    password: "Upboundtest1"
-spec:
-  forProvider:
-    availabilityZone: ZONE_1
-    cores: 1
-    cpuFamily: INTEL_XEON
-    datacenterIdSelector:
-      matchLabels:
-        testing.upbound.io/example-name: example
-    imageName:  ubuntu:latest
-    imagePasswordSecretRef:
-      key: password
+      key: attribute.result
       name: example-password
       namespace: upbound-system
     name: Server Example
@@ -205,10 +105,15 @@ spec:
         portRangeEnd: 22
         portRangeStart: 22
         protocol: TCP
+        sourceIp: ${ionoscloud_ipblock.example.ips[2]}
         sourceMac: 00:0a:95:9d:68:17
+        targetIp: ${ionoscloud_ipblock.example.ips[3]}
         type: EGRESS
       firewallActive: true
       firewallType: BIDIRECTIONAL
+      ips:
+      - ${ionoscloud_ipblock.example.ips[0]}
+      - ${ionoscloud_ipblock.example.ips[1]}
       lanSelector:
         matchLabels:
           testing.upbound.io/example-name: example
