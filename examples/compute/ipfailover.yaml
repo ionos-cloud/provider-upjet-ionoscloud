@@ -100,7 +100,7 @@ spec:
       dhcp: true
       firewallActive: true
       ips:
-        - ${ionoscloud_ipblock.example.ips[0]}
+        - "192.96.159.61"
       lanSelector:
         matchLabels:
           testing.upbound.io/example-name: example
