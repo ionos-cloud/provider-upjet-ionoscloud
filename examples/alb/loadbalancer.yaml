@@ -8,7 +8,7 @@ metadata:
   name: example
 spec:
   forProvider:
-    centralLogging: true
+#    centralLogging: true
     datacenterIdSelector:
       matchLabels:
         testing.upbound.io/example-name: example
@@ -59,7 +59,7 @@ spec:
       matchLabels:
         testing.upbound.io/example-name: example
     name: Lan Example
-    public: true
+    public: false
 
 ---
 
@@ -77,4 +77,4 @@ spec:
       matchLabels:
         testing.upbound.io/example-name: example
     name: Lan Example
-    public: true
+    public: false

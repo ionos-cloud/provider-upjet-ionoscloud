@@ -1,5 +1,5 @@
 apiVersion: alb.ionoscloud.io/v1alpha1
-kind: Group
+kind: TargetGroup
 metadata:
   annotations:
     meta.upbound.io/example-id: alb/v1alpha1/group
