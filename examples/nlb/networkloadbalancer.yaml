@@ -8,7 +8,6 @@ metadata:
   name: example
 spec:
   forProvider:
-    centralLogging: true
     datacenterIdSelector:
       matchLabels:
         testing.upbound.io/example-name: example
@@ -19,8 +18,6 @@ spec:
     listenerLanSelector:
       matchLabels:
         testing.upbound.io/example-name: example1
-    loggingFormat: '%{+Q}o %{-Q}ci - - [%trg] %r %ST %B "" "" %cp %ms %ft %b %s %TR
-      %Tw %Tc %Tr %Ta %tsc %ac %fc %bc %sc %rc %sq %bq %CC %CS %hrl %hsl'
     name: example
     targetLanSelector:
       matchLabels:

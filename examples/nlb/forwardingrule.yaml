@@ -59,7 +59,7 @@ spec:
   forProvider:
     datacenterIdSelector:
       matchLabels:
-        testing.upbound.io/example-name: example
+        testing.upbound.io/example-name: example1
     name: Lan Example 1
     public: false
 
