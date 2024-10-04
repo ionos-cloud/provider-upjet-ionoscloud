@@ -13,6 +13,38 @@ import (
 	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
 )
 
+type ConnectionPoolerInitParameters struct {
+
+	// [bool]
+	Enabled *bool `json:"enabled,omitempty" tf:"enabled,omitempty"`
+
+	// [string] Represents different modes of connection pooling for the connection pooler.
+	// Represents different modes of connection pooling for the connection pooler
+	PoolMode *string `json:"poolMode,omitempty" tf:"pool_mode,omitempty"`
+}
+
+type ConnectionPoolerObservation struct {
+
+	// [bool]
+	Enabled *bool `json:"enabled,omitempty" tf:"enabled,omitempty"`
+
+	// [string] Represents different modes of connection pooling for the connection pooler.
+	// Represents different modes of connection pooling for the connection pooler
+	PoolMode *string `json:"poolMode,omitempty" tf:"pool_mode,omitempty"`
+}
+
+type ConnectionPoolerParameters struct {
+
+	// [bool]
+	// +kubebuilder:validation:Optional
+	Enabled *bool `json:"enabled" tf:"enabled,omitempty"`
+
+	// [string] Represents different modes of connection pooling for the connection pooler.
+	// Represents different modes of connection pooling for the connection pooler
+	// +kubebuilder:validation:Optional
+	PoolMode *string `json:"poolMode" tf:"pool_mode,omitempty"`
+}
+
 type ConnectionsInitParameters struct {
 
 	// [true] The IP and subnet for the database. Note the following unavailable IP ranges: 10.233.64.0/18, 10.233.0.0/18, 10.233.114.0/24. Please enter in the correct format like IP/Subnet, exp: 192.168.10.0/24. See Private IPs and Configuring the network.
@@ -208,6 +240,10 @@ type PostgresqlClusterInitParameters struct {
 	// The S3 location where the backups will be stored.
 	BackupLocation *string `json:"backupLocation,omitempty" tf:"backup_location,omitempty"`
 
+	// [object]
+	// Configuration options for the connection pooler
+	ConnectionPooler *ConnectionPoolerInitParameters `json:"connectionPooler,omitempty" tf:"connection_pooler,omitempty"`
+
 	// [string] Details about the network connection for your cluster.
 	// Details about the network connection for your cluster.
 	Connections *ConnectionsInitParameters `json:"connections,omitempty" tf:"connections,omitempty"`
@@ -277,6 +313,10 @@ type PostgresqlClusterObservation struct {
 	// The S3 location where the backups will be stored.
 	BackupLocation *string `json:"backupLocation,omitempty" tf:"backup_location,omitempty"`
 
+	// [object]
+	// Configuration options for the connection pooler
+	ConnectionPooler *ConnectionPoolerObservation `json:"connectionPooler,omitempty" tf:"connection_pooler,omitempty"`
+
 	// [string] Details about the network connection for your cluster.
 	// Details about the network connection for your cluster.
 	Connections *ConnectionsObservation `json:"connections,omitempty" tf:"connections,omitempty"`
@@ -342,6 +382,11 @@ type PostgresqlClusterParameters struct {
 	// The S3 location where the backups will be stored.
 	// +kubebuilder:validation:Optional
 	BackupLocation *string `json:"backupLocation,omitempty" tf:"backup_location,omitempty"`
+
+	// [object]
+	// Configuration options for the connection pooler
+	// +kubebuilder:validation:Optional
+	ConnectionPooler *ConnectionPoolerParameters `json:"connectionPooler,omitempty" tf:"connection_pooler,omitempty"`
 
 	// [string] Details about the network connection for your cluster.
 	// Details about the network connection for your cluster.

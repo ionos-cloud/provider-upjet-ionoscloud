@@ -82,7 +82,7 @@ spec:
                       properties:
                         certificateId:
                           description: |-
-                            [string] The certificate ID for the domain.
+                            [string] The certificate ID for the domain. Must be a valid certificate in UUID form.
                             The certificate ID for the domain.
                           type: string
                         name:
@@ -129,7 +129,7 @@ spec:
                       properties:
                         certificateId:
                           description: |-
-                            [string] The certificate ID for the domain.
+                            [string] The certificate ID for the domain. Must be a valid certificate in UUID form.
                             The certificate ID for the domain.
                           type: string
                         name:
@@ -340,7 +340,7 @@ spec:
                       properties:
                         certificateId:
                           description: |-
-                            [string] The certificate ID for the domain.
+                            [string] The certificate ID for the domain. Must be a valid certificate in UUID form.
                             The certificate ID for the domain.
                           type: string
                         name:

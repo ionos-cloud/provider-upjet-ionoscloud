@@ -49,6 +49,18 @@ type DistributionObservation struct {
 
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
+	// IP of the distribution, it has to be included on the domain DNS Zone as A record.
+	// IP of the distribution, it has to be included on the domain DNS Zone as A record.
+	PublicEndpointV4 *string `json:"publicEndpointV4,omitempty" tf:"public_endpoint_v4,omitempty"`
+
+	// IP of the distribution, it has to be included on the domain DNS Zone as AAAA record.
+	// IP of the distribution, it has to be included on the domain DNS Zone as AAAA record.
+	PublicEndpointV6 *string `json:"publicEndpointV6,omitempty" tf:"public_endpoint_v6,omitempty"`
+
+	// Unique resource indentifier.
+	// Unique name of the resource.
+	ResourceUrn *string `json:"resourceUrn,omitempty" tf:"resource_urn,omitempty"`
+
 	// [list] The routing rules for the distribution.
 	// The routing rules for the distribution.
 	RoutingRules []RoutingRulesObservation `json:"routingRules,omitempty" tf:"routing_rules,omitempty"`

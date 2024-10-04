@@ -78,6 +78,20 @@ spec:
                       (Computed)[string] The S3 location where the backups will be stored. Possible values are: de, eu-south-2, eu-central-2. This attribute is immutable (disallowed in update requests).
                       The S3 location where the backups will be stored.
                     type: string
+                  connectionPooler:
+                    description: |-
+                      [object]
+                      Configuration options for the connection pooler
+                    properties:
+                      enabled:
+                        description: '[bool]'
+                        type: boolean
+                      poolMode:
+                        description: |-
+                          [string] Represents different modes of connection pooling for the connection pooler.
+                          Represents different modes of connection pooling for the connection pooler
+                        type: string
+                    type: object
                   connections:
                     description: |-
                       [string] Details about the network connection for your cluster.
@@ -451,6 +465,20 @@ spec:
                       (Computed)[string] The S3 location where the backups will be stored. Possible values are: de, eu-south-2, eu-central-2. This attribute is immutable (disallowed in update requests).
                       The S3 location where the backups will be stored.
                     type: string
+                  connectionPooler:
+                    description: |-
+                      [object]
+                      Configuration options for the connection pooler
+                    properties:
+                      enabled:
+                        description: '[bool]'
+                        type: boolean
+                      poolMode:
+                        description: |-
+                          [string] Represents different modes of connection pooling for the connection pooler.
+                          Represents different modes of connection pooling for the connection pooler
+                        type: string
+                    type: object
                   connections:
                     description: |-
                       [string] Details about the network connection for your cluster.
@@ -1022,6 +1050,20 @@ spec:
                       (Computed)[string] The S3 location where the backups will be stored. Possible values are: de, eu-south-2, eu-central-2. This attribute is immutable (disallowed in update requests).
                       The S3 location where the backups will be stored.
                     type: string
+                  connectionPooler:
+                    description: |-
+                      [object]
+                      Configuration options for the connection pooler
+                    properties:
+                      enabled:
+                        description: '[bool]'
+                        type: boolean
+                      poolMode:
+                        description: |-
+                          [string] Represents different modes of connection pooling for the connection pooler.
+                          Represents different modes of connection pooling for the connection pooler
+                        type: string
+                    type: object
                   connections:
                     description: |-
                       [string] Details about the network connection for your cluster.

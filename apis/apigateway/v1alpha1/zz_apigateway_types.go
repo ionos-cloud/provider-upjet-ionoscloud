@@ -83,7 +83,7 @@ type ApigatewayParameters struct {
 
 type CustomDomainsInitParameters struct {
 
-	// [string] The certificate ID for the domain.
+	// [string] The certificate ID for the domain. Must be a valid certificate in UUID form.
 	// The certificate ID for the domain.
 	CertificateID *string `json:"certificateId,omitempty" tf:"certificate_id,omitempty"`
 
@@ -94,7 +94,7 @@ type CustomDomainsInitParameters struct {
 
 type CustomDomainsObservation struct {
 
-	// [string] The certificate ID for the domain.
+	// [string] The certificate ID for the domain. Must be a valid certificate in UUID form.
 	// The certificate ID for the domain.
 	CertificateID *string `json:"certificateId,omitempty" tf:"certificate_id,omitempty"`
 
@@ -105,10 +105,10 @@ type CustomDomainsObservation struct {
 
 type CustomDomainsParameters struct {
 
-	// [string] The certificate ID for the domain.
+	// [string] The certificate ID for the domain. Must be a valid certificate in UUID form.
 	// The certificate ID for the domain.
 	// +kubebuilder:validation:Optional
-	CertificateID *string `json:"certificateId" tf:"certificate_id,omitempty"`
+	CertificateID *string `json:"certificateId,omitempty" tf:"certificate_id,omitempty"`
 
 	// [string] The name of the API Gateway.
 	// The domain name.
