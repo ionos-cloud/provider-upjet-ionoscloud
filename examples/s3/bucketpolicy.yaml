@@ -1,0 +1,51 @@
+apiVersion: s3.ionoscloud.io/v1alpha1
+kind: Bucket
+metadata:
+  annotations:
+    meta.upbound.io/example-id: s3/v1alpha1/bucketpolicy
+  labels:
+    testing.upbound.io/example-name: policy
+  name: ${Rand.RFC1123Subdomain}
+spec:
+  forProvider: {}
+---
+apiVersion: s3.ionoscloud.io/v1alpha1
+kind: BucketPolicy
+metadata:
+  annotations:
+    meta.upbound.io/example-id: s3/v1alpha1/bucketpolicy
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    bucketSelector:
+      matchLabels:
+        testing.upbound.io/example-name: policy
+    policy: |-
+      {
+        "Version": "2012-10-17",
+        "Statement": [
+          {
+            "Sid": "Delegate certain actions to another user",
+            "Action": [
+              "s3:ListBucket",
+              "s3:PutObject",
+              "s3:GetObject"
+            ],
+            "Effect": "Allow",
+            "Resource": [
+              "arn:aws:s3:::example",
+              "arn:aws:s3:::example/*"
+            ],
+            "Condition": {
+              "IpAddress": [
+                "123.123.123.123/32"
+              ]
+            },
+            "Principal": [
+              "arn:aws:iam:::user/31000000:9acd8251-2857-410e-b1fd-ca86462bdcec"
+            ]
+          }
+        ]
+      }

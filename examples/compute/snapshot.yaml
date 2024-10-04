@@ -1,0 +1,76 @@
+apiVersion: compute.ionoscloud.io/v1alpha1
+kind: Snapshot
+metadata:
+  annotations:
+    meta.upbound.io/example-id: compute/v1alpha1/snapshot
+  labels:
+    testing.upbound.io/example-name: test_snapshot
+  name: test-snapshot
+spec:
+  forProvider:
+    datacenterIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    name: Snapshot Example
+    volumeIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+
+---
+
+apiVersion: compute.ionoscloud.io/v1alpha1
+kind: Datacenter
+metadata:
+  annotations:
+    meta.upbound.io/example-id: compute/v1alpha1/snapshot
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    description: Datacenter Description
+    location: us/las
+    name: Datacenter Example
+    secAuthProtection: false
+---
+
+apiVersion: compute.ionoscloud.io/v1alpha1
+kind: Server
+metadata:
+  annotations:
+    meta.upbound.io/example-id: compute/v1alpha1/snapshot
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    availabilityZone: ZONE_1
+    cores: 1
+    cpuFamily: INTEL_XEON
+    datacenterIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    imageName: Ubuntu-20.04
+    imagePasswordSecretRef:
+      key: password
+      name: example-password
+      namespace: upbound-system
+    name: Server Example
+    ram: 1024
+    type: ENTERPRISE
+    volume:
+    - availabilityZone: ZONE_1
+      bus: VIRTIO
+      diskType: SSD Standard
+      name: system
+      size: 5
+      userData: foo
+---
+
+apiVersion: v1
+kind: Secret
+metadata:
+  name: example-password
+  namespace: upbound-system
+stringData:
+  password: "Upboundtest1"

@@ -1,0 +1,88 @@
+apiVersion: compute.ionoscloud.io/v1alpha1
+kind: Loadbalancer
+metadata:
+  annotations:
+    meta.upbound.io/example-id: compute/v1alpha1/loadbalancer
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    datacenterIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    dhcp: true
+    name: Load Balancer Example
+    nicIds:
+    - ${ionoscloud_server.example.primary_nic}
+
+---
+
+apiVersion: compute.ionoscloud.io/v1alpha1
+kind: Datacenter
+metadata:
+  annotations:
+    meta.upbound.io/example-id: compute/v1alpha1/loadbalancer
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    description: Datacenter Description
+    location: us/las
+    name: Datacenter Example
+    secAuthProtection: false
+
+---
+
+apiVersion: compute.ionoscloud.io/v1alpha1
+kind: Lan
+metadata:
+  annotations:
+    meta.upbound.io/example-id: compute/v1alpha1/loadbalancer
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    datacenterIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    name: Lan Example
+    public: true
+
+---
+
+apiVersion: compute.ionoscloud.io/v1alpha1
+kind: Server
+metadata:
+  annotations:
+    meta.upbound.io/example-id: compute/v1alpha1/loadbalancer
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    availabilityZone: ZONE_1
+    cores: 1
+    cpuFamily: INTEL_XEON
+    datacenterIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    imageName: Ubuntu-20.04
+    imagePasswordSecretRef:
+      key: attribute.result
+      name: example-password
+      namespace: upbound-system
+    name: Server Example
+    nic:
+    - dhcp: true
+      firewallActive: true
+      lanSelector:
+        matchLabels:
+          testing.upbound.io/example-name: example
+    ram: 1024
+    volume:
+    - diskType: SSD
+      name: system
+      size: 14

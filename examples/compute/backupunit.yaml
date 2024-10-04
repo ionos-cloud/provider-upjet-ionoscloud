@@ -1,0 +1,28 @@
+apiVersion: compute.ionoscloud.io/v1alpha1
+kind: Unit
+metadata:
+  annotations:
+    meta.upbound.io/example-id: compute/v1alpha1/unit
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    email: ${Rand.RFC1123Subdomain}@exampledomain.com
+    name: ${Rand.RFC1123Subdomain}
+    passwordSecretRef:
+      key: password
+      name: example-password
+      namespace: upbound-system
+
+---
+apiVersion: v1
+kind: Secret
+metadata:
+  name: example-password
+  namespace: upbound-system
+stringData:
+  password: "Upboundtest!"
+
+
+

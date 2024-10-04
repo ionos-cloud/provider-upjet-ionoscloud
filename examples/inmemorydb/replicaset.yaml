@@ -1,0 +1,78 @@
+apiVersion: inmemorydb.replicaset.ionoscloud.io/v1alpha1
+kind: InMemoryDBReplicaset
+metadata:
+  annotations:
+    meta.upbound.io/example-id: inmemorydb/v1alpha1/inmemorydbreplicaset
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    connections:
+      cidr: "192.168.42.1/24"
+      datacenterIdSelector:
+        matchLabels:
+          testing.upbound.io/example-name: example
+      lanIdSelector:
+        matchLabels:
+          testing.upbound.io/example-name: example
+    credentials:
+    - plainTextPasswordSecretRef:
+        key: password
+        name: pwsecret
+        namespace: upbound-system
+      username: myuser
+    displayName: ExampleReplicaSet
+    evictionPolicy: noeviction
+    location: de/txl
+    maintenanceWindow:
+      dayOfTheWeek: Monday
+      time: "10:00:00"
+    persistenceMode: RDB
+    replicas: 4
+    resources:
+      cores: 1
+      ram: 6
+    version: "7.2"
+
+---
+
+apiVersion: compute.ionoscloud.io/v1alpha1
+kind: Datacenter
+metadata:
+  annotations:
+    meta.upbound.io/example-id: inmemorydb.replicaset/v1alpha1/inmemorydbreplicaset
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    description: Datacenter for DBaaS InMemoryDB replica sets
+    location: de/txl
+    name: example
+
+---
+
+apiVersion: compute.ionoscloud.io/v1alpha1
+kind: Lan
+metadata:
+  annotations:
+    meta.upbound.io/example-id: inmemorydb.replicaset/v1alpha1/inmemorydbreplicaset
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    datacenterIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    name: example
+    public: false
+---
+  apiVersion: v1
+  kind: Secret
+  metadata:
+    name: pwsecret
+    namespace: upbound-system
+  stringData:
+    password: "Upboundtest!"

@@ -1,0 +1,26 @@
+apiVersion: nfs.ionoscloud.io/v1alpha1
+kind: NFSShare
+metadata:
+  annotations:
+    meta.upbound.io/example-id: nfs/v1alpha1/nfsshare
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    clientGroups:
+      - description: Client Group 1
+        hosts:
+          - 10.234.62.123
+        ipNetworks:
+          - 10.234.50.0/24
+        nfs:
+           squash: all-anonymous
+    clusterIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    gid: 512
+    location: de/txl
+    name: example-share
+    quota: 512
+    uid: 512

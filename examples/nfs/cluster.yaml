@@ -1,0 +1,55 @@
+apiVersion: compute.ionoscloud.io/v1alpha1
+kind: Datacenter
+metadata:
+  annotations:
+    meta.upbound.io/example-id: asg/v1alpha1/autoscalinggroup
+  labels:
+    testing.upbound.io/example-name: datacenter_example
+  name: datacenter-example
+spec:
+  forProvider:
+    location: de/txl
+    name: datacenter_example
+
+---
+
+apiVersion: compute.ionoscloud.io/v1alpha1
+kind: Lan
+metadata:
+  annotations:
+    meta.upbound.io/example-id: asg/v1alpha1/autoscalinggroup
+  labels:
+    testing.upbound.io/example-name: lan_example
+  name: lan-example
+spec:
+  forProvider:
+    datacenterIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: datacenter_example
+    name: lan_example
+    public: false
+
+---
+apiVersion: nfs.ionoscloud.io/v1alpha1
+kind: NFSCluster
+metadata:
+  annotations:
+    meta.upbound.io/example-id: nfs/v1alpha1/nfscluster
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    connections:
+        datacenterIdSelector:
+          matchLabels:
+            testing.upbound.io/example-name: datacenter_example
+        ipAddress: 192.168.100.10/24
+        lanSelector:
+          matchLabels:
+            testing.upbound.io/example-name: lan_example
+    location: de/txl
+    name: test
+    nfs:
+       minVersion: "4.2"
+    size: 2

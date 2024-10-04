@@ -10,17 +10,59 @@ package apis
 import (
 	"k8s.io/apimachinery/pkg/runtime"
 
-	v1alpha1 "github.com/upbound/upjet-provider-template/apis/null/v1alpha1"
-	v1alpha1apis "github.com/upbound/upjet-provider-template/apis/v1alpha1"
-	v1beta1 "github.com/upbound/upjet-provider-template/apis/v1beta1"
+	v1alpha1 "github.com/ionos-cloud/provider-upjet-ionoscloud/apis/alb/v1alpha1"
+	v1alpha1apigateway "github.com/ionos-cloud/provider-upjet-ionoscloud/apis/apigateway/v1alpha1"
+	v1alpha1asg "github.com/ionos-cloud/provider-upjet-ionoscloud/apis/asg/v1alpha1"
+	v1alpha1cdn "github.com/ionos-cloud/provider-upjet-ionoscloud/apis/cdn/v1alpha1"
+	v1alpha1certificatemanager "github.com/ionos-cloud/provider-upjet-ionoscloud/apis/certificatemanager/v1alpha1"
+	v1alpha1compute "github.com/ionos-cloud/provider-upjet-ionoscloud/apis/compute/v1alpha1"
+	v1alpha1containerregistry "github.com/ionos-cloud/provider-upjet-ionoscloud/apis/containerregistry/v1alpha1"
+	v1alpha1dataplatform "github.com/ionos-cloud/provider-upjet-ionoscloud/apis/dataplatform/v1alpha1"
+	v1alpha1dbaas "github.com/ionos-cloud/provider-upjet-ionoscloud/apis/dbaas/v1alpha1"
+	v1alpha1dns "github.com/ionos-cloud/provider-upjet-ionoscloud/apis/dns/v1alpha1"
+	v1alpha1inmemorydb "github.com/ionos-cloud/provider-upjet-ionoscloud/apis/inmemorydb/v1alpha1"
+	v1alpha1k8s "github.com/ionos-cloud/provider-upjet-ionoscloud/apis/k8s/v1alpha1"
+	v1alpha1kafka "github.com/ionos-cloud/provider-upjet-ionoscloud/apis/kafka/v1alpha1"
+	v1alpha1log "github.com/ionos-cloud/provider-upjet-ionoscloud/apis/log/v1alpha1"
+	v1alpha1mongodb "github.com/ionos-cloud/provider-upjet-ionoscloud/apis/mongodb/v1alpha1"
+	v1alpha1natgateway "github.com/ionos-cloud/provider-upjet-ionoscloud/apis/natgateway/v1alpha1"
+	v1alpha1nfs "github.com/ionos-cloud/provider-upjet-ionoscloud/apis/nfs/v1alpha1"
+	v1alpha1nlb "github.com/ionos-cloud/provider-upjet-ionoscloud/apis/nlb/v1alpha1"
+	v1alpha1postgresql "github.com/ionos-cloud/provider-upjet-ionoscloud/apis/postgresql/v1alpha1"
+	v1alpha1s3 "github.com/ionos-cloud/provider-upjet-ionoscloud/apis/s3/v1alpha1"
+	v1alpha1apis "github.com/ionos-cloud/provider-upjet-ionoscloud/apis/v1alpha1"
+	v1beta1 "github.com/ionos-cloud/provider-upjet-ionoscloud/apis/v1beta1"
+	v1alpha1vpnipsec "github.com/ionos-cloud/provider-upjet-ionoscloud/apis/vpnipsec/v1alpha1"
+	v1alpha1vpnwireguard "github.com/ionos-cloud/provider-upjet-ionoscloud/apis/vpnwireguard/v1alpha1"
 )
 
 func init() {
 	// Register the types with the Scheme so the components can map objects to GroupVersionKinds and back
 	AddToSchemes = append(AddToSchemes,
 		v1alpha1.SchemeBuilder.AddToScheme,
+		v1alpha1apigateway.SchemeBuilder.AddToScheme,
+		v1alpha1asg.SchemeBuilder.AddToScheme,
+		v1alpha1cdn.SchemeBuilder.AddToScheme,
+		v1alpha1certificatemanager.SchemeBuilder.AddToScheme,
+		v1alpha1compute.SchemeBuilder.AddToScheme,
+		v1alpha1containerregistry.SchemeBuilder.AddToScheme,
+		v1alpha1dataplatform.SchemeBuilder.AddToScheme,
+		v1alpha1dbaas.SchemeBuilder.AddToScheme,
+		v1alpha1dns.SchemeBuilder.AddToScheme,
+		v1alpha1inmemorydb.SchemeBuilder.AddToScheme,
+		v1alpha1k8s.SchemeBuilder.AddToScheme,
+		v1alpha1kafka.SchemeBuilder.AddToScheme,
+		v1alpha1log.SchemeBuilder.AddToScheme,
+		v1alpha1mongodb.SchemeBuilder.AddToScheme,
+		v1alpha1natgateway.SchemeBuilder.AddToScheme,
+		v1alpha1nfs.SchemeBuilder.AddToScheme,
+		v1alpha1nlb.SchemeBuilder.AddToScheme,
+		v1alpha1postgresql.SchemeBuilder.AddToScheme,
+		v1alpha1s3.SchemeBuilder.AddToScheme,
 		v1alpha1apis.SchemeBuilder.AddToScheme,
 		v1beta1.SchemeBuilder.AddToScheme,
+		v1alpha1vpnipsec.SchemeBuilder.AddToScheme,
+		v1alpha1vpnwireguard.SchemeBuilder.AddToScheme,
 	)
 }
 

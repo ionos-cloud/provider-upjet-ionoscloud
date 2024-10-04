@@ -1,0 +1,89 @@
+apiVersion: mongodb.ionoscloud.io/v1alpha1
+kind: MongodbUser
+metadata:
+  annotations:
+    meta.upbound.io/example-id: mongodb/v1alpha1/mongodbuser
+  labels:
+    testing.upbound.io/example-name: example_mongo_user
+  name: example-mongo-user
+spec:
+  forProvider:
+    clusterIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example_mongo_cluster
+    passwordSecretRef:
+      key: example-key
+      name: example-secret
+      namespace: upbound-system
+    roles:
+    - database: db1
+      role: read
+    - database: db2
+      role: readWrite
+    username: myUser
+
+---
+
+apiVersion: compute.ionoscloud.io/v1alpha1
+kind: Datacenter
+metadata:
+  annotations:
+    meta.upbound.io/example-id: mongodb/v1alpha1/mongodbuser
+  labels:
+    testing.upbound.io/example-name: datacenter_example
+  name: datacenter-example
+spec:
+  forProvider:
+    description: Datacenter for testing dbaas cluster
+    location: de/txl
+    name: example
+
+---
+
+apiVersion: compute.ionoscloud.io/v1alpha1
+kind: Lan
+metadata:
+  annotations:
+    meta.upbound.io/example-id: mongodb/v1alpha1/mongodbuser
+  labels:
+    testing.upbound.io/example-name: lan_example
+  name: lan-example
+spec:
+  forProvider:
+    datacenterIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: datacenter_example
+    name: example
+    public: false
+
+---
+
+apiVersion: mongodb.ionoscloud.io/v1alpha1
+kind: MongodbCluster
+metadata:
+  annotations:
+    meta.upbound.io/example-id: mongodb/v1alpha1/mongodbuser
+  labels:
+    testing.upbound.io/example-name: example_mongo_cluster
+  name: example-mongo-cluster
+spec:
+  forProvider:
+    connections:
+    - cidrList:
+      - 192.168.1.108/24
+      datacenterIdSelector:
+        matchLabels:
+          testing.upbound.io/example-name: datacenter_example
+      lanIdSelector:
+        matchLabels:
+          testing.upbound.io/example-name: lan_example
+    displayName: example_mongo_cluster
+    instances: 1
+    locationSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    maintenanceWindow:
+    - dayOfTheWeek: Sunday
+      time: "09:00:00"
+    mongodbVersion: "5.0"
+    templateId: 6b78ea06-ee0e-4689-998c-fc9c46e781f6

@@ -1,0 +1,67 @@
+apiVersion: dataplatform.ionoscloud.io/v1alpha1
+kind: NodePool
+metadata:
+  annotations:
+    meta.upbound.io/example-id: dataplatform/v1alpha1/nodepool
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    annotations:
+      ann1: value1
+      ann2: value2
+    availabilityZone: AUTO
+    clusterIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    coresCount: 1
+    cpuFamily: INTEL_SKYLAKE
+    labels:
+      color: green
+      foo: bar
+    maintenanceWindow:
+    - dayOfTheWeek: Monday
+      time: "09:00:00"
+    name: Dataplatform_Node_Pool_Example
+    nodeCount: 1
+    ramSize: 2048
+    storageSize: 10
+    storageType: HDD
+
+---
+
+apiVersion: compute.ionoscloud.io/v1alpha1
+kind: Datacenter
+metadata:
+  annotations:
+    meta.upbound.io/example-id: dataplatform/v1alpha1/nodepool
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    description: Datacenter for testing Dataplatform Cluster
+    location: de/txl
+    name: Datacenter_Example
+
+---
+
+apiVersion: dataplatform.ionoscloud.io/v1alpha1
+kind: Cluster
+metadata:
+  annotations:
+    meta.upbound.io/example-id: dataplatform/v1alpha1/nodepool
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    datacenterIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    maintenanceWindow:
+    - dayOfTheWeek: Sunday
+      time: "09:00:00"
+    name: Dataplatform_Cluster_Example
+    version: "23.7"
