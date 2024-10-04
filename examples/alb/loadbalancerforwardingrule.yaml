@@ -43,8 +43,6 @@ spec:
     listenerPort: 8080
     name: ALB FR Example
     protocol: HTTP
-    serverCertificates:
-    - ${ionoscloud_certificate.cert.id}
 
 ---
 
@@ -72,26 +70,6 @@ spec:
     targetLanSelector:
       matchLabels:
         testing.upbound.io/example-name: example_2
-
----
-
-apiVersion: certificatemanager.ionoscloud.io/v1alpha1
-kind: Certificate
-metadata:
-  annotations:
-    meta.upbound.io/example-id: alb/v1alpha1/loadbalancerforwardingrule
-  labels:
-    testing.upbound.io/example-name: cert
-  name: cert
-spec:
-  forProvider:
-    certificate: ${file("path_to_cert")}
-    certificateChain: ${file("path_to_cert_chain")}
-    name: add_name_here
-    privateKeySecretRef:
-      key: attribute.path_to_private_key
-      name: example-secret
-      namespace: upbound-system
 
 ---
 
@@ -126,7 +104,7 @@ spec:
       matchLabels:
         testing.upbound.io/example-name: example
     name: Lan Example
-    public: true
+    public: false
 
 ---
 
@@ -144,4 +122,4 @@ spec:
       matchLabels:
         testing.upbound.io/example-name: example
     name: Lan Example
-    public: true
+    public: false
