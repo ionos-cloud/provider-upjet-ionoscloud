@@ -281,7 +281,16 @@ type NicInitParameters struct {
 	FlowLog []FlowLogInitParameters `json:"flowLog,omitempty" tf:"flow_log,omitempty"`
 
 	// Lan ID for this replica Nic.
+	// +crossplane:generate:reference:type=github.com/ionos-cloud/provider-upjet-ionoscloud/apis/compute/v1alpha1.Lan
 	Lan *float64 `json:"lan,omitempty" tf:"lan,omitempty"`
+
+	// Reference to a Lan in compute to populate lan.
+	// +kubebuilder:validation:Optional
+	LanRef *v1.Reference `json:"lanRef,omitempty" tf:"-"`
+
+	// Selector for a Lan in compute to populate lan.
+	// +kubebuilder:validation:Optional
+	LanSelector *v1.Selector `json:"lanSelector,omitempty" tf:"-"`
 
 	// Name for this replica NIC.
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
@@ -340,8 +349,17 @@ type NicParameters struct {
 	FlowLog []FlowLogParameters `json:"flowLog,omitempty" tf:"flow_log,omitempty"`
 
 	// Lan ID for this replica Nic.
+	// +crossplane:generate:reference:type=github.com/ionos-cloud/provider-upjet-ionoscloud/apis/compute/v1alpha1.Lan
 	// +kubebuilder:validation:Optional
-	Lan *float64 `json:"lan" tf:"lan,omitempty"`
+	Lan *float64 `json:"lan,omitempty" tf:"lan,omitempty"`
+
+	// Reference to a Lan in compute to populate lan.
+	// +kubebuilder:validation:Optional
+	LanRef *v1.Reference `json:"lanRef,omitempty" tf:"-"`
+
+	// Selector for a Lan in compute to populate lan.
+	// +kubebuilder:validation:Optional
+	LanSelector *v1.Selector `json:"lanSelector,omitempty" tf:"-"`
 
 	// Name for this replica NIC.
 	// +kubebuilder:validation:Optional
@@ -604,7 +622,16 @@ type TargetGroupInitParameters struct {
 	Port *float64 `json:"port,omitempty" tf:"port,omitempty"`
 
 	// The ID of the target group.
+	// +crossplane:generate:reference:type=github.com/ionos-cloud/provider-upjet-ionoscloud/apis/alb/v1alpha1.TargetGroup
 	TargetGroupID *string `json:"targetGroupId,omitempty" tf:"target_group_id,omitempty"`
+
+	// Reference to a TargetGroup in alb to populate targetGroupId.
+	// +kubebuilder:validation:Optional
+	TargetGroupIDRef *v1.Reference `json:"targetGroupIdRef,omitempty" tf:"-"`
+
+	// Selector for a TargetGroup in alb to populate targetGroupId.
+	// +kubebuilder:validation:Optional
+	TargetGroupIDSelector *v1.Selector `json:"targetGroupIdSelector,omitempty" tf:"-"`
 
 	// The weight for the target group.
 	Weight *float64 `json:"weight,omitempty" tf:"weight,omitempty"`
@@ -629,8 +656,17 @@ type TargetGroupParameters struct {
 	Port *float64 `json:"port" tf:"port,omitempty"`
 
 	// The ID of the target group.
+	// +crossplane:generate:reference:type=github.com/ionos-cloud/provider-upjet-ionoscloud/apis/alb/v1alpha1.TargetGroup
 	// +kubebuilder:validation:Optional
-	TargetGroupID *string `json:"targetGroupId" tf:"target_group_id,omitempty"`
+	TargetGroupID *string `json:"targetGroupId,omitempty" tf:"target_group_id,omitempty"`
+
+	// Reference to a TargetGroup in alb to populate targetGroupId.
+	// +kubebuilder:validation:Optional
+	TargetGroupIDRef *v1.Reference `json:"targetGroupIdRef,omitempty" tf:"-"`
+
+	// Selector for a TargetGroup in alb to populate targetGroupId.
+	// +kubebuilder:validation:Optional
+	TargetGroupIDSelector *v1.Selector `json:"targetGroupIdSelector,omitempty" tf:"-"`
 
 	// The weight for the target group.
 	// +kubebuilder:validation:Optional

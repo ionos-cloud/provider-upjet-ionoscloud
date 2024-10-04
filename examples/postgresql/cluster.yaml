@@ -9,7 +9,7 @@ metadata:
 spec:
   forProvider:
     description: datacenter description
-    location: es/vit
+    location: de/fra
     name: Datacenter Example
     secAuthProtection: false
 ---

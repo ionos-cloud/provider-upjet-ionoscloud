@@ -12,11 +12,11 @@ func Configure(p *config.Provider) {
 		r.References["datacenter_id"] = config.Reference{
 			TerraformName: "ionoscloud_datacenter",
 		}
-		r.References["nic[0].target_group"] = config.Reference{
+		r.References["replica_configuration.nic.target_group.target_group_id"] = config.Reference{
 			TerraformName: "ionoscloud_target_group",
 		}
 
-		r.References["nic[*].lan"] = config.Reference{
+		r.References["replica_configuration.nic.lan"] = config.Reference{
 			TerraformName: "ionoscloud_lan",
 		}
 	})

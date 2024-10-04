@@ -2,6 +2,7 @@ package alb
 
 import (
 	"github.com/crossplane/upjet/pkg/config"
+	"github.com/ionos-cloud/provider-upjet-ionoscloud/config/common"
 )
 
 // Configure configures individual resources by adding custom ResourceConfigurators.
@@ -32,5 +33,6 @@ func Configure(p *config.Provider) {
 	p.AddResourceConfigurator("ionoscloud_target_group", func(r *config.Resource) {
 		r.Kind = "TargetGroup"
 		r.ShortGroup = "alb"
+		r.TerraformCustomDiff = common.IgnoreEmptyDiffForComputed([]string{"http_health_check.#", "health_check.#", "target.#"})
 	})
 }
