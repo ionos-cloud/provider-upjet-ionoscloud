@@ -28,10 +28,12 @@ func Configure(p *config.Provider) {
 
 		r.References["source_ip"] = config.Reference{
 			TerraformName: "ionoscloud_ipblock",
+			Extractor:     "github.com/ionos-cloud/provider-upjet-ionoscloud/config/common.FirstIPBlockIP()",
 		}
 
 		r.References["target_ip"] = config.Reference{
 			TerraformName: "ionoscloud_ipblock",
+			Extractor:     "github.com/ionos-cloud/provider-upjet-ionoscloud/config/common.FirstIPBlockIP()",
 		}
 	})
 

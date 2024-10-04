@@ -92,7 +92,7 @@ spec:
         testing.upbound.io/example-name: example
     imageName: Ubuntu-20.04
     imagePasswordSecretRef:
-      key: attribute.result
+      key: password
       name: example-password
       namespace: upbound-system
     name: Server Example
@@ -108,4 +108,13 @@ spec:
     volume:
       diskType: SSD
       name: system
-      size: 14
+      size: 10
+---
+
+apiVersion: v1
+kind: Secret
+metadata:
+  name: example-password
+  namespace: upbound-system
+stringData:
+  password: "Upboundtest1"

@@ -71,6 +71,7 @@ type FirewallInitParameters_2 struct {
 
 	// [string] Only traffic originating from the respective IPv4 address is allowed. Value null allows all source IPs.
 	// +crossplane:generate:reference:type=github.com/ionos-cloud/provider-upjet-ionoscloud/apis/compute/v1alpha1.Ipblock
+	// +crossplane:generate:reference:extractor=github.com/ionos-cloud/provider-upjet-ionoscloud/config/common.FirstIPBlockIP()
 	SourceIP *string `json:"sourceIp,omitempty" tf:"source_ip,omitempty"`
 
 	// Reference to a Ipblock in compute to populate sourceIp.
@@ -86,6 +87,7 @@ type FirewallInitParameters_2 struct {
 
 	// [string] In case the target NIC has multiple IP addresses, only traffic directed to the respective IP address of the NIC is allowed. Value null allows all target IPs.
 	// +crossplane:generate:reference:type=github.com/ionos-cloud/provider-upjet-ionoscloud/apis/compute/v1alpha1.Ipblock
+	// +crossplane:generate:reference:extractor=github.com/ionos-cloud/provider-upjet-ionoscloud/config/common.FirstIPBlockIP()
 	TargetIP *string `json:"targetIp,omitempty" tf:"target_ip,omitempty"`
 
 	// Reference to a Ipblock in compute to populate targetIp.
@@ -211,6 +213,7 @@ type FirewallParameters_2 struct {
 
 	// [string] Only traffic originating from the respective IPv4 address is allowed. Value null allows all source IPs.
 	// +crossplane:generate:reference:type=github.com/ionos-cloud/provider-upjet-ionoscloud/apis/compute/v1alpha1.Ipblock
+	// +crossplane:generate:reference:extractor=github.com/ionos-cloud/provider-upjet-ionoscloud/config/common.FirstIPBlockIP()
 	// +kubebuilder:validation:Optional
 	SourceIP *string `json:"sourceIp,omitempty" tf:"source_ip,omitempty"`
 
@@ -228,6 +231,7 @@ type FirewallParameters_2 struct {
 
 	// [string] In case the target NIC has multiple IP addresses, only traffic directed to the respective IP address of the NIC is allowed. Value null allows all target IPs.
 	// +crossplane:generate:reference:type=github.com/ionos-cloud/provider-upjet-ionoscloud/apis/compute/v1alpha1.Ipblock
+	// +crossplane:generate:reference:extractor=github.com/ionos-cloud/provider-upjet-ionoscloud/config/common.FirstIPBlockIP()
 	// +kubebuilder:validation:Optional
 	TargetIP *string `json:"targetIp,omitempty" tf:"target_ip,omitempty"`
 

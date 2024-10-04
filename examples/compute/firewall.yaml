@@ -11,8 +11,8 @@ spec:
     datacenterIdSelector:
       matchLabels:
         testing.upbound.io/example-name: example
-    icmpCode: 8
-    icmpType: 1
+    icmpCode: "8"
+    icmpType: "1"
     name: Firewall Example
     nicIdSelector:
       matchLabels:
@@ -21,13 +21,7 @@ spec:
     serverIdSelector:
       matchLabels:
         testing.upbound.io/example-name: example
-    sourceIpSelector:
-      matchLabels:
-        testing.upbound.io/example-name: example
     sourceMac: 00:0a:95:9d:68:16
-    targetIpSelector:
-      matchLabels:
-        testing.upbound.io/example-name: example
     type: INGRESS
 
 ---
@@ -46,22 +40,6 @@ spec:
     location: us/las
     name: Datacenter Example
     secAuthProtection: false
-
----
-
-apiVersion: compute.ionoscloud.io/v1alpha1
-kind: Ipblock
-metadata:
-  annotations:
-    meta.upbound.io/example-id: compute/v1alpha1/firewall
-  labels:
-    testing.upbound.io/example-name: example
-  name: example
-spec:
-  forProvider:
-    location: us/las
-    name: IP Block Example
-    size: 2
 
 ---
 
@@ -87,6 +65,23 @@ spec:
     serverIdSelector:
       matchLabels:
         testing.upbound.io/example-name: example
+---
+
+apiVersion: compute.ionoscloud.io/v1alpha1
+kind: Lan
+metadata:
+  annotations:
+    meta.upbound.io/example-id: compute/v1alpha1/firewall
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    datacenterIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    name: Lan Example
+    public: true
 
 ---
 
@@ -108,7 +103,7 @@ spec:
         testing.upbound.io/example-name: example
     imageName: Ubuntu-20.04
     imagePasswordSecretRef:
-      key: attribute.result
+      key: password
       name: example-password
       namespace: upbound-system
     name: Server Example
@@ -127,7 +122,7 @@ spec:
 apiVersion: v1
 kind: Secret
 metadata:
-  name: pwsecret
+  name: example-password
   namespace: upbound-system
 stringData:
   password: "Upboundtest1"
