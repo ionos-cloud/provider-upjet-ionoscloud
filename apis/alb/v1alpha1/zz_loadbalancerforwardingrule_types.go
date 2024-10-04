@@ -15,58 +15,73 @@ import (
 
 type ConditionsInitParameters struct {
 
+	// [string] Matching rule for the HTTP rule condition attribute; mandatory for HEADER, PATH, QUERY, METHOD, HOST, and COOKIE types; must be null when type is SOURCE_IP.
 	// Matching rule for the HTTP rule condition attribute; mandatory for HEADER, PATH, QUERY, METHOD, HOST, and COOKIE types; must be null when type is SOURCE_IP.
 	Condition *string `json:"condition,omitempty" tf:"condition,omitempty"`
 
+	// [string] Must be null when type is PATH, METHOD, HOST, or SOURCE_IP. Key can only be set when type is COOKIES, HEADER, or QUERY.
 	// Must be null when type is PATH, METHOD, HOST, or SOURCE_IP. Key can only be set when type is COOKIES, HEADER, or QUERY.
 	Key *string `json:"key,omitempty" tf:"key,omitempty"`
 
+	// [bool] Specifies whether the condition is negated or not; the default is False.
 	// Specifies whether the condition is negated or not; the default is False.
 	Negate *bool `json:"negate,omitempty" tf:"negate,omitempty"`
 
+	// [string] Type of the Http Rule.
 	// Type of the HTTP rule condition.
 	Type *string `json:"type,omitempty" tf:"type,omitempty"`
 
+	// [string] Mandatory for conditions CONTAINS, EQUALS, MATCHES, STARTS_WITH, ENDS_WITH; must be null when condition is EXISTS; should be a valid CIDR if provided and if type is SOURCE_IP.
 	// Mandatory for conditions CONTAINS, EQUALS, MATCHES, STARTS_WITH, ENDS_WITH; must be null when condition is EXISTS; should be a valid CIDR if provided and if type is SOURCE_IP.
 	Value *string `json:"value,omitempty" tf:"value,omitempty"`
 }
 
 type ConditionsObservation struct {
 
+	// [string] Matching rule for the HTTP rule condition attribute; mandatory for HEADER, PATH, QUERY, METHOD, HOST, and COOKIE types; must be null when type is SOURCE_IP.
 	// Matching rule for the HTTP rule condition attribute; mandatory for HEADER, PATH, QUERY, METHOD, HOST, and COOKIE types; must be null when type is SOURCE_IP.
 	Condition *string `json:"condition,omitempty" tf:"condition,omitempty"`
 
+	// [string] Must be null when type is PATH, METHOD, HOST, or SOURCE_IP. Key can only be set when type is COOKIES, HEADER, or QUERY.
 	// Must be null when type is PATH, METHOD, HOST, or SOURCE_IP. Key can only be set when type is COOKIES, HEADER, or QUERY.
 	Key *string `json:"key,omitempty" tf:"key,omitempty"`
 
+	// [bool] Specifies whether the condition is negated or not; the default is False.
 	// Specifies whether the condition is negated or not; the default is False.
 	Negate *bool `json:"negate,omitempty" tf:"negate,omitempty"`
 
+	// [string] Type of the Http Rule.
 	// Type of the HTTP rule condition.
 	Type *string `json:"type,omitempty" tf:"type,omitempty"`
 
+	// [string] Mandatory for conditions CONTAINS, EQUALS, MATCHES, STARTS_WITH, ENDS_WITH; must be null when condition is EXISTS; should be a valid CIDR if provided and if type is SOURCE_IP.
 	// Mandatory for conditions CONTAINS, EQUALS, MATCHES, STARTS_WITH, ENDS_WITH; must be null when condition is EXISTS; should be a valid CIDR if provided and if type is SOURCE_IP.
 	Value *string `json:"value,omitempty" tf:"value,omitempty"`
 }
 
 type ConditionsParameters struct {
 
+	// [string] Matching rule for the HTTP rule condition attribute; mandatory for HEADER, PATH, QUERY, METHOD, HOST, and COOKIE types; must be null when type is SOURCE_IP.
 	// Matching rule for the HTTP rule condition attribute; mandatory for HEADER, PATH, QUERY, METHOD, HOST, and COOKIE types; must be null when type is SOURCE_IP.
 	// +kubebuilder:validation:Optional
 	Condition *string `json:"condition,omitempty" tf:"condition,omitempty"`
 
+	// [string] Must be null when type is PATH, METHOD, HOST, or SOURCE_IP. Key can only be set when type is COOKIES, HEADER, or QUERY.
 	// Must be null when type is PATH, METHOD, HOST, or SOURCE_IP. Key can only be set when type is COOKIES, HEADER, or QUERY.
 	// +kubebuilder:validation:Optional
 	Key *string `json:"key,omitempty" tf:"key,omitempty"`
 
+	// [bool] Specifies whether the condition is negated or not; the default is False.
 	// Specifies whether the condition is negated or not; the default is False.
 	// +kubebuilder:validation:Optional
 	Negate *bool `json:"negate,omitempty" tf:"negate,omitempty"`
 
+	// [string] Type of the Http Rule.
 	// Type of the HTTP rule condition.
 	// +kubebuilder:validation:Optional
 	Type *string `json:"type" tf:"type,omitempty"`
 
+	// [string] Mandatory for conditions CONTAINS, EQUALS, MATCHES, STARTS_WITH, ENDS_WITH; must be null when condition is EXISTS; should be a valid CIDR if provided and if type is SOURCE_IP.
 	// Mandatory for conditions CONTAINS, EQUALS, MATCHES, STARTS_WITH, ENDS_WITH; must be null when condition is EXISTS; should be a valid CIDR if provided and if type is SOURCE_IP.
 	// +kubebuilder:validation:Optional
 	Value *string `json:"value,omitempty" tf:"value,omitempty"`
@@ -74,98 +89,125 @@ type ConditionsParameters struct {
 
 type HTTPRulesInitParameters struct {
 
+	// [list] - An array of items in the collection.The action is only performed if each and every condition is met; if no conditions are set, the rule will always be performed.
 	// An array of items in the collection.The action is only performed if each and every condition is met; if no conditions are set, the rule will always be performed.
 	Conditions []ConditionsInitParameters `json:"conditions,omitempty" tf:"conditions,omitempty"`
 
+	// [string] Valid only for STATIC actions.
 	// Valid only for STATIC actions.
 	ContentType *string `json:"contentType,omitempty" tf:"content_type,omitempty"`
 
+	// [bool] Default is false; valid only for REDIRECT actions.
 	// Default is false; valid only for REDIRECT actions.
 	DropQuery *bool `json:"dropQuery,omitempty" tf:"drop_query,omitempty"`
 
+	// [string] The location for redirecting; mandatory and valid only for REDIRECT actions.
 	// The location for redirecting; mandatory and valid only for REDIRECT actions.
 	Location *string `json:"location,omitempty" tf:"location,omitempty"`
 
+	// [string] The name of the Application Load Balancer forwarding rule.
 	// The unique name of the Application Load Balancer HTTP rule.
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
+	// [string] The response message of the request; mandatory for STATIC action.
 	// The response message of the request; mandatory for STATIC actions.
 	ResponseMessage *string `json:"responseMessage,omitempty" tf:"response_message,omitempty"`
 
+	// [int] Valid only for REDIRECT and STATIC actions. For REDIRECT actions, default is 301 and possible values are 301, 302, 303, 307, and 308. For STATIC actions, default is 503 and valid range is 200 to 599.
 	// Valid only for REDIRECT and STATIC actions. For REDIRECT actions, default is 301 and possible values are 301, 302, 303, 307, and 308. For STATIC actions, default is 503 and valid range is 200 to 599.
 	StatusCode *float64 `json:"statusCode,omitempty" tf:"status_code,omitempty"`
 
+	// [string] The UUID of the target group; mandatory for FORWARD action.
 	// The ID of the target group; mandatory and only valid for FORWARD actions.
 	TargetGroup *string `json:"targetGroup,omitempty" tf:"target_group,omitempty"`
 
+	// [string] Type of the Http Rule.
 	// Type of the HTTP rule.
 	Type *string `json:"type,omitempty" tf:"type,omitempty"`
 }
 
 type HTTPRulesObservation struct {
 
+	// [list] - An array of items in the collection.The action is only performed if each and every condition is met; if no conditions are set, the rule will always be performed.
 	// An array of items in the collection.The action is only performed if each and every condition is met; if no conditions are set, the rule will always be performed.
 	Conditions []ConditionsObservation `json:"conditions,omitempty" tf:"conditions,omitempty"`
 
+	// [string] Valid only for STATIC actions.
 	// Valid only for STATIC actions.
 	ContentType *string `json:"contentType,omitempty" tf:"content_type,omitempty"`
 
+	// [bool] Default is false; valid only for REDIRECT actions.
 	// Default is false; valid only for REDIRECT actions.
 	DropQuery *bool `json:"dropQuery,omitempty" tf:"drop_query,omitempty"`
 
+	// [string] The location for redirecting; mandatory and valid only for REDIRECT actions.
 	// The location for redirecting; mandatory and valid only for REDIRECT actions.
 	Location *string `json:"location,omitempty" tf:"location,omitempty"`
 
+	// [string] The name of the Application Load Balancer forwarding rule.
 	// The unique name of the Application Load Balancer HTTP rule.
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
+	// [string] The response message of the request; mandatory for STATIC action.
 	// The response message of the request; mandatory for STATIC actions.
 	ResponseMessage *string `json:"responseMessage,omitempty" tf:"response_message,omitempty"`
 
+	// [int] Valid only for REDIRECT and STATIC actions. For REDIRECT actions, default is 301 and possible values are 301, 302, 303, 307, and 308. For STATIC actions, default is 503 and valid range is 200 to 599.
 	// Valid only for REDIRECT and STATIC actions. For REDIRECT actions, default is 301 and possible values are 301, 302, 303, 307, and 308. For STATIC actions, default is 503 and valid range is 200 to 599.
 	StatusCode *float64 `json:"statusCode,omitempty" tf:"status_code,omitempty"`
 
+	// [string] The UUID of the target group; mandatory for FORWARD action.
 	// The ID of the target group; mandatory and only valid for FORWARD actions.
 	TargetGroup *string `json:"targetGroup,omitempty" tf:"target_group,omitempty"`
 
+	// [string] Type of the Http Rule.
 	// Type of the HTTP rule.
 	Type *string `json:"type,omitempty" tf:"type,omitempty"`
 }
 
 type HTTPRulesParameters struct {
 
+	// [list] - An array of items in the collection.The action is only performed if each and every condition is met; if no conditions are set, the rule will always be performed.
 	// An array of items in the collection.The action is only performed if each and every condition is met; if no conditions are set, the rule will always be performed.
 	// +kubebuilder:validation:Optional
 	Conditions []ConditionsParameters `json:"conditions,omitempty" tf:"conditions,omitempty"`
 
+	// [string] Valid only for STATIC actions.
 	// Valid only for STATIC actions.
 	// +kubebuilder:validation:Optional
 	ContentType *string `json:"contentType,omitempty" tf:"content_type,omitempty"`
 
+	// [bool] Default is false; valid only for REDIRECT actions.
 	// Default is false; valid only for REDIRECT actions.
 	// +kubebuilder:validation:Optional
 	DropQuery *bool `json:"dropQuery,omitempty" tf:"drop_query,omitempty"`
 
+	// [string] The location for redirecting; mandatory and valid only for REDIRECT actions.
 	// The location for redirecting; mandatory and valid only for REDIRECT actions.
 	// +kubebuilder:validation:Optional
 	Location *string `json:"location,omitempty" tf:"location,omitempty"`
 
+	// [string] The name of the Application Load Balancer forwarding rule.
 	// The unique name of the Application Load Balancer HTTP rule.
 	// +kubebuilder:validation:Optional
 	Name *string `json:"name" tf:"name,omitempty"`
 
+	// [string] The response message of the request; mandatory for STATIC action.
 	// The response message of the request; mandatory for STATIC actions.
 	// +kubebuilder:validation:Optional
 	ResponseMessage *string `json:"responseMessage,omitempty" tf:"response_message,omitempty"`
 
+	// [int] Valid only for REDIRECT and STATIC actions. For REDIRECT actions, default is 301 and possible values are 301, 302, 303, 307, and 308. For STATIC actions, default is 503 and valid range is 200 to 599.
 	// Valid only for REDIRECT and STATIC actions. For REDIRECT actions, default is 301 and possible values are 301, 302, 303, 307, and 308. For STATIC actions, default is 503 and valid range is 200 to 599.
 	// +kubebuilder:validation:Optional
 	StatusCode *float64 `json:"statusCode,omitempty" tf:"status_code,omitempty"`
 
+	// [string] The UUID of the target group; mandatory for FORWARD action.
 	// The ID of the target group; mandatory and only valid for FORWARD actions.
 	// +kubebuilder:validation:Optional
 	TargetGroup *string `json:"targetGroup,omitempty" tf:"target_group,omitempty"`
 
+	// [string] Type of the Http Rule.
 	// Type of the HTTP rule.
 	// +kubebuilder:validation:Optional
 	Type *string `json:"type" tf:"type,omitempty"`
@@ -173,6 +215,7 @@ type HTTPRulesParameters struct {
 
 type LoadbalancerForwardingruleInitParameters struct {
 
+	// [string] The ID of Application Load Balancer.
 	// +crossplane:generate:reference:type=github.com/ionos-cloud/provider-upjet-ionoscloud/apis/alb/v1alpha1.Loadbalancer
 	ApplicationLoadbalancerID *string `json:"applicationLoadbalancerId,omitempty" tf:"application_loadbalancer_id,omitempty"`
 
@@ -184,9 +227,11 @@ type LoadbalancerForwardingruleInitParameters struct {
 	// +kubebuilder:validation:Optional
 	ApplicationLoadbalancerIDSelector *v1.Selector `json:"applicationLoadbalancerIdSelector,omitempty" tf:"-"`
 
+	// [int] The maximum time in milliseconds to wait for the client to acknowledge or send data; default is 50,000 (50 seconds).
 	// The maximum time in milliseconds to wait for the client to acknowledge or send data; default is 50,000 (50 seconds).
 	ClientTimeout *float64 `json:"clientTimeout,omitempty" tf:"client_timeout,omitempty"`
 
+	// [string] The ID of a Virtual Data Center.
 	// +crossplane:generate:reference:type=github.com/ionos-cloud/provider-upjet-ionoscloud/apis/compute/v1alpha1.Datacenter
 	DatacenterID *string `json:"datacenterId,omitempty" tf:"datacenter_id,omitempty"`
 
@@ -198,51 +243,67 @@ type LoadbalancerForwardingruleInitParameters struct {
 	// +kubebuilder:validation:Optional
 	DatacenterIDSelector *v1.Selector `json:"datacenterIdSelector,omitempty" tf:"-"`
 
+	// [list] Array of items in that collection
 	// Array of items in that collection
 	HTTPRules []HTTPRulesInitParameters `json:"httpRules,omitempty" tf:"http_rules,omitempty"`
 
+	// [string] Listening (inbound) IP.
 	// Listening (inbound) IP.
 	ListenerIP *string `json:"listenerIp,omitempty" tf:"listener_ip,omitempty"`
 
+	// [int] Listening (inbound) port number; valid range is 1 to 65535.
 	// Listening (inbound) port number; valid range is 1 to 65535.
 	ListenerPort *float64 `json:"listenerPort,omitempty" tf:"listener_port,omitempty"`
 
+	// [string] The name of the Application Load Balancer forwarding rule.
 	// The name of the Application Load Balancer forwarding rule.
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
+	// [string] Balancing protocol.
 	// Balancing protocol.
 	Protocol *string `json:"protocol,omitempty" tf:"protocol,omitempty"`
 
+	// [list] Array of certificate ids. You can create certificates with the certificate resource.
 	// Array of items in the collection.
 	// +listType=set
 	ServerCertificates []*string `json:"serverCertificates,omitempty" tf:"server_certificates,omitempty"`
 }
 
 type LoadbalancerForwardingruleObservation struct {
+
+	// [string] The ID of Application Load Balancer.
 	ApplicationLoadbalancerID *string `json:"applicationLoadbalancerId,omitempty" tf:"application_loadbalancer_id,omitempty"`
 
+	// [int] The maximum time in milliseconds to wait for the client to acknowledge or send data; default is 50,000 (50 seconds).
 	// The maximum time in milliseconds to wait for the client to acknowledge or send data; default is 50,000 (50 seconds).
 	ClientTimeout *float64 `json:"clientTimeout,omitempty" tf:"client_timeout,omitempty"`
 
+	// [string] The ID of a Virtual Data Center.
 	DatacenterID *string `json:"datacenterId,omitempty" tf:"datacenter_id,omitempty"`
 
+	// [list] Array of items in that collection
 	// Array of items in that collection
 	HTTPRules []HTTPRulesObservation `json:"httpRules,omitempty" tf:"http_rules,omitempty"`
 
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
+	// [string] Listening (inbound) IP.
 	// Listening (inbound) IP.
 	ListenerIP *string `json:"listenerIp,omitempty" tf:"listener_ip,omitempty"`
 
+	// [int] Listening (inbound) port number; valid range is 1 to 65535.
 	// Listening (inbound) port number; valid range is 1 to 65535.
 	ListenerPort *float64 `json:"listenerPort,omitempty" tf:"listener_port,omitempty"`
 
+	// [string] The name of the Application Load Balancer forwarding rule.
 	// The name of the Application Load Balancer forwarding rule.
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
+	// [string] Balancing protocol.
 	// Balancing protocol.
 	Protocol *string `json:"protocol,omitempty" tf:"protocol,omitempty"`
 
+	// [list] Array of certificate ids. You can create certificates with the certificate resource.
 	// Array of items in the collection.
 	// +listType=set
 	ServerCertificates []*string `json:"serverCertificates,omitempty" tf:"server_certificates,omitempty"`
@@ -250,6 +311,7 @@ type LoadbalancerForwardingruleObservation struct {
 
 type LoadbalancerForwardingruleParameters struct {
 
+	// [string] The ID of Application Load Balancer.
 	// +crossplane:generate:reference:type=github.com/ionos-cloud/provider-upjet-ionoscloud/apis/alb/v1alpha1.Loadbalancer
 	// +kubebuilder:validation:Optional
 	ApplicationLoadbalancerID *string `json:"applicationLoadbalancerId,omitempty" tf:"application_loadbalancer_id,omitempty"`
@@ -262,10 +324,12 @@ type LoadbalancerForwardingruleParameters struct {
 	// +kubebuilder:validation:Optional
 	ApplicationLoadbalancerIDSelector *v1.Selector `json:"applicationLoadbalancerIdSelector,omitempty" tf:"-"`
 
+	// [int] The maximum time in milliseconds to wait for the client to acknowledge or send data; default is 50,000 (50 seconds).
 	// The maximum time in milliseconds to wait for the client to acknowledge or send data; default is 50,000 (50 seconds).
 	// +kubebuilder:validation:Optional
 	ClientTimeout *float64 `json:"clientTimeout,omitempty" tf:"client_timeout,omitempty"`
 
+	// [string] The ID of a Virtual Data Center.
 	// +crossplane:generate:reference:type=github.com/ionos-cloud/provider-upjet-ionoscloud/apis/compute/v1alpha1.Datacenter
 	// +kubebuilder:validation:Optional
 	DatacenterID *string `json:"datacenterId,omitempty" tf:"datacenter_id,omitempty"`
@@ -278,26 +342,32 @@ type LoadbalancerForwardingruleParameters struct {
 	// +kubebuilder:validation:Optional
 	DatacenterIDSelector *v1.Selector `json:"datacenterIdSelector,omitempty" tf:"-"`
 
+	// [list] Array of items in that collection
 	// Array of items in that collection
 	// +kubebuilder:validation:Optional
 	HTTPRules []HTTPRulesParameters `json:"httpRules,omitempty" tf:"http_rules,omitempty"`
 
+	// [string] Listening (inbound) IP.
 	// Listening (inbound) IP.
 	// +kubebuilder:validation:Optional
 	ListenerIP *string `json:"listenerIp,omitempty" tf:"listener_ip,omitempty"`
 
+	// [int] Listening (inbound) port number; valid range is 1 to 65535.
 	// Listening (inbound) port number; valid range is 1 to 65535.
 	// +kubebuilder:validation:Optional
 	ListenerPort *float64 `json:"listenerPort,omitempty" tf:"listener_port,omitempty"`
 
+	// [string] The name of the Application Load Balancer forwarding rule.
 	// The name of the Application Load Balancer forwarding rule.
 	// +kubebuilder:validation:Optional
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
+	// [string] Balancing protocol.
 	// Balancing protocol.
 	// +kubebuilder:validation:Optional
 	Protocol *string `json:"protocol,omitempty" tf:"protocol,omitempty"`
 
+	// [list] Array of certificate ids. You can create certificates with the certificate resource.
 	// Array of items in the collection.
 	// +kubebuilder:validation:Optional
 	// +listType=set
@@ -331,7 +401,7 @@ type LoadbalancerForwardingruleStatus struct {
 // +kubebuilder:subresource:status
 // +kubebuilder:storageversion
 
-// LoadbalancerForwardingrule is the Schema for the LoadbalancerForwardingrules API. <no value>
+// LoadbalancerForwardingrule is the Schema for the LoadbalancerForwardingrules API. Creates and manages IonosCloud Application Load Balancer Forwarding Rule.
 // +kubebuilder:printcolumn:name="SYNCED",type="string",JSONPath=".status.conditions[?(@.type=='Synced')].status"
 // +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"
 // +kubebuilder:printcolumn:name="EXTERNAL-NAME",type="string",JSONPath=".metadata.annotations.crossplane\\.io/external-name"
