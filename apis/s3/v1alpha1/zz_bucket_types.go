@@ -15,7 +15,7 @@ import (
 
 type BucketInitParameters struct {
 
-	// [bool] If true, the bucket and the contents of the bucket will be destroyed. Default is false.
+	// [bool] Default is false. This is particularly useful when dealing with buckets that contain objects, as it allows for automatic cleanup without requiring the manual deletion of objects beforehand.There is a significant risk of accidental data loss when using this attribute, as it irreversibly deletes all contents of the bucket. It's crucial to ensure that the bucket does not contain critical data before using force_destroy.
 	// Whether all objects should be deleted from the bucket so that the bucket can be destroyed
 	ForceDestroy *bool `json:"forceDestroy,omitempty" tf:"force_destroy,omitempty"`
 
@@ -35,7 +35,7 @@ type BucketInitParameters struct {
 
 type BucketObservation struct {
 
-	// [bool] If true, the bucket and the contents of the bucket will be destroyed. Default is false.
+	// [bool] Default is false. This is particularly useful when dealing with buckets that contain objects, as it allows for automatic cleanup without requiring the manual deletion of objects beforehand.There is a significant risk of accidental data loss when using this attribute, as it irreversibly deletes all contents of the bucket. It's crucial to ensure that the bucket does not contain critical data before using force_destroy.
 	// Whether all objects should be deleted from the bucket so that the bucket can be destroyed
 	ForceDestroy *bool `json:"forceDestroy,omitempty" tf:"force_destroy,omitempty"`
 
@@ -58,7 +58,7 @@ type BucketObservation struct {
 
 type BucketParameters struct {
 
-	// [bool] If true, the bucket and the contents of the bucket will be destroyed. Default is false.
+	// [bool] Default is false. This is particularly useful when dealing with buckets that contain objects, as it allows for automatic cleanup without requiring the manual deletion of objects beforehand.There is a significant risk of accidental data loss when using this attribute, as it irreversibly deletes all contents of the bucket. It's crucial to ensure that the bucket does not contain critical data before using force_destroy.
 	// Whether all objects should be deleted from the bucket so that the bucket can be destroyed
 	// +kubebuilder:validation:Optional
 	ForceDestroy *bool `json:"forceDestroy,omitempty" tf:"force_destroy,omitempty"`
