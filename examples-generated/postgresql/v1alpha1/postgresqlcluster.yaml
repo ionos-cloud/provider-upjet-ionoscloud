@@ -8,6 +8,9 @@ metadata:
   name: example
 spec:
   forProvider:
+    connectionPooler:
+    - enabled: true
+      poolMode: session
     connections:
     - cidr: 192.168.100.1/24
       datacenterIdSelector:

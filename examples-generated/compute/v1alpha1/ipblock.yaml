@@ -10,4 +10,4 @@ spec:
   forProvider:
     location: us/las
     name: IP Block Example
-    size: 3
+    size: 1

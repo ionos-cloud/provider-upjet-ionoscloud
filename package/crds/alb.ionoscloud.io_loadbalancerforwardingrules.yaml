@@ -35,7 +35,8 @@ spec:
     schema:
       openAPIV3Schema:
         description: LoadbalancerForwardingrule is the Schema for the LoadbalancerForwardingrules
-          API. <no value>
+          API. Creates and manages IonosCloud Application Load Balancer Forwarding
+          Rule.
         properties:
           apiVersion:
             description: |-
@@ -75,6 +76,7 @@ spec:
               forProvider:
                 properties:
                   applicationLoadbalancerId:
+                    description: '[string] The ID of Application Load Balancer.'
                     type: string
                   applicationLoadbalancerIdRef:
                     description: Reference to a Loadbalancer in alb to populate applicationLoadbalancerId.
@@ -151,10 +153,12 @@ spec:
                         type: object
                     type: object
                   clientTimeout:
-                    description: The maximum time in milliseconds to wait for the
-                      client to acknowledge or send data; default is 50,000 (50 seconds).
+                    description: |-
+                      [int] The maximum time in milliseconds to wait for the client to acknowledge or send data; default is 50,000 (50 seconds).
+                      The maximum time in milliseconds to wait for the client to acknowledge or send data; default is 50,000 (50 seconds).
                     type: number
                   datacenterId:
+                    description: '[string] The ID of a Virtual Data Center.'
                     type: string
                   datacenterIdRef:
                     description: Reference to a Datacenter in compute to populate
@@ -233,90 +237,110 @@ spec:
                         type: object
                     type: object
                   httpRules:
-                    description: Array of items in that collection
+                    description: |-
+                      [list] Array of items in that collection
+                      Array of items in that collection
                     items:
                       properties:
                         conditions:
-                          description: An array of items in the collection.The action
-                            is only performed if each and every condition is met;
-                            if no conditions are set, the rule will always be performed.
+                          description: |-
+                            [list] - An array of items in the collection.The action is only performed if each and every condition is met; if no conditions are set, the rule will always be performed.
+                            An array of items in the collection.The action is only performed if each and every condition is met; if no conditions are set, the rule will always be performed.
                           items:
                             properties:
                               condition:
-                                description: Matching rule for the HTTP rule condition
-                                  attribute; mandatory for HEADER, PATH, QUERY, METHOD,
-                                  HOST, and COOKIE types; must be null when type is
-                                  SOURCE_IP.
+                                description: |-
+                                  [string] Matching rule for the HTTP rule condition attribute; mandatory for HEADER, PATH, QUERY, METHOD, HOST, and COOKIE types; must be null when type is SOURCE_IP.
+                                  Matching rule for the HTTP rule condition attribute; mandatory for HEADER, PATH, QUERY, METHOD, HOST, and COOKIE types; must be null when type is SOURCE_IP.
                                 type: string
                               key:
-                                description: Must be null when type is PATH, METHOD,
-                                  HOST, or SOURCE_IP. Key can only be set when type
-                                  is COOKIES, HEADER, or QUERY.
+                                description: |-
+                                  [string] Must be null when type is PATH, METHOD, HOST, or SOURCE_IP. Key can only be set when type is COOKIES, HEADER, or QUERY.
+                                  Must be null when type is PATH, METHOD, HOST, or SOURCE_IP. Key can only be set when type is COOKIES, HEADER, or QUERY.
                                 type: string
                               negate:
-                                description: Specifies whether the condition is negated
-                                  or not; the default is False.
+                                description: |-
+                                  [bool] Specifies whether the condition is negated or not; the default is False.
+                                  Specifies whether the condition is negated or not; the default is False.
                                 type: boolean
                               type:
-                                description: Type of the HTTP rule condition.
+                                description: |-
+                                  [string] Type of the Http Rule.
+                                  Type of the HTTP rule condition.
                                 type: string
                               value:
-                                description: Mandatory for conditions CONTAINS, EQUALS,
-                                  MATCHES, STARTS_WITH, ENDS_WITH; must be null when
-                                  condition is EXISTS; should be a valid CIDR if provided
-                                  and if type is SOURCE_IP.
+                                description: |-
+                                  [string] Mandatory for conditions CONTAINS, EQUALS, MATCHES, STARTS_WITH, ENDS_WITH; must be null when condition is EXISTS; should be a valid CIDR if provided and if type is SOURCE_IP.
+                                  Mandatory for conditions CONTAINS, EQUALS, MATCHES, STARTS_WITH, ENDS_WITH; must be null when condition is EXISTS; should be a valid CIDR if provided and if type is SOURCE_IP.
                                 type: string
                             type: object
                           type: array
                         contentType:
-                          description: Valid only for STATIC actions.
+                          description: |-
+                            [string] Valid only for STATIC actions.
+                            Valid only for STATIC actions.
                           type: string
                         dropQuery:
-                          description: Default is false; valid only for REDIRECT actions.
+                          description: |-
+                            [bool] Default is false; valid only for REDIRECT actions.
+                            Default is false; valid only for REDIRECT actions.
                           type: boolean
                         location:
-                          description: The location for redirecting; mandatory and
-                            valid only for REDIRECT actions.
+                          description: |-
+                            [string] The location for redirecting; mandatory and valid only for REDIRECT actions.
+                            The location for redirecting; mandatory and valid only for REDIRECT actions.
                           type: string
                         name:
-                          description: The unique name of the Application Load Balancer
-                            HTTP rule.
+                          description: |-
+                            [string] The name of the Application Load Balancer forwarding rule.
+                            The unique name of the Application Load Balancer HTTP rule.
                           type: string
                         responseMessage:
-                          description: The response message of the request; mandatory
-                            for STATIC actions.
+                          description: |-
+                            [string] The response message of the request; mandatory for STATIC action.
+                            The response message of the request; mandatory for STATIC actions.
                           type: string
                         statusCode:
-                          description: Valid only for REDIRECT and STATIC actions.
-                            For REDIRECT actions, default is 301 and possible values
-                            are 301, 302, 303, 307, and 308. For STATIC actions, default
-                            is 503 and valid range is 200 to 599.
+                          description: |-
+                            [int] Valid only for REDIRECT and STATIC actions. For REDIRECT actions, default is 301 and possible values are 301, 302, 303, 307, and 308. For STATIC actions, default is 503 and valid range is 200 to 599.
+                            Valid only for REDIRECT and STATIC actions. For REDIRECT actions, default is 301 and possible values are 301, 302, 303, 307, and 308. For STATIC actions, default is 503 and valid range is 200 to 599.
                           type: number
                         targetGroup:
-                          description: The ID of the target group; mandatory and only
-                            valid for FORWARD actions.
+                          description: |-
+                            [string] The UUID of the target group; mandatory for FORWARD action.
+                            The ID of the target group; mandatory and only valid for FORWARD actions.
                           type: string
                         type:
-                          description: Type of the HTTP rule.
+                          description: |-
+                            [string] Type of the Http Rule.
+                            Type of the HTTP rule.
                           type: string
                       type: object
                     type: array
                   listenerIp:
-                    description: Listening (inbound) IP.
+                    description: |-
+                      [string] Listening (inbound) IP.
+                      Listening (inbound) IP.
                     type: string
                   listenerPort:
-                    description: Listening (inbound) port number; valid range is 1
-                      to 65535.
+                    description: |-
+                      [int] Listening (inbound) port number; valid range is 1 to 65535.
+                      Listening (inbound) port number; valid range is 1 to 65535.
                     type: number
                   name:
-                    description: The name of the Application Load Balancer forwarding
-                      rule.
+                    description: |-
+                      [string] The name of the Application Load Balancer forwarding rule.
+                      The name of the Application Load Balancer forwarding rule.
                     type: string
                   protocol:
-                    description: Balancing protocol.
+                    description: |-
+                      [string] Balancing protocol.
+                      Balancing protocol.
                     type: string
                   serverCertificates:
-                    description: Array of items in the collection.
+                    description: |-
+                      [list] Array of certificate ids. You can create certificates with the certificate resource.
+                      Array of items in the collection.
                     items:
                       type: string
                     type: array
@@ -336,6 +360,7 @@ spec:
                   autoscaler.
                 properties:
                   applicationLoadbalancerId:
+                    description: '[string] The ID of Application Load Balancer.'
                     type: string
                   applicationLoadbalancerIdRef:
                     description: Reference to a Loadbalancer in alb to populate applicationLoadbalancerId.
@@ -412,10 +437,12 @@ spec:
                         type: object
                     type: object
                   clientTimeout:
-                    description: The maximum time in milliseconds to wait for the
-                      client to acknowledge or send data; default is 50,000 (50 seconds).
+                    description: |-
+                      [int] The maximum time in milliseconds to wait for the client to acknowledge or send data; default is 50,000 (50 seconds).
+                      The maximum time in milliseconds to wait for the client to acknowledge or send data; default is 50,000 (50 seconds).
                     type: number
                   datacenterId:
+                    description: '[string] The ID of a Virtual Data Center.'
                     type: string
                   datacenterIdRef:
                     description: Reference to a Datacenter in compute to populate
@@ -494,90 +521,110 @@ spec:
                         type: object
                     type: object
                   httpRules:
-                    description: Array of items in that collection
+                    description: |-
+                      [list] Array of items in that collection
+                      Array of items in that collection
                     items:
                       properties:
                         conditions:
-                          description: An array of items in the collection.The action
-                            is only performed if each and every condition is met;
-                            if no conditions are set, the rule will always be performed.
+                          description: |-
+                            [list] - An array of items in the collection.The action is only performed if each and every condition is met; if no conditions are set, the rule will always be performed.
+                            An array of items in the collection.The action is only performed if each and every condition is met; if no conditions are set, the rule will always be performed.
                           items:
                             properties:
                               condition:
-                                description: Matching rule for the HTTP rule condition
-                                  attribute; mandatory for HEADER, PATH, QUERY, METHOD,
-                                  HOST, and COOKIE types; must be null when type is
-                                  SOURCE_IP.
+                                description: |-
+                                  [string] Matching rule for the HTTP rule condition attribute; mandatory for HEADER, PATH, QUERY, METHOD, HOST, and COOKIE types; must be null when type is SOURCE_IP.
+                                  Matching rule for the HTTP rule condition attribute; mandatory for HEADER, PATH, QUERY, METHOD, HOST, and COOKIE types; must be null when type is SOURCE_IP.
                                 type: string
                               key:
-                                description: Must be null when type is PATH, METHOD,
-                                  HOST, or SOURCE_IP. Key can only be set when type
-                                  is COOKIES, HEADER, or QUERY.
+                                description: |-
+                                  [string] Must be null when type is PATH, METHOD, HOST, or SOURCE_IP. Key can only be set when type is COOKIES, HEADER, or QUERY.
+                                  Must be null when type is PATH, METHOD, HOST, or SOURCE_IP. Key can only be set when type is COOKIES, HEADER, or QUERY.
                                 type: string
                               negate:
-                                description: Specifies whether the condition is negated
-                                  or not; the default is False.
+                                description: |-
+                                  [bool] Specifies whether the condition is negated or not; the default is False.
+                                  Specifies whether the condition is negated or not; the default is False.
                                 type: boolean
                               type:
-                                description: Type of the HTTP rule condition.
+                                description: |-
+                                  [string] Type of the Http Rule.
+                                  Type of the HTTP rule condition.
                                 type: string
                               value:
-                                description: Mandatory for conditions CONTAINS, EQUALS,
-                                  MATCHES, STARTS_WITH, ENDS_WITH; must be null when
-                                  condition is EXISTS; should be a valid CIDR if provided
-                                  and if type is SOURCE_IP.
+                                description: |-
+                                  [string] Mandatory for conditions CONTAINS, EQUALS, MATCHES, STARTS_WITH, ENDS_WITH; must be null when condition is EXISTS; should be a valid CIDR if provided and if type is SOURCE_IP.
+                                  Mandatory for conditions CONTAINS, EQUALS, MATCHES, STARTS_WITH, ENDS_WITH; must be null when condition is EXISTS; should be a valid CIDR if provided and if type is SOURCE_IP.
                                 type: string
                             type: object
                           type: array
                         contentType:
-                          description: Valid only for STATIC actions.
+                          description: |-
+                            [string] Valid only for STATIC actions.
+                            Valid only for STATIC actions.
                           type: string
                         dropQuery:
-                          description: Default is false; valid only for REDIRECT actions.
+                          description: |-
+                            [bool] Default is false; valid only for REDIRECT actions.
+                            Default is false; valid only for REDIRECT actions.
                           type: boolean
                         location:
-                          description: The location for redirecting; mandatory and
-                            valid only for REDIRECT actions.
+                          description: |-
+                            [string] The location for redirecting; mandatory and valid only for REDIRECT actions.
+                            The location for redirecting; mandatory and valid only for REDIRECT actions.
                           type: string
                         name:
-                          description: The unique name of the Application Load Balancer
-                            HTTP rule.
+                          description: |-
+                            [string] The name of the Application Load Balancer forwarding rule.
+                            The unique name of the Application Load Balancer HTTP rule.
                           type: string
                         responseMessage:
-                          description: The response message of the request; mandatory
-                            for STATIC actions.
+                          description: |-
+                            [string] The response message of the request; mandatory for STATIC action.
+                            The response message of the request; mandatory for STATIC actions.
                           type: string
                         statusCode:
-                          description: Valid only for REDIRECT and STATIC actions.
-                            For REDIRECT actions, default is 301 and possible values
-                            are 301, 302, 303, 307, and 308. For STATIC actions, default
-                            is 503 and valid range is 200 to 599.
+                          description: |-
+                            [int] Valid only for REDIRECT and STATIC actions. For REDIRECT actions, default is 301 and possible values are 301, 302, 303, 307, and 308. For STATIC actions, default is 503 and valid range is 200 to 599.
+                            Valid only for REDIRECT and STATIC actions. For REDIRECT actions, default is 301 and possible values are 301, 302, 303, 307, and 308. For STATIC actions, default is 503 and valid range is 200 to 599.
                           type: number
                         targetGroup:
-                          description: The ID of the target group; mandatory and only
-                            valid for FORWARD actions.
+                          description: |-
+                            [string] The UUID of the target group; mandatory for FORWARD action.
+                            The ID of the target group; mandatory and only valid for FORWARD actions.
                           type: string
                         type:
-                          description: Type of the HTTP rule.
+                          description: |-
+                            [string] Type of the Http Rule.
+                            Type of the HTTP rule.
                           type: string
                       type: object
                     type: array
                   listenerIp:
-                    description: Listening (inbound) IP.
+                    description: |-
+                      [string] Listening (inbound) IP.
+                      Listening (inbound) IP.
                     type: string
                   listenerPort:
-                    description: Listening (inbound) port number; valid range is 1
-                      to 65535.
+                    description: |-
+                      [int] Listening (inbound) port number; valid range is 1 to 65535.
+                      Listening (inbound) port number; valid range is 1 to 65535.
                     type: number
                   name:
-                    description: The name of the Application Load Balancer forwarding
-                      rule.
+                    description: |-
+                      [string] The name of the Application Load Balancer forwarding rule.
+                      The name of the Application Load Balancer forwarding rule.
                     type: string
                   protocol:
-                    description: Balancing protocol.
+                    description: |-
+                      [string] Balancing protocol.
+                      Balancing protocol.
                     type: string
                   serverCertificates:
-                    description: Array of items in the collection.
+                    description: |-
+                      [list] Array of certificate ids. You can create certificates with the certificate resource.
+                      Array of items in the collection.
                     items:
                       type: string
                     type: array
@@ -774,100 +821,123 @@ spec:
               atProvider:
                 properties:
                   applicationLoadbalancerId:
+                    description: '[string] The ID of Application Load Balancer.'
                     type: string
                   clientTimeout:
-                    description: The maximum time in milliseconds to wait for the
-                      client to acknowledge or send data; default is 50,000 (50 seconds).
+                    description: |-
+                      [int] The maximum time in milliseconds to wait for the client to acknowledge or send data; default is 50,000 (50 seconds).
+                      The maximum time in milliseconds to wait for the client to acknowledge or send data; default is 50,000 (50 seconds).
                     type: number
                   datacenterId:
+                    description: '[string] The ID of a Virtual Data Center.'
                     type: string
                   httpRules:
-                    description: Array of items in that collection
+                    description: |-
+                      [list] Array of items in that collection
+                      Array of items in that collection
                     items:
                       properties:
                         conditions:
-                          description: An array of items in the collection.The action
-                            is only performed if each and every condition is met;
-                            if no conditions are set, the rule will always be performed.
+                          description: |-
+                            [list] - An array of items in the collection.The action is only performed if each and every condition is met; if no conditions are set, the rule will always be performed.
+                            An array of items in the collection.The action is only performed if each and every condition is met; if no conditions are set, the rule will always be performed.
                           items:
                             properties:
                               condition:
-                                description: Matching rule for the HTTP rule condition
-                                  attribute; mandatory for HEADER, PATH, QUERY, METHOD,
-                                  HOST, and COOKIE types; must be null when type is
-                                  SOURCE_IP.
+                                description: |-
+                                  [string] Matching rule for the HTTP rule condition attribute; mandatory for HEADER, PATH, QUERY, METHOD, HOST, and COOKIE types; must be null when type is SOURCE_IP.
+                                  Matching rule for the HTTP rule condition attribute; mandatory for HEADER, PATH, QUERY, METHOD, HOST, and COOKIE types; must be null when type is SOURCE_IP.
                                 type: string
                               key:
-                                description: Must be null when type is PATH, METHOD,
-                                  HOST, or SOURCE_IP. Key can only be set when type
-                                  is COOKIES, HEADER, or QUERY.
+                                description: |-
+                                  [string] Must be null when type is PATH, METHOD, HOST, or SOURCE_IP. Key can only be set when type is COOKIES, HEADER, or QUERY.
+                                  Must be null when type is PATH, METHOD, HOST, or SOURCE_IP. Key can only be set when type is COOKIES, HEADER, or QUERY.
                                 type: string
                               negate:
-                                description: Specifies whether the condition is negated
-                                  or not; the default is False.
+                                description: |-
+                                  [bool] Specifies whether the condition is negated or not; the default is False.
+                                  Specifies whether the condition is negated or not; the default is False.
                                 type: boolean
                               type:
-                                description: Type of the HTTP rule condition.
+                                description: |-
+                                  [string] Type of the Http Rule.
+                                  Type of the HTTP rule condition.
                                 type: string
                               value:
-                                description: Mandatory for conditions CONTAINS, EQUALS,
-                                  MATCHES, STARTS_WITH, ENDS_WITH; must be null when
-                                  condition is EXISTS; should be a valid CIDR if provided
-                                  and if type is SOURCE_IP.
+                                description: |-
+                                  [string] Mandatory for conditions CONTAINS, EQUALS, MATCHES, STARTS_WITH, ENDS_WITH; must be null when condition is EXISTS; should be a valid CIDR if provided and if type is SOURCE_IP.
+                                  Mandatory for conditions CONTAINS, EQUALS, MATCHES, STARTS_WITH, ENDS_WITH; must be null when condition is EXISTS; should be a valid CIDR if provided and if type is SOURCE_IP.
                                 type: string
                             type: object
                           type: array
                         contentType:
-                          description: Valid only for STATIC actions.
+                          description: |-
+                            [string] Valid only for STATIC actions.
+                            Valid only for STATIC actions.
                           type: string
                         dropQuery:
-                          description: Default is false; valid only for REDIRECT actions.
+                          description: |-
+                            [bool] Default is false; valid only for REDIRECT actions.
+                            Default is false; valid only for REDIRECT actions.
                           type: boolean
                         location:
-                          description: The location for redirecting; mandatory and
-                            valid only for REDIRECT actions.
+                          description: |-
+                            [string] The location for redirecting; mandatory and valid only for REDIRECT actions.
+                            The location for redirecting; mandatory and valid only for REDIRECT actions.
                           type: string
                         name:
-                          description: The unique name of the Application Load Balancer
-                            HTTP rule.
+                          description: |-
+                            [string] The name of the Application Load Balancer forwarding rule.
+                            The unique name of the Application Load Balancer HTTP rule.
                           type: string
                         responseMessage:
-                          description: The response message of the request; mandatory
-                            for STATIC actions.
+                          description: |-
+                            [string] The response message of the request; mandatory for STATIC action.
+                            The response message of the request; mandatory for STATIC actions.
                           type: string
                         statusCode:
-                          description: Valid only for REDIRECT and STATIC actions.
-                            For REDIRECT actions, default is 301 and possible values
-                            are 301, 302, 303, 307, and 308. For STATIC actions, default
-                            is 503 and valid range is 200 to 599.
+                          description: |-
+                            [int] Valid only for REDIRECT and STATIC actions. For REDIRECT actions, default is 301 and possible values are 301, 302, 303, 307, and 308. For STATIC actions, default is 503 and valid range is 200 to 599.
+                            Valid only for REDIRECT and STATIC actions. For REDIRECT actions, default is 301 and possible values are 301, 302, 303, 307, and 308. For STATIC actions, default is 503 and valid range is 200 to 599.
                           type: number
                         targetGroup:
-                          description: The ID of the target group; mandatory and only
-                            valid for FORWARD actions.
+                          description: |-
+                            [string] The UUID of the target group; mandatory for FORWARD action.
+                            The ID of the target group; mandatory and only valid for FORWARD actions.
                           type: string
                         type:
-                          description: Type of the HTTP rule.
+                          description: |-
+                            [string] Type of the Http Rule.
+                            Type of the HTTP rule.
                           type: string
                       type: object
                     type: array
                   id:
                     type: string
                   listenerIp:
-                    description: Listening (inbound) IP.
+                    description: |-
+                      [string] Listening (inbound) IP.
+                      Listening (inbound) IP.
                     type: string
                   listenerPort:
-                    description: Listening (inbound) port number; valid range is 1
-                      to 65535.
+                    description: |-
+                      [int] Listening (inbound) port number; valid range is 1 to 65535.
+                      Listening (inbound) port number; valid range is 1 to 65535.
                     type: number
                   name:
-                    description: The name of the Application Load Balancer forwarding
-                      rule.
+                    description: |-
+                      [string] The name of the Application Load Balancer forwarding rule.
+                      The name of the Application Load Balancer forwarding rule.
                     type: string
                   protocol:
-                    description: Balancing protocol.
+                    description: |-
+                      [string] Balancing protocol.
+                      Balancing protocol.
                     type: string
                   serverCertificates:
-                    description: Array of items in the collection.
+                    description: |-
+                      [list] Array of certificate ids. You can create certificates with the certificate resource.
+                      Array of items in the collection.
                     items:
                       type: string
                     type: array

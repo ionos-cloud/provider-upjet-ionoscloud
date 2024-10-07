@@ -565,6 +565,21 @@ spec:
                     type: string
                   id:
                     type: string
+                  publicEndpointV4:
+                    description: |-
+                      IP of the distribution, it has to be included on the domain DNS Zone as A record.
+                      IP of the distribution, it has to be included on the domain DNS Zone as A record.
+                    type: string
+                  publicEndpointV6:
+                    description: |-
+                      IP of the distribution, it has to be included on the domain DNS Zone as AAAA record.
+                      IP of the distribution, it has to be included on the domain DNS Zone as AAAA record.
+                    type: string
+                  resourceUrn:
+                    description: |-
+                      Unique resource indentifier.
+                      Unique name of the resource.
+                    type: string
                   routingRules:
                     description: |-
                       [list] The routing rules for the distribution.

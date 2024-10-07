@@ -249,9 +249,8 @@ spec:
                     type: object
                   location:
                     description: |-
-                      [string] The location of the Kafka Cluster. Possible values: de/fra, de/txl, es/vit,
-                      gb/lhr, us/ewr, us/las, us/mci, fr/par
-                      The location of your Kafka Cluster. Supported locations: de/fra, de/txl, es/vit, gb/lhr, us/ewr, us/las, us/mci, fr/par
+                      [string] The location of the Kafka Cluster. Possible values: de/fra, de/txl
+                      The location of your Kafka Cluster. Supported locations: de/fra, de/txl
                     type: string
                   locationRef:
                     description: Reference to a Datacenter in compute to populate
@@ -534,9 +533,8 @@ spec:
                     type: object
                   location:
                     description: |-
-                      [string] The location of the Kafka Cluster. Possible values: de/fra, de/txl, es/vit,
-                      gb/lhr, us/ewr, us/las, us/mci, fr/par
-                      The location of your Kafka Cluster. Supported locations: de/fra, de/txl, es/vit, gb/lhr, us/ewr, us/las, us/mci, fr/par
+                      [string] The location of the Kafka Cluster. Possible values: de/fra, de/txl
+                      The location of your Kafka Cluster. Supported locations: de/fra, de/txl
                     type: string
                   locationRef:
                     description: Reference to a Datacenter in compute to populate
@@ -856,9 +854,8 @@ spec:
                     type: string
                   location:
                     description: |-
-                      [string] The location of the Kafka Cluster. Possible values: de/fra, de/txl, es/vit,
-                      gb/lhr, us/ewr, us/las, us/mci, fr/par
-                      The location of your Kafka Cluster. Supported locations: de/fra, de/txl, es/vit, gb/lhr, us/ewr, us/las, us/mci, fr/par
+                      [string] The location of the Kafka Cluster. Possible values: de/fra, de/txl
+                      The location of your Kafka Cluster. Supported locations: de/fra, de/txl
                     type: string
                   name:
                     description: |-

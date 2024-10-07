@@ -106,9 +106,8 @@ type KafkaInitParameters struct {
 	// The network connection for your Kafka Cluster. Only one connection is allowed.
 	Connections *ConnectionsInitParameters `json:"connections,omitempty" tf:"connections,omitempty"`
 
-	// [string] The location of the Kafka Cluster. Possible values: de/fra, de/txl, es/vit,
-	// gb/lhr, us/ewr, us/las, us/mci, fr/par
-	// The location of your Kafka Cluster. Supported locations: de/fra, de/txl, es/vit, gb/lhr, us/ewr, us/las, us/mci, fr/par
+	// [string] The location of the Kafka Cluster. Possible values: de/fra, de/txl
+	// The location of your Kafka Cluster. Supported locations: de/fra, de/txl
 	// +crossplane:generate:reference:type=github.com/ionos-cloud/provider-upjet-ionoscloud/apis/compute/v1alpha1.Datacenter
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractParamPath("location",false)
 	Location *string `json:"location,omitempty" tf:"location,omitempty"`
@@ -148,9 +147,8 @@ type KafkaObservation struct {
 	// (Computed)[string] The UUID of the Kafka Cluster.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
-	// [string] The location of the Kafka Cluster. Possible values: de/fra, de/txl, es/vit,
-	// gb/lhr, us/ewr, us/las, us/mci, fr/par
-	// The location of your Kafka Cluster. Supported locations: de/fra, de/txl, es/vit, gb/lhr, us/ewr, us/las, us/mci, fr/par
+	// [string] The location of the Kafka Cluster. Possible values: de/fra, de/txl
+	// The location of your Kafka Cluster. Supported locations: de/fra, de/txl
 	Location *string `json:"location,omitempty" tf:"location,omitempty"`
 
 	// [string] Name of the Kafka Cluster.
@@ -173,9 +171,8 @@ type KafkaParameters struct {
 	// +kubebuilder:validation:Optional
 	Connections *ConnectionsParameters `json:"connections,omitempty" tf:"connections,omitempty"`
 
-	// [string] The location of the Kafka Cluster. Possible values: de/fra, de/txl, es/vit,
-	// gb/lhr, us/ewr, us/las, us/mci, fr/par
-	// The location of your Kafka Cluster. Supported locations: de/fra, de/txl, es/vit, gb/lhr, us/ewr, us/las, us/mci, fr/par
+	// [string] The location of the Kafka Cluster. Possible values: de/fra, de/txl
+	// The location of your Kafka Cluster. Supported locations: de/fra, de/txl
 	// +crossplane:generate:reference:type=github.com/ionos-cloud/provider-upjet-ionoscloud/apis/compute/v1alpha1.Datacenter
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractParamPath("location",false)
 	// +kubebuilder:validation:Optional

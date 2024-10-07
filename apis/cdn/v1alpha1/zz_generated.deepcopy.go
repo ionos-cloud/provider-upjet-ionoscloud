@@ -132,6 +132,21 @@ func (in *DistributionObservation) DeepCopyInto(out *DistributionObservation) {
 		*out = new(string)
 		**out = **in
 	}
+	if in.PublicEndpointV4 != nil {
+		in, out := &in.PublicEndpointV4, &out.PublicEndpointV4
+		*out = new(string)
+		**out = **in
+	}
+	if in.PublicEndpointV6 != nil {
+		in, out := &in.PublicEndpointV6, &out.PublicEndpointV6
+		*out = new(string)
+		**out = **in
+	}
+	if in.ResourceUrn != nil {
+		in, out := &in.ResourceUrn, &out.ResourceUrn
+		*out = new(string)
+		**out = **in
+	}
 	if in.RoutingRules != nil {
 		in, out := &in.RoutingRules, &out.RoutingRules
 		*out = make([]RoutingRulesObservation, len(*in))

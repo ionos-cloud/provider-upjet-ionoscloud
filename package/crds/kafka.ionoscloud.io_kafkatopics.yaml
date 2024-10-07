@@ -154,9 +154,8 @@ spec:
                     type: object
                   location:
                     description: |-
-                      [string] The location of the Kafka Cluster Topic. Possible values: de/fra, de/txl,
-                      es/vit,gb/lhr, us/ewr, us/las, us/mci, fr/par
-                      The location of your Kafka Cluster Topic. Supported locations: de/fra, de/txl, es/vit, gb/lhr, us/ewr, us/las, us/mci, fr/par
+                      [string] The location of the Kafka Cluster Topic. Possible values: de/fra, de/txl
+                      The location of your Kafka Cluster Topic. Supported locations: de/fra, de/txl
                     type: string
                   locationRef:
                     description: Reference to a Kafka in kafka to populate location.
@@ -360,9 +359,8 @@ spec:
                     type: object
                   location:
                     description: |-
-                      [string] The location of the Kafka Cluster Topic. Possible values: de/fra, de/txl,
-                      es/vit,gb/lhr, us/ewr, us/las, us/mci, fr/par
-                      The location of your Kafka Cluster Topic. Supported locations: de/fra, de/txl, es/vit, gb/lhr, us/ewr, us/las, us/mci, fr/par
+                      [string] The location of the Kafka Cluster Topic. Possible values: de/fra, de/txl
+                      The location of your Kafka Cluster Topic. Supported locations: de/fra, de/txl
                     type: string
                   locationRef:
                     description: Reference to a Kafka in kafka to populate location.
@@ -660,9 +658,8 @@ spec:
                     type: string
                   location:
                     description: |-
-                      [string] The location of the Kafka Cluster Topic. Possible values: de/fra, de/txl,
-                      es/vit,gb/lhr, us/ewr, us/las, us/mci, fr/par
-                      The location of your Kafka Cluster Topic. Supported locations: de/fra, de/txl, es/vit, gb/lhr, us/ewr, us/las, us/mci, fr/par
+                      [string] The location of the Kafka Cluster Topic. Possible values: de/fra, de/txl
+                      The location of your Kafka Cluster Topic. Supported locations: de/fra, de/txl
                     type: string
                   name:
                     description: |-

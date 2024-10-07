@@ -1,7 +1,7 @@
 name: ionos-cloud/ionoscloud
 resources:
     Server Boot Device Selection:
-        subCategory: ""
+        subCategory: Compute Engine
         description: Manages the selection of boot devices for IonosCloud Server objects.
         name: Server Boot Device Selection
         title: Server Boot Device Selection
@@ -12,35 +12,6 @@ resources:
             datacenter_id: '- (Required)[string] The ID of a Virtual Data Center.'
             server_id: '- (Required)[string] The ID of a server.'
         importStatements: []
-    application_loadbalancer_forwarding_rule:
-        subCategory: Application Load Balancer
-        description: Creates and manages IonosCloud Application Load Balancer Forwarding Rule.
-        name: application_loadbalancer_forwarding_rule
-        title: application_loadbalancer_forwarding_rule
-        argumentDocs:
-            application_loadbalancer_id: '- (Required)[string] The ID of Application Load Balancer.'
-            client_timeout: '- (Optional)[int] The maximum time in milliseconds to wait for the client to acknowledge or send data; default is 50,000 (50 seconds).'
-            condition: '- (Required)[string] Matching rule for the HTTP rule condition attribute; mandatory for HEADER, PATH, QUERY, METHOD, HOST, and COOKIE types; must be null when type is SOURCE_IP.'
-            conditions: '- (Optional)[list] - An array of items in the collection.The action is only performed if each and every condition is met; if no conditions are set, the rule will always be performed.'
-            content_type: '- (Optional)[string] Valid only for STATIC actions.'
-            datacenter_id: '- (Required)[string] The ID of a Virtual Data Center.'
-            drop_query: '- (Optional)[bool] Default is false; valid only for REDIRECT actions.'
-            http_rules: '- (Optional)[list] Array of items in that collection'
-            key: '- (Optional)[string] Must be null when type is PATH, METHOD, HOST, or SOURCE_IP. Key can only be set when type is COOKIES, HEADER, or QUERY.'
-            listener_ip: '- (Required)[string] Listening (inbound) IP.'
-            listener_port: '- (Required)[int] Listening (inbound) port number; valid range is 1 to 65535.'
-            location: '- (Optional)[string] The location for redirecting; mandatory and valid only for REDIRECT actions.'
-            name: '- (Required)[string] The name of the Application Load Balancer forwarding rule.'
-            negate: '- (Optional)[bool] Specifies whether the condition is negated or not; the default is False.'
-            protocol: '- (Required)[string] Balancing protocol.'
-            response_message: '- (Optional)[string] The response message of the request; mandatory for STATIC action.'
-            server_certificates: '- (Optional)[list] Array of certificate ids. You can create certificates with the certificate resource.'
-            status_code: '- (Optional)[int] Valid only for REDIRECT and STATIC actions. For REDIRECT actions, default is 301 and possible values are 301, 302, 303, 307, and 308. For STATIC actions, default is 503 and valid range is 200 to 599.'
-            target_group: '- (Optional)[string] The UUID of the target group; mandatory for FORWARD action.'
-            type: '- (Required)[string] Type of the Http Rule.'
-            value: '- (Optional)[string] Mandatory for conditions CONTAINS, EQUALS, MATCHES, STARTS_WITH, ENDS_WITH; must be null when condition is EXISTS; should be a valid CIDR if provided and if type is SOURCE_IP.'
-        importStatements:
-            - terraform import ionoscloud_application_loadbalancer_forwarding_rule.myAlbRule {datacenter uuid}/{applicationLoadBalancer uuid}/{applicationLoadBalancerForwardingRule uuid}
     ionoscloud_apigateway:
         subCategory: API Gateway
         description: API Gateway is an application that acts as a "front door" for backend services and APIs, handling client requests and routing them to the appropriate backend.
@@ -50,21 +21,11 @@ resources:
             - name: example
               manifest: |-
                 {
-                  "custom_domains": [
-                    {
-                      "certificate_id": "00000000-0000-0000-0000-000000000000",
-                      "name": "example.com"
-                    },
-                    {
-                      "certificate_id": "00000000-0000-0000-0000-000000000000",
-                      "name": "example.org"
-                    }
-                  ],
                   "metrics": true,
                   "name": "example-gateway"
                 }
         argumentDocs:
-            certificate_id: '- (Required)[string] The certificate ID for the domain.'
+            certificate_id: '- (Optional)[string] The certificate ID for the domain. Must be a valid certificate in UUID form.'
             custom_domains: '- (Optional)[list] Custom domains for the API Gateway, a list that contains elements with the following structure:'
             id: '- (Computed)[string] The ID of the API Gateway.'
             logs: '- (Optional)[bool] Enable or disable logging. Defaults to false. NOTE: Central Logging must be enabled through the Logging API to enable this feature.'
@@ -202,6 +163,128 @@ resources:
             target_lan: '- (Required)[int] ID of the balanced private target LAN (outbound).'
         importStatements:
             - terraform import ionoscloud_application_loadbalancer.myalb {datacenter uuid}/{applicationLoadBalancer uuid}
+    ionoscloud_application_loadbalancer_forwardingrule:
+        subCategory: Application Load Balancer
+        description: Creates and manages IonosCloud Application Load Balancer Forwarding Rule.
+        name: ionoscloud_application_loadbalancer_forwardingrule
+        title: application_loadbalancer_forwardingrule
+        examples:
+            - name: example
+              manifest: |-
+                {
+                  "application_loadbalancer_id": "${ionoscloud_application_loadbalancer.example.id}",
+                  "client_timeout": 1000,
+                  "datacenter_id": "${ionoscloud_datacenter.example.id}",
+                  "http_rules": [
+                    {
+                      "conditions": [
+                        {
+                          "condition": "EQUALS",
+                          "key": "key",
+                          "negate": true,
+                          "type": "HEADER",
+                          "value": "10.12.120.224/24"
+                        }
+                      ],
+                      "drop_query": true,
+                      "location": "www.ionos.com",
+                      "name": "http_rule",
+                      "status_code": 301,
+                      "type": "REDIRECT"
+                    },
+                    {
+                      "conditions": [
+                        {
+                          "condition": "MATCHES",
+                          "key": "key",
+                          "negate": false,
+                          "type": "QUERY",
+                          "value": "10.12.120.224/24"
+                        }
+                      ],
+                      "content_type": "text/plain",
+                      "drop_query": false,
+                      "name": "http_rule_2",
+                      "response_message": "Response",
+                      "status_code": 303,
+                      "type": "STATIC"
+                    }
+                  ],
+                  "listener_ip": "10.12.118.224",
+                  "listener_port": 8080,
+                  "name": "ALB FR Example",
+                  "protocol": "HTTP",
+                  "server_certificates": [
+                    "${ionoscloud_certificate.cert.id}"
+                  ]
+                }
+              references:
+                application_loadbalancer_id: ionoscloud_application_loadbalancer.example.id
+                datacenter_id: ionoscloud_datacenter.example.id
+              dependencies:
+                ionoscloud_application_loadbalancer.example: |-
+                    {
+                      "datacenter_id": "${ionoscloud_datacenter.example.id}",
+                      "ips": [
+                        "10.12.118.224"
+                      ],
+                      "lb_private_ips": [
+                        "10.13.72.225/24"
+                      ],
+                      "listener_lan": "${ionoscloud_lan.example_1.id}",
+                      "name": "ALB Example",
+                      "target_lan": "${ionoscloud_lan.example_2.id}"
+                    }
+                ionoscloud_certificate.cert: |-
+                    {
+                      "certificate": "${file(\"path_to_cert\")}",
+                      "certificate_chain": "${file(\"path_to_cert_chain\")}",
+                      "name": "add_name_here",
+                      "private_key": "${file(\"path_to_private_key\")}"
+                    }
+                ionoscloud_datacenter.example: |-
+                    {
+                      "description": "datacenter description",
+                      "location": "us/las",
+                      "name": "Datacenter Example",
+                      "sec_auth_protection": false
+                    }
+                ionoscloud_lan.example_1: |-
+                    {
+                      "datacenter_id": "${ionoscloud_datacenter.example.id}",
+                      "name": "Lan Example",
+                      "public": true
+                    }
+                ionoscloud_lan.example_2: |-
+                    {
+                      "datacenter_id": "${ionoscloud_datacenter.example.id}",
+                      "name": "Lan Example",
+                      "public": true
+                    }
+        argumentDocs:
+            application_loadbalancer_id: '- (Required)[string] The ID of Application Load Balancer.'
+            client_timeout: '- (Optional)[int] The maximum time in milliseconds to wait for the client to acknowledge or send data; default is 50,000 (50 seconds).'
+            condition: '- (Required)[string] Matching rule for the HTTP rule condition attribute; mandatory for HEADER, PATH, QUERY, METHOD, HOST, and COOKIE types; must be null when type is SOURCE_IP.'
+            conditions: '- (Optional)[list] - An array of items in the collection.The action is only performed if each and every condition is met; if no conditions are set, the rule will always be performed.'
+            content_type: '- (Optional)[string] Valid only for STATIC actions.'
+            datacenter_id: '- (Required)[string] The ID of a Virtual Data Center.'
+            drop_query: '- (Optional)[bool] Default is false; valid only for REDIRECT actions.'
+            http_rules: '- (Optional)[list] Array of items in that collection'
+            key: '- (Optional)[string] Must be null when type is PATH, METHOD, HOST, or SOURCE_IP. Key can only be set when type is COOKIES, HEADER, or QUERY.'
+            listener_ip: '- (Required)[string] Listening (inbound) IP.'
+            listener_port: '- (Required)[int] Listening (inbound) port number; valid range is 1 to 65535.'
+            location: '- (Optional)[string] The location for redirecting; mandatory and valid only for REDIRECT actions.'
+            name: '- (Required)[string] The name of the Application Load Balancer forwarding rule.'
+            negate: '- (Optional)[bool] Specifies whether the condition is negated or not; the default is False.'
+            protocol: '- (Required)[string] Balancing protocol.'
+            response_message: '- (Optional)[string] The response message of the request; mandatory for STATIC action.'
+            server_certificates: '- (Optional)[list] Array of certificate ids. You can create certificates with the certificate resource.'
+            status_code: '- (Optional)[int] Valid only for REDIRECT and STATIC actions. For REDIRECT actions, default is 301 and possible values are 301, 302, 303, 307, and 308. For STATIC actions, default is 503 and valid range is 200 to 599.'
+            target_group: '- (Optional)[string] The UUID of the target group; mandatory for FORWARD action.'
+            type: '- (Required)[string] Type of the Http Rule.'
+            value: '- (Optional)[string] Mandatory for conditions CONTAINS, EQUALS, MATCHES, STARTS_WITH, ENDS_WITH; must be null when condition is EXISTS; should be a valid CIDR if provided and if type is SOURCE_IP.'
+        importStatements:
+            - terraform import ionoscloud_application_loadbalancer_forwardingrule.my_application_loadbalancer_forwardingrule {datacenter uuid}/{application_loadbalancer uuid}/{application_loadbalancer_forwardingrule uuid}
     ionoscloud_auto_certificate:
         subCategory: Certificate Manager Service
         description: Creates and manages Certificate Manager AutoCertificate objects.
@@ -379,7 +462,10 @@ resources:
             geo_restrictions: '- (Optional)[map] - A map of geo_restrictions'
             host: '- (Required)[string] The upstream host that handles the requests if not already cached. This host will be protected by the WAF if the option is enabled.'
             prefix: '- (Required)[string] The prefix of the routing rule.'
+            public_endpoint_v4: '- IP of the distribution, it has to be included on the domain DNS Zone as A record.'
+            public_endpoint_v6: '- IP of the distribution, it has to be included on the domain DNS Zone as AAAA record.'
             rate_limit_class: '- (Required)[string] Rate limit class that will be applied to limit the number of incoming requests per IP.'
+            resource_urn: '- Unique resource indentifier.'
             routing_rules: '- (Required)[list] The routing rules for the distribution.'
             scheme: '- (Required)[string] The scheme of the routing rule.'
             upstream: '- (Required)[map] - A map of properties for the rule'
@@ -1170,7 +1256,7 @@ resources:
                 {
                   "location": "us/las",
                   "name": "IP Block Example",
-                  "size": 3
+                  "size": 1
                 }
         argumentDocs:
             ip_consumers: (Computed) Read-Only attribute. Lists consumption detail of an individual ip
@@ -1591,9 +1677,7 @@ resources:
             datacenter_id: '- (Required)[string] The datacenter to connect your instance to.'
             id: '- (Computed)[string] The UUID of the Kafka Cluster.'
             lan_id: '- (Required)[string] The numeric LAN ID to connect your instance to.'
-            location: |-
-                - (Required)[string] The location of the Kafka Cluster. Possible values: de/fra, de/txl, es/vit,
-                gb/lhr, us/ewr, us/las, us/mci, fr/par
+            location: '- (Required)[string] The location of the Kafka Cluster. Possible values: de/fra, de/txl'
             name: '- (Required)[string] Name of the Kafka Cluster.'
             size: '- (Required)[string] Size of the Kafka Cluster. Possible values: XS, S'
             version: '- (Required)[string] Version of the Kafka Cluster. Possible values: 3.7.0'
@@ -1722,9 +1806,7 @@ resources:
         argumentDocs:
             cluster_id: '- (Required)[string] ID of the Kafka Cluster that the topic belongs to.'
             id: '- (Computed)[string] The UUID of the Kafka Cluster Topic.'
-            location: |-
-                - (Required)[string] The location of the Kafka Cluster Topic. Possible values: de/fra, de/txl,
-                es/vit,gb/lhr, us/ewr, us/las, us/mci, fr/par
+            location: '- (Required)[string] The location of the Kafka Cluster Topic. Possible values: de/fra, de/txl'
             name: '- (Required)[string] Name of the Kafka Cluster.'
             number_of_partitions: |-
                 - (Optional)[int] The number of partitions of the topic. Partitions allow for parallel
@@ -3134,6 +3216,12 @@ resources:
             - name: example
               manifest: |-
                 {
+                  "connection_pooler": [
+                    {
+                      "enabled": true,
+                      "pool_mode": "session"
+                    }
+                  ],
                   "connections": [
                     {
                       "cidr": "192.168.100.1/24",
@@ -3183,6 +3271,12 @@ resources:
             - name: example
               manifest: |-
                 {
+                  "connection_pooler": [
+                    {
+                      "enabled": true,
+                      "pool_mode": "session"
+                    }
+                  ],
                   "connections": [
                     {
                       "cidr": "${local.database_ip_cidr}",
@@ -3243,7 +3337,7 @@ resources:
                       "cores": 2,
                       "cpu_family": "INTEL_SKYLAKE",
                       "datacenter_id": "${ionoscloud_datacenter.example.id}",
-                      "image_name": "Debian-10-cloud-init.qcow2",
+                      "image_name": "rockylinux-8-GenericCloud-20230518",
                       "image_password": "password",
                       "name": "example",
                       "nic": [
@@ -3272,6 +3366,7 @@ resources:
             backup_id: '- (Required)[string] The unique ID of the backup you want to restore.'
             backup_location: '- (Optional)(Computed)[string] The S3 location where the backups will be stored. Possible values are: de, eu-south-2, eu-central-2. This attribute is immutable (disallowed in update requests).'
             cidr: '- (Required)[true] The IP and subnet for the database. Note the following unavailable IP ranges: 10.233.64.0/18, 10.233.0.0/18, 10.233.114.0/24. Please enter in the correct format like IP/Subnet, exp: 192.168.10.0/24. See Private IPs and Configuring the network.'
+            connection_pooler: '- (Optional)[object]'
             connections: '- (Required)[string] Details about the network connection for your cluster.'
             cores: '- (Required)[int] The number of CPU cores per replica.'
             credentials: '- (Required)[string] Credentials for the database user to be created. This attribute is immutable(disallowed in update requests).'
@@ -3279,12 +3374,14 @@ resources:
             day_of_the_week: '- (Required)[string]'
             display_name: '- (Required)[string] The friendly name of your cluster.'
             dns_name: '- (Computed)[string] The DNS name pointing to your cluster.'
+            enabled: '- (Required)[bool]'
             from_backup: '- (Optional)[string] The unique ID of the backup you want to restore. This attribute is immutable(disallowed in update requests).'
             instances: '- (Required)[int] The total number of instances in the cluster (one master and n-1 standbys)'
             lan_id: '- (Required)[true] The LAN to connect your cluster to.'
             location: '- (Required)[string] The physical location where the cluster will be created. This will be where all of your instances live. Property cannot be modified after datacenter creation. Possible values are: de/fra, de/txl, gb/lhr, es/vit, us/ewr, us/las. This attribute is immutable(disallowed in update requests).'
             maintenance_window: '- (Optional)(Computed)[string] A weekly 4 hour-long window, during which maintenance might occur'
             password: '- (Required)[string]'
+            pool_mode: '- (Required)[string] Represents different modes of connection pooling for the connection pooler.'
             postgres_version: '- (Required)[string] The PostgreSQL version of your cluster.'
             ram: '- (Required)[int] The amount of memory per instance in megabytes. Has to be a multiple of 1024.'
             recovery_target_time: '- (Optional)[string] If this value is supplied as ISO 8601 timestamp, the backup will be replayed up until the given timestamp. If empty, the backup will be applied completely.'
@@ -3427,7 +3524,7 @@ resources:
         argumentDocs:
             create: '- (Optional)[string] Time to wait for the bucket to be created. Default is 10m.'
             delete: '- (Optional)[string] Time to wait for the bucket to be deleted. Default is 10m.'
-            force_destroy: '- (Optional)[bool] If true, the bucket and the contents of the bucket will be destroyed. Default is false.'
+            force_destroy: '- (Optional)[bool] Default is false.By setting force_destroy to true, you instruct Terraform to delete the bucket and all its contents during the terraform destroy process. This is particularly useful when dealing with buckets that contain objects, as it allows for automatic cleanup without requiring the manual deletion of objects beforehand. If force_destroy is not set or is set to false, Terraform will refuse to delete a bucket that still contains objects. You must manually empty the bucket before Terraform can remove it.There is a significant risk of accidental data loss when using this attribute, as it irreversibly deletes all contents of the bucket. It''s crucial to ensure that the bucket does not contain critical data before using force_destroy.'
             id: '- (Computed) Name of the bucket'
             name: '- (Required)[string] The bucket name. [ 3 .. 63 ] characters'
             object_lock_enabled: '- (Optional)[bool] The object lock configuration status of the bucket. Must be true or false.'
