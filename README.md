@@ -25,15 +25,15 @@ spec:
 EOF
 ```
 
-Notice that in this example Provider resource is referencing ControllerConfig with debug enabled.
+#### The API reference can be checked [here](https://doc.crds.dev/github.com/ionos-cloud/provider-upjet-ionoscloud).
+### For more details on installation and configuration see the [Quickstart guide](docs/Quickstart.md)
 
-You can see the API reference [here](https://doc.crds.dev/github.com/ionos-cloud/provider-upjet-ionoscloud).
 
 ## Developing
 
 Run code-generation pipeline:
 ```console
-go run cmd/generator/main.go "$PWD"
+make generate
 ```
 
 Run against a Kubernetes cluster:
