@@ -51,8 +51,8 @@ type ClusterInitParameters struct {
 	// The indicator if the cluster is public or private.
 	Public *bool `json:"public,omitempty" tf:"public,omitempty"`
 
-	// [list] List of S3 bucket configured for K8s usage. For now it contains only an S3 bucket used to store K8s API audit logs.
-	// List of S3 bucket configured for K8s usage. For now it contains only an S3 bucket used to store K8s API audit logs.
+	// [list] List of IONOS Object Storage buckets configured for K8s usage. For now it contains only an IONOS Object Storage bucket used to store K8s API audit logs.
+	// List of Object Storage bucket configured for K8s usage. For now it contains only an Object Storage bucket used to store K8s API audit logs.
 	S3Buckets []S3BucketsInitParameters `json:"s3Buckets,omitempty" tf:"s3_buckets,omitempty"`
 }
 
@@ -96,8 +96,8 @@ type ClusterObservation struct {
 	// The indicator if the cluster is public or private.
 	Public *bool `json:"public,omitempty" tf:"public,omitempty"`
 
-	// [list] List of S3 bucket configured for K8s usage. For now it contains only an S3 bucket used to store K8s API audit logs.
-	// List of S3 bucket configured for K8s usage. For now it contains only an S3 bucket used to store K8s API audit logs.
+	// [list] List of IONOS Object Storage buckets configured for K8s usage. For now it contains only an IONOS Object Storage bucket used to store K8s API audit logs.
+	// List of Object Storage bucket configured for K8s usage. For now it contains only an Object Storage bucket used to store K8s API audit logs.
 	S3Buckets []S3BucketsObservation `json:"s3Buckets,omitempty" tf:"s3_buckets,omitempty"`
 
 	// (Computed)[list] List of versions that may be used for node pools under this cluster
@@ -152,8 +152,8 @@ type ClusterParameters struct {
 	// +kubebuilder:validation:Optional
 	Public *bool `json:"public,omitempty" tf:"public,omitempty"`
 
-	// [list] List of S3 bucket configured for K8s usage. For now it contains only an S3 bucket used to store K8s API audit logs.
-	// List of S3 bucket configured for K8s usage. For now it contains only an S3 bucket used to store K8s API audit logs.
+	// [list] List of IONOS Object Storage buckets configured for K8s usage. For now it contains only an IONOS Object Storage bucket used to store K8s API audit logs.
+	// List of Object Storage bucket configured for K8s usage. For now it contains only an Object Storage bucket used to store K8s API audit logs.
 	// +kubebuilder:validation:Optional
 	S3Buckets []S3BucketsParameters `json:"s3Buckets,omitempty" tf:"s3_buckets,omitempty"`
 }
@@ -196,15 +196,15 @@ type MaintenanceWindowParameters struct {
 type S3BucketsInitParameters struct {
 
 	// [string] The name of the Kubernetes Cluster.
-	// Name of the S3 bucket
-	// +crossplane:generate:reference:type=github.com/ionos-cloud/provider-upjet-ionoscloud/apis/s3/v1alpha1.Bucket
+	// Name of the Object Storage bucket
+	// +crossplane:generate:reference:type=github.com/ionos-cloud/provider-upjet-ionoscloud/apis/objectstorage/v1alpha1.Bucket
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
-	// Reference to a Bucket in s3 to populate name.
+	// Reference to a Bucket in objectstorage to populate name.
 	// +kubebuilder:validation:Optional
 	NameRef *v1.Reference `json:"nameRef,omitempty" tf:"-"`
 
-	// Selector for a Bucket in s3 to populate name.
+	// Selector for a Bucket in objectstorage to populate name.
 	// +kubebuilder:validation:Optional
 	NameSelector *v1.Selector `json:"nameSelector,omitempty" tf:"-"`
 }
@@ -212,23 +212,23 @@ type S3BucketsInitParameters struct {
 type S3BucketsObservation struct {
 
 	// [string] The name of the Kubernetes Cluster.
-	// Name of the S3 bucket
+	// Name of the Object Storage bucket
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 }
 
 type S3BucketsParameters struct {
 
 	// [string] The name of the Kubernetes Cluster.
-	// Name of the S3 bucket
-	// +crossplane:generate:reference:type=github.com/ionos-cloud/provider-upjet-ionoscloud/apis/s3/v1alpha1.Bucket
+	// Name of the Object Storage bucket
+	// +crossplane:generate:reference:type=github.com/ionos-cloud/provider-upjet-ionoscloud/apis/objectstorage/v1alpha1.Bucket
 	// +kubebuilder:validation:Optional
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
-	// Reference to a Bucket in s3 to populate name.
+	// Reference to a Bucket in objectstorage to populate name.
 	// +kubebuilder:validation:Optional
 	NameRef *v1.Reference `json:"nameRef,omitempty" tf:"-"`
 
-	// Selector for a Bucket in s3 to populate name.
+	// Selector for a Bucket in objectstorage to populate name.
 	// +kubebuilder:validation:Optional
 	NameSelector *v1.Selector `json:"nameSelector,omitempty" tf:"-"`
 }

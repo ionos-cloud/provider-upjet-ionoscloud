@@ -10,7 +10,7 @@ require (
 	github.com/hashicorp/terraform-json v0.22.1
 	github.com/hashicorp/terraform-plugin-framework v1.11.0
 	github.com/hashicorp/terraform-plugin-sdk/v2 v2.34.0
-	github.com/ionos-cloud/terraform-provider-ionoscloud/v6 v6.5.5
+	github.com/ionos-cloud/terraform-provider-ionoscloud/v6 v6.6.0
 	github.com/pkg/errors v0.9.1
 	gopkg.in/alecthomas/kingpin.v2 v2.2.6
 	k8s.io/apimachinery v0.29.1
@@ -87,7 +87,7 @@ require (
 	github.com/imdario/mergo v0.3.16 // indirect
 	github.com/inconshreveable/mousetrap v1.1.0 // indirect
 	github.com/ionos-cloud/sdk-go-api-gateway v1.0.0 // indirect
-	github.com/ionos-cloud/sdk-go-bundle/products/cdn/v2 v2.0.1 // indirect
+	github.com/ionos-cloud/sdk-go-bundle/products/cdn/v2 v2.1.0 // indirect
 	github.com/ionos-cloud/sdk-go-bundle/products/logging/v2 v2.1.1 // indirect
 	github.com/ionos-cloud/sdk-go-bundle/products/vpn/v2 v2.0.1 // indirect
 	github.com/ionos-cloud/sdk-go-bundle/shared v0.1.1 // indirect
@@ -97,11 +97,11 @@ require (
 	github.com/ionos-cloud/sdk-go-dbaas-in-memory-db v1.0.1 // indirect
 	github.com/ionos-cloud/sdk-go-dbaas-mariadb v1.0.1 // indirect
 	github.com/ionos-cloud/sdk-go-dbaas-mongo v1.3.1 // indirect
-	github.com/ionos-cloud/sdk-go-dbaas-postgres v1.1.2 // indirect
+	github.com/ionos-cloud/sdk-go-dbaas-postgres v1.1.3 // indirect
 	github.com/ionos-cloud/sdk-go-dns v1.2.1 // indirect
 	github.com/ionos-cloud/sdk-go-kafka v1.0.0 // indirect
 	github.com/ionos-cloud/sdk-go-nfs v1.0.0 // indirect
-	github.com/ionos-cloud/sdk-go-s3 v1.1.0 // indirect
+	github.com/ionos-cloud/sdk-go-object-storage v1.0.0 // indirect
 	github.com/ionos-cloud/sdk-go-vm-autoscaling v1.0.1 // indirect
 	github.com/ionos-cloud/sdk-go/v6 v6.2.1 // indirect
 	github.com/jmespath/go-jmespath v0.4.0 // indirect

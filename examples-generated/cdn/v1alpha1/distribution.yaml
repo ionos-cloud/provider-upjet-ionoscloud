@@ -23,6 +23,7 @@ spec:
           - RU
         host: server.example.com
         rateLimitClass: R500
+        sniMode: distribution
         waf: true
     - prefix: /api2
       scheme: http/https
@@ -34,6 +35,7 @@ spec:
           - RU
         host: server2.example.com
         rateLimitClass: R10
+        sniMode: origin
         waf: false
 
 ---

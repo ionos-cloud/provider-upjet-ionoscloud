@@ -186,8 +186,8 @@ spec:
                         type: string
                       bucket:
                         description: |-
-                          Specifies the S3 IONOS bucket where the flow log data will be stored. The bucket must exist. Immutable, update forces re-creation.
-                          The S3 bucket name of an existing IONOS Cloud S3 bucket. Immutable, forces re-recreation of the nic resource.
+                          Specifies the IONOS Object Storage bucket where the flow log data will be stored. The bucket must exist. Immutable, update forces re-creation.
+                          The bucket name of an existing IONOS Object Storage bucket. Immutable, forces re-recreation of the nic resource.
                         type: string
                       direction:
                         description: |-
@@ -503,8 +503,8 @@ spec:
                         type: string
                       bucket:
                         description: |-
-                          Specifies the S3 IONOS bucket where the flow log data will be stored. The bucket must exist. Immutable, update forces re-creation.
-                          The S3 bucket name of an existing IONOS Cloud S3 bucket. Immutable, forces re-recreation of the nic resource.
+                          Specifies the IONOS Object Storage bucket where the flow log data will be stored. The bucket must exist. Immutable, update forces re-creation.
+                          The bucket name of an existing IONOS Object Storage bucket. Immutable, forces re-recreation of the nic resource.
                         type: string
                       direction:
                         description: |-
@@ -908,8 +908,8 @@ spec:
                         type: string
                       bucket:
                         description: |-
-                          Specifies the S3 IONOS bucket where the flow log data will be stored. The bucket must exist. Immutable, update forces re-creation.
-                          The S3 bucket name of an existing IONOS Cloud S3 bucket. Immutable, forces re-recreation of the nic resource.
+                          Specifies the IONOS Object Storage bucket where the flow log data will be stored. The bucket must exist. Immutable, update forces re-creation.
+                          The bucket name of an existing IONOS Object Storage bucket. Immutable, forces re-recreation of the nic resource.
                         type: string
                       direction:
                         description: |-

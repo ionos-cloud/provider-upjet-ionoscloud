@@ -65,7 +65,7 @@ var TerraformPluginSDKExternalNameConfigs = map[string]config.ExternalName{
 	// k8s
 	"ionoscloud_k8s_cluster":   config.IdentifierFromProvider,
 	"ionoscloud_k8s_node_pool": config.IdentifierFromProvider,
-	// s3 management
+	// object storage key management
 	"ionoscloud_s3_key": config.IdentifierFromProvider,
 	// dns
 	"ionoscloud_dns_zone":   config.IdentifierFromProvider,

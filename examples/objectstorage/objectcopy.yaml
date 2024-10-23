@@ -1,0 +1,59 @@
+apiVersion: objectstorage.ionoscloud.io/v1alpha1
+kind: Bucket
+metadata:
+  annotations:
+    meta.upbound.io/example-id: objectstorage/v1alpha1/objectcopy
+  labels:
+    testing.upbound.io/example-name: source
+  name: source-x-test-object-copy
+spec:
+  forProvider: {}
+
+---
+
+apiVersion: objectstorage.ionoscloud.io/v1alpha1
+kind: Bucket
+metadata:
+  annotations:
+    meta.upbound.io/example-id: objectstorage/v1alpha1/objectcopy
+  labels:
+    testing.upbound.io/example-name: target
+  name: target-${Rand.RFC1123Subdomain}
+spec:
+  forProvider: {}
+
+---
+
+apiVersion: objectstorage.ionoscloud.io/v1alpha1
+kind: Object
+metadata:
+  annotations:
+    meta.upbound.io/example-id: objectstorage/v1alpha1/objectcopy
+  labels:
+    testing.upbound.io/example-name: source
+  name: source
+spec:
+  forProvider:
+    bucketSelector:
+      matchLabels:
+        testing.upbound.io/example-name: source
+    content: 0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ
+    contentType: application/octet-stream
+    key: source_object
+
+---
+apiVersion: objectstorage.ionoscloud.io/v1alpha1
+kind: ObjectCopy
+metadata:
+  annotations:
+    meta.upbound.io/example-id: objectstorage/v1alpha1/objectcopy
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    bucketSelector:
+      matchLabels:
+        testing.upbound.io/example-name: target
+    key: example
+    source: source-x-test-object-copy/source_object

@@ -1,0 +1,29 @@
+apiVersion: objectstorage.ionoscloud.io/v1alpha1
+kind: Bucket
+metadata:
+  annotations:
+    meta.upbound.io/example-id: objectstorage/v1alpha1/bucketwebsiteconfiguration
+  labels:
+    testing.upbound.io/example-name: website
+  name: ${Rand.RFC1123Subdomain}
+spec:
+  forProvider: {}
+---
+apiVersion: objectstorage.ionoscloud.io/v1alpha1
+kind: BucketWebsiteConfiguration
+metadata:
+  annotations:
+    meta.upbound.io/example-id: objectstorage/v1alpha1/bucketwebsiteconfiguration
+  labels:
+    testing.upbound.io/example-name: website
+  name: example
+spec:
+  forProvider:
+    bucketSelector:
+      matchLabels:
+        testing.upbound.io/example-name: website
+    indexDocument:
+      suffix: index.html
+    errorDocument:
+      key: error.html
+

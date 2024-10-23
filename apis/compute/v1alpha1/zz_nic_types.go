@@ -19,8 +19,8 @@ type FlowlogInitParameters struct {
 	// Specifies the traffic direction pattern. Valid values: ACCEPTED, REJECTED, ALL. Immutable, forces re-recreation of the nic resource.
 	Action *string `json:"action,omitempty" tf:"action,omitempty"`
 
-	// Specifies the S3 IONOS bucket where the flow log data will be stored. The bucket must exist. Immutable, update forces re-creation.
-	// The S3 bucket name of an existing IONOS Cloud S3 bucket. Immutable, forces re-recreation of the nic resource.
+	// Specifies the IONOS Object Storage bucket where the flow log data will be stored. The bucket must exist. Immutable, update forces re-creation.
+	// The bucket name of an existing IONOS Object Storage bucket. Immutable, forces re-recreation of the nic resource.
 	Bucket *string `json:"bucket,omitempty" tf:"bucket,omitempty"`
 
 	// Specifies the traffic direction pattern. Valid values: INGRESS, EGRESS, BIDIRECTIONAL. Immutable, update forces re-creation.
@@ -38,8 +38,8 @@ type FlowlogObservation struct {
 	// Specifies the traffic direction pattern. Valid values: ACCEPTED, REJECTED, ALL. Immutable, forces re-recreation of the nic resource.
 	Action *string `json:"action,omitempty" tf:"action,omitempty"`
 
-	// Specifies the S3 IONOS bucket where the flow log data will be stored. The bucket must exist. Immutable, update forces re-creation.
-	// The S3 bucket name of an existing IONOS Cloud S3 bucket. Immutable, forces re-recreation of the nic resource.
+	// Specifies the IONOS Object Storage bucket where the flow log data will be stored. The bucket must exist. Immutable, update forces re-creation.
+	// The bucket name of an existing IONOS Object Storage bucket. Immutable, forces re-recreation of the nic resource.
 	Bucket *string `json:"bucket,omitempty" tf:"bucket,omitempty"`
 
 	// Specifies the traffic direction pattern. Valid values: INGRESS, EGRESS, BIDIRECTIONAL. Immutable, update forces re-creation.
@@ -62,8 +62,8 @@ type FlowlogParameters struct {
 	// +kubebuilder:validation:Optional
 	Action *string `json:"action" tf:"action,omitempty"`
 
-	// Specifies the S3 IONOS bucket where the flow log data will be stored. The bucket must exist. Immutable, update forces re-creation.
-	// The S3 bucket name of an existing IONOS Cloud S3 bucket. Immutable, forces re-recreation of the nic resource.
+	// Specifies the IONOS Object Storage bucket where the flow log data will be stored. The bucket must exist. Immutable, update forces re-creation.
+	// The bucket name of an existing IONOS Object Storage bucket. Immutable, forces re-recreation of the nic resource.
 	// +kubebuilder:validation:Optional
 	Bucket *string `json:"bucket" tf:"bucket,omitempty"`
 

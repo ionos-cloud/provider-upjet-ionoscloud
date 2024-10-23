@@ -390,9 +390,9 @@ spec:
                                         nic resource.'
                                       type: string
                                     bucket:
-                                      description: The S3 bucket name of an existing
-                                        IONOS Cloud S3 bucket. Immutable, forces re-recreation
-                                        of the nic resource.
+                                      description: The bucket name of an existing
+                                        IONOS Object Storage bucket. Immutable, forces
+                                        re-recreation of the nic resource.
                                       type: string
                                     direction:
                                       description: 'Specifies the traffic direction
@@ -992,9 +992,9 @@ spec:
                                         nic resource.'
                                       type: string
                                     bucket:
-                                      description: The S3 bucket name of an existing
-                                        IONOS Cloud S3 bucket. Immutable, forces re-recreation
-                                        of the nic resource.
+                                      description: The bucket name of an existing
+                                        IONOS Object Storage bucket. Immutable, forces
+                                        re-recreation of the nic resource.
                                       type: string
                                     direction:
                                       description: 'Specifies the traffic direction
@@ -1703,9 +1703,9 @@ spec:
                                         nic resource.'
                                       type: string
                                     bucket:
-                                      description: The S3 bucket name of an existing
-                                        IONOS Cloud S3 bucket. Immutable, forces re-recreation
-                                        of the nic resource.
+                                      description: The bucket name of an existing
+                                        IONOS Object Storage bucket. Immutable, forces
+                                        re-recreation of the nic resource.
                                       type: string
                                     direction:
                                       description: 'Specifies the traffic direction
