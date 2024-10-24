@@ -184,6 +184,10 @@ type UpstreamInitParameters struct {
 	// Rate limit class that will be applied to limit the number of incoming requests per IP.
 	RateLimitClass *string `json:"rateLimitClass,omitempty" tf:"rate_limit_class,omitempty"`
 
+	// [string] The SNI (Server Name Indication) mode of the upstream. It supports two modes: 1) distribution: for outgoing connections to the upstream host, the CDN requires the upstream host to present a valid certificate that matches the configured domain of the CDN distribution; 2) origin: for outgoing connections to the upstream host, the CDN requires the upstream host to present a valid certificate that matches the configured upstream/origin hostname.
+	// The SNI (Server Name Indication) mode of the upstream host. It supports two modes: 'distribution' and 'origin', for more information about these modes please check the resource docs.
+	SniMode *string `json:"sniMode,omitempty" tf:"sni_mode,omitempty"`
+
 	// [bool] Enable or disable WAF to protect the upstream host.
 	// Enable or disable WAF to protect the upstream host.
 	Waf *bool `json:"waf,omitempty" tf:"waf,omitempty"`
@@ -205,6 +209,10 @@ type UpstreamObservation struct {
 	// [string] Rate limit class that will be applied to limit the number of incoming requests per IP.
 	// Rate limit class that will be applied to limit the number of incoming requests per IP.
 	RateLimitClass *string `json:"rateLimitClass,omitempty" tf:"rate_limit_class,omitempty"`
+
+	// [string] The SNI (Server Name Indication) mode of the upstream. It supports two modes: 1) distribution: for outgoing connections to the upstream host, the CDN requires the upstream host to present a valid certificate that matches the configured domain of the CDN distribution; 2) origin: for outgoing connections to the upstream host, the CDN requires the upstream host to present a valid certificate that matches the configured upstream/origin hostname.
+	// The SNI (Server Name Indication) mode of the upstream host. It supports two modes: 'distribution' and 'origin', for more information about these modes please check the resource docs.
+	SniMode *string `json:"sniMode,omitempty" tf:"sni_mode,omitempty"`
 
 	// [bool] Enable or disable WAF to protect the upstream host.
 	// Enable or disable WAF to protect the upstream host.
@@ -231,6 +239,11 @@ type UpstreamParameters struct {
 	// Rate limit class that will be applied to limit the number of incoming requests per IP.
 	// +kubebuilder:validation:Optional
 	RateLimitClass *string `json:"rateLimitClass" tf:"rate_limit_class,omitempty"`
+
+	// [string] The SNI (Server Name Indication) mode of the upstream. It supports two modes: 1) distribution: for outgoing connections to the upstream host, the CDN requires the upstream host to present a valid certificate that matches the configured domain of the CDN distribution; 2) origin: for outgoing connections to the upstream host, the CDN requires the upstream host to present a valid certificate that matches the configured upstream/origin hostname.
+	// The SNI (Server Name Indication) mode of the upstream host. It supports two modes: 'distribution' and 'origin', for more information about these modes please check the resource docs.
+	// +kubebuilder:validation:Optional
+	SniMode *string `json:"sniMode" tf:"sni_mode,omitempty"`
 
 	// [bool] Enable or disable WAF to protect the upstream host.
 	// Enable or disable WAF to protect the upstream host.

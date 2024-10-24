@@ -133,17 +133,18 @@ spec:
                     type: boolean
                   s3Buckets:
                     description: |-
-                      [list] List of S3 bucket configured for K8s usage. For now it contains only an S3 bucket used to store K8s API audit logs.
-                      List of S3 bucket configured for K8s usage. For now it contains only an S3 bucket used to store K8s API audit logs.
+                      [list] List of IONOS Object Storage buckets configured for K8s usage. For now it contains only an IONOS Object Storage bucket used to store K8s API audit logs.
+                      List of Object Storage bucket configured for K8s usage. For now it contains only an Object Storage bucket used to store K8s API audit logs.
                     items:
                       properties:
                         name:
                           description: |-
                             [string] The name of the Kubernetes Cluster.
-                            Name of the S3 bucket
+                            Name of the Object Storage bucket
                           type: string
                         nameRef:
-                          description: Reference to a Bucket in s3 to populate name.
+                          description: Reference to a Bucket in objectstorage to populate
+                            name.
                           properties:
                             name:
                               description: Name of the referenced object.
@@ -177,7 +178,8 @@ spec:
                           - name
                           type: object
                         nameSelector:
-                          description: Selector for a Bucket in s3 to populate name.
+                          description: Selector for a Bucket in objectstorage to populate
+                            name.
                           properties:
                             matchControllerRef:
                               description: |-
@@ -292,17 +294,18 @@ spec:
                     type: boolean
                   s3Buckets:
                     description: |-
-                      [list] List of S3 bucket configured for K8s usage. For now it contains only an S3 bucket used to store K8s API audit logs.
-                      List of S3 bucket configured for K8s usage. For now it contains only an S3 bucket used to store K8s API audit logs.
+                      [list] List of IONOS Object Storage buckets configured for K8s usage. For now it contains only an IONOS Object Storage bucket used to store K8s API audit logs.
+                      List of Object Storage bucket configured for K8s usage. For now it contains only an Object Storage bucket used to store K8s API audit logs.
                     items:
                       properties:
                         name:
                           description: |-
                             [string] The name of the Kubernetes Cluster.
-                            Name of the S3 bucket
+                            Name of the Object Storage bucket
                           type: string
                         nameRef:
-                          description: Reference to a Bucket in s3 to populate name.
+                          description: Reference to a Bucket in objectstorage to populate
+                            name.
                           properties:
                             name:
                               description: Name of the referenced object.
@@ -336,7 +339,8 @@ spec:
                           - name
                           type: object
                         nameSelector:
-                          description: Selector for a Bucket in s3 to populate name.
+                          description: Selector for a Bucket in objectstorage to populate
+                            name.
                           properties:
                             matchControllerRef:
                               description: |-
@@ -617,14 +621,14 @@ spec:
                     type: boolean
                   s3Buckets:
                     description: |-
-                      [list] List of S3 bucket configured for K8s usage. For now it contains only an S3 bucket used to store K8s API audit logs.
-                      List of S3 bucket configured for K8s usage. For now it contains only an S3 bucket used to store K8s API audit logs.
+                      [list] List of IONOS Object Storage buckets configured for K8s usage. For now it contains only an IONOS Object Storage bucket used to store K8s API audit logs.
+                      List of Object Storage bucket configured for K8s usage. For now it contains only an Object Storage bucket used to store K8s API audit logs.
                     items:
                       properties:
                         name:
                           description: |-
                             [string] The name of the Kubernetes Cluster.
-                            Name of the S3 bucket
+                            Name of the Object Storage bucket
                           type: string
                       type: object
                     type: array

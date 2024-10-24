@@ -236,8 +236,8 @@ type MaintenanceWindowParameters struct {
 
 type PostgresqlClusterInitParameters struct {
 
-	// (Computed)[string] The S3 location where the backups will be stored. Possible values are: de, eu-south-2, eu-central-2. This attribute is immutable (disallowed in update requests).
-	// The S3 location where the backups will be stored.
+	// (Computed)[string] The IONOS Object Storage location where the backups will be stored. Possible values are: de, eu-south-2, eu-central-2. This attribute is immutable (disallowed in update requests).
+	// The Object Storage location where the backups will be stored.
 	BackupLocation *string `json:"backupLocation,omitempty" tf:"backup_location,omitempty"`
 
 	// [object]
@@ -309,8 +309,8 @@ type PostgresqlClusterInitParameters struct {
 
 type PostgresqlClusterObservation struct {
 
-	// (Computed)[string] The S3 location where the backups will be stored. Possible values are: de, eu-south-2, eu-central-2. This attribute is immutable (disallowed in update requests).
-	// The S3 location where the backups will be stored.
+	// (Computed)[string] The IONOS Object Storage location where the backups will be stored. Possible values are: de, eu-south-2, eu-central-2. This attribute is immutable (disallowed in update requests).
+	// The Object Storage location where the backups will be stored.
 	BackupLocation *string `json:"backupLocation,omitempty" tf:"backup_location,omitempty"`
 
 	// [object]
@@ -378,8 +378,8 @@ type PostgresqlClusterObservation struct {
 
 type PostgresqlClusterParameters struct {
 
-	// (Computed)[string] The S3 location where the backups will be stored. Possible values are: de, eu-south-2, eu-central-2. This attribute is immutable (disallowed in update requests).
-	// The S3 location where the backups will be stored.
+	// (Computed)[string] The IONOS Object Storage location where the backups will be stored. Possible values are: de, eu-south-2, eu-central-2. This attribute is immutable (disallowed in update requests).
+	// The Object Storage location where the backups will be stored.
 	// +kubebuilder:validation:Optional
 	BackupLocation *string `json:"backupLocation,omitempty" tf:"backup_location,omitempty"`
 

@@ -1,0 +1,17 @@
+apiVersion: objectstorage.ionoscloud.io/v1alpha1
+kind: BucketPublicAccessBlock
+metadata:
+  annotations:
+    meta.upbound.io/example-id: objectstorage/v1alpha1/bucketpublicaccessblock
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    blockPublicAcls: false
+    blockPublicPolicy: false
+    bucketSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    ignorePublicAcls: true
+    restrictPublicBuckets: true

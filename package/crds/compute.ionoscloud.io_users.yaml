@@ -417,8 +417,8 @@ spec:
                     description: '[string] A last name for the user.'
                     type: string
                   s3CanonicalUserId:
-                    description: (Computed) Canonical (S3) id of the user for a given
-                      identity
+                    description: (Computed) Canonical (IONOS Object Storage) id of
+                      the user for a given identity
                     type: string
                   secAuthActive:
                     description: |-

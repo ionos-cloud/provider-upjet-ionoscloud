@@ -216,7 +216,7 @@ type FlowLogInitParameters struct {
 	// Specifies the traffic direction pattern. Valid values: ACCEPTED, REJECTED, ALL. Immutable, forces re-recreation of the nic resource.
 	Action *string `json:"action,omitempty" tf:"action,omitempty"`
 
-	// The S3 bucket name of an existing IONOS Cloud S3 bucket. Immutable, forces re-recreation of the nic resource.
+	// The bucket name of an existing IONOS Object Storage bucket. Immutable, forces re-recreation of the nic resource.
 	Bucket *string `json:"bucket,omitempty" tf:"bucket,omitempty"`
 
 	// Specifies the traffic direction pattern. Valid values: INGRESS, EGRESS, BIDIRECTIONAL. Immutable, forces re-recreation of the nic resource.
@@ -231,7 +231,7 @@ type FlowLogObservation struct {
 	// Specifies the traffic direction pattern. Valid values: ACCEPTED, REJECTED, ALL. Immutable, forces re-recreation of the nic resource.
 	Action *string `json:"action,omitempty" tf:"action,omitempty"`
 
-	// The S3 bucket name of an existing IONOS Cloud S3 bucket. Immutable, forces re-recreation of the nic resource.
+	// The bucket name of an existing IONOS Object Storage bucket. Immutable, forces re-recreation of the nic resource.
 	Bucket *string `json:"bucket,omitempty" tf:"bucket,omitempty"`
 
 	// Specifies the traffic direction pattern. Valid values: INGRESS, EGRESS, BIDIRECTIONAL. Immutable, forces re-recreation of the nic resource.
@@ -250,7 +250,7 @@ type FlowLogParameters struct {
 	// +kubebuilder:validation:Optional
 	Action *string `json:"action" tf:"action,omitempty"`
 
-	// The S3 bucket name of an existing IONOS Cloud S3 bucket. Immutable, forces re-recreation of the nic resource.
+	// The bucket name of an existing IONOS Object Storage bucket. Immutable, forces re-recreation of the nic resource.
 	// +kubebuilder:validation:Optional
 	Bucket *string `json:"bucket" tf:"bucket,omitempty"`
 

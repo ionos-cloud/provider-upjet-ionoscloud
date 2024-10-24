@@ -77,7 +77,7 @@ type UserObservation struct {
 	// [string] A last name for the user.
 	LastName *string `json:"lastName,omitempty" tf:"last_name,omitempty"`
 
-	// (Computed) Canonical (S3) id of the user for a given identity
+	// (Computed) Canonical (IONOS Object Storage) id of the user for a given identity
 	S3CanonicalUserID *string `json:"s3CanonicalUserId,omitempty" tf:"s3_canonical_user_id,omitempty"`
 
 	// [Boolean] Indicates if secure authentication is active for the user or not. it can not be used in create requests - can be used in update

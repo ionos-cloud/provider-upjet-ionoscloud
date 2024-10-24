@@ -79,6 +79,7 @@ func TerraformSetupBuilder(version, providerSource, providerVersion string, fwPr
 		ps.Configuration = map[string]any{
 			"username":      creds["user"],
 			"password":      creds["password"],
+			"token":         creds["token"],
 			"s3_access_key": creds["s3_access_key"],
 			"s3_secret_key": creds["s3_secret_key"],
 		}

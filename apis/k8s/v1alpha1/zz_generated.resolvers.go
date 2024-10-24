@@ -11,7 +11,7 @@ import (
 	reference "github.com/crossplane/crossplane-runtime/pkg/reference"
 	resource "github.com/crossplane/upjet/pkg/resource"
 	v1alpha11 "github.com/ionos-cloud/provider-upjet-ionoscloud/apis/compute/v1alpha1"
-	v1alpha1 "github.com/ionos-cloud/provider-upjet-ionoscloud/apis/s3/v1alpha1"
+	v1alpha1 "github.com/ionos-cloud/provider-upjet-ionoscloud/apis/objectstorage/v1alpha1"
 	errors "github.com/pkg/errors"
 	client "sigs.k8s.io/controller-runtime/pkg/client"
 )
