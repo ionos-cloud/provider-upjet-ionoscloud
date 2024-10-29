@@ -258,8 +258,5 @@ help-special: crossplane.help
 vendor: modules.download
 vendor.check: modules.check
 
-go.cachedir:
-	@go env GOCACHE
-
 go.mod.cachedir:
 	@go env GOMODCACHE
