@@ -1,0 +1,46 @@
+apiVersion: objectstorage.ionoscloud.io/v1alpha1
+kind: Key
+metadata:
+  annotations:
+    meta.upbound.io/example-id: objectstorage/v1alpha1/key
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    active: true
+    userIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+
+---
+
+apiVersion: compute.ionoscloud.io/v1alpha1
+kind: User
+metadata:
+  annotations:
+    meta.upbound.io/example-id: objectstorage/v1alpha1/key
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+#  needs to be set to true so that the user can create a key
+    administrator: true
+    email: ${Rand.RFC1123Subdomain}@email.com
+    firstName: example
+    forceSecAuth: false
+    active: true
+    lastName: example
+    passwordSecretRef:
+      key: password
+      name: pwsecret
+      namespace: upbound-system
+---
+  apiVersion: v1
+  kind: Secret
+  metadata:
+    name: pwsecret
+    namespace: upbound-system
+  stringData:
+    password: "Upboundtest!"

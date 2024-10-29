@@ -75,8 +75,8 @@ spec:
                 properties:
                   backupLocation:
                     description: |-
-                      (Computed)[string] The S3 location where the backups will be stored. Possible values are: de, eu-south-2, eu-central-2. This attribute is immutable (disallowed in update requests).
-                      The S3 location where the backups will be stored.
+                      (Computed)[string] The IONOS Object Storage location where the backups will be stored. Possible values are: de, eu-south-2, eu-central-2. This attribute is immutable (disallowed in update requests).
+                      The Object Storage location where the backups will be stored.
                     type: string
                   connectionPooler:
                     description: |-
@@ -462,8 +462,8 @@ spec:
                 properties:
                   backupLocation:
                     description: |-
-                      (Computed)[string] The S3 location where the backups will be stored. Possible values are: de, eu-south-2, eu-central-2. This attribute is immutable (disallowed in update requests).
-                      The S3 location where the backups will be stored.
+                      (Computed)[string] The IONOS Object Storage location where the backups will be stored. Possible values are: de, eu-south-2, eu-central-2. This attribute is immutable (disallowed in update requests).
+                      The Object Storage location where the backups will be stored.
                     type: string
                   connectionPooler:
                     description: |-
@@ -1047,8 +1047,8 @@ spec:
                 properties:
                   backupLocation:
                     description: |-
-                      (Computed)[string] The S3 location where the backups will be stored. Possible values are: de, eu-south-2, eu-central-2. This attribute is immutable (disallowed in update requests).
-                      The S3 location where the backups will be stored.
+                      (Computed)[string] The IONOS Object Storage location where the backups will be stored. Possible values are: de, eu-south-2, eu-central-2. This attribute is immutable (disallowed in update requests).
+                      The Object Storage location where the backups will be stored.
                     type: string
                   connectionPooler:
                     description: |-

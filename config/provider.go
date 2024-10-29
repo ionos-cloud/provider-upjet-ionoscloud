@@ -38,8 +38,8 @@ import (
 	"github.com/ionos-cloud/provider-upjet-ionoscloud/config/mariadb"
 	"github.com/ionos-cloud/provider-upjet-ionoscloud/config/mongodb"
 	"github.com/ionos-cloud/provider-upjet-ionoscloud/config/nfs"
+	"github.com/ionos-cloud/provider-upjet-ionoscloud/config/objectstorage"
 	"github.com/ionos-cloud/provider-upjet-ionoscloud/config/postgresql"
-	"github.com/ionos-cloud/provider-upjet-ionoscloud/config/s3"
 	"github.com/ionos-cloud/provider-upjet-ionoscloud/config/wireguard"
 )
 
@@ -88,7 +88,7 @@ func GetProvider(generationProvider bool) (*ujconfig.Provider, error) {
 
 	for _, configure := range []func(provider *ujconfig.Provider){
 		// add custom config functions
-		s3.Configure,
+		objectstorage.Configure,
 		compute.Configure,
 		apigateway.Configure,
 		mariadb.Configure,

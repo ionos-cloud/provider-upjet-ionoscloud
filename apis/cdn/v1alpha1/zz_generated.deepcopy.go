@@ -467,6 +467,11 @@ func (in *UpstreamInitParameters) DeepCopyInto(out *UpstreamInitParameters) {
 		*out = new(string)
 		**out = **in
 	}
+	if in.SniMode != nil {
+		in, out := &in.SniMode, &out.SniMode
+		*out = new(string)
+		**out = **in
+	}
 	if in.Waf != nil {
 		in, out := &in.Waf, &out.Waf
 		*out = new(bool)
@@ -507,6 +512,11 @@ func (in *UpstreamObservation) DeepCopyInto(out *UpstreamObservation) {
 		*out = new(string)
 		**out = **in
 	}
+	if in.SniMode != nil {
+		in, out := &in.SniMode, &out.SniMode
+		*out = new(string)
+		**out = **in
+	}
 	if in.Waf != nil {
 		in, out := &in.Waf, &out.Waf
 		*out = new(bool)
@@ -544,6 +554,11 @@ func (in *UpstreamParameters) DeepCopyInto(out *UpstreamParameters) {
 	}
 	if in.RateLimitClass != nil {
 		in, out := &in.RateLimitClass, &out.RateLimitClass
+		*out = new(string)
+		**out = **in
+	}
+	if in.SniMode != nil {
+		in, out := &in.SniMode, &out.SniMode
 		*out = new(string)
 		**out = **in
 	}

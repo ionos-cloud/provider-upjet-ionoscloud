@@ -150,7 +150,7 @@ resources:
                     }
         argumentDocs:
             action: '- (Required)[string] Specifies the action to be taken when the rule is matched. Possible values: ACCEPTED, REJECTED, ALL. Immutable, forces re-creation.'
-            bucket: '- (Required)[string] Specifies the S3 IONOS bucket where the flow log data will be stored. The bucket must exist. Immutable, forces re-creation.'
+            bucket: '- (Required)[string] Specifies the IONOS Object Storage bucket where the flow log data will be stored. The bucket must exist. Immutable, forces re-creation.'
             central_logging: '- (Optional)[bool] Turn logging on and off for this product. Default value is ''false''.'
             datacenter_id: '- (Required)[string] ID of the datacenter.'
             direction: '- (Required)[string] Specifies the traffic direction pattern. Valid values: INGRESS, EGRESS, BIDIRECTIONAL. Immutable, forces re-creation.'
@@ -417,6 +417,7 @@ resources:
                           ],
                           "host": "server.example.com",
                           "rate_limit_class": "R500",
+                          "sni_mode": "distribution",
                           "waf": true
                         }
                       ]
@@ -437,6 +438,7 @@ resources:
                           ],
                           "host": "server2.example.com",
                           "rate_limit_class": "R10",
+                          "sni_mode": "origin",
                           "waf": false
                         }
                       ]
@@ -468,6 +470,7 @@ resources:
             resource_urn: '- Unique resource indentifier.'
             routing_rules: '- (Required)[list] The routing rules for the distribution.'
             scheme: '- (Required)[string] The scheme of the routing rule.'
+            sni_mode: '- (Required)[string] The SNI (Server Name Indication) mode of the upstream. It supports two modes: 1) distribution: for outgoing connections to the upstream host, the CDN requires the upstream host to present a valid certificate that matches the configured domain of the CDN distribution; 2) origin: for outgoing connections to the upstream host, the CDN requires the upstream host to present a valid certificate that matches the configured upstream/origin hostname.'
             upstream: '- (Required)[map] - A map of properties for the rule'
             waf: '- (Required)[bool] Enable or disable WAF to protect the upstream host.'
         importStatements:
@@ -1371,7 +1374,7 @@ resources:
                   "name": "k8sClusterExample",
                   "s3_buckets": [
                     {
-                      "name": "globally_unique_s3_bucket_name"
+                      "name": "globally_unique_bucket_name"
                     }
                   ]
                 }
@@ -1395,7 +1398,7 @@ resources:
                   "public": false,
                   "s3_buckets": [
                     {
-                      "name": "globally_unique_s3_bucket_name"
+                      "name": "globally_unique_bucket_name"
                     }
                   ]
                 }
@@ -1425,7 +1428,7 @@ resources:
             nat_gateway_ip: '- (Optional)[string] The NAT gateway IP of the cluster if the cluster is private. This attribute is immutable. Must be a reserved IP in the same location as the cluster''s location. This attribute is mandatory if the cluster is private.'
             node_subnet: '- (Optional)[string] The node subnet of the cluster, if the cluster is private. This attribute is optional and immutable. Must be a valid CIDR notation for an IPv4 network prefix of 16 bits length.'
             public: '- (Optional)[boolean] Indicates if the cluster is public or private. This attribute is immutable.'
-            s3_buckets: '- (Optional)[list] List of S3 bucket configured for K8s usage. For now it contains only an S3 bucket used to store K8s API audit logs.'
+            s3_buckets: '- (Optional)[list] List of IONOS Object Storage buckets configured for K8s usage. For now it contains only an IONOS Object Storage bucket used to store K8s API audit logs.'
             time: '- (Required)[string] A clock time in the day when maintenance is allowed'
             viable_node_pool_versions: '- (Computed)[list] List of versions that may be used for node pools under this cluster'
         importStatements:
@@ -2632,7 +2635,7 @@ resources:
                 target_lan: ionoscloud_lan.example2.id
         argumentDocs:
             action: '- (Required)[string] Specifies the action to be taken when the rule is matched. Possible values: ACCEPTED, REJECTED, ALL. Immutable, forces re-creation.'
-            bucket: '- (Required)[string] Specifies the S3 IONOS bucket where the flow log data will be stored. The bucket must exist. Immutable, forces re-creation.'
+            bucket: '- (Required)[string] Specifies the IONOS Object Storage bucket where the flow log data will be stored. The bucket must exist. Immutable, forces re-creation.'
             central_logging: '- (Optional)[bool] Turn logging on and off for this product. Default value is ''false''.'
             datacenter_id: '- (Required)[string] A Datacenter''s UUID.'
             direction: '- (Required)[string] Specifies the traffic direction pattern. Valid values: INGRESS, EGRESS, BIDIRECTIONAL. Immutable, forces re-creation.'
@@ -3187,7 +3190,7 @@ resources:
                 server_id: ionoscloud_server.example.id
         argumentDocs:
             action: '- (Required) Specifies the action to be taken when the rule is matched. Possible values: ACCEPTED, REJECTED, ALL. Immutable, update forces re-creation.'
-            bucket: '- (Required) Specifies the S3 IONOS bucket where the flow log data will be stored. The bucket must exist. Immutable, update forces re-creation.'
+            bucket: '- (Required) Specifies the IONOS Object Storage bucket where the flow log data will be stored. The bucket must exist. Immutable, update forces re-creation.'
             datacenter_id: '- (Required)[string] The ID of a Virtual Data Center.'
             device_number: '- (Computed) The Logical Unit Number (LUN) of the storage volume. Null if this NIC was created from CloudAPI and no DCD changes were done on the Datacenter.'
             dhcp: '- (Optional)[Boolean] Indicates if the NIC should get an IP address using DHCP (true) or not (false).'
@@ -3364,7 +3367,7 @@ resources:
                     }
         argumentDocs:
             backup_id: '- (Required)[string] The unique ID of the backup you want to restore.'
-            backup_location: '- (Optional)(Computed)[string] The S3 location where the backups will be stored. Possible values are: de, eu-south-2, eu-central-2. This attribute is immutable (disallowed in update requests).'
+            backup_location: '- (Optional)(Computed)[string] The IONOS Object Storage location where the backups will be stored. Possible values are: de, eu-south-2, eu-central-2. This attribute is immutable (disallowed in update requests).'
             cidr: '- (Required)[true] The IP and subnet for the database. Note the following unavailable IP ranges: 10.233.64.0/18, 10.233.0.0/18, 10.233.114.0/24. Please enter in the correct format like IP/Subnet, exp: 192.168.10.0/24. See Private IPs and Configuring the network.'
             connection_pooler: '- (Optional)[object]'
             connections: '- (Required)[string] Details about the network connection for your cluster.'
@@ -3498,8 +3501,8 @@ resources:
         importStatements:
             - terraform import ionoscloud_private_crossconnect.demo {ionoscloud_private_crossconnect_uuid}
     ionoscloud_s3_bucket:
-        subCategory: S3
-        description: Creates and manages IonosCloud S3 Buckets.
+        subCategory: Object Storage
+        description: Creates and manages IONOS Object Storage Buckets.
         name: ionoscloud_s3_bucket
         title: s3_bucket
         examples:
@@ -3534,7 +3537,7 @@ resources:
         importStatements:
             - terraform import ionoscloud_s3_bucket.example example
     ionoscloud_s3_bucket_cors_configuration:
-        subCategory: S3
+        subCategory: Object Storage
         description: Manages Buckets cors_configuration on IonosCloud.
         name: ionoscloud_s3_bucket_cors_configuration
         title: s3_bucket_cors_configuration
@@ -3582,7 +3585,7 @@ resources:
         importStatements:
             - terraform import ionoscloud_s3_bucket_cors_configuration.example example
     ionoscloud_s3_bucket_lifecycle_configuration:
-        subCategory: S3
+        subCategory: Object Storage
         description: Manages Buckets lifecycle configuration on IonosCloud.
         name: ionoscloud_s3_bucket_lifecycle_configuration
         title: s3_bucket_lifecycle_configuration
@@ -3632,23 +3635,23 @@ resources:
                       "name": "example"
                     }
         argumentDocs:
-            abort_incomplete_multipart_upload: '- (Optional)[block] Specifies the days since the initiation of an incomplete multipart upload that IONOS S3 Object Storage will wait before permanently removing all parts of the upload.'
+            abort_incomplete_multipart_upload: '- (Optional)[block] Specifies the days since the initiation of an incomplete multipart upload that IONOS Object Storage will wait before permanently removing all parts of the upload.'
             bucket: '- (Required)[string] The name of the bucket where the object will be stored.'
             date: '- (Optional)[string] Specifies the date after which you want the specific rule action to take effect.'
             days: '- (Optional)[int] Specifies the number of days after object creation when the object expires. Required if ''date'' is not specified.'
-            days_after_initiation: '- (Optional)[int] Specifies the number of days after which IONOS S3 Object Storage aborts an incomplete multipart upload.'
+            days_after_initiation: '- (Optional)[int] Specifies the number of days after which IONOS Object Storage aborts an incomplete multipart upload.'
             expiration: '- (Optional)[block]  A lifecycle rule for when an object expires.'
-            expired_object_delete_marker: '- (Optional)[bool] Indicates whether IONOS S3 Object Storage will remove a delete marker with no noncurrent versions. If set to true, the delete marker will be expired; if set to false the policy takes no operation. This cannot be specified with Days or Date in a Lifecycle Expiration Policy.'
+            expired_object_delete_marker: '- (Optional)[bool] Indicates whether IONOS Object Storage will remove a delete marker with no noncurrent versions. If set to true, the delete marker will be expired; if set to false the policy takes no operation. This cannot be specified with Days or Date in a Lifecycle Expiration Policy.'
             id: '- (Optional)[int] Container for the Contract Number of the owner'
             lifecycle_rule: '- (Required)[block] A block of lifecycle_rule as defined below.'
-            noncurrent_days: '- (Optional)[int] Specifies the number of days an object is noncurrent before Amazon S3 can perform the associated action.'
+            noncurrent_days: '- (Optional)[int] Specifies the number of days an object is noncurrent before the associated action can be performed.'
             noncurrent_version_expiration: '- (Optional)[block] A lifecycle rule for when non-current object versions expire.'
             prefix: '- (Required)[string] Prefix identifying one or more objects to which the rule applies.'
             status: '- (Required)[string] The lifecycle rule status. Valid values are Enabled or Disabled.'
         importStatements:
             - terraform import ionoscloud_s3_bucket_lifecycle_configuration.example example
     ionoscloud_s3_bucket_object_lock_configuration:
-        subCategory: S3
+        subCategory: Object Storage
         description: Manages Buckets object_lock_configuration on IonosCloud.
         name: ionoscloud_s3_bucket_object_lock_configuration
         title: s3_bucket_object_lock_configuration
@@ -3688,8 +3691,8 @@ resources:
         importStatements:
             - terraform import ionoscloud_s3_bucket_object_lock_configuration.example example
     ionoscloud_s3_bucket_policy:
-        subCategory: S3
-        description: Creates and manages IonosCloud S3 Buckets policies.
+        subCategory: Object Storage
+        description: Creates and manages IonosCloud IONOS Object Storage Buckets policies.
         name: ionoscloud_s3_bucket_policy
         title: s3_bucket_policy
         examples:
@@ -3712,8 +3715,8 @@ resources:
         importStatements:
             - terraform import ionoscloud_s3_bucket_policy.example example
     ionoscloud_s3_bucket_public_access_block:
-        subCategory: S3
-        description: Creates and manages IonosCloud S3 Public Access Block for buckets.
+        subCategory: Object Storage
+        description: Creates and manages IonosCloud IONOS Object Storage Public Access Block for buckets.
         name: ionoscloud_s3_bucket_public_access_block
         title: s3_bucket_public_access_block
         examples:
@@ -3737,7 +3740,7 @@ resources:
         importStatements:
             - terraform import ionoscloud_s3_bucket_public_access_block.example example
     ionoscloud_s3_bucket_server_side_encryption_configuration:
-        subCategory: S3
+        subCategory: Object Storage
         description: Manages Buckets server side encryption configuration on IonosCloud.
         name: ionoscloud_s3_bucket_server_side_encryption_configuration
         title: s3_bucket_server_side_encryption_configuration
@@ -3771,7 +3774,7 @@ resources:
         importStatements:
             - terraform import ionoscloud_s3_bucket_server_side_encryption_configuration.example example
     ionoscloud_s3_bucket_versioning:
-        subCategory: S3
+        subCategory: Object Storage
         description: Manages Buckets versioning on IonosCloud.
         name: ionoscloud_s3_bucket_versioning
         title: s3_bucket_versioning
@@ -3801,7 +3804,7 @@ resources:
         importStatements:
             - terraform import ionoscloud_s3_bucket_versioning.example example
     ionoscloud_s3_bucket_website_configuration:
-        subCategory: S3
+        subCategory: Object Storage
         description: Manages Buckets website configuration on IonosCloud.
         name: ionoscloud_s3_bucket_website_configuration
         title: s3_bucket_website_configuration
@@ -3863,7 +3866,7 @@ resources:
             - terraform import ionoscloud_s3_bucket_website_configuration.example example
     ionoscloud_s3_key:
         subCategory: User Management
-        description: Creates and manages IonosCloud S3 keys.
+        description: Creates and manages IONOS Object Storage keys.
         name: ionoscloud_s3_key
         title: s3_key
         examples:
@@ -3886,14 +3889,14 @@ resources:
                       "password": "abc123-321CBA"
                     }
         argumentDocs:
-            active: '- (Optional)[boolean] Whether the S3 is active / enabled or not - Please keep in mind this is only required on create. Default value in true'
-            secret_key: '- (Computed)  The S3 Secret key.'
-            user_id: '- (Required)[string] The UUID of the user owning the S3 Key.'
+            active: '- (Optional)[boolean] Whether the IONOS Object Storage is active / enabled or not - Please keep in mind this is only required on create. Default value in true'
+            secret_key: '- (Computed)  The IONOS Object Storage Secret key.'
+            user_id: '- (Required)[string] The UUID of the user owning the IONOS Object Storage Key.'
         importStatements:
             - terraform import ionoscloud_s3_key.demo {userId}/{s3KeyId}
     ionoscloud_s3_object:
-        subCategory: S3
-        description: Creates and manages IonosCloud S3 Objects.
+        subCategory: Object Storage
+        description: Creates and manages IONOS Object Storage Objects.
         name: ionoscloud_s3_object
         title: s3_object
         examples:
@@ -3957,14 +3960,14 @@ resources:
             expires: '- (Optional)[string] The date and time at which the object is no longer cacheable.'
             force_destroy: '- (Optional)[bool] If true, the object will be destroyed if versioning is enabled then all versions will be destroyed. Default is false.'
             key: '- (Required)[string] The key of the object. Must be at least 1 character long.'
-            metadata: '- (Optional)[map] A map of metadata to store with the object in IONOS S3 Object Storage. Metadata keys must be lowercase alphanumeric characters.'
+            metadata: '- (Optional)[map] A map of metadata to store with the object in IONOS Object Storage. Metadata keys must be lowercase alphanumeric characters.'
             mfa: '- (Optional) [string]The concatenation of the authentication device''s serial number, a space, and the value displayed on your authentication device.'
             object_lock_legal_hold: '- (Optional)[string] Indicates whether a legal hold is in effect for the object. Valid values are ON and OFF.'
             object_lock_mode: '- (Optional)[string] The object lock mode that you want to apply to the object. Valid values are GOVERNANCE and COMPLIANCE.'
             object_lock_retain_until_date: '- (Optional)[string] The date and time when the object lock retention expires.Must be in RFC3999 format'
             request_payer: '- (Optional)[string] Confirms that the requester knows that they will be charged for the request.'
-            server_side_encryption: '- (Optional)[string] The server-side encryption algorithm used when storing this object in IONOS S3 Object Storage. Valid value is AES256.'
-            server_side_encryption_context: '- (Optional)[string] Specifies the IONOS S3 Object Storage Encryption Context for object encryption.'
+            server_side_encryption: '- (Optional)[string] The server-side encryption algorithm used when storing this object in IONOS Object Storage. Valid value is AES256.'
+            server_side_encryption_context: '- (Optional)[string] Specifies the IONOS Object Storage Encryption Context for object encryption.'
             server_side_encryption_customer_algorithm: '- (Optional)[string] Specifies the algorithm to use for encrypting the object. Valid value is AES256.'
             server_side_encryption_customer_key: '- (Optional)[string] Specifies the 256-bit, base64-encoded encryption key to use to encrypt and decrypt your data.'
             server_side_encryption_customer_key_md5: '- (Optional)[string] Specifies the 128-bit MD5 digest of the encryption key.'
@@ -3976,8 +3979,8 @@ resources:
         importStatements:
             - terraform import ionoscloud_s3_object.example example/object
     ionoscloud_s3_object_copy:
-        subCategory: S3
-        description: Creates a copy of an object that is already stored in IONOS S3 Object Storage.
+        subCategory: Object Storage
+        description: Creates a copy of an object that is already stored in IONOS Object Storage.
         name: ionoscloud_s3_object_copy
         title: s3_object_copy
         examples:
@@ -4022,13 +4025,13 @@ resources:
             force_destroy: '- (Optional)[bool] If true, the object will be destroyed if versioning is enabled then all versions will be destroyed. Default is false.'
             key: '- (Required)[string] The key of the object. Must be at least 1 character long.'
             last_modified: '- (Computed)[string] The date and time at which the object was last modified.'
-            metadata: '- (Optional)[map] A map of metadata to store with the object in IONOS S3 Object Storage. Metadata keys must be lowercase alphanumeric characters.'
+            metadata: '- (Optional)[map] A map of metadata to store with the object in IONOS Object Storage. Metadata keys must be lowercase alphanumeric characters.'
             metadata_directive: '- (Optional)[string] Specifies whether the metadata is copied from the source object or replaced with metadata provided in the request. Valid values are COPY and REPLACE.'
             object_lock_legal_hold: '- (Optional)[string] Indicates whether a legal hold is in effect for the object. Valid values are ON and OFF.'
             object_lock_mode: '- (Optional)[string] The object lock mode that you want to apply to the object. Valid values are GOVERNANCE and COMPLIANCE.'
             object_lock_retain_until_date: '- (Optional)[string] The date and time when the object lock retention expires.Must be in RFC3999 format'
-            server_side_encryption: '- (Optional)[string] The server-side encryption algorithm used when storing this object in IONOS S3 Object Storage. Valid value is AES256.'
-            server_side_encryption_context: '- (Optional)[string] Specifies the IONOS S3 Object Storage Encryption Context for object encryption.'
+            server_side_encryption: '- (Optional)[string] The server-side encryption algorithm used when storing this object in IONOS Object Storage. Valid value is AES256.'
+            server_side_encryption_context: '- (Optional)[string] Specifies the IONOS Object Storage Encryption Context for object encryption.'
             server_side_encryption_customer_algorithm: '- (Optional)[string] Specifies the algorithm to use for encrypting the object. Valid value is AES256.'
             server_side_encryption_customer_key: '- (Optional)[string] Specifies the 256-bit, base64-encoded encryption key to use to encrypt and decrypt your data.'
             server_side_encryption_customer_key_md5: '- (Optional)[string] Specifies the 128-bit MD5 digest of the encryption key.'
@@ -4608,7 +4611,7 @@ resources:
             group_ids: '- (Optional)[Set] The groups that this user will be a member of'
             last_name: '- (Required)[string] A last name for the user.'
             password: '- (Required)[string] A password for the user.'
-            s3_canonical_user_id: '- (Computed) Canonical (S3) id of the user for a given identity'
+            s3_canonical_user_id: '- (Computed) Canonical (IONOS Object Storage) id of the user for a given identity'
             sec_auth_active: '- (Optional)[Boolean] Indicates if secure authentication is active for the user or not. it can not be used in create requests - can be used in update'
         importStatements:
             - terraform import ionoscloud_user.myuser {user uuid}
@@ -4937,7 +4940,6 @@ resources:
             disc_virtio_hot_unplug: '- (Computed)[string] Is capable of Virt-IO drive hot unplug (no reboot required). This works only for non-Windows virtual Machines.'
             disk_type: '- (Required)[string] The volume type: HDD or SSD. This property is immutable.'
             image: '- (Computed) The image or snapshot UUID.'
-            image_alias: '- (Computed) The image alias.'
             image_name: '- (Optional)[string] The name, ID or alias of the image. May also be a snapshot ID. It is required if licence_type is not provided. Attribute is immutable.'
             image_password: '- (Optional)[string] Required if sshkey_path is not provided.'
             licence_type: '- (Optional)[string] Required if image_name is not provided.'

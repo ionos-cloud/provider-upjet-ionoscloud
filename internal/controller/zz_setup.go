@@ -58,22 +58,22 @@ import (
 	nfsshare "github.com/ionos-cloud/provider-upjet-ionoscloud/internal/controller/nfs/nfsshare"
 	forwardingrule "github.com/ionos-cloud/provider-upjet-ionoscloud/internal/controller/nlb/forwardingrule"
 	networkloadbalancer "github.com/ionos-cloud/provider-upjet-ionoscloud/internal/controller/nlb/networkloadbalancer"
+	bucket "github.com/ionos-cloud/provider-upjet-ionoscloud/internal/controller/objectstorage/bucket"
+	bucketcorsconfiguration "github.com/ionos-cloud/provider-upjet-ionoscloud/internal/controller/objectstorage/bucketcorsconfiguration"
+	bucketlifecycleconfiguration "github.com/ionos-cloud/provider-upjet-ionoscloud/internal/controller/objectstorage/bucketlifecycleconfiguration"
+	bucketobjectlockconfiguration "github.com/ionos-cloud/provider-upjet-ionoscloud/internal/controller/objectstorage/bucketobjectlockconfiguration"
+	bucketpolicy "github.com/ionos-cloud/provider-upjet-ionoscloud/internal/controller/objectstorage/bucketpolicy"
+	bucketpublicaccessblock "github.com/ionos-cloud/provider-upjet-ionoscloud/internal/controller/objectstorage/bucketpublicaccessblock"
+	bucketserversideencryptionconfiguration "github.com/ionos-cloud/provider-upjet-ionoscloud/internal/controller/objectstorage/bucketserversideencryptionconfiguration"
+	bucketversioning "github.com/ionos-cloud/provider-upjet-ionoscloud/internal/controller/objectstorage/bucketversioning"
+	bucketwebsiteconfiguration "github.com/ionos-cloud/provider-upjet-ionoscloud/internal/controller/objectstorage/bucketwebsiteconfiguration"
+	key "github.com/ionos-cloud/provider-upjet-ionoscloud/internal/controller/objectstorage/key"
+	object "github.com/ionos-cloud/provider-upjet-ionoscloud/internal/controller/objectstorage/object"
+	objectcopy "github.com/ionos-cloud/provider-upjet-ionoscloud/internal/controller/objectstorage/objectcopy"
 	postgresqlcluster "github.com/ionos-cloud/provider-upjet-ionoscloud/internal/controller/postgresql/postgresqlcluster"
 	postgresqldatabase "github.com/ionos-cloud/provider-upjet-ionoscloud/internal/controller/postgresql/postgresqldatabase"
 	postgresqluser "github.com/ionos-cloud/provider-upjet-ionoscloud/internal/controller/postgresql/postgresqluser"
 	providerconfig "github.com/ionos-cloud/provider-upjet-ionoscloud/internal/controller/providerconfig"
-	bucket "github.com/ionos-cloud/provider-upjet-ionoscloud/internal/controller/s3/bucket"
-	bucketcorsconfiguration "github.com/ionos-cloud/provider-upjet-ionoscloud/internal/controller/s3/bucketcorsconfiguration"
-	bucketlifecycleconfiguration "github.com/ionos-cloud/provider-upjet-ionoscloud/internal/controller/s3/bucketlifecycleconfiguration"
-	bucketobjectlockconfiguration "github.com/ionos-cloud/provider-upjet-ionoscloud/internal/controller/s3/bucketobjectlockconfiguration"
-	bucketpolicy "github.com/ionos-cloud/provider-upjet-ionoscloud/internal/controller/s3/bucketpolicy"
-	bucketpublicaccessblock "github.com/ionos-cloud/provider-upjet-ionoscloud/internal/controller/s3/bucketpublicaccessblock"
-	bucketserversideencryptionconfiguration "github.com/ionos-cloud/provider-upjet-ionoscloud/internal/controller/s3/bucketserversideencryptionconfiguration"
-	bucketversioning "github.com/ionos-cloud/provider-upjet-ionoscloud/internal/controller/s3/bucketversioning"
-	bucketwebsiteconfiguration "github.com/ionos-cloud/provider-upjet-ionoscloud/internal/controller/s3/bucketwebsiteconfiguration"
-	key "github.com/ionos-cloud/provider-upjet-ionoscloud/internal/controller/s3/key"
-	object "github.com/ionos-cloud/provider-upjet-ionoscloud/internal/controller/s3/object"
-	objectcopy "github.com/ionos-cloud/provider-upjet-ionoscloud/internal/controller/s3/objectcopy"
 	vpnipsecgateway "github.com/ionos-cloud/provider-upjet-ionoscloud/internal/controller/vpnipsec/vpnipsecgateway"
 	vpnipsectunnel "github.com/ionos-cloud/provider-upjet-ionoscloud/internal/controller/vpnipsec/vpnipsectunnel"
 	vpnwireguardgateway "github.com/ionos-cloud/provider-upjet-ionoscloud/internal/controller/vpnwireguard/vpnwireguardgateway"
@@ -133,10 +133,6 @@ func Setup(mgr ctrl.Manager, o controller.Options) error {
 		nfsshare.Setup,
 		forwardingrule.Setup,
 		networkloadbalancer.Setup,
-		postgresqlcluster.Setup,
-		postgresqldatabase.Setup,
-		postgresqluser.Setup,
-		providerconfig.Setup,
 		bucket.Setup,
 		bucketcorsconfiguration.Setup,
 		bucketlifecycleconfiguration.Setup,
@@ -149,6 +145,10 @@ func Setup(mgr ctrl.Manager, o controller.Options) error {
 		key.Setup,
 		object.Setup,
 		objectcopy.Setup,
+		postgresqlcluster.Setup,
+		postgresqldatabase.Setup,
+		postgresqluser.Setup,
+		providerconfig.Setup,
 		vpnipsecgateway.Setup,
 		vpnipsectunnel.Setup,
 		vpnwireguardgateway.Setup,
