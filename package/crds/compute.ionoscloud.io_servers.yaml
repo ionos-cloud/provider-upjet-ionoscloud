@@ -180,6 +180,11 @@ spec:
                     items:
                       type: string
                     type: array
+                  hostname:
+                    description: |-
+                      [string] The hostname of the resource. Allowed characters are a-z, 0-9 and - (minus). Hostname should not start with minus and should not be longer than 63 characters.
+                      The hostname of the resource. Allowed characters are a-z, 0-9 and - (minus). Hostname should not start with minus and should not be longer than 63 characters.
+                    type: string
                   imageName:
                     description: '[string] The name, ID or alias of the image. May
                       also be a snapshot ID. It is required if licence_type is not
@@ -575,6 +580,11 @@ spec:
                     items:
                       type: string
                     type: array
+                  hostname:
+                    description: |-
+                      [string] The hostname of the resource. Allowed characters are a-z, 0-9 and - (minus). Hostname should not start with minus and should not be longer than 63 characters.
+                      The hostname of the resource. Allowed characters are a-z, 0-9 and - (minus). Hostname should not start with minus and should not be longer than 63 characters.
+                    type: string
                   imageName:
                     description: '[string] The name, ID or alias of the image. May
                       also be a snapshot ID. It is required if licence_type is not
@@ -1068,6 +1078,11 @@ spec:
                     items:
                       type: string
                     type: array
+                  hostname:
+                    description: |-
+                      [string] The hostname of the resource. Allowed characters are a-z, 0-9 and - (minus). Hostname should not start with minus and should not be longer than 63 characters.
+                      The hostname of the resource. Allowed characters are a-z, 0-9 and - (minus). Hostname should not start with minus and should not be longer than 63 characters.
+                    type: string
                   id:
                     type: string
                   imageName:
