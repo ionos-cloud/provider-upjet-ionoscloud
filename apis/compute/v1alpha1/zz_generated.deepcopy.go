@@ -660,6 +660,11 @@ func (in *CubeServerInitParameters) DeepCopyInto(out *CubeServerInitParameters) 
 		*out = new(v1.Selector)
 		(*in).DeepCopyInto(*out)
 	}
+	if in.Hostname != nil {
+		in, out := &in.Hostname, &out.Hostname
+		*out = new(string)
+		**out = **in
+	}
 	if in.ImageName != nil {
 		in, out := &in.ImageName, &out.ImageName
 		*out = new(string)
@@ -783,6 +788,11 @@ func (in *CubeServerObservation) DeepCopyInto(out *CubeServerObservation) {
 		*out = new(string)
 		**out = **in
 	}
+	if in.Hostname != nil {
+		in, out := &in.Hostname, &out.Hostname
+		*out = new(string)
+		**out = **in
+	}
 	if in.ID != nil {
 		in, out := &in.ID, &out.ID
 		*out = new(string)
@@ -894,6 +904,11 @@ func (in *CubeServerParameters) DeepCopyInto(out *CubeServerParameters) {
 		in, out := &in.DatacenterIDSelector, &out.DatacenterIDSelector
 		*out = new(v1.Selector)
 		(*in).DeepCopyInto(*out)
+	}
+	if in.Hostname != nil {
+		in, out := &in.Hostname, &out.Hostname
+		*out = new(string)
+		**out = **in
 	}
 	if in.ImageName != nil {
 		in, out := &in.ImageName, &out.ImageName
@@ -4703,6 +4718,11 @@ func (in *ServerInitParameters) DeepCopyInto(out *ServerInitParameters) {
 			}
 		}
 	}
+	if in.Hostname != nil {
+		in, out := &in.Hostname, &out.Hostname
+		*out = new(string)
+		**out = **in
+	}
 	if in.ImageName != nil {
 		in, out := &in.ImageName, &out.ImageName
 		*out = new(string)
@@ -5152,6 +5172,11 @@ func (in *ServerObservation) DeepCopyInto(out *ServerObservation) {
 			}
 		}
 	}
+	if in.Hostname != nil {
+		in, out := &in.Hostname, &out.Hostname
+		*out = new(string)
+		**out = **in
+	}
 	if in.ID != nil {
 		in, out := &in.ID, &out.ID
 		*out = new(string)
@@ -5312,6 +5337,11 @@ func (in *ServerParameters) DeepCopyInto(out *ServerParameters) {
 				**out = **in
 			}
 		}
+	}
+	if in.Hostname != nil {
+		in, out := &in.Hostname, &out.Hostname
+		*out = new(string)
+		**out = **in
 	}
 	if in.ImageName != nil {
 		in, out := &in.ImageName, &out.ImageName
@@ -6979,6 +7009,11 @@ func (in *VCPUServerInitParameters) DeepCopyInto(out *VCPUServerInitParameters) 
 			}
 		}
 	}
+	if in.Hostname != nil {
+		in, out := &in.Hostname, &out.Hostname
+		*out = new(string)
+		**out = **in
+	}
 	if in.ImageName != nil {
 		in, out := &in.ImageName, &out.ImageName
 		*out = new(string)
@@ -7682,6 +7717,11 @@ func (in *VCPUServerObservation) DeepCopyInto(out *VCPUServerObservation) {
 			}
 		}
 	}
+	if in.Hostname != nil {
+		in, out := &in.Hostname, &out.Hostname
+		*out = new(string)
+		**out = **in
+	}
 	if in.ID != nil {
 		in, out := &in.ID, &out.ID
 		*out = new(string)
@@ -7821,6 +7861,11 @@ func (in *VCPUServerParameters) DeepCopyInto(out *VCPUServerParameters) {
 				**out = **in
 			}
 		}
+	}
+	if in.Hostname != nil {
+		in, out := &in.Hostname, &out.Hostname
+		*out = new(string)
+		**out = **in
 	}
 	if in.ImageName != nil {
 		in, out := &in.ImageName, &out.ImageName

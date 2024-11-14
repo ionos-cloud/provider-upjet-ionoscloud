@@ -715,6 +715,7 @@ resources:
             boot_volume: '- (Computed) The associated boot volume.'
             datacenter_id: '- (Required)[string] The ID of a Virtual Data Center.'
             firewallrule_id: '- (Computed) The associated firewall rule.'
+            hostname: '- The hostname of the resource. Allowed characters are a-z, 0-9 and - (minus). Hostname should not start with minus and should not be longer than 63 characters.'
             image_name: '- (Optional)[string] The name, ID or alias of the image. May also be a snapshot ID. It is required if licence_type is not provided. Attribute is immutable.'
             image_password: '- (Optional)[string] Required if ssh_key_path is not provided.'
             licence_type: '- (Optional)[string] Sets the OS type of the server.'
@@ -4327,6 +4328,7 @@ resources:
             firewall: '- (Optional) Allows to define firewall rules inline in the server. See the Firewall section.'
             firewallrule_id: '- (Computed) The associated firewall rule.'
             firewallrule_ids: '- (Computed) The associated firewall rules.'
+            hostname: '- (Optional)[string] The hostname of the resource. Allowed characters are a-z, 0-9 and - (minus). Hostname should not start with minus and should not be longer than 63 characters.'
             image_name: '- (Optional)[string] The name, ID or alias of the image. May also be a snapshot ID. It is required if licence_type is not provided. Attribute is immutable.'
             image_password: '- (Optional)[string] Required if ssh_key_path is not provided.'
             inline_volume_ids: '- (Computed) A list with the IDs for the volumes that are defined inside the server resource.'
@@ -4719,6 +4721,7 @@ resources:
             firewall: '- (Optional) Allows to define firewall rules inline in the server. See the Firewall section.'
             firewallrule_id: '- (Computed) The associated firewall rule.'
             firewallrule_ids: '- (Computed) The associated firewall rules.'
+            hostname: '- (Optional)[string] The hostname of the resource. Allowed characters are a-z, 0-9 and - (minus). Hostname should not start with minus and should not be longer than 63 characters.'
             image_name: '- (Optional)[string] The name, ID or alias of the image. May also be a snapshot ID. It is required if licence_type is not provided. Attribute is immutable.'
             image_password: '- (Optional)[string] The password for the image.'
             inline_volume_ids: '- (Computed) A list with the IDs for the volumes that are defined inside the server resource.'
@@ -4836,7 +4839,7 @@ resources:
                       "length": 16,
                       "special": false
                     }
-            - name: example
+            - name: example2
               manifest: |-
                 {
                   "availability_zone": "ZONE_1",
