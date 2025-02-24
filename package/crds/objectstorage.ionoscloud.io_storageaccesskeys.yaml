@@ -4,18 +4,18 @@ kind: CustomResourceDefinition
 metadata:
   annotations:
     controller-gen.kubebuilder.io/version: v0.14.0
-  name: autocertificateproviders.certificatemanager.ionoscloud.io
+  name: storageaccesskeys.objectstorage.ionoscloud.io
 spec:
-  group: certificatemanager.ionoscloud.io
+  group: objectstorage.ionoscloud.io
   names:
     categories:
     - crossplane
     - managed
     - ionos
-    kind: AutoCertificateProvider
-    listKind: AutoCertificateProviderList
-    plural: autocertificateproviders
-    singular: autocertificateprovider
+    kind: StorageAccesskey
+    listKind: StorageAccesskeyList
+    plural: storageaccesskeys
+    singular: storageaccesskey
   scope: Cluster
   versions:
   - additionalPrinterColumns:
@@ -34,8 +34,8 @@ spec:
     name: v1alpha1
     schema:
       openAPIV3Schema:
-        description: AutoCertificateProvider is the Schema for the AutoCertificateProviders
-          API. Creates and manages Certificate Manager provider objects.
+        description: StorageAccesskey is the Schema for the StorageAccesskeys API.
+          Creates and manages IonosCloud Object Storage Accesskeys.
         properties:
           apiVersion:
             description: |-
@@ -55,8 +55,7 @@ spec:
           metadata:
             type: object
           spec:
-            description: AutoCertificateProviderSpec defines the desired state of
-              AutoCertificateProvider
+            description: StorageAccesskeySpec defines the desired state of StorageAccesskey
             properties:
               deletionPolicy:
                 default: Delete
@@ -74,55 +73,10 @@ spec:
                 type: string
               forProvider:
                 properties:
-                  email:
+                  description:
                     description: |-
-                      [string] The email address of the certificate requester.
-                      The email address of the certificate requester
-                    type: string
-                  externalAccountBinding:
-                    description: '[list] External account binding details.'
-                    items:
-                      properties:
-                        keyId:
-                          description: |-
-                            [string] The key ID of the external account binding.
-                            The key ID of the external account binding
-                          type: string
-                        keySecretSecretRef:
-                          description: |-
-                            [string] The key secret of the external account binding
-                            The secret of the external account binding
-                          properties:
-                            key:
-                              description: The key to select.
-                              type: string
-                            name:
-                              description: Name of the secret.
-                              type: string
-                            namespace:
-                              description: Namespace of the secret.
-                              type: string
-                          required:
-                          - key
-                          - name
-                          - namespace
-                          type: object
-                      type: object
-                    type: array
-                  location:
-                    description: |-
-                      [string] The location of the provider.
-                      The location of the certificate provider
-                    type: string
-                  name:
-                    description: |-
-                      [string] The name of the certificate provider.
-                      The name of the certificate provider
-                    type: string
-                  server:
-                    description: |-
-                      [string] The URL of the certificate provider.
-                      The URL of the certificate provider
+                      [string] Description of the Access key.
+                      Description of the Access key.
                     type: string
                 type: object
               initProvider:
@@ -138,57 +92,10 @@ spec:
                   for example because of an external controller is managing them, like an
                   autoscaler.
                 properties:
-                  email:
+                  description:
                     description: |-
-                      [string] The email address of the certificate requester.
-                      The email address of the certificate requester
-                    type: string
-                  externalAccountBinding:
-                    description: '[list] External account binding details.'
-                    items:
-                      properties:
-                        keyId:
-                          description: |-
-                            [string] The key ID of the external account binding.
-                            The key ID of the external account binding
-                          type: string
-                        keySecretSecretRef:
-                          description: |-
-                            [string] The key secret of the external account binding
-                            The secret of the external account binding
-                          properties:
-                            key:
-                              description: The key to select.
-                              type: string
-                            name:
-                              description: Name of the secret.
-                              type: string
-                            namespace:
-                              description: Namespace of the secret.
-                              type: string
-                          required:
-                          - key
-                          - name
-                          - namespace
-                          type: object
-                      required:
-                      - keySecretSecretRef
-                      type: object
-                    type: array
-                  location:
-                    description: |-
-                      [string] The location of the provider.
-                      The location of the certificate provider
-                    type: string
-                  name:
-                    description: |-
-                      [string] The name of the certificate provider.
-                      The name of the certificate provider
-                    type: string
-                  server:
-                    description: |-
-                      [string] The URL of the certificate provider.
-                      The URL of the certificate provider
+                      [string] Description of the Access key.
+                      Description of the Access key.
                     type: string
                 type: object
               managementPolicies:
@@ -358,57 +265,38 @@ spec:
             required:
             - forProvider
             type: object
-            x-kubernetes-validations:
-            - message: spec.forProvider.email is a required parameter
-              rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
-                || ''Update'' in self.managementPolicies) || has(self.forProvider.email)
-                || (has(self.initProvider) && has(self.initProvider.email))'
-            - message: spec.forProvider.name is a required parameter
-              rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
-                || ''Update'' in self.managementPolicies) || has(self.forProvider.name)
-                || (has(self.initProvider) && has(self.initProvider.name))'
-            - message: spec.forProvider.server is a required parameter
-              rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
-                || ''Update'' in self.managementPolicies) || has(self.forProvider.server)
-                || (has(self.initProvider) && has(self.initProvider.server))'
           status:
-            description: AutoCertificateProviderStatus defines the observed state
-              of AutoCertificateProvider.
+            description: StorageAccesskeyStatus defines the observed state of StorageAccesskey.
             properties:
               atProvider:
                 properties:
-                  email:
+                  accesskey:
                     description: |-
-                      [string] The email address of the certificate requester.
-                      The email address of the certificate requester
+                      (Computed)  Access key metadata is a string of 92 characters.
+                      Access key metadata is a string of 92 characters.
                     type: string
-                  externalAccountBinding:
-                    description: '[list] External account binding details.'
-                    items:
-                      properties:
-                        keyId:
-                          description: |-
-                            [string] The key ID of the external account binding.
-                            The key ID of the external account binding
-                          type: string
-                      type: object
-                    type: array
+                  canonicalUserId:
+                    description: |-
+                      (Computed)  The canonical user ID which is valid for user-owned buckets.
+                      The canonical user ID which is valid for user-owned buckets.
+                    type: string
+                  contractUserId:
+                    description: |-
+                      (Computed)  The contract user ID which is valid for contract-owned buckets
+                      The contract user ID which is valid for contract-owned buckets
+                    type: string
+                  description:
+                    description: |-
+                      [string] Description of the Access key.
+                      Description of the Access key.
+                    type: string
                   id:
+                    description: (Computed)  The ID (UUID) of the AccessKey.
                     type: string
-                  location:
+                  secretkey:
                     description: |-
-                      [string] The location of the provider.
-                      The location of the certificate provider
-                    type: string
-                  name:
-                    description: |-
-                      [string] The name of the certificate provider.
-                      The name of the certificate provider
-                    type: string
-                  server:
-                    description: |-
-                      [string] The URL of the certificate provider.
-                      The URL of the certificate provider
+                      (Computed)  The secret key of the Access key.
+                      The secret key of the Access key.
                     type: string
                 type: object
               conditions:

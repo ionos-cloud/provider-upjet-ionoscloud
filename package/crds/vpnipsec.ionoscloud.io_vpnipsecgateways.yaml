@@ -342,13 +342,34 @@ spec:
                   location:
                     description: |-
                       [string] The location of the IPSec Gateway. Supported locations: de/fra, de/txl, es/vit,
-                      gb/lhr, us/ewr, us/las, us/mci, fr/par
-                      The location of the IPSec Gateway. Supported locations: de/fra, de/txl
+                      gb/bhx, gb/lhr, us/ewr, us/las, us/mci, fr/par.
+                      The location of the IPSec Gateway. Supported locations: de/fra, de/txl, es/vit, gb/bhx, gb/lhr, us/ewr, us/las, us/mci, fr/par
                     type: string
+                  maintenanceWindow:
+                    description: |-
+                      (Computed) A weekly 4 hour-long window, during which maintenance might occur.
+                      A weekly 4 hour-long window, during which maintenance might occur
+                    properties:
+                      dayOfTheWeek:
+                        description: |-
+                          [string] The name of the week day.
+                          The name of the week day
+                        type: string
+                      time:
+                        description: |-
+                          [string] Start of the maintenance window in UTC time.
+                          Start of the maintenance window in UTC time.
+                        type: string
+                    type: object
                   name:
                     description: |-
                       [string] The name of the IPSec Gateway.
                       The human readable name of your IPSecGateway.
+                    type: string
+                  tier:
+                    description: |-
+                      (Computed)[string] Gateway performance options.  See product documentation for full details. Options: STANDARD, STANDARD_HA, ENHANCED, ENHANCED_HA, PREMIUM, PREMIUM_HA.
+                      Gateway performance options. See the documentation for the available options
                     type: string
                   version:
                     description: |-
@@ -639,13 +660,34 @@ spec:
                   location:
                     description: |-
                       [string] The location of the IPSec Gateway. Supported locations: de/fra, de/txl, es/vit,
-                      gb/lhr, us/ewr, us/las, us/mci, fr/par
-                      The location of the IPSec Gateway. Supported locations: de/fra, de/txl
+                      gb/bhx, gb/lhr, us/ewr, us/las, us/mci, fr/par.
+                      The location of the IPSec Gateway. Supported locations: de/fra, de/txl, es/vit, gb/bhx, gb/lhr, us/ewr, us/las, us/mci, fr/par
                     type: string
+                  maintenanceWindow:
+                    description: |-
+                      (Computed) A weekly 4 hour-long window, during which maintenance might occur.
+                      A weekly 4 hour-long window, during which maintenance might occur
+                    properties:
+                      dayOfTheWeek:
+                        description: |-
+                          [string] The name of the week day.
+                          The name of the week day
+                        type: string
+                      time:
+                        description: |-
+                          [string] Start of the maintenance window in UTC time.
+                          Start of the maintenance window in UTC time.
+                        type: string
+                    type: object
                   name:
                     description: |-
                       [string] The name of the IPSec Gateway.
                       The human readable name of your IPSecGateway.
+                    type: string
+                  tier:
+                    description: |-
+                      (Computed)[string] Gateway performance options.  See product documentation for full details. Options: STANDARD, STANDARD_HA, ENHANCED, ENHANCED_HA, PREMIUM, PREMIUM_HA.
+                      Gateway performance options. See the documentation for the available options
                     type: string
                   version:
                     description: |-
@@ -826,10 +868,6 @@ spec:
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
                 || ''Update'' in self.managementPolicies) || has(self.forProvider.connections)
                 || (has(self.initProvider) && has(self.initProvider.connections))'
-            - message: spec.forProvider.location is a required parameter
-              rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
-                || ''Update'' in self.managementPolicies) || has(self.forProvider.location)
-                || (has(self.initProvider) && has(self.initProvider.location))'
             - message: spec.forProvider.name is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
                 || ''Update'' in self.managementPolicies) || has(self.forProvider.name)
@@ -886,13 +924,34 @@ spec:
                   location:
                     description: |-
                       [string] The location of the IPSec Gateway. Supported locations: de/fra, de/txl, es/vit,
-                      gb/lhr, us/ewr, us/las, us/mci, fr/par
-                      The location of the IPSec Gateway. Supported locations: de/fra, de/txl
+                      gb/bhx, gb/lhr, us/ewr, us/las, us/mci, fr/par.
+                      The location of the IPSec Gateway. Supported locations: de/fra, de/txl, es/vit, gb/bhx, gb/lhr, us/ewr, us/las, us/mci, fr/par
                     type: string
+                  maintenanceWindow:
+                    description: |-
+                      (Computed) A weekly 4 hour-long window, during which maintenance might occur.
+                      A weekly 4 hour-long window, during which maintenance might occur
+                    properties:
+                      dayOfTheWeek:
+                        description: |-
+                          [string] The name of the week day.
+                          The name of the week day
+                        type: string
+                      time:
+                        description: |-
+                          [string] Start of the maintenance window in UTC time.
+                          Start of the maintenance window in UTC time.
+                        type: string
+                    type: object
                   name:
                     description: |-
                       [string] The name of the IPSec Gateway.
                       The human readable name of your IPSecGateway.
+                    type: string
+                  tier:
+                    description: |-
+                      (Computed)[string] Gateway performance options.  See product documentation for full details. Options: STANDARD, STANDARD_HA, ENHANCED, ENHANCED_HA, PREMIUM, PREMIUM_HA.
+                      Gateway performance options. See the documentation for the available options
                     type: string
                   version:
                     description: |-

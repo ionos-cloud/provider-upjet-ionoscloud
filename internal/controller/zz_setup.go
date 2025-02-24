@@ -70,6 +70,7 @@ import (
 	key "github.com/ionos-cloud/provider-upjet-ionoscloud/internal/controller/objectstorage/key"
 	object "github.com/ionos-cloud/provider-upjet-ionoscloud/internal/controller/objectstorage/object"
 	objectcopy "github.com/ionos-cloud/provider-upjet-ionoscloud/internal/controller/objectstorage/objectcopy"
+	storageaccesskey "github.com/ionos-cloud/provider-upjet-ionoscloud/internal/controller/objectstorage/storageaccesskey"
 	postgresqlcluster "github.com/ionos-cloud/provider-upjet-ionoscloud/internal/controller/postgresql/postgresqlcluster"
 	postgresqldatabase "github.com/ionos-cloud/provider-upjet-ionoscloud/internal/controller/postgresql/postgresqldatabase"
 	postgresqluser "github.com/ionos-cloud/provider-upjet-ionoscloud/internal/controller/postgresql/postgresqluser"
@@ -145,6 +146,7 @@ func Setup(mgr ctrl.Manager, o controller.Options) error {
 		key.Setup,
 		object.Setup,
 		objectcopy.Setup,
+		storageaccesskey.Setup,
 		postgresqlcluster.Setup,
 		postgresqldatabase.Setup,
 		postgresqluser.Setup,

@@ -18,13 +18,49 @@ type GroupInitParameters struct {
 	// [Boolean] The group will be allowed to access the activity log.
 	AccessActivityLog *bool `json:"accessActivityLog,omitempty" tf:"access_activity_log,omitempty"`
 
+	// [Boolean]  The group will be allowed to access and manage ai model hub.
+	// Privilege for a group to access and manage AiModelHub.
+	AccessAndManageAIModelHub *bool `json:"accessAndManageAiModelHub,omitempty" tf:"access_and_manage_ai_model_hub,omitempty"`
+
+	// [Boolean]  The group will be allowed to access and manage api gateway.
+	// Privilege for a group to access and manage ApiGateway.
+	AccessAndManageAPIGateway *bool `json:"accessAndManageApiGateway,omitempty" tf:"access_and_manage_api_gateway,omitempty"`
+
+	// [Boolean]  The group will be allowed to access and manage cdn.
+	// Privilege for a group to access and manage Cdn.
+	AccessAndManageCdn *bool `json:"accessAndManageCdn,omitempty" tf:"access_and_manage_cdn,omitempty"`
+
 	// [Boolean]  The group will be allowed to access and manage certificates.
 	// Privilege for a group to access and manage certificates.
 	AccessAndManageCertificates *bool `json:"accessAndManageCertificates,omitempty" tf:"access_and_manage_certificates,omitempty"`
 
+	// [Boolean]  The group will be allowed to access and manage dns records.
+	// Privilege for a group to access and manage dns records.
+	AccessAndManageDNS *bool `json:"accessAndManageDns,omitempty" tf:"access_and_manage_dns,omitempty"`
+
+	// [Boolean]  The group will be allowed to access and manage iam resources.
+	// Privilege for a group to access and manage IamResources.
+	AccessAndManageIAMResources *bool `json:"accessAndManageIamResources,omitempty" tf:"access_and_manage_iam_resources,omitempty"`
+
+	// [Boolean]  The group will be allowed to access and manage kaas.
+	// Privilege for a group to access and manage Kaas.
+	AccessAndManageKaas *bool `json:"accessAndManageKaas,omitempty" tf:"access_and_manage_kaas,omitempty"`
+
+	// [Boolean]  The group will be allowed to access and manage logging.
+	// Privilege for a group to access and manage logging.
+	AccessAndManageLogging *bool `json:"accessAndManageLogging,omitempty" tf:"access_and_manage_logging,omitempty"`
+
 	// [Boolean]  The group will be allowed to access and manage monitoring.
 	// Privilege for a group to access and manage monitoring related functionality (access metrics, CRUD on alarms, alarm-actions etc) using Monotoring-as-a-Service (MaaS).
 	AccessAndManageMonitoring *bool `json:"accessAndManageMonitoring,omitempty" tf:"access_and_manage_monitoring,omitempty"`
+
+	// [Boolean]  The group will be allowed to access and manage network file storage.
+	// Privilege for a group to access and manage NetworkFileStorage.
+	AccessAndManageNetworkFileStorage *bool `json:"accessAndManageNetworkFileStorage,omitempty" tf:"access_and_manage_network_file_storage,omitempty"`
+
+	// [Boolean]  The group will be allowed to access and manage vpn.
+	// Privilege for a group to access and manage Vpn.
+	AccessAndManageVPN *bool `json:"accessAndManageVpn,omitempty" tf:"access_and_manage_vpn,omitempty"`
 
 	// [Boolean] The group will be allowed to create backup unit privilege.
 	// Create backup unit privilege.
@@ -45,15 +81,27 @@ type GroupInitParameters struct {
 	// Create Kubernetes cluster privilege.
 	CreateK8SCluster *bool `json:"createK8SCluster,omitempty" tf:"create_k8s_cluster,omitempty"`
 
+	// [Boolean]  The group will be allowed to create network security groups.
+	// Create Network Security groups.
+	CreateNetworkSecurityGroups *bool `json:"createNetworkSecurityGroups,omitempty" tf:"create_network_security_groups,omitempty"`
+
 	// [Boolean] The group will be allowed to create Cross Connects privilege.
 	CreatePcc *bool `json:"createPcc,omitempty" tf:"create_pcc,omitempty"`
 
 	// [Boolean] The group will be allowed to create snapshots.
 	CreateSnapshot *bool `json:"createSnapshot,omitempty" tf:"create_snapshot,omitempty"`
 
+	// [Boolean]  The group will be allowed to access and manage the Data Platform.
+	// Privilege for a group to access and manage the Data Platform.
+	ManageDataplatform *bool `json:"manageDataplatform,omitempty" tf:"manage_dataplatform,omitempty"`
+
 	// [Boolean]  Privilege for a group to manage DBaaS related functionality.
 	// Privilege for a group to manage DBaaS related functionality
 	ManageDbaas *bool `json:"manageDbaas,omitempty" tf:"manage_dbaas,omitempty"`
+
+	// [Boolean]  The group will be allowed to access container registry related functionality.
+	// Privilege for group accessing container registry related functionality.
+	ManageRegistry *bool `json:"manageRegistry,omitempty" tf:"manage_registry,omitempty"`
 
 	// [string] A name for the group.
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
@@ -86,13 +134,49 @@ type GroupObservation struct {
 	// [Boolean] The group will be allowed to access the activity log.
 	AccessActivityLog *bool `json:"accessActivityLog,omitempty" tf:"access_activity_log,omitempty"`
 
+	// [Boolean]  The group will be allowed to access and manage ai model hub.
+	// Privilege for a group to access and manage AiModelHub.
+	AccessAndManageAIModelHub *bool `json:"accessAndManageAiModelHub,omitempty" tf:"access_and_manage_ai_model_hub,omitempty"`
+
+	// [Boolean]  The group will be allowed to access and manage api gateway.
+	// Privilege for a group to access and manage ApiGateway.
+	AccessAndManageAPIGateway *bool `json:"accessAndManageApiGateway,omitempty" tf:"access_and_manage_api_gateway,omitempty"`
+
+	// [Boolean]  The group will be allowed to access and manage cdn.
+	// Privilege for a group to access and manage Cdn.
+	AccessAndManageCdn *bool `json:"accessAndManageCdn,omitempty" tf:"access_and_manage_cdn,omitempty"`
+
 	// [Boolean]  The group will be allowed to access and manage certificates.
 	// Privilege for a group to access and manage certificates.
 	AccessAndManageCertificates *bool `json:"accessAndManageCertificates,omitempty" tf:"access_and_manage_certificates,omitempty"`
 
+	// [Boolean]  The group will be allowed to access and manage dns records.
+	// Privilege for a group to access and manage dns records.
+	AccessAndManageDNS *bool `json:"accessAndManageDns,omitempty" tf:"access_and_manage_dns,omitempty"`
+
+	// [Boolean]  The group will be allowed to access and manage iam resources.
+	// Privilege for a group to access and manage IamResources.
+	AccessAndManageIAMResources *bool `json:"accessAndManageIamResources,omitempty" tf:"access_and_manage_iam_resources,omitempty"`
+
+	// [Boolean]  The group will be allowed to access and manage kaas.
+	// Privilege for a group to access and manage Kaas.
+	AccessAndManageKaas *bool `json:"accessAndManageKaas,omitempty" tf:"access_and_manage_kaas,omitempty"`
+
+	// [Boolean]  The group will be allowed to access and manage logging.
+	// Privilege for a group to access and manage logging.
+	AccessAndManageLogging *bool `json:"accessAndManageLogging,omitempty" tf:"access_and_manage_logging,omitempty"`
+
 	// [Boolean]  The group will be allowed to access and manage monitoring.
 	// Privilege for a group to access and manage monitoring related functionality (access metrics, CRUD on alarms, alarm-actions etc) using Monotoring-as-a-Service (MaaS).
 	AccessAndManageMonitoring *bool `json:"accessAndManageMonitoring,omitempty" tf:"access_and_manage_monitoring,omitempty"`
+
+	// [Boolean]  The group will be allowed to access and manage network file storage.
+	// Privilege for a group to access and manage NetworkFileStorage.
+	AccessAndManageNetworkFileStorage *bool `json:"accessAndManageNetworkFileStorage,omitempty" tf:"access_and_manage_network_file_storage,omitempty"`
+
+	// [Boolean]  The group will be allowed to access and manage vpn.
+	// Privilege for a group to access and manage Vpn.
+	AccessAndManageVPN *bool `json:"accessAndManageVpn,omitempty" tf:"access_and_manage_vpn,omitempty"`
 
 	// [Boolean] The group will be allowed to create backup unit privilege.
 	// Create backup unit privilege.
@@ -113,6 +197,10 @@ type GroupObservation struct {
 	// Create Kubernetes cluster privilege.
 	CreateK8SCluster *bool `json:"createK8SCluster,omitempty" tf:"create_k8s_cluster,omitempty"`
 
+	// [Boolean]  The group will be allowed to create network security groups.
+	// Create Network Security groups.
+	CreateNetworkSecurityGroups *bool `json:"createNetworkSecurityGroups,omitempty" tf:"create_network_security_groups,omitempty"`
+
 	// [Boolean] The group will be allowed to create Cross Connects privilege.
 	CreatePcc *bool `json:"createPcc,omitempty" tf:"create_pcc,omitempty"`
 
@@ -121,9 +209,17 @@ type GroupObservation struct {
 
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
+	// [Boolean]  The group will be allowed to access and manage the Data Platform.
+	// Privilege for a group to access and manage the Data Platform.
+	ManageDataplatform *bool `json:"manageDataplatform,omitempty" tf:"manage_dataplatform,omitempty"`
+
 	// [Boolean]  Privilege for a group to manage DBaaS related functionality.
 	// Privilege for a group to manage DBaaS related functionality
 	ManageDbaas *bool `json:"manageDbaas,omitempty" tf:"manage_dbaas,omitempty"`
+
+	// [Boolean]  The group will be allowed to access container registry related functionality.
+	// Privilege for group accessing container registry related functionality.
+	ManageRegistry *bool `json:"manageRegistry,omitempty" tf:"manage_registry,omitempty"`
 
 	// [string] A name for the group.
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
@@ -151,15 +247,60 @@ type GroupParameters struct {
 	// +kubebuilder:validation:Optional
 	AccessActivityLog *bool `json:"accessActivityLog,omitempty" tf:"access_activity_log,omitempty"`
 
+	// [Boolean]  The group will be allowed to access and manage ai model hub.
+	// Privilege for a group to access and manage AiModelHub.
+	// +kubebuilder:validation:Optional
+	AccessAndManageAIModelHub *bool `json:"accessAndManageAiModelHub,omitempty" tf:"access_and_manage_ai_model_hub,omitempty"`
+
+	// [Boolean]  The group will be allowed to access and manage api gateway.
+	// Privilege for a group to access and manage ApiGateway.
+	// +kubebuilder:validation:Optional
+	AccessAndManageAPIGateway *bool `json:"accessAndManageApiGateway,omitempty" tf:"access_and_manage_api_gateway,omitempty"`
+
+	// [Boolean]  The group will be allowed to access and manage cdn.
+	// Privilege for a group to access and manage Cdn.
+	// +kubebuilder:validation:Optional
+	AccessAndManageCdn *bool `json:"accessAndManageCdn,omitempty" tf:"access_and_manage_cdn,omitempty"`
+
 	// [Boolean]  The group will be allowed to access and manage certificates.
 	// Privilege for a group to access and manage certificates.
 	// +kubebuilder:validation:Optional
 	AccessAndManageCertificates *bool `json:"accessAndManageCertificates,omitempty" tf:"access_and_manage_certificates,omitempty"`
 
+	// [Boolean]  The group will be allowed to access and manage dns records.
+	// Privilege for a group to access and manage dns records.
+	// +kubebuilder:validation:Optional
+	AccessAndManageDNS *bool `json:"accessAndManageDns,omitempty" tf:"access_and_manage_dns,omitempty"`
+
+	// [Boolean]  The group will be allowed to access and manage iam resources.
+	// Privilege for a group to access and manage IamResources.
+	// +kubebuilder:validation:Optional
+	AccessAndManageIAMResources *bool `json:"accessAndManageIamResources,omitempty" tf:"access_and_manage_iam_resources,omitempty"`
+
+	// [Boolean]  The group will be allowed to access and manage kaas.
+	// Privilege for a group to access and manage Kaas.
+	// +kubebuilder:validation:Optional
+	AccessAndManageKaas *bool `json:"accessAndManageKaas,omitempty" tf:"access_and_manage_kaas,omitempty"`
+
+	// [Boolean]  The group will be allowed to access and manage logging.
+	// Privilege for a group to access and manage logging.
+	// +kubebuilder:validation:Optional
+	AccessAndManageLogging *bool `json:"accessAndManageLogging,omitempty" tf:"access_and_manage_logging,omitempty"`
+
 	// [Boolean]  The group will be allowed to access and manage monitoring.
 	// Privilege for a group to access and manage monitoring related functionality (access metrics, CRUD on alarms, alarm-actions etc) using Monotoring-as-a-Service (MaaS).
 	// +kubebuilder:validation:Optional
 	AccessAndManageMonitoring *bool `json:"accessAndManageMonitoring,omitempty" tf:"access_and_manage_monitoring,omitempty"`
+
+	// [Boolean]  The group will be allowed to access and manage network file storage.
+	// Privilege for a group to access and manage NetworkFileStorage.
+	// +kubebuilder:validation:Optional
+	AccessAndManageNetworkFileStorage *bool `json:"accessAndManageNetworkFileStorage,omitempty" tf:"access_and_manage_network_file_storage,omitempty"`
+
+	// [Boolean]  The group will be allowed to access and manage vpn.
+	// Privilege for a group to access and manage Vpn.
+	// +kubebuilder:validation:Optional
+	AccessAndManageVPN *bool `json:"accessAndManageVpn,omitempty" tf:"access_and_manage_vpn,omitempty"`
 
 	// [Boolean] The group will be allowed to create backup unit privilege.
 	// Create backup unit privilege.
@@ -185,6 +326,11 @@ type GroupParameters struct {
 	// +kubebuilder:validation:Optional
 	CreateK8SCluster *bool `json:"createK8SCluster,omitempty" tf:"create_k8s_cluster,omitempty"`
 
+	// [Boolean]  The group will be allowed to create network security groups.
+	// Create Network Security groups.
+	// +kubebuilder:validation:Optional
+	CreateNetworkSecurityGroups *bool `json:"createNetworkSecurityGroups,omitempty" tf:"create_network_security_groups,omitempty"`
+
 	// [Boolean] The group will be allowed to create Cross Connects privilege.
 	// +kubebuilder:validation:Optional
 	CreatePcc *bool `json:"createPcc,omitempty" tf:"create_pcc,omitempty"`
@@ -193,10 +339,20 @@ type GroupParameters struct {
 	// +kubebuilder:validation:Optional
 	CreateSnapshot *bool `json:"createSnapshot,omitempty" tf:"create_snapshot,omitempty"`
 
+	// [Boolean]  The group will be allowed to access and manage the Data Platform.
+	// Privilege for a group to access and manage the Data Platform.
+	// +kubebuilder:validation:Optional
+	ManageDataplatform *bool `json:"manageDataplatform,omitempty" tf:"manage_dataplatform,omitempty"`
+
 	// [Boolean]  Privilege for a group to manage DBaaS related functionality.
 	// Privilege for a group to manage DBaaS related functionality
 	// +kubebuilder:validation:Optional
 	ManageDbaas *bool `json:"manageDbaas,omitempty" tf:"manage_dbaas,omitempty"`
+
+	// [Boolean]  The group will be allowed to access container registry related functionality.
+	// Privilege for group accessing container registry related functionality.
+	// +kubebuilder:validation:Optional
+	ManageRegistry *bool `json:"manageRegistry,omitempty" tf:"manage_registry,omitempty"`
 
 	// [string] A name for the group.
 	// +kubebuilder:validation:Optional

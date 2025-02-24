@@ -81,6 +81,22 @@ spec:
                       Key-value pairs attached to node pool resource as [Kubernetes annotations](https://kubernetes.io/docs/concepts/overview/working-with-objects/annotations/)
                     type: object
                     x-kubernetes-map-type: granular
+                  autoScaling:
+                    description: |-
+                      [string] Whether the Node Pool should autoscale. For more details, please check the API documentation
+                      The range defining the minimum and maximum number of worker nodes that the managed node group can scale in
+                    properties:
+                      maxNodeCount:
+                        description: |-
+                          [int] The maximum number of worker nodes that the node pool can scale to. Should be greater than min_node_count
+                          The maximum number of worker nodes that the node pool can scale to. Should be greater than min_node_count
+                        type: number
+                      minNodeCount:
+                        description: |-
+                          [int] The minimum number of worker nodes the node pool can scale down to. Should be less than max_node_count
+                          The minimum number of worker nodes the node pool can scale down to. Should be less than max_node_count
+                        type: number
+                    type: object
                   availabilityZone:
                     description: |-
                       [string] The availability zone of the virtual datacenter region where the node pool resources should be provisioned. Must be set with one of the values AUTO, ZONE_1 or ZONE_2. The default value is AUTO.
@@ -187,7 +203,7 @@ spec:
                     x-kubernetes-map-type: granular
                   maintenanceWindow:
                     description: |-
-                      [string] Starting time of a weekly 4 hour-long window, during which maintenance might occur in hh:mm:ss format
+                      Starting time of a weekly 4 hour-long window, during which maintenance might occur in hh:mm:ss format
                       Starting time of a weekly 4 hour-long window, during which maintenance might occur in hh:mm:ss format
                     items:
                       properties:
@@ -249,6 +265,22 @@ spec:
                       Key-value pairs attached to node pool resource as [Kubernetes annotations](https://kubernetes.io/docs/concepts/overview/working-with-objects/annotations/)
                     type: object
                     x-kubernetes-map-type: granular
+                  autoScaling:
+                    description: |-
+                      [string] Whether the Node Pool should autoscale. For more details, please check the API documentation
+                      The range defining the minimum and maximum number of worker nodes that the managed node group can scale in
+                    properties:
+                      maxNodeCount:
+                        description: |-
+                          [int] The maximum number of worker nodes that the node pool can scale to. Should be greater than min_node_count
+                          The maximum number of worker nodes that the node pool can scale to. Should be greater than min_node_count
+                        type: number
+                      minNodeCount:
+                        description: |-
+                          [int] The minimum number of worker nodes the node pool can scale down to. Should be less than max_node_count
+                          The minimum number of worker nodes the node pool can scale down to. Should be less than max_node_count
+                        type: number
+                    type: object
                   availabilityZone:
                     description: |-
                       [string] The availability zone of the virtual datacenter region where the node pool resources should be provisioned. Must be set with one of the values AUTO, ZONE_1 or ZONE_2. The default value is AUTO.
@@ -355,7 +387,7 @@ spec:
                     x-kubernetes-map-type: granular
                   maintenanceWindow:
                     description: |-
-                      [string] Starting time of a weekly 4 hour-long window, during which maintenance might occur in hh:mm:ss format
+                      Starting time of a weekly 4 hour-long window, during which maintenance might occur in hh:mm:ss format
                       Starting time of a weekly 4 hour-long window, during which maintenance might occur in hh:mm:ss format
                     items:
                       properties:
@@ -585,6 +617,22 @@ spec:
                       Key-value pairs attached to node pool resource as [Kubernetes annotations](https://kubernetes.io/docs/concepts/overview/working-with-objects/annotations/)
                     type: object
                     x-kubernetes-map-type: granular
+                  autoScaling:
+                    description: |-
+                      [string] Whether the Node Pool should autoscale. For more details, please check the API documentation
+                      The range defining the minimum and maximum number of worker nodes that the managed node group can scale in
+                    properties:
+                      maxNodeCount:
+                        description: |-
+                          [int] The maximum number of worker nodes that the node pool can scale to. Should be greater than min_node_count
+                          The maximum number of worker nodes that the node pool can scale to. Should be greater than min_node_count
+                        type: number
+                      minNodeCount:
+                        description: |-
+                          [int] The minimum number of worker nodes the node pool can scale down to. Should be less than max_node_count
+                          The minimum number of worker nodes the node pool can scale down to. Should be less than max_node_count
+                        type: number
+                    type: object
                   availabilityZone:
                     description: |-
                       [string] The availability zone of the virtual datacenter region where the node pool resources should be provisioned. Must be set with one of the values AUTO, ZONE_1 or ZONE_2. The default value is AUTO.
@@ -621,7 +669,7 @@ spec:
                     x-kubernetes-map-type: granular
                   maintenanceWindow:
                     description: |-
-                      [string] Starting time of a weekly 4 hour-long window, during which maintenance might occur in hh:mm:ss format
+                      Starting time of a weekly 4 hour-long window, during which maintenance might occur in hh:mm:ss format
                       Starting time of a weekly 4 hour-long window, during which maintenance might occur in hh:mm:ss format
                     items:
                       properties:

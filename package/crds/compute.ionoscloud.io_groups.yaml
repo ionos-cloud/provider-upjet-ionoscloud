@@ -77,15 +77,60 @@ spec:
                     description: '[Boolean] The group will be allowed to access the
                       activity log.'
                     type: boolean
+                  accessAndManageAiModelHub:
+                    description: |-
+                      [Boolean]  The group will be allowed to access and manage ai model hub.
+                      Privilege for a group to access and manage AiModelHub.
+                    type: boolean
+                  accessAndManageApiGateway:
+                    description: |-
+                      [Boolean]  The group will be allowed to access and manage api gateway.
+                      Privilege for a group to access and manage ApiGateway.
+                    type: boolean
+                  accessAndManageCdn:
+                    description: |-
+                      [Boolean]  The group will be allowed to access and manage cdn.
+                      Privilege for a group to access and manage Cdn.
+                    type: boolean
                   accessAndManageCertificates:
                     description: |-
                       [Boolean]  The group will be allowed to access and manage certificates.
                       Privilege for a group to access and manage certificates.
                     type: boolean
+                  accessAndManageDns:
+                    description: |-
+                      [Boolean]  The group will be allowed to access and manage dns records.
+                      Privilege for a group to access and manage dns records.
+                    type: boolean
+                  accessAndManageIamResources:
+                    description: |-
+                      [Boolean]  The group will be allowed to access and manage iam resources.
+                      Privilege for a group to access and manage IamResources.
+                    type: boolean
+                  accessAndManageKaas:
+                    description: |-
+                      [Boolean]  The group will be allowed to access and manage kaas.
+                      Privilege for a group to access and manage Kaas.
+                    type: boolean
+                  accessAndManageLogging:
+                    description: |-
+                      [Boolean]  The group will be allowed to access and manage logging.
+                      Privilege for a group to access and manage logging.
+                    type: boolean
                   accessAndManageMonitoring:
                     description: |-
                       [Boolean]  The group will be allowed to access and manage monitoring.
                       Privilege for a group to access and manage monitoring related functionality (access metrics, CRUD on alarms, alarm-actions etc) using Monotoring-as-a-Service (MaaS).
+                    type: boolean
+                  accessAndManageNetworkFileStorage:
+                    description: |-
+                      [Boolean]  The group will be allowed to access and manage network file storage.
+                      Privilege for a group to access and manage NetworkFileStorage.
+                    type: boolean
+                  accessAndManageVpn:
+                    description: |-
+                      [Boolean]  The group will be allowed to access and manage vpn.
+                      Privilege for a group to access and manage Vpn.
                     type: boolean
                   createBackupUnit:
                     description: |-
@@ -111,6 +156,11 @@ spec:
                       [Boolean]  The group will be allowed to create kubernetes cluster privilege.
                       Create Kubernetes cluster privilege.
                     type: boolean
+                  createNetworkSecurityGroups:
+                    description: |-
+                      [Boolean]  The group will be allowed to create network security groups.
+                      Create Network Security groups.
+                    type: boolean
                   createPcc:
                     description: '[Boolean] The group will be allowed to create Cross
                       Connects privilege.'
@@ -118,10 +168,20 @@ spec:
                   createSnapshot:
                     description: '[Boolean] The group will be allowed to create snapshots.'
                     type: boolean
+                  manageDataplatform:
+                    description: |-
+                      [Boolean]  The group will be allowed to access and manage the Data Platform.
+                      Privilege for a group to access and manage the Data Platform.
+                    type: boolean
                   manageDbaas:
                     description: |-
                       [Boolean]  Privilege for a group to manage DBaaS related functionality.
                       Privilege for a group to manage DBaaS related functionality
+                    type: boolean
+                  manageRegistry:
+                    description: |-
+                      [Boolean]  The group will be allowed to access container registry related functionality.
+                      Privilege for group accessing container registry related functionality.
                     type: boolean
                   name:
                     description: '[string] A name for the group.'
@@ -239,15 +299,60 @@ spec:
                     description: '[Boolean] The group will be allowed to access the
                       activity log.'
                     type: boolean
+                  accessAndManageAiModelHub:
+                    description: |-
+                      [Boolean]  The group will be allowed to access and manage ai model hub.
+                      Privilege for a group to access and manage AiModelHub.
+                    type: boolean
+                  accessAndManageApiGateway:
+                    description: |-
+                      [Boolean]  The group will be allowed to access and manage api gateway.
+                      Privilege for a group to access and manage ApiGateway.
+                    type: boolean
+                  accessAndManageCdn:
+                    description: |-
+                      [Boolean]  The group will be allowed to access and manage cdn.
+                      Privilege for a group to access and manage Cdn.
+                    type: boolean
                   accessAndManageCertificates:
                     description: |-
                       [Boolean]  The group will be allowed to access and manage certificates.
                       Privilege for a group to access and manage certificates.
                     type: boolean
+                  accessAndManageDns:
+                    description: |-
+                      [Boolean]  The group will be allowed to access and manage dns records.
+                      Privilege for a group to access and manage dns records.
+                    type: boolean
+                  accessAndManageIamResources:
+                    description: |-
+                      [Boolean]  The group will be allowed to access and manage iam resources.
+                      Privilege for a group to access and manage IamResources.
+                    type: boolean
+                  accessAndManageKaas:
+                    description: |-
+                      [Boolean]  The group will be allowed to access and manage kaas.
+                      Privilege for a group to access and manage Kaas.
+                    type: boolean
+                  accessAndManageLogging:
+                    description: |-
+                      [Boolean]  The group will be allowed to access and manage logging.
+                      Privilege for a group to access and manage logging.
+                    type: boolean
                   accessAndManageMonitoring:
                     description: |-
                       [Boolean]  The group will be allowed to access and manage monitoring.
                       Privilege for a group to access and manage monitoring related functionality (access metrics, CRUD on alarms, alarm-actions etc) using Monotoring-as-a-Service (MaaS).
+                    type: boolean
+                  accessAndManageNetworkFileStorage:
+                    description: |-
+                      [Boolean]  The group will be allowed to access and manage network file storage.
+                      Privilege for a group to access and manage NetworkFileStorage.
+                    type: boolean
+                  accessAndManageVpn:
+                    description: |-
+                      [Boolean]  The group will be allowed to access and manage vpn.
+                      Privilege for a group to access and manage Vpn.
                     type: boolean
                   createBackupUnit:
                     description: |-
@@ -273,6 +378,11 @@ spec:
                       [Boolean]  The group will be allowed to create kubernetes cluster privilege.
                       Create Kubernetes cluster privilege.
                     type: boolean
+                  createNetworkSecurityGroups:
+                    description: |-
+                      [Boolean]  The group will be allowed to create network security groups.
+                      Create Network Security groups.
+                    type: boolean
                   createPcc:
                     description: '[Boolean] The group will be allowed to create Cross
                       Connects privilege.'
@@ -280,10 +390,20 @@ spec:
                   createSnapshot:
                     description: '[Boolean] The group will be allowed to create snapshots.'
                     type: boolean
+                  manageDataplatform:
+                    description: |-
+                      [Boolean]  The group will be allowed to access and manage the Data Platform.
+                      Privilege for a group to access and manage the Data Platform.
+                    type: boolean
                   manageDbaas:
                     description: |-
                       [Boolean]  Privilege for a group to manage DBaaS related functionality.
                       Privilege for a group to manage DBaaS related functionality
+                    type: boolean
+                  manageRegistry:
+                    description: |-
+                      [Boolean]  The group will be allowed to access container registry related functionality.
+                      Privilege for group accessing container registry related functionality.
                     type: boolean
                   name:
                     description: '[string] A name for the group.'
@@ -565,15 +685,60 @@ spec:
                     description: '[Boolean] The group will be allowed to access the
                       activity log.'
                     type: boolean
+                  accessAndManageAiModelHub:
+                    description: |-
+                      [Boolean]  The group will be allowed to access and manage ai model hub.
+                      Privilege for a group to access and manage AiModelHub.
+                    type: boolean
+                  accessAndManageApiGateway:
+                    description: |-
+                      [Boolean]  The group will be allowed to access and manage api gateway.
+                      Privilege for a group to access and manage ApiGateway.
+                    type: boolean
+                  accessAndManageCdn:
+                    description: |-
+                      [Boolean]  The group will be allowed to access and manage cdn.
+                      Privilege for a group to access and manage Cdn.
+                    type: boolean
                   accessAndManageCertificates:
                     description: |-
                       [Boolean]  The group will be allowed to access and manage certificates.
                       Privilege for a group to access and manage certificates.
                     type: boolean
+                  accessAndManageDns:
+                    description: |-
+                      [Boolean]  The group will be allowed to access and manage dns records.
+                      Privilege for a group to access and manage dns records.
+                    type: boolean
+                  accessAndManageIamResources:
+                    description: |-
+                      [Boolean]  The group will be allowed to access and manage iam resources.
+                      Privilege for a group to access and manage IamResources.
+                    type: boolean
+                  accessAndManageKaas:
+                    description: |-
+                      [Boolean]  The group will be allowed to access and manage kaas.
+                      Privilege for a group to access and manage Kaas.
+                    type: boolean
+                  accessAndManageLogging:
+                    description: |-
+                      [Boolean]  The group will be allowed to access and manage logging.
+                      Privilege for a group to access and manage logging.
+                    type: boolean
                   accessAndManageMonitoring:
                     description: |-
                       [Boolean]  The group will be allowed to access and manage monitoring.
                       Privilege for a group to access and manage monitoring related functionality (access metrics, CRUD on alarms, alarm-actions etc) using Monotoring-as-a-Service (MaaS).
+                    type: boolean
+                  accessAndManageNetworkFileStorage:
+                    description: |-
+                      [Boolean]  The group will be allowed to access and manage network file storage.
+                      Privilege for a group to access and manage NetworkFileStorage.
+                    type: boolean
+                  accessAndManageVpn:
+                    description: |-
+                      [Boolean]  The group will be allowed to access and manage vpn.
+                      Privilege for a group to access and manage Vpn.
                     type: boolean
                   createBackupUnit:
                     description: |-
@@ -599,6 +764,11 @@ spec:
                       [Boolean]  The group will be allowed to create kubernetes cluster privilege.
                       Create Kubernetes cluster privilege.
                     type: boolean
+                  createNetworkSecurityGroups:
+                    description: |-
+                      [Boolean]  The group will be allowed to create network security groups.
+                      Create Network Security groups.
+                    type: boolean
                   createPcc:
                     description: '[Boolean] The group will be allowed to create Cross
                       Connects privilege.'
@@ -608,10 +778,20 @@ spec:
                     type: boolean
                   id:
                     type: string
+                  manageDataplatform:
+                    description: |-
+                      [Boolean]  The group will be allowed to access and manage the Data Platform.
+                      Privilege for a group to access and manage the Data Platform.
+                    type: boolean
                   manageDbaas:
                     description: |-
                       [Boolean]  Privilege for a group to manage DBaaS related functionality.
                       Privilege for a group to manage DBaaS related functionality
+                    type: boolean
+                  manageRegistry:
+                    description: |-
+                      [Boolean]  The group will be allowed to access container registry related functionality.
+                      Privilege for group accessing container registry related functionality.
                     type: boolean
                   name:
                     description: '[string] A name for the group.'

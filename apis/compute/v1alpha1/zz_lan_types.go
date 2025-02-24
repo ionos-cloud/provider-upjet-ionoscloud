@@ -75,6 +75,10 @@ type LanObservation struct {
 	// (Computed) IP failover configurations for lan
 	IPFailover []IPFailoverObservation `json:"ipFailover,omitempty" tf:"ip_failover,omitempty"`
 
+	// (Computed)[String] For public LANs this property is null, for private LANs it contains the private IPv4 CIDR range. This property is a read only property.
+	// For public LANs this property is null, for private LANs it contains the private IPv4 CIDR range. This property is a read only property.
+	IPv4CidrBlock *string `json:"ipv4CidrBlock,omitempty" tf:"ipv4_cidr_block,omitempty"`
+
 	// (Computed, Optional) Contains the LAN's /64 IPv6 CIDR block if this LAN is IPv6 enabled. 'AUTO' will result in enabling this LAN for IPv6 and automatically assign a /64 IPv6 CIDR block to this LAN. If you specify your own IPv6 CIDR block then you must provide a unique /64 block, which is inside the IPv6 CIDR block of the virtual datacenter and unique inside all LANs from this virtual datacenter.
 	// IPv6 CIDR block assigned to the LAN. Can be set to 'AUTO' for an automatically assigned address or the address can be explicitly supplied.
 	IPv6CidrBlock *string `json:"ipv6CidrBlock,omitempty" tf:"ipv6_cidr_block,omitempty"`

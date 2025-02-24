@@ -266,7 +266,7 @@ spec:
                     type: array
                   maintenanceWindow:
                     description: |-
-                      [string] Starting time of a weekly 4 hour-long window, during which maintenance might occur in hh:mm:ss format
+                      Starting time of a weekly 4 hour-long window, during which maintenance might occur in hh:mm:ss format
                       Starting time of a weekly 4 hour-long window, during which maintenance might occur in hh:mm:ss format
                     items:
                       properties:
@@ -498,7 +498,7 @@ spec:
                     type: array
                   maintenanceWindow:
                     description: |-
-                      [string] Starting time of a weekly 4 hour-long window, during which maintenance might occur in hh:mm:ss format
+                      Starting time of a weekly 4 hour-long window, during which maintenance might occur in hh:mm:ss format
                       Starting time of a weekly 4 hour-long window, during which maintenance might occur in hh:mm:ss format
                     items:
                       properties:
@@ -746,7 +746,7 @@ spec:
                     type: array
                   maintenanceWindow:
                     description: |-
-                      [string] Starting time of a weekly 4 hour-long window, during which maintenance might occur in hh:mm:ss format
+                      Starting time of a weekly 4 hour-long window, during which maintenance might occur in hh:mm:ss format
                       Starting time of a weekly 4 hour-long window, during which maintenance might occur in hh:mm:ss format
                     items:
                       properties:

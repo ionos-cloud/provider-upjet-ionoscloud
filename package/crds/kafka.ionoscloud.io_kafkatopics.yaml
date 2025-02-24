@@ -154,7 +154,7 @@ spec:
                     type: object
                   location:
                     description: |-
-                      [string] The location of the Kafka Cluster Topic. Possible values: de/fra, de/txl
+                      [string] The location of the Kafka Cluster Topic. Possible values: de/fra, de/txl. If this is not set and if no value is provided for the IONOS_API_URL env var, the default location will be: de/fra.
                       The location of your Kafka Cluster Topic. Supported locations: de/fra, de/txl
                     type: string
                   locationRef:
@@ -359,7 +359,7 @@ spec:
                     type: object
                   location:
                     description: |-
-                      [string] The location of the Kafka Cluster Topic. Possible values: de/fra, de/txl
+                      [string] The location of the Kafka Cluster Topic. Possible values: de/fra, de/txl. If this is not set and if no value is provided for the IONOS_API_URL env var, the default location will be: de/fra.
                       The location of your Kafka Cluster Topic. Supported locations: de/fra, de/txl
                     type: string
                   locationRef:
@@ -658,7 +658,7 @@ spec:
                     type: string
                   location:
                     description: |-
-                      [string] The location of the Kafka Cluster Topic. Possible values: de/fra, de/txl
+                      [string] The location of the Kafka Cluster Topic. Possible values: de/fra, de/txl. If this is not set and if no value is provided for the IONOS_API_URL env var, the default location will be: de/fra.
                       The location of your Kafka Cluster Topic. Supported locations: de/fra, de/txl
                     type: string
                   name:

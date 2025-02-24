@@ -13,12 +13,51 @@ import (
 	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
 )
 
+type AutoScalingInitParameters struct {
+
+	// [int] The maximum number of worker nodes that the node pool can scale to. Should be greater than min_node_count
+	// The maximum number of worker nodes that the node pool can scale to. Should be greater than min_node_count
+	MaxNodeCount *float64 `json:"maxNodeCount,omitempty" tf:"max_node_count,omitempty"`
+
+	// [int] The minimum number of worker nodes the node pool can scale down to. Should be less than max_node_count
+	// The minimum number of worker nodes the node pool can scale down to. Should be less than max_node_count
+	MinNodeCount *float64 `json:"minNodeCount,omitempty" tf:"min_node_count,omitempty"`
+}
+
+type AutoScalingObservation struct {
+
+	// [int] The maximum number of worker nodes that the node pool can scale to. Should be greater than min_node_count
+	// The maximum number of worker nodes that the node pool can scale to. Should be greater than min_node_count
+	MaxNodeCount *float64 `json:"maxNodeCount,omitempty" tf:"max_node_count,omitempty"`
+
+	// [int] The minimum number of worker nodes the node pool can scale down to. Should be less than max_node_count
+	// The minimum number of worker nodes the node pool can scale down to. Should be less than max_node_count
+	MinNodeCount *float64 `json:"minNodeCount,omitempty" tf:"min_node_count,omitempty"`
+}
+
+type AutoScalingParameters struct {
+
+	// [int] The maximum number of worker nodes that the node pool can scale to. Should be greater than min_node_count
+	// The maximum number of worker nodes that the node pool can scale to. Should be greater than min_node_count
+	// +kubebuilder:validation:Optional
+	MaxNodeCount *float64 `json:"maxNodeCount" tf:"max_node_count,omitempty"`
+
+	// [int] The minimum number of worker nodes the node pool can scale down to. Should be less than max_node_count
+	// The minimum number of worker nodes the node pool can scale down to. Should be less than max_node_count
+	// +kubebuilder:validation:Optional
+	MinNodeCount *float64 `json:"minNodeCount" tf:"min_node_count,omitempty"`
+}
+
 type NodePoolInitParameters struct {
 
 	// [map] Key-value pairs attached to node pool resource as Kubernetes annotations.
 	// Key-value pairs attached to node pool resource as [Kubernetes annotations](https://kubernetes.io/docs/concepts/overview/working-with-objects/annotations/)
 	// +mapType=granular
 	Annotations map[string]*string `json:"annotations,omitempty" tf:"annotations,omitempty"`
+
+	// [string] Whether the Node Pool should autoscale. For more details, please check the API documentation
+	// The range defining the minimum and maximum number of worker nodes that the managed node group can scale in
+	AutoScaling *AutoScalingInitParameters `json:"autoScaling,omitempty" tf:"auto_scaling,omitempty"`
 
 	// [string] The availability zone of the virtual datacenter region where the node pool resources should be provisioned. Must be set with one of the values AUTO, ZONE_1 or ZONE_2. The default value is AUTO.
 	// The availability zone of the virtual datacenter region where the node pool resources should be provisioned.
@@ -50,7 +89,7 @@ type NodePoolInitParameters struct {
 	// +mapType=granular
 	Labels map[string]*string `json:"labels,omitempty" tf:"labels,omitempty"`
 
-	// [string] Starting time of a weekly 4 hour-long window, during which maintenance might occur in hh:mm:ss format
+	// Starting time of a weekly 4 hour-long window, during which maintenance might occur in hh:mm:ss format
 	// Starting time of a weekly 4 hour-long window, during which maintenance might occur in hh:mm:ss format
 	MaintenanceWindow []NodePoolMaintenanceWindowInitParameters `json:"maintenanceWindow,omitempty" tf:"maintenance_window,omitempty"`
 
@@ -114,6 +153,10 @@ type NodePoolObservation struct {
 	// +mapType=granular
 	Annotations map[string]*string `json:"annotations,omitempty" tf:"annotations,omitempty"`
 
+	// [string] Whether the Node Pool should autoscale. For more details, please check the API documentation
+	// The range defining the minimum and maximum number of worker nodes that the managed node group can scale in
+	AutoScaling *AutoScalingObservation `json:"autoScaling,omitempty" tf:"auto_scaling,omitempty"`
+
 	// [string] The availability zone of the virtual datacenter region where the node pool resources should be provisioned. Must be set with one of the values AUTO, ZONE_1 or ZONE_2. The default value is AUTO.
 	// The availability zone of the virtual datacenter region where the node pool resources should be provisioned.
 	AvailabilityZone *string `json:"availabilityZone,omitempty" tf:"availability_zone,omitempty"`
@@ -140,7 +183,7 @@ type NodePoolObservation struct {
 	// +mapType=granular
 	Labels map[string]*string `json:"labels,omitempty" tf:"labels,omitempty"`
 
-	// [string] Starting time of a weekly 4 hour-long window, during which maintenance might occur in hh:mm:ss format
+	// Starting time of a weekly 4 hour-long window, during which maintenance might occur in hh:mm:ss format
 	// Starting time of a weekly 4 hour-long window, during which maintenance might occur in hh:mm:ss format
 	MaintenanceWindow []NodePoolMaintenanceWindowObservation `json:"maintenanceWindow,omitempty" tf:"maintenance_window,omitempty"`
 
@@ -175,6 +218,11 @@ type NodePoolParameters struct {
 	// +kubebuilder:validation:Optional
 	// +mapType=granular
 	Annotations map[string]*string `json:"annotations,omitempty" tf:"annotations,omitempty"`
+
+	// [string] Whether the Node Pool should autoscale. For more details, please check the API documentation
+	// The range defining the minimum and maximum number of worker nodes that the managed node group can scale in
+	// +kubebuilder:validation:Optional
+	AutoScaling *AutoScalingParameters `json:"autoScaling,omitempty" tf:"auto_scaling,omitempty"`
 
 	// [string] The availability zone of the virtual datacenter region where the node pool resources should be provisioned. Must be set with one of the values AUTO, ZONE_1 or ZONE_2. The default value is AUTO.
 	// The availability zone of the virtual datacenter region where the node pool resources should be provisioned.
@@ -211,7 +259,7 @@ type NodePoolParameters struct {
 	// +mapType=granular
 	Labels map[string]*string `json:"labels,omitempty" tf:"labels,omitempty"`
 
-	// [string] Starting time of a weekly 4 hour-long window, during which maintenance might occur in hh:mm:ss format
+	// Starting time of a weekly 4 hour-long window, during which maintenance might occur in hh:mm:ss format
 	// Starting time of a weekly 4 hour-long window, during which maintenance might occur in hh:mm:ss format
 	// +kubebuilder:validation:Optional
 	MaintenanceWindow []NodePoolMaintenanceWindowParameters `json:"maintenanceWindow,omitempty" tf:"maintenance_window,omitempty"`

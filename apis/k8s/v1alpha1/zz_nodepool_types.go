@@ -124,7 +124,7 @@ type NodePoolInitParameters struct {
 	// +mapType=granular
 	Annotations map[string]*string `json:"annotations,omitempty" tf:"annotations,omitempty"`
 
-	// [string] Wether the Node Pool should autoscale. For more details, please check the API documentation
+	// [string] Whether the Node Pool should autoscale. For more details, please check the API documentation
 	// The range defining the minimum and maximum number of worker nodes that the managed node group can scale in
 	AutoScaling *AutoScalingInitParameters `json:"autoScaling,omitempty" tf:"auto_scaling,omitempty"`
 
@@ -262,7 +262,7 @@ type NodePoolObservation struct {
 	// +mapType=granular
 	Annotations map[string]*string `json:"annotations,omitempty" tf:"annotations,omitempty"`
 
-	// [string] Wether the Node Pool should autoscale. For more details, please check the API documentation
+	// [string] Whether the Node Pool should autoscale. For more details, please check the API documentation
 	// The range defining the minimum and maximum number of worker nodes that the managed node group can scale in
 	AutoScaling *AutoScalingObservation `json:"autoScaling,omitempty" tf:"auto_scaling,omitempty"`
 
@@ -342,7 +342,7 @@ type NodePoolParameters struct {
 	// +mapType=granular
 	Annotations map[string]*string `json:"annotations,omitempty" tf:"annotations,omitempty"`
 
-	// [string] Wether the Node Pool should autoscale. For more details, please check the API documentation
+	// [string] Whether the Node Pool should autoscale. For more details, please check the API documentation
 	// The range defining the minimum and maximum number of worker nodes that the managed node group can scale in
 	// +kubebuilder:validation:Optional
 	AutoScaling *AutoScalingParameters `json:"autoScaling,omitempty" tf:"auto_scaling,omitempty"`

@@ -43,8 +43,8 @@ type VCPUServerInitParameters struct {
 	// (Computed) The associated firewall rules.
 	FirewallruleIds []*string `json:"firewallruleIds,omitempty" tf:"firewallrule_ids,omitempty"`
 
-	// [string] The hostname of the resource. Allowed characters are a-z, 0-9 and - (minus). Hostname should not start with minus and should not be longer than 63 characters.
-	// The hostname of the resource. Allowed characters are a-z, 0-9 and - (minus). Hostname should not start with minus and should not be longer than 63 characters.
+	// (Computed)[string] The hostname of the resource. Allowed characters are a-z, 0-9 and - (minus). Hostname should not start with minus and should not be longer than 63 characters. If no value provided explicitly, it will be populated with the name of the server
+	// The hostname of the resource. Allowed characters are a-z, 0-9 and - (minus). Hostname should not start with minus and should not be longer than 63 characters. If no value provided explicitly, it will be populated with the name of the server
 	Hostname *string `json:"hostname,omitempty" tf:"hostname,omitempty"`
 
 	// [string] The name, ID or alias of the image. May also be a snapshot ID. It is required if licence_type is not provided. Attribute is immutable.
@@ -68,6 +68,11 @@ type VCPUServerInitParameters struct {
 	// [list] Immutable List of absolute or relative paths to files containing public SSH key that will be injected into IonosCloud provided Linux images. Also accepts ssh keys directly. Public SSH keys are set on the image as authorized keys for appropriate SSH login to the instance using the corresponding private key. This field may only be set in creation requests. When reading, it always returns null. SSH keys are only supported if a public Linux image is used for the volume creation. Does not support ~ expansion to homedir in the given path.
 	// Public SSH keys are set on the image as authorized keys for appropriate SSH login to the instance using the corresponding private key. This field may only be set in creation requests. When reading, it always returns null. SSH keys are only supported if a public Linux image is used for the volume creation.
 	SSHKeys []*string `json:"sshKeys,omitempty" tf:"ssh_keys,omitempty"`
+
+	// The list of Security Group IDs for the resource.
+	// The list of Security Group IDs for the server
+	// +listType=set
+	SecurityGroupsIds []*string `json:"securityGroupsIds,omitempty" tf:"security_groups_ids,omitempty"`
 
 	// Sets the power state of the vcpu server. Possible values: `RUNNING` or `SHUTOFF`.
 	VMState *string `json:"vmState,omitempty" tf:"vm_state,omitempty"`
@@ -210,8 +215,15 @@ type VCPUServerNicInitParameters struct {
 	// +kubebuilder:validation:Optional
 	LanSelector *v1.Selector `json:"lanSelector,omitempty" tf:"-"`
 
+	Mac *string `json:"mac,omitempty" tf:"mac,omitempty"`
+
 	// [string] The name of the server.
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+
+	// The list of Security Group IDs for the resource.
+	// The list of Security Group IDs for the NIC
+	// +listType=set
+	SecurityGroupsIds []*string `json:"securityGroupsIds,omitempty" tf:"security_groups_ids,omitempty"`
 }
 
 type VCPUServerNicObservation struct {
@@ -246,6 +258,11 @@ type VCPUServerNicObservation struct {
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
 	PciSlot *float64 `json:"pciSlot,omitempty" tf:"pci_slot,omitempty"`
+
+	// The list of Security Group IDs for the resource.
+	// The list of Security Group IDs for the NIC
+	// +listType=set
+	SecurityGroupsIds []*string `json:"securityGroupsIds,omitempty" tf:"security_groups_ids,omitempty"`
 }
 
 type VCPUServerNicParameters struct {
@@ -289,9 +306,18 @@ type VCPUServerNicParameters struct {
 	// +kubebuilder:validation:Optional
 	LanSelector *v1.Selector `json:"lanSelector,omitempty" tf:"-"`
 
+	// +kubebuilder:validation:Optional
+	Mac *string `json:"mac,omitempty" tf:"mac,omitempty"`
+
 	// [string] The name of the server.
 	// +kubebuilder:validation:Optional
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+
+	// The list of Security Group IDs for the resource.
+	// The list of Security Group IDs for the NIC
+	// +kubebuilder:validation:Optional
+	// +listType=set
+	SecurityGroupsIds []*string `json:"securityGroupsIds,omitempty" tf:"security_groups_ids,omitempty"`
 }
 
 type VCPUServerObservation struct {
@@ -323,8 +349,8 @@ type VCPUServerObservation struct {
 	// (Computed) The associated firewall rules.
 	FirewallruleIds []*string `json:"firewallruleIds,omitempty" tf:"firewallrule_ids,omitempty"`
 
-	// [string] The hostname of the resource. Allowed characters are a-z, 0-9 and - (minus). Hostname should not start with minus and should not be longer than 63 characters.
-	// The hostname of the resource. Allowed characters are a-z, 0-9 and - (minus). Hostname should not start with minus and should not be longer than 63 characters.
+	// (Computed)[string] The hostname of the resource. Allowed characters are a-z, 0-9 and - (minus). Hostname should not start with minus and should not be longer than 63 characters. If no value provided explicitly, it will be populated with the name of the server
+	// The hostname of the resource. Allowed characters are a-z, 0-9 and - (minus). Hostname should not start with minus and should not be longer than 63 characters. If no value provided explicitly, it will be populated with the name of the server
 	Hostname *string `json:"hostname,omitempty" tf:"hostname,omitempty"`
 
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
@@ -358,6 +384,11 @@ type VCPUServerObservation struct {
 	// [list] Immutable List of absolute or relative paths to files containing public SSH key that will be injected into IonosCloud provided Linux images. Also accepts ssh keys directly. Public SSH keys are set on the image as authorized keys for appropriate SSH login to the instance using the corresponding private key. This field may only be set in creation requests. When reading, it always returns null. SSH keys are only supported if a public Linux image is used for the volume creation. Does not support ~ expansion to homedir in the given path.
 	// Public SSH keys are set on the image as authorized keys for appropriate SSH login to the instance using the corresponding private key. This field may only be set in creation requests. When reading, it always returns null. SSH keys are only supported if a public Linux image is used for the volume creation.
 	SSHKeys []*string `json:"sshKeys,omitempty" tf:"ssh_keys,omitempty"`
+
+	// The list of Security Group IDs for the resource.
+	// The list of Security Group IDs for the server
+	// +listType=set
+	SecurityGroupsIds []*string `json:"securityGroupsIds,omitempty" tf:"security_groups_ids,omitempty"`
 
 	Type *string `json:"type,omitempty" tf:"type,omitempty"`
 
@@ -404,8 +435,8 @@ type VCPUServerParameters struct {
 	// +kubebuilder:validation:Optional
 	FirewallruleIds []*string `json:"firewallruleIds,omitempty" tf:"firewallrule_ids,omitempty"`
 
-	// [string] The hostname of the resource. Allowed characters are a-z, 0-9 and - (minus). Hostname should not start with minus and should not be longer than 63 characters.
-	// The hostname of the resource. Allowed characters are a-z, 0-9 and - (minus). Hostname should not start with minus and should not be longer than 63 characters.
+	// (Computed)[string] The hostname of the resource. Allowed characters are a-z, 0-9 and - (minus). Hostname should not start with minus and should not be longer than 63 characters. If no value provided explicitly, it will be populated with the name of the server
+	// The hostname of the resource. Allowed characters are a-z, 0-9 and - (minus). Hostname should not start with minus and should not be longer than 63 characters. If no value provided explicitly, it will be populated with the name of the server
 	// +kubebuilder:validation:Optional
 	Hostname *string `json:"hostname,omitempty" tf:"hostname,omitempty"`
 
@@ -437,6 +468,12 @@ type VCPUServerParameters struct {
 	// Public SSH keys are set on the image as authorized keys for appropriate SSH login to the instance using the corresponding private key. This field may only be set in creation requests. When reading, it always returns null. SSH keys are only supported if a public Linux image is used for the volume creation.
 	// +kubebuilder:validation:Optional
 	SSHKeys []*string `json:"sshKeys,omitempty" tf:"ssh_keys,omitempty"`
+
+	// The list of Security Group IDs for the resource.
+	// The list of Security Group IDs for the server
+	// +kubebuilder:validation:Optional
+	// +listType=set
+	SecurityGroupsIds []*string `json:"securityGroupsIds,omitempty" tf:"security_groups_ids,omitempty"`
 
 	// Sets the power state of the vcpu server. Possible values: `RUNNING` or `SHUTOFF`.
 	// +kubebuilder:validation:Optional

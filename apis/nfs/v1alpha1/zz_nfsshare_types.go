@@ -116,8 +116,8 @@ type NFSShareInitParameters struct {
 	// The group ID that will own the exported directory. If not set, **anonymous** (`512`) will be used.
 	GID *float64 `json:"gid,omitempty" tf:"gid,omitempty"`
 
-	// The location of the Network File Storage Cluster.
-	// The location of the Network File Storage Cluster. Available locations: 'de/fra, 'de/txl'
+	// The location of the Network File Storage Cluster. If this is not set and if no value is provided for the IONOS_API_URL env var, the default location will be: de/fra.
+	// The location of the Network File Storage Cluster. Available locations: 'de/fra, 'de/txl, 'fr-par, 'gb-lhr, 'es/vit, 'us/las, 'us/ewr, 'us/mci'
 	Location *string `json:"location,omitempty" tf:"location,omitempty"`
 
 	// The directory being exported.
@@ -149,8 +149,8 @@ type NFSShareObservation struct {
 
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
-	// The location of the Network File Storage Cluster.
-	// The location of the Network File Storage Cluster. Available locations: 'de/fra, 'de/txl'
+	// The location of the Network File Storage Cluster. If this is not set and if no value is provided for the IONOS_API_URL env var, the default location will be: de/fra.
+	// The location of the Network File Storage Cluster. Available locations: 'de/fra, 'de/txl, 'fr-par, 'gb-lhr, 'es/vit, 'us/las, 'us/ewr, 'us/mci'
 	Location *string `json:"location,omitempty" tf:"location,omitempty"`
 
 	// Path to the NFS export. The NFS path is the path to the directory being exported.
@@ -195,8 +195,8 @@ type NFSShareParameters struct {
 	// +kubebuilder:validation:Optional
 	GID *float64 `json:"gid,omitempty" tf:"gid,omitempty"`
 
-	// The location of the Network File Storage Cluster.
-	// The location of the Network File Storage Cluster. Available locations: 'de/fra, 'de/txl'
+	// The location of the Network File Storage Cluster. If this is not set and if no value is provided for the IONOS_API_URL env var, the default location will be: de/fra.
+	// The location of the Network File Storage Cluster. Available locations: 'de/fra, 'de/txl, 'fr-par, 'gb-lhr, 'es/vit, 'us/las, 'us/ewr, 'us/mci'
 	// +kubebuilder:validation:Optional
 	Location *string `json:"location,omitempty" tf:"location,omitempty"`
 
@@ -253,7 +253,6 @@ type NFSShare struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
 	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.clientGroups) || (has(self.initProvider) && has(self.initProvider.clientGroups))",message="spec.forProvider.clientGroups is a required parameter"
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.location) || (has(self.initProvider) && has(self.initProvider.location))",message="spec.forProvider.location is a required parameter"
 	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.name) || (has(self.initProvider) && has(self.initProvider.name))",message="spec.forProvider.name is a required parameter"
 	Spec   NFSShareSpec   `json:"spec"`
 	Status NFSShareStatus `json:"status,omitempty"`

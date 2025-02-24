@@ -136,8 +136,16 @@ type NicInitParameters_2 struct {
 	// +kubebuilder:validation:Optional
 	LanSelector *v1.Selector `json:"lanSelector,omitempty" tf:"-"`
 
+	// The MAC address of the NIC. Can be set on creation only. If not set, one will be assigned automatically by the API. Immutable, update forces re-creation.
+	Mac *string `json:"mac,omitempty" tf:"mac,omitempty"`
+
 	// [string] The name of the LAN.
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+
+	// The list of Security Group IDs for the resource.
+	// The list of Security Group IDs
+	// +listType=set
+	SecurityGroupsIds []*string `json:"securityGroupsIds,omitempty" tf:"security_groups_ids,omitempty"`
 
 	// [string] The ID of a server.
 	// +crossplane:generate:reference:type=github.com/ionos-cloud/provider-upjet-ionoscloud/apis/compute/v1alpha1.Server
@@ -198,7 +206,7 @@ type NicObservation_2 struct {
 	// [integer] The LAN ID the NIC will sit on.
 	Lan *float64 `json:"lan,omitempty" tf:"lan,omitempty"`
 
-	// (Computed) The MAC address of the NIC.
+	// The MAC address of the NIC. Can be set on creation only. If not set, one will be assigned automatically by the API. Immutable, update forces re-creation.
 	Mac *string `json:"mac,omitempty" tf:"mac,omitempty"`
 
 	// [string] The name of the LAN.
@@ -206,6 +214,11 @@ type NicObservation_2 struct {
 
 	// (Computed) The PCI slot number of the Nic.
 	PciSlot *float64 `json:"pciSlot,omitempty" tf:"pci_slot,omitempty"`
+
+	// The list of Security Group IDs for the resource.
+	// The list of Security Group IDs
+	// +listType=set
+	SecurityGroupsIds []*string `json:"securityGroupsIds,omitempty" tf:"security_groups_ids,omitempty"`
 
 	// [string] The ID of a server.
 	ServerID *string `json:"serverId,omitempty" tf:"server_id,omitempty"`
@@ -279,9 +292,19 @@ type NicParameters_2 struct {
 	// +kubebuilder:validation:Optional
 	LanSelector *v1.Selector `json:"lanSelector,omitempty" tf:"-"`
 
+	// The MAC address of the NIC. Can be set on creation only. If not set, one will be assigned automatically by the API. Immutable, update forces re-creation.
+	// +kubebuilder:validation:Optional
+	Mac *string `json:"mac,omitempty" tf:"mac,omitempty"`
+
 	// [string] The name of the LAN.
 	// +kubebuilder:validation:Optional
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+
+	// The list of Security Group IDs for the resource.
+	// The list of Security Group IDs
+	// +kubebuilder:validation:Optional
+	// +listType=set
+	SecurityGroupsIds []*string `json:"securityGroupsIds,omitempty" tf:"security_groups_ids,omitempty"`
 
 	// [string] The ID of a server.
 	// +crossplane:generate:reference:type=github.com/ionos-cloud/provider-upjet-ionoscloud/apis/compute/v1alpha1.Server

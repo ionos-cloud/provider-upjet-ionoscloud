@@ -86,7 +86,7 @@ spec:
                     x-kubernetes-map-type: granular
                   autoScaling:
                     description: |-
-                      [string] Wether the Node Pool should autoscale. For more details, please check the API documentation
+                      [string] Whether the Node Pool should autoscale. For more details, please check the API documentation
                       The range defining the minimum and maximum number of worker nodes that the managed node group can scale in
                     properties:
                       maxNodeCount:
@@ -545,7 +545,7 @@ spec:
                     x-kubernetes-map-type: granular
                   autoScaling:
                     description: |-
-                      [string] Wether the Node Pool should autoscale. For more details, please check the API documentation
+                      [string] Whether the Node Pool should autoscale. For more details, please check the API documentation
                       The range defining the minimum and maximum number of worker nodes that the managed node group can scale in
                     properties:
                       maxNodeCount:
@@ -1196,7 +1196,7 @@ spec:
                     x-kubernetes-map-type: granular
                   autoScaling:
                     description: |-
-                      [string] Wether the Node Pool should autoscale. For more details, please check the API documentation
+                      [string] Whether the Node Pool should autoscale. For more details, please check the API documentation
                       The range defining the minimum and maximum number of worker nodes that the managed node group can scale in
                     properties:
                       maxNodeCount:

@@ -10,7 +10,7 @@ spec:
   forProvider:
     apiSubnetAllowList:
     - 1.2.3.4/32
-    k8sVersion: 1.28.6
+    k8sVersion: 1.31.2
     maintenanceWindow:
     - dayOfTheWeek: Sunday
       time: 09:00:00Z

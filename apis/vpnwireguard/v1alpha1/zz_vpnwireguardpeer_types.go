@@ -76,7 +76,7 @@ type VpnWireguardPeerInitParameters struct {
 	GatewayIDSelector *v1.Selector `json:"gatewayIdSelector,omitempty" tf:"-"`
 
 	// [string] The location of the WireGuard Gateway.
-	// The location of the WireGuard Peer. Supported locations: de/fra, de/txl
+	// The location of the WireGuard Peer. Supported locations: de/fra, de/txl, es/vit, gb/bhx, gb/lhr, us/ewr, us/las, us/mci, fr/par
 	Location *string `json:"location,omitempty" tf:"location,omitempty"`
 
 	// [string] The human-readable name of the WireGuard Gateway.
@@ -109,7 +109,7 @@ type VpnWireguardPeerObservation struct {
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
 	// [string] The location of the WireGuard Gateway.
-	// The location of the WireGuard Peer. Supported locations: de/fra, de/txl
+	// The location of the WireGuard Peer. Supported locations: de/fra, de/txl, es/vit, gb/bhx, gb/lhr, us/ewr, us/las, us/mci, fr/par
 	Location *string `json:"location,omitempty" tf:"location,omitempty"`
 
 	// [string] The human-readable name of the WireGuard Gateway.
@@ -157,7 +157,7 @@ type VpnWireguardPeerParameters struct {
 	GatewayIDSelector *v1.Selector `json:"gatewayIdSelector,omitempty" tf:"-"`
 
 	// [string] The location of the WireGuard Gateway.
-	// The location of the WireGuard Peer. Supported locations: de/fra, de/txl
+	// The location of the WireGuard Peer. Supported locations: de/fra, de/txl, es/vit, gb/bhx, gb/lhr, us/ewr, us/las, us/mci, fr/par
 	// +kubebuilder:validation:Optional
 	Location *string `json:"location,omitempty" tf:"location,omitempty"`
 
@@ -209,7 +209,6 @@ type VpnWireguardPeer struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
 	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.allowedIps) || (has(self.initProvider) && has(self.initProvider.allowedIps))",message="spec.forProvider.allowedIps is a required parameter"
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.location) || (has(self.initProvider) && has(self.initProvider.location))",message="spec.forProvider.location is a required parameter"
 	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.name) || (has(self.initProvider) && has(self.initProvider.name))",message="spec.forProvider.name is a required parameter"
 	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.publicKey) || (has(self.initProvider) && has(self.initProvider.publicKey))",message="spec.forProvider.publicKey is a required parameter"
 	Spec   VpnWireguardPeerSpec   `json:"spec"`

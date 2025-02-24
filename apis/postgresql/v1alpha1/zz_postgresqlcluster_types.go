@@ -236,6 +236,10 @@ type MaintenanceWindowParameters struct {
 
 type PostgresqlClusterInitParameters struct {
 
+	// [bool] When set to true, allows the update of immutable fields by destroying and re-creating the cluster."
+	// When set to true, allows the update of immutable fields by destroying and re-creating the cluster.
+	AllowReplace *bool `json:"allowReplace,omitempty" tf:"allow_replace,omitempty"`
+
 	// (Computed)[string] The IONOS Object Storage location where the backups will be stored. Possible values are: de, eu-south-2, eu-central-2. This attribute is immutable (disallowed in update requests).
 	// The Object Storage location where the backups will be stored.
 	BackupLocation *string `json:"backupLocation,omitempty" tf:"backup_location,omitempty"`
@@ -282,7 +286,7 @@ type PostgresqlClusterInitParameters struct {
 	// +kubebuilder:validation:Optional
 	LocationSelector *v1.Selector `json:"locationSelector,omitempty" tf:"-"`
 
-	// (Computed)[string] A weekly 4 hour-long window, during which maintenance might occur
+	// (Computed) A weekly 4 hour-long window, during which maintenance might occur
 	// a weekly 4 hour-long window, during which maintenance might occur
 	MaintenanceWindow *MaintenanceWindowInitParameters `json:"maintenanceWindow,omitempty" tf:"maintenance_window,omitempty"`
 
@@ -308,6 +312,10 @@ type PostgresqlClusterInitParameters struct {
 }
 
 type PostgresqlClusterObservation struct {
+
+	// [bool] When set to true, allows the update of immutable fields by destroying and re-creating the cluster."
+	// When set to true, allows the update of immutable fields by destroying and re-creating the cluster.
+	AllowReplace *bool `json:"allowReplace,omitempty" tf:"allow_replace,omitempty"`
 
 	// (Computed)[string] The IONOS Object Storage location where the backups will be stored. Possible values are: de, eu-south-2, eu-central-2. This attribute is immutable (disallowed in update requests).
 	// The Object Storage location where the backups will be stored.
@@ -351,7 +359,7 @@ type PostgresqlClusterObservation struct {
 	// The physical location where the cluster will be created. This will be where all of your instances live. Property cannot be modified after datacenter creation (disallowed in update requests)
 	Location *string `json:"location,omitempty" tf:"location,omitempty"`
 
-	// (Computed)[string] A weekly 4 hour-long window, during which maintenance might occur
+	// (Computed) A weekly 4 hour-long window, during which maintenance might occur
 	// a weekly 4 hour-long window, during which maintenance might occur
 	MaintenanceWindow *MaintenanceWindowObservation `json:"maintenanceWindow,omitempty" tf:"maintenance_window,omitempty"`
 
@@ -377,6 +385,11 @@ type PostgresqlClusterObservation struct {
 }
 
 type PostgresqlClusterParameters struct {
+
+	// [bool] When set to true, allows the update of immutable fields by destroying and re-creating the cluster."
+	// When set to true, allows the update of immutable fields by destroying and re-creating the cluster.
+	// +kubebuilder:validation:Optional
+	AllowReplace *bool `json:"allowReplace,omitempty" tf:"allow_replace,omitempty"`
 
 	// (Computed)[string] The IONOS Object Storage location where the backups will be stored. Possible values are: de, eu-south-2, eu-central-2. This attribute is immutable (disallowed in update requests).
 	// The Object Storage location where the backups will be stored.
@@ -433,7 +446,7 @@ type PostgresqlClusterParameters struct {
 	// +kubebuilder:validation:Optional
 	LocationSelector *v1.Selector `json:"locationSelector,omitempty" tf:"-"`
 
-	// (Computed)[string] A weekly 4 hour-long window, during which maintenance might occur
+	// (Computed) A weekly 4 hour-long window, during which maintenance might occur
 	// a weekly 4 hour-long window, during which maintenance might occur
 	// +kubebuilder:validation:Optional
 	MaintenanceWindow *MaintenanceWindowParameters `json:"maintenanceWindow,omitempty" tf:"maintenance_window,omitempty"`

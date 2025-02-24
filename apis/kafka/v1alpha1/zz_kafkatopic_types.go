@@ -28,7 +28,7 @@ type KafkaTopicInitParameters struct {
 	// +kubebuilder:validation:Optional
 	ClusterIDSelector *v1.Selector `json:"clusterIdSelector,omitempty" tf:"-"`
 
-	// [string] The location of the Kafka Cluster Topic. Possible values: de/fra, de/txl
+	// [string] The location of the Kafka Cluster Topic. Possible values: de/fra, de/txl. If this is not set and if no value is provided for the IONOS_API_URL env var, the default location will be: de/fra.
 	// The location of your Kafka Cluster Topic. Supported locations: de/fra, de/txl
 	// +crossplane:generate:reference:type=github.com/ionos-cloud/provider-upjet-ionoscloud/apis/kafka/v1alpha1.Kafka
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractParamPath("location",false)
@@ -80,7 +80,7 @@ type KafkaTopicObservation struct {
 	// (Computed)[string] The UUID of the Kafka Cluster Topic.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
-	// [string] The location of the Kafka Cluster Topic. Possible values: de/fra, de/txl
+	// [string] The location of the Kafka Cluster Topic. Possible values: de/fra, de/txl. If this is not set and if no value is provided for the IONOS_API_URL env var, the default location will be: de/fra.
 	// The location of your Kafka Cluster Topic. Supported locations: de/fra, de/txl
 	Location *string `json:"location,omitempty" tf:"location,omitempty"`
 
@@ -129,7 +129,7 @@ type KafkaTopicParameters struct {
 	// +kubebuilder:validation:Optional
 	ClusterIDSelector *v1.Selector `json:"clusterIdSelector,omitempty" tf:"-"`
 
-	// [string] The location of the Kafka Cluster Topic. Possible values: de/fra, de/txl
+	// [string] The location of the Kafka Cluster Topic. Possible values: de/fra, de/txl. If this is not set and if no value is provided for the IONOS_API_URL env var, the default location will be: de/fra.
 	// The location of your Kafka Cluster Topic. Supported locations: de/fra, de/txl
 	// +crossplane:generate:reference:type=github.com/ionos-cloud/provider-upjet-ionoscloud/apis/kafka/v1alpha1.Kafka
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractParamPath("location",false)
