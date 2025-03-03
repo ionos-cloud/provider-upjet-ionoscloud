@@ -1034,9 +1034,7 @@ resources:
                     }
                 ionoscloud_server.example: |-
                     {
-                      "availability_zone": "ZONE_1",
                       "cores": 1,
-                      "cpu_family": "INTEL_XEON",
                       "datacenter_id": "${ionoscloud_datacenter.example.id}",
                       "image_name": "Ubuntu-20.04",
                       "image_password": "${random_password.server_image_password.result}",
@@ -1239,11 +1237,9 @@ resources:
                     }
                 ionoscloud_server.example: |-
                     {
-                      "availability_zone": "ZONE_1",
                       "cores": 2,
-                      "cpu_family": "INTEL_SKYLAKE",
                       "datacenter_id": "${ionoscloud_datacenter.example.id}",
-                      "image_name": "rockylinux-8-GenericCloud-20230518",
+                      "image_name": "rocky:latest",
                       "image_password": "password",
                       "name": "example",
                       "nic": [
@@ -1367,9 +1363,7 @@ resources:
                     }
                 ionoscloud_server.example: |-
                     {
-                      "availability_zone": "ZONE_1",
                       "cores": 1,
-                      "cpu_family": "INTEL_XEON",
                       "datacenter_id": "${ionoscloud_datacenter.example.id}",
                       "image_name": "Ubuntu-20.04",
                       "image_password": "${random_password.server_image_password.result}",
@@ -1700,7 +1694,6 @@ resources:
                     {
                       "availability_zone": "AUTO",
                       "cores": 1,
-                      "cpu_family": "INTEL_SKYLAKE",
                       "datacenter_id": "${ionoscloud_datacenter.example.id}",
                       "image_name": "ubuntu:latest",
                       "image_password": "${random_password.password.result}",
@@ -1834,7 +1827,6 @@ resources:
                     {
                       "availability_zone": "AUTO",
                       "cores": 1,
-                      "cpu_family": "INTEL_SKYLAKE",
                       "datacenter_id": "${ionoscloud_datacenter.example.id}",
                       "image_name": "ubuntu:latest",
                       "image_password": "${random_password.password.result}",
@@ -2155,11 +2147,9 @@ resources:
                     }
                 ionoscloud_server.example: |-
                     {
-                      "availability_zone": "ZONE_1",
                       "cores": 2,
-                      "cpu_family": "INTEL_SKYLAKE",
                       "datacenter_id": "${ionoscloud_datacenter.example.id}",
-                      "image_name": "rockylinux-8-GenericCloud-20230518",
+                      "image_name": "rocky:latest",
                       "image_password": "password",
                       "name": "example",
                       "nic": [
@@ -2980,9 +2970,7 @@ resources:
                     }
                 ionoscloud_server.nfs_server: |-
                     {
-                      "availability_zone": "ZONE_1",
                       "cores": 1,
-                      "cpu_family": "INTEL_SKYLAKE",
                       "datacenter_id": "${ionoscloud_datacenter.nfs_dc.id}",
                       "image_name": "${data.ionoscloud_image.HDD_image.id}",
                       "image_password": "${random_password.password.result}",
@@ -3154,9 +3142,7 @@ resources:
                     }
                 ionoscloud_server.example: |-
                     {
-                      "availability_zone": "ZONE_1",
                       "cores": 1,
-                      "cpu_family": "INTEL_XEON",
                       "datacenter_id": "${ionoscloud_datacenter.example.id}",
                       "image_name": "Ubuntu-20.04",
                       "image_password": "${random_password.server_image_password.result}",
@@ -3221,9 +3207,7 @@ resources:
                     }
                 ionoscloud_server.example: |-
                     {
-                      "availability_zone": "ZONE_1",
                       "cores": 1,
-                      "cpu_family": "INTEL_XEON",
                       "datacenter_id": "${ionoscloud_datacenter.example.id}",
                       "image_name": "Ubuntu-20.04",
                       "image_password": "${random_password.server_image_password.result}",
@@ -3451,11 +3435,9 @@ resources:
                     }
                 ionoscloud_server.example: |-
                     {
-                      "availability_zone": "ZONE_1",
                       "cores": 2,
-                      "cpu_family": "INTEL_SKYLAKE",
                       "datacenter_id": "${ionoscloud_datacenter.example.id}",
-                      "image_name": "rockylinux-8-GenericCloud-20230518",
+                      "image_name": "rocky:latest",
                       "image_password": "password",
                       "name": "example",
                       "nic": [
@@ -4170,9 +4152,7 @@ resources:
             - name: example
               manifest: |-
                 {
-                  "availability_zone": "ZONE_1",
                   "cores": 1,
-                  "cpu_family": "INTEL_XEON",
                   "datacenter_id": "${ionoscloud_datacenter.example.id}",
                   "image_name": "${data.ionoscloud_image.example.name}",
                   "image_password": "${random_password.server_image_password.result}",
@@ -4260,9 +4240,7 @@ resources:
             - name: example
               manifest: |-
                 {
-                  "availability_zone": "ZONE_1",
                   "cores": 1,
-                  "cpu_family": "INTEL_XEON",
                   "datacenter_id": "${ionoscloud_datacenter.example.id}",
                   "image_name": "ubuntu:latest",
                   "image_password": "${random_password.server_image_password.result}",
@@ -4544,9 +4522,7 @@ resources:
                     }
                 ionoscloud_server.example: |-
                     {
-                      "availability_zone": "ZONE_1",
                       "cores": 1,
-                      "cpu_family": "INTEL_XEON",
                       "datacenter_id": "${ionoscloud_datacenter.example.id}",
                       "image_name": "${data.ionoscloud_image.example.id}",
                       "image_password": "${random_password.server_image_password.result}",
@@ -4902,9 +4878,7 @@ resources:
                     }
                 ionoscloud_server.example: |-
                     {
-                      "availability_zone": "ZONE_1",
                       "cores": 1,
-                      "cpu_family": "INTEL_XEON",
                       "datacenter_id": "${ionoscloud_datacenter.example.id}",
                       "image_name": "${data.ionoscloud_image.example.name}",
                       "image_password": "${random_password.server_image_password.result}",
@@ -4994,9 +4968,7 @@ resources:
                     }
                 ionoscloud_server.example: |-
                     {
-                      "availability_zone": "ZONE_1",
                       "cores": 1,
-                      "cpu_family": "INTEL_XEON",
                       "datacenter_id": "${ionoscloud_datacenter.example.id}",
                       "image_name": "${data.ionoscloud_image.example.name}",
                       "image_password": "${random_password.server_image_password.result}",

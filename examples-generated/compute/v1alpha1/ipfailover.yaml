@@ -84,9 +84,7 @@ metadata:
   name: example
 spec:
   forProvider:
-    availabilityZone: ZONE_1
     cores: 1
-    cpuFamily: INTEL_XEON
     datacenterIdSelector:
       matchLabels:
         testing.upbound.io/example-name: example
