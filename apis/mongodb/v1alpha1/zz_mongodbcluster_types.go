@@ -242,7 +242,7 @@ type MongodbClusterInitParameters struct {
 	// +kubebuilder:validation:Optional
 	LocationSelector *v1.Selector `json:"locationSelector,omitempty" tf:"-"`
 
-	// (Computed)[string] A weekly 4 hour-long window, during which maintenance might occur.  Updates to the value of the field force the cluster to be re-created.
+	// (Computed) A weekly 4 hour-long window, during which maintenance might occur.  Updates to the value of the field force the cluster to be re-created.
 	// A weekly 4 hour-long window, during which maintenance might occur
 	MaintenanceWindow *MaintenanceWindowInitParameters `json:"maintenanceWindow,omitempty" tf:"maintenance_window,omitempty"`
 
@@ -315,7 +315,7 @@ type MongodbClusterObservation struct {
 	// The physical location where the cluster will be created. This will be where all of your instances live. Property cannot be modified after datacenter creation (disallowed in update requests). Available locations: de/txl, gb/lhr, es/vit. Update forces cluster re-creation.
 	Location *string `json:"location,omitempty" tf:"location,omitempty"`
 
-	// (Computed)[string] A weekly 4 hour-long window, during which maintenance might occur.  Updates to the value of the field force the cluster to be re-created.
+	// (Computed) A weekly 4 hour-long window, during which maintenance might occur.  Updates to the value of the field force the cluster to be re-created.
 	// A weekly 4 hour-long window, during which maintenance might occur
 	MaintenanceWindow *MaintenanceWindowObservation `json:"maintenanceWindow,omitempty" tf:"maintenance_window,omitempty"`
 
@@ -400,7 +400,7 @@ type MongodbClusterParameters struct {
 	// +kubebuilder:validation:Optional
 	LocationSelector *v1.Selector `json:"locationSelector,omitempty" tf:"-"`
 
-	// (Computed)[string] A weekly 4 hour-long window, during which maintenance might occur.  Updates to the value of the field force the cluster to be re-created.
+	// (Computed) A weekly 4 hour-long window, during which maintenance might occur.  Updates to the value of the field force the cluster to be re-created.
 	// A weekly 4 hour-long window, during which maintenance might occur
 	// +kubebuilder:validation:Optional
 	MaintenanceWindow *MaintenanceWindowParameters `json:"maintenanceWindow,omitempty" tf:"maintenance_window,omitempty"`

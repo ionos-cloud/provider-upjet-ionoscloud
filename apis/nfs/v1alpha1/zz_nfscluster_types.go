@@ -103,8 +103,8 @@ type NFSClusterInitParameters struct {
 	// The network connections for the Network File Storage Cluster.
 	Connections *ConnectionsInitParameters `json:"connections,omitempty" tf:"connections,omitempty"`
 
-	// The location where the Network File Storage cluster is located.
-	// The location of the Network File Storage Cluster. Available locations: 'de/fra, 'de/txl'
+	// The location where the Network File Storage cluster is located. If this is not set and if no value is provided for the IONOS_API_URL env var, the default location will be: de/fra.
+	// The location of the Network File Storage Cluster. Available locations: 'de/fra, 'de/txl, 'fr-par, 'gb-lhr, 'es/vit, 'us/las, 'us/ewr, 'us/mci'
 	Location *string `json:"location,omitempty" tf:"location,omitempty"`
 
 	// The NFS configuration for the Network File Storage cluster. Each NFS configuration supports the following:
@@ -127,8 +127,8 @@ type NFSClusterObservation struct {
 
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
-	// The location where the Network File Storage cluster is located.
-	// The location of the Network File Storage Cluster. Available locations: 'de/fra, 'de/txl'
+	// The location where the Network File Storage cluster is located. If this is not set and if no value is provided for the IONOS_API_URL env var, the default location will be: de/fra.
+	// The location of the Network File Storage Cluster. Available locations: 'de/fra, 'de/txl, 'fr-par, 'gb-lhr, 'es/vit, 'us/las, 'us/ewr, 'us/mci'
 	Location *string `json:"location,omitempty" tf:"location,omitempty"`
 
 	// The NFS configuration for the Network File Storage cluster. Each NFS configuration supports the following:
@@ -150,8 +150,8 @@ type NFSClusterParameters struct {
 	// +kubebuilder:validation:Optional
 	Connections *ConnectionsParameters `json:"connections,omitempty" tf:"connections,omitempty"`
 
-	// The location where the Network File Storage cluster is located.
-	// The location of the Network File Storage Cluster. Available locations: 'de/fra, 'de/txl'
+	// The location where the Network File Storage cluster is located. If this is not set and if no value is provided for the IONOS_API_URL env var, the default location will be: de/fra.
+	// The location of the Network File Storage Cluster. Available locations: 'de/fra, 'de/txl, 'fr-par, 'gb-lhr, 'es/vit, 'us/las, 'us/ewr, 'us/mci'
 	// +kubebuilder:validation:Optional
 	Location *string `json:"location,omitempty" tf:"location,omitempty"`
 
@@ -229,7 +229,6 @@ type NFSCluster struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
 	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.connections) || (has(self.initProvider) && has(self.initProvider.connections))",message="spec.forProvider.connections is a required parameter"
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.location) || (has(self.initProvider) && has(self.initProvider.location))",message="spec.forProvider.location is a required parameter"
 	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.name) || (has(self.initProvider) && has(self.initProvider.name))",message="spec.forProvider.name is a required parameter"
 	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.size) || (has(self.initProvider) && has(self.initProvider.size))",message="spec.forProvider.size is a required parameter"
 	Spec   NFSClusterSpec   `json:"spec"`

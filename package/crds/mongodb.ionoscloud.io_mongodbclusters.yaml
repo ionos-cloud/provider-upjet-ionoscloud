@@ -378,7 +378,7 @@ spec:
                     type: object
                   maintenanceWindow:
                     description: |-
-                      (Computed)[string] A weekly 4 hour-long window, during which maintenance might occur.  Updates to the value of the field force the cluster to be re-created.
+                      (Computed) A weekly 4 hour-long window, during which maintenance might occur.  Updates to the value of the field force the cluster to be re-created.
                       A weekly 4 hour-long window, during which maintenance might occur
                     properties:
                       dayOfTheWeek:
@@ -742,7 +742,7 @@ spec:
                     type: object
                   maintenanceWindow:
                     description: |-
-                      (Computed)[string] A weekly 4 hour-long window, during which maintenance might occur.  Updates to the value of the field force the cluster to be re-created.
+                      (Computed) A weekly 4 hour-long window, during which maintenance might occur.  Updates to the value of the field force the cluster to be re-created.
                       A weekly 4 hour-long window, during which maintenance might occur
                     properties:
                       dayOfTheWeek:
@@ -1073,7 +1073,7 @@ spec:
                     type: string
                   maintenanceWindow:
                     description: |-
-                      (Computed)[string] A weekly 4 hour-long window, during which maintenance might occur.  Updates to the value of the field force the cluster to be re-created.
+                      (Computed) A weekly 4 hour-long window, during which maintenance might occur.  Updates to the value of the field force the cluster to be re-created.
                       A weekly 4 hour-long window, during which maintenance might occur
                     properties:
                       dayOfTheWeek:

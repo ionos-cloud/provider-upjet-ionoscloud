@@ -15,6 +15,10 @@ import (
 
 type CubeServerInitParameters struct {
 
+	// [bool] When set to true, allows the update of immutable fields by first destroying and then re-creating the server.
+	// When set to true, allows the update of immutable fields by destroying and re-creating the resource.
+	AllowReplace *bool `json:"allowReplace,omitempty" tf:"allow_replace,omitempty"`
+
 	// [string] The availability zone in which the server should exist. This property is immutable.
 	AvailabilityZone *string `json:"availabilityZone,omitempty" tf:"availability_zone,omitempty"`
 
@@ -36,8 +40,8 @@ type CubeServerInitParameters struct {
 	// +kubebuilder:validation:Optional
 	DatacenterIDSelector *v1.Selector `json:"datacenterIdSelector,omitempty" tf:"-"`
 
-	// The hostname of the resource. Allowed characters are a-z, 0-9 and - (minus). Hostname should not start with minus and should not be longer than 63 characters.
-	// The hostname of the resource. Allowed characters are a-z, 0-9 and - (minus). Hostname should not start with minus and should not be longer than 63 characters.
+	// (Computed) The hostname of the resource. Allowed characters are a-z, 0-9 and - (minus). Hostname should not start with minus and should not be longer than 63 characters. If no value provided explicitly, it will be populated with the name of the server
+	// The hostname of the resource. Allowed characters are a-z, 0-9 and - (minus). Hostname should not start with minus and should not be longer than 63 characters. If no value provided explicitly, it will be populated with the name of the server
 	Hostname *string `json:"hostname,omitempty" tf:"hostname,omitempty"`
 
 	// [string] The name, ID or alias of the image. May also be a snapshot ID. It is required if licence_type is not provided. Attribute is immutable.
@@ -55,6 +59,11 @@ type CubeServerInitParameters struct {
 	// [list] List of paths to files containing a public SSH key that will be injected into IonosCloud provided Linux images. Required for IonosCloud Linux images. Required if image_password is not provided.
 	SSHKeyPath []*string `json:"sshKeyPath,omitempty" tf:"ssh_key_path,omitempty"`
 
+	// The list of Security Group IDs for the resource.
+	// The list of Security Group IDs for the server
+	// +listType=set
+	SecurityGroupsIds []*string `json:"securityGroupsIds,omitempty" tf:"security_groups_ids,omitempty"`
+
 	// [string] The UUID of the template for creating a CUBE server; the available templates for CUBE servers can be found on the templates resource
 	TemplateUUID *string `json:"templateUuid,omitempty" tf:"template_uuid,omitempty"`
 
@@ -67,6 +76,10 @@ type CubeServerInitParameters struct {
 }
 
 type CubeServerObservation struct {
+
+	// [bool] When set to true, allows the update of immutable fields by first destroying and then re-creating the server.
+	// When set to true, allows the update of immutable fields by destroying and re-creating the resource.
+	AllowReplace *bool `json:"allowReplace,omitempty" tf:"allow_replace,omitempty"`
 
 	// [string] The availability zone in which the server should exist. This property is immutable.
 	AvailabilityZone *string `json:"availabilityZone,omitempty" tf:"availability_zone,omitempty"`
@@ -86,8 +99,8 @@ type CubeServerObservation struct {
 	// (Computed) The associated firewall rule.
 	FirewallruleID *string `json:"firewallruleId,omitempty" tf:"firewallrule_id,omitempty"`
 
-	// The hostname of the resource. Allowed characters are a-z, 0-9 and - (minus). Hostname should not start with minus and should not be longer than 63 characters.
-	// The hostname of the resource. Allowed characters are a-z, 0-9 and - (minus). Hostname should not start with minus and should not be longer than 63 characters.
+	// (Computed) The hostname of the resource. Allowed characters are a-z, 0-9 and - (minus). Hostname should not start with minus and should not be longer than 63 characters. If no value provided explicitly, it will be populated with the name of the server
+	// The hostname of the resource. Allowed characters are a-z, 0-9 and - (minus). Hostname should not start with minus and should not be longer than 63 characters. If no value provided explicitly, it will be populated with the name of the server
 	Hostname *string `json:"hostname,omitempty" tf:"hostname,omitempty"`
 
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
@@ -113,6 +126,11 @@ type CubeServerObservation struct {
 	// [list] List of paths to files containing a public SSH key that will be injected into IonosCloud provided Linux images. Required for IonosCloud Linux images. Required if image_password is not provided.
 	SSHKeyPath []*string `json:"sshKeyPath,omitempty" tf:"ssh_key_path,omitempty"`
 
+	// The list of Security Group IDs for the resource.
+	// The list of Security Group IDs for the server
+	// +listType=set
+	SecurityGroupsIds []*string `json:"securityGroupsIds,omitempty" tf:"security_groups_ids,omitempty"`
+
 	// [string] The UUID of the template for creating a CUBE server; the available templates for CUBE servers can be found on the templates resource
 	TemplateUUID *string `json:"templateUuid,omitempty" tf:"template_uuid,omitempty"`
 
@@ -125,6 +143,11 @@ type CubeServerObservation struct {
 }
 
 type CubeServerParameters struct {
+
+	// [bool] When set to true, allows the update of immutable fields by first destroying and then re-creating the server.
+	// When set to true, allows the update of immutable fields by destroying and re-creating the resource.
+	// +kubebuilder:validation:Optional
+	AllowReplace *bool `json:"allowReplace,omitempty" tf:"allow_replace,omitempty"`
 
 	// [string] The availability zone in which the server should exist. This property is immutable.
 	// +kubebuilder:validation:Optional
@@ -151,8 +174,8 @@ type CubeServerParameters struct {
 	// +kubebuilder:validation:Optional
 	DatacenterIDSelector *v1.Selector `json:"datacenterIdSelector,omitempty" tf:"-"`
 
-	// The hostname of the resource. Allowed characters are a-z, 0-9 and - (minus). Hostname should not start with minus and should not be longer than 63 characters.
-	// The hostname of the resource. Allowed characters are a-z, 0-9 and - (minus). Hostname should not start with minus and should not be longer than 63 characters.
+	// (Computed) The hostname of the resource. Allowed characters are a-z, 0-9 and - (minus). Hostname should not start with minus and should not be longer than 63 characters. If no value provided explicitly, it will be populated with the name of the server
+	// The hostname of the resource. Allowed characters are a-z, 0-9 and - (minus). Hostname should not start with minus and should not be longer than 63 characters. If no value provided explicitly, it will be populated with the name of the server
 	// +kubebuilder:validation:Optional
 	Hostname *string `json:"hostname,omitempty" tf:"hostname,omitempty"`
 
@@ -175,6 +198,12 @@ type CubeServerParameters struct {
 	// [list] List of paths to files containing a public SSH key that will be injected into IonosCloud provided Linux images. Required for IonosCloud Linux images. Required if image_password is not provided.
 	// +kubebuilder:validation:Optional
 	SSHKeyPath []*string `json:"sshKeyPath,omitempty" tf:"ssh_key_path,omitempty"`
+
+	// The list of Security Group IDs for the resource.
+	// The list of Security Group IDs for the server
+	// +kubebuilder:validation:Optional
+	// +listType=set
+	SecurityGroupsIds []*string `json:"securityGroupsIds,omitempty" tf:"security_groups_ids,omitempty"`
 
 	// [string] The UUID of the template for creating a CUBE server; the available templates for CUBE servers can be found on the templates resource
 	// +kubebuilder:validation:Optional
@@ -301,8 +330,15 @@ type NicInitParameters struct {
 	// +kubebuilder:validation:Optional
 	LanSelector *v1.Selector `json:"lanSelector,omitempty" tf:"-"`
 
+	Mac *string `json:"mac,omitempty" tf:"mac,omitempty"`
+
 	// [string] The name of the server.
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+
+	// The list of Security Group IDs for the resource.
+	// The list of Security Group IDs for the NIC
+	// +listType=set
+	SecurityGroupsIds []*string `json:"securityGroupsIds,omitempty" tf:"security_groups_ids,omitempty"`
 }
 
 type NicObservation struct {
@@ -335,6 +371,11 @@ type NicObservation struct {
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
 	PciSlot *float64 `json:"pciSlot,omitempty" tf:"pci_slot,omitempty"`
+
+	// The list of Security Group IDs for the resource.
+	// The list of Security Group IDs for the NIC
+	// +listType=set
+	SecurityGroupsIds []*string `json:"securityGroupsIds,omitempty" tf:"security_groups_ids,omitempty"`
 }
 
 type NicParameters struct {
@@ -378,9 +419,18 @@ type NicParameters struct {
 	// +kubebuilder:validation:Optional
 	LanSelector *v1.Selector `json:"lanSelector,omitempty" tf:"-"`
 
+	// +kubebuilder:validation:Optional
+	Mac *string `json:"mac,omitempty" tf:"mac,omitempty"`
+
 	// [string] The name of the server.
 	// +kubebuilder:validation:Optional
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+
+	// The list of Security Group IDs for the resource.
+	// The list of Security Group IDs for the NIC
+	// +kubebuilder:validation:Optional
+	// +listType=set
+	SecurityGroupsIds []*string `json:"securityGroupsIds,omitempty" tf:"security_groups_ids,omitempty"`
 }
 
 type VolumeInitParameters struct {

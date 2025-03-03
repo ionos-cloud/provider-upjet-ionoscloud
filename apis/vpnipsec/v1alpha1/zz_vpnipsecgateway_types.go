@@ -116,6 +116,41 @@ type ConnectionsParameters struct {
 	LanIDSelector *v1.Selector `json:"lanIdSelector,omitempty" tf:"-"`
 }
 
+type MaintenanceWindowInitParameters struct {
+
+	// [string] The name of the week day.
+	// The name of the week day
+	DayOfTheWeek *string `json:"dayOfTheWeek,omitempty" tf:"day_of_the_week,omitempty"`
+
+	// [string] Start of the maintenance window in UTC time.
+	// Start of the maintenance window in UTC time.
+	Time *string `json:"time,omitempty" tf:"time,omitempty"`
+}
+
+type MaintenanceWindowObservation struct {
+
+	// [string] The name of the week day.
+	// The name of the week day
+	DayOfTheWeek *string `json:"dayOfTheWeek,omitempty" tf:"day_of_the_week,omitempty"`
+
+	// [string] Start of the maintenance window in UTC time.
+	// Start of the maintenance window in UTC time.
+	Time *string `json:"time,omitempty" tf:"time,omitempty"`
+}
+
+type MaintenanceWindowParameters struct {
+
+	// [string] The name of the week day.
+	// The name of the week day
+	// +kubebuilder:validation:Optional
+	DayOfTheWeek *string `json:"dayOfTheWeek" tf:"day_of_the_week,omitempty"`
+
+	// [string] Start of the maintenance window in UTC time.
+	// Start of the maintenance window in UTC time.
+	// +kubebuilder:validation:Optional
+	Time *string `json:"time" tf:"time,omitempty"`
+}
+
 type VpnIpsecGatewayInitParameters struct {
 
 	// [list] The network connection for your gateway. Note: all connections must belong to the
@@ -143,13 +178,21 @@ type VpnIpsecGatewayInitParameters struct {
 	GatewayIPSelector *v1.Selector `json:"gatewayIpSelector,omitempty" tf:"-"`
 
 	// [string] The location of the IPSec Gateway. Supported locations: de/fra, de/txl, es/vit,
-	// gb/lhr, us/ewr, us/las, us/mci, fr/par
-	// The location of the IPSec Gateway. Supported locations: de/fra, de/txl
+	// gb/bhx, gb/lhr, us/ewr, us/las, us/mci, fr/par.
+	// The location of the IPSec Gateway. Supported locations: de/fra, de/txl, es/vit, gb/bhx, gb/lhr, us/ewr, us/las, us/mci, fr/par
 	Location *string `json:"location,omitempty" tf:"location,omitempty"`
+
+	// (Computed) A weekly 4 hour-long window, during which maintenance might occur.
+	// A weekly 4 hour-long window, during which maintenance might occur
+	MaintenanceWindow *MaintenanceWindowInitParameters `json:"maintenanceWindow,omitempty" tf:"maintenance_window,omitempty"`
 
 	// [string] The name of the IPSec Gateway.
 	// The human readable name of your IPSecGateway.
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+
+	// (Computed)[string] Gateway performance options.  See product documentation for full details. Options: STANDARD, STANDARD_HA, ENHANCED, ENHANCED_HA, PREMIUM, PREMIUM_HA.
+	// Gateway performance options. See the documentation for the available options
+	Tier *string `json:"tier,omitempty" tf:"tier,omitempty"`
 
 	// [string] The IKE version that is permitted for the VPN tunnels. Default: IKEv2. Possible
 	// values: IKEv2.
@@ -176,13 +219,21 @@ type VpnIpsecGatewayObservation struct {
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
 	// [string] The location of the IPSec Gateway. Supported locations: de/fra, de/txl, es/vit,
-	// gb/lhr, us/ewr, us/las, us/mci, fr/par
-	// The location of the IPSec Gateway. Supported locations: de/fra, de/txl
+	// gb/bhx, gb/lhr, us/ewr, us/las, us/mci, fr/par.
+	// The location of the IPSec Gateway. Supported locations: de/fra, de/txl, es/vit, gb/bhx, gb/lhr, us/ewr, us/las, us/mci, fr/par
 	Location *string `json:"location,omitempty" tf:"location,omitempty"`
+
+	// (Computed) A weekly 4 hour-long window, during which maintenance might occur.
+	// A weekly 4 hour-long window, during which maintenance might occur
+	MaintenanceWindow *MaintenanceWindowObservation `json:"maintenanceWindow,omitempty" tf:"maintenance_window,omitempty"`
 
 	// [string] The name of the IPSec Gateway.
 	// The human readable name of your IPSecGateway.
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+
+	// (Computed)[string] Gateway performance options.  See product documentation for full details. Options: STANDARD, STANDARD_HA, ENHANCED, ENHANCED_HA, PREMIUM, PREMIUM_HA.
+	// Gateway performance options. See the documentation for the available options
+	Tier *string `json:"tier,omitempty" tf:"tier,omitempty"`
 
 	// [string] The IKE version that is permitted for the VPN tunnels. Default: IKEv2. Possible
 	// values: IKEv2.
@@ -220,15 +271,25 @@ type VpnIpsecGatewayParameters struct {
 	GatewayIPSelector *v1.Selector `json:"gatewayIpSelector,omitempty" tf:"-"`
 
 	// [string] The location of the IPSec Gateway. Supported locations: de/fra, de/txl, es/vit,
-	// gb/lhr, us/ewr, us/las, us/mci, fr/par
-	// The location of the IPSec Gateway. Supported locations: de/fra, de/txl
+	// gb/bhx, gb/lhr, us/ewr, us/las, us/mci, fr/par.
+	// The location of the IPSec Gateway. Supported locations: de/fra, de/txl, es/vit, gb/bhx, gb/lhr, us/ewr, us/las, us/mci, fr/par
 	// +kubebuilder:validation:Optional
 	Location *string `json:"location,omitempty" tf:"location,omitempty"`
+
+	// (Computed) A weekly 4 hour-long window, during which maintenance might occur.
+	// A weekly 4 hour-long window, during which maintenance might occur
+	// +kubebuilder:validation:Optional
+	MaintenanceWindow *MaintenanceWindowParameters `json:"maintenanceWindow,omitempty" tf:"maintenance_window,omitempty"`
 
 	// [string] The name of the IPSec Gateway.
 	// The human readable name of your IPSecGateway.
 	// +kubebuilder:validation:Optional
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+
+	// (Computed)[string] Gateway performance options.  See product documentation for full details. Options: STANDARD, STANDARD_HA, ENHANCED, ENHANCED_HA, PREMIUM, PREMIUM_HA.
+	// Gateway performance options. See the documentation for the available options
+	// +kubebuilder:validation:Optional
+	Tier *string `json:"tier,omitempty" tf:"tier,omitempty"`
 
 	// [string] The IKE version that is permitted for the VPN tunnels. Default: IKEv2. Possible
 	// values: IKEv2.
@@ -274,7 +335,6 @@ type VpnIpsecGateway struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
 	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.connections) || (has(self.initProvider) && has(self.initProvider.connections))",message="spec.forProvider.connections is a required parameter"
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.location) || (has(self.initProvider) && has(self.initProvider.location))",message="spec.forProvider.location is a required parameter"
 	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.name) || (has(self.initProvider) && has(self.initProvider.name))",message="spec.forProvider.name is a required parameter"
 	Spec   VpnIpsecGatewaySpec   `json:"spec"`
 	Status VpnIpsecGatewayStatus `json:"status,omitempty"`

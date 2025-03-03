@@ -182,6 +182,7 @@ type AutoCertificate struct {
 	metav1.ObjectMeta `json:"metadata,omitempty"`
 	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.commonName) || (has(self.initProvider) && has(self.initProvider.commonName))",message="spec.forProvider.commonName is a required parameter"
 	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.keyAlgorithm) || (has(self.initProvider) && has(self.initProvider.keyAlgorithm))",message="spec.forProvider.keyAlgorithm is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.name) || (has(self.initProvider) && has(self.initProvider.name))",message="spec.forProvider.name is a required parameter"
 	Spec   AutoCertificateSpec   `json:"spec"`
 	Status AutoCertificateStatus `json:"status,omitempty"`
 }

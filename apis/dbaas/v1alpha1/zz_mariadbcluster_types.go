@@ -193,8 +193,8 @@ type MariadbClusterInitParameters struct {
 	// A weekly 4 hour-long window, during which maintenance might occur.
 	MaintenanceWindow *MaintenanceWindowInitParameters `json:"maintenanceWindow,omitempty" tf:"maintenance_window,omitempty"`
 
-	// [string] The MariaDB version of your cluster.
-	// The MariaDB version of your cluster.
+	// [string] The MariaDB version of your cluster. Cannot be downgraded.
+	// The MariaDB version of your cluster. Cannot be downgraded.
 	MariadbVersion *string `json:"mariadbVersion,omitempty" tf:"mariadb_version,omitempty"`
 
 	// [int] The amount of memory per instance in gigabytes (GB).
@@ -242,8 +242,8 @@ type MariadbClusterObservation struct {
 	// A weekly 4 hour-long window, during which maintenance might occur.
 	MaintenanceWindow *MaintenanceWindowObservation `json:"maintenanceWindow,omitempty" tf:"maintenance_window,omitempty"`
 
-	// [string] The MariaDB version of your cluster.
-	// The MariaDB version of your cluster.
+	// [string] The MariaDB version of your cluster. Cannot be downgraded.
+	// The MariaDB version of your cluster. Cannot be downgraded.
 	MariadbVersion *string `json:"mariadbVersion,omitempty" tf:"mariadb_version,omitempty"`
 
 	// [int] The amount of memory per instance in gigabytes (GB).
@@ -292,8 +292,8 @@ type MariadbClusterParameters struct {
 	// +kubebuilder:validation:Optional
 	MaintenanceWindow *MaintenanceWindowParameters `json:"maintenanceWindow,omitempty" tf:"maintenance_window,omitempty"`
 
-	// [string] The MariaDB version of your cluster.
-	// The MariaDB version of your cluster.
+	// [string] The MariaDB version of your cluster. Cannot be downgraded.
+	// The MariaDB version of your cluster. Cannot be downgraded.
 	// +kubebuilder:validation:Optional
 	MariadbVersion *string `json:"mariadbVersion,omitempty" tf:"mariadb_version,omitempty"`
 

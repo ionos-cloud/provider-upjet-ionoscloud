@@ -246,8 +246,8 @@ spec:
                     type: object
                   location:
                     description: |-
-                      The location where the Network File Storage cluster is located.
-                      The location of the Network File Storage Cluster. Available locations: 'de/fra, 'de/txl'
+                      The location where the Network File Storage cluster is located. If this is not set and if no value is provided for the IONOS_API_URL env var, the default location will be: de/fra.
+                      The location of the Network File Storage Cluster. Available locations: 'de/fra, 'de/txl, 'fr-par, 'gb-lhr, 'es/vit, 'us/las, 'us/ewr, 'us/mci'
                     type: string
                   name:
                     description: |-
@@ -456,8 +456,8 @@ spec:
                     type: object
                   location:
                     description: |-
-                      The location where the Network File Storage cluster is located.
-                      The location of the Network File Storage Cluster. Available locations: 'de/fra, 'de/txl'
+                      The location where the Network File Storage cluster is located. If this is not set and if no value is provided for the IONOS_API_URL env var, the default location will be: de/fra.
+                      The location of the Network File Storage Cluster. Available locations: 'de/fra, 'de/txl, 'fr-par, 'gb-lhr, 'es/vit, 'us/las, 'us/ewr, 'us/mci'
                     type: string
                   name:
                     description: |-
@@ -652,10 +652,6 @@ spec:
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
                 || ''Update'' in self.managementPolicies) || has(self.forProvider.connections)
                 || (has(self.initProvider) && has(self.initProvider.connections))'
-            - message: spec.forProvider.location is a required parameter
-              rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
-                || ''Update'' in self.managementPolicies) || has(self.forProvider.location)
-                || (has(self.initProvider) && has(self.initProvider.location))'
             - message: spec.forProvider.name is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
                 || ''Update'' in self.managementPolicies) || has(self.forProvider.name)
@@ -694,8 +690,8 @@ spec:
                     type: string
                   location:
                     description: |-
-                      The location where the Network File Storage cluster is located.
-                      The location of the Network File Storage Cluster. Available locations: 'de/fra, 'de/txl'
+                      The location where the Network File Storage cluster is located. If this is not set and if no value is provided for the IONOS_API_URL env var, the default location will be: de/fra.
+                      The location of the Network File Storage Cluster. Available locations: 'de/fra, 'de/txl, 'fr-par, 'gb-lhr, 'es/vit, 'us/las, 'us/ewr, 'us/mci'
                     type: string
                   name:
                     description: |-

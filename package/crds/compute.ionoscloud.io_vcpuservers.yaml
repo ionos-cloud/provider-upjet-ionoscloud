@@ -176,8 +176,8 @@ spec:
                     type: array
                   hostname:
                     description: |-
-                      [string] The hostname of the resource. Allowed characters are a-z, 0-9 and - (minus). Hostname should not start with minus and should not be longer than 63 characters.
-                      The hostname of the resource. Allowed characters are a-z, 0-9 and - (minus). Hostname should not start with minus and should not be longer than 63 characters.
+                      (Computed)[string] The hostname of the resource. Allowed characters are a-z, 0-9 and - (minus). Hostname should not start with minus and should not be longer than 63 characters. If no value provided explicitly, it will be populated with the name of the server
+                      The hostname of the resource. Allowed characters are a-z, 0-9 and - (minus). Hostname should not start with minus and should not be longer than 63 characters. If no value provided explicitly, it will be populated with the name of the server
                     type: string
                   imageName:
                     description: '[string] The name, ID or alias of the image. May
@@ -347,14 +347,32 @@ spec:
                                 type: string
                             type: object
                         type: object
+                      mac:
+                        type: string
                       name:
                         description: '[string] The name of the server.'
                         type: string
+                      securityGroupsIds:
+                        description: |-
+                          The list of Security Group IDs for the resource.
+                          The list of Security Group IDs for the NIC
+                        items:
+                          type: string
+                        type: array
+                        x-kubernetes-list-type: set
                     type: object
                   ram:
                     description: '[integer] The amount of memory for the server in
                       MB.'
                     type: number
+                  securityGroupsIds:
+                    description: |-
+                      The list of Security Group IDs for the resource.
+                      The list of Security Group IDs for the server
+                    items:
+                      type: string
+                    type: array
+                    x-kubernetes-list-type: set
                   sshKeys:
                     description: |-
                       [list] Immutable List of absolute or relative paths to files containing public SSH key that will be injected into IonosCloud provided Linux images. Also accepts ssh keys directly. Public SSH keys are set on the image as authorized keys for appropriate SSH login to the instance using the corresponding private key. This field may only be set in creation requests. When reading, it always returns null. SSH keys are only supported if a public Linux image is used for the volume creation. Does not support ~ expansion to homedir in the given path.
@@ -519,8 +537,8 @@ spec:
                     type: array
                   hostname:
                     description: |-
-                      [string] The hostname of the resource. Allowed characters are a-z, 0-9 and - (minus). Hostname should not start with minus and should not be longer than 63 characters.
-                      The hostname of the resource. Allowed characters are a-z, 0-9 and - (minus). Hostname should not start with minus and should not be longer than 63 characters.
+                      (Computed)[string] The hostname of the resource. Allowed characters are a-z, 0-9 and - (minus). Hostname should not start with minus and should not be longer than 63 characters. If no value provided explicitly, it will be populated with the name of the server
+                      The hostname of the resource. Allowed characters are a-z, 0-9 and - (minus). Hostname should not start with minus and should not be longer than 63 characters. If no value provided explicitly, it will be populated with the name of the server
                     type: string
                   imageName:
                     description: '[string] The name, ID or alias of the image. May
@@ -690,14 +708,32 @@ spec:
                                 type: string
                             type: object
                         type: object
+                      mac:
+                        type: string
                       name:
                         description: '[string] The name of the server.'
                         type: string
+                      securityGroupsIds:
+                        description: |-
+                          The list of Security Group IDs for the resource.
+                          The list of Security Group IDs for the NIC
+                        items:
+                          type: string
+                        type: array
+                        x-kubernetes-list-type: set
                     type: object
                   ram:
                     description: '[integer] The amount of memory for the server in
                       MB.'
                     type: number
+                  securityGroupsIds:
+                    description: |-
+                      The list of Security Group IDs for the resource.
+                      The list of Security Group IDs for the server
+                    items:
+                      type: string
+                    type: array
+                    x-kubernetes-list-type: set
                   sshKeys:
                     description: |-
                       [list] Immutable List of absolute or relative paths to files containing public SSH key that will be injected into IonosCloud provided Linux images. Also accepts ssh keys directly. Public SSH keys are set on the image as authorized keys for appropriate SSH login to the instance using the corresponding private key. This field may only be set in creation requests. When reading, it always returns null. SSH keys are only supported if a public Linux image is used for the volume creation. Does not support ~ expansion to homedir in the given path.
@@ -970,8 +1006,8 @@ spec:
                     type: array
                   hostname:
                     description: |-
-                      [string] The hostname of the resource. Allowed characters are a-z, 0-9 and - (minus). Hostname should not start with minus and should not be longer than 63 characters.
-                      The hostname of the resource. Allowed characters are a-z, 0-9 and - (minus). Hostname should not start with minus and should not be longer than 63 characters.
+                      (Computed)[string] The hostname of the resource. Allowed characters are a-z, 0-9 and - (minus). Hostname should not start with minus and should not be longer than 63 characters. If no value provided explicitly, it will be populated with the name of the server
+                      The hostname of the resource. Allowed characters are a-z, 0-9 and - (minus). Hostname should not start with minus and should not be longer than 63 characters. If no value provided explicitly, it will be populated with the name of the server
                     type: string
                   id:
                     type: string
@@ -1072,6 +1108,14 @@ spec:
                         type: string
                       pciSlot:
                         type: number
+                      securityGroupsIds:
+                        description: |-
+                          The list of Security Group IDs for the resource.
+                          The list of Security Group IDs for the NIC
+                        items:
+                          type: string
+                        type: array
+                        x-kubernetes-list-type: set
                     type: object
                   primaryIp:
                     description: (Computed) The associated IP address.
@@ -1085,6 +1129,14 @@ spec:
                     description: '[integer] The amount of memory for the server in
                       MB.'
                     type: number
+                  securityGroupsIds:
+                    description: |-
+                      The list of Security Group IDs for the resource.
+                      The list of Security Group IDs for the server
+                    items:
+                      type: string
+                    type: array
+                    x-kubernetes-list-type: set
                   sshKeys:
                     description: |-
                       [list] Immutable List of absolute or relative paths to files containing public SSH key that will be injected into IonosCloud provided Linux images. Also accepts ssh keys directly. Public SSH keys are set on the image as authorized keys for appropriate SSH login to the instance using the corresponding private key. This field may only be set in creation requests. When reading, it always returns null. SSH keys are only supported if a public Linux image is used for the volume creation. Does not support ~ expansion to homedir in the given path.

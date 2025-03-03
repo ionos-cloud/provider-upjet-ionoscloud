@@ -98,6 +98,41 @@ type ConnectionsParameters struct {
 	LanIDSelector *v1.Selector `json:"lanIdSelector,omitempty" tf:"-"`
 }
 
+type MaintenanceWindowInitParameters struct {
+
+	// [string] The name of the week day.
+	// The name of the week day
+	DayOfTheWeek *string `json:"dayOfTheWeek,omitempty" tf:"day_of_the_week,omitempty"`
+
+	// [string] Start of the maintenance window in UTC time.
+	// Start of the maintenance window in UTC time.
+	Time *string `json:"time,omitempty" tf:"time,omitempty"`
+}
+
+type MaintenanceWindowObservation struct {
+
+	// [string] The name of the week day.
+	// The name of the week day
+	DayOfTheWeek *string `json:"dayOfTheWeek,omitempty" tf:"day_of_the_week,omitempty"`
+
+	// [string] Start of the maintenance window in UTC time.
+	// Start of the maintenance window in UTC time.
+	Time *string `json:"time,omitempty" tf:"time,omitempty"`
+}
+
+type MaintenanceWindowParameters struct {
+
+	// [string] The name of the week day.
+	// The name of the week day
+	// +kubebuilder:validation:Optional
+	DayOfTheWeek *string `json:"dayOfTheWeek" tf:"day_of_the_week,omitempty"`
+
+	// [string] Start of the maintenance window in UTC time.
+	// Start of the maintenance window in UTC time.
+	// +kubebuilder:validation:Optional
+	Time *string `json:"time" tf:"time,omitempty"`
+}
+
 type VpnWireguardGatewayInitParameters struct {
 
 	// [Block] The connection configuration for the WireGuard Gateway. This block supports fields documented below.
@@ -131,9 +166,14 @@ type VpnWireguardGatewayInitParameters struct {
 
 	ListenPort *float64 `json:"listenPort,omitempty" tf:"listen_port,omitempty"`
 
-	// [String] The location of the WireGuard Gateway.
-	// The location of the WireGuard Gateway. Supported locations: de/fra, de/txl
+	// [String] The location of the WireGuard Gateway. Supported locations: de/fra, de/txl, es/vit,
+	// gb/bhx, gb/lhr, us/ewr, us/las, us/mci, fr/par.
+	// The location of the WireGuard Gateway. Supported locations: de/fra, de/txl, es/vit, gb/bhx, gb/lhr, us/ewr, us/las, us/mci, fr/par
 	Location *string `json:"location,omitempty" tf:"location,omitempty"`
+
+	// (Computed) A weekly 4 hour-long window, during which maintenance might occur.
+	// A weekly 4 hour-long window, during which maintenance might occur
+	MaintenanceWindow *MaintenanceWindowInitParameters `json:"maintenanceWindow,omitempty" tf:"maintenance_window,omitempty"`
 
 	// [String] The name of the WireGuard Gateway.
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
@@ -141,6 +181,10 @@ type VpnWireguardGatewayInitParameters struct {
 	// [String] The private key for the WireGuard Gateway. To be created with the wg utility.
 	// PrivateKey used for WireGuard Server
 	PrivateKeySecretRef v1.SecretKeySelector `json:"privateKeySecretRef" tf:"-"`
+
+	// (Computed)[string] Gateway performance options.  See product documentation for full details. Options: STANDARD, STANDARD_HA, ENHANCED, ENHANCED_HA, PREMIUM, PREMIUM_HA.
+	// Gateway performance options. See the documentation for the available options
+	Tier *string `json:"tier,omitempty" tf:"tier,omitempty"`
 }
 
 type VpnWireguardGatewayObservation struct {
@@ -168,9 +212,14 @@ type VpnWireguardGatewayObservation struct {
 
 	ListenPort *float64 `json:"listenPort,omitempty" tf:"listen_port,omitempty"`
 
-	// [String] The location of the WireGuard Gateway.
-	// The location of the WireGuard Gateway. Supported locations: de/fra, de/txl
+	// [String] The location of the WireGuard Gateway. Supported locations: de/fra, de/txl, es/vit,
+	// gb/bhx, gb/lhr, us/ewr, us/las, us/mci, fr/par.
+	// The location of the WireGuard Gateway. Supported locations: de/fra, de/txl, es/vit, gb/bhx, gb/lhr, us/ewr, us/las, us/mci, fr/par
 	Location *string `json:"location,omitempty" tf:"location,omitempty"`
+
+	// (Computed) A weekly 4 hour-long window, during which maintenance might occur.
+	// A weekly 4 hour-long window, during which maintenance might occur
+	MaintenanceWindow *MaintenanceWindowObservation `json:"maintenanceWindow,omitempty" tf:"maintenance_window,omitempty"`
 
 	// [String] The name of the WireGuard Gateway.
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
@@ -182,6 +231,10 @@ type VpnWireguardGatewayObservation struct {
 	// (Computed)[String] The current status of the WireGuard Gateway.
 	// The status of the WireGuard Gateway
 	Status *string `json:"status,omitempty" tf:"status,omitempty"`
+
+	// (Computed)[string] Gateway performance options.  See product documentation for full details. Options: STANDARD, STANDARD_HA, ENHANCED, ENHANCED_HA, PREMIUM, PREMIUM_HA.
+	// Gateway performance options. See the documentation for the available options
+	Tier *string `json:"tier,omitempty" tf:"tier,omitempty"`
 }
 
 type VpnWireguardGatewayParameters struct {
@@ -223,10 +276,16 @@ type VpnWireguardGatewayParameters struct {
 	// +kubebuilder:validation:Optional
 	ListenPort *float64 `json:"listenPort,omitempty" tf:"listen_port,omitempty"`
 
-	// [String] The location of the WireGuard Gateway.
-	// The location of the WireGuard Gateway. Supported locations: de/fra, de/txl
+	// [String] The location of the WireGuard Gateway. Supported locations: de/fra, de/txl, es/vit,
+	// gb/bhx, gb/lhr, us/ewr, us/las, us/mci, fr/par.
+	// The location of the WireGuard Gateway. Supported locations: de/fra, de/txl, es/vit, gb/bhx, gb/lhr, us/ewr, us/las, us/mci, fr/par
 	// +kubebuilder:validation:Optional
 	Location *string `json:"location,omitempty" tf:"location,omitempty"`
+
+	// (Computed) A weekly 4 hour-long window, during which maintenance might occur.
+	// A weekly 4 hour-long window, during which maintenance might occur
+	// +kubebuilder:validation:Optional
+	MaintenanceWindow *MaintenanceWindowParameters `json:"maintenanceWindow,omitempty" tf:"maintenance_window,omitempty"`
 
 	// [String] The name of the WireGuard Gateway.
 	// +kubebuilder:validation:Optional
@@ -236,6 +295,11 @@ type VpnWireguardGatewayParameters struct {
 	// PrivateKey used for WireGuard Server
 	// +kubebuilder:validation:Optional
 	PrivateKeySecretRef v1.SecretKeySelector `json:"privateKeySecretRef" tf:"-"`
+
+	// (Computed)[string] Gateway performance options.  See product documentation for full details. Options: STANDARD, STANDARD_HA, ENHANCED, ENHANCED_HA, PREMIUM, PREMIUM_HA.
+	// Gateway performance options. See the documentation for the available options
+	// +kubebuilder:validation:Optional
+	Tier *string `json:"tier,omitempty" tf:"tier,omitempty"`
 }
 
 // VpnWireguardGatewaySpec defines the desired state of VpnWireguardGateway
@@ -275,7 +339,6 @@ type VpnWireguardGateway struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
 	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.connections) || (has(self.initProvider) && has(self.initProvider.connections))",message="spec.forProvider.connections is a required parameter"
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.location) || (has(self.initProvider) && has(self.initProvider.location))",message="spec.forProvider.location is a required parameter"
 	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.name) || (has(self.initProvider) && has(self.initProvider.name))",message="spec.forProvider.name is a required parameter"
 	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.privateKeySecretRef)",message="spec.forProvider.privateKeySecretRef is a required parameter"
 	Spec   VpnWireguardGatewaySpec   `json:"spec"`

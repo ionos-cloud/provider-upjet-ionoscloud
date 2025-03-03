@@ -185,7 +185,7 @@ spec:
                   location:
                     description: |-
                       [string] The location of the WireGuard Gateway.
-                      The location of the WireGuard Peer. Supported locations: de/fra, de/txl
+                      The location of the WireGuard Peer. Supported locations: de/fra, de/txl, es/vit, gb/bhx, gb/lhr, us/ewr, us/las, us/mci, fr/par
                     type: string
                   name:
                     description: |-
@@ -323,7 +323,7 @@ spec:
                   location:
                     description: |-
                       [string] The location of the WireGuard Gateway.
-                      The location of the WireGuard Peer. Supported locations: de/fra, de/txl
+                      The location of the WireGuard Peer. Supported locations: de/fra, de/txl, es/vit, gb/bhx, gb/lhr, us/ewr, us/las, us/mci, fr/par
                     type: string
                   name:
                     description: |-
@@ -508,10 +508,6 @@ spec:
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
                 || ''Update'' in self.managementPolicies) || has(self.forProvider.allowedIps)
                 || (has(self.initProvider) && has(self.initProvider.allowedIps))'
-            - message: spec.forProvider.location is a required parameter
-              rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
-                || ''Update'' in self.managementPolicies) || has(self.forProvider.location)
-                || (has(self.initProvider) && has(self.initProvider.location))'
             - message: spec.forProvider.name is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
                 || ''Update'' in self.managementPolicies) || has(self.forProvider.name)
@@ -563,7 +559,7 @@ spec:
                   location:
                     description: |-
                       [string] The location of the WireGuard Gateway.
-                      The location of the WireGuard Peer. Supported locations: de/fra, de/txl
+                      The location of the WireGuard Peer. Supported locations: de/fra, de/txl, es/vit, gb/bhx, gb/lhr, us/ewr, us/las, us/mci, fr/par
                     type: string
                   name:
                     description: |-

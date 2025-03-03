@@ -9,13 +9,22 @@ metadata:
 spec:
   forProvider:
     accessActivityLog: true
+    accessAndManageAiModelHub: true
+    accessAndManageApiGateway: true
+    accessAndManageCdn: true
     accessAndManageCertificates: true
+    accessAndManageIamResources: true
+    accessAndManageKaas: true
+    accessAndManageLogging: true
     accessAndManageMonitoring: true
+    accessAndManageNetworkFileStorage: true
+    accessAndManageVpn: true
     createBackupUnit: true
     createDatacenter: true
     createFlowLog: true
     createInternetAccess: true
     createK8SCluster: true
+    createNetworkSecurityGroups: true
     createPcc: true
     createSnapshot: true
     manageDbaas: true

@@ -32,7 +32,7 @@ type ClusterInitParameters struct {
 	// A list of LANs you want this node pool to be part of
 	Lans []LansInitParameters `json:"lans,omitempty" tf:"lans,omitempty"`
 
-	// [string] Starting time of a weekly 4 hour-long window, during which maintenance might occur in hh:mm:ss format
+	// Starting time of a weekly 4 hour-long window, during which maintenance might occur in hh:mm:ss format
 	// Starting time of a weekly 4 hour-long window, during which maintenance might occur in hh:mm:ss format
 	MaintenanceWindow []MaintenanceWindowInitParameters `json:"maintenanceWindow,omitempty" tf:"maintenance_window,omitempty"`
 
@@ -57,7 +57,7 @@ type ClusterObservation struct {
 	// A list of LANs you want this node pool to be part of
 	Lans []LansObservation `json:"lans,omitempty" tf:"lans,omitempty"`
 
-	// [string] Starting time of a weekly 4 hour-long window, during which maintenance might occur in hh:mm:ss format
+	// Starting time of a weekly 4 hour-long window, during which maintenance might occur in hh:mm:ss format
 	// Starting time of a weekly 4 hour-long window, during which maintenance might occur in hh:mm:ss format
 	MaintenanceWindow []MaintenanceWindowObservation `json:"maintenanceWindow,omitempty" tf:"maintenance_window,omitempty"`
 
@@ -91,7 +91,7 @@ type ClusterParameters struct {
 	// +kubebuilder:validation:Optional
 	Lans []LansParameters `json:"lans,omitempty" tf:"lans,omitempty"`
 
-	// [string] Starting time of a weekly 4 hour-long window, during which maintenance might occur in hh:mm:ss format
+	// Starting time of a weekly 4 hour-long window, during which maintenance might occur in hh:mm:ss format
 	// Starting time of a weekly 4 hour-long window, during which maintenance might occur in hh:mm:ss format
 	// +kubebuilder:validation:Optional
 	MaintenanceWindow []MaintenanceWindowParameters `json:"maintenanceWindow,omitempty" tf:"maintenance_window,omitempty"`

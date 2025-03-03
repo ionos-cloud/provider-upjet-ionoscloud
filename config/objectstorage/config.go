@@ -83,4 +83,7 @@ func Configure(p *config.Provider) {
 			TerraformName: "ionoscloud_user",
 		}
 	})
+	p.AddResourceConfigurator("ionoscloud_object_storage_accesskey", func(r *config.Resource) {
+		r.ShortGroup = "objectstorage"
+	})
 }

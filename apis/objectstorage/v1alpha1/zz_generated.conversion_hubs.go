@@ -41,3 +41,6 @@ func (tr *Object) Hub() {}
 
 // Hub marks this type as a conversion hub.
 func (tr *ObjectCopy) Hub() {}
+
+// Hub marks this type as a conversion hub.
+func (tr *StorageAccesskey) Hub() {}

@@ -314,8 +314,8 @@ spec:
                     type: object
                   mariadbVersion:
                     description: |-
-                      [string] The MariaDB version of your cluster.
-                      The MariaDB version of your cluster.
+                      [string] The MariaDB version of your cluster. Cannot be downgraded.
+                      The MariaDB version of your cluster. Cannot be downgraded.
                     type: string
                   ram:
                     description: |-
@@ -584,8 +584,8 @@ spec:
                     type: object
                   mariadbVersion:
                     description: |-
-                      [string] The MariaDB version of your cluster.
-                      The MariaDB version of your cluster.
+                      [string] The MariaDB version of your cluster. Cannot be downgraded.
+                      The MariaDB version of your cluster. Cannot be downgraded.
                     type: string
                   ram:
                     description: |-
@@ -882,8 +882,8 @@ spec:
                     type: object
                   mariadbVersion:
                     description: |-
-                      [string] The MariaDB version of your cluster.
-                      The MariaDB version of your cluster.
+                      [string] The MariaDB version of your cluster. Cannot be downgraded.
+                      The MariaDB version of your cluster. Cannot be downgraded.
                     type: string
                   ram:
                     description: |-

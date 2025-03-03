@@ -296,9 +296,22 @@ spec:
                             type: string
                         type: object
                     type: object
+                  mac:
+                    description: The MAC address of the NIC. Can be set on creation
+                      only. If not set, one will be assigned automatically by the
+                      API. Immutable, update forces re-creation.
+                    type: string
                   name:
                     description: '[string] The name of the LAN.'
                     type: string
+                  securityGroupsIds:
+                    description: |-
+                      The list of Security Group IDs for the resource.
+                      The list of Security Group IDs
+                    items:
+                      type: string
+                    type: array
+                    x-kubernetes-list-type: set
                   serverId:
                     description: '[string] The ID of a server.'
                     type: string
@@ -613,9 +626,22 @@ spec:
                             type: string
                         type: object
                     type: object
+                  mac:
+                    description: The MAC address of the NIC. Can be set on creation
+                      only. If not set, one will be assigned automatically by the
+                      API. Immutable, update forces re-creation.
+                    type: string
                   name:
                     description: '[string] The name of the LAN.'
                     type: string
+                  securityGroupsIds:
+                    description: |-
+                      The list of Security Group IDs for the resource.
+                      The list of Security Group IDs
+                    items:
+                      type: string
+                    type: array
+                    x-kubernetes-list-type: set
                   serverId:
                     description: '[string] The ID of a server.'
                     type: string
@@ -953,7 +979,9 @@ spec:
                     description: '[integer] The LAN ID the NIC will sit on.'
                     type: number
                   mac:
-                    description: (Computed) The MAC address of the NIC.
+                    description: The MAC address of the NIC. Can be set on creation
+                      only. If not set, one will be assigned automatically by the
+                      API. Immutable, update forces re-creation.
                     type: string
                   name:
                     description: '[string] The name of the LAN.'
@@ -961,6 +989,14 @@ spec:
                   pciSlot:
                     description: (Computed) The PCI slot number of the Nic.
                     type: number
+                  securityGroupsIds:
+                    description: |-
+                      The list of Security Group IDs for the resource.
+                      The list of Security Group IDs
+                    items:
+                      type: string
+                    type: array
+                    x-kubernetes-list-type: set
                   serverId:
                     description: '[string] The ID of a server.'
                     type: string

@@ -13,10 +13,10 @@ TERRAFORM_VERSION_VALID := $(shell [ "$(TERRAFORM_VERSION)" = "`printf "$(TERRAF
 TERRAFORM_VERSION_VALID := $(shell [ "$(TERRAFORM_VERSION)" = "`printf "$(TERRAFORM_VERSION)\n1.6" | sort -V | head -n1`" ] && echo 1 || echo 0)
 export TERRAFORM_PROVIDER_SOURCE ?= ionos-cloud/ionoscloud
 export TERRAFORM_PROVIDER_REPO ?= https://github.com/ionos-cloud/terraform-provider-ionoscloud
-export TERRAFORM_PROVIDER_VERSION ?= 6.6.1
+export TERRAFORM_PROVIDER_VERSION ?= 6.7.3
 export TERRAFORM_PROVIDER_DOWNLOAD_NAME ?= terraform-provider-ionoscloud
 export TERRAFORM_PROVIDER_DOWNLOAD_URL_PREFIX ?= https://github.com/ionos-cloud/$(TERRAFORM_PROVIDER_DOWNLOAD_NAME)/releases/download/v$(TERRAFORM_PROVIDER_VERSION)
-export TERRAFORM_NATIVE_PROVIDER_BINARY ?= terraform-provider-ionoscloud_v6_6_1
+export TERRAFORM_NATIVE_PROVIDER_BINARY ?= terraform-provider-ionoscloud_v6_7_3
 export TERRAFORM_DOCS_PATH ?= docs/resources
 
 
@@ -55,10 +55,10 @@ GO_SUBDIRS += cmd internal apis
 # ====================================================================================
 # Setup Kubernetes tools
 
-KIND_VERSION = v0.15.0
-UP_VERSION = v0.28.0
+KIND_VERSION = v0.26.0
+UP_VERSION = v0.34.2
 UP_CHANNEL = stable
-UPTEST_VERSION = v0.5.0
+UPTEST_VERSION = v0.11.1
 -include build/makelib/k8s_tools.mk
 
 # ====================================================================================
@@ -193,7 +193,7 @@ CROSSPLANE_NAMESPACE = upbound-system
 # - UPTEST_DATASOURCE_PATH (optional), please see https://github.com/crossplane/uptest#injecting-dynamic-values-and-datasource
 uptest: $(UPTEST) $(KUBECTL) $(KUTTL)
 	@$(INFO) running automated tests
-	@KUBECTL=$(KUBECTL) KUTTL=$(KUTTL) $(UPTEST) e2e "${UPTEST_EXAMPLE_LIST}" --data-source="${UPTEST_DATASOURCE_PATH}" --setup-script=cluster/test/setup.sh --default-timeout 3600 --default-conditions="Test" || $(FAIL)
+	@KUBECTL=$(KUBECTL) KUTTL=$(KUTTL) CROSSPLANE_NAMESPACE=$(CROSSPLANE_NAMESPACE) $(UPTEST) e2e "${UPTEST_EXAMPLE_LIST}" --data-source="${UPTEST_DATASOURCE_PATH}" --setup-script=cluster/test/setup.sh --default-conditions="Test" || $(FAIL)
 	@$(OK) running automated tests
 
 local-deploy: build controlplane.up local.xpkg.deploy.provider.$(PROJECT_NAME)

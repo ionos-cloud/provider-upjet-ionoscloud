@@ -305,7 +305,7 @@ spec:
                     type: string
                   location:
                     description: |-
-                      [string] The location of your replica set. Updates to the value of the field force the replica set to be re-created.
+                      [string] The location of your replica set. Updates to the value of the field force the replica set to be re-created. If this is not set and if no value is provided for the IONOS_API_URL env var, the default location will be: de/fra.
                       The replica set location
                     type: string
                   locationRef:
@@ -677,7 +677,7 @@ spec:
                     type: string
                   location:
                     description: |-
-                      [string] The location of your replica set. Updates to the value of the field force the replica set to be re-created.
+                      [string] The location of your replica set. Updates to the value of the field force the replica set to be re-created. If this is not set and if no value is provided for the IONOS_API_URL env var, the default location will be: de/fra.
                       The replica set location
                     type: string
                   locationRef:
@@ -1080,7 +1080,7 @@ spec:
                     type: string
                   location:
                     description: |-
-                      [string] The location of your replica set. Updates to the value of the field force the replica set to be re-created.
+                      [string] The location of your replica set. Updates to the value of the field force the replica set to be re-created. If this is not set and if no value is provided for the IONOS_API_URL env var, the default location will be: de/fra.
                       The replica set location
                     type: string
                   maintenanceWindow:

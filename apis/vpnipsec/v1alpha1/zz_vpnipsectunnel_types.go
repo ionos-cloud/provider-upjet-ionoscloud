@@ -247,7 +247,7 @@ type VpnIpsecTunnelInitParameters struct {
 
 	// [string] The location of the IPSec Gateway Tunnel. Supported locations: de/fra, de/txl, es/vit,
 	// gb/lhr, us/ewr, us/las, us/mci, fr/par
-	// The location of the IPSec Gateway Tunnel. Supported locations: de/fra, de/txl
+	// The location of the IPSec Gateway Tunnel. Supported locations: de/fra, de/txl, es/vit, gb/bhx, gb/lhr, us/ewr, us/las, us/mci, fr/par
 	Location *string `json:"location,omitempty" tf:"location,omitempty"`
 
 	// [string] The name of the IPSec Gateway Tunnel.
@@ -297,7 +297,7 @@ type VpnIpsecTunnelObservation struct {
 
 	// [string] The location of the IPSec Gateway Tunnel. Supported locations: de/fra, de/txl, es/vit,
 	// gb/lhr, us/ewr, us/las, us/mci, fr/par
-	// The location of the IPSec Gateway Tunnel. Supported locations: de/fra, de/txl
+	// The location of the IPSec Gateway Tunnel. Supported locations: de/fra, de/txl, es/vit, gb/bhx, gb/lhr, us/ewr, us/las, us/mci, fr/par
 	Location *string `json:"location,omitempty" tf:"location,omitempty"`
 
 	// [string] The name of the IPSec Gateway Tunnel.
@@ -360,7 +360,7 @@ type VpnIpsecTunnelParameters struct {
 
 	// [string] The location of the IPSec Gateway Tunnel. Supported locations: de/fra, de/txl, es/vit,
 	// gb/lhr, us/ewr, us/las, us/mci, fr/par
-	// The location of the IPSec Gateway Tunnel. Supported locations: de/fra, de/txl
+	// The location of the IPSec Gateway Tunnel. Supported locations: de/fra, de/txl, es/vit, gb/bhx, gb/lhr, us/ewr, us/las, us/mci, fr/par
 	// +kubebuilder:validation:Optional
 	Location *string `json:"location,omitempty" tf:"location,omitempty"`
 
@@ -421,7 +421,6 @@ type VpnIpsecTunnel struct {
 	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.cloudNetworkCidrs) || (has(self.initProvider) && has(self.initProvider.cloudNetworkCidrs))",message="spec.forProvider.cloudNetworkCidrs is a required parameter"
 	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.esp) || (has(self.initProvider) && has(self.initProvider.esp))",message="spec.forProvider.esp is a required parameter"
 	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.ike) || (has(self.initProvider) && has(self.initProvider.ike))",message="spec.forProvider.ike is a required parameter"
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.location) || (has(self.initProvider) && has(self.initProvider.location))",message="spec.forProvider.location is a required parameter"
 	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.name) || (has(self.initProvider) && has(self.initProvider.name))",message="spec.forProvider.name is a required parameter"
 	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.peerNetworkCidrs) || (has(self.initProvider) && has(self.initProvider.peerNetworkCidrs))",message="spec.forProvider.peerNetworkCidrs is a required parameter"
 	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.remoteHost) || (has(self.initProvider) && has(self.initProvider.remoteHost))",message="spec.forProvider.remoteHost is a required parameter"

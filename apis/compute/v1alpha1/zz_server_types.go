@@ -132,6 +132,10 @@ type NicFirewallParameters struct {
 
 type ServerInitParameters struct {
 
+	// [bool] When set to true, allows the update of immutable fields by first destroying and then re-creating the server.
+	// When set to true, allows the update of immutable fields by destroying and re-creating the resource.
+	AllowReplace *bool `json:"allowReplace,omitempty" tf:"allow_replace,omitempty"`
+
 	// [string] The availability zone in which the server should exist. E.g: AUTO, ZONE_1, ZONE_2. This property is immutable.
 	AvailabilityZone *string `json:"availabilityZone,omitempty" tf:"availability_zone,omitempty"`
 
@@ -163,8 +167,8 @@ type ServerInitParameters struct {
 	// (Computed) The associated firewall rules.
 	FirewallruleIds []*string `json:"firewallruleIds,omitempty" tf:"firewallrule_ids,omitempty"`
 
-	// [string] The hostname of the resource. Allowed characters are a-z, 0-9 and - (minus). Hostname should not start with minus and should not be longer than 63 characters.
-	// The hostname of the resource. Allowed characters are a-z, 0-9 and - (minus). Hostname should not start with minus and should not be longer than 63 characters.
+	// (Computed)[string] The hostname of the resource. Allowed characters are a-z, 0-9 and - (minus). Hostname should not start with minus and should not be longer than 63 characters. If no value provided explicitly, it will be populated with the name of the server
+	// The hostname of the resource. Allowed characters are a-z, 0-9 and - (minus). Hostname should not start with minus and should not be longer than 63 characters. If no value provided explicitly, it will be populated with the name of the server
 	Hostname *string `json:"hostname,omitempty" tf:"hostname,omitempty"`
 
 	// [string] The name, ID or alias of the image. May also be a snapshot ID. It is required if licence_type is not provided. Attribute is immutable.
@@ -192,6 +196,11 @@ type ServerInitParameters struct {
 	// [list] Immutable List of absolute or relative paths to files containing public SSH key that will be injected into IonosCloud provided Linux images. Also accepts ssh keys directly. Public SSH keys are set on the image as authorized keys for appropriate SSH login to the instance using the corresponding private key. This field may only be set in creation requests. When reading, it always returns null. SSH keys are only supported if a public Linux image is used for the volume creation. Does not support ~ expansion to homedir in the given path.
 	// Public SSH keys are set on the image as authorized keys for appropriate SSH login to the instance using the corresponding private key. This field may only be set in creation requests. When reading, it always returns null. SSH keys are only supported if a public Linux image is used for the volume creation.
 	SSHKeys []*string `json:"sshKeys,omitempty" tf:"ssh_keys,omitempty"`
+
+	// The list of Security Group IDs for the
+	// The list of Security Group IDs for the server
+	// +listType=set
+	SecurityGroupsIds []*string `json:"securityGroupsIds,omitempty" tf:"security_groups_ids,omitempty"`
 
 	// [string] The UUID of the template for creating a CUBE server; the available templates for CUBE servers can be found on the templates resource
 	TemplateUUID *string `json:"templateUuid,omitempty" tf:"template_uuid,omitempty"`
@@ -243,8 +252,15 @@ type ServerNicInitParameters struct {
 	// +kubebuilder:validation:Optional
 	LanSelector *v1.Selector `json:"lanSelector,omitempty" tf:"-"`
 
+	Mac *string `json:"mac,omitempty" tf:"mac,omitempty"`
+
 	// [string] The name of the server.
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+
+	// The list of Security Group IDs for the
+	// The list of Security Group IDs for the NIC
+	// +listType=set
+	SecurityGroupsIds []*string `json:"securityGroupsIds,omitempty" tf:"security_groups_ids,omitempty"`
 }
 
 type ServerNicObservation struct {
@@ -283,6 +299,11 @@ type ServerNicObservation struct {
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
 	PciSlot *float64 `json:"pciSlot,omitempty" tf:"pci_slot,omitempty"`
+
+	// The list of Security Group IDs for the
+	// The list of Security Group IDs for the NIC
+	// +listType=set
+	SecurityGroupsIds []*string `json:"securityGroupsIds,omitempty" tf:"security_groups_ids,omitempty"`
 }
 
 type ServerNicParameters struct {
@@ -330,12 +351,25 @@ type ServerNicParameters struct {
 	// +kubebuilder:validation:Optional
 	LanSelector *v1.Selector `json:"lanSelector,omitempty" tf:"-"`
 
+	// +kubebuilder:validation:Optional
+	Mac *string `json:"mac,omitempty" tf:"mac,omitempty"`
+
 	// [string] The name of the server.
 	// +kubebuilder:validation:Optional
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+
+	// The list of Security Group IDs for the
+	// The list of Security Group IDs for the NIC
+	// +kubebuilder:validation:Optional
+	// +listType=set
+	SecurityGroupsIds []*string `json:"securityGroupsIds,omitempty" tf:"security_groups_ids,omitempty"`
 }
 
 type ServerObservation struct {
+
+	// [bool] When set to true, allows the update of immutable fields by first destroying and then re-creating the server.
+	// When set to true, allows the update of immutable fields by destroying and re-creating the resource.
+	AllowReplace *bool `json:"allowReplace,omitempty" tf:"allow_replace,omitempty"`
 
 	// [string] The availability zone in which the server should exist. E.g: AUTO, ZONE_1, ZONE_2. This property is immutable.
 	AvailabilityZone *string `json:"availabilityZone,omitempty" tf:"availability_zone,omitempty"`
@@ -365,8 +399,8 @@ type ServerObservation struct {
 	// (Computed) The associated firewall rules.
 	FirewallruleIds []*string `json:"firewallruleIds,omitempty" tf:"firewallrule_ids,omitempty"`
 
-	// [string] The hostname of the resource. Allowed characters are a-z, 0-9 and - (minus). Hostname should not start with minus and should not be longer than 63 characters.
-	// The hostname of the resource. Allowed characters are a-z, 0-9 and - (minus). Hostname should not start with minus and should not be longer than 63 characters.
+	// (Computed)[string] The hostname of the resource. Allowed characters are a-z, 0-9 and - (minus). Hostname should not start with minus and should not be longer than 63 characters. If no value provided explicitly, it will be populated with the name of the server
+	// The hostname of the resource. Allowed characters are a-z, 0-9 and - (minus). Hostname should not start with minus and should not be longer than 63 characters. If no value provided explicitly, it will be populated with the name of the server
 	Hostname *string `json:"hostname,omitempty" tf:"hostname,omitempty"`
 
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
@@ -405,6 +439,11 @@ type ServerObservation struct {
 	// Public SSH keys are set on the image as authorized keys for appropriate SSH login to the instance using the corresponding private key. This field may only be set in creation requests. When reading, it always returns null. SSH keys are only supported if a public Linux image is used for the volume creation.
 	SSHKeys []*string `json:"sshKeys,omitempty" tf:"ssh_keys,omitempty"`
 
+	// The list of Security Group IDs for the
+	// The list of Security Group IDs for the server
+	// +listType=set
+	SecurityGroupsIds []*string `json:"securityGroupsIds,omitempty" tf:"security_groups_ids,omitempty"`
+
 	// [string] The UUID of the template for creating a CUBE server; the available templates for CUBE servers can be found on the templates resource
 	TemplateUUID *string `json:"templateUuid,omitempty" tf:"template_uuid,omitempty"`
 
@@ -421,6 +460,11 @@ type ServerObservation struct {
 }
 
 type ServerParameters struct {
+
+	// [bool] When set to true, allows the update of immutable fields by first destroying and then re-creating the server.
+	// When set to true, allows the update of immutable fields by destroying and re-creating the resource.
+	// +kubebuilder:validation:Optional
+	AllowReplace *bool `json:"allowReplace,omitempty" tf:"allow_replace,omitempty"`
 
 	// [string] The availability zone in which the server should exist. E.g: AUTO, ZONE_1, ZONE_2. This property is immutable.
 	// +kubebuilder:validation:Optional
@@ -460,8 +504,8 @@ type ServerParameters struct {
 	// +kubebuilder:validation:Optional
 	FirewallruleIds []*string `json:"firewallruleIds,omitempty" tf:"firewallrule_ids,omitempty"`
 
-	// [string] The hostname of the resource. Allowed characters are a-z, 0-9 and - (minus). Hostname should not start with minus and should not be longer than 63 characters.
-	// The hostname of the resource. Allowed characters are a-z, 0-9 and - (minus). Hostname should not start with minus and should not be longer than 63 characters.
+	// (Computed)[string] The hostname of the resource. Allowed characters are a-z, 0-9 and - (minus). Hostname should not start with minus and should not be longer than 63 characters. If no value provided explicitly, it will be populated with the name of the server
+	// The hostname of the resource. Allowed characters are a-z, 0-9 and - (minus). Hostname should not start with minus and should not be longer than 63 characters. If no value provided explicitly, it will be populated with the name of the server
 	// +kubebuilder:validation:Optional
 	Hostname *string `json:"hostname,omitempty" tf:"hostname,omitempty"`
 
@@ -498,6 +542,12 @@ type ServerParameters struct {
 	// Public SSH keys are set on the image as authorized keys for appropriate SSH login to the instance using the corresponding private key. This field may only be set in creation requests. When reading, it always returns null. SSH keys are only supported if a public Linux image is used for the volume creation.
 	// +kubebuilder:validation:Optional
 	SSHKeys []*string `json:"sshKeys,omitempty" tf:"ssh_keys,omitempty"`
+
+	// The list of Security Group IDs for the
+	// The list of Security Group IDs for the server
+	// +kubebuilder:validation:Optional
+	// +listType=set
+	SecurityGroupsIds []*string `json:"securityGroupsIds,omitempty" tf:"security_groups_ids,omitempty"`
 
 	// [string] The UUID of the template for creating a CUBE server; the available templates for CUBE servers can be found on the templates resource
 	// +kubebuilder:validation:Optional
@@ -696,7 +746,6 @@ type Server struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
 	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.name) || (has(self.initProvider) && has(self.initProvider.name))",message="spec.forProvider.name is a required parameter"
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.volume) || (has(self.initProvider) && has(self.initProvider.volume))",message="spec.forProvider.volume is a required parameter"
 	Spec   ServerSpec   `json:"spec"`
 	Status ServerStatus `json:"status,omitempty"`
 }

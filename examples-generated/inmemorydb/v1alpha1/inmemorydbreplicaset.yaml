@@ -83,13 +83,11 @@ metadata:
   name: example
 spec:
   forProvider:
-    availabilityZone: ZONE_1
     cores: 2
-    cpuFamily: INTEL_SKYLAKE
     datacenterIdSelector:
       matchLabels:
         testing.upbound.io/example-name: example
-    imageName: rockylinux-8-GenericCloud-20230518
+    imageName: rocky:latest
     imagePasswordSecretRef:
       key: example-key
       name: example-secret

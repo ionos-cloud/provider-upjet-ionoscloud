@@ -73,6 +73,11 @@ spec:
                 type: string
               forProvider:
                 properties:
+                  allowReplace:
+                    description: |-
+                      [bool] When set to true, allows the update of immutable fields by first destroying and then re-creating the server.
+                      When set to true, allows the update of immutable fields by destroying and re-creating the resource.
+                    type: boolean
                   availabilityZone:
                     description: '[string] The availability zone in which the server
                       should exist. E.g: AUTO, ZONE_1, ZONE_2. This property is immutable.'
@@ -182,8 +187,8 @@ spec:
                     type: array
                   hostname:
                     description: |-
-                      [string] The hostname of the resource. Allowed characters are a-z, 0-9 and - (minus). Hostname should not start with minus and should not be longer than 63 characters.
-                      The hostname of the resource. Allowed characters are a-z, 0-9 and - (minus). Hostname should not start with minus and should not be longer than 63 characters.
+                      (Computed)[string] The hostname of the resource. Allowed characters are a-z, 0-9 and - (minus). Hostname should not start with minus and should not be longer than 63 characters. If no value provided explicitly, it will be populated with the name of the server
+                      The hostname of the resource. Allowed characters are a-z, 0-9 and - (minus). Hostname should not start with minus and should not be longer than 63 characters. If no value provided explicitly, it will be populated with the name of the server
                     type: string
                   imageName:
                     description: '[string] The name, ID or alias of the image. May
@@ -367,14 +372,32 @@ spec:
                                 type: string
                             type: object
                         type: object
+                      mac:
+                        type: string
                       name:
                         description: '[string] The name of the server.'
                         type: string
+                      securityGroupsIds:
+                        description: |-
+                          The list of Security Group IDs for the
+                          The list of Security Group IDs for the NIC
+                        items:
+                          type: string
+                        type: array
+                        x-kubernetes-list-type: set
                     type: object
                   ram:
                     description: (Computed)[integer] The amount of memory for the
                       server in MB.
                     type: number
+                  securityGroupsIds:
+                    description: |-
+                      The list of Security Group IDs for the
+                      The list of Security Group IDs for the server
+                    items:
+                      type: string
+                    type: array
+                    x-kubernetes-list-type: set
                   sshKeyPath:
                     description: |-
                       [list] List of absolute paths to files containing a public SSH key that will be injected into IonosCloud provided Linux images.  Also accepts ssh keys directly. Required for IonosCloud Linux images. Required if image_password is not provided. Does not support ~ expansion to homedir in the given path. This property is immutable.
@@ -473,6 +496,11 @@ spec:
                   for example because of an external controller is managing them, like an
                   autoscaler.
                 properties:
+                  allowReplace:
+                    description: |-
+                      [bool] When set to true, allows the update of immutable fields by first destroying and then re-creating the server.
+                      When set to true, allows the update of immutable fields by destroying and re-creating the resource.
+                    type: boolean
                   availabilityZone:
                     description: '[string] The availability zone in which the server
                       should exist. E.g: AUTO, ZONE_1, ZONE_2. This property is immutable.'
@@ -582,8 +610,8 @@ spec:
                     type: array
                   hostname:
                     description: |-
-                      [string] The hostname of the resource. Allowed characters are a-z, 0-9 and - (minus). Hostname should not start with minus and should not be longer than 63 characters.
-                      The hostname of the resource. Allowed characters are a-z, 0-9 and - (minus). Hostname should not start with minus and should not be longer than 63 characters.
+                      (Computed)[string] The hostname of the resource. Allowed characters are a-z, 0-9 and - (minus). Hostname should not start with minus and should not be longer than 63 characters. If no value provided explicitly, it will be populated with the name of the server
+                      The hostname of the resource. Allowed characters are a-z, 0-9 and - (minus). Hostname should not start with minus and should not be longer than 63 characters. If no value provided explicitly, it will be populated with the name of the server
                     type: string
                   imageName:
                     description: '[string] The name, ID or alias of the image. May
@@ -767,14 +795,32 @@ spec:
                                 type: string
                             type: object
                         type: object
+                      mac:
+                        type: string
                       name:
                         description: '[string] The name of the server.'
                         type: string
+                      securityGroupsIds:
+                        description: |-
+                          The list of Security Group IDs for the
+                          The list of Security Group IDs for the NIC
+                        items:
+                          type: string
+                        type: array
+                        x-kubernetes-list-type: set
                     type: object
                   ram:
                     description: (Computed)[integer] The amount of memory for the
                       server in MB.
                     type: number
+                  securityGroupsIds:
+                    description: |-
+                      The list of Security Group IDs for the
+                      The list of Security Group IDs for the server
+                    items:
+                      type: string
+                    type: array
+                    x-kubernetes-list-type: set
                   sshKeyPath:
                     description: |-
                       [list] List of absolute paths to files containing a public SSH key that will be injected into IonosCloud provided Linux images.  Also accepts ssh keys directly. Required for IonosCloud Linux images. Required if image_password is not provided. Does not support ~ expansion to homedir in the given path. This property is immutable.
@@ -1032,15 +1078,16 @@ spec:
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
                 || ''Update'' in self.managementPolicies) || has(self.forProvider.name)
                 || (has(self.initProvider) && has(self.initProvider.name))'
-            - message: spec.forProvider.volume is a required parameter
-              rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
-                || ''Update'' in self.managementPolicies) || has(self.forProvider.volume)
-                || (has(self.initProvider) && has(self.initProvider.volume))'
           status:
             description: ServerStatus defines the observed state of Server.
             properties:
               atProvider:
                 properties:
+                  allowReplace:
+                    description: |-
+                      [bool] When set to true, allows the update of immutable fields by first destroying and then re-creating the server.
+                      When set to true, allows the update of immutable fields by destroying and re-creating the resource.
+                    type: boolean
                   availabilityZone:
                     description: '[string] The availability zone in which the server
                       should exist. E.g: AUTO, ZONE_1, ZONE_2. This property is immutable.'
@@ -1080,8 +1127,8 @@ spec:
                     type: array
                   hostname:
                     description: |-
-                      [string] The hostname of the resource. Allowed characters are a-z, 0-9 and - (minus). Hostname should not start with minus and should not be longer than 63 characters.
-                      The hostname of the resource. Allowed characters are a-z, 0-9 and - (minus). Hostname should not start with minus and should not be longer than 63 characters.
+                      (Computed)[string] The hostname of the resource. Allowed characters are a-z, 0-9 and - (minus). Hostname should not start with minus and should not be longer than 63 characters. If no value provided explicitly, it will be populated with the name of the server
+                      The hostname of the resource. Allowed characters are a-z, 0-9 and - (minus). Hostname should not start with minus and should not be longer than 63 characters. If no value provided explicitly, it will be populated with the name of the server
                     type: string
                   id:
                     type: string
@@ -1196,6 +1243,14 @@ spec:
                         type: string
                       pciSlot:
                         type: number
+                      securityGroupsIds:
+                        description: |-
+                          The list of Security Group IDs for the
+                          The list of Security Group IDs for the NIC
+                        items:
+                          type: string
+                        type: array
+                        x-kubernetes-list-type: set
                     type: object
                   primaryIp:
                     description: (Computed) The associated IP address.
@@ -1209,6 +1264,14 @@ spec:
                     description: (Computed)[integer] The amount of memory for the
                       server in MB.
                     type: number
+                  securityGroupsIds:
+                    description: |-
+                      The list of Security Group IDs for the
+                      The list of Security Group IDs for the server
+                    items:
+                      type: string
+                    type: array
+                    x-kubernetes-list-type: set
                   sshKeyPath:
                     description: |-
                       [list] List of absolute paths to files containing a public SSH key that will be injected into IonosCloud provided Linux images.  Also accepts ssh keys directly. Required for IonosCloud Linux images. Required if image_password is not provided. Does not support ~ expansion to homedir in the given path. This property is immutable.
