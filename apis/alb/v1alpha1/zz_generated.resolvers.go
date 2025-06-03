@@ -9,6 +9,8 @@ package v1alpha1
 import (
 	"context"
 	reference "github.com/crossplane/crossplane-runtime/pkg/reference"
+	resource "github.com/crossplane/upjet/pkg/resource"
+	v1alpha11 "github.com/ionos-cloud/provider-upjet-ionoscloud/apis/certificatemanager/v1alpha1"
 	v1alpha1 "github.com/ionos-cloud/provider-upjet-ionoscloud/apis/compute/v1alpha1"
 	errors "github.com/pkg/errors"
 	client "sigs.k8s.io/controller-runtime/pkg/client"
@@ -125,6 +127,7 @@ func (mg *LoadbalancerForwardingrule) ResolveReferences(ctx context.Context, c c
 	r := reference.NewAPIResolver(c, mg)
 
 	var rsp reference.ResolutionResponse
+	var mrsp reference.MultiResolutionResponse
 	var err error
 
 	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
@@ -159,6 +162,22 @@ func (mg *LoadbalancerForwardingrule) ResolveReferences(ctx context.Context, c c
 	mg.Spec.ForProvider.DatacenterID = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.DatacenterIDRef = rsp.ResolvedReference
 
+	mrsp, err = r.ResolveMultiple(ctx, reference.MultiResolutionRequest{
+		CurrentValues: reference.FromPtrValues(mg.Spec.ForProvider.ServerCertificates),
+		Extract:       resource.ExtractResourceID(),
+		References:    mg.Spec.ForProvider.ServerCertificatesRefs,
+		Selector:      mg.Spec.ForProvider.ServerCertificatesSelector,
+		To: reference.To{
+			List:    &v1alpha11.CertificateList{},
+			Managed: &v1alpha11.Certificate{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.ForProvider.ServerCertificates")
+	}
+	mg.Spec.ForProvider.ServerCertificates = reference.ToPtrValues(mrsp.ResolvedValues)
+	mg.Spec.ForProvider.ServerCertificatesRefs = mrsp.ResolvedReferences
+
 	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 		CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.ApplicationLoadbalancerID),
 		Extract:      reference.ExternalName(),
@@ -190,6 +209,22 @@ func (mg *LoadbalancerForwardingrule) ResolveReferences(ctx context.Context, c c
 	}
 	mg.Spec.InitProvider.DatacenterID = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.InitProvider.DatacenterIDRef = rsp.ResolvedReference
+
+	mrsp, err = r.ResolveMultiple(ctx, reference.MultiResolutionRequest{
+		CurrentValues: reference.FromPtrValues(mg.Spec.InitProvider.ServerCertificates),
+		Extract:       resource.ExtractResourceID(),
+		References:    mg.Spec.InitProvider.ServerCertificatesRefs,
+		Selector:      mg.Spec.InitProvider.ServerCertificatesSelector,
+		To: reference.To{
+			List:    &v1alpha11.CertificateList{},
+			Managed: &v1alpha11.Certificate{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.InitProvider.ServerCertificates")
+	}
+	mg.Spec.InitProvider.ServerCertificates = reference.ToPtrValues(mrsp.ResolvedValues)
+	mg.Spec.InitProvider.ServerCertificatesRefs = mrsp.ResolvedReferences
 
 	return nil
 }

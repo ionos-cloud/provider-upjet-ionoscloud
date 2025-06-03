@@ -230,6 +230,7 @@ resources:
               references:
                 application_loadbalancer_id: ionoscloud_application_loadbalancer.example.id
                 datacenter_id: ionoscloud_datacenter.example.id
+                server_certificates: ionoscloud_certificate.cert.id
               dependencies:
                 ionoscloud_application_loadbalancer.example: |-
                     {
@@ -691,6 +692,7 @@ resources:
               references:
                 datacenter_id: ionoscloud_datacenter.example.id
                 image_password: random_password.server_image_password.result
+                nic.ips: ionoscloud_ipblock.webserver_ipblock.ips[0]
                 nic.lan: ionoscloud_lan.example.id
                 template_uuid: data.ionoscloud_template.example.id
               dependencies:
@@ -1113,6 +1115,8 @@ resources:
                     "${ionoscloud_user.example2.id}"
                   ]
                 }
+              references:
+                user_ids: ionoscloud_user.example1.id
               dependencies:
                 ionoscloud_user.example1: |-
                     {
@@ -1544,6 +1548,7 @@ resources:
                 k8s_cluster_id: ionoscloud_k8s_cluster.example.id
                 k8s_version: ionoscloud_k8s_cluster.example.k8s_version
                 lans.id: ionoscloud_lan.example.id
+                public_ips: ionoscloud_ipblock.example.ips[0]
               dependencies:
                 ionoscloud_datacenter.example: |-
                     {
@@ -1951,6 +1956,7 @@ resources:
                 }
               references:
                 datacenter_id: ionoscloud_datacenter.example.id
+                nic_ids: ionoscloud_server.example.primary_nic
               dependencies:
                 ionoscloud_datacenter.example: |-
                     {
@@ -2534,6 +2540,7 @@ resources:
               references:
                 datacenter_id: ionoscloud_datacenter.example.id
                 lans.id: ionoscloud_lan.example.id
+                public_ips: ionoscloud_ipblock.example.ips[0]
               dependencies:
                 ionoscloud_datacenter.example: |-
                     {
@@ -3118,6 +3125,7 @@ resources:
                 }
               references:
                 datacenter_id: ionoscloud_datacenter.example.id
+                ips: ionoscloud_ipblock.example.ips[0]
                 lan: ionoscloud_lan.example.id
                 server_id: ionoscloud_server.example.id
               dependencies:
@@ -4211,6 +4219,7 @@ resources:
                 image_password: random_password.server_image_password.result
                 nic.firewall.source_ip: ionoscloud_ipblock.example.ips[2]
                 nic.firewall.target_ip: ionoscloud_ipblock.example.ips[3]
+                nic.ips: ionoscloud_ipblock.example.ips[0]
                 nic.lan: ionoscloud_lan.example.id
               dependencies:
                 ionoscloud_datacenter.example: |-
@@ -4295,6 +4304,7 @@ resources:
                 image_password: random_password.server_image_password.result
                 nic.firewall.source_ip: ionoscloud_ipblock.webserver_ipblock.ips[2]
                 nic.firewall.target_ip: ionoscloud_ipblock.webserver_ipblock.ips[3]
+                nic.ips: ionoscloud_ipblock.webserver_ipblock.ips[0]
                 nic.lan: ionoscloud_lan.example.id
               dependencies:
                 ionoscloud_datacenter.example: |-
@@ -4663,6 +4673,7 @@ resources:
                   "password": "${random_password.user_password.result}"
                 }
               references:
+                group_ids: ionoscloud_group.group1.id
                 password: random_password.user_password.result
               dependencies:
                 ionoscloud_group.group1: |-
@@ -4778,6 +4789,7 @@ resources:
                 image_password: random_password.server_image_password.result
                 nic.firewall.source_ip: ionoscloud_ipblock.example.ips[2]
                 nic.firewall.target_ip: ionoscloud_ipblock.example.ips[3]
+                nic.ips: ionoscloud_ipblock.example.ips[0]
                 nic.lan: ionoscloud_lan.example.id
               dependencies:
                 ionoscloud_datacenter.example: |-
