@@ -265,8 +265,18 @@ type LoadbalancerForwardingruleInitParameters struct {
 
 	// [list] Array of certificate ids. You can create certificates with the certificate resource.
 	// Array of items in the collection.
+	// +crossplane:generate:reference:type=github.com/ionos-cloud/provider-upjet-ionoscloud/apis/certificatemanager/v1alpha1.Certificate
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
 	// +listType=set
 	ServerCertificates []*string `json:"serverCertificates,omitempty" tf:"server_certificates,omitempty"`
+
+	// References to Certificate in certificatemanager to populate serverCertificates.
+	// +kubebuilder:validation:Optional
+	ServerCertificatesRefs []v1.Reference `json:"serverCertificatesRefs,omitempty" tf:"-"`
+
+	// Selector for a list of Certificate in certificatemanager to populate serverCertificates.
+	// +kubebuilder:validation:Optional
+	ServerCertificatesSelector *v1.Selector `json:"serverCertificatesSelector,omitempty" tf:"-"`
 }
 
 type LoadbalancerForwardingruleObservation struct {
@@ -369,9 +379,19 @@ type LoadbalancerForwardingruleParameters struct {
 
 	// [list] Array of certificate ids. You can create certificates with the certificate resource.
 	// Array of items in the collection.
+	// +crossplane:generate:reference:type=github.com/ionos-cloud/provider-upjet-ionoscloud/apis/certificatemanager/v1alpha1.Certificate
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	// +listType=set
 	ServerCertificates []*string `json:"serverCertificates,omitempty" tf:"server_certificates,omitempty"`
+
+	// References to Certificate in certificatemanager to populate serverCertificates.
+	// +kubebuilder:validation:Optional
+	ServerCertificatesRefs []v1.Reference `json:"serverCertificatesRefs,omitempty" tf:"-"`
+
+	// Selector for a list of Certificate in certificatemanager to populate serverCertificates.
+	// +kubebuilder:validation:Optional
+	ServerCertificatesSelector *v1.Selector `json:"serverCertificatesSelector,omitempty" tf:"-"`
 }
 
 // LoadbalancerForwardingruleSpec defines the desired state of LoadbalancerForwardingrule

@@ -43,8 +43,8 @@ spec:
     listenerPort: 8080
     name: ALB FR Example
     protocol: HTTP
-    serverCertificates:
-    - ${ionoscloud_certificate.cert.id}
+    serverCertificatesRefs:
+    - name: cert
 
 ---
 

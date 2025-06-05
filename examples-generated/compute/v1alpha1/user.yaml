@@ -13,10 +13,10 @@ spec:
     email: unique@email.com
     firstName: example
     forceSecAuth: false
-    groupIds:
-    - ${ionoscloud_group.group1.id}
-    - ${ionoscloud_group.group2.id}
-    - ${ionoscloud_group.group3.id}
+    groupIdsRefs:
+    - name: group1
+    - name: group2
+    - name: group3
     lastName: example
     passwordSecretRef:
       key: attribute.result

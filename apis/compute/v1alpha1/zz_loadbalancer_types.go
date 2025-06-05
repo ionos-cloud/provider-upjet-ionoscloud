@@ -37,7 +37,17 @@ type LoadbalancerInitParameters struct {
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
 	// [list] A list of NIC IDs that are part of the load balancer.
+	// +crossplane:generate:reference:type=github.com/ionos-cloud/provider-upjet-ionoscloud/apis/compute/v1alpha1.Server
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractParamPath("primary_nic",true)
 	NicIds []*string `json:"nicIds,omitempty" tf:"nic_ids,omitempty"`
+
+	// References to Server in compute to populate nicIds.
+	// +kubebuilder:validation:Optional
+	NicIdsRefs []v1.Reference `json:"nicIdsRefs,omitempty" tf:"-"`
+
+	// Selector for a list of Server in compute to populate nicIds.
+	// +kubebuilder:validation:Optional
+	NicIdsSelector *v1.Selector `json:"nicIdsSelector,omitempty" tf:"-"`
 }
 
 type LoadbalancerObservation struct {
@@ -88,8 +98,18 @@ type LoadbalancerParameters struct {
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
 	// [list] A list of NIC IDs that are part of the load balancer.
+	// +crossplane:generate:reference:type=github.com/ionos-cloud/provider-upjet-ionoscloud/apis/compute/v1alpha1.Server
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractParamPath("primary_nic",true)
 	// +kubebuilder:validation:Optional
 	NicIds []*string `json:"nicIds,omitempty" tf:"nic_ids,omitempty"`
+
+	// References to Server in compute to populate nicIds.
+	// +kubebuilder:validation:Optional
+	NicIdsRefs []v1.Reference `json:"nicIdsRefs,omitempty" tf:"-"`
+
+	// Selector for a list of Server in compute to populate nicIds.
+	// +kubebuilder:validation:Optional
+	NicIdsSelector *v1.Selector `json:"nicIdsSelector,omitempty" tf:"-"`
 }
 
 // LoadbalancerSpec defines the desired state of Loadbalancer
@@ -129,7 +149,6 @@ type Loadbalancer struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
 	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.name) || (has(self.initProvider) && has(self.initProvider.name))",message="spec.forProvider.name is a required parameter"
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.nicIds) || (has(self.initProvider) && has(self.initProvider.nicIds))",message="spec.forProvider.nicIds is a required parameter"
 	Spec   LoadbalancerSpec   `json:"spec"`
 	Status LoadbalancerStatus `json:"status,omitempty"`
 }

@@ -36,8 +36,18 @@ type UserInitParameters struct {
 
 	// [Set] The groups that this user will be a member of
 	// Ids of the groups that the user is a member of
+	// +crossplane:generate:reference:type=github.com/ionos-cloud/provider-upjet-ionoscloud/apis/compute/v1alpha1.Group
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
 	// +listType=set
 	GroupIds []*string `json:"groupIds,omitempty" tf:"group_ids,omitempty"`
+
+	// References to Group in compute to populate groupIds.
+	// +kubebuilder:validation:Optional
+	GroupIdsRefs []v1.Reference `json:"groupIdsRefs,omitempty" tf:"-"`
+
+	// Selector for a list of Group in compute to populate groupIds.
+	// +kubebuilder:validation:Optional
+	GroupIdsSelector *v1.Selector `json:"groupIdsSelector,omitempty" tf:"-"`
 
 	// [string] A last name for the user.
 	LastName *string `json:"lastName,omitempty" tf:"last_name,omitempty"`
@@ -113,9 +123,19 @@ type UserParameters struct {
 
 	// [Set] The groups that this user will be a member of
 	// Ids of the groups that the user is a member of
+	// +crossplane:generate:reference:type=github.com/ionos-cloud/provider-upjet-ionoscloud/apis/compute/v1alpha1.Group
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	// +listType=set
 	GroupIds []*string `json:"groupIds,omitempty" tf:"group_ids,omitempty"`
+
+	// References to Group in compute to populate groupIds.
+	// +kubebuilder:validation:Optional
+	GroupIdsRefs []v1.Reference `json:"groupIdsRefs,omitempty" tf:"-"`
+
+	// Selector for a list of Group in compute to populate groupIds.
+	// +kubebuilder:validation:Optional
+	GroupIdsSelector *v1.Selector `json:"groupIdsSelector,omitempty" tf:"-"`
 
 	// [string] A last name for the user.
 	// +kubebuilder:validation:Optional

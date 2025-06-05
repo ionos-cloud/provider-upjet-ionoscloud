@@ -13,8 +13,8 @@ spec:
         testing.upbound.io/example-name: example
     dhcp: true
     name: Load Balancer Example
-    nicIds:
-    - ${ionoscloud_server.example.primary_nic}
+    nicIdsRefs:
+    - name: example
 
 ---
 
