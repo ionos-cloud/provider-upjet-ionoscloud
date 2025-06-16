@@ -18,8 +18,6 @@ import (
 
 	"github.com/ionos-cloud/terraform-provider-ionoscloud/v6/xpprovider"
 
-	ujconfig "github.com/crossplane/upjet/pkg/config"
-
 	"github.com/ionos-cloud/provider-upjet-ionoscloud/config/alb"
 	"github.com/ionos-cloud/provider-upjet-ionoscloud/config/apigateway"
 	"github.com/ionos-cloud/provider-upjet-ionoscloud/config/asg"
@@ -56,7 +54,7 @@ var providerSchema string
 var providerMetadata string
 
 // GetProvider returns provider configuration
-func GetProvider(generationProvider bool) (*ujconfig.Provider, error) {
+func GetProvider(generationProvider bool) (*config.Provider, error) {
 	fwProvider, sdkProvider := xpprovider.GetProvider()
 	if generationProvider {
 		p, err := getProviderSchema(providerSchema)
@@ -71,23 +69,23 @@ func GetProvider(generationProvider bool) (*ujconfig.Provider, error) {
 		sdkProvider = p
 	}
 
-	pc := ujconfig.NewProvider([]byte(providerSchema), resourcePrefix, modulePath, []byte(providerMetadata),
-		ujconfig.WithShortName("ionos"),
-		ujconfig.WithRootGroup("ionoscloud.io"),
-		ujconfig.WithIncludeList(CLIReconciledResourceList()),
-		ujconfig.WithTerraformPluginSDKIncludeList(TerraformPluginSDKResourceList()),
-		ujconfig.WithTerraformPluginFrameworkIncludeList(TerraformPluginFrameworkResourceList()),
-		ujconfig.WithReferenceInjectors([]config.ReferenceInjector{reference.NewInjector(modulePath)}),
-		ujconfig.WithFeaturesPackage("internal/features"),
-		ujconfig.WithTerraformProvider(sdkProvider),
-		ujconfig.WithTerraformPluginFrameworkProvider(fwProvider),
-		ujconfig.WithSchemaTraversers(&config.SingletonListEmbedder{}),
-		ujconfig.WithDefaultResourceOptions(
+	pc := config.NewProvider([]byte(providerSchema), resourcePrefix, modulePath, []byte(providerMetadata),
+		config.WithShortName("ionos"),
+		config.WithRootGroup("ionoscloud.io"),
+		config.WithIncludeList(CLIReconciledResourceList()),
+		config.WithTerraformPluginSDKIncludeList(TerraformPluginSDKResourceList()),
+		config.WithTerraformPluginFrameworkIncludeList(TerraformPluginFrameworkResourceList()),
+		config.WithReferenceInjectors([]config.ReferenceInjector{reference.NewInjector(modulePath)}),
+		config.WithFeaturesPackage("internal/features"),
+		config.WithTerraformProvider(sdkProvider),
+		config.WithTerraformPluginFrameworkProvider(fwProvider),
+		config.WithSchemaTraversers(&config.SingletonListEmbedder{}),
+		config.WithDefaultResourceOptions(
 			ResourceConfigurator(),
 		),
 	)
 
-	for _, configure := range []func(provider *ujconfig.Provider){
+	for _, configure := range []func(provider *config.Provider){
 		// add custom config functions
 		objectstorage.Configure,
 		compute.Configure,
