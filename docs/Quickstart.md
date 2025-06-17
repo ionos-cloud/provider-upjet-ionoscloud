@@ -172,14 +172,25 @@ Create a managed resource to verify the provider is functioning.
 
 This example creates a Ionoscloud datacenter.
 
+Either from a file:
+```shell
+kubectl apply -f examples/datacenter.yaml
+```
+
+Or directly from the command line:
+
 ```shell
 cat <<EOF | kubectl apply -f -
-apiVersion: pkg.crossplane.io/v1
-kind: Provider
+apiVersion: compute.ionoscloud.io/v1alpha1
+kind: Datacenter
 metadata:
-  name: provider-upjet-ionoscloud
+  name: example
 spec:
-  package: xpkg.upbound.io/ionos-cloud/provider-upjet-ionoscloud:v0.1.2
+  forProvider:
+    description: Example datacenter description
+    location: de/fra
+    name: Datacenter Example
+    secAuthProtection: false
 EOF
 ```
 
