@@ -344,4 +344,4 @@ jobs:
           path: _output/**
 
       - name: Publish Artifacts
-        run: make publish BRANCH_NAME=${GITHUB_REF##*/}
+        run: make publish BRANCH_NAME=${GITHUB_REF##*/} VERSION=$VERSION_TAG
