@@ -202,8 +202,16 @@ No resources found
 ```
 
 ## Troubleshooting
-If you encounter issues, check the logs of the provider pod with `kubectl logs`.
-
+Check events to see if there are any issues with the provider installation or managed resources.
 ```shell 
 kubectl get events
 ```
+
+
+If you encounter issues, check the logs of the provider pod with `kubectl logs`.
+
+```shell 
+kubectl -n crossplane-system logs  provider-upjet-ionoscloud-1f720e145fea-8994d7b58-gh57n
+```
+
+For more information on troubleshooting, see the [Crossplane troubleshooting guide](https://docs.crossplane.io/latest/guides/troubleshoot-crossplane/).
