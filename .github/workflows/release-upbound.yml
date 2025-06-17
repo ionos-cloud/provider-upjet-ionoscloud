@@ -245,9 +245,15 @@ jobs:
       - name: Deploying locally built provider package
         run: make local-deploy
 
-  set_version:
+  publish-artifacts:
     runs-on: ubuntu-22.04
-    needs: detect-noop
+    needs:
+      - detect-noop
+      - report-breaking-changes
+      - lint
+      - check-diff
+      - unit-tests
+      - local-deploy
     if: needs.detect-noop.outputs.noop != 'true'
 
     steps:
@@ -267,19 +273,10 @@ jobs:
         if: github.event_name == 'workflow_dispatch'
         run: echo "VERSION_TAG=${{ github.event.inputs.version_tag }}" >> $GITHUB_ENV
 
-  publish-artifacts:
-    runs-on: ubuntu-22.04
-    needs:
-      - detect-noop
-      - report-breaking-changes
-      - lint
-      - check-diff
-      - unit-tests
-      - local-deploy
-      - set_version
-    if: needs.detect-noop.outputs.noop != 'true'
+      - name: Debug Environment
+        run: |
+          echo "Version Tag: $VERSION_TAG"
 
-    steps:
       - name: Setup QEMU
         uses: docker/setup-qemu-action@2b82ce82d56a2a04d2637cd93a637ae1b359c0a7 # v2
         with:
@@ -334,7 +331,7 @@ jobs:
         run: make vendor vendor.check
 
       - name: Build Artifacts
-        run: make -j2 build.all VERSION=${VERSION_TAG}
+        run: make -j2 build.all VERSION=$VERSION_TAG
         env:
           # We're using docker buildx, which doesn't actually load the images it
           # builds by default. Specifying --load does so.
