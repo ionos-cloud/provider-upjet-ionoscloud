@@ -53,9 +53,9 @@ cat <<EOF | kubectl apply -f -
 apiVersion: pkg.crossplane.io/v1
 kind: Provider
 metadata:
-  name: provider-ionoscloud
+  name: provider-upjet-ionoscloud
 spec:
-  package: xpkg.upbound.io/ionoscloud/provider-upjet-ionoscloud:v0.1.0
+  package: xpkg.upbound.io/ionos-cloud/provider-upjet-ionoscloud:v0.1.1-5.g2bde626
 EOF
 ```
 
@@ -183,11 +183,11 @@ kubectl get datacenters
 NAME      SYNCED   READY   EXTERNAL-NAME                          AGE
 example   True     True    5bc1d7a9-2b1d-488c-b16f-8b946017ecde   5m3s
 ```
-The datacenter creation is finalized when the values `READY` and `SYNCED` are `True`. 
+The datacenter creation is finalized when the values `READY` and `SYNCED` are `True`.
 
 ## Delete the managed resource
 ```shell
-kubectl delete datacenters.compute.ionoscloud.io example 
+kubectl delete datacenters.compute.ionoscloud.io example
 datacenter.compute.ionoscloud.io "example" deleted
 
 
