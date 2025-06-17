@@ -144,9 +144,6 @@ Verify the `ProviderConfig` with `kubectl describe providerconfigs`.
 
 ```shell
 kubectl describe providerconfigs
-```
-
-```plaintext
 Name:         default
 Namespace:
 API Version:  upjet-ionoscloud.ionoscloud.io/v1beta1
