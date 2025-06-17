@@ -73,6 +73,17 @@ spec:
                 type: string
               forProvider:
                 properties:
+                  backup:
+                    description: |-
+                      Properties configuring the backup of the cluster. Immutable, change forces re-creation of the cluster.
+                      Properties configuring the backup of the cluster. Immutable, change forces re-creation of the cluster.
+                    properties:
+                      location:
+                        description: |-
+                          [string] The location in which the cluster will be created. Different service endpoints are used based on location, possible options are: "de/fra", "de/txl", "es/vit", "fr/par", "gb/lhr", "us/ewr", "us/las", "us/mci". If not set, the endpoint will be the one corresponding to "de/txl".
+                          The IONOS Object Storage location where the backups will be stored.
+                        type: string
+                    type: object
                   connections:
                     description: |-
                       The network connection for your cluster. Only one connection is allowed.
@@ -341,6 +352,17 @@ spec:
                   for example because of an external controller is managing them, like an
                   autoscaler.
                 properties:
+                  backup:
+                    description: |-
+                      Properties configuring the backup of the cluster. Immutable, change forces re-creation of the cluster.
+                      Properties configuring the backup of the cluster. Immutable, change forces re-creation of the cluster.
+                    properties:
+                      location:
+                        description: |-
+                          [string] The location in which the cluster will be created. Different service endpoints are used based on location, possible options are: "de/fra", "de/txl", "es/vit", "fr/par", "gb/lhr", "us/ewr", "us/las", "us/mci". If not set, the endpoint will be the one corresponding to "de/txl".
+                          The IONOS Object Storage location where the backups will be stored.
+                        type: string
+                    type: object
                   connections:
                     description: |-
                       The network connection for your cluster. Only one connection is allowed.
@@ -803,6 +825,17 @@ spec:
             properties:
               atProvider:
                 properties:
+                  backup:
+                    description: |-
+                      Properties configuring the backup of the cluster. Immutable, change forces re-creation of the cluster.
+                      Properties configuring the backup of the cluster. Immutable, change forces re-creation of the cluster.
+                    properties:
+                      location:
+                        description: |-
+                          [string] The location in which the cluster will be created. Different service endpoints are used based on location, possible options are: "de/fra", "de/txl", "es/vit", "fr/par", "gb/lhr", "us/ewr", "us/las", "us/mci". If not set, the endpoint will be the one corresponding to "de/txl".
+                          The IONOS Object Storage location where the backups will be stored.
+                        type: string
+                    type: object
                   connections:
                     description: |-
                       The network connection for your cluster. Only one connection is allowed.

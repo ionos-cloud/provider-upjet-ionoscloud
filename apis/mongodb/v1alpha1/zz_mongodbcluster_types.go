@@ -246,8 +246,8 @@ type MongodbClusterInitParameters struct {
 	// A weekly 4 hour-long window, during which maintenance might occur
 	MaintenanceWindow *MaintenanceWindowInitParameters `json:"maintenanceWindow,omitempty" tf:"maintenance_window,omitempty"`
 
-	// [string] The MongoDB version of your cluster. Updates to the value of the field force the cluster to be re-created.
-	// The MongoDB version of your cluster. Update forces cluster re-creation.
+	// [string] The MongoDB version of your cluster. Downgrade is not possible and will throw an error.
+	// The MongoDB version of your cluster. Downgrade is not possible and will throw an error.
 	MongodbVersion *string `json:"mongodbVersion,omitempty" tf:"mongodb_version,omitempty"`
 
 	// (Computed)[int]The amount of memory per instance in megabytes. Required for enterprise edition.
@@ -319,8 +319,8 @@ type MongodbClusterObservation struct {
 	// A weekly 4 hour-long window, during which maintenance might occur
 	MaintenanceWindow *MaintenanceWindowObservation `json:"maintenanceWindow,omitempty" tf:"maintenance_window,omitempty"`
 
-	// [string] The MongoDB version of your cluster. Updates to the value of the field force the cluster to be re-created.
-	// The MongoDB version of your cluster. Update forces cluster re-creation.
+	// [string] The MongoDB version of your cluster. Downgrade is not possible and will throw an error.
+	// The MongoDB version of your cluster. Downgrade is not possible and will throw an error.
 	MongodbVersion *string `json:"mongodbVersion,omitempty" tf:"mongodb_version,omitempty"`
 
 	// (Computed)[int]The amount of memory per instance in megabytes. Required for enterprise edition.
@@ -405,8 +405,8 @@ type MongodbClusterParameters struct {
 	// +kubebuilder:validation:Optional
 	MaintenanceWindow *MaintenanceWindowParameters `json:"maintenanceWindow,omitempty" tf:"maintenance_window,omitempty"`
 
-	// [string] The MongoDB version of your cluster. Updates to the value of the field force the cluster to be re-created.
-	// The MongoDB version of your cluster. Update forces cluster re-creation.
+	// [string] The MongoDB version of your cluster. Downgrade is not possible and will throw an error.
+	// The MongoDB version of your cluster. Downgrade is not possible and will throw an error.
 	// +kubebuilder:validation:Optional
 	MongodbVersion *string `json:"mongodbVersion,omitempty" tf:"mongodb_version,omitempty"`
 

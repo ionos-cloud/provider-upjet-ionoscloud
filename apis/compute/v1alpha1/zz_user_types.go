@@ -35,6 +35,8 @@ type UserInitParameters struct {
 	ForceSecAuth *bool `json:"forceSecAuth,omitempty" tf:"force_sec_auth,omitempty"`
 
 	// [Set] The groups that this user will be a member of
+	// NOTE: Group_ids field cannot be used at the same time with user_ids field in group resource. Trying to add the same user to the same group in both ways in the same plan will result in a cyclic dependency error.
+	// NOTE: password_wo requires Teraform 1.11 or higher.
 	// Ids of the groups that the user is a member of
 	// +crossplane:generate:reference:type=github.com/ionos-cloud/provider-upjet-ionoscloud/apis/compute/v1alpha1.Group
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
@@ -52,8 +54,17 @@ type UserInitParameters struct {
 	// [string] A last name for the user.
 	LastName *string `json:"lastName,omitempty" tf:"last_name,omitempty"`
 
-	// [string] A password for the user.
-	PasswordSecretRef v1.SecretKeySelector `json:"passwordSecretRef" tf:"-"`
+	// [string] A password for the user.11 or higher, you can use password_wo instead of password to avoid storing the password in the state file.
+	// A password for the user.11 or higher, you can use `password_wo` instead of `password` to avoid storing the password in the state file.
+	PasswordSecretRef *v1.SecretKeySelector `json:"passwordSecretRef,omitempty" tf:"-"`
+
+	// user password. This value is always marked as sensitive in the plan output, regardless of type. Additionally, write-only values are never stored to state. password_wo_version can be used to trigger an update and is required with this argument.15 and later, this may require additional configuration handling for certain scenarios.15 Upgrade Guide.
+	// Write-only attribute. Password for the user. To modify, must change the password_wo_version attribute.
+	PasswordWoSecretRef *v1.SecretKeySelector `json:"passwordWoSecretRef,omitempty" tf:"-"`
+
+	// Used together with password_wo to trigger an update. Increment this value when an update to the password_wo is required.
+	// Version of the password_wo attribute. Must be incremented to apply changes to the password_wo attribute.
+	PasswordWoVersion *float64 `json:"passwordWoVersion,omitempty" tf:"password_wo_version,omitempty"`
 }
 
 type UserObservation struct {
@@ -78,6 +89,8 @@ type UserObservation struct {
 	ForceSecAuth *bool `json:"forceSecAuth,omitempty" tf:"force_sec_auth,omitempty"`
 
 	// [Set] The groups that this user will be a member of
+	// NOTE: Group_ids field cannot be used at the same time with user_ids field in group resource. Trying to add the same user to the same group in both ways in the same plan will result in a cyclic dependency error.
+	// NOTE: password_wo requires Teraform 1.11 or higher.
 	// Ids of the groups that the user is a member of
 	// +listType=set
 	GroupIds []*string `json:"groupIds,omitempty" tf:"group_ids,omitempty"`
@@ -86,6 +99,10 @@ type UserObservation struct {
 
 	// [string] A last name for the user.
 	LastName *string `json:"lastName,omitempty" tf:"last_name,omitempty"`
+
+	// Used together with password_wo to trigger an update. Increment this value when an update to the password_wo is required.
+	// Version of the password_wo attribute. Must be incremented to apply changes to the password_wo attribute.
+	PasswordWoVersion *float64 `json:"passwordWoVersion,omitempty" tf:"password_wo_version,omitempty"`
 
 	// (Computed) Canonical (IONOS Object Storage) id of the user for a given identity
 	S3CanonicalUserID *string `json:"s3CanonicalUserId,omitempty" tf:"s3_canonical_user_id,omitempty"`
@@ -122,6 +139,8 @@ type UserParameters struct {
 	ForceSecAuth *bool `json:"forceSecAuth,omitempty" tf:"force_sec_auth,omitempty"`
 
 	// [Set] The groups that this user will be a member of
+	// NOTE: Group_ids field cannot be used at the same time with user_ids field in group resource. Trying to add the same user to the same group in both ways in the same plan will result in a cyclic dependency error.
+	// NOTE: password_wo requires Teraform 1.11 or higher.
 	// Ids of the groups that the user is a member of
 	// +crossplane:generate:reference:type=github.com/ionos-cloud/provider-upjet-ionoscloud/apis/compute/v1alpha1.Group
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
@@ -141,9 +160,20 @@ type UserParameters struct {
 	// +kubebuilder:validation:Optional
 	LastName *string `json:"lastName,omitempty" tf:"last_name,omitempty"`
 
-	// [string] A password for the user.
+	// [string] A password for the user.11 or higher, you can use password_wo instead of password to avoid storing the password in the state file.
+	// A password for the user.11 or higher, you can use `password_wo` instead of `password` to avoid storing the password in the state file.
 	// +kubebuilder:validation:Optional
-	PasswordSecretRef v1.SecretKeySelector `json:"passwordSecretRef" tf:"-"`
+	PasswordSecretRef *v1.SecretKeySelector `json:"passwordSecretRef,omitempty" tf:"-"`
+
+	// user password. This value is always marked as sensitive in the plan output, regardless of type. Additionally, write-only values are never stored to state. password_wo_version can be used to trigger an update and is required with this argument.15 and later, this may require additional configuration handling for certain scenarios.15 Upgrade Guide.
+	// Write-only attribute. Password for the user. To modify, must change the password_wo_version attribute.
+	// +kubebuilder:validation:Optional
+	PasswordWoSecretRef *v1.SecretKeySelector `json:"passwordWoSecretRef,omitempty" tf:"-"`
+
+	// Used together with password_wo to trigger an update. Increment this value when an update to the password_wo is required.
+	// Version of the password_wo attribute. Must be incremented to apply changes to the password_wo attribute.
+	// +kubebuilder:validation:Optional
+	PasswordWoVersion *float64 `json:"passwordWoVersion,omitempty" tf:"password_wo_version,omitempty"`
 }
 
 // UserSpec defines the desired state of User
@@ -185,7 +215,6 @@ type User struct {
 	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.email) || (has(self.initProvider) && has(self.initProvider.email))",message="spec.forProvider.email is a required parameter"
 	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.firstName) || (has(self.initProvider) && has(self.initProvider.firstName))",message="spec.forProvider.firstName is a required parameter"
 	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.lastName) || (has(self.initProvider) && has(self.initProvider.lastName))",message="spec.forProvider.lastName is a required parameter"
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.passwordSecretRef)",message="spec.forProvider.passwordSecretRef is a required parameter"
 	Spec   UserSpec   `json:"spec"`
 	Status UserStatus `json:"status,omitempty"`
 }

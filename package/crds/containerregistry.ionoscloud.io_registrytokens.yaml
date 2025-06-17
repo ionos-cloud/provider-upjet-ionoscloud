@@ -80,6 +80,7 @@ spec:
                       Immutable, update forces re-creation of the resource.'
                     type: string
                   registryId:
+                    description: '[string] The ID of the container registry'
                     type: string
                   registryIdRef:
                     description: Reference to a Registry in containerregistry to populate
@@ -163,7 +164,7 @@ spec:
                       Saves password to file. Only works on create. Takes as argument a file name, or a file path
                     type: string
                   scopes:
-                    description: '[map]'
+                    description: (Computed) [map]
                     items:
                       properties:
                         actions:
@@ -184,7 +185,7 @@ spec:
                     type: array
                   status:
                     description: |-
-                      [string] Must have on of the values: enabled, disabled
+                      [string] Must have one of the values: enabled, disabled
                       Can be one of enabled, disabled
                     type: string
                 type: object
@@ -208,6 +209,7 @@ spec:
                       Immutable, update forces re-creation of the resource.'
                     type: string
                   registryId:
+                    description: '[string] The ID of the container registry'
                     type: string
                   registryIdRef:
                     description: Reference to a Registry in containerregistry to populate
@@ -291,7 +293,7 @@ spec:
                       Saves password to file. Only works on create. Takes as argument a file name, or a file path
                     type: string
                   scopes:
-                    description: '[map]'
+                    description: (Computed) [map]
                     items:
                       properties:
                         actions:
@@ -312,7 +314,7 @@ spec:
                     type: array
                   status:
                     description: |-
-                      [string] Must have on of the values: enabled, disabled
+                      [string] Must have one of the values: enabled, disabled
                       Can be one of enabled, disabled
                     type: string
                 type: object
@@ -494,13 +496,17 @@ spec:
               atProvider:
                 properties:
                   credentials:
+                    description: (Computed)[map]
                     items:
                       properties:
                         password:
+                          description: (Computed)[string] The password/token of the
+                            container registry token which will also be saved to a
+                            file if save_password_to_file is set
                           type: string
                         username:
-                          description: '[string] The name of the container registry
-                            token. Immutable, update forces re-creation of the resource.'
+                          description: (Computed)[string] The username of the container
+                            registry token
                           type: string
                       type: object
                     type: array
@@ -513,6 +519,7 @@ spec:
                       Immutable, update forces re-creation of the resource.'
                     type: string
                   registryId:
+                    description: '[string] The ID of the container registry'
                     type: string
                   savePasswordToFile:
                     description: |-
@@ -520,7 +527,7 @@ spec:
                       Saves password to file. Only works on create. Takes as argument a file name, or a file path
                     type: string
                   scopes:
-                    description: '[map]'
+                    description: (Computed) [map]
                     items:
                       properties:
                         actions:
@@ -541,7 +548,7 @@ spec:
                     type: array
                   status:
                     description: |-
-                      [string] Must have on of the values: enabled, disabled
+                      [string] Must have one of the values: enabled, disabled
                       Can be one of enabled, disabled
                     type: string
                 type: object

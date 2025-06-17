@@ -45,7 +45,7 @@ type LabelParameters struct {
 type NicFirewallInitParameters struct {
 	IcmpCode *string `json:"icmpCode,omitempty" tf:"icmp_code,omitempty"`
 
-	// (Computed)[string] Server usages: ENTERPRISE or CUBE. This property is immutable.
+	// (Computed)[string] Server usages: * type - Server usages: ENTERPRISE now named dedicated core, CUBE or VCPU. This property is immutable.
 	IcmpType *string `json:"icmpType,omitempty" tf:"icmp_type,omitempty"`
 
 	// [string] The name of the server.
@@ -63,7 +63,7 @@ type NicFirewallInitParameters struct {
 
 	TargetIP *string `json:"targetIp,omitempty" tf:"target_ip,omitempty"`
 
-	// (Computed)[string] Server usages: ENTERPRISE or CUBE. This property is immutable.
+	// (Computed)[string] Server usages: * type - Server usages: ENTERPRISE now named dedicated core, CUBE or VCPU. This property is immutable.
 	Type *string `json:"type,omitempty" tf:"type,omitempty"`
 }
 
@@ -72,7 +72,7 @@ type NicFirewallObservation struct {
 
 	IcmpCode *string `json:"icmpCode,omitempty" tf:"icmp_code,omitempty"`
 
-	// (Computed)[string] Server usages: ENTERPRISE or CUBE. This property is immutable.
+	// (Computed)[string] Server usages: * type - Server usages: ENTERPRISE now named dedicated core, CUBE or VCPU. This property is immutable.
 	IcmpType *string `json:"icmpType,omitempty" tf:"icmp_type,omitempty"`
 
 	// [string] The name of the server.
@@ -90,7 +90,7 @@ type NicFirewallObservation struct {
 
 	TargetIP *string `json:"targetIp,omitempty" tf:"target_ip,omitempty"`
 
-	// (Computed)[string] Server usages: ENTERPRISE or CUBE. This property is immutable.
+	// (Computed)[string] Server usages: * type - Server usages: ENTERPRISE now named dedicated core, CUBE or VCPU. This property is immutable.
 	Type *string `json:"type,omitempty" tf:"type,omitempty"`
 }
 
@@ -99,7 +99,7 @@ type NicFirewallParameters struct {
 	// +kubebuilder:validation:Optional
 	IcmpCode *string `json:"icmpCode,omitempty" tf:"icmp_code,omitempty"`
 
-	// (Computed)[string] Server usages: ENTERPRISE or CUBE. This property is immutable.
+	// (Computed)[string] Server usages: * type - Server usages: ENTERPRISE now named dedicated core, CUBE or VCPU. This property is immutable.
 	// +kubebuilder:validation:Optional
 	IcmpType *string `json:"icmpType,omitempty" tf:"icmp_type,omitempty"`
 
@@ -125,7 +125,7 @@ type NicFirewallParameters struct {
 	// +kubebuilder:validation:Optional
 	TargetIP *string `json:"targetIp,omitempty" tf:"target_ip,omitempty"`
 
-	// (Computed)[string] Server usages: ENTERPRISE or CUBE. This property is immutable.
+	// (Computed)[string] Server usages: * type - Server usages: ENTERPRISE now named dedicated core, CUBE or VCPU. This property is immutable.
 	// +kubebuilder:validation:Optional
 	Type *string `json:"type,omitempty" tf:"type,omitempty"`
 }
@@ -205,11 +205,11 @@ type ServerInitParameters struct {
 	// [string] The UUID of the template for creating a CUBE server; the available templates for CUBE servers can be found on the templates resource
 	TemplateUUID *string `json:"templateUuid,omitempty" tf:"template_uuid,omitempty"`
 
-	// (Computed)[string] Server usages: ENTERPRISE or CUBE. This property is immutable.
+	// (Computed)[string] Server usages: * type - Server usages: ENTERPRISE now named dedicated core, CUBE or VCPU. This property is immutable.
 	// server usages: ENTERPRISE or CUBE
 	Type *string `json:"type,omitempty" tf:"type,omitempty"`
 
-	// [string] Sets the power state of the server. E.g: RUNNING, SHUTOFF or SUSPENDED. SUSPENDED state is only valid for cube. SHUTOFF state is only valid for enterprise.
+	// [string] Sets the power state of the server. E.g: RUNNING, SHUTOFF or SUSPENDED. SUSPENDED state is only valid for cube. SHUTOFF state is only valid for enterprise(dedicated core).
 	// Sets the power state of the server. Possible values: `RUNNING`, `SHUTOFF` or `SUSPENDED`. SUSPENDED state is only valid for cube. SHUTOFF state is only valid for enterprise
 	VMState *string `json:"vmState,omitempty" tf:"vm_state,omitempty"`
 
@@ -229,7 +229,7 @@ type ServerNicInitParameters struct {
 
 	FirewallActive *bool `json:"firewallActive,omitempty" tf:"firewall_active,omitempty"`
 
-	// (Computed)[string] Server usages: ENTERPRISE or CUBE. This property is immutable.
+	// (Computed)[string] Server usages: * type - Server usages: ENTERPRISE now named dedicated core, CUBE or VCPU. This property is immutable.
 	FirewallType *string `json:"firewallType,omitempty" tf:"firewall_type,omitempty"`
 
 	// IPv6 CIDR block assigned to the NIC.
@@ -277,7 +277,7 @@ type ServerNicObservation struct {
 
 	FirewallActive *bool `json:"firewallActive,omitempty" tf:"firewall_active,omitempty"`
 
-	// (Computed)[string] Server usages: ENTERPRISE or CUBE. This property is immutable.
+	// (Computed)[string] Server usages: * type - Server usages: ENTERPRISE now named dedicated core, CUBE or VCPU. This property is immutable.
 	FirewallType *string `json:"firewallType,omitempty" tf:"firewall_type,omitempty"`
 
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
@@ -323,7 +323,7 @@ type ServerNicParameters struct {
 	// +kubebuilder:validation:Optional
 	FirewallActive *bool `json:"firewallActive,omitempty" tf:"firewall_active,omitempty"`
 
-	// (Computed)[string] Server usages: ENTERPRISE or CUBE. This property is immutable.
+	// (Computed)[string] Server usages: * type - Server usages: ENTERPRISE now named dedicated core, CUBE or VCPU. This property is immutable.
 	// +kubebuilder:validation:Optional
 	FirewallType *string `json:"firewallType,omitempty" tf:"firewall_type,omitempty"`
 
@@ -447,11 +447,11 @@ type ServerObservation struct {
 	// [string] The UUID of the template for creating a CUBE server; the available templates for CUBE servers can be found on the templates resource
 	TemplateUUID *string `json:"templateUuid,omitempty" tf:"template_uuid,omitempty"`
 
-	// (Computed)[string] Server usages: ENTERPRISE or CUBE. This property is immutable.
+	// (Computed)[string] Server usages: * type - Server usages: ENTERPRISE now named dedicated core, CUBE or VCPU. This property is immutable.
 	// server usages: ENTERPRISE or CUBE
 	Type *string `json:"type,omitempty" tf:"type,omitempty"`
 
-	// [string] Sets the power state of the server. E.g: RUNNING, SHUTOFF or SUSPENDED. SUSPENDED state is only valid for cube. SHUTOFF state is only valid for enterprise.
+	// [string] Sets the power state of the server. E.g: RUNNING, SHUTOFF or SUSPENDED. SUSPENDED state is only valid for cube. SHUTOFF state is only valid for enterprise(dedicated core).
 	// Sets the power state of the server. Possible values: `RUNNING`, `SHUTOFF` or `SUSPENDED`. SUSPENDED state is only valid for cube. SHUTOFF state is only valid for enterprise
 	VMState *string `json:"vmState,omitempty" tf:"vm_state,omitempty"`
 
@@ -553,12 +553,12 @@ type ServerParameters struct {
 	// +kubebuilder:validation:Optional
 	TemplateUUID *string `json:"templateUuid,omitempty" tf:"template_uuid,omitempty"`
 
-	// (Computed)[string] Server usages: ENTERPRISE or CUBE. This property is immutable.
+	// (Computed)[string] Server usages: * type - Server usages: ENTERPRISE now named dedicated core, CUBE or VCPU. This property is immutable.
 	// server usages: ENTERPRISE or CUBE
 	// +kubebuilder:validation:Optional
 	Type *string `json:"type,omitempty" tf:"type,omitempty"`
 
-	// [string] Sets the power state of the server. E.g: RUNNING, SHUTOFF or SUSPENDED. SUSPENDED state is only valid for cube. SHUTOFF state is only valid for enterprise.
+	// [string] Sets the power state of the server. E.g: RUNNING, SHUTOFF or SUSPENDED. SUSPENDED state is only valid for cube. SHUTOFF state is only valid for enterprise(dedicated core).
 	// Sets the power state of the server. Possible values: `RUNNING`, `SHUTOFF` or `SUSPENDED`. SUSPENDED state is only valid for cube. SHUTOFF state is only valid for enterprise
 	// +kubebuilder:validation:Optional
 	VMState *string `json:"vmState,omitempty" tf:"vm_state,omitempty"`
@@ -578,7 +578,7 @@ type ServerVolumeInitParameters struct {
 
 	Bus *string `json:"bus,omitempty" tf:"bus,omitempty"`
 
-	// (Computed)[string] Server usages: ENTERPRISE or CUBE. This property is immutable.
+	// (Computed)[string] Server usages: * type - Server usages: ENTERPRISE now named dedicated core, CUBE or VCPU. This property is immutable.
 	DiskType *string `json:"diskType,omitempty" tf:"disk_type,omitempty"`
 
 	// [string] Required if ssh_key_path is not provided.
@@ -626,7 +626,7 @@ type ServerVolumeObservation struct {
 
 	DiscVirtioHotUnplug *bool `json:"discVirtioHotUnplug,omitempty" tf:"disc_virtio_hot_unplug,omitempty"`
 
-	// (Computed)[string] Server usages: ENTERPRISE or CUBE. This property is immutable.
+	// (Computed)[string] Server usages: * type - Server usages: ENTERPRISE now named dedicated core, CUBE or VCPU. This property is immutable.
 	DiskType *string `json:"diskType,omitempty" tf:"disk_type,omitempty"`
 
 	// [string] Required if ssh_key_path is not provided.
@@ -674,7 +674,7 @@ type ServerVolumeParameters struct {
 	// +kubebuilder:validation:Optional
 	Bus *string `json:"bus,omitempty" tf:"bus,omitempty"`
 
-	// (Computed)[string] Server usages: ENTERPRISE or CUBE. This property is immutable.
+	// (Computed)[string] Server usages: * type - Server usages: ENTERPRISE now named dedicated core, CUBE or VCPU. This property is immutable.
 	// +kubebuilder:validation:Optional
 	DiskType *string `json:"diskType" tf:"disk_type,omitempty"`
 

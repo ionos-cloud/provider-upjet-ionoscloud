@@ -13,6 +13,28 @@ import (
 	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
 )
 
+type BackupInitParameters struct {
+
+	// [string] The location in which the cluster will be created. Different service endpoints are used based on location, possible options are: "de/fra", "de/txl", "es/vit", "fr/par", "gb/lhr", "us/ewr", "us/las", "us/mci". If not set, the endpoint will be the one corresponding to "de/txl".
+	// The IONOS Object Storage location where the backups will be stored.
+	Location *string `json:"location,omitempty" tf:"location,omitempty"`
+}
+
+type BackupObservation struct {
+
+	// [string] The location in which the cluster will be created. Different service endpoints are used based on location, possible options are: "de/fra", "de/txl", "es/vit", "fr/par", "gb/lhr", "us/ewr", "us/las", "us/mci". If not set, the endpoint will be the one corresponding to "de/txl".
+	// The IONOS Object Storage location where the backups will be stored.
+	Location *string `json:"location,omitempty" tf:"location,omitempty"`
+}
+
+type BackupParameters struct {
+
+	// [string] The location in which the cluster will be created. Different service endpoints are used based on location, possible options are: "de/fra", "de/txl", "es/vit", "fr/par", "gb/lhr", "us/ewr", "us/las", "us/mci". If not set, the endpoint will be the one corresponding to "de/txl".
+	// The IONOS Object Storage location where the backups will be stored.
+	// +kubebuilder:validation:Optional
+	Location *string `json:"location" tf:"location,omitempty"`
+}
+
 type ConnectionsInitParameters struct {
 
 	// [true] The IP and subnet for the database. Note the following unavailable IP ranges: 10.233.64.0/18, 10.233.0.0/18, 10.233.114.0/24. Please enter in the correct format like IP/Subnet, exp: 192.168.10.0/24. See Private IPs and Configuring the network.
@@ -165,6 +187,10 @@ type MaintenanceWindowParameters struct {
 
 type MariadbClusterInitParameters struct {
 
+	// Properties configuring the backup of the cluster. Immutable, change forces re-creation of the cluster.
+	// Properties configuring the backup of the cluster. Immutable, change forces re-creation of the cluster.
+	Backup *BackupInitParameters `json:"backup,omitempty" tf:"backup,omitempty"`
+
 	// The network connection for your cluster. Only one connection is allowed.
 	// The network connection for your cluster. Only one connection is allowed.
 	Connections *ConnectionsInitParameters `json:"connections,omitempty" tf:"connections,omitempty"`
@@ -207,6 +233,10 @@ type MariadbClusterInitParameters struct {
 }
 
 type MariadbClusterObservation struct {
+
+	// Properties configuring the backup of the cluster. Immutable, change forces re-creation of the cluster.
+	// Properties configuring the backup of the cluster. Immutable, change forces re-creation of the cluster.
+	Backup *BackupObservation `json:"backup,omitempty" tf:"backup,omitempty"`
 
 	// The network connection for your cluster. Only one connection is allowed.
 	// The network connection for your cluster. Only one connection is allowed.
@@ -256,6 +286,11 @@ type MariadbClusterObservation struct {
 }
 
 type MariadbClusterParameters struct {
+
+	// Properties configuring the backup of the cluster. Immutable, change forces re-creation of the cluster.
+	// Properties configuring the backup of the cluster. Immutable, change forces re-creation of the cluster.
+	// +kubebuilder:validation:Optional
+	Backup *BackupParameters `json:"backup,omitempty" tf:"backup,omitempty"`
 
 	// The network connection for your cluster. Only one connection is allowed.
 	// The network connection for your cluster. Only one connection is allowed.

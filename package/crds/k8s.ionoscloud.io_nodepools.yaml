@@ -508,6 +508,11 @@ spec:
                       [int] - The desired amount of RAM, in MB. This attribute is immutable.
                       The amount of RAM in MB
                     type: number
+                  serverType:
+                    description: |-
+                      [string] The server type for the compute engine - See the API documentation for more information. Possible values: DedicatedCore, VCPU
+                      The server type for the compute engine
+                    type: string
                   storageSize:
                     description: |-
                       [int] - The size of the volume in GB. The size should be greater than 10GB. This attribute is immutable.
@@ -967,6 +972,11 @@ spec:
                       [int] - The desired amount of RAM, in MB. This attribute is immutable.
                       The amount of RAM in MB
                     type: number
+                  serverType:
+                    description: |-
+                      [string] The server type for the compute engine - See the API documentation for more information. Possible values: DedicatedCore, VCPU
+                      The server type for the compute engine
+                    type: string
                   storageSize:
                     description: |-
                       [int] - The size of the volume in GB. The size should be greater than 10GB. This attribute is immutable.
@@ -1154,10 +1164,6 @@ spec:
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
                 || ''Update'' in self.managementPolicies) || has(self.forProvider.coresCount)
                 || (has(self.initProvider) && has(self.initProvider.coresCount))'
-            - message: spec.forProvider.cpuFamily is a required parameter
-              rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
-                || ''Update'' in self.managementPolicies) || has(self.forProvider.cpuFamily)
-                || (has(self.initProvider) && has(self.initProvider.cpuFamily))'
             - message: spec.forProvider.name is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
                 || ''Update'' in self.managementPolicies) || has(self.forProvider.name)
@@ -1324,6 +1330,11 @@ spec:
                       [int] - The desired amount of RAM, in MB. This attribute is immutable.
                       The amount of RAM in MB
                     type: number
+                  serverType:
+                    description: |-
+                      [string] The server type for the compute engine - See the API documentation for more information. Possible values: DedicatedCore, VCPU
+                      The server type for the compute engine
+                    type: string
                   storageSize:
                     description: |-
                       [int] - The size of the volume in GB. The size should be greater than 10GB. This attribute is immutable.

@@ -248,8 +248,9 @@ spec:
                             icmpCode:
                               type: string
                             icmpType:
-                              description: '(Computed)[string] Server usages: ENTERPRISE
-                                or CUBE. This property is immutable.'
+                              description: '(Computed)[string] Server usages: * type
+                                - Server usages: ENTERPRISE now named dedicated core,
+                                CUBE or VCPU. This property is immutable.'
                               type: string
                             name:
                               description: '[string] The name of the server.'
@@ -267,16 +268,18 @@ spec:
                             targetIp:
                               type: string
                             type:
-                              description: '(Computed)[string] Server usages: ENTERPRISE
-                                or CUBE. This property is immutable.'
+                              description: '(Computed)[string] Server usages: * type
+                                - Server usages: ENTERPRISE now named dedicated core,
+                                CUBE or VCPU. This property is immutable.'
                               type: string
                           type: object
                         type: array
                       firewallActive:
                         type: boolean
                       firewallType:
-                        description: '(Computed)[string] Server usages: ENTERPRISE
-                          or CUBE. This property is immutable.'
+                        description: '(Computed)[string] Server usages: * type - Server
+                          usages: ENTERPRISE now named dedicated core, CUBE or VCPU.
+                          This property is immutable.'
                         type: string
                       ips:
                         description: Collection of IP addresses assigned to a nic.
@@ -419,12 +422,12 @@ spec:
                     type: string
                   type:
                     description: |-
-                      (Computed)[string] Server usages: ENTERPRISE or CUBE. This property is immutable.
+                      (Computed)[string] Server usages: * type - Server usages: ENTERPRISE now named dedicated core, CUBE or VCPU. This property is immutable.
                       server usages: ENTERPRISE or CUBE
                     type: string
                   vmState:
                     description: |-
-                      [string] Sets the power state of the server. E.g: RUNNING, SHUTOFF or SUSPENDED. SUSPENDED state is only valid for cube. SHUTOFF state is only valid for enterprise.
+                      [string] Sets the power state of the server. E.g: RUNNING, SHUTOFF or SUSPENDED. SUSPENDED state is only valid for cube. SHUTOFF state is only valid for enterprise(dedicated core).
                       Sets the power state of the server. Possible values: `RUNNING`, `SHUTOFF` or `SUSPENDED`. SUSPENDED state is only valid for cube. SHUTOFF state is only valid for enterprise
                     type: string
                   volume:
@@ -445,8 +448,9 @@ spec:
                       bus:
                         type: string
                       diskType:
-                        description: '(Computed)[string] Server usages: ENTERPRISE
-                          or CUBE. This property is immutable.'
+                        description: '(Computed)[string] Server usages: * type - Server
+                          usages: ENTERPRISE now named dedicated core, CUBE or VCPU.
+                          This property is immutable.'
                         type: string
                       imagePassword:
                         description: '[string] Required if ssh_key_path is not provided.'
@@ -671,8 +675,9 @@ spec:
                             icmpCode:
                               type: string
                             icmpType:
-                              description: '(Computed)[string] Server usages: ENTERPRISE
-                                or CUBE. This property is immutable.'
+                              description: '(Computed)[string] Server usages: * type
+                                - Server usages: ENTERPRISE now named dedicated core,
+                                CUBE or VCPU. This property is immutable.'
                               type: string
                             name:
                               description: '[string] The name of the server.'
@@ -690,16 +695,18 @@ spec:
                             targetIp:
                               type: string
                             type:
-                              description: '(Computed)[string] Server usages: ENTERPRISE
-                                or CUBE. This property is immutable.'
+                              description: '(Computed)[string] Server usages: * type
+                                - Server usages: ENTERPRISE now named dedicated core,
+                                CUBE or VCPU. This property is immutable.'
                               type: string
                           type: object
                         type: array
                       firewallActive:
                         type: boolean
                       firewallType:
-                        description: '(Computed)[string] Server usages: ENTERPRISE
-                          or CUBE. This property is immutable.'
+                        description: '(Computed)[string] Server usages: * type - Server
+                          usages: ENTERPRISE now named dedicated core, CUBE or VCPU.
+                          This property is immutable.'
                         type: string
                       ips:
                         description: Collection of IP addresses assigned to a nic.
@@ -842,12 +849,12 @@ spec:
                     type: string
                   type:
                     description: |-
-                      (Computed)[string] Server usages: ENTERPRISE or CUBE. This property is immutable.
+                      (Computed)[string] Server usages: * type - Server usages: ENTERPRISE now named dedicated core, CUBE or VCPU. This property is immutable.
                       server usages: ENTERPRISE or CUBE
                     type: string
                   vmState:
                     description: |-
-                      [string] Sets the power state of the server. E.g: RUNNING, SHUTOFF or SUSPENDED. SUSPENDED state is only valid for cube. SHUTOFF state is only valid for enterprise.
+                      [string] Sets the power state of the server. E.g: RUNNING, SHUTOFF or SUSPENDED. SUSPENDED state is only valid for cube. SHUTOFF state is only valid for enterprise(dedicated core).
                       Sets the power state of the server. Possible values: `RUNNING`, `SHUTOFF` or `SUSPENDED`. SUSPENDED state is only valid for cube. SHUTOFF state is only valid for enterprise
                     type: string
                   volume:
@@ -868,8 +875,9 @@ spec:
                       bus:
                         type: string
                       diskType:
-                        description: '(Computed)[string] Server usages: ENTERPRISE
-                          or CUBE. This property is immutable.'
+                        description: '(Computed)[string] Server usages: * type - Server
+                          usages: ENTERPRISE now named dedicated core, CUBE or VCPU.
+                          This property is immutable.'
                         type: string
                       imagePassword:
                         description: '[string] Required if ssh_key_path is not provided.'
@@ -1182,8 +1190,9 @@ spec:
                             icmpCode:
                               type: string
                             icmpType:
-                              description: '(Computed)[string] Server usages: ENTERPRISE
-                                or CUBE. This property is immutable.'
+                              description: '(Computed)[string] Server usages: * type
+                                - Server usages: ENTERPRISE now named dedicated core,
+                                CUBE or VCPU. This property is immutable.'
                               type: string
                             id:
                               type: string
@@ -1203,16 +1212,18 @@ spec:
                             targetIp:
                               type: string
                             type:
-                              description: '(Computed)[string] Server usages: ENTERPRISE
-                                or CUBE. This property is immutable.'
+                              description: '(Computed)[string] Server usages: * type
+                                - Server usages: ENTERPRISE now named dedicated core,
+                                CUBE or VCPU. This property is immutable.'
                               type: string
                           type: object
                         type: array
                       firewallActive:
                         type: boolean
                       firewallType:
-                        description: '(Computed)[string] Server usages: ENTERPRISE
-                          or CUBE. This property is immutable.'
+                        description: '(Computed)[string] Server usages: * type - Server
+                          usages: ENTERPRISE now named dedicated core, CUBE or VCPU.
+                          This property is immutable.'
                         type: string
                       id:
                         type: string
@@ -1293,12 +1304,12 @@ spec:
                     type: string
                   type:
                     description: |-
-                      (Computed)[string] Server usages: ENTERPRISE or CUBE. This property is immutable.
+                      (Computed)[string] Server usages: * type - Server usages: ENTERPRISE now named dedicated core, CUBE or VCPU. This property is immutable.
                       server usages: ENTERPRISE or CUBE
                     type: string
                   vmState:
                     description: |-
-                      [string] Sets the power state of the server. E.g: RUNNING, SHUTOFF or SUSPENDED. SUSPENDED state is only valid for cube. SHUTOFF state is only valid for enterprise.
+                      [string] Sets the power state of the server. E.g: RUNNING, SHUTOFF or SUSPENDED. SUSPENDED state is only valid for cube. SHUTOFF state is only valid for enterprise(dedicated core).
                       Sets the power state of the server. Possible values: `RUNNING`, `SHUTOFF` or `SUSPENDED`. SUSPENDED state is only valid for cube. SHUTOFF state is only valid for enterprise
                     type: string
                   volume:
@@ -1330,8 +1341,9 @@ spec:
                       discVirtioHotUnplug:
                         type: boolean
                       diskType:
-                        description: '(Computed)[string] Server usages: ENTERPRISE
-                          or CUBE. This property is immutable.'
+                        description: '(Computed)[string] Server usages: * type - Server
+                          usages: ENTERPRISE now named dedicated core, CUBE or VCPU.
+                          This property is immutable.'
                         type: string
                       imagePassword:
                         description: '[string] Required if ssh_key_path is not provided.'

@@ -390,8 +390,8 @@ spec:
                     type: object
                   mongodbVersion:
                     description: |-
-                      [string] The MongoDB version of your cluster. Updates to the value of the field force the cluster to be re-created.
-                      The MongoDB version of your cluster. Update forces cluster re-creation.
+                      [string] The MongoDB version of your cluster. Downgrade is not possible and will throw an error.
+                      The MongoDB version of your cluster. Downgrade is not possible and will throw an error.
                     type: string
                   ram:
                     description: |-
@@ -754,8 +754,8 @@ spec:
                     type: object
                   mongodbVersion:
                     description: |-
-                      [string] The MongoDB version of your cluster. Updates to the value of the field force the cluster to be re-created.
-                      The MongoDB version of your cluster. Update forces cluster re-creation.
+                      [string] The MongoDB version of your cluster. Downgrade is not possible and will throw an error.
+                      The MongoDB version of your cluster. Downgrade is not possible and will throw an error.
                     type: string
                   ram:
                     description: |-
@@ -1085,8 +1085,8 @@ spec:
                     type: object
                   mongodbVersion:
                     description: |-
-                      [string] The MongoDB version of your cluster. Updates to the value of the field force the cluster to be re-created.
-                      The MongoDB version of your cluster. Update forces cluster re-creation.
+                      [string] The MongoDB version of your cluster. Downgrade is not possible and will throw an error.
+                      The MongoDB version of your cluster. Downgrade is not possible and will throw an error.
                     type: string
                   ram:
                     description: |-

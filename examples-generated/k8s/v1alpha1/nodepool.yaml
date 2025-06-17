@@ -47,6 +47,7 @@ spec:
     - ${ionoscloud_ipblock.example.ips[1]}
     - ${ionoscloud_ipblock.example.ips[2]}
     ramSize: 2048
+    serverType: DedicatedCore
     storageSize: 40
     storageType: SSD
 

@@ -9,7 +9,9 @@ import (
 	"encoding/json"
 
 	"github.com/hashicorp/terraform-plugin-framework/provider"
-	"github.com/ionos-cloud/terraform-provider-ionoscloud/v6/ionoscloud"
+	"github.com/ionos-cloud/sdk-go-bundle/shared"
+	"github.com/ionos-cloud/terraform-provider-ionoscloud/v6/services/bundleclient"
+	"github.com/ionos-cloud/terraform-provider-ionoscloud/v6/services/clientoptions"
 
 	"github.com/crossplane/crossplane-runtime/pkg/resource"
 	"github.com/pkg/errors"
@@ -66,14 +68,22 @@ func TerraformSetupBuilder(version, providerSource, providerVersion string, fwPr
 			return ps, errors.Wrap(err, errUnmarshalCredentials)
 		}
 
-		ionosSDKBundleClient := ionoscloud.NewSDKBundleClient(ionoscloud.ClientOptions{
-			Username:         creds["user"],
-			Password:         creds["password"],
-			Token:            creds["token"],
+		ionosSDKBundleClient := bundleclient.New(clientoptions.TerraformClientOptions{
+			ClientOptions: shared.ClientOptions{
+				SkipTLSVerify: false,
+				Credentials: shared.Credentials{
+					Username:    creds["user"],
+					Password:    creds["password"],
+					Token:       creds["token"],
+					S3AccessKey: creds["s3_access_key"],
+					S3SecretKey: creds["s3_secret_key"],
+				},
+			},
+			StorageOptions:   clientoptions.StorageOptions{},
 			TerraformVersion: version,
-		})
+		}, nil)
 
-		ps.Meta = ionosSDKBundleClient
+		ps.Meta = *ionosSDKBundleClient
 
 		// Set credentials in Terraform provider configuration.
 		ps.Configuration = map[string]any{

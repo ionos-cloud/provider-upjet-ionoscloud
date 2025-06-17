@@ -15,7 +15,7 @@ import (
 
 type PostgresqlDatabaseInitParameters struct {
 
-	// [string] The unique ID of the cluster.
+	// [string] The unique ID of the cluster. Immutable, forces re-creation.
 	// +crossplane:generate:reference:type=github.com/ionos-cloud/provider-upjet-ionoscloud/apis/postgresql/v1alpha1.PostgresqlCluster
 	ClusterID *string `json:"clusterId,omitempty" tf:"cluster_id,omitempty"`
 
@@ -27,34 +27,34 @@ type PostgresqlDatabaseInitParameters struct {
 	// +kubebuilder:validation:Optional
 	ClusterIDSelector *v1.Selector `json:"clusterIdSelector,omitempty" tf:"-"`
 
-	// [string] The name of the database.
+	// [string] The name of the database. Immutable, forces re-creation.
 	// The databasename of a given database.
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
-	// [string] The owner of the database.
+	// [string] The owner of the database. Immutable, forces re-creation.
 	// The name of the role owning a given database.
 	Owner *string `json:"owner,omitempty" tf:"owner,omitempty"`
 }
 
 type PostgresqlDatabaseObservation struct {
 
-	// [string] The unique ID of the cluster.
+	// [string] The unique ID of the cluster. Immutable, forces re-creation.
 	ClusterID *string `json:"clusterId,omitempty" tf:"cluster_id,omitempty"`
 
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
-	// [string] The name of the database.
+	// [string] The name of the database. Immutable, forces re-creation.
 	// The databasename of a given database.
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
-	// [string] The owner of the database.
+	// [string] The owner of the database. Immutable, forces re-creation.
 	// The name of the role owning a given database.
 	Owner *string `json:"owner,omitempty" tf:"owner,omitempty"`
 }
 
 type PostgresqlDatabaseParameters struct {
 
-	// [string] The unique ID of the cluster.
+	// [string] The unique ID of the cluster. Immutable, forces re-creation.
 	// +crossplane:generate:reference:type=github.com/ionos-cloud/provider-upjet-ionoscloud/apis/postgresql/v1alpha1.PostgresqlCluster
 	// +kubebuilder:validation:Optional
 	ClusterID *string `json:"clusterId,omitempty" tf:"cluster_id,omitempty"`
@@ -67,12 +67,12 @@ type PostgresqlDatabaseParameters struct {
 	// +kubebuilder:validation:Optional
 	ClusterIDSelector *v1.Selector `json:"clusterIdSelector,omitempty" tf:"-"`
 
-	// [string] The name of the database.
+	// [string] The name of the database. Immutable, forces re-creation.
 	// The databasename of a given database.
 	// +kubebuilder:validation:Optional
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
-	// [string] The owner of the database.
+	// [string] The owner of the database. Immutable, forces re-creation.
 	// The name of the role owning a given database.
 	// +kubebuilder:validation:Optional
 	Owner *string `json:"owner,omitempty" tf:"owner,omitempty"`
