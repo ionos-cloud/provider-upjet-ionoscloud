@@ -9,11 +9,7 @@ IonosCloud API.
 
 Install the provider by using the following command after changing the image tag
 to the [latest release](https://marketplace.upbound.io/providers/ionos-cloud/provider-upjet-ionoscloud):
-```
-up ctp provider install ionos-cloud/provider-upjet-ionoscloud:v0.1.0
-```
 
-Alternatively, you can use declarative installation:
 ```
 cat <<EOF | kubectl apply -f -
 apiVersion: pkg.crossplane.io/v1
@@ -25,8 +21,15 @@ spec:
 EOF
 ```
 
-#### The API reference can be checked [here](https://doc.crds.dev/github.com/ionos-cloud/provider-upjet-ionoscloud).
+Or directly from the file:
+
+```bash
+kubectl apply -f examples/install.yaml
+```
+
 ### For more details on installation and configuration see the [Quickstart guide](docs/Quickstart.md)
+
+#### The API reference can be checked [here](https://doc.crds.dev/github.com/ionos-cloud/provider-upjet-ionoscloud).
 
 
 ## Developing
