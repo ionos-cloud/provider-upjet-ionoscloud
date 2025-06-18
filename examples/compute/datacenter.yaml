@@ -10,5 +10,5 @@ spec:
   forProvider:
     description: datacenter description
     location: de/fra
-    name: Datacenter Example
+    name: crossplane upjet example
     secAuthProtection: false
