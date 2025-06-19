@@ -68,10 +68,8 @@ func TerraformSetupBuilder(version, providerSource, providerVersion string, fwPr
 		if err := json.Unmarshal(data, &creds); err != nil {
 			return ps, errors.Wrap(err, errUnmarshalCredentials)
 		}
-		insecure := "false"
-		exists := false
 		boolInsecure := false
-		if insecure, exists = creds["insecure"]; exists {
+		if insecure, exists := creds["insecure"]; exists {
 			if boolInsecure, err = strconv.ParseBool(insecure); err != nil {
 				return ps, errors.Wrapf(err, "cannot parse insecure value %q as boolean", insecure)
 			}
