@@ -7,6 +7,7 @@ package clients
 import (
 	"context"
 	"encoding/json"
+	"strconv"
 
 	"github.com/hashicorp/terraform-plugin-framework/provider"
 	"github.com/ionos-cloud/sdk-go-bundle/shared"
@@ -67,10 +68,19 @@ func TerraformSetupBuilder(version, providerSource, providerVersion string, fwPr
 		if err := json.Unmarshal(data, &creds); err != nil {
 			return ps, errors.Wrap(err, errUnmarshalCredentials)
 		}
+		insecure := "false"
+		exists := false
+		boolInsecure := false
+		if insecure, exists = creds["insecure"]; exists {
+			if boolInsecure, err = strconv.ParseBool(insecure); err != nil {
+				return ps, errors.Wrapf(err, "cannot parse insecure value %q as boolean", insecure)
+			}
+		}
 
 		ionosSDKBundleClient := bundleclient.New(clientoptions.TerraformClientOptions{
 			ClientOptions: shared.ClientOptions{
-				SkipTLSVerify: false,
+				Endpoint:      creds["endpoint"],
+				SkipTLSVerify: boolInsecure,
 				Credentials: shared.Credentials{
 					Username:    creds["user"],
 					Password:    creds["password"],
@@ -79,19 +89,28 @@ func TerraformSetupBuilder(version, providerSource, providerVersion string, fwPr
 					S3SecretKey: creds["s3_secret_key"],
 				},
 			},
-			StorageOptions:   clientoptions.StorageOptions{},
+			StorageOptions: clientoptions.StorageOptions{
+				AccessKey: creds["s3_access_key"],
+				SecretKey: creds["s3_secret_key"],
+				Region:    creds["s3_region"],
+			},
 			TerraformVersion: version,
+			Version:          providerVersion,
 		}, nil)
 
 		ps.Meta = *ionosSDKBundleClient
 
 		// Set credentials in Terraform provider configuration.
 		ps.Configuration = map[string]any{
-			"username":      creds["user"],
-			"password":      creds["password"],
-			"token":         creds["token"],
-			"s3_access_key": creds["s3_access_key"],
-			"s3_secret_key": creds["s3_secret_key"],
+			"username":        creds["user"],
+			"password":        creds["password"],
+			"token":           creds["token"],
+			"s3_access_key":   creds["s3_access_key"],
+			"s3_secret_key":   creds["s3_secret_key"],
+			"s3_region":       creds["s3_region"],
+			"insecure":        boolInsecure,
+			"endpoint":        creds["endpoint"],
+			"contract_number": creds["contract_number"],
 		}
 
 		return ps, nil
