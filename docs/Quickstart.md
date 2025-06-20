@@ -30,10 +30,10 @@ $ up uxp install
 UXP 1.17.1-up.1 installed
 ```
 
-Verify all UXP pods are `Running` with `kubectl get pods -n upbound-system`
+Verify all UXP pods are `Running` with `kubectl get pods`
 
 ```shell
-kubectl get pods -n upbound-system
+kubectl get pods
 NAME                                       READY   STATUS    RESTARTS   AGE
 crossplane-77ff754998-4l8xb                1/1     Running   0          21s
 crossplane-rbac-manager-79b8bdd6d8-ml6ft   1/1     Running   0          21s
@@ -48,15 +48,27 @@ documentation](https://docs.upbound.io/uxp/).
 Install the Ionoscloud provider into the Kubernetes cluster with a Kubernetes
 configuration file.
 
-```yaml
+```shell
 cat <<EOF | kubectl apply -f -
 apiVersion: pkg.crossplane.io/v1
 kind: Provider
 metadata:
   name: provider-upjet-ionoscloud
 spec:
-  package: xpkg.upbound.io/ionos-cloud/provider-upjet-ionoscloud:v0.1.1-5.g2bde626
+  package: xpkg.upbound.io/ionos-cloud/provider-upjet-ionoscloud:v0.1.2
 EOF
+```
+
+
+Verify again all pods are `Running` with `kubectl get pods`
+
+```shell
+kubectl get pods
+NAME                                       READY   STATUS    RESTARTS   AGE
+crossplane-7b9585ddfd-6rzm6                              1/1     Running   0          7m19s
+crossplane-rbac-manager-699c59799d-mwtkl                 1/1     Running   0          7m19s
+provider-upjet-ionoscloud-1f720e145fea-8994d7b58-w7xxb   1/1     Running   0          4m32s
+
 ```
 
 Apply this configuration with `kubectl apply -f`.
@@ -65,8 +77,7 @@ After installing the provider, verify the install with `kubectl get providers`.
 
 ```shell
 NAME                        INSTALLED   HEALTHY   PACKAGE                            AGE
-provider-upjet-ionoscloud   True        True      provider-upjet-ionoscloud-v0.1.0   100s
-
+provider-upjet-ionoscloud   True        True      xpkg.upbound.io/ionos-cloud/provider-upjet-ionoscloud:v0.1.2   5m35s
 ```
 
 ## Create a Kubernetes secret for Ionoscloud
@@ -81,7 +92,7 @@ kubectl -n upbound-system create secret generic ionoscloud-secret --from-literal
 kubectl -n upbound-system create secret generic ionoscloud-secret --from-literal=credentials="{\"token\":\"${IONOS_TOKEN}\",\"s3_access_key\":\"${IONOS_S3_ACCESS_KEY}\",\"s3_secret_key\":\"${IONOS_S3_SECRET_KEY}\"}"
 ```
 
-### Using the Ionoscloud username and password
+### Using the Ionoscloud username and password(not recommended)
 ```shell
 kubectl -n upbound-system create secret generic ionoscloud-secret --from-literal=credentials="{\"user\":\"${IONOS_USERNAME}\",\"password\":\"${IONOS_PASSWORD}\"}"
 ```
@@ -106,7 +117,7 @@ _Note:_ the size may be larger or smaller depending on which credentials you sup
 Create a `ProviderConfig` Kubernetes configuration file to attach the Ionoscloud
 credentials to the provider.
 
-```yaml
+```shell
 cat <<EOF | kubectl apply -f -
 apiVersion: upjet-ionoscloud.ionoscloud.io/v1beta1
 kind: ProviderConfig
@@ -131,7 +142,7 @@ Apply this configuration with `kubectl apply -f`.
 
 Verify the `ProviderConfig` with `kubectl describe providerconfigs`.
 
-```yaml
+```shell
 kubectl describe providerconfigs
 Name:         default
 Namespace:
@@ -161,8 +172,15 @@ Create a managed resource to verify the provider is functioning.
 
 This example creates a Ionoscloud datacenter.
 
-```yaml
-CAT <<EOF | kubectl apply -f -
+Either from a file:
+```shell
+kubectl apply -f examples/datacenter.yaml
+```
+
+Or directly from the command line:
+
+```shell
+cat <<EOF | kubectl apply -f -
 apiVersion: compute.ionoscloud.io/v1alpha1
 kind: Datacenter
 metadata:
@@ -190,7 +208,21 @@ The datacenter creation is finalized when the values `READY` and `SYNCED` are `T
 kubectl delete datacenters.compute.ionoscloud.io example
 datacenter.compute.ionoscloud.io "example" deleted
 
-
 kubectl get datacenters
 No resources found
 ```
+
+## Troubleshooting
+Check events to see if there are any issues with the provider installation or managed resources.
+```shell 
+kubectl get events
+```
+
+
+If you encounter issues, check the logs of the provider pod with `kubectl logs`.
+
+```shell 
+kubectl -n crossplane-system logs  provider-upjet-ionoscloud-1f720e145fea-8994d7b58-gh57n
+```
+
+For more information on troubleshooting, see the [Crossplane troubleshooting guide](https://docs.crossplane.io/latest/guides/troubleshoot-crossplane/).
