@@ -17,7 +17,7 @@ kind: Provider
 metadata:
   name: provider-upjet-ionoscloud
 spec:
-  package: xpkg.upbound.io/ionos-cloud/provider-upjet-ionoscloud:v0.1.2
+  package: xpkg.upbound.io/ionos-cloud/provider-upjet-ionoscloud:v0.1.3
 EOF
 ```
 

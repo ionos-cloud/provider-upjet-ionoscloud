@@ -55,7 +55,7 @@ kind: Provider
 metadata:
   name: provider-upjet-ionoscloud
 spec:
-  package: xpkg.upbound.io/ionos-cloud/provider-upjet-ionoscloud:v0.1.2
+  package: xpkg.upbound.io/ionos-cloud/provider-upjet-ionoscloud:v0.1.3
 EOF
 ```
 
@@ -77,7 +77,7 @@ After installing the provider, verify the install with `kubectl get providers`.
 
 ```shell
 NAME                        INSTALLED   HEALTHY   PACKAGE                            AGE
-provider-upjet-ionoscloud   True        True      xpkg.upbound.io/ionos-cloud/provider-upjet-ionoscloud:v0.1.2   5m35s
+provider-upjet-ionoscloud   True        True      xpkg.upbound.io/ionos-cloud/provider-upjet-ionoscloud:v0.1.3   5m35s
 ```
 
 ## Create a Kubernetes secret for Ionoscloud
@@ -96,6 +96,19 @@ kubectl -n upbound-system create secret generic ionoscloud-secret --from-literal
 ```shell
 kubectl -n upbound-system create secret generic ionoscloud-secret --from-literal=credentials="{\"user\":\"${IONOS_USERNAME}\",\"password\":\"${IONOS_PASSWORD}\"}"
 ```
+
+### Fields that can be set using the credentials secret:
+```yaml
+{
+  "token": "string",
+  "user": "string",
+  "password": "string",
+  "s3_access_key": "string",
+  "s3_secret_key": "string",
+  "s3_region": "string",
+  "endpoint": "string",
+  "contract_number": "string",
+}
 
 View the secret with `kubectl describe secret`
 ```shell
