@@ -99,6 +99,8 @@ spec:
                   groupIds:
                     description: |-
                       [Set] The groups that this user will be a member of
+                      NOTE: Group_ids field cannot be used at the same time with user_ids field in group resource. Trying to add the same user to the same group in both ways in the same plan will result in a cyclic dependency error.
+                      NOTE: password_wo requires Teraform 1.11 or higher.
                       Ids of the groups that the user is a member of
                     items:
                       type: string
@@ -186,7 +188,9 @@ spec:
                     description: '[string] A last name for the user.'
                     type: string
                   passwordSecretRef:
-                    description: '[string] A password for the user.'
+                    description: |-
+                      [string] A password for the user.11 or higher, you can use password_wo instead of password to avoid storing the password in the state file.
+                      A password for the user.11 or higher, you can use `password_wo` instead of `password` to avoid storing the password in the state file.
                     properties:
                       key:
                         description: The key to select.
@@ -202,6 +206,30 @@ spec:
                     - name
                     - namespace
                     type: object
+                  passwordWoSecretRef:
+                    description: |-
+                      user password. This value is always marked as sensitive in the plan output, regardless of type. Additionally, write-only values are never stored to state. password_wo_version can be used to trigger an update and is required with this argument.15 and later, this may require additional configuration handling for certain scenarios.15 Upgrade Guide.
+                      Write-only attribute. Password for the user. To modify, must change the password_wo_version attribute.
+                    properties:
+                      key:
+                        description: The key to select.
+                        type: string
+                      name:
+                        description: Name of the secret.
+                        type: string
+                      namespace:
+                        description: Namespace of the secret.
+                        type: string
+                    required:
+                    - key
+                    - name
+                    - namespace
+                    type: object
+                  passwordWoVersion:
+                    description: |-
+                      Used together with password_wo to trigger an update. Increment this value when an update to the password_wo is required.
+                      Version of the password_wo attribute. Must be incremented to apply changes to the password_wo attribute.
+                    type: number
                 type: object
               initProvider:
                 description: |-
@@ -242,6 +270,8 @@ spec:
                   groupIds:
                     description: |-
                       [Set] The groups that this user will be a member of
+                      NOTE: Group_ids field cannot be used at the same time with user_ids field in group resource. Trying to add the same user to the same group in both ways in the same plan will result in a cyclic dependency error.
+                      NOTE: password_wo requires Teraform 1.11 or higher.
                       Ids of the groups that the user is a member of
                     items:
                       type: string
@@ -329,7 +359,9 @@ spec:
                     description: '[string] A last name for the user.'
                     type: string
                   passwordSecretRef:
-                    description: '[string] A password for the user.'
+                    description: |-
+                      [string] A password for the user.11 or higher, you can use password_wo instead of password to avoid storing the password in the state file.
+                      A password for the user.11 or higher, you can use `password_wo` instead of `password` to avoid storing the password in the state file.
                     properties:
                       key:
                         description: The key to select.
@@ -345,8 +377,30 @@ spec:
                     - name
                     - namespace
                     type: object
-                required:
-                - passwordSecretRef
+                  passwordWoSecretRef:
+                    description: |-
+                      user password. This value is always marked as sensitive in the plan output, regardless of type. Additionally, write-only values are never stored to state. password_wo_version can be used to trigger an update and is required with this argument.15 and later, this may require additional configuration handling for certain scenarios.15 Upgrade Guide.
+                      Write-only attribute. Password for the user. To modify, must change the password_wo_version attribute.
+                    properties:
+                      key:
+                        description: The key to select.
+                        type: string
+                      name:
+                        description: Name of the secret.
+                        type: string
+                      namespace:
+                        description: Namespace of the secret.
+                        type: string
+                    required:
+                    - key
+                    - name
+                    - namespace
+                    type: object
+                  passwordWoVersion:
+                    description: |-
+                      Used together with password_wo to trigger an update. Increment this value when an update to the password_wo is required.
+                      Version of the password_wo attribute. Must be incremented to apply changes to the password_wo attribute.
+                    type: number
                 type: object
               managementPolicies:
                 default:
@@ -528,9 +582,6 @@ spec:
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
                 || ''Update'' in self.managementPolicies) || has(self.forProvider.lastName)
                 || (has(self.initProvider) && has(self.initProvider.lastName))'
-            - message: spec.forProvider.passwordSecretRef is a required parameter
-              rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
-                || ''Update'' in self.managementPolicies) || has(self.forProvider.passwordSecretRef)'
           status:
             description: UserStatus defines the observed state of User.
             properties:
@@ -562,6 +613,8 @@ spec:
                   groupIds:
                     description: |-
                       [Set] The groups that this user will be a member of
+                      NOTE: Group_ids field cannot be used at the same time with user_ids field in group resource. Trying to add the same user to the same group in both ways in the same plan will result in a cyclic dependency error.
+                      NOTE: password_wo requires Teraform 1.11 or higher.
                       Ids of the groups that the user is a member of
                     items:
                       type: string
@@ -572,6 +625,11 @@ spec:
                   lastName:
                     description: '[string] A last name for the user.'
                     type: string
+                  passwordWoVersion:
+                    description: |-
+                      Used together with password_wo to trigger an update. Increment this value when an update to the password_wo is required.
+                      Version of the password_wo attribute. Must be incremented to apply changes to the password_wo attribute.
+                    type: number
                   s3CanonicalUserId:
                     description: (Computed) Canonical (IONOS Object Storage) id of
                       the user for a given identity

@@ -52,7 +52,7 @@ metadata:
   name: example
 spec:
   forProvider:
-    description: Datacenter for testing dbaas cluster
+    description: Datacenter for testing psql cluster
     location: de/txl
     name: example
 

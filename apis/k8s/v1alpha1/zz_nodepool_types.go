@@ -208,6 +208,10 @@ type NodePoolInitParameters struct {
 	// The amount of RAM in MB
 	RAMSize *float64 `json:"ramSize,omitempty" tf:"ram_size,omitempty"`
 
+	// [string] The server type for the compute engine - See the API documentation for more information. Possible values: DedicatedCore, VCPU
+	// The server type for the compute engine
+	ServerType *string `json:"serverType,omitempty" tf:"server_type,omitempty"`
+
 	// [int] - The size of the volume in GB. The size should be greater than 10GB. This attribute is immutable.
 	// The total allocated storage capacity of a node in GB
 	StorageSize *float64 `json:"storageSize,omitempty" tf:"storage_size,omitempty"`
@@ -320,6 +324,10 @@ type NodePoolObservation struct {
 	// [int] - The desired amount of RAM, in MB. This attribute is immutable.
 	// The amount of RAM in MB
 	RAMSize *float64 `json:"ramSize,omitempty" tf:"ram_size,omitempty"`
+
+	// [string] The server type for the compute engine - See the API documentation for more information. Possible values: DedicatedCore, VCPU
+	// The server type for the compute engine
+	ServerType *string `json:"serverType,omitempty" tf:"server_type,omitempty"`
 
 	// [int] - The size of the volume in GB. The size should be greater than 10GB. This attribute is immutable.
 	// The total allocated storage capacity of a node in GB
@@ -440,6 +448,11 @@ type NodePoolParameters struct {
 	// +kubebuilder:validation:Optional
 	RAMSize *float64 `json:"ramSize,omitempty" tf:"ram_size,omitempty"`
 
+	// [string] The server type for the compute engine - See the API documentation for more information. Possible values: DedicatedCore, VCPU
+	// The server type for the compute engine
+	// +kubebuilder:validation:Optional
+	ServerType *string `json:"serverType,omitempty" tf:"server_type,omitempty"`
+
 	// [int] - The size of the volume in GB. The size should be greater than 10GB. This attribute is immutable.
 	// The total allocated storage capacity of a node in GB
 	// +kubebuilder:validation:Optional
@@ -524,7 +537,6 @@ type NodePool struct {
 	metav1.ObjectMeta `json:"metadata,omitempty"`
 	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.availabilityZone) || (has(self.initProvider) && has(self.initProvider.availabilityZone))",message="spec.forProvider.availabilityZone is a required parameter"
 	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.coresCount) || (has(self.initProvider) && has(self.initProvider.coresCount))",message="spec.forProvider.coresCount is a required parameter"
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.cpuFamily) || (has(self.initProvider) && has(self.initProvider.cpuFamily))",message="spec.forProvider.cpuFamily is a required parameter"
 	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.name) || (has(self.initProvider) && has(self.initProvider.name))",message="spec.forProvider.name is a required parameter"
 	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.nodeCount) || (has(self.initProvider) && has(self.initProvider.nodeCount))",message="spec.forProvider.nodeCount is a required parameter"
 	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.ramSize) || (has(self.initProvider) && has(self.initProvider.ramSize))",message="spec.forProvider.ramSize is a required parameter"

@@ -17,9 +17,11 @@ type CredentialsInitParameters struct {
 }
 
 type CredentialsObservation struct {
+
+	// (Computed)[string] The password/token of the container registry token which will also be saved to a file if save_password_to_file is set
 	Password *string `json:"password,omitempty" tf:"password,omitempty"`
 
-	// [string] The name of the container registry token. Immutable, update forces re-creation of the resource.
+	// (Computed)[string] The username of the container registry token
 	Username *string `json:"username,omitempty" tf:"username,omitempty"`
 }
 
@@ -32,6 +34,7 @@ type RegistryTokenInitParameters struct {
 	// [string] The name of the container registry token. Immutable, update forces re-creation of the resource.
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
+	// [string] The ID of the container registry
 	// +crossplane:generate:reference:type=github.com/ionos-cloud/provider-upjet-ionoscloud/apis/containerregistry/v1alpha1.Registry
 	RegistryID *string `json:"registryId,omitempty" tf:"registry_id,omitempty"`
 
@@ -47,15 +50,17 @@ type RegistryTokenInitParameters struct {
 	// Saves password to file. Only works on create. Takes as argument a file name, or a file path
 	SavePasswordToFile *string `json:"savePasswordToFile,omitempty" tf:"save_password_to_file,omitempty"`
 
-	// [map]
+	// (Computed) [map]
 	Scopes []ScopesInitParameters `json:"scopes,omitempty" tf:"scopes,omitempty"`
 
-	// [string] Must have on of the values: enabled, disabled
+	// [string] Must have one of the values: enabled, disabled
 	// Can be one of enabled, disabled
 	Status *string `json:"status,omitempty" tf:"status,omitempty"`
 }
 
 type RegistryTokenObservation struct {
+
+	// (Computed)[map]
 	Credentials []CredentialsObservation `json:"credentials,omitempty" tf:"credentials,omitempty"`
 
 	ExpiryDate *string `json:"expiryDate,omitempty" tf:"expiry_date,omitempty"`
@@ -65,16 +70,17 @@ type RegistryTokenObservation struct {
 	// [string] The name of the container registry token. Immutable, update forces re-creation of the resource.
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
+	// [string] The ID of the container registry
 	RegistryID *string `json:"registryId,omitempty" tf:"registry_id,omitempty"`
 
 	// [string] Saves token password to file. Only works on create. Takes as argument a file name, or a file path
 	// Saves password to file. Only works on create. Takes as argument a file name, or a file path
 	SavePasswordToFile *string `json:"savePasswordToFile,omitempty" tf:"save_password_to_file,omitempty"`
 
-	// [map]
+	// (Computed) [map]
 	Scopes []ScopesObservation `json:"scopes,omitempty" tf:"scopes,omitempty"`
 
-	// [string] Must have on of the values: enabled, disabled
+	// [string] Must have one of the values: enabled, disabled
 	// Can be one of enabled, disabled
 	Status *string `json:"status,omitempty" tf:"status,omitempty"`
 }
@@ -88,6 +94,7 @@ type RegistryTokenParameters struct {
 	// +kubebuilder:validation:Optional
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
+	// [string] The ID of the container registry
 	// +crossplane:generate:reference:type=github.com/ionos-cloud/provider-upjet-ionoscloud/apis/containerregistry/v1alpha1.Registry
 	// +kubebuilder:validation:Optional
 	RegistryID *string `json:"registryId,omitempty" tf:"registry_id,omitempty"`
@@ -105,11 +112,11 @@ type RegistryTokenParameters struct {
 	// +kubebuilder:validation:Optional
 	SavePasswordToFile *string `json:"savePasswordToFile,omitempty" tf:"save_password_to_file,omitempty"`
 
-	// [map]
+	// (Computed) [map]
 	// +kubebuilder:validation:Optional
 	Scopes []ScopesParameters `json:"scopes,omitempty" tf:"scopes,omitempty"`
 
-	// [string] Must have on of the values: enabled, disabled
+	// [string] Must have one of the values: enabled, disabled
 	// Can be one of enabled, disabled
 	// +kubebuilder:validation:Optional
 	Status *string `json:"status,omitempty" tf:"status,omitempty"`

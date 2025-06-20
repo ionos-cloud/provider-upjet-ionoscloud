@@ -91,7 +91,7 @@ type NodePoolInitParameters struct {
 
 	// Starting time of a weekly 4 hour-long window, during which maintenance might occur in hh:mm:ss format
 	// Starting time of a weekly 4 hour-long window, during which maintenance might occur in hh:mm:ss format
-	MaintenanceWindow []NodePoolMaintenanceWindowInitParameters `json:"maintenanceWindow,omitempty" tf:"maintenance_window,omitempty"`
+	MaintenanceWindow *NodePoolMaintenanceWindowInitParameters `json:"maintenanceWindow,omitempty" tf:"maintenance_window,omitempty"`
 
 	// [string] The name of your node pool. Must be 63 characters or less and must be empty or begin and end with an alphanumeric character ([a-z0-9A-Z]). It can contain dashes (-), underscores (_), dots (.), and alphanumerics in-between.
 	// The name of your node pool. Must be 63 characters or less and must be empty or begin and end with an alphanumeric character ([a-z0-9A-Z]). It can contain dashes (-), underscores (_), dots (.), and alphanumerics in-between.
@@ -185,7 +185,7 @@ type NodePoolObservation struct {
 
 	// Starting time of a weekly 4 hour-long window, during which maintenance might occur in hh:mm:ss format
 	// Starting time of a weekly 4 hour-long window, during which maintenance might occur in hh:mm:ss format
-	MaintenanceWindow []NodePoolMaintenanceWindowObservation `json:"maintenanceWindow,omitempty" tf:"maintenance_window,omitempty"`
+	MaintenanceWindow *NodePoolMaintenanceWindowObservation `json:"maintenanceWindow,omitempty" tf:"maintenance_window,omitempty"`
 
 	// [string] The name of your node pool. Must be 63 characters or less and must be empty or begin and end with an alphanumeric character ([a-z0-9A-Z]). It can contain dashes (-), underscores (_), dots (.), and alphanumerics in-between.
 	// The name of your node pool. Must be 63 characters or less and must be empty or begin and end with an alphanumeric character ([a-z0-9A-Z]). It can contain dashes (-), underscores (_), dots (.), and alphanumerics in-between.
@@ -262,7 +262,7 @@ type NodePoolParameters struct {
 	// Starting time of a weekly 4 hour-long window, during which maintenance might occur in hh:mm:ss format
 	// Starting time of a weekly 4 hour-long window, during which maintenance might occur in hh:mm:ss format
 	// +kubebuilder:validation:Optional
-	MaintenanceWindow []NodePoolMaintenanceWindowParameters `json:"maintenanceWindow,omitempty" tf:"maintenance_window,omitempty"`
+	MaintenanceWindow *NodePoolMaintenanceWindowParameters `json:"maintenanceWindow,omitempty" tf:"maintenance_window,omitempty"`
 
 	// [string] The name of your node pool. Must be 63 characters or less and must be empty or begin and end with an alphanumeric character ([a-z0-9A-Z]). It can contain dashes (-), underscores (_), dots (.), and alphanumerics in-between.
 	// The name of your node pool. Must be 63 characters or less and must be empty or begin and end with an alphanumeric character ([a-z0-9A-Z]). It can contain dashes (-), underscores (_), dots (.), and alphanumerics in-between.

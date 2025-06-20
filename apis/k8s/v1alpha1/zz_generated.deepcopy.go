@@ -778,6 +778,11 @@ func (in *NodePoolInitParameters) DeepCopyInto(out *NodePoolInitParameters) {
 		*out = new(float64)
 		**out = **in
 	}
+	if in.ServerType != nil {
+		in, out := &in.ServerType, &out.ServerType
+		*out = new(string)
+		**out = **in
+	}
 	if in.StorageSize != nil {
 		in, out := &in.StorageSize, &out.StorageSize
 		*out = new(float64)
@@ -1025,6 +1030,11 @@ func (in *NodePoolObservation) DeepCopyInto(out *NodePoolObservation) {
 		*out = new(float64)
 		**out = **in
 	}
+	if in.ServerType != nil {
+		in, out := &in.ServerType, &out.ServerType
+		*out = new(string)
+		**out = **in
+	}
 	if in.StorageSize != nil {
 		in, out := &in.StorageSize, &out.StorageSize
 		*out = new(float64)
@@ -1188,6 +1198,11 @@ func (in *NodePoolParameters) DeepCopyInto(out *NodePoolParameters) {
 	if in.RAMSize != nil {
 		in, out := &in.RAMSize, &out.RAMSize
 		*out = new(float64)
+		**out = **in
+	}
+	if in.ServerType != nil {
+		in, out := &in.ServerType, &out.ServerType
+		*out = new(string)
 		**out = **in
 	}
 	if in.StorageSize != nil {

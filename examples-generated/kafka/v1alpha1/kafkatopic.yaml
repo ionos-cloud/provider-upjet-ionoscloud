@@ -63,7 +63,7 @@ spec:
         testing.upbound.io/example-name: example
     name: example-kafka-cluster
     size: S
-    version: 3.7.0
+    version: 3.8.0
 
 ---
 

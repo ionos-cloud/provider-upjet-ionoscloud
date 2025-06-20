@@ -10,71 +10,12 @@ spec:
   forProvider:
     active: true
     administrator: false
-    email: unique@email.com
+    email: unique@ionos.com
     firstName: example
     forceSecAuth: false
-    groupIdsRefs:
-    - name: group1
-    - name: group2
-    - name: group3
     lastName: example
-    passwordSecretRef:
+    passwordWoSecretRef:
       key: attribute.result
       name: example-password
       namespace: upbound-system
-
----
-
-apiVersion: compute.ionoscloud.io/v1alpha1
-kind: Group
-metadata:
-  annotations:
-    meta.upbound.io/example-id: compute/v1alpha1/user
-  labels:
-    testing.upbound.io/example-name: group1
-  name: group1
-spec:
-  forProvider:
-    accessActivityLog: false
-    createDatacenter: true
-    createK8SCluster: true
-    createSnapshot: true
-    name: group1
-    reserveIp: true
-
----
-
-apiVersion: compute.ionoscloud.io/v1alpha1
-kind: Group
-metadata:
-  annotations:
-    meta.upbound.io/example-id: compute/v1alpha1/user
-  labels:
-    testing.upbound.io/example-name: group2
-  name: group2
-spec:
-  forProvider:
-    accessActivityLog: false
-    createDatacenter: true
-    createK8SCluster: true
-    createSnapshot: true
-    name: group2
-    reserveIp: true
-
----
-
-apiVersion: compute.ionoscloud.io/v1alpha1
-kind: Group
-metadata:
-  annotations:
-    meta.upbound.io/example-id: compute/v1alpha1/user
-  labels:
-    testing.upbound.io/example-name: group3
-  name: group3
-spec:
-  forProvider:
-    accessActivityLog: false
-    createDatacenter: true
-    createSnapshot: true
-    name: group3
-    reserveIp: true
+    passwordWoVersion: "1"

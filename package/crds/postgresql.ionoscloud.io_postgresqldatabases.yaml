@@ -74,7 +74,8 @@ spec:
               forProvider:
                 properties:
                   clusterId:
-                    description: '[string] The unique ID of the cluster.'
+                    description: '[string] The unique ID of the cluster. Immutable,
+                      forces re-creation.'
                     type: string
                   clusterIdRef:
                     description: Reference to a PostgresqlCluster in postgresql to
@@ -154,12 +155,12 @@ spec:
                     type: object
                   name:
                     description: |-
-                      [string] The name of the database.
+                      [string] The name of the database. Immutable, forces re-creation.
                       The databasename of a given database.
                     type: string
                   owner:
                     description: |-
-                      [string] The owner of the database.
+                      [string] The owner of the database. Immutable, forces re-creation.
                       The name of the role owning a given database.
                     type: string
                 type: object
@@ -177,7 +178,8 @@ spec:
                   autoscaler.
                 properties:
                   clusterId:
-                    description: '[string] The unique ID of the cluster.'
+                    description: '[string] The unique ID of the cluster. Immutable,
+                      forces re-creation.'
                     type: string
                   clusterIdRef:
                     description: Reference to a PostgresqlCluster in postgresql to
@@ -257,12 +259,12 @@ spec:
                     type: object
                   name:
                     description: |-
-                      [string] The name of the database.
+                      [string] The name of the database. Immutable, forces re-creation.
                       The databasename of a given database.
                     type: string
                   owner:
                     description: |-
-                      [string] The owner of the database.
+                      [string] The owner of the database. Immutable, forces re-creation.
                       The name of the role owning a given database.
                     type: string
                 type: object
@@ -448,18 +450,19 @@ spec:
               atProvider:
                 properties:
                   clusterId:
-                    description: '[string] The unique ID of the cluster.'
+                    description: '[string] The unique ID of the cluster. Immutable,
+                      forces re-creation.'
                     type: string
                   id:
                     type: string
                   name:
                     description: |-
-                      [string] The name of the database.
+                      [string] The name of the database. Immutable, forces re-creation.
                       The databasename of a given database.
                     type: string
                   owner:
                     description: |-
-                      [string] The owner of the database.
+                      [string] The owner of the database. Immutable, forces re-creation.
                       The name of the role owning a given database.
                     type: string
                 type: object

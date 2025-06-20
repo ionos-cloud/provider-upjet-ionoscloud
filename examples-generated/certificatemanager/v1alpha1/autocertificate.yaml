@@ -32,7 +32,7 @@ metadata:
   name: example
 spec:
   forProvider:
-    email: user@example.com
+    email: user@ionos.com
     externalAccountBinding:
     - keyId: some-key-id
       keySecretSecretRef:
