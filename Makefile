@@ -150,6 +150,10 @@ generate.init: $(TERRAFORM_PROVIDER_SCHEMA) pull-docs
 go.cachedir:
 	@go env GOCACHE
 
+go.mod.cachedir:
+	@go env GOMODCACHE
+
+
 # Generate a coverage report for cobertura applying exclusions on
 # - generated file
 cobertura:
@@ -257,6 +261,3 @@ help-special: crossplane.help
 # TODO(negz): Update CI to use these targets.
 vendor: modules.download
 vendor.check: modules.check
-
-go.mod.cachedir:
-	@go env GOMODCACHE
