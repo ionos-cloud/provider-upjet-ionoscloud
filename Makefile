@@ -261,6 +261,3 @@ help-special: crossplane.help
 # TODO(negz): Update CI to use these targets.
 vendor: modules.download
 vendor.check: modules.check
-
-go.mod.cachedir:
-	@go env GOMODCACHE
