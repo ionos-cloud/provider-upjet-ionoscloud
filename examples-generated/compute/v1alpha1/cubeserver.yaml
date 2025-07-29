@@ -8,7 +8,6 @@ metadata:
   name: example
 spec:
   forProvider:
-    availabilityZone: ZONE_2
     datacenterIdSelector:
       matchLabels:
         testing.upbound.io/example-name: example

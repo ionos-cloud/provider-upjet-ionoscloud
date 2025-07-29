@@ -302,6 +302,11 @@ func (in *PipelineObservation) DeepCopyInto(out *PipelineObservation) {
 		*out = new(string)
 		**out = **in
 	}
+	if in.HTTPAddress != nil {
+		in, out := &in.HTTPAddress, &out.HTTPAddress
+		*out = new(string)
+		**out = **in
+	}
 	if in.ID != nil {
 		in, out := &in.ID, &out.ID
 		*out = new(string)
@@ -321,6 +326,11 @@ func (in *PipelineObservation) DeepCopyInto(out *PipelineObservation) {
 	}
 	if in.Name != nil {
 		in, out := &in.Name, &out.Name
+		*out = new(string)
+		**out = **in
+	}
+	if in.TCPAddress != nil {
+		in, out := &in.TCPAddress, &out.TCPAddress
 		*out = new(string)
 		**out = **in
 	}
