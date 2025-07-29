@@ -1,5 +1,7 @@
 name: End to End Testing
-
+permissions:
+  contents: read
+  statuses: write
 on:
   issue_comment:
     types: [created]
