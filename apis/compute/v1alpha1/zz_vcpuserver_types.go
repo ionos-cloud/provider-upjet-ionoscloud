@@ -496,6 +496,9 @@ type VCPUServerVolumeInitParameters struct {
 
 	DiskType *string `json:"diskType,omitempty" tf:"disk_type,omitempty"`
 
+	// If set to `true` will expose the serial id of the disk attached to the server. If set to `false` will not expose the serial id. Some operating systems or software solutions require the serial id to be exposed to work properly. Exposing the serial can influence licensed software (e.g. Windows) behavior
+	ExposeSerial *bool `json:"exposeSerial,omitempty" tf:"expose_serial,omitempty"`
+
 	// [string] Sets the OS type of the server.
 	LicenceType *string `json:"licenceType,omitempty" tf:"licence_type,omitempty"`
 
@@ -531,6 +534,9 @@ type VCPUServerVolumeObservation struct {
 	DiscVirtioHotUnplug *bool `json:"discVirtioHotUnplug,omitempty" tf:"disc_virtio_hot_unplug,omitempty"`
 
 	DiskType *string `json:"diskType,omitempty" tf:"disk_type,omitempty"`
+
+	// If set to `true` will expose the serial id of the disk attached to the server. If set to `false` will not expose the serial id. Some operating systems or software solutions require the serial id to be exposed to work properly. Exposing the serial can influence licensed software (e.g. Windows) behavior
+	ExposeSerial *bool `json:"exposeSerial,omitempty" tf:"expose_serial,omitempty"`
 
 	// [string] Sets the OS type of the server.
 	LicenceType *string `json:"licenceType,omitempty" tf:"licence_type,omitempty"`
@@ -568,6 +574,10 @@ type VCPUServerVolumeParameters struct {
 
 	// +kubebuilder:validation:Optional
 	DiskType *string `json:"diskType" tf:"disk_type,omitempty"`
+
+	// If set to `true` will expose the serial id of the disk attached to the server. If set to `false` will not expose the serial id. Some operating systems or software solutions require the serial id to be exposed to work properly. Exposing the serial can influence licensed software (e.g. Windows) behavior
+	// +kubebuilder:validation:Optional
+	ExposeSerial *bool `json:"exposeSerial,omitempty" tf:"expose_serial,omitempty"`
 
 	// [string] Sets the OS type of the server.
 	// +kubebuilder:validation:Optional

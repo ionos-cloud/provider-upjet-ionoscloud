@@ -191,6 +191,15 @@ spec:
                                 Indicates whether IONOS Object Storage Object Storage will remove a delete marker with no noncurrent versions. If set to true, the delete marker will be expired; if set to false the policy takes no operation. This cannot be specified with Days or Date in a Lifecycle Expiration Policy.
                               type: boolean
                           type: object
+                        filter:
+                          description: A filter.
+                          properties:
+                            prefix:
+                              description: |-
+                                [string] DEPRECATED! This field does not do anything! Will be removed in a future version, use filter instead. Prefix identifying one or more objects to which the rule applies.
+                                Object key prefix identifying one or more objects to which the rule applies.
+                              type: string
+                          type: object
                         id:
                           description: |-
                             [int] Container for the Contract Number of the owner
@@ -209,7 +218,7 @@ spec:
                           type: object
                         prefix:
                           description: |-
-                            [string] Prefix identifying one or more objects to which the rule applies.
+                            [string] DEPRECATED! This field does not do anything! Will be removed in a future version, use filter instead. Prefix identifying one or more objects to which the rule applies.
                             Object key prefix identifying one or more objects to which the rule applies.
                           type: string
                         status:
@@ -350,6 +359,15 @@ spec:
                                 Indicates whether IONOS Object Storage Object Storage will remove a delete marker with no noncurrent versions. If set to true, the delete marker will be expired; if set to false the policy takes no operation. This cannot be specified with Days or Date in a Lifecycle Expiration Policy.
                               type: boolean
                           type: object
+                        filter:
+                          description: A filter.
+                          properties:
+                            prefix:
+                              description: |-
+                                [string] DEPRECATED! This field does not do anything! Will be removed in a future version, use filter instead. Prefix identifying one or more objects to which the rule applies.
+                                Object key prefix identifying one or more objects to which the rule applies.
+                              type: string
+                          type: object
                         id:
                           description: |-
                             [int] Container for the Contract Number of the owner
@@ -368,7 +386,7 @@ spec:
                           type: object
                         prefix:
                           description: |-
-                            [string] Prefix identifying one or more objects to which the rule applies.
+                            [string] DEPRECATED! This field does not do anything! Will be removed in a future version, use filter instead. Prefix identifying one or more objects to which the rule applies.
                             Object key prefix identifying one or more objects to which the rule applies.
                           type: string
                         status:
@@ -596,6 +614,15 @@ spec:
                                 Indicates whether IONOS Object Storage Object Storage will remove a delete marker with no noncurrent versions. If set to true, the delete marker will be expired; if set to false the policy takes no operation. This cannot be specified with Days or Date in a Lifecycle Expiration Policy.
                               type: boolean
                           type: object
+                        filter:
+                          description: A filter.
+                          properties:
+                            prefix:
+                              description: |-
+                                [string] DEPRECATED! This field does not do anything! Will be removed in a future version, use filter instead. Prefix identifying one or more objects to which the rule applies.
+                                Object key prefix identifying one or more objects to which the rule applies.
+                              type: string
+                          type: object
                         id:
                           description: |-
                             [int] Container for the Contract Number of the owner
@@ -614,7 +641,7 @@ spec:
                           type: object
                         prefix:
                           description: |-
-                            [string] Prefix identifying one or more objects to which the rule applies.
+                            [string] DEPRECATED! This field does not do anything! Will be removed in a future version, use filter instead. Prefix identifying one or more objects to which the rule applies.
                             Object key prefix identifying one or more objects to which the rule applies.
                           type: string
                         status:

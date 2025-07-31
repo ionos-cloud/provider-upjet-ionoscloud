@@ -387,6 +387,14 @@ spec:
                         type: string
                       diskType:
                         type: string
+                      exposeSerial:
+                        description: If set to `true` will expose the serial id of
+                          the disk attached to the server. If set to `false` will
+                          not expose the serial id. Some operating systems or software
+                          solutions require the serial id to be exposed to work properly.
+                          Exposing the serial can influence licensed software (e.g.
+                          Windows) behavior
+                        type: boolean
                       imagePassword:
                         description: '[string] Required if ssh_key_path is not provided.'
                         type: string
@@ -740,6 +748,14 @@ spec:
                         type: string
                       diskType:
                         type: string
+                      exposeSerial:
+                        description: If set to `true` will expose the serial id of
+                          the disk attached to the server. If set to `false` will
+                          not expose the serial id. Some operating systems or software
+                          solutions require the serial id to be exposed to work properly.
+                          Exposing the serial can influence licensed software (e.g.
+                          Windows) behavior
+                        type: boolean
                       imagePassword:
                         description: '[string] Required if ssh_key_path is not provided.'
                         type: string
@@ -1137,6 +1153,14 @@ spec:
                         type: boolean
                       diskType:
                         type: string
+                      exposeSerial:
+                        description: If set to `true` will expose the serial id of
+                          the disk attached to the server. If set to `false` will
+                          not expose the serial id. Some operating systems or software
+                          solutions require the serial id to be exposed to work properly.
+                          Exposing the serial can influence licensed software (e.g.
+                          Windows) behavior
+                        type: boolean
                       imagePassword:
                         description: '[string] Required if ssh_key_path is not provided.'
                         type: string

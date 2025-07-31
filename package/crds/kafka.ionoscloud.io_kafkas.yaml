@@ -340,8 +340,8 @@ spec:
                     type: string
                   version:
                     description: |-
-                      [string] Version of the Kafka Cluster. Possible values: 3.7.0, 3.8.0
-                      The desired Kafka Version. Supported versions: 3.7.0, 3.8.0
+                      [string] Version of the Kafka Cluster. Possible values: 3.8.0, 3.9.0
+                      The desired Kafka Version. Supported versions: 3.8.0
                     type: string
                 type: object
               initProvider:
@@ -624,8 +624,8 @@ spec:
                     type: string
                   version:
                     description: |-
-                      [string] Version of the Kafka Cluster. Possible values: 3.7.0, 3.8.0
-                      The desired Kafka Version. Supported versions: 3.7.0, 3.8.0
+                      [string] Version of the Kafka Cluster. Possible values: 3.8.0, 3.9.0
+                      The desired Kafka Version. Supported versions: 3.8.0
                     type: string
                 type: object
               managementPolicies:
@@ -869,8 +869,8 @@ spec:
                     type: string
                   version:
                     description: |-
-                      [string] Version of the Kafka Cluster. Possible values: 3.7.0, 3.8.0
-                      The desired Kafka Version. Supported versions: 3.7.0, 3.8.0
+                      [string] Version of the Kafka Cluster. Possible values: 3.8.0, 3.9.0
+                      The desired Kafka Version. Supported versions: 3.8.0
                     type: string
                 type: object
               conditions:

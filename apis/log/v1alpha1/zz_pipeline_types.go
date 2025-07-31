@@ -74,7 +74,6 @@ type LogObservation struct {
 	// Protocol to use as intake. Possible values are: http, tcp.
 	Protocol *string `json:"protocol,omitempty" tf:"protocol,omitempty"`
 
-	// (Computed)[bool]
 	Public *bool `json:"public,omitempty" tf:"public,omitempty"`
 
 	// [string] The source parser to be used.
@@ -124,9 +123,13 @@ type PipelineInitParameters struct {
 
 type PipelineObservation struct {
 
-	// (Computed)[string] The address of the client's grafana instance.
-	// The address of the client's grafana instance
+	// (Computed)[string] The Grafana address is where user can access their logs, create dashboards, and set up alerts
+	// The Grafana address is where user can access their logs, create dashboards, and set up alerts
 	GrafanaAddress *string `json:"grafanaAddress,omitempty" tf:"grafana_address,omitempty"`
+
+	// (Computed)[string] The HTTP address of the pipeline. This is the address to which logs are sent using the HTTP protocol.
+	// The HTTP address of the pipeline. This is the address to which logs are sent using the HTTP protocol
+	HTTPAddress *string `json:"httpAddress,omitempty" tf:"http_address,omitempty"`
 
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
@@ -139,6 +142,10 @@ type PipelineObservation struct {
 
 	// [string] The name of the Logging pipeline.
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+
+	// (Computed)[string] The TCP address of the pipeline. This is the address to which logs are sent using the TCP protocol.
+	// The TCP address of the pipeline. This is the address to which logs are sent using the TCP protocol
+	TCPAddress *string `json:"tcpAddress,omitempty" tf:"tcp_address,omitempty"`
 }
 
 type PipelineParameters struct {

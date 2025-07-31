@@ -128,8 +128,8 @@ type KafkaInitParameters struct {
 	// The size of your Kafka Cluster. The size of the Kafka Cluster is given in T-shirt sizes. Valid values are: XS, S
 	Size *string `json:"size,omitempty" tf:"size,omitempty"`
 
-	// [string] Version of the Kafka Cluster. Possible values: 3.7.0, 3.8.0
-	// The desired Kafka Version. Supported versions: 3.7.0, 3.8.0
+	// [string] Version of the Kafka Cluster. Possible values: 3.8.0, 3.9.0
+	// The desired Kafka Version. Supported versions: 3.8.0
 	Version *string `json:"version,omitempty" tf:"version,omitempty"`
 }
 
@@ -159,8 +159,8 @@ type KafkaObservation struct {
 	// The size of your Kafka Cluster. The size of the Kafka Cluster is given in T-shirt sizes. Valid values are: XS, S
 	Size *string `json:"size,omitempty" tf:"size,omitempty"`
 
-	// [string] Version of the Kafka Cluster. Possible values: 3.7.0, 3.8.0
-	// The desired Kafka Version. Supported versions: 3.7.0, 3.8.0
+	// [string] Version of the Kafka Cluster. Possible values: 3.8.0, 3.9.0
+	// The desired Kafka Version. Supported versions: 3.8.0
 	Version *string `json:"version,omitempty" tf:"version,omitempty"`
 }
 
@@ -196,8 +196,8 @@ type KafkaParameters struct {
 	// +kubebuilder:validation:Optional
 	Size *string `json:"size,omitempty" tf:"size,omitempty"`
 
-	// [string] Version of the Kafka Cluster. Possible values: 3.7.0, 3.8.0
-	// The desired Kafka Version. Supported versions: 3.7.0, 3.8.0
+	// [string] Version of the Kafka Cluster. Possible values: 3.8.0, 3.9.0
+	// The desired Kafka Version. Supported versions: 3.8.0
 	// +kubebuilder:validation:Optional
 	Version *string `json:"version,omitempty" tf:"version,omitempty"`
 }

@@ -21,7 +21,7 @@ func (mg *Pipeline) GetTerraformResourceType() string {
 
 // GetConnectionDetailsMapping for this Pipeline
 func (tr *Pipeline) GetConnectionDetailsMapping() map[string]string {
-	return nil
+	return map[string]string{"key": "status.atProvider.key"}
 }
 
 // GetObservation of this Pipeline

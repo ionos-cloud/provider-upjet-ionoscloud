@@ -365,8 +365,13 @@ spec:
                 properties:
                   grafanaAddress:
                     description: |-
-                      (Computed)[string] The address of the client's grafana instance.
-                      The address of the client's grafana instance
+                      (Computed)[string] The Grafana address is where user can access their logs, create dashboards, and set up alerts
+                      The Grafana address is where user can access their logs, create dashboards, and set up alerts
+                    type: string
+                  httpAddress:
+                    description: |-
+                      (Computed)[string] The HTTP address of the pipeline. This is the address to which logs are sent using the HTTP protocol.
+                      The HTTP address of the pipeline. This is the address to which logs are sent using the HTTP protocol
                     type: string
                   id:
                     type: string
@@ -403,7 +408,6 @@ spec:
                             Protocol to use as intake. Possible values are: http, tcp.
                           type: string
                         public:
-                          description: (Computed)[bool]
                           type: boolean
                         source:
                           description: |-
@@ -419,6 +423,11 @@ spec:
                     type: array
                   name:
                     description: '[string] The name of the Logging pipeline.'
+                    type: string
+                  tcpAddress:
+                    description: |-
+                      (Computed)[string] The TCP address of the pipeline. This is the address to which logs are sent using the TCP protocol.
+                      The TCP address of the pipeline. This is the address to which logs are sent using the TCP protocol
                     type: string
                 type: object
               conditions:
