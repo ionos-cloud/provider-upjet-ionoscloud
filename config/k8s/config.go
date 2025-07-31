@@ -14,6 +14,7 @@ func Configure(p *config.Provider) {
 		r.References["s3_buckets.name"] = config.Reference{
 			TerraformName: "ionoscloud_s3_bucket",
 		}
+		r.UseAsync = true
 	})
 	p.AddResourceConfigurator("ionoscloud_k8s_node_pool", func(r *config.Resource) {
 		r.ShortGroup = "k8s"
@@ -26,5 +27,6 @@ func Configure(p *config.Provider) {
 		r.References["lans.id"] = config.Reference{
 			TerraformName: "ionoscloud_lan",
 		}
+		r.UseAsync = true
 	})
 }

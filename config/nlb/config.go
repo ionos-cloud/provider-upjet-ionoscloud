@@ -17,6 +17,8 @@ func Configure(p *config.Provider) {
 		r.References["target_lan"] = config.Reference{
 			TerraformName: "ionoscloud_lan",
 		}
+		r.UseAsync = true
+
 	})
 
 	p.AddResourceConfigurator("ionoscloud_networkloadbalancer_forwardingrule", func(r *config.Resource) {

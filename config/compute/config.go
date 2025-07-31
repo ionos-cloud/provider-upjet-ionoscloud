@@ -65,6 +65,7 @@ func Configure(p *config.Provider) {
 		r.References["datacenter_id"] = config.Reference{
 			TerraformName: "ionoscloud_datacenter",
 		}
+		r.UseAsync = true
 	})
 
 	p.AddResourceConfigurator("ionoscloud_server", func(r *config.Resource) {

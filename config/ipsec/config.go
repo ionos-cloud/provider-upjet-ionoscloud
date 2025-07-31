@@ -20,6 +20,7 @@ func Configure(p *config.Provider) {
 			r.References["connections.lan_id"] = config.Reference{
 				TerraformName: "ionoscloud_lan",
 			}
+			r.UseAsync = true
 		},
 	)
 
