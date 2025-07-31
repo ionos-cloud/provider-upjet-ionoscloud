@@ -75,6 +75,7 @@ func Configure(p *config.Provider) {
 		r.References["nic.lan"] = config.Reference{
 			TerraformName: "ionoscloud_lan",
 		}
+		r.UseAsync = true
 	})
 
 	p.AddResourceConfigurator("ionoscloud_volume", func(r *config.Resource) {

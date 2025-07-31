@@ -17,6 +17,7 @@ func Configure(p *config.Provider) {
 				TerraformName: "ionoscloud_lan",
 			}
 			r.ExternalName = config.IdentifierFromProvider
+			r.UseAsync = true
 		},
 	)
 
@@ -28,6 +29,7 @@ func Configure(p *config.Provider) {
 				TerraformName: "ionoscloud_nfs_cluster",
 			}
 			r.ExternalName = config.IdentifierFromProvider
+			r.UseAsync = true
 		},
 	)
 }

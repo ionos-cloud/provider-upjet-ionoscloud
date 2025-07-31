@@ -27,6 +27,7 @@ func Configure(p *config.Provider) {
 				IgnoredFields: []string{"template_id", "ram", "storage_size", "cores"},
 			}
 			r.TerraformCustomDiff = common.IgnoreEmptyDiffForComputed([]string{"bi_connector.#"})
+			r.UseAsync = true
 		},
 	)
 

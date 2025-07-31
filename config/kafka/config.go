@@ -15,6 +15,7 @@ func Configure(p *config.Provider) {
 		r.References["connections.lan_id"] = config.Reference{
 			TerraformName: "ionoscloud_lan",
 		}
+		r.UseAsync = true
 	})
 	p.AddResourceConfigurator("ionoscloud_kafka_cluster_topic", func(r *config.Resource) {
 		r.ShortGroup = "kafka"
