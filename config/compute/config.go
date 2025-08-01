@@ -65,6 +65,7 @@ func Configure(p *config.Provider) {
 		r.References["datacenter_id"] = config.Reference{
 			TerraformName: "ionoscloud_datacenter",
 		}
+		r.UseAsync = true
 	})
 
 	p.AddResourceConfigurator("ionoscloud_server", func(r *config.Resource) {
@@ -148,6 +149,7 @@ func Configure(p *config.Provider) {
 		r.References["nic.lan"] = config.Reference{
 			TerraformName: "ionoscloud_lan",
 		}
+		r.UseAsync = true
 	})
 
 	p.AddResourceConfigurator("ionoscloud_vcpu_server", func(r *config.Resource) {
@@ -159,6 +161,7 @@ func Configure(p *config.Provider) {
 		r.References["nic.lan"] = config.Reference{
 			TerraformName: "ionoscloud_lan",
 		}
+		r.UseAsync = true
 	})
 
 	p.AddResourceConfigurator("ionoscloud_server_boot_device_selection", func(r *config.Resource) {

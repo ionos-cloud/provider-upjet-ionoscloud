@@ -18,5 +18,6 @@ func Configure(p *config.Provider) {
 		r.References["cluster_id"] = config.Reference{
 			TerraformName: "ionoscloud_dataplatform_cluster",
 		}
+		r.UseAsync = true
 	})
 }

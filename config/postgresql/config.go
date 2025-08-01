@@ -20,6 +20,7 @@ func Configure(p *config.Provider) {
 				TerraformName: "ionoscloud_datacenter",
 				Extractor:     "github.com/ionos-cloud/provider-upjet-ionoscloud/config/common.DatacenterLocation()",
 			}
+			r.UseAsync = true
 		},
 	)
 	p.AddResourceConfigurator(

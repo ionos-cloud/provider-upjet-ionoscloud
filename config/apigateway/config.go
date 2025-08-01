@@ -15,5 +15,6 @@ func Configure(p *config.Provider) {
 		r.References["gateway_id"] = config.Reference{
 			TerraformName: "ionoscloud_apigateway",
 		}
+		r.UseAsync = true
 	})
 }
