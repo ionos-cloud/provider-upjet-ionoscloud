@@ -136,6 +136,28 @@ type ExpirationParameters struct {
 	ExpiredObjectDeleteMarker *bool `json:"expiredObjectDeleteMarker,omitempty" tf:"expired_object_delete_marker,omitempty"`
 }
 
+type FilterInitParameters struct {
+
+	// [string] DEPRECATED! This field does not do anything! Will be removed in a future version, use filter instead. Prefix identifying one or more objects to which the rule applies.
+	// Object key prefix identifying one or more objects to which the rule applies.
+	Prefix *string `json:"prefix,omitempty" tf:"prefix,omitempty"`
+}
+
+type FilterObservation struct {
+
+	// [string] DEPRECATED! This field does not do anything! Will be removed in a future version, use filter instead. Prefix identifying one or more objects to which the rule applies.
+	// Object key prefix identifying one or more objects to which the rule applies.
+	Prefix *string `json:"prefix,omitempty" tf:"prefix,omitempty"`
+}
+
+type FilterParameters struct {
+
+	// [string] DEPRECATED! This field does not do anything! Will be removed in a future version, use filter instead. Prefix identifying one or more objects to which the rule applies.
+	// Object key prefix identifying one or more objects to which the rule applies.
+	// +kubebuilder:validation:Optional
+	Prefix *string `json:"prefix,omitempty" tf:"prefix,omitempty"`
+}
+
 type NoncurrentVersionExpirationInitParameters struct {
 
 	// [int] Specifies the number of days an object is noncurrent before the associated action can be performed.
@@ -168,6 +190,9 @@ type RuleInitParameters struct {
 	// A lifecycle rule for when an object expires.
 	Expiration *ExpirationInitParameters `json:"expiration,omitempty" tf:"expiration,omitempty"`
 
+	// A filter.
+	Filter *FilterInitParameters `json:"filter,omitempty" tf:"filter,omitempty"`
+
 	// [int] Container for the Contract Number of the owner
 	// Unique identifier for the rule.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
@@ -176,7 +201,7 @@ type RuleInitParameters struct {
 	// A lifecycle rule for when non-current object versions expire.
 	NoncurrentVersionExpiration *NoncurrentVersionExpirationInitParameters `json:"noncurrentVersionExpiration,omitempty" tf:"noncurrent_version_expiration,omitempty"`
 
-	// [string] Prefix identifying one or more objects to which the rule applies.
+	// [string] DEPRECATED! This field does not do anything! Will be removed in a future version, use filter instead. Prefix identifying one or more objects to which the rule applies.
 	// Object key prefix identifying one or more objects to which the rule applies.
 	Prefix *string `json:"prefix,omitempty" tf:"prefix,omitempty"`
 
@@ -195,6 +220,9 @@ type RuleObservation struct {
 	// A lifecycle rule for when an object expires.
 	Expiration *ExpirationObservation `json:"expiration,omitempty" tf:"expiration,omitempty"`
 
+	// A filter.
+	Filter *FilterObservation `json:"filter,omitempty" tf:"filter,omitempty"`
+
 	// [int] Container for the Contract Number of the owner
 	// Unique identifier for the rule.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
@@ -203,7 +231,7 @@ type RuleObservation struct {
 	// A lifecycle rule for when non-current object versions expire.
 	NoncurrentVersionExpiration *NoncurrentVersionExpirationObservation `json:"noncurrentVersionExpiration,omitempty" tf:"noncurrent_version_expiration,omitempty"`
 
-	// [string] Prefix identifying one or more objects to which the rule applies.
+	// [string] DEPRECATED! This field does not do anything! Will be removed in a future version, use filter instead. Prefix identifying one or more objects to which the rule applies.
 	// Object key prefix identifying one or more objects to which the rule applies.
 	Prefix *string `json:"prefix,omitempty" tf:"prefix,omitempty"`
 
@@ -224,6 +252,10 @@ type RuleParameters struct {
 	// +kubebuilder:validation:Optional
 	Expiration *ExpirationParameters `json:"expiration,omitempty" tf:"expiration,omitempty"`
 
+	// A filter.
+	// +kubebuilder:validation:Optional
+	Filter *FilterParameters `json:"filter,omitempty" tf:"filter,omitempty"`
+
 	// [int] Container for the Contract Number of the owner
 	// Unique identifier for the rule.
 	// +kubebuilder:validation:Optional
@@ -234,10 +266,10 @@ type RuleParameters struct {
 	// +kubebuilder:validation:Optional
 	NoncurrentVersionExpiration *NoncurrentVersionExpirationParameters `json:"noncurrentVersionExpiration,omitempty" tf:"noncurrent_version_expiration,omitempty"`
 
-	// [string] Prefix identifying one or more objects to which the rule applies.
+	// [string] DEPRECATED! This field does not do anything! Will be removed in a future version, use filter instead. Prefix identifying one or more objects to which the rule applies.
 	// Object key prefix identifying one or more objects to which the rule applies.
 	// +kubebuilder:validation:Optional
-	Prefix *string `json:"prefix" tf:"prefix,omitempty"`
+	Prefix *string `json:"prefix,omitempty" tf:"prefix,omitempty"`
 
 	// [string] The lifecycle rule status. Valid values are Enabled or Disabled.
 	// Whether the rule is currently being applied. Valid values: Enabled or Disabled.

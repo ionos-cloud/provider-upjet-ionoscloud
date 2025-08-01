@@ -581,6 +581,9 @@ type ServerVolumeInitParameters struct {
 	// (Computed)[string] Server usages: * type - Server usages: ENTERPRISE now named dedicated core, CUBE or VCPU. This property is immutable.
 	DiskType *string `json:"diskType,omitempty" tf:"disk_type,omitempty"`
 
+	// If set to `true` will expose the serial id of the disk attached to the server. If set to `false` will not expose the serial id. Some operating systems or software solutions require the serial id to be exposed to work properly. Exposing the serial can influence licensed software (e.g. Windows) behavior
+	ExposeSerial *bool `json:"exposeSerial,omitempty" tf:"expose_serial,omitempty"`
+
 	// [string] Required if ssh_key_path is not provided.
 	ImagePassword *string `json:"imagePassword,omitempty" tf:"image_password,omitempty"`
 
@@ -628,6 +631,9 @@ type ServerVolumeObservation struct {
 
 	// (Computed)[string] Server usages: * type - Server usages: ENTERPRISE now named dedicated core, CUBE or VCPU. This property is immutable.
 	DiskType *string `json:"diskType,omitempty" tf:"disk_type,omitempty"`
+
+	// If set to `true` will expose the serial id of the disk attached to the server. If set to `false` will not expose the serial id. Some operating systems or software solutions require the serial id to be exposed to work properly. Exposing the serial can influence licensed software (e.g. Windows) behavior
+	ExposeSerial *bool `json:"exposeSerial,omitempty" tf:"expose_serial,omitempty"`
 
 	// [string] Required if ssh_key_path is not provided.
 	ImagePassword *string `json:"imagePassword,omitempty" tf:"image_password,omitempty"`
@@ -677,6 +683,10 @@ type ServerVolumeParameters struct {
 	// (Computed)[string] Server usages: * type - Server usages: ENTERPRISE now named dedicated core, CUBE or VCPU. This property is immutable.
 	// +kubebuilder:validation:Optional
 	DiskType *string `json:"diskType" tf:"disk_type,omitempty"`
+
+	// If set to `true` will expose the serial id of the disk attached to the server. If set to `false` will not expose the serial id. Some operating systems or software solutions require the serial id to be exposed to work properly. Exposing the serial can influence licensed software (e.g. Windows) behavior
+	// +kubebuilder:validation:Optional
+	ExposeSerial *bool `json:"exposeSerial,omitempty" tf:"expose_serial,omitempty"`
 
 	// [string] Required if ssh_key_path is not provided.
 	// +kubebuilder:validation:Optional
