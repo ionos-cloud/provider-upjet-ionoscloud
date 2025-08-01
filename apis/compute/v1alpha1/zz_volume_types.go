@@ -39,6 +39,10 @@ type VolumeInitParameters_2 struct {
 	// [string] The volume type: HDD or SSD. This property is immutable.
 	DiskType *string `json:"diskType,omitempty" tf:"disk_type,omitempty"`
 
+	// (Computed) [boolean] Defaults to false if not previously set by the image used to create the volume. If set to true will expose the serial id of the disk attached to the server. If set to false will not expose the serial id. Some operating systems or software solutions require the serial id to be exposed to work properly. Exposing the serial can influence licensed software (e.g. Windows) behavior
+	// If set to `true` will expose the serial id of the disk attached to the server. If set to `false` will not expose the serial id. Some operating systems or software solutions require the serial id to be exposed to work properly. Exposing the serial can influence licensed software (e.g. Windows) behavior
+	ExposeSerial *bool `json:"exposeSerial,omitempty" tf:"expose_serial,omitempty"`
+
 	// [string] The name, ID or alias of the image. May also be a snapshot ID. It is required if licence_type is not provided. Attribute is immutable.
 	ImageName *string `json:"imageName,omitempty" tf:"image_name,omitempty"`
 
@@ -108,6 +112,10 @@ type VolumeObservation_2 struct {
 
 	// [string] The volume type: HDD or SSD. This property is immutable.
 	DiskType *string `json:"diskType,omitempty" tf:"disk_type,omitempty"`
+
+	// (Computed) [boolean] Defaults to false if not previously set by the image used to create the volume. If set to true will expose the serial id of the disk attached to the server. If set to false will not expose the serial id. Some operating systems or software solutions require the serial id to be exposed to work properly. Exposing the serial can influence licensed software (e.g. Windows) behavior
+	// If set to `true` will expose the serial id of the disk attached to the server. If set to `false` will not expose the serial id. Some operating systems or software solutions require the serial id to be exposed to work properly. Exposing the serial can influence licensed software (e.g. Windows) behavior
+	ExposeSerial *bool `json:"exposeSerial,omitempty" tf:"expose_serial,omitempty"`
 
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
@@ -189,6 +197,11 @@ type VolumeParameters_2 struct {
 	// [string] The volume type: HDD or SSD. This property is immutable.
 	// +kubebuilder:validation:Optional
 	DiskType *string `json:"diskType,omitempty" tf:"disk_type,omitempty"`
+
+	// (Computed) [boolean] Defaults to false if not previously set by the image used to create the volume. If set to true will expose the serial id of the disk attached to the server. If set to false will not expose the serial id. Some operating systems or software solutions require the serial id to be exposed to work properly. Exposing the serial can influence licensed software (e.g. Windows) behavior
+	// If set to `true` will expose the serial id of the disk attached to the server. If set to `false` will not expose the serial id. Some operating systems or software solutions require the serial id to be exposed to work properly. Exposing the serial can influence licensed software (e.g. Windows) behavior
+	// +kubebuilder:validation:Optional
+	ExposeSerial *bool `json:"exposeSerial,omitempty" tf:"expose_serial,omitempty"`
 
 	// [string] The name, ID or alias of the image. May also be a snapshot ID. It is required if licence_type is not provided. Attribute is immutable.
 	// +kubebuilder:validation:Optional

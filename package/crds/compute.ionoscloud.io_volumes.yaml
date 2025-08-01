@@ -172,6 +172,11 @@ spec:
                     description: '[string] The volume type: HDD or SSD. This property
                       is immutable.'
                     type: string
+                  exposeSerial:
+                    description: |-
+                      (Computed) [boolean] Defaults to false if not previously set by the image used to create the volume. If set to true will expose the serial id of the disk attached to the server. If set to false will not expose the serial id. Some operating systems or software solutions require the serial id to be exposed to work properly. Exposing the serial can influence licensed software (e.g. Windows) behavior
+                      If set to `true` will expose the serial id of the disk attached to the server. If set to `false` will not expose the serial id. Some operating systems or software solutions require the serial id to be exposed to work properly. Exposing the serial can influence licensed software (e.g. Windows) behavior
+                    type: boolean
                   imageName:
                     description: '[string] The name, ID or alias of the image. May
                       also be a snapshot ID. It is required if licence_type is not
@@ -403,6 +408,11 @@ spec:
                     description: '[string] The volume type: HDD or SSD. This property
                       is immutable.'
                     type: string
+                  exposeSerial:
+                    description: |-
+                      (Computed) [boolean] Defaults to false if not previously set by the image used to create the volume. If set to true will expose the serial id of the disk attached to the server. If set to false will not expose the serial id. Some operating systems or software solutions require the serial id to be exposed to work properly. Exposing the serial can influence licensed software (e.g. Windows) behavior
+                      If set to `true` will expose the serial id of the disk attached to the server. If set to `false` will not expose the serial id. Some operating systems or software solutions require the serial id to be exposed to work properly. Exposing the serial can influence licensed software (e.g. Windows) behavior
+                    type: boolean
                   imageName:
                     description: '[string] The name, ID or alias of the image. May
                       also be a snapshot ID. It is required if licence_type is not
@@ -748,6 +758,11 @@ spec:
                     description: '[string] The volume type: HDD or SSD. This property
                       is immutable.'
                     type: string
+                  exposeSerial:
+                    description: |-
+                      (Computed) [boolean] Defaults to false if not previously set by the image used to create the volume. If set to true will expose the serial id of the disk attached to the server. If set to false will not expose the serial id. Some operating systems or software solutions require the serial id to be exposed to work properly. Exposing the serial can influence licensed software (e.g. Windows) behavior
+                      If set to `true` will expose the serial id of the disk attached to the server. If set to `false` will not expose the serial id. Some operating systems or software solutions require the serial id to be exposed to work properly. Exposing the serial can influence licensed software (e.g. Windows) behavior
+                    type: boolean
                   id:
                     type: string
                   image:

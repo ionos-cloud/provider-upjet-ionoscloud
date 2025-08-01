@@ -613,7 +613,6 @@ resources:
             - name: example
               manifest: |-
                 {
-                  "availability_zone": "ZONE_2",
                   "datacenter_id": "${ionoscloud_datacenter.example.id}",
                   "image_name": "ubuntu:latest",
                   "image_password": "${random_password.server_image_password.result}",
@@ -792,6 +791,8 @@ resources:
             vendor: '- A valid CPU vendor name'
             version: '- (Computed) The version of that Data Center. Gets incremented with every change'
         importStatements:
+            - "import {\n  to = ionoscloud_datacenter.example\n  id = \"datacenter uuid\" \n}"
+            - terraform plan -generate-config-out=dc.tf
             - terraform import ionoscloud_datacenter.mydc datacenter uuid
     ionoscloud_dataplatform_cluster:
         subCategory: Dataplatform
@@ -1652,7 +1653,7 @@ resources:
                   "location": "de/fra",
                   "name": "example-kafka-cluster",
                   "size": "S",
-                  "version": "3.8.0"
+                  "version": "3.9.0"
                 }
               references:
                 connections.datacenter_id: ionoscloud_datacenter.example.id
@@ -1682,7 +1683,7 @@ resources:
                   "location": "${ionoscloud_datacenter.example.location}",
                   "name": "example-kafka-cluster",
                   "size": "S",
-                  "version": "3.8.0"
+                  "version": "3.9.0"
                 }
               references:
                 connections.broker_addresses: local.kafka_cluster_broker_ips_cidr
@@ -1741,7 +1742,7 @@ resources:
             location: '- (Optional)[string] The location of the Kafka Cluster. Possible values: de/fra, de/txl. If this is not set and if no value is provided for the IONOS_API_URL env var, the default location will be: de/fra.'
             name: '- (Required)[string] Name of the Kafka Cluster.'
             size: '- (Required)[string] Size of the Kafka Cluster. Possible values: XS, S'
-            version: '- (Required)[string] Version of the Kafka Cluster. Possible values: 3.7.0, 3.8.0'
+            version: '- (Required)[string] Version of the Kafka Cluster. Possible values: 3.8.0, 3.9.0'
         importStatements:
             - terraform import ionoscloud_kafka_cluster.mycluster location:kafka cluster uuid
     ionoscloud_kafka_cluster_topic:
@@ -1786,7 +1787,7 @@ resources:
                       "location": "${ionoscloud_datacenter.example.location}",
                       "name": "example-kafka-cluster",
                       "size": "S",
-                      "version": "3.8.0"
+                      "version": "3.9.0"
                     }
                 ionoscloud_lan.example: |-
                     {
@@ -1826,7 +1827,7 @@ resources:
                       "location": "${ionoscloud_datacenter.example.location}",
                       "name": "example-kafka-cluster",
                       "size": "S",
-                      "version": "3.8.0"
+                      "version": "3.9.0"
                     }
                 ionoscloud_lan.example: |-
                     {
@@ -2088,15 +2089,17 @@ resources:
               manifest: '{}'
         argumentDocs:
             destinations: '- (Optional)[list] The configuration of the logs datastore, a list that contains elements with the following structure:'
-            grafana_address: '- (Computed)[string] The address of the client''s grafana instance.'
+            grafana_address: '- (Computed)[string] The Grafana address is where user can access their logs, create dashboards, and set up alerts'
+            http_address: '- (Computed)[string] The HTTP address of the pipeline. This is the address to which logs are sent using the HTTP protocol.'
+            key: '- (Computed)[string] The key is shared once and is used to authenticate the logs sent to the pipeline'
             location: '- (Optional)[string] The location of the Logging pipeline. Default: de/txl One of de/fra, de/txl, gb/lhr, es/vit, fr/par. If this is not set and if no value is provided for the IONOS_API_URL env var, the default location will be: de/fra.'
             log: '- (Required)[list] Pipeline logs, a list that contains elements with the following structure:'
             name: '- (Required)[string] The name of the Logging pipeline.'
             protocol: '- (Required)[string] "Protocol to use as intake. Possible values are: http, tcp."'
-            public: '- (Computed)[bool]'
             retention_in_days: '- (Optional)[int] Defines the number of days a log record should be kept in loki. Works with loki destination type only. Can be one of: 7, 14, 30.'
             source: '- (Required)[string] The source parser to be used.'
             tag: '- (Required)[string] The tag is used to distinguish different pipelines. Must be unique amongst the pipeline''s array items.'
+            tcp_address: '- (Computed)[string] The TCP address of the pipeline. This is the address to which logs are sent using the TCP protocol.'
             type: '- (Optional)[string] The internal output stream to send logs to.'
         importStatements:
             - |-
@@ -3714,18 +3717,26 @@ resources:
                           "days": 90
                         }
                       ],
+                      "filter": [
+                        {
+                          "prefix": "/logs"
+                        }
+                      ],
                       "id": "1",
-                      "prefix": "/logs",
                       "status": "Enabled"
                     },
                     {
+                      "filter": [
+                        {
+                          "prefix": "/logs"
+                        }
+                      ],
                       "id": "2",
                       "noncurrent_version_expiration": [
                         {
                           "noncurrent_days": 90
                         }
                       ],
-                      "prefix": "/logs",
                       "status": "Enabled"
                     },
                     {
@@ -3734,8 +3745,12 @@ resources:
                           "days_after_initiation": 90
                         }
                       ],
+                      "filter": [
+                        {
+                          "prefix": "/logs"
+                        }
+                      ],
                       "id": "3",
-                      "prefix": "/logs",
                       "status": "Enabled"
                     }
                   ]
@@ -3755,11 +3770,12 @@ resources:
             days_after_initiation: '- (Optional)[int] Specifies the number of days after which IONOS Object Storage aborts an incomplete multipart upload.'
             expiration: '- (Optional)[block]  A lifecycle rule for when an object expires.'
             expired_object_delete_marker: '- (Optional)[bool] Indicates whether IONOS Object Storage will remove a delete marker with no noncurrent versions. If set to true, the delete marker will be expired; if set to false the policy takes no operation. This cannot be specified with Days or Date in a Lifecycle Expiration Policy.'
+            filter - (Optional)[block] A filter identifying one or more objects to which the rule applies.: ""
             id: '- (Optional)[int] Container for the Contract Number of the owner'
             lifecycle_rule: '- (Required)[block] A block of lifecycle_rule as defined below.'
             noncurrent_days: '- (Optional)[int] Specifies the number of days an object is noncurrent before the associated action can be performed.'
             noncurrent_version_expiration: '- (Optional)[block] A lifecycle rule for when non-current object versions expire.'
-            prefix: '- (Required)[string] Prefix identifying one or more objects to which the rule applies.'
+            prefix: '- (Required)[string] DEPRECATED! This field does not do anything! Will be removed in a future version, use filter instead. Prefix identifying one or more objects to which the rule applies.'
             status: '- (Required)[string] The lifecycle rule status. Valid values are Enabled or Disabled.'
         importStatements:
             - terraform import ionoscloud_s3_bucket_lifecycle_configuration.example example
@@ -4460,6 +4476,7 @@ resources:
             vm_state: '- (Optional)[string] Sets the power state of the server. E.g: RUNNING, SHUTOFF or SUSPENDED. SUSPENDED state is only valid for cube. SHUTOFF state is only valid for enterprise(dedicated core).'
             volume: '- (Optional) See the Volume section.'
         importStatements:
+            - terraform plan -generate-config-out=generated.tf
             - terraform import ionoscloud_server.myserver datacenter uuid/server uuid
             - terraform import ionoscloud_server.myserver datacenter uuid/server uuid/primary nic id/firewall rule id
     ionoscloud_share:
@@ -4763,7 +4780,6 @@ resources:
             - name: example
               manifest: |-
                 {
-                  "availability_zone": "ZONE_1",
                   "cores": 1,
                   "datacenter_id": "${ionoscloud_datacenter.example.id}",
                   "image_name": "${data.ionoscloud_image.example.id}",
@@ -4807,7 +4823,6 @@ resources:
                   "ram": 1024,
                   "volume": [
                     {
-                      "availability_zone": "ZONE_1",
                       "bus": "VIRTIO",
                       "disk_type": "SSD Standard",
                       "name": "system",
@@ -5077,6 +5092,7 @@ resources:
             disc_virtio_hot_plug: '- (Computed)[string] Is capable of Virt-IO drive hot plug (no reboot required)'
             disc_virtio_hot_unplug: '- (Computed)[string] Is capable of Virt-IO drive hot unplug (no reboot required). This works only for non-Windows virtual Machines.'
             disk_type: '- (Required)[string] The volume type: HDD or SSD. This property is immutable.'
+            expose_serial: '- (Optional)(Computed) [boolean] Defaults to false if not previously set by the image used to create the volume. If set to true will expose the serial id of the disk attached to the server. If set to false will not expose the serial id. Some operating systems or software solutions require the serial id to be exposed to work properly. Exposing the serial can influence licensed software (e.g. Windows) behavior'
             image: '- (Computed) The image or snapshot UUID.'
             image_name: '- (Optional)[string] The name, ID or alias of the image. May also be a snapshot ID. It is required if licence_type is not provided. Attribute is immutable.'
             image_password: '- (Optional)[string] Required if sshkey_path is not provided.'

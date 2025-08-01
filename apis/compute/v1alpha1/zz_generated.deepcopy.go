@@ -5921,6 +5921,11 @@ func (in *ServerVolumeInitParameters) DeepCopyInto(out *ServerVolumeInitParamete
 		*out = new(string)
 		**out = **in
 	}
+	if in.ExposeSerial != nil {
+		in, out := &in.ExposeSerial, &out.ExposeSerial
+		*out = new(bool)
+		**out = **in
+	}
 	if in.ImagePassword != nil {
 		in, out := &in.ImagePassword, &out.ImagePassword
 		*out = new(string)
@@ -6028,6 +6033,11 @@ func (in *ServerVolumeObservation) DeepCopyInto(out *ServerVolumeObservation) {
 		*out = new(string)
 		**out = **in
 	}
+	if in.ExposeSerial != nil {
+		in, out := &in.ExposeSerial, &out.ExposeSerial
+		*out = new(bool)
+		**out = **in
+	}
 	if in.ImagePassword != nil {
 		in, out := &in.ImagePassword, &out.ImagePassword
 		*out = new(string)
@@ -6128,6 +6138,11 @@ func (in *ServerVolumeParameters) DeepCopyInto(out *ServerVolumeParameters) {
 	if in.DiskType != nil {
 		in, out := &in.DiskType, &out.DiskType
 		*out = new(string)
+		**out = **in
+	}
+	if in.ExposeSerial != nil {
+		in, out := &in.ExposeSerial, &out.ExposeSerial
+		*out = new(bool)
 		**out = **in
 	}
 	if in.ImagePassword != nil {
@@ -8557,6 +8572,11 @@ func (in *VCPUServerVolumeInitParameters) DeepCopyInto(out *VCPUServerVolumeInit
 		*out = new(string)
 		**out = **in
 	}
+	if in.ExposeSerial != nil {
+		in, out := &in.ExposeSerial, &out.ExposeSerial
+		*out = new(bool)
+		**out = **in
+	}
 	if in.LicenceType != nil {
 		in, out := &in.LicenceType, &out.LicenceType
 		*out = new(string)
@@ -8637,6 +8657,11 @@ func (in *VCPUServerVolumeObservation) DeepCopyInto(out *VCPUServerVolumeObserva
 		*out = new(string)
 		**out = **in
 	}
+	if in.ExposeSerial != nil {
+		in, out := &in.ExposeSerial, &out.ExposeSerial
+		*out = new(bool)
+		**out = **in
+	}
 	if in.LicenceType != nil {
 		in, out := &in.LicenceType, &out.LicenceType
 		*out = new(string)
@@ -8710,6 +8735,11 @@ func (in *VCPUServerVolumeParameters) DeepCopyInto(out *VCPUServerVolumeParamete
 	if in.DiskType != nil {
 		in, out := &in.DiskType, &out.DiskType
 		*out = new(string)
+		**out = **in
+	}
+	if in.ExposeSerial != nil {
+		in, out := &in.ExposeSerial, &out.ExposeSerial
+		*out = new(bool)
 		**out = **in
 	}
 	if in.LicenceType != nil {
@@ -8794,6 +8824,11 @@ func (in *VolumeInitParameters) DeepCopyInto(out *VolumeInitParameters) {
 		*out = new(string)
 		**out = **in
 	}
+	if in.ExposeSerial != nil {
+		in, out := &in.ExposeSerial, &out.ExposeSerial
+		*out = new(bool)
+		**out = **in
+	}
 	if in.ImagePassword != nil {
 		in, out := &in.ImagePassword, &out.ImagePassword
 		*out = new(string)
@@ -8873,6 +8908,11 @@ func (in *VolumeInitParameters_2) DeepCopyInto(out *VolumeInitParameters_2) {
 	if in.DiskType != nil {
 		in, out := &in.DiskType, &out.DiskType
 		*out = new(string)
+		**out = **in
+	}
+	if in.ExposeSerial != nil {
+		in, out := &in.ExposeSerial, &out.ExposeSerial
+		*out = new(bool)
 		**out = **in
 	}
 	if in.ImageName != nil {
@@ -9034,6 +9074,11 @@ func (in *VolumeObservation) DeepCopyInto(out *VolumeObservation) {
 		*out = new(string)
 		**out = **in
 	}
+	if in.ExposeSerial != nil {
+		in, out := &in.ExposeSerial, &out.ExposeSerial
+		*out = new(bool)
+		**out = **in
+	}
 	if in.ImagePassword != nil {
 		in, out := &in.ImagePassword, &out.ImagePassword
 		*out = new(string)
@@ -9148,6 +9193,11 @@ func (in *VolumeObservation_2) DeepCopyInto(out *VolumeObservation_2) {
 	if in.DiskType != nil {
 		in, out := &in.DiskType, &out.DiskType
 		*out = new(string)
+		**out = **in
+	}
+	if in.ExposeSerial != nil {
+		in, out := &in.ExposeSerial, &out.ExposeSerial
+		*out = new(bool)
 		**out = **in
 	}
 	if in.ID != nil {
@@ -9282,6 +9332,11 @@ func (in *VolumeParameters) DeepCopyInto(out *VolumeParameters) {
 		*out = new(string)
 		**out = **in
 	}
+	if in.ExposeSerial != nil {
+		in, out := &in.ExposeSerial, &out.ExposeSerial
+		*out = new(bool)
+		**out = **in
+	}
 	if in.ImagePassword != nil {
 		in, out := &in.ImagePassword, &out.ImagePassword
 		*out = new(string)
@@ -9361,6 +9416,11 @@ func (in *VolumeParameters_2) DeepCopyInto(out *VolumeParameters_2) {
 	if in.DiskType != nil {
 		in, out := &in.DiskType, &out.DiskType
 		*out = new(string)
+		**out = **in
+	}
+	if in.ExposeSerial != nil {
+		in, out := &in.ExposeSerial, &out.ExposeSerial
+		*out = new(bool)
 		**out = **in
 	}
 	if in.ImageName != nil {

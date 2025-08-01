@@ -13,10 +13,10 @@ TERRAFORM_VERSION_VALID := $(shell [ "$(TERRAFORM_VERSION)" = "`printf "$(TERRAF
 TERRAFORM_VERSION_VALID := $(shell [ "$(TERRAFORM_VERSION)" = "`printf "$(TERRAFORM_VERSION)\n1.6" | sort -V | head -n1`" ] && echo 1 || echo 0)
 export TERRAFORM_PROVIDER_SOURCE ?= ionos-cloud/ionoscloud
 export TERRAFORM_PROVIDER_REPO ?= https://github.com/ionos-cloud/terraform-provider-ionoscloud
-export TERRAFORM_PROVIDER_VERSION ?= 6.7.7
+export TERRAFORM_PROVIDER_VERSION ?= 6.7.12
 export TERRAFORM_PROVIDER_DOWNLOAD_NAME ?= terraform-provider-ionoscloud
 export TERRAFORM_PROVIDER_DOWNLOAD_URL_PREFIX ?= https://github.com/ionos-cloud/$(TERRAFORM_PROVIDER_DOWNLOAD_NAME)/releases/download/v$(TERRAFORM_PROVIDER_VERSION)
-export TERRAFORM_NATIVE_PROVIDER_BINARY ?= terraform-provider-ionoscloud_v6_7_7
+export TERRAFORM_NATIVE_PROVIDER_BINARY ?= terraform-provider-ionoscloud_v6_7_12
 export TERRAFORM_DOCS_PATH ?= docs/resources
 
 
@@ -45,7 +45,7 @@ NPROCS ?= 1
 # to half the number of CPU cores.
 GO_TEST_PARALLEL := $(shell echo $$(( $(NPROCS) / 2 )))
 
-GO_REQUIRED_VERSION ?= 1.21
+GO_REQUIRED_VERSION ?= 1.24
 GOLANGCILINT_VERSION ?= 1.54.0
 GO_STATIC_PACKAGES = $(GO_PROJECT)/cmd/provider $(GO_PROJECT)/cmd/generator
 GO_LDFLAGS += -X $(GO_PROJECT)/internal/version.Version=$(VERSION)
