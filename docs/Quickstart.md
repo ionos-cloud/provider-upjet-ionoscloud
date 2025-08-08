@@ -55,7 +55,7 @@ kind: Provider
 metadata:
   name: provider-upjet-ionoscloud
 spec:
-  package: xpkg.upbound.io/ionos-cloud/provider-upjet-ionoscloud:v0.1.3
+  package: xpkg.upbound.io/ionos-cloud/provider-upjet-ionoscloud:v0.1.4
 EOF
 ```
 
@@ -77,7 +77,7 @@ After installing the provider, verify the install with `kubectl get providers`.
 
 ```shell
 NAME                        INSTALLED   HEALTHY   PACKAGE                            AGE
-provider-upjet-ionoscloud   True        True      xpkg.upbound.io/ionos-cloud/provider-upjet-ionoscloud:v0.1.3   5m35s
+provider-upjet-ionoscloud   True        True      xpkg.upbound.io/ionos-cloud/provider-upjet-ionoscloud:v0.1.4   5m35s
 ```
 
 ## Create a Kubernetes secret for Ionoscloud
