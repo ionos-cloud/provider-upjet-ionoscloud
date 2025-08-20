@@ -54,7 +54,7 @@ GO_SUBDIRS += cmd internal apis
 
 # ====================================================================================
 # Setup Kubernetes tools
-CROSSPLANE_CLI_VERSION = v1.19.0
+CROSSPLANE_CLI_VERSION = v1.14.5
 KIND_VERSION = v0.26.0
 UP_VERSION = v0.39.0
 UP_CHANNEL = stable
