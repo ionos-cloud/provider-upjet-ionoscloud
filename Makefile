@@ -54,16 +54,10 @@ GO_SUBDIRS += cmd internal apis
 
 # ====================================================================================
 # Setup Kubernetes tools
-#CROSSPLANE_CLI_VERSION = v2.0.0
-#KIND_VERSION = v0.26.0
-#UP_VERSION = v0.39.0
-#UP_CHANNEL = stable
-#UPTEST_VERSION = v1.4.0
-
-KIND_VERSION = v0.24.0
-UP_VERSION = v0.37.0
+KIND_VERSION = v0.29.0
+UP_VERSION = v0.40.2
 UP_CHANNEL = stable
-UPTEST_VERSION = v1.2.0
+UPTEST_VERSION = v1.4.0
 -include build/makelib/k8s_tools.mk
 
 # ====================================================================================
@@ -181,7 +175,7 @@ run: go.build
 
 # ====================================================================================
 # End to End Testing
-CROSSPLANE_VERSION = 1.20.0
+CROSSPLANE_VERSION = 1.20.1
 CROSSPLANE_NAMESPACE = upbound-system
 -include build/makelib/local.xpkg.mk
 -include build/makelib/controlplane.mk
@@ -200,9 +194,9 @@ CROSSPLANE_NAMESPACE = upbound-system
 #   aws_secret_access_key = REDACTED'
 #   The associated `ProviderConfig`s will be named as `default` and `peer`.
 # - UPTEST_DATASOURCE_PATH (optional), please see https://github.com/crossplane/uptest#injecting-dynamic-values-and-datasource
-uptest: $(UPTEST) $(KUBECTL) $(KUTTL) $(CROSSPLANE_CLI)
+uptest: $(UPTEST) $(KUBECTL) $(CHAINSAW) $(CROSSPLANE_CLI)
 	@$(INFO) running automated tests
-	@KUBECTL=$(KUBECTL) KUTTL=$(KUTTL) CROSSPLANE_NAMESPACE=$(CROSSPLANE_NAMESPACE) $(UPTEST) e2e "${UPTEST_EXAMPLE_LIST}" --data-source="${UPTEST_DATASOURCE_PATH}" --setup-script=cluster/test/setup.sh --default-conditions="Test" || $(FAIL)
+	@KUBECTL=$(KUBECTL) CHAINSAW=$(CHAINSAW) CROSSPLANE_CLI=$(CROSSPLANE_CLI) CROSSPLANE_NAMESPACE=$(CROSSPLANE_NAMESPACE) $(UPTEST) e2e "${UPTEST_EXAMPLE_LIST}" --data-source="${UPTEST_DATASOURCE_PATH}" --setup-script=cluster/test/setup.sh --default-conditions="Test" || $(FAIL)
 	@$(OK) running automated tests
 
 local-deploy: build controlplane.up local.xpkg.deploy.provider.$(PROJECT_NAME)
@@ -266,3 +260,6 @@ help-special: crossplane.help
 # TODO(negz): Update CI to use these targets.
 vendor: modules.download
 vendor.check: modules.check
+
+# This file contains custom make targets
+-include custom.mk
