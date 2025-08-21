@@ -54,7 +54,7 @@ GO_SUBDIRS += cmd internal apis
 
 # ====================================================================================
 # Setup Kubernetes tools
-CROSSPLANE_CLI_VERSION = v1.14.5
+CROSSPLANE_CLI_VERSION = v1.17.0
 KIND_VERSION = v0.26.0
 UP_VERSION = v0.39.0
 UP_CHANNEL = stable
@@ -98,7 +98,7 @@ xpkg.build.provider-upjet-ionoscloud: do.build.images
 
 # NOTE(hasheddan): we ensure up is installed prior to running platform-specific
 # build steps in parallel to avoid encountering an installation race condition.
-build.init: $(UP) $(CROSSPLANE_CLI) $(KUBECTL) $(CROSSPLANE) $(YQ) check-terraform-version
+build.init: $(UP) $(CROSSPLANE_CLI) check-terraform-version
 
 # ====================================================================================
 # Setup Terraform for fetching provider schema
