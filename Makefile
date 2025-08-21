@@ -54,11 +54,16 @@ GO_SUBDIRS += cmd internal apis
 
 # ====================================================================================
 # Setup Kubernetes tools
-CROSSPLANE_CLI_VERSION = v1.17.0
-KIND_VERSION = v0.26.0
-UP_VERSION = v0.39.0
+#CROSSPLANE_CLI_VERSION = v2.0.0
+#KIND_VERSION = v0.26.0
+#UP_VERSION = v0.39.0
+#UP_CHANNEL = stable
+#UPTEST_VERSION = v1.4.0
+
+KIND_VERSION = v0.24.0
+UP_VERSION = v0.37.0
 UP_CHANNEL = stable
-UPTEST_VERSION = v1.4.0
+UPTEST_VERSION = v1.2.0
 -include build/makelib/k8s_tools.mk
 
 # ====================================================================================
@@ -176,7 +181,7 @@ run: go.build
 
 # ====================================================================================
 # End to End Testing
-CROSSPLANE_VERSION = 1.16.0
+CROSSPLANE_VERSION = 1.20.0
 CROSSPLANE_NAMESPACE = upbound-system
 -include build/makelib/local.xpkg.mk
 -include build/makelib/controlplane.mk
@@ -203,7 +208,7 @@ uptest: $(UPTEST) $(KUBECTL) $(KUTTL) $(CROSSPLANE_CLI)
 local-deploy: build controlplane.up local.xpkg.deploy.provider.$(PROJECT_NAME)
 	@$(INFO) running locally built provider
 	@$(KUBECTL) wait provider.pkg $(PROJECT_NAME) --for condition=Healthy --timeout 5m
-	@$(KUBECTL) -n upbound-system wait --for=condition=Available deployment --all --timeout=5m
+	@$(KUBECTL) -n $(CROSSPLANE_NAMESPACE) wait --for=condition=Available deployment --all --timeout=5m
 	@$(OK) running locally built provider
 
 e2e: local-deploy uptest
