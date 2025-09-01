@@ -50,7 +50,7 @@ func TerraformSetupBuilder(version, providerSource, providerVersion string, fwPr
 		if configRef == nil {
 			return ps, errors.New(errNoProviderConfig)
 		}
-		pc := &v1beta1.ProviderConfig{}
+		pc := &v1alpha1.ProviderConfig{}
 		if err := client.Get(ctx, types.NamespacedName{Name: configRef.Name}, pc); err != nil {
 			return ps, errors.Wrap(err, errGetProviderConfig)
 		}
