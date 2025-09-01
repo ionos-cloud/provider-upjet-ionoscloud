@@ -1,0 +1,63 @@
+apiVersion: cube.ionos.m.upbound.io/v1alpha1
+kind: Server
+metadata:
+  annotations:
+    meta.upbound.io/example-id: cube/v1alpha1/server
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+  namespace: upbound-system
+spec:
+  forProvider:
+    datacenterIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    imageName: ubuntu:latest
+    imagePasswordSecretRef:
+      key: attribute.result
+      name: example-password
+    nic:
+    - dhcp: true
+      firewallActive: true
+      lanSelector:
+        matchLabels:
+          testing.upbound.io/example-name: example
+      name: Nic Example
+    templateUuid: ${data.ionoscloud_template.example.id}
+    volume:
+    - diskType: DAS
+      licenceType: LINUX
+      name: Volume Example
+
+---
+
+apiVersion: ionoscloud.ionos.m.upbound.io/v1alpha1
+kind: Datacenter
+metadata:
+  annotations:
+    meta.upbound.io/example-id: cube/v1alpha1/server
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+  namespace: upbound-system
+spec:
+  forProvider:
+    location: de/txl
+
+---
+
+apiVersion: ionoscloud.ionos.m.upbound.io/v1alpha1
+kind: Lan
+metadata:
+  annotations:
+    meta.upbound.io/example-id: cube/v1alpha1/server
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+  namespace: upbound-system
+spec:
+  forProvider:
+    datacenterIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    public: true

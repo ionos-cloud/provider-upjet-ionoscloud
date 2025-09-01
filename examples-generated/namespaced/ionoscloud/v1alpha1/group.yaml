@@ -1,0 +1,80 @@
+apiVersion: ionoscloud.ionos.m.upbound.io/v1alpha1
+kind: Group
+metadata:
+  annotations:
+    meta.upbound.io/example-id: ionoscloud/v1alpha1/group
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+  namespace: upbound-system
+spec:
+  forProvider:
+    accessActivityLog: true
+    accessAndManageAiModelHub: true
+    accessAndManageApiGateway: true
+    accessAndManageCdn: true
+    accessAndManageCertificates: true
+    accessAndManageIamResources: true
+    accessAndManageKaas: true
+    accessAndManageLogging: true
+    accessAndManageMonitoring: true
+    accessAndManageNetworkFileStorage: true
+    accessAndManageVpn: true
+    createBackupUnit: true
+    createDatacenter: true
+    createFlowLog: true
+    createInternetAccess: true
+    createK8SCluster: true
+    createNetworkSecurityGroups: true
+    createPcc: true
+    createSnapshot: true
+    manageDbaas: true
+    reserveIp: true
+    s3Privilege: true
+    userIdsRefs:
+    - name: example1
+    - name: example2
+
+---
+
+apiVersion: ionoscloud.ionos.m.upbound.io/v1alpha1
+kind: User
+metadata:
+  annotations:
+    meta.upbound.io/example-id: ionoscloud/v1alpha1/group
+  labels:
+    testing.upbound.io/example-name: example1
+  name: example1
+  namespace: upbound-system
+spec:
+  forProvider:
+    administrator: false
+    email: unique_email.com
+    firstName: user1
+    forceSecAuth: false
+    lastName: user1
+    passwordSecretRef:
+      key: attribute.result
+      name: example-password
+
+---
+
+apiVersion: ionoscloud.ionos.m.upbound.io/v1alpha1
+kind: User
+metadata:
+  annotations:
+    meta.upbound.io/example-id: ionoscloud/v1alpha1/group
+  labels:
+    testing.upbound.io/example-name: example2
+  name: example2
+  namespace: upbound-system
+spec:
+  forProvider:
+    administrator: false
+    email: unique_email.com
+    firstName: user2
+    forceSecAuth: false
+    lastName: user2
+    passwordSecretRef:
+      key: attribute.result
+      name: example-password

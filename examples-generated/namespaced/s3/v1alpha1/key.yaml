@@ -1,0 +1,37 @@
+apiVersion: s3.ionos.m.upbound.io/v1alpha1
+kind: Key
+metadata:
+  annotations:
+    meta.upbound.io/example-id: s3/v1alpha1/key
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+  namespace: upbound-system
+spec:
+  forProvider:
+    active: true
+    userIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+
+---
+
+apiVersion: ionoscloud.ionos.m.upbound.io/v1alpha1
+kind: User
+metadata:
+  annotations:
+    meta.upbound.io/example-id: s3/v1alpha1/key
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+  namespace: upbound-system
+spec:
+  forProvider:
+    administrator: false
+    email: unique@email.com
+    firstName: example
+    forceSecAuth: false
+    lastName: example
+    passwordSecretRef:
+      key: example-key
+      name: example-secret

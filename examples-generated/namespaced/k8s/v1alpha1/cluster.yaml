@@ -1,0 +1,19 @@
+apiVersion: k8s.ionos.m.upbound.io/v1alpha1
+kind: Cluster
+metadata:
+  annotations:
+    meta.upbound.io/example-id: k8s/v1alpha1/cluster
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+  namespace: upbound-system
+spec:
+  forProvider:
+    apiSubnetAllowList:
+    - 1.2.3.4/32
+    k8sVersion: 1.31.2
+    maintenanceWindow:
+    - dayOfTheWeek: Sunday
+      time: 09:00:00Z
+    s3Buckets:
+    - name: globally_unique_bucket_name

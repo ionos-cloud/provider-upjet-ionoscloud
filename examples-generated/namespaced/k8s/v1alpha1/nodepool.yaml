@@ -1,0 +1,125 @@
+apiVersion: k8s.ionos.m.upbound.io/v1alpha1
+kind: NodePool
+metadata:
+  annotations:
+    meta.upbound.io/example-id: k8s/v1alpha1/nodepool
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+  namespace: upbound-system
+spec:
+  forProvider:
+    annotations:
+      ann1: value1
+      ann2: value2
+    autoScaling:
+    - maxNodeCount: 2
+      minNodeCount: 1
+    availabilityZone: AUTO
+    coresCount: 2
+    cpuFamily: INTEL_XEON
+    datacenterIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    k8sClusterIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    k8sVersionSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    labels:
+      lab1: value1
+      lab2: value2
+    lans:
+    - dhcp: true
+      idSelector:
+        matchLabels:
+          testing.upbound.io/example-name: example
+      routes:
+      - gatewayIp: 10.1.5.17
+        network: 1.2.3.5/24
+    maintenanceWindow:
+    - dayOfTheWeek: Monday
+      time: 09:00:00Z
+    nodeCount: 1
+    publicIps:
+    - ${ionoscloud_ipblock.example.ips[0]}
+    - ${ionoscloud_ipblock.example.ips[1]}
+    - ${ionoscloud_ipblock.example.ips[2]}
+    ramSize: 2048
+    serverType: DedicatedCore
+    storageSize: 40
+    storageType: SSD
+
+---
+
+apiVersion: ionoscloud.ionos.m.upbound.io/v1alpha1
+kind: Datacenter
+metadata:
+  annotations:
+    meta.upbound.io/example-id: k8s/v1alpha1/nodepool
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+  namespace: upbound-system
+spec:
+  forProvider:
+    description: datacenter description
+    location: us/las
+    secAuthProtection: false
+
+---
+
+apiVersion: ionoscloud.ionos.m.upbound.io/v1alpha1
+kind: Ipblock
+metadata:
+  annotations:
+    meta.upbound.io/example-id: k8s/v1alpha1/nodepool
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+  namespace: upbound-system
+spec:
+  forProvider:
+    location: us/las
+    size: 3
+
+---
+
+apiVersion: k8s.ionos.m.upbound.io/v1alpha1
+kind: Cluster
+metadata:
+  annotations:
+    meta.upbound.io/example-id: k8s/v1alpha1/nodepool
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+  namespace: upbound-system
+spec:
+  forProvider:
+    apiSubnetAllowList:
+    - 1.2.3.4/32
+    k8sVersion: 1.31.2
+    maintenanceWindow:
+    - dayOfTheWeek: Sunday
+      time: 09:00:00Z
+    s3Buckets:
+    - name: globally_unique_s3_bucket_name
+
+---
+
+apiVersion: ionoscloud.ionos.m.upbound.io/v1alpha1
+kind: Lan
+metadata:
+  annotations:
+    meta.upbound.io/example-id: k8s/v1alpha1/nodepool
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+  namespace: upbound-system
+spec:
+  forProvider:
+    datacenterIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    public: false

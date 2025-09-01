@@ -1,0 +1,105 @@
+apiVersion: inmemorydb.ionos.m.upbound.io/v1alpha1
+kind: Replicaset
+metadata:
+  annotations:
+    meta.upbound.io/example-id: inmemorydb/v1alpha1/replicaset
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+  namespace: upbound-system
+spec:
+  forProvider:
+    connections:
+    - cidr: ${local.database_ip_cidr}
+      datacenterIdSelector:
+        matchLabels:
+          testing.upbound.io/example-name: example
+      lanIdSelector:
+        matchLabels:
+          testing.upbound.io/example-name: example
+    credentials:
+    - plainTextPasswordSecretRef:
+        key: example-key
+        name: example-secret
+      username: myuser
+    displayName: ExampleReplicaSet
+    evictionPolicy: noeviction
+    locationSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    maintenanceWindow:
+    - dayOfTheWeek: Monday
+      time: "10:00:00"
+    persistenceMode: RDB
+    replicas: 4
+    resources:
+    - cores: 1
+      ram: 6
+    version: "7.2"
+
+---
+
+apiVersion: ionoscloud.ionos.m.upbound.io/v1alpha1
+kind: Datacenter
+metadata:
+  annotations:
+    meta.upbound.io/example-id: inmemorydb/v1alpha1/replicaset
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+  namespace: upbound-system
+spec:
+  forProvider:
+    description: Datacenter for DBaaS InMemoryDB replica sets
+    location: de/txl
+
+---
+
+apiVersion: ionoscloud.ionos.m.upbound.io/v1alpha1
+kind: Lan
+metadata:
+  annotations:
+    meta.upbound.io/example-id: inmemorydb/v1alpha1/replicaset
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+  namespace: upbound-system
+spec:
+  forProvider:
+    datacenterIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    public: false
+
+---
+
+apiVersion: ionoscloud.ionos.m.upbound.io/v1alpha1
+kind: Server
+metadata:
+  annotations:
+    meta.upbound.io/example-id: inmemorydb/v1alpha1/replicaset
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+  namespace: upbound-system
+spec:
+  forProvider:
+    cores: 2
+    datacenterIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    imageName: rocky:latest
+    imagePasswordSecretRef:
+      key: example-key
+      name: example-secret
+    nic:
+    - dhcp: true
+      lanSelector:
+        matchLabels:
+          testing.upbound.io/example-name: example
+      name: example
+    ram: 2048
+    volume:
+    - diskType: SSD Standard
+      name: example
+      size: 10

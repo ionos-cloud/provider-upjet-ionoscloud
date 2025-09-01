@@ -1,0 +1,18 @@
+apiVersion: compute.ionoscloud.io/v1alpha1
+kind: Server
+metadata:
+  annotations:
+    crossplane.io/composition-resource-name: xservers-mytestserver-0
+  generateName: create-servers-
+  labels:
+    ionos-cloud-server-name: mytestserver-0
+  name: mytestserver-0
+spec:
+  forProvider:
+    cores: 2
+    name: mytestserver-0
+    nic:
+      dhcp: true
+      name: mytestserver-0
+    ram: 4096
+    type: ENTERPRISE

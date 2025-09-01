@@ -1,0 +1,38 @@
+apiVersion: target.ionos.m.upbound.io/v1alpha1
+kind: Group
+metadata:
+  annotations:
+    meta.upbound.io/example-id: target/v1alpha1/group
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+  namespace: upbound-system
+spec:
+  forProvider:
+    algorithm: ROUND_ROBIN
+    healthCheck:
+    - checkInterval: 50000
+      checkTimeout: 5000
+      retries: 2
+    httpHealthCheck:
+    - matchType: STATUS_CODE
+      method: GET
+      negate: true
+      path: /.
+      regex: true
+      response: "200"
+    protocol: HTTP
+    protocolVersion: HTTP1
+    targets:
+    - healthCheckEnabled: true
+      ip: 22.231.2.2
+      maintenanceEnabled: false
+      port: "8080"
+      proxyProtocol: v2ssl
+      weight: "1"
+    - healthCheckEnabled: false
+      ip: 22.231.2.3
+      maintenanceEnabled: false
+      port: "8081"
+      proxyProtocol: v2
+      weight: "124"

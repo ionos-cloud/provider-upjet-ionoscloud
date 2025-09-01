@@ -1,0 +1,83 @@
+apiVersion: ionoscloud.ionos.m.upbound.io/v1alpha1
+kind: Snapshot
+metadata:
+  annotations:
+    meta.upbound.io/example-id: ionoscloud/v1alpha1/snapshot
+  labels:
+    testing.upbound.io/example-name: test_snapshot
+  name: test-snapshot
+  namespace: upbound-system
+spec:
+  forProvider:
+    datacenterIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    volumeIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+
+---
+
+apiVersion: ionoscloud.ionos.m.upbound.io/v1alpha1
+kind: Datacenter
+metadata:
+  annotations:
+    meta.upbound.io/example-id: ionoscloud/v1alpha1/snapshot
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+  namespace: upbound-system
+spec:
+  forProvider:
+    description: Datacenter Description
+    location: us/las
+    secAuthProtection: false
+
+---
+
+apiVersion: ionoscloud.ionos.m.upbound.io/v1alpha1
+kind: Lan
+metadata:
+  annotations:
+    meta.upbound.io/example-id: ionoscloud/v1alpha1/snapshot
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+  namespace: upbound-system
+spec:
+  forProvider:
+    datacenterIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    public: true
+
+---
+
+apiVersion: ionoscloud.ionos.m.upbound.io/v1alpha1
+kind: Server
+metadata:
+  annotations:
+    meta.upbound.io/example-id: ionoscloud/v1alpha1/snapshot
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+  namespace: upbound-system
+spec:
+  forProvider:
+    cores: 1
+    datacenterIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    imageName: ${data.ionoscloud_image.example.id}
+    imagePasswordSecretRef:
+      key: attribute.result
+      name: example-password
+    ram: 1024
+    type: ENTERPRISE
+    volume:
+    - availabilityZone: ZONE_1
+      bus: VIRTIO
+      diskType: SSD Standard
+      name: system
+      size: 5
+      userData: foo

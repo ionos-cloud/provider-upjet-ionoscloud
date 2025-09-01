@@ -1,0 +1,14 @@
+apiVersion: ionoscloud.ionos.m.upbound.io/v1alpha1
+kind: Datacenter
+metadata:
+  annotations:
+    meta.upbound.io/example-id: ionoscloud/v1alpha1/datacenter
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+  namespace: upbound-system
+spec:
+  forProvider:
+    description: datacenter description
+    location: us/las
+    secAuthProtection: false

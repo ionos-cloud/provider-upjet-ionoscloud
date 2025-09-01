@@ -1,0 +1,59 @@
+apiVersion: cdn.ionos.m.upbound.io/v1alpha1
+kind: Distribution
+metadata:
+  annotations:
+    meta.upbound.io/example-id: cdn/v1alpha1/distribution
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+  namespace: upbound-system
+spec:
+  forProvider:
+    certificateIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: cert
+    domain: example.com
+    routingRules:
+    - prefix: /api
+      scheme: https
+      upstream:
+      - caching: true
+        geoRestrictions:
+        - allowList:
+          - CN
+          - RU
+        host: server.example.com
+        rateLimitClass: R500
+        sniMode: distribution
+        waf: true
+    - prefix: /api2
+      scheme: http/https
+      upstream:
+      - caching: false
+        geoRestrictions:
+        - blockList:
+          - CN
+          - RU
+        host: server2.example.com
+        rateLimitClass: R10
+        sniMode: origin
+        waf: false
+
+---
+
+apiVersion: ionoscloud.ionos.m.upbound.io/v1alpha1
+kind: Certificate
+metadata:
+  annotations:
+    meta.upbound.io/example-id: cdn/v1alpha1/distribution
+  labels:
+    testing.upbound.io/example-name: cert
+  name: cert
+  namespace: upbound-system
+spec:
+  forProvider:
+    certificate: ${file("path_to_cert")}
+    certificateChain: ${file("path_to_cert_chain")}
+    privateKeySecretRef:
+      key: attribute.path_to_private_key
+      name: example-secret

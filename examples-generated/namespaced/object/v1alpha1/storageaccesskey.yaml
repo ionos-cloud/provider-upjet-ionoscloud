@@ -1,0 +1,12 @@
+apiVersion: object.ionos.m.upbound.io/v1alpha1
+kind: StorageAccesskey
+metadata:
+  annotations:
+    meta.upbound.io/example-id: object/v1alpha1/storageaccesskey
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+  namespace: upbound-system
+spec:
+  forProvider:
+    description: my description

@@ -1,0 +1,28 @@
+apiVersion: s3.ionos.m.upbound.io/v1alpha1
+kind: BucketVersioning
+metadata:
+  annotations:
+    meta.upbound.io/example-id: s3/v1alpha1/bucketversioning
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+  namespace: upbound-system
+spec:
+  forProvider:
+    bucketSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+
+---
+
+apiVersion: s3.ionos.m.upbound.io/v1alpha1
+kind: Bucket
+metadata:
+  annotations:
+    meta.upbound.io/example-id: s3/v1alpha1/bucketversioning
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+  namespace: upbound-system
+spec:
+  forProvider: {}
