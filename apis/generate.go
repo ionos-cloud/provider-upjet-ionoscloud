@@ -16,6 +16,8 @@ Copyright 2021 Upbound Inc.
 //go:generate bash -c "find ../apis -type d -empty -delete"
 //go:generate bash -c "find ../internal/controller -iname 'zz_*' -delete"
 //go:generate bash -c "find ../internal/controller -type d -empty -delete"
+//go:generate bash -c "find ../cmd/provider -name 'zz_*' -type f -delete"
+//go:generate bash -c "find ../cmd/provider -type d -maxdepth 1 -mindepth 1 -empty -delete"
 //go:generate rm -rf ../examples-generated
 
 // Generate documentation from Terraform docs.
@@ -30,12 +32,19 @@ Copyright 2021 Upbound Inc.
 // Generate crossplane-runtime methodsets (resource.Claim, etc)
 //go:generate go run -tags generate github.com/crossplane/crossplane-tools/cmd/angryjet generate-methodsets --header-file=../hack/boilerplate.go.txt ./...
 
+// Run upjet's transformer for the generated resolvers to get rid of the cross
+// API-group imports and to prevent import cycles
+//go:generate go run github.com/crossplane/upjet/v2/cmd/resolver -g upjet-ionoscloud.ionoscloud.io -a github.com/ionos-cloud/provider-upjet-ionoscloud/internal/apis -s -p ../apis/cluster/...
+//go:generate go run github.com/crossplane/upjet/v2/cmd/resolver -g upjet-ionoscloud.ionoscloud.io -a github.com/ionos-cloud/provider-upjet-ionoscloud/internal/apis -s -p ../apis/namespaced/...
+
 package apis
 
 import (
+	_ "sigs.k8s.io/controller-tools/cmd/controller-gen" //nolint:typecheck
+
 	_ "github.com/crossplane/crossplane-tools/cmd/angryjet" //nolint:typecheck
-	_ "github.com/crossplane/upjet/v2/cmd/scraper"          //nolint:typecheck
-	_ "sigs.k8s.io/controller-tools/cmd/controller-gen"     //nolint:typecheck
+
+	_ "github.com/crossplane/upjet/v2/cmd/scraper" //nolint:typecheck
 
 	_ "github.com/crossplane/upjet/cmd/resolver"
 	_ "github.com/crossplane/upjet/v2/cmd/resolver"

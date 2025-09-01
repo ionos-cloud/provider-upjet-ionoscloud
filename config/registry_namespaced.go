@@ -8,38 +8,15 @@ import (
 	"context"
 	_ "embed"
 
-	conversiontfjson "github.com/crossplane/upjet/pkg/types/conversion/tfjson"
 	"github.com/crossplane/upjet/v2/pkg/config"
 	"github.com/crossplane/upjet/v2/pkg/registry/reference"
 	"github.com/crossplane/upjet/v2/pkg/schema/traverser"
-	tfjson "github.com/hashicorp/terraform-json"
 	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/schema"
 	"github.com/pkg/errors"
 
 	fwprovider "github.com/hashicorp/terraform-plugin-framework/provider"
 
-	"github.com/ionos-cloud/provider-upjet-ionoscloud/config/namespaced/alb"
-	"github.com/ionos-cloud/provider-upjet-ionoscloud/config/namespaced/apigateway"
-	"github.com/ionos-cloud/provider-upjet-ionoscloud/config/namespaced/asg"
-	"github.com/ionos-cloud/provider-upjet-ionoscloud/config/namespaced/cdn"
-	"github.com/ionos-cloud/provider-upjet-ionoscloud/config/namespaced/certificatemanager"
-	"github.com/ionos-cloud/provider-upjet-ionoscloud/config/namespaced/compute"
-	"github.com/ionos-cloud/provider-upjet-ionoscloud/config/namespaced/containerregistry"
-	"github.com/ionos-cloud/provider-upjet-ionoscloud/config/namespaced/dataplatform"
-	"github.com/ionos-cloud/provider-upjet-ionoscloud/config/namespaced/dns"
-	"github.com/ionos-cloud/provider-upjet-ionoscloud/config/namespaced/inmemorydb"
-	"github.com/ionos-cloud/provider-upjet-ionoscloud/config/namespaced/ipsec"
-	"github.com/ionos-cloud/provider-upjet-ionoscloud/config/namespaced/k8s"
-	"github.com/ionos-cloud/provider-upjet-ionoscloud/config/namespaced/kafka"
-	"github.com/ionos-cloud/provider-upjet-ionoscloud/config/namespaced/log"
-	"github.com/ionos-cloud/provider-upjet-ionoscloud/config/namespaced/mariadb"
-	"github.com/ionos-cloud/provider-upjet-ionoscloud/config/namespaced/mongodb"
-	"github.com/ionos-cloud/provider-upjet-ionoscloud/config/namespaced/natgateway"
-	"github.com/ionos-cloud/provider-upjet-ionoscloud/config/namespaced/nfs"
-	"github.com/ionos-cloud/provider-upjet-ionoscloud/config/namespaced/nlb"
-	"github.com/ionos-cloud/provider-upjet-ionoscloud/config/namespaced/objectstorage"
-	"github.com/ionos-cloud/provider-upjet-ionoscloud/config/namespaced/postgresql"
-	"github.com/ionos-cloud/provider-upjet-ionoscloud/config/namespaced/wireguard"
+	"github.com/ionos-cloud/provider-upjet-ionoscloud/config/namespaced"
 )
 
 const (
@@ -121,32 +98,7 @@ func GetProviderNamespaced(ctx context.Context, fwProvider fwprovider.Provider, 
 		),
 	)
 
-	for _, configure := range []func(provider *config.Provider){
-		// add custom config functions
-		objectstorage.Configure,
-		compute.Configure,
-		apigateway.Configure,
-		mariadb.Configure,
-		wireguard.Configure,
-		kafka.Configure,
-		inmemorydb.Configure,
-		ipsec.Configure,
-		nfs.Configure,
-		k8s.Configure,
-		dns.Configure,
-		mongodb.Configure,
-		postgresql.Configure,
-		alb.Configure,
-		certificatemanager.Configure,
-		asg.Configure,
-		compute.Configure,
-		nlb.Configure,
-		containerregistry.Configure,
-		natgateway.Configure,
-		dataplatform.Configure,
-		log.Configure,
-		cdn.Configure,
-	} {
+	for _, configure := range namespaced.ProviderConfiguration {
 		configure(pc)
 	}
 	pc.ConfigureResources()
@@ -162,22 +114,4 @@ func hasSingletonListCredentialsSensitiveMarshallingProblems(r *config.Resource)
 		r.Name == "ionoscloud_mongo_cluster" ||
 		r.Name == "ionoscloud_autoscaling_group" ||
 		r.Name == "ionoscloud_auto_certificate_provider"
-}
-
-func getProviderSchema(s string) (*schema.Provider, error) {
-	ps := tfjson.ProviderSchemas{}
-	if err := ps.UnmarshalJSON([]byte(s)); err != nil {
-		panic(err)
-	}
-	if len(ps.Schemas) != 1 {
-		return nil, errors.Errorf("there should exactly be 1 provider schema but there are %d", len(ps.Schemas))
-	}
-	var rs map[string]*tfjson.Schema
-	for _, v := range ps.Schemas {
-		rs = v.ResourceSchemas
-		break
-	}
-	return &schema.Provider{
-		ResourcesMap: conversiontfjson.GetV2ResourceMap(rs),
-	}, nil
 }

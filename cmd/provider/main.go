@@ -5,6 +5,7 @@ Copyright 2021 Upbound Inc.
 package main
 
 import (
+	"context"
 	"io"
 	"os"
 	"path/filepath"
@@ -25,10 +26,9 @@ import (
 	"sigs.k8s.io/controller-runtime/pkg/log/zap"
 	"sigs.k8s.io/controller-runtime/pkg/metrics"
 
-	"github.com/ionos-cloud/provider-upjet-ionoscloud/apis"
 	"github.com/ionos-cloud/provider-upjet-ionoscloud/config"
 	"github.com/ionos-cloud/provider-upjet-ionoscloud/internal/clients"
-	"github.com/ionos-cloud/provider-upjet-ionoscloud/internal/controller"
+	controller "github.com/ionos-cloud/provider-upjet-ionoscloud/internal/controller/cluster"
 	"github.com/ionos-cloud/provider-upjet-ionoscloud/internal/features"
 )
 
@@ -46,7 +46,7 @@ func main() {
 		providerSource   = app.Flag("terraform-provider-source", "Terraform provider source.").Required().Envar("TERRAFORM_PROVIDER_SOURCE").String()
 		providerVersion  = app.Flag("terraform-provider-version", "Terraform provider version.").Required().Envar("TERRAFORM_PROVIDER_VERSION").String()
 
-		namespace                = app.Flag("namespace", "Namespace used to set as default scope in default secret store config.").Default("crossplane-system").Envar("POD_NAMESPACE").String()
+		// namespace                = app.Flag("namespace", "Namespace used to set as default scope in default secret store config.").Default("crossplane-system").Envar("POD_NAMESPACE").String()
 		enableManagementPolicies = app.Flag("enable-management-policies", "Enable support for Management Policies.").Default("true").Envar("ENABLE_MANAGEMENT_POLICIES").Bool()
 	)
 
@@ -88,7 +88,7 @@ func main() {
 	metrics.Registry.MustRegister(metricRecorder)
 	metrics.Registry.MustRegister(stateMetrics)
 
-	p, err := config.GetProvider(false)
+	p, err := config.GetProvider(context.Background(), clients.IonosCloudProvider, clients.IonosCloudProvider, false, true)
 	kingpin.FatalIfError(err, "Cannot get provider configuration")
 
 	o := tjcontroller.Options{

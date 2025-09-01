@@ -29,9 +29,9 @@ func main() {
 		panic(fmt.Sprintf("cannot calculate the absolute path with %s", *repoRoot))
 	}
 
-	providerCluster, err := config.GetProvider(true)
-	kingpin.FatalIfError(err, "Cannot get provider configuration")
 	fwProvider, sdkProvider := xpprovider.GetProvider()
+	providerCluster, err := config.GetProvider(context.Background(), fwProvider, sdkProvider, true, false)
+	kingpin.FatalIfError(err, "Cannot get terraform provider configuration")
 	pns, err := config.GetProviderNamespaced(context.Background(), fwProvider, sdkProvider, true, false)
 	kingpin.FatalIfError(err, "Cannot initialize the provider namespaced configuration")
 
