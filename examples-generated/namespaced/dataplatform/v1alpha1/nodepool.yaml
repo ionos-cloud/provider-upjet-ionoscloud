@@ -1,4 +1,4 @@
-apiVersion: dataplatform.ionos.m.upbound.io/v1alpha1
+apiVersion: dataplatform.ionoscloud.io/v1alpha1
 kind: NodePool
 metadata:
   annotations:
@@ -24,6 +24,7 @@ spec:
     maintenanceWindow:
     - dayOfTheWeek: Monday
       time: "09:00:00"
+    name: Dataplatform_Node_Pool_Example
     nodeCount: 1
     ramSize: 2048
     storageSize: 10
@@ -31,7 +32,7 @@ spec:
 
 ---
 
-apiVersion: ionoscloud.ionos.m.upbound.io/v1alpha1
+apiVersion: compute.ionoscloud.io/v1alpha1
 kind: Datacenter
 metadata:
   annotations:
@@ -44,10 +45,11 @@ spec:
   forProvider:
     description: Datacenter for testing Dataplatform Cluster
     location: de/txl
+    name: Datacenter_Example
 
 ---
 
-apiVersion: dataplatform.ionos.m.upbound.io/v1alpha1
+apiVersion: dataplatform.ionoscloud.io/v1alpha1
 kind: Cluster
 metadata:
   annotations:
@@ -64,4 +66,5 @@ spec:
     maintenanceWindow:
     - dayOfTheWeek: Sunday
       time: "09:00:00"
+    name: Dataplatform_Cluster_Example
     version: "24.11"

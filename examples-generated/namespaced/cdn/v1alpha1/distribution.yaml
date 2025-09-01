@@ -1,4 +1,4 @@
-apiVersion: cdn.ionos.m.upbound.io/v1alpha1
+apiVersion: cdn.ionoscloud.io/v1alpha1
 kind: Distribution
 metadata:
   annotations:
@@ -41,7 +41,7 @@ spec:
 
 ---
 
-apiVersion: ionoscloud.ionos.m.upbound.io/v1alpha1
+apiVersion: certificatemanager.ionoscloud.io/v1alpha1
 kind: Certificate
 metadata:
   annotations:
@@ -54,6 +54,7 @@ spec:
   forProvider:
     certificate: ${file("path_to_cert")}
     certificateChain: ${file("path_to_cert_chain")}
+    name: add_name_here
     privateKeySecretRef:
       key: attribute.path_to_private_key
       name: example-secret

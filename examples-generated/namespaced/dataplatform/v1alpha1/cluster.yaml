@@ -1,4 +1,4 @@
-apiVersion: dataplatform.ionos.m.upbound.io/v1alpha1
+apiVersion: dataplatform.ionoscloud.io/v1alpha1
 kind: Cluster
 metadata:
   annotations:
@@ -23,11 +23,12 @@ spec:
     maintenanceWindow:
     - dayOfTheWeek: Sunday
       time: "09:00:00"
+    name: Dataplatform_Cluster_Example
     version: "24.11"
 
 ---
 
-apiVersion: ionoscloud.ionos.m.upbound.io/v1alpha1
+apiVersion: compute.ionoscloud.io/v1alpha1
 kind: Datacenter
 metadata:
   annotations:
@@ -40,10 +41,11 @@ spec:
   forProvider:
     description: Datacenter for testing Dataplatform Cluster
     location: de/txl
+    name: Datacenter_Example
 
 ---
 
-apiVersion: ionoscloud.ionos.m.upbound.io/v1alpha1
+apiVersion: compute.ionoscloud.io/v1alpha1
 kind: Lan
 metadata:
   annotations:
@@ -57,4 +59,5 @@ spec:
     datacenterIdSelector:
       matchLabels:
         testing.upbound.io/example-name: example
+    name: LAN_Example
     public: false

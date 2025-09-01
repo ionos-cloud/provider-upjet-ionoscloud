@@ -1,4 +1,4 @@
-apiVersion: k8s.ionos.m.upbound.io/v1alpha1
+apiVersion: k8s.ionoscloud.io/v1alpha1
 kind: NodePool
 metadata:
   annotations:
@@ -41,6 +41,7 @@ spec:
     maintenanceWindow:
     - dayOfTheWeek: Monday
       time: 09:00:00Z
+    name: k8sNodePoolExample
     nodeCount: 1
     publicIps:
     - ${ionoscloud_ipblock.example.ips[0]}
@@ -53,7 +54,7 @@ spec:
 
 ---
 
-apiVersion: ionoscloud.ionos.m.upbound.io/v1alpha1
+apiVersion: compute.ionoscloud.io/v1alpha1
 kind: Datacenter
 metadata:
   annotations:
@@ -66,11 +67,12 @@ spec:
   forProvider:
     description: datacenter description
     location: us/las
+    name: Datacenter Example
     secAuthProtection: false
 
 ---
 
-apiVersion: ionoscloud.ionos.m.upbound.io/v1alpha1
+apiVersion: compute.ionoscloud.io/v1alpha1
 kind: Ipblock
 metadata:
   annotations:
@@ -82,11 +84,12 @@ metadata:
 spec:
   forProvider:
     location: us/las
+    name: IP Block Example
     size: 3
 
 ---
 
-apiVersion: k8s.ionos.m.upbound.io/v1alpha1
+apiVersion: k8s.ionoscloud.io/v1alpha1
 kind: Cluster
 metadata:
   annotations:
@@ -103,12 +106,15 @@ spec:
     maintenanceWindow:
     - dayOfTheWeek: Sunday
       time: 09:00:00Z
+    name: k8sClusterExample
     s3Buckets:
-    - name: globally_unique_s3_bucket_name
+    - nameSelector:
+        matchLabels:
+          testing.upbound.io/example-name: example
 
 ---
 
-apiVersion: ionoscloud.ionos.m.upbound.io/v1alpha1
+apiVersion: compute.ionoscloud.io/v1alpha1
 kind: Lan
 metadata:
   annotations:
@@ -122,4 +128,5 @@ spec:
     datacenterIdSelector:
       matchLabels:
         testing.upbound.io/example-name: example
+    name: Lan Example
     public: false

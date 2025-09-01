@@ -21,7 +21,7 @@ import (
 
 	"github.com/crossplane/upjet/v2/pkg/terraform"
 
-	"github.com/ionos-cloud/provider-upjet-ionoscloud/apis/v1beta1"
+	"github.com/ionos-cloud/provider-upjet-ionoscloud/apis/namespaced/v1beta1"
 )
 
 const (

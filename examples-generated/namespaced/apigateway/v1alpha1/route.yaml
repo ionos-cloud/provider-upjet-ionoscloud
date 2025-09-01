@@ -1,4 +1,4 @@
-apiVersion: apigateway.ionos.m.upbound.io/v1alpha1
+apiVersion: apigateway.ionoscloud.io/v1alpha1
 kind: Route
 metadata:
   annotations:
@@ -15,6 +15,7 @@ spec:
     methods:
     - GET
     - POST
+    name: apigateway-route
     paths:
     - /foo/*
     - /bar
@@ -29,7 +30,7 @@ spec:
 
 ---
 
-apiVersion: ionoscloud.ionos.m.upbound.io/v1alpha1
+apiVersion: apigateway.ionoscloud.io/v1alpha1
 kind: Apigateway
 metadata:
   annotations:
@@ -46,3 +47,4 @@ spec:
     - certificateId: 00000000-0000-0000-0000-000000000000
       name: example.org
     metrics: true
+    name: example-gateway

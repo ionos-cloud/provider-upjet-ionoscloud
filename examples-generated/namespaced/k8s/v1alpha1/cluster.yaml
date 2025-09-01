@@ -1,4 +1,4 @@
-apiVersion: k8s.ionos.m.upbound.io/v1alpha1
+apiVersion: k8s.ionoscloud.io/v1alpha1
 kind: Cluster
 metadata:
   annotations:
@@ -15,5 +15,8 @@ spec:
     maintenanceWindow:
     - dayOfTheWeek: Sunday
       time: 09:00:00Z
+    name: k8sClusterExample
     s3Buckets:
-    - name: globally_unique_bucket_name
+    - nameSelector:
+        matchLabels:
+          testing.upbound.io/example-name: example
