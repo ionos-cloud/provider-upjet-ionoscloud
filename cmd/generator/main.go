@@ -5,7 +5,6 @@ Copyright 2021 Upbound Inc.
 package main
 
 import (
-	"context"
 	"fmt"
 	"os"
 	"path/filepath"
@@ -30,9 +29,9 @@ func main() {
 	}
 
 	fwProvider, sdkProvider := xpprovider.GetProvider()
-	providerCluster, err := config.GetProvider(context.Background(), fwProvider, sdkProvider, true)
+	providerCluster, err := config.GetProvider(fwProvider, sdkProvider, true)
 	kingpin.FatalIfError(err, "Cannot get terraform provider configuration")
-	pns, err := config.GetProviderNamespaced(context.Background(), fwProvider, sdkProvider, true)
+	pns, err := config.GetProviderNamespaced(fwProvider, sdkProvider, true)
 	kingpin.FatalIfError(err, "Cannot initialize the provider namespaced configuration")
 
 	pipeline.Run(providerCluster, pns, absRootDir)

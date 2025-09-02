@@ -5,7 +5,6 @@ Copyright 2021 Upbound Inc.
 package main
 
 import (
-	"context"
 	"io"
 	"os"
 	"path/filepath"
@@ -93,7 +92,7 @@ func main() {
 	metrics.Registry.MustRegister(stateMetrics)
 
 	fwprovider, sdkprovider := xpprovider.GetProvider()
-	clusterProvider, err := config.GetProvider(context.Background(), fwprovider, sdkprovider, false)
+	clusterProvider, err := config.GetProvider(fwprovider, sdkprovider, false)
 	kingpin.FatalIfError(err, "Cannot get cluster terraform provider configuration")
 	//
 	// Cluster scoped configuration
@@ -119,7 +118,7 @@ func main() {
 		SetupFn:        clients.TerraformSetupBuilder(*terraformVersion, *providerSource, *providerVersion, clusterProvider.TerraformPluginFrameworkProvider),
 	}
 
-	namespacedProvider, err := config.GetProviderNamespaced(context.Background(), fwprovider, sdkprovider, false)
+	namespacedProvider, err := config.GetProviderNamespaced(fwprovider, sdkprovider, false)
 	kingpin.FatalIfError(err, "Cannot get namespaced terraform provider configuration")
 	//
 	// Namespaced configuration

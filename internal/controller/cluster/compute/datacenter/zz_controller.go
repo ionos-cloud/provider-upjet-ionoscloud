@@ -21,8 +21,8 @@ import (
 	"github.com/pkg/errors"
 	ctrl "sigs.k8s.io/controller-runtime"
 
-	"github.com/ionos-cloud/provider-upjet-ionoscloud/apis/cluster/compute/v1alpha1"
-	"github.com/ionos-cloud/provider-upjet-ionoscloud/internal/features"
+	v1alpha1 "github.com/ionos-cloud/provider-upjet-ionoscloud/apis/cluster/compute/v1alpha1"
+	features "github.com/ionos-cloud/provider-upjet-ionoscloud/internal/features"
 )
 
 // SetupGated adds a controller that reconciles Datacenter managed resources.

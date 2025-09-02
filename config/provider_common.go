@@ -21,6 +21,11 @@ var (
 	providerMetadata []byte
 )
 
+const (
+	resourcePrefix = "ionoscloud"
+	modulePath     = "github.com/ionos-cloud/provider-upjet-ionoscloud"
+)
+
 func getProviderSchema(s string) (*schema.Provider, error) {
 	ps := tfjson.ProviderSchemas{}
 	if err := ps.UnmarshalJSON([]byte(s)); err != nil {

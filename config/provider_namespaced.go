@@ -5,7 +5,6 @@
 package config
 
 import (
-	"context"
 	_ "embed"
 
 	"github.com/crossplane/upjet/v2/pkg/config"
@@ -16,11 +15,6 @@ import (
 	"github.com/pkg/errors"
 
 	"github.com/ionos-cloud/provider-upjet-ionoscloud/config/namespaced"
-)
-
-const (
-	resourcePrefix = "ionoscloud"
-	modulePath     = "github.com/ionos-cloud/provider-upjet-ionoscloud"
 )
 
 func addTFSingletonConversion(pc *config.Provider) {
@@ -63,7 +57,7 @@ func addTFSingletonConversion(pc *config.Provider) {
 // configuration is being read for the code generation pipelines.
 // In that case, we will only use the JSON schema for generating
 // the CRDs.
-func GetProviderNamespaced(ctx context.Context, fwProvider fwprovider.Provider, sdkProvider *schema.Provider, generationProvider bool) (*config.Provider, error) {
+func GetProviderNamespaced(fwProvider fwprovider.Provider, sdkProvider *schema.Provider, generationProvider bool) (*config.Provider, error) {
 	if generationProvider {
 		p, err := getProviderSchema(providerSchema)
 		if err != nil {
