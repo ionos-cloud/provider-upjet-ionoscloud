@@ -2,7 +2,6 @@ apiVersion: upjet-ionoscloud.m.ionoscloud.io/v1beta1
 kind: ClusterProviderConfig
 metadata:
   name: default
-  namespace: upbound-system
 spec:
   credentials:
     source: Secret
