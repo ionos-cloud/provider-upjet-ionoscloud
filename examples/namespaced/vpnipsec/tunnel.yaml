@@ -1,0 +1,47 @@
+apiVersion: vpnipsec.ionoscloud.io/v1alpha1
+kind: VpnIpsecTunnel
+metadata:
+  annotations:
+    meta.upbound.io/example-id: vpnipsec/v1alpha1/vpnipsectunnel
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+  namespace: upbound-system
+spec:
+  forProvider:
+    auth:
+      - method: PSK
+        pskKeySecretRef:
+          key: password
+          name: example-secret
+          namespace: upbound-system
+    cloudNetworkCidrs:
+      - 0.0.0.0/0
+    description: Allows local subnet X to connect to virtual network Y.
+    esp:
+      - diffieHellmanGroup: 16-MODP4096
+        encryptionAlgorithm: AES256
+        integrityAlgorithm: SHA256
+        lifetime: 3600
+    gatewayIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    ike:
+        diffieHellmanGroup: 16-MODP4096
+        encryptionAlgorithm: AES256
+        integrityAlgorithm: SHA256
+        lifetime: 86400
+    location: de/fra
+    name: example-tunnel
+    peerNetworkCidrs:
+      - 1.2.3.4/32
+    remoteHost: vpn.mycompany.com
+---
+apiVersion: v1
+kind: Secret
+metadata:
+  name: example-secret
+  namespace: upbound-system
+stringData:
+  password: "Upboundtest!"
+

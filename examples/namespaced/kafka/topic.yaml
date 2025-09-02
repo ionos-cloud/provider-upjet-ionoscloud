@@ -1,0 +1,88 @@
+apiVersion: kafka.ionoscloud.io/v1alpha1
+kind: KafkaTopic
+metadata:
+  annotations:
+    meta.upbound.io/example-id: kafka/v1alpha1/kafkatopic
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+  namespace: upbound-system
+spec:
+  forProvider:
+    clusterIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    locationSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    name: kafka-cluster-topic
+    numberOfPartitions: 1
+    replicationFactor: 1
+    retentionTime: 86400000
+    segmentBytes: 1073741824
+
+---
+
+apiVersion: compute.ionoscloud.io/v1alpha1
+kind: Datacenter
+metadata:
+  annotations:
+    meta.upbound.io/example-id: kafka/v1alpha1/kafkatopic
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+  namespace: upbound-system
+spec:
+  forProvider:
+    location: de/fra
+    name: example-kafka-datacenter
+
+---
+
+apiVersion: kafka.ionoscloud.io/v1alpha1
+kind: Kafka
+metadata:
+  annotations:
+    meta.upbound.io/example-id: kafka/v1alpha1/kafkatopic
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+  namespace: upbound-system
+spec:
+  forProvider:
+    connections:
+      brokerAddresses:
+        - 192.168.1.101/24
+        - 192.168.1.102/24
+        - 192.168.1.103/24
+      datacenterIdSelector:
+        matchLabels:
+          testing.upbound.io/example-name: example
+      lanIdSelector:
+        matchLabels:
+          testing.upbound.io/example-name: example
+    locationSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    name: example-kafka-cluster
+    size: S
+    version: 3.7.0
+
+---
+
+apiVersion: compute.ionoscloud.io/v1alpha1
+kind: Lan
+metadata:
+  annotations:
+    meta.upbound.io/example-id: kafka/v1alpha1/kafkatopic
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+  namespace: upbound-system
+spec:
+  forProvider:
+    datacenterIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    name: example-kafka-lan
+    public: false

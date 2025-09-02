@@ -1,0 +1,117 @@
+apiVersion: compute.ionoscloud.io/v1alpha1
+kind: VCPUServer
+metadata:
+  annotations:
+    meta.upbound.io/example-id: compute/v1alpha1/vcpuserver
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+  namespace: upbound-system
+spec:
+  forProvider:
+    availabilityZone: AUTO
+    cores: 1
+    datacenterIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    imageName: ubuntu:latest
+    imagePasswordSecretRef:
+      key: password
+      name: example-password
+      namespace: upbound-system
+    label:
+    - key: labelkey1
+      value: labelvalue1
+    - key: labelkey2
+      value: labelvalue2
+    name: VCPU Server Example
+    nic:
+      dhcp: true
+      firewall:
+      - name: SSH
+        portRangeEnd: 22
+        portRangeStart: 22
+        protocol: TCP
+        sourceIp: 87.106.116.150
+        sourceMac: 00:0a:95:9d:68:17
+        targetIp: 212.227.7.83
+        type: EGRESS
+      firewallActive: true
+      firewallType: BIDIRECTIONAL
+      ips:
+        - 85.215.251.82
+        - 85.215.190.16
+      lanSelector:
+        matchLabels:
+          testing.upbound.io/example-name: example
+      name: system
+    ram: 1024
+    volume:
+      availabilityZone: ZONE_1
+      bus: VIRTIO
+      diskType: SSD Standard
+      name: system
+      size: 5
+      userData: foo
+
+---
+
+apiVersion: compute.ionoscloud.io/v1alpha1
+kind: Datacenter
+metadata:
+  annotations:
+    meta.upbound.io/example-id: compute/v1alpha1/vcpuserver
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+  namespace: upbound-system
+spec:
+  forProvider:
+    description: Datacenter Description
+    location: de/txl
+    name: Datacenter Example
+    secAuthProtection: false
+
+---
+
+apiVersion: compute.ionoscloud.io/v1alpha1
+kind: Ipblock
+metadata:
+  annotations:
+    meta.upbound.io/example-id: compute/v1alpha1/vcpuserver
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+  namespace: upbound-system
+spec:
+  forProvider:
+    location: de/txl
+    name: IP Block Example
+    size: 4
+
+---
+
+apiVersion: compute.ionoscloud.io/v1alpha1
+kind: Lan
+metadata:
+  annotations:
+    meta.upbound.io/example-id: compute/v1alpha1/vcpuserver
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+  namespace: upbound-system
+spec:
+  forProvider:
+    datacenterIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    name: Lan Example
+    public: true
+---
+apiVersion: v1
+kind: Secret
+metadata:
+  name: example-password
+  namespace: upbound-system
+stringData:
+  password: "Upboundtest1"

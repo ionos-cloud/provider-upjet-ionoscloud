@@ -1,0 +1,60 @@
+apiVersion: apiextensions.crossplane.io/v1
+kind: Composition
+metadata:
+  name: k8sdbclustercomposition
+  namespace: upbound-system
+spec:
+  compositeTypeRef:
+    apiVersion: ionos.crossplane.io/v1alpha1
+    kind: XK8sDBCluster
+  resources:
+    - name: k8sCluster
+      base:
+        apiVersion: compute.ionos.crossplane.io/v1alpha1
+        kind: KubernetesCluster
+        namespace: upbound-system
+        spec:
+          forProvider:
+            name: k8s-cluster
+            version: "1.21"
+            nodePools:
+              - name: default-pool
+                nodeCount: 3
+                cpuFamily: AMD_OPTERON
+                cores: 2
+                ramSize: 4096
+                storageType: HDD
+                storageSize: 100
+      patches:
+        - fromFieldPath: "spec.parameters.k8sClusterName"
+          toFieldPath: "spec.forProvider.name"
+          type: FromCompositeFieldPath
+    - name: psqlDatabase
+      base:
+        apiVersion: database.ionos.crossplane.io/v1alpha1
+        kind: PostgreSQLInstance
+        namespace: upbound-system
+        spec:
+          forProvider:
+            name: psql-db
+            version: "13"
+            storageType: HDD
+            storageSize: 100
+            cores: 2
+            ramSize: 4096
+      patches:
+        - fromFieldPath: "spec.parameters.dbName"
+          toFieldPath: "spec.forProvider.name"
+          type: FromCompositeFieldPath
+    - name: lan
+      base:
+        apiVersion: compute.ionos.crossplane.io/v1alpha1
+        kind: Lan
+        spec:
+          forProvider:
+            name: k8s-db-lan
+            public: false
+      patches:
+        - fromFieldPath: "spec.parameters.lanIPv4CidrBlock"
+          toFieldPath: "spec.forProvider.ipv4CidrBlock"
+          type: FromCompositeFieldPath

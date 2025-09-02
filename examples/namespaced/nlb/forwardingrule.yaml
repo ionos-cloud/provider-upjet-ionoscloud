@@ -1,0 +1,114 @@
+apiVersion: nlb.ionoscloud.io/v1alpha1
+kind: Forwardingrule
+metadata:
+  annotations:
+    meta.upbound.io/example-id: nlb/v1alpha1/forwardingrule
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+  namespace: upbound-system
+spec:
+  forProvider:
+    algorithm: SOURCE_IP
+    datacenterIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example1
+    listenerIp: 10.12.118.224
+    listenerPort: 8081
+    name: example
+    networkloadbalancerIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    protocol: TCP
+    targets:
+    - healthCheck:
+        check: true
+        checkInterval: 1000
+      ip: 22.231.2.2
+      port: 8080
+      proxyProtocol: v1
+      weight: 123
+
+---
+
+apiVersion: compute.ionoscloud.io/v1alpha1
+kind: Datacenter
+metadata:
+  annotations:
+    meta.upbound.io/example-id: nlb/v1alpha1/forwardingrule
+  labels:
+    testing.upbound.io/example-name: example1
+  name: example1
+  namespace: upbound-system
+spec:
+  forProvider:
+    description: Datacenter Description
+    location: us/las
+    name: Datacenter Example
+    secAuthProtection: false
+
+---
+
+apiVersion: compute.ionoscloud.io/v1alpha1
+kind: Lan
+metadata:
+  annotations:
+    meta.upbound.io/example-id: nlb/v1alpha1/forwardingrule
+  labels:
+    testing.upbound.io/example-name: example1
+  name: example1
+  namespace: upbound-system
+spec:
+  forProvider:
+    datacenterIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example1
+    name: Lan Example 1
+    public: false
+
+---
+
+apiVersion: compute.ionoscloud.io/v1alpha1
+kind: Lan
+metadata:
+  annotations:
+    meta.upbound.io/example-id: nlb/v1alpha1/forwardingrule
+  labels:
+    testing.upbound.io/example-name: example2
+  name: example2
+  namespace: upbound-system
+spec:
+  forProvider:
+    datacenterIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example1
+    name: Lan Example 2
+    public: false
+
+---
+
+apiVersion: nlb.ionoscloud.io/v1alpha1
+kind: Networkloadbalancer
+metadata:
+  annotations:
+    meta.upbound.io/example-id: nlb/v1alpha1/forwardingrule
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+  namespace: upbound-system
+spec:
+  forProvider:
+    datacenterIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example1
+    ips:
+    - 10.12.118.224
+    lbPrivateIps:
+    - 10.13.72.225/24
+    listenerLanSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example1
+    name: example
+    targetLanSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example2

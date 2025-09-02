@@ -1,0 +1,130 @@
+apiVersion: alb.ionoscloud.io/v1alpha1
+kind: LoadbalancerForwardingrule
+metadata:
+  annotations:
+    meta.upbound.io/example-id: alb/v1alpha1/loadbalancerforwardingrule
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+  namespace: upbound-system
+spec:
+  forProvider:
+    applicationLoadbalancerIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    clientTimeout: 1000
+    datacenterIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    httpRules:
+    - conditions:
+      - condition: EQUALS
+        key: key
+        negate: true
+        type: HEADER
+        value: 10.12.120.224/24
+      dropQuery: true
+      location: www.ionos.com
+      name: http_rule
+      statusCode: 301
+      type: REDIRECT
+    - conditions:
+      - condition: MATCHES
+        key: key
+        negate: false
+        type: QUERY
+        value: 10.12.120.224/24
+      contentType: text/plain
+      dropQuery: false
+      name: http_rule_2
+      responseMessage: Response
+      statusCode: 303
+      type: STATIC
+    listenerIp: 10.12.118.224
+    listenerPort: 8080
+    name: ALB FR Example
+    protocol: HTTP
+
+---
+
+apiVersion: alb.ionoscloud.io/v1alpha1
+kind: Loadbalancer
+metadata:
+  annotations:
+    meta.upbound.io/example-id: alb/v1alpha1/loadbalancerforwardingrule
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+  namespace: upbound-system
+spec:
+  forProvider:
+    datacenterIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    ips:
+    - 10.12.118.224
+    lbPrivateIps:
+    - 10.13.72.225/24
+    listenerLanSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example_1
+    name: ALB Example
+    targetLanSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example_2
+
+---
+
+apiVersion: compute.ionoscloud.io/v1alpha1
+kind: Datacenter
+metadata:
+  annotations:
+    meta.upbound.io/example-id: alb/v1alpha1/loadbalancerforwardingrule
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+  namespace: upbound-system
+spec:
+  forProvider:
+    description: datacenter description
+    location: us/las
+    name: Datacenter Example
+    secAuthProtection: false
+
+---
+
+apiVersion: compute.ionoscloud.io/v1alpha1
+kind: Lan
+metadata:
+  annotations:
+    meta.upbound.io/example-id: alb/v1alpha1/loadbalancerforwardingrule
+  labels:
+    testing.upbound.io/example-name: example_1
+  name: example-1
+  namespace: upbound-system
+spec:
+  forProvider:
+    datacenterIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    name: Lan Example
+    public: false
+
+---
+
+apiVersion: compute.ionoscloud.io/v1alpha1
+kind: Lan
+metadata:
+  annotations:
+    meta.upbound.io/example-id: alb/v1alpha1/loadbalancerforwardingrule
+  labels:
+    testing.upbound.io/example-name: example_2
+  name: example-2
+  namespace: upbound-system
+spec:
+  forProvider:
+    datacenterIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    name: Lan Example
+    public: false

@@ -1,0 +1,29 @@
+apiVersion: objectstorage.ionoscloud.io/v1alpha1
+kind: Bucket
+metadata:
+  annotations:
+    meta.upbound.io/example-id: objectstorage/v1alpha1/bucketserversideencryptionconfiguration
+  labels:
+    testing.upbound.io/example-name: sse
+  name: ${Rand.RFC1123Subdomain}
+  namespace: upbound-system
+spec:
+  forProvider: {}
+---
+apiVersion: objectstorage.ionoscloud.io/v1alpha1
+kind: BucketServerSideEncryptionConfiguration
+metadata:
+  annotations:
+    meta.upbound.io/example-id: objectstorage/v1alpha1/bucketserversideencryptionconfiguration
+  labels:
+    testing.upbound.io/example-name: sse
+  name: example
+  namespace: upbound-system
+spec:
+  forProvider:
+    bucketSelector:
+      matchLabels:
+        testing.upbound.io/example-name: sse
+    rule:
+    - applyServerSideEncryptionByDefault:
+        sseAlgorithm: AES256

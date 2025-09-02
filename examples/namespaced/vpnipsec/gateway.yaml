@@ -1,0 +1,74 @@
+apiVersion: compute.ionoscloud.io/v1alpha1
+kind: Datacenter
+metadata:
+  annotations:
+    meta.upbound.io/example-id: compute/v1alpha1/datacenter
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+  namespace: upbound-system
+spec:
+  forProvider:
+    description: datacenter description
+    location: de/fra
+    name: Datacenter Example
+    secAuthProtection: false
+---
+apiVersion: compute.ionoscloud.io/v1alpha1
+kind: Ipblock
+metadata:
+  annotations:
+    meta.upbound.io/example-id: compute/v1alpha1/ipblock
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+  namespace: upbound-system
+spec:
+  forProvider:
+    location: de/fra
+    name: IP Block Example
+    size: 1
+---
+apiVersion: compute.ionoscloud.io/v1alpha1
+kind: Lan
+metadata:
+  annotations:
+    meta.upbound.io/example-id: compute/v1alpha1/lan
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+  namespace: upbound-system
+spec:
+  forProvider:
+    datacenterIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    name: Lan Example
+    public: false
+---
+apiVersion: vpnipsec.ionoscloud.io/v1alpha1
+kind: VpnIpsecGateway
+metadata:
+  annotations:
+    meta.upbound.io/example-id: vpnipsec/v1alpha1/vpnipsecgateway
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+  namespace: upbound-system
+spec:
+  forProvider:
+    connections:
+      - datacenterIdSelector:
+          matchLabels:
+            testing.upbound.io/example-name: example
+        ipv4Cidr: 192.168.100.10/24
+        lanIdSelector:
+          matchLabels:
+            testing.upbound.io/example-name: example
+    description: This gateway connects site A to VDC X.
+    gatewayIpSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    location: de/fra
+    name: ipsec_gateway_basic
+    version: IKEv2

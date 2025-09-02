@@ -1,0 +1,17 @@
+apiVersion: objectstorage.ionoscloud.io/v1alpha1
+kind: Bucket
+metadata:
+  annotations:
+    meta.upbound.io/example-id: objectstorage/v1alpha1/bucket
+  labels:
+    testing.upbound.io/example-name: example
+  name: ${Rand.RFC1123Subdomain}
+  namespace: upbound-system
+spec:
+  forProvider:
+    forceDestroy: true
+    objectLockEnabled: true
+    region: eu-central-3
+    tags:
+      key1: value1
+      key2: value2

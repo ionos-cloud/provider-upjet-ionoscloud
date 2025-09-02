@@ -1,0 +1,94 @@
+apiVersion: compute.ionoscloud.io/v1alpha1
+kind: BootDeviceSelection
+metadata:
+  annotations:
+    meta.upbound.io/example-id: compute/v1alpha1/bootdeviceselection
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+  namespace: upbound-system
+spec:
+  forProvider:
+    bootDeviceIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    datacenterIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    serverIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+
+---
+
+apiVersion: compute.ionoscloud.io/v1alpha1
+kind: Server
+metadata:
+  annotations:
+    meta.upbound.io/example-id: compute/v1alpha1/bootdeviceselection
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+  namespace: upbound-system
+spec:
+  forProvider:
+    availabilityZone: ZONE_2
+    cores: 2
+    datacenterIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    imageName: ubuntu:latest
+    imagePasswordSecretRef:
+      key: password
+      name: example-password
+      namespace: upbound-system
+    name: Server Example
+    nic:
+      dhcp: true
+      firewallActive: true
+      lanSelector:
+        matchLabels:
+          testing.upbound.io/example-name: example
+      name: Nic Example
+    ram: 2048
+    volume:
+      availabilityZone: AUTO
+      bus: VIRTIO
+      diskType: SSD Standard
+      name: Inline Updated
+      size: 20
+
+---
+apiVersion: v1
+kind: Secret
+metadata:
+  name: example-password
+  namespace: upbound-system
+stringData:
+  password: "Upboundtest1"
+---
+
+apiVersion: compute.ionoscloud.io/v1alpha1
+kind: Volume
+metadata:
+  annotations:
+    meta.upbound.io/example-id: compute/v1alpha1/bootdeviceselection
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+  namespace: upbound-system
+spec:
+  forProvider:
+    availabilityZone: AUTO
+    datacenterIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    diskType: HDD
+    imageName: debian:latest
+    imagePassword: "Upboundtest1"
+    name: External 1
+    serverIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    size: 10
+

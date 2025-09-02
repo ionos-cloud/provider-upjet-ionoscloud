@@ -1,0 +1,30 @@
+apiVersion: objectstorage.ionoscloud.io/v1alpha1
+kind: BucketPublicAccessBlock
+metadata:
+  annotations:
+    meta.upbound.io/example-id: objectstorage/v1alpha1/bucketpublicaccessblock
+  labels:
+    testing.upbound.io/example-name: example
+  name: ${Rand.RFC1123Subdomain}
+  namespace: upbound-system
+spec:
+  forProvider:
+    blockPublicAcls: true
+    blockPublicPolicy: true
+    bucketSelector:
+      matchLabels:
+        testing.upbound.io/example-name: object-lock
+    ignorePublicAcls: false
+    restrictPublicBuckets: false
+---
+apiVersion: objectstorage.ionoscloud.io/v1alpha1
+kind: Bucket
+metadata:
+  annotations:
+    meta.upbound.io/example-id: objectstorage/v1alpha1/bucketobjectlockconfiguration
+  labels:
+    testing.upbound.io/example-name: object-lock
+  name: ${Rand.RFC1123Subdomain}
+  namespace: upbound-system
+spec:
+  forProvider: {}

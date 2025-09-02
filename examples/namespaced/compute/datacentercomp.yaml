@@ -1,0 +1,40 @@
+apiVersion: compute.ionoscloud.io/v1alpha1
+kind: Datacenter
+metadata:
+  annotations:
+    crossplane.io/composition-resource-name: datacenter-mytestserver
+  generateName: create-servers-
+  labels:
+    crossplane.io/composite: create-servers
+    ionos-cloud-datacenter-name: mytestserver
+  name: mytestserver
+  namespace: upbound-system
+spec:
+  forProvider:
+    description: my go composition datacenter
+    location: de/txl
+    name: mytestserver
+---
+apiVersion: compute.ionoscloud.io/v1alpha1
+kind: Server
+metadata:
+  annotations:
+    crossplane.io/composition-resource-name: xservers-mytestserver-0
+  generateName: create-servers-
+  labels:
+    crossplane.io/composite: create-servers
+    ionos-cloud-server-name: mytestserver-0
+  name: mytestserver-0
+  namespace: upbound-system
+spec:
+  forProvider:
+    cores: 2
+    datacenterIdSelector:
+      matchLabels:
+        ionos-cloud-datacenter-name: mytestserver
+    nic:
+      dhcp: true
+      name: mytestserver-0
+    name: mytestserver-0
+    ram: 4096
+    type: ENTERPRISE

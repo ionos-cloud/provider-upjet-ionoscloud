@@ -1,0 +1,82 @@
+apiVersion: compute.ionoscloud.io/v1alpha1
+kind: Group
+metadata:
+  annotations:
+    meta.upbound.io/example-id: compute/v1alpha1/group
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+  namespace: upbound-system
+spec:
+  forProvider:
+    accessActivityLog: true
+    accessAndManageCertificates: true
+    accessAndManageMonitoring: true
+    createBackupUnit: true
+    createDatacenter: true
+    createFlowLog: true
+    createInternetAccess: true
+    createK8SCluster: true
+    createPcc: true
+    createSnapshot: true
+    manageDbaas: false
+    name: Group Example
+    reserveIp: true
+    s3Privilege: false
+    userIdsRefs:
+    - name: example1
+    - name: example2
+
+---
+
+apiVersion: compute.ionoscloud.io/v1alpha1
+kind: User
+metadata:
+  annotations:
+    meta.upbound.io/example-id: compute/v1alpha1/group
+  labels:
+    testing.upbound.io/example-name: example1
+  name: example1
+  namespace: upbound-system
+spec:
+  forProvider:
+    administrator: false
+    email: uniqueblabla@email.com
+    firstName: user1
+    forceSecAuth: false
+    lastName: user1
+    passwordSecretRef:
+        key: password
+        name: pwsecret
+        namespace: upbound-system
+
+---
+
+apiVersion: compute.ionoscloud.io/v1alpha1
+kind: User
+metadata:
+  annotations:
+    meta.upbound.io/example-id: compute/v1alpha1/group
+  labels:
+    testing.upbound.io/example-name: example2
+  name: example2
+  namespace: upbound-system
+spec:
+  forProvider:
+    administrator: false
+    email: unique_qwease@mail.com
+    firstName: user2
+    forceSecAuth: false
+    lastName: user2
+    passwordSecretRef:
+        key: password
+        name: pwsecret
+        namespace: upbound-system
+---
+  apiVersion: v1
+  kind: Secret
+  metadata:
+    name: pwsecret
+    namespace: upbound-system
+  stringData:
+    password: "Upboundtest!"

@@ -1,0 +1,81 @@
+apiVersion: compute.ionoscloud.io/v1alpha1
+kind: Datacenter
+metadata:
+  annotations:
+    meta.upbound.io/example-id: compute/v1alpha1/datacenter
+  labels:
+    testing.upbound.io/example-name: datacenter_example
+  name: example
+  namespace: upbound-system
+spec:
+  forProvider:
+    description: datacenter description
+    location: de/fra
+    name: Datacenter Example
+    secAuthProtection: false
+---
+apiVersion: compute.ionoscloud.io/v1alpha1
+kind: Lan
+metadata:
+  annotations:
+    meta.upbound.io/example-id: compute/v1alpha1/lan
+  labels:
+    testing.upbound.io/example-name: lan_example
+  name: example
+  namespace: upbound-system
+spec:
+  forProvider:
+    datacenterIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: datacenter_example
+    name: Lan Example
+    public: false
+---
+apiVersion: postgresql.ionoscloud.io/v1alpha1
+kind: PostgresqlCluster
+metadata:
+  annotations:
+    meta.upbound.io/example-id: postgresql/v1alpha1/postgresqlcluster
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+  namespace: upbound-system
+spec:
+  forProvider:
+    connections:
+        cidr: 192.168.100.1/24
+        datacenterIdSelector:
+          matchLabels:
+            testing.upbound.io/example-name: datacenter_example
+        lanIdSelector:
+          matchLabels:
+            testing.upbound.io/example-name: lan_example
+    cores: 1
+    credentials:
+      - passwordSecretRef:
+          key: password
+          name: pwsecret
+          namespace: upbound-system
+        username: username
+    displayName: PostgreSQL_cluster
+    instances: 1
+    locationSelector:
+      matchLabels:
+        testing.upbound.io/example-name: datacenter_example
+    maintenanceWindow:
+        dayOfTheWeek: Sunday
+        time: "09:00:00"
+    postgresVersion: "12"
+    ram: 2048
+    storageSize: 2048
+    storageType: HDD
+    synchronizationMode: ASYNCHRONOUS
+
+---
+apiVersion: v1
+kind: Secret
+metadata:
+  name: pwsecret
+  namespace: upbound-system
+stringData:
+  password: "Upboundtest!"

@@ -1,0 +1,63 @@
+apiVersion: compute.ionoscloud.io/v1alpha1
+kind: Datacenter
+metadata:
+  annotations:
+    meta.upbound.io/example-id: compute/v1alpha1/datacenter
+  labels:
+    testing.upbound.io/example-name: datacenter_example
+  name: example
+  namespace: upbound-system
+spec:
+  forProvider:
+    description: datacenter description
+    location: de/txl
+    name: Datacenter Example
+    secAuthProtection: false
+---
+apiVersion: compute.ionoscloud.io/v1alpha1
+kind: Lan
+metadata:
+  annotations:
+    meta.upbound.io/example-id: compute/v1alpha1/lan
+  labels:
+    testing.upbound.io/example-name: lan_example
+  name: example
+  namespace: upbound-system
+spec:
+  forProvider:
+    datacenterIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: datacenter_example
+    name: Lan Example
+    public: false
+---
+apiVersion: mongodb.ionoscloud.io/v1alpha1
+kind: MongodbCluster
+metadata:
+  annotations:
+    meta.upbound.io/example-id: mongodb/v1alpha1/mongodbcluster
+  labels:
+    testing.upbound.io/example-name: example_mongo_cluster
+  name: example-mongo-cluster
+  namespace: upbound-system
+spec:
+  forProvider:
+    connections:
+        cidrList:
+          - 192.168.1.110/24
+        datacenterIdSelector:
+          matchLabels:
+            testing.upbound.io/example-name: datacenter_example
+        lanIdSelector:
+          matchLabels:
+            testing.upbound.io/example-name: lan_example
+    displayName: example_mongo_cluster
+    instances: 1
+    locationSelector:
+      matchLabels:
+        testing.upbound.io/example-name: datacenter_example
+    maintenanceWindow:
+        dayOfTheWeek: Sunday
+        time: "09:00:00"
+    mongodbVersion: "5.0"
+    templateId: 6b78ea06-ee0e-4689-998c-fc9c46e781f6

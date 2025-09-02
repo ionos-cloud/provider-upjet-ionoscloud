@@ -1,0 +1,35 @@
+apiVersion: apiextensions.crossplane.io/v1
+kind: CompositeResourceDefinition
+metadata:
+  name: xk8sdbclusters.ionos.crossplane.io
+  namespace: upbound-system
+spec:
+  group: ionos.crossplane.io
+  names:
+    kind: XK8sDBCluster
+    plural: xk8sdbclusters
+  claimNames:
+    kind: K8sDBCluster
+    plural: k8sdbclusters
+  versions:
+    - name: v1alpha1
+      served: true
+      referenceable: true
+      schema:
+        openAPIV3Schema:
+          type: object
+          properties:
+              namespace: upbound-system
+              type: object
+              properties:
+                parameters:
+                  type: object
+                  properties:
+                    k8sClusterName:
+                      type: string
+                    dbName:
+                      type: string
+                    lanIPv4CidrBlock:
+                      type: string
+              required:
+                - parameters
