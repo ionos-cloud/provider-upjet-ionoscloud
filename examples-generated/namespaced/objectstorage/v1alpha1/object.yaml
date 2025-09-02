@@ -1,0 +1,47 @@
+apiVersion: objectstorage.ionoscloud.io/v1alpha1
+kind: Object
+metadata:
+  annotations:
+    meta.upbound.io/example-id: objectstorage/v1alpha1/object
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+  namespace: upbound-system
+spec:
+  forProvider:
+    bucketSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    cacheControl: no-cache
+    content: body
+    contentDisposition: attachment
+    contentEncoding: identity
+    contentLanguage: en-GB
+    contentType: text/plain
+    expires: "2024-10-07T12:34:56Z"
+    forceDestroy: true
+    key: object
+    metadata:
+      mk: mv
+    objectLockLegalHold: "ON"
+    objectLockMode: GOVERNANCE
+    objectLockRetainUntilDate: "2024-10-07T12:34:56Z"
+    serverSideEncryption: AES256
+    tags:
+      tk: tv
+    websiteRedirect: https://www.ionos.com
+
+---
+
+apiVersion: objectstorage.ionoscloud.io/v1alpha1
+kind: Bucket
+metadata:
+  annotations:
+    meta.upbound.io/example-id: objectstorage/v1alpha1/object
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+  namespace: upbound-system
+spec:
+  forProvider:
+    objectLockEnabled: true

@@ -1,0 +1,18 @@
+apiVersion: postgresql.ionoscloud.io/v1alpha1
+kind: PostgresqlUser
+metadata:
+  annotations:
+    meta.upbound.io/example-id: postgresql/v1alpha1/postgresqluser
+  labels:
+    testing.upbound.io/example-name: example_pg_user
+  name: example-pg-user
+  namespace: upbound-system
+spec:
+  forProvider:
+    clusterIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    passwordSecretRef:
+      key: attribute.result
+      name: example-password
+    username: exampleuser

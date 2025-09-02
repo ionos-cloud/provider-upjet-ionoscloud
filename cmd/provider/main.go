@@ -19,6 +19,7 @@ import (
 	"github.com/crossplane/crossplane-runtime/v2/pkg/statemetrics"
 	tjcontroller "github.com/crossplane/upjet/v2/pkg/controller"
 	"github.com/crossplane/upjet/v2/pkg/terraform"
+	"github.com/ionos-cloud/terraform-provider-ionoscloud/v6/xpprovider"
 	"gopkg.in/alecthomas/kingpin.v2"
 	"k8s.io/client-go/tools/leaderelection/resourcelock"
 	ctrl "sigs.k8s.io/controller-runtime"
@@ -26,15 +27,18 @@ import (
 	"sigs.k8s.io/controller-runtime/pkg/log/zap"
 	"sigs.k8s.io/controller-runtime/pkg/metrics"
 
+	clusterapis "github.com/ionos-cloud/provider-upjet-ionoscloud/apis/cluster"
+	namespacedapis "github.com/ionos-cloud/provider-upjet-ionoscloud/apis/namespaced"
 	"github.com/ionos-cloud/provider-upjet-ionoscloud/config"
 	"github.com/ionos-cloud/provider-upjet-ionoscloud/internal/clients"
-	controller "github.com/ionos-cloud/provider-upjet-ionoscloud/internal/controller/cluster"
+	clustercontroller "github.com/ionos-cloud/provider-upjet-ionoscloud/internal/controller/cluster"
+	namespacedcontroller "github.com/ionos-cloud/provider-upjet-ionoscloud/internal/controller/namespaced"
 	"github.com/ionos-cloud/provider-upjet-ionoscloud/internal/features"
 )
 
 func main() {
 	var (
-		app                     = kingpin.New(filepath.Base(os.Args[0]), "Terraform based Crossplane provider for IonosCloud").DefaultEnvars()
+		app                     = kingpin.New(filepath.Base(os.Args[0]), "Terraform based Crossplane provider for Artifactory").DefaultEnvars()
 		debug                   = app.Flag("debug", "Run with debug logging.").Short('d').Bool()
 		syncPeriod              = app.Flag("sync", "Controller manager sync period such as 300ms, 1.5h, or 2h45m").Short('s').Default("1h").Duration()
 		pollInterval            = app.Flag("poll", "Poll interval controls how often an individual resource should be checked for drift.").Default("10m").Duration()
@@ -46,7 +50,6 @@ func main() {
 		providerSource   = app.Flag("terraform-provider-source", "Terraform provider source.").Required().Envar("TERRAFORM_PROVIDER_SOURCE").String()
 		providerVersion  = app.Flag("terraform-provider-version", "Terraform provider version.").Required().Envar("TERRAFORM_PROVIDER_VERSION").String()
 
-		// namespace                = app.Flag("namespace", "Namespace used to set as default scope in default secret store config.").Default("crossplane-system").Envar("POD_NAMESPACE").String()
 		enableManagementPolicies = app.Flag("enable-management-policies", "Enable support for Management Policies.").Default("true").Envar("ENABLE_MANAGEMENT_POLICIES").Bool()
 	)
 
@@ -80,7 +83,8 @@ func main() {
 		RenewDeadline:              func() *time.Duration { d := 50 * time.Second; return &d }(),
 	})
 	kingpin.FatalIfError(err, "Cannot create controller manager")
-	kingpin.FatalIfError(apis.AddToScheme(mgr.GetScheme()), "Cannot add IonosCloud APIs to scheme")
+	kingpin.FatalIfError(clusterapis.AddToScheme(mgr.GetScheme()), "Cannot add cluster scoped APIs to scheme")
+	kingpin.FatalIfError(namespacedapis.AddToScheme(mgr.GetScheme()), "Cannot add namespaced APIs to scheme")
 
 	metricRecorder := managed.NewMRMetricRecorder()
 	stateMetrics := statemetrics.NewMRStateMetrics()
@@ -88,10 +92,13 @@ func main() {
 	metrics.Registry.MustRegister(metricRecorder)
 	metrics.Registry.MustRegister(stateMetrics)
 
-	p, err := config.GetProvider(context.Background(), clients.IonosCloudProvider, clients.IonosCloudProvider, false, true)
-	kingpin.FatalIfError(err, "Cannot get provider configuration")
-
-	o := tjcontroller.Options{
+	fwprovider, sdkprovider := xpprovider.GetProvider()
+	clusterProvider, err := config.GetProvider(context.Background(), fwprovider, sdkprovider, false, false)
+	kingpin.FatalIfError(err, "Cannot get cluster terraform provider configuration")
+	//
+	// Cluster scoped configuration
+	//
+	clusterOptions := tjcontroller.Options{
 		Options: xpcontroller.Options{
 			Logger:                  log,
 			GlobalRateLimiter:       ratelimiter.NewGlobal(*maxReconcileRate),
@@ -104,39 +111,45 @@ func main() {
 				MRStateMetrics:          stateMetrics,
 			},
 		},
-		OperationTrackerStore: tjcontroller.NewOperationStore(log),
-		Provider:              p,
+		Provider: clusterProvider,
 		// use the following WorkspaceStoreOption to enable the shared gRPC mode
 		// terraform.WithProviderRunner(terraform.NewSharedProvider(log, os.Getenv("TERRAFORM_NATIVE_PROVIDER_PATH"), terraform.WithNativeProviderArgs("-debuggable")))
 		WorkspaceStore: terraform.NewWorkspaceStore(log),
-		SetupFn:        clients.TerraformSetupBuilder(*terraformVersion, *providerSource, *providerVersion, p.TerraformPluginFrameworkProvider),
+		SetupFn:        clients.TerraformSetupBuilder(*terraformVersion, *providerSource, *providerVersion, clusterProvider.TerraformPluginFrameworkProvider),
 	}
 
-	// todo check if we need to add it back
-	// if *enableExternalSecretStores {
-	// 	o.SecretStoreConfigGVK = &v1alpha1.StoreConfigGroupVersionKind
-	// 	log.Info("Alpha feature enabled", "flag", features.EnableAlphaExternalSecretStores)
+	namespacedProvider, err := config.GetProviderNamespaced(context.Background(), fwprovider, sdkprovider, false, false)
+	kingpin.FatalIfError(err, "Cannot get namespaced terraform provider configuration")
 	//
-	// 	// Ensure default store config exists.
-	// 	kingpin.FatalIfError(resource.Ignore(kerrors.IsAlreadyExists, mgr.GetClient().Create(context.Background(), &v1alpha1.StoreConfig{
-	// 		ObjectMeta: metav1.ObjectMeta{
-	// 			Name: "default",
-	// 		},
-	// 		Spec: v1alpha1.StoreConfigSpec{
-	// 			// NOTE(turkenh): We only set required spec and expect optional
-	// 			// ones to properly be initialized with CRD level default values.
-	// 			SecretStoreConfig: xpv1.SecretStoreConfig{
-	// 				DefaultScope: *namespace,
-	// 			},
-	// 		},
-	// 	})), "cannot create default store config")
-	// }
+	// Namespaced configuration
+	//
+	namespacedOptions := tjcontroller.Options{
+		Options: xpcontroller.Options{
+			Logger:                  log,
+			GlobalRateLimiter:       ratelimiter.NewGlobal(*maxReconcileRate),
+			PollInterval:            *pollInterval,
+			MaxConcurrentReconciles: *maxReconcileRate,
+			Features:                &feature.Flags{},
+			MetricOptions: &xpcontroller.MetricOptions{
+				PollStateMetricInterval: *pollStateMetricInterval,
+				MRMetrics:               metricRecorder,
+				MRStateMetrics:          stateMetrics,
+			},
+		},
+		Provider: namespacedProvider,
+		// use the following WorkspaceStoreOption to enable the shared gRPC mode
+		// terraform.WithProviderRunner(terraform.NewSharedProvider(log, os.Getenv("TERRAFORM_NATIVE_PROVIDER_PATH"), terraform.WithNativeProviderArgs("-debuggable")))
+		WorkspaceStore: terraform.NewWorkspaceStore(log),
+		SetupFn:        clients.TerraformSetupBuilder(*terraformVersion, *providerSource, *providerVersion, clusterProvider.TerraformPluginFrameworkProvider),
+	}
 
 	if *enableManagementPolicies {
-		o.Features.Enable(features.EnableBetaManagementPolicies)
+		clusterOptions.Features.Enable(features.EnableBetaManagementPolicies)
+		namespacedOptions.Features.Enable(features.EnableBetaManagementPolicies)
 		log.Info("Beta feature enabled", "flag", features.EnableBetaManagementPolicies)
 	}
 
-	kingpin.FatalIfError(controller.Setup(mgr, o), "Cannot setup IonosCloud controllers")
+	kingpin.FatalIfError(clustercontroller.Setup(mgr, clusterOptions), "Cannot setup cluster scoped controllers")
+	kingpin.FatalIfError(namespacedcontroller.Setup(mgr, namespacedOptions), "Cannot setup namespaced controllers")
 	kingpin.FatalIfError(mgr.Start(ctrl.SetupSignalHandler()), "Cannot start controller manager")
 }

@@ -1,0 +1,14 @@
+apiVersion: compute.ionoscloud.io/v1alpha1
+kind: Ipblock
+metadata:
+  annotations:
+    meta.upbound.io/example-id: compute/v1alpha1/ipblock
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+  namespace: upbound-system
+spec:
+  forProvider:
+    location: us/las
+    name: IP Block Example
+    size: 1

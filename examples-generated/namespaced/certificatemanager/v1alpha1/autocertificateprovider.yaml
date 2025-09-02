@@ -1,0 +1,20 @@
+apiVersion: certificatemanager.ionoscloud.io/v1alpha1
+kind: AutoCertificateProvider
+metadata:
+  annotations:
+    meta.upbound.io/example-id: certificatemanager/v1alpha1/autocertificateprovider
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+  namespace: upbound-system
+spec:
+  forProvider:
+    email: user@example.com
+    externalAccountBinding:
+    - keyId: some-key-id
+      keySecretSecretRef:
+        key: example-key
+        name: example-secret
+    location: de/fra
+    name: Let's Encrypt
+    server: https://acme-v02.api.letsencrypt.org/directory

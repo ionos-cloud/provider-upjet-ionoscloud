@@ -1,0 +1,14 @@
+apiVersion: dns.ionoscloud.io/v1alpha1
+kind: DnsZone
+metadata:
+  annotations:
+    meta.upbound.io/example-id: dns/v1alpha1/dnszone
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+  namespace: upbound-system
+spec:
+  forProvider:
+    description: description
+    enabled: false
+    name: example.com

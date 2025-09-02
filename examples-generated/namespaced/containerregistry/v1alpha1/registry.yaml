@@ -1,0 +1,20 @@
+apiVersion: containerregistry.ionoscloud.io/v1alpha1
+kind: Registry
+metadata:
+  annotations:
+    meta.upbound.io/example-id: containerregistry/v1alpha1/registry
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+  namespace: upbound-system
+spec:
+  forProvider:
+    apiSubnetAllowList:
+    - 1.2.3.4/32
+    garbageCollectionSchedule:
+    - days:
+      - Monday
+      - Tuesday
+      time: 05:19:00+00:00
+    location: de/fra
+    name: container-registry-example

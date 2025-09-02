@@ -1,0 +1,21 @@
+apiVersion: compute.ionoscloud.io/v1alpha1
+kind: User
+metadata:
+  annotations:
+    meta.upbound.io/example-id: compute/v1alpha1/user
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+  namespace: upbound-system
+spec:
+  forProvider:
+    active: true
+    administrator: false
+    email: unique@ionos.com
+    firstName: example
+    forceSecAuth: false
+    lastName: example
+    passwordWoSecretRef:
+      key: attribute.result
+      name: example-password
+    passwordWoVersion: "1"

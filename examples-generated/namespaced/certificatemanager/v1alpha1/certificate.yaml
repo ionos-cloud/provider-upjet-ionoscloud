@@ -1,0 +1,17 @@
+apiVersion: certificatemanager.ionoscloud.io/v1alpha1
+kind: Certificate
+metadata:
+  annotations:
+    meta.upbound.io/example-id: certificatemanager/v1alpha1/certificate
+  labels:
+    testing.upbound.io/example-name: cert
+  name: cert
+  namespace: upbound-system
+spec:
+  forProvider:
+    certificate: ${file("path_to_cert")}
+    certificateChain: ${file("path_to_cert_chain")}
+    name: add_name_here
+    privateKeySecretRef:
+      key: attribute.path_to_private_key
+      name: example-secret

@@ -1,0 +1,84 @@
+apiVersion: vpnwireguard.ionoscloud.io/v1alpha1
+kind: VpnWireguardGateway
+metadata:
+  annotations:
+    meta.upbound.io/example-id: vpnwireguard/v1alpha1/vpnwireguardgateway
+  labels:
+    testing.upbound.io/example-name: gateway
+  name: gateway
+  namespace: upbound-system
+spec:
+  forProvider:
+    connections:
+    - datacenterIdSelector:
+        matchLabels:
+          testing.upbound.io/example-name: datacenter_example
+      ipv4Cidr: 192.168.1.108/24
+      lanIdSelector:
+        matchLabels:
+          testing.upbound.io/example-name: lan_example
+    description: description
+    gatewayIpSelector:
+      matchLabels:
+        testing.upbound.io/example-name: ipblock_example
+    interfaceIpv4Cidr: 192.168.1.100/24
+    location: de/fra
+    maintenanceWindow:
+    - dayOfTheWeek: Monday
+      time: "09:00:00"
+    name: gateway_example
+    privateKeySecretRef:
+      key: example-key
+      name: example-secret
+    tier: STANDARD
+
+---
+
+apiVersion: compute.ionoscloud.io/v1alpha1
+kind: Datacenter
+metadata:
+  annotations:
+    meta.upbound.io/example-id: vpnwireguard/v1alpha1/vpnwireguardgateway
+  labels:
+    testing.upbound.io/example-name: datacenter_example
+  name: datacenter-example
+  namespace: upbound-system
+spec:
+  forProvider:
+    location: de/fra
+    name: datacenter_example
+
+---
+
+apiVersion: compute.ionoscloud.io/v1alpha1
+kind: Ipblock
+metadata:
+  annotations:
+    meta.upbound.io/example-id: vpnwireguard/v1alpha1/vpnwireguardgateway
+  labels:
+    testing.upbound.io/example-name: ipblock_example
+  name: ipblock-example
+  namespace: upbound-system
+spec:
+  forProvider:
+    location: de/fra
+    name: ipblock_example
+    size: 1
+
+---
+
+apiVersion: compute.ionoscloud.io/v1alpha1
+kind: Lan
+metadata:
+  annotations:
+    meta.upbound.io/example-id: vpnwireguard/v1alpha1/vpnwireguardgateway
+  labels:
+    testing.upbound.io/example-name: lan_example
+  name: lan-example
+  namespace: upbound-system
+spec:
+  forProvider:
+    datacenterIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: datacenter_example
+    name: lan_example

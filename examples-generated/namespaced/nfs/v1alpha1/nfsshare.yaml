@@ -1,0 +1,91 @@
+apiVersion: nfs.ionoscloud.io/v1alpha1
+kind: NFSShare
+metadata:
+  annotations:
+    meta.upbound.io/example-id: nfs/v1alpha1/nfsshare
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+  namespace: upbound-system
+spec:
+  forProvider:
+    clientGroups:
+    - description: Client Group 1
+      hosts:
+      - 10.234.62.123
+      ipNetworks:
+      - 10.234.50.0/24
+      nfs:
+      - squash: all-anonymous
+    clusterIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    gid: 512
+    location: de/txl
+    name: example-share
+    quota: 512
+    uid: 512
+
+---
+
+apiVersion: compute.ionoscloud.io/v1alpha1
+kind: Datacenter
+metadata:
+  annotations:
+    meta.upbound.io/example-id: nfs/v1alpha1/nfsshare
+  labels:
+    testing.upbound.io/example-name: nfs_dc
+  name: nfs-dc
+  namespace: upbound-system
+spec:
+  forProvider:
+    description: Datacenter Description
+    location: de/txl
+    name: NFS Datacenter
+    secAuthProtection: false
+
+---
+
+apiVersion: compute.ionoscloud.io/v1alpha1
+kind: Lan
+metadata:
+  annotations:
+    meta.upbound.io/example-id: nfs/v1alpha1/nfsshare
+  labels:
+    testing.upbound.io/example-name: nfs_lan
+  name: nfs-lan
+  namespace: upbound-system
+spec:
+  forProvider:
+    datacenterIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: nfs_dc
+    name: Lan for NFS
+    public: false
+
+---
+
+apiVersion: nfs.ionoscloud.io/v1alpha1
+kind: NFSCluster
+metadata:
+  annotations:
+    meta.upbound.io/example-id: nfs/v1alpha1/nfsshare
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+  namespace: upbound-system
+spec:
+  forProvider:
+    connections:
+    - datacenterIdSelector:
+        matchLabels:
+          testing.upbound.io/example-name: nfs_dc
+      ipAddress: 192.168.100.10/24
+      lanSelector:
+        matchLabels:
+          testing.upbound.io/example-name: nfs_lan
+    location: de/txl
+    name: test
+    nfs:
+    - minVersion: "4.2"
+    size: 2

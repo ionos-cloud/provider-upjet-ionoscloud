@@ -1,0 +1,26 @@
+apiVersion: log.ionoscloud.io/v1alpha1
+kind: Pipeline
+metadata:
+  annotations:
+    meta.upbound.io/example-id: log/v1alpha1/pipeline
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+  namespace: upbound-system
+spec:
+  forProvider:
+    location: es/vit
+    log:
+    - destinations:
+      - retentionInDays: 7
+        type: loki
+      protocol: http
+      source: kubernetes
+      tag: tagexample
+    - destinations:
+      - retentionInDays: 7
+        type: loki
+      protocol: tcp
+      source: kubernetes
+      tag: anothertagexample
+    name: pipelineexample

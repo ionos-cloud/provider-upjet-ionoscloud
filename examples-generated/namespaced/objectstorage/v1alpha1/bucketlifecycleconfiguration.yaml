@@ -1,0 +1,47 @@
+apiVersion: objectstorage.ionoscloud.io/v1alpha1
+kind: BucketLifecycleConfiguration
+metadata:
+  annotations:
+    meta.upbound.io/example-id: objectstorage/v1alpha1/bucketlifecycleconfiguration
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+  namespace: upbound-system
+spec:
+  forProvider:
+    bucketSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    rule:
+    - expiration:
+      - days: 90
+      filter:
+      - prefix: /logs
+      id: "1"
+      status: Enabled
+    - filter:
+      - prefix: /logs
+      id: "2"
+      noncurrentVersionExpiration:
+      - noncurrentDays: 90
+      status: Enabled
+    - abortIncompleteMultipartUpload:
+      - daysAfterInitiation: 90
+      filter:
+      - prefix: /logs
+      id: "3"
+      status: Enabled
+
+---
+
+apiVersion: objectstorage.ionoscloud.io/v1alpha1
+kind: Bucket
+metadata:
+  annotations:
+    meta.upbound.io/example-id: objectstorage/v1alpha1/bucketlifecycleconfiguration
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+  namespace: upbound-system
+spec:
+  forProvider: {}

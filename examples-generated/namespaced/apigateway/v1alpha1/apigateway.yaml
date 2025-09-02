@@ -1,0 +1,13 @@
+apiVersion: apigateway.ionoscloud.io/v1alpha1
+kind: Apigateway
+metadata:
+  annotations:
+    meta.upbound.io/example-id: apigateway/v1alpha1/apigateway
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+  namespace: upbound-system
+spec:
+  forProvider:
+    metrics: true
+    name: example-gateway

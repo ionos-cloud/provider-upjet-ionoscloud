@@ -1,0 +1,24 @@
+apiVersion: vpnwireguard.ionoscloud.io/v1alpha1
+kind: VpnWireguardPeer
+metadata:
+  annotations:
+    meta.upbound.io/example-id: vpnwireguard/v1alpha1/vpnwireguardpeer
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+  namespace: upbound-system
+spec:
+  forProvider:
+    allowedIps:
+    - 10.0.0.0/8
+    - 192.168.1.0/24
+    description: An example WireGuard peer
+    endpoint:
+    - host: 1.2.3.4
+      port: 51820
+    gatewayIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    location: de/fra
+    name: example-gateway
+    publicKey: examplePublicKey==

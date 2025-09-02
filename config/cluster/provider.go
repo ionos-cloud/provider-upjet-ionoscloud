@@ -48,5 +48,4 @@ func init() {
 	ProviderConfiguration.AddConfig(objectstorage.Configure)
 	ProviderConfiguration.AddConfig(postgresql.Configure)
 	ProviderConfiguration.AddConfig(wireguard.Configure)
-
 }
