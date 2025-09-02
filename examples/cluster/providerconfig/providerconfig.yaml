@@ -1,0 +1,11 @@
+apiVersion: upjet-ionoscloud.ionoscloud.io/v1beta1
+kind: ProviderConfig
+metadata:
+  name: default
+spec:
+  credentials:
+    source: Secret
+    secretRef:
+      name: example-provider-secret
+      namespace: crossplane-system
+      key: credentials
