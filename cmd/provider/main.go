@@ -46,13 +46,13 @@ func main() {
 		leaderElection          = app.Flag("leader-election", "Use leader election for the controller manager.").Short('l').Default("false").OverrideDefaultFromEnvar("LEADER_ELECTION").Bool()
 		maxReconcileRate        = app.Flag("max-reconcile-rate", "The global maximum rate per second at which resources may be checked for drift from the desired state.").Default("10").Int()
 
-		terraformVersion = app.Flag("terraform-version", "Terraform version.").Required().Envar("TERRAFORM_VERSION").String()
-		providerSource   = app.Flag("terraform-provider-source", "Terraform provider source.").Required().Envar("TERRAFORM_PROVIDER_SOURCE").String()
-		providerVersion  = app.Flag("terraform-provider-version", "Terraform provider version.").Required().Envar("TERRAFORM_PROVIDER_VERSION").String()
+		terraformVersion = app.Flag("terraform-version", "Terraform version.").Envar("TERRAFORM_VERSION").Default("1.5.7").String()
+		providerSource   = app.Flag("terraform-provider-source", "Terraform provider source.").Envar("TERRAFORM_PROVIDER_SOURCE").Default("ionos-cloud/ionoscloud").String()
+		providerVersion  = app.Flag("terraform-provider-version", "Terraform provider version.").Envar("TERRAFORM_PROVIDER_VERSION").Default("6.7.12").String()
 
 		enableManagementPolicies = app.Flag("enable-management-policies", "Enable support for Management Policies.").Default("true").Envar("ENABLE_MANAGEMENT_POLICIES").Bool()
 	)
-
+	*debug = true
 	kingpin.MustParse(app.Parse(os.Args[1:]))
 
 	zl := zap.New(zap.UseDevMode(*debug))
@@ -93,7 +93,7 @@ func main() {
 	metrics.Registry.MustRegister(stateMetrics)
 
 	fwprovider, sdkprovider := xpprovider.GetProvider()
-	clusterProvider, err := config.GetProvider(context.Background(), fwprovider, sdkprovider, false, false)
+	clusterProvider, err := config.GetProvider(context.Background(), fwprovider, sdkprovider, false)
 	kingpin.FatalIfError(err, "Cannot get cluster terraform provider configuration")
 	//
 	// Cluster scoped configuration
@@ -111,14 +111,15 @@ func main() {
 				MRStateMetrics:          stateMetrics,
 			},
 		},
-		Provider: clusterProvider,
+		OperationTrackerStore: tjcontroller.NewOperationStore(log),
+		Provider:              clusterProvider,
 		// use the following WorkspaceStoreOption to enable the shared gRPC mode
 		// terraform.WithProviderRunner(terraform.NewSharedProvider(log, os.Getenv("TERRAFORM_NATIVE_PROVIDER_PATH"), terraform.WithNativeProviderArgs("-debuggable")))
 		WorkspaceStore: terraform.NewWorkspaceStore(log),
 		SetupFn:        clients.TerraformSetupBuilder(*terraformVersion, *providerSource, *providerVersion, clusterProvider.TerraformPluginFrameworkProvider),
 	}
 
-	namespacedProvider, err := config.GetProviderNamespaced(context.Background(), fwprovider, sdkprovider, false, false)
+	namespacedProvider, err := config.GetProviderNamespaced(context.Background(), fwprovider, sdkprovider, false)
 	kingpin.FatalIfError(err, "Cannot get namespaced terraform provider configuration")
 	//
 	// Namespaced configuration
@@ -136,11 +137,12 @@ func main() {
 				MRStateMetrics:          stateMetrics,
 			},
 		},
-		Provider: namespacedProvider,
+		OperationTrackerStore: tjcontroller.NewOperationStore(log),
+		Provider:              namespacedProvider,
 		// use the following WorkspaceStoreOption to enable the shared gRPC mode
 		// terraform.WithProviderRunner(terraform.NewSharedProvider(log, os.Getenv("TERRAFORM_NATIVE_PROVIDER_PATH"), terraform.WithNativeProviderArgs("-debuggable")))
 		WorkspaceStore: terraform.NewWorkspaceStore(log),
-		SetupFn:        clients.TerraformSetupBuilder(*terraformVersion, *providerSource, *providerVersion, clusterProvider.TerraformPluginFrameworkProvider),
+		SetupFn:        clients.TerraformSetupBuilder(*terraformVersion, *providerSource, *providerVersion, namespacedProvider.TerraformPluginFrameworkProvider),
 	}
 
 	if *enableManagementPolicies {

@@ -9,12 +9,11 @@ import (
 	"encoding/json"
 	"strconv"
 
+	"github.com/crossplane/crossplane-runtime/v2/pkg/resource"
 	"github.com/hashicorp/terraform-plugin-framework/provider"
 	"github.com/ionos-cloud/sdk-go-bundle/shared"
 	"github.com/ionos-cloud/terraform-provider-ionoscloud/v6/services/bundleclient"
 	"github.com/ionos-cloud/terraform-provider-ionoscloud/v6/services/clientoptions"
-
-	"github.com/crossplane/crossplane-runtime/v2/pkg/resource"
 	"github.com/pkg/errors"
 	"sigs.k8s.io/controller-runtime/pkg/client"
 
@@ -34,6 +33,10 @@ const (
 // returns Terraform provider setup configuration
 func TerraformSetupBuilder(version, providerSource, providerVersion string, fwProvider provider.Provider) terraform.SetupFn {
 	return func(ctx context.Context, client client.Client, mg resource.Managed) (terraform.Setup, error) {
+		providerConfig, err := resolveProviderConfig(ctx, client, mg)
+		if err != nil {
+			return terraform.Setup{}, err
+		}
 		ps := terraform.Setup{
 			Version: version,
 			Requirement: terraform.ProviderRequirement{
@@ -41,10 +44,6 @@ func TerraformSetupBuilder(version, providerSource, providerVersion string, fwPr
 				Version: providerVersion,
 			},
 			FrameworkProvider: fwProvider,
-		}
-		providerConfig, err := resolveProviderConfig(ctx, client, mg)
-		if err != nil {
-			return ps, err
 		}
 
 		data, err := resource.CommonCredentialExtractor(ctx, providerConfig.Spec.Credentials.Source, client, providerConfig.Spec.Credentials.CommonCredentialSelectors)

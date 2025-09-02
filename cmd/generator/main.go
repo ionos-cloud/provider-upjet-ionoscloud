@@ -30,9 +30,9 @@ func main() {
 	}
 
 	fwProvider, sdkProvider := xpprovider.GetProvider()
-	providerCluster, err := config.GetProvider(context.Background(), fwProvider, sdkProvider, true, false)
+	providerCluster, err := config.GetProvider(context.Background(), fwProvider, sdkProvider, true)
 	kingpin.FatalIfError(err, "Cannot get terraform provider configuration")
-	pns, err := config.GetProviderNamespaced(context.Background(), fwProvider, sdkProvider, true, false)
+	pns, err := config.GetProviderNamespaced(context.Background(), fwProvider, sdkProvider, true)
 	kingpin.FatalIfError(err, "Cannot initialize the provider namespaced configuration")
 
 	pipeline.Run(providerCluster, pns, absRootDir)

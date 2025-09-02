@@ -11,10 +11,9 @@ import (
 	"github.com/crossplane/upjet/v2/pkg/config"
 	"github.com/crossplane/upjet/v2/pkg/registry/reference"
 	"github.com/crossplane/upjet/v2/pkg/schema/traverser"
+	fwprovider "github.com/hashicorp/terraform-plugin-framework/provider"
 	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/schema"
 	"github.com/pkg/errors"
-
-	fwprovider "github.com/hashicorp/terraform-plugin-framework/provider"
 
 	"github.com/ionos-cloud/provider-upjet-ionoscloud/config/namespaced"
 )
@@ -64,7 +63,7 @@ func addTFSingletonConversion(pc *config.Provider) {
 // configuration is being read for the code generation pipelines.
 // In that case, we will only use the JSON schema for generating
 // the CRDs.
-func GetProviderNamespaced(ctx context.Context, fwProvider fwprovider.Provider, sdkProvider *schema.Provider, generationProvider bool, skipDefaultTags bool) (*config.Provider, error) {
+func GetProviderNamespaced(ctx context.Context, fwProvider fwprovider.Provider, sdkProvider *schema.Provider, generationProvider bool) (*config.Provider, error) {
 	if generationProvider {
 		p, err := getProviderSchema(providerSchema)
 		if err != nil {
@@ -82,7 +81,7 @@ func GetProviderNamespaced(ctx context.Context, fwProvider fwprovider.Provider, 
 
 	modulePath := "github.com/ionos-cloud/provider-upjet-ionoscloud"
 	resourcePrefix := "ionoscloud"
-	pc := config.NewProvider([]byte(providerSchema), resourcePrefix, modulePath, []byte(providerMetadata),
+	pc := config.NewProvider([]byte(providerSchema), resourcePrefix, modulePath, providerMetadata,
 		config.WithShortName("ionos"),
 		config.WithRootGroup("m.ionoscloud.io"),
 		config.WithIncludeList(CLIReconciledResourceList()),

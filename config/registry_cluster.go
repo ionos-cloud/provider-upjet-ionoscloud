@@ -61,7 +61,7 @@ import (
 // }
 
 // GetProvider returns provider configuration
-func GetProvider(ctx context.Context, fwProvider fwprovider.Provider, sdkProvider *schema.Provider, generationProvider bool, skipDefaultTags bool) (*config.Provider, error) {
+func GetProvider(ctx context.Context, fwProvider fwprovider.Provider, sdkProvider *schema.Provider, generationProvider bool) (*config.Provider, error) {
 	if generationProvider {
 		p, err := getProviderSchema(providerSchema)
 		if err != nil {
@@ -79,7 +79,7 @@ func GetProvider(ctx context.Context, fwProvider fwprovider.Provider, sdkProvide
 
 	modulePath := "github.com/ionos-cloud/provider-upjet-ionoscloud"
 	resourcePrefix := "ionoscloud"
-	pc := config.NewProvider([]byte(providerSchema), resourcePrefix, modulePath, []byte(providerMetadata),
+	pc := config.NewProvider([]byte(providerSchema), resourcePrefix, modulePath, providerMetadata,
 		config.WithShortName("ionos"),
 		config.WithRootGroup("ionoscloud.io"),
 		config.WithIncludeList(CLIReconciledResourceList()),
