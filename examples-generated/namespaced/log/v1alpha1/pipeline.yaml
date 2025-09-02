@@ -1,4 +1,4 @@
-apiVersion: log.ionoscloud.io/v1alpha1
+apiVersion: log.m.ionoscloud.io/v1alpha1
 kind: Pipeline
 metadata:
   annotations:

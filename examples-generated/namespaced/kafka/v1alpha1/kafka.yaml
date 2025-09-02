@@ -1,4 +1,4 @@
-apiVersion: kafka.ionoscloud.io/v1alpha1
+apiVersion: kafka.m.ionoscloud.io/v1alpha1
 kind: Kafka
 metadata:
   annotations:
@@ -29,7 +29,7 @@ spec:
 
 ---
 
-apiVersion: compute.ionoscloud.io/v1alpha1
+apiVersion: compute.m.ionoscloud.io/v1alpha1
 kind: Datacenter
 metadata:
   annotations:
@@ -45,7 +45,7 @@ spec:
 
 ---
 
-apiVersion: compute.ionoscloud.io/v1alpha1
+apiVersion: compute.m.ionoscloud.io/v1alpha1
 kind: Lan
 metadata:
   annotations:

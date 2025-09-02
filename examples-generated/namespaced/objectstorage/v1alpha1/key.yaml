@@ -1,4 +1,4 @@
-apiVersion: objectstorage.ionoscloud.io/v1alpha1
+apiVersion: objectstorage.m.ionoscloud.io/v1alpha1
 kind: Key
 metadata:
   annotations:
@@ -16,7 +16,7 @@ spec:
 
 ---
 
-apiVersion: compute.ionoscloud.io/v1alpha1
+apiVersion: compute.m.ionoscloud.io/v1alpha1
 kind: User
 metadata:
   annotations:

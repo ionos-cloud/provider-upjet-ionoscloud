@@ -1,4 +1,4 @@
-apiVersion: certificatemanager.ionoscloud.io/v1alpha1
+apiVersion: certificatemanager.m.ionoscloud.io/v1alpha1
 kind: AutoCertificate
 metadata:
   annotations:
@@ -23,7 +23,7 @@ spec:
 
 ---
 
-apiVersion: certificatemanager.ionoscloud.io/v1alpha1
+apiVersion: certificatemanager.m.ionoscloud.io/v1alpha1
 kind: AutoCertificateProvider
 metadata:
   annotations:

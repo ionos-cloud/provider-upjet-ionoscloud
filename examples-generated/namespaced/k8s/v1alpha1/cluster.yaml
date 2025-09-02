@@ -1,4 +1,4 @@
-apiVersion: k8s.ionoscloud.io/v1alpha1
+apiVersion: k8s.m.ionoscloud.io/v1alpha1
 kind: Cluster
 metadata:
   annotations:

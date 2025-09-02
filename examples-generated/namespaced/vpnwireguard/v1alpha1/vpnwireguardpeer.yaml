@@ -1,4 +1,4 @@
-apiVersion: vpnwireguard.ionoscloud.io/v1alpha1
+apiVersion: vpnwireguard.m.ionoscloud.io/v1alpha1
 kind: VpnWireguardPeer
 metadata:
   annotations:

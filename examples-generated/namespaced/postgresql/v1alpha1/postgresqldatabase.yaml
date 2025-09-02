@@ -1,4 +1,4 @@
-apiVersion: postgresql.ionoscloud.io/v1alpha1
+apiVersion: postgresql.m.ionoscloud.io/v1alpha1
 kind: PostgresqlDatabase
 metadata:
   annotations:

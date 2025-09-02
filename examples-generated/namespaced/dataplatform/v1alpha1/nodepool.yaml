@@ -1,4 +1,4 @@
-apiVersion: dataplatform.ionoscloud.io/v1alpha1
+apiVersion: dataplatform.m.ionoscloud.io/v1alpha1
 kind: NodePool
 metadata:
   annotations:
@@ -32,7 +32,7 @@ spec:
 
 ---
 
-apiVersion: compute.ionoscloud.io/v1alpha1
+apiVersion: compute.m.ionoscloud.io/v1alpha1
 kind: Datacenter
 metadata:
   annotations:
@@ -49,7 +49,7 @@ spec:
 
 ---
 
-apiVersion: dataplatform.ionoscloud.io/v1alpha1
+apiVersion: dataplatform.m.ionoscloud.io/v1alpha1
 kind: Cluster
 metadata:
   annotations:

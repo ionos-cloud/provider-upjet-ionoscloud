@@ -84,7 +84,7 @@ func GetProviderNamespaced(ctx context.Context, fwProvider fwprovider.Provider, 
 	resourcePrefix := "ionoscloud"
 	pc := config.NewProvider([]byte(providerSchema), resourcePrefix, modulePath, []byte(providerMetadata),
 		config.WithShortName("ionos"),
-		config.WithRootGroup("ionoscloud.io"),
+		config.WithRootGroup("m.ionoscloud.io"),
 		config.WithIncludeList(CLIReconciledResourceList()),
 		config.WithTerraformPluginSDKIncludeList(TerraformPluginSDKResourceList()),
 		config.WithTerraformPluginFrameworkIncludeList(TerraformPluginFrameworkResourceList()),

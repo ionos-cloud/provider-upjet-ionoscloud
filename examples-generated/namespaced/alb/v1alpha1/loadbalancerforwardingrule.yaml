@@ -1,4 +1,4 @@
-apiVersion: alb.ionoscloud.io/v1alpha1
+apiVersion: alb.m.ionoscloud.io/v1alpha1
 kind: LoadbalancerForwardingrule
 metadata:
   annotations:
@@ -49,7 +49,7 @@ spec:
 
 ---
 
-apiVersion: alb.ionoscloud.io/v1alpha1
+apiVersion: alb.m.ionoscloud.io/v1alpha1
 kind: Loadbalancer
 metadata:
   annotations:
@@ -77,7 +77,7 @@ spec:
 
 ---
 
-apiVersion: certificatemanager.ionoscloud.io/v1alpha1
+apiVersion: certificatemanager.m.ionoscloud.io/v1alpha1
 kind: Certificate
 metadata:
   annotations:
@@ -97,7 +97,7 @@ spec:
 
 ---
 
-apiVersion: compute.ionoscloud.io/v1alpha1
+apiVersion: compute.m.ionoscloud.io/v1alpha1
 kind: Datacenter
 metadata:
   annotations:
@@ -115,7 +115,7 @@ spec:
 
 ---
 
-apiVersion: compute.ionoscloud.io/v1alpha1
+apiVersion: compute.m.ionoscloud.io/v1alpha1
 kind: Lan
 metadata:
   annotations:
@@ -134,7 +134,7 @@ spec:
 
 ---
 
-apiVersion: compute.ionoscloud.io/v1alpha1
+apiVersion: compute.m.ionoscloud.io/v1alpha1
 kind: Lan
 metadata:
   annotations:

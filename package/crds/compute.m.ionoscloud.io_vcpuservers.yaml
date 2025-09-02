@@ -1,0 +1,1184 @@
+---
+apiVersion: apiextensions.k8s.io/v1
+kind: CustomResourceDefinition
+metadata:
+  annotations:
+    controller-gen.kubebuilder.io/version: v0.18.0
+  name: vcpuservers.compute.m.ionoscloud.io
+spec:
+  group: compute.m.ionoscloud.io
+  names:
+    categories:
+    - crossplane
+    - managed
+    - ionos
+    kind: VCPUServer
+    listKind: VCPUServerList
+    plural: vcpuservers
+    singular: vcpuserver
+  scope: Namespaced
+  versions:
+  - additionalPrinterColumns:
+    - jsonPath: .status.conditions[?(@.type=='Synced')].status
+      name: SYNCED
+      type: string
+    - jsonPath: .status.conditions[?(@.type=='Ready')].status
+      name: READY
+      type: string
+    - jsonPath: .metadata.annotations.crossplane\.io/external-name
+      name: EXTERNAL-NAME
+      type: string
+    - jsonPath: .metadata.creationTimestamp
+      name: AGE
+      type: date
+    name: v1alpha1
+    schema:
+      openAPIV3Schema:
+        description: VCPUServer is the Schema for the VCPUServers API. Creates and
+          manages IonosCloud VCPU Server objects.
+        properties:
+          apiVersion:
+            description: |-
+              APIVersion defines the versioned schema of this representation of an object.
+              Servers should convert recognized schemas to the latest internal value, and
+              may reject unrecognized values.
+              More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#resources
+            type: string
+          kind:
+            description: |-
+              Kind is a string value representing the REST resource this object represents.
+              Servers may infer this from the endpoint the client submits requests to.
+              Cannot be updated.
+              In CamelCase.
+              More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#types-kinds
+            type: string
+          metadata:
+            type: object
+          spec:
+            description: VCPUServerSpec defines the desired state of VCPUServer
+            properties:
+              forProvider:
+                properties:
+                  availabilityZone:
+                    description: '[string] The availability zone in which the server
+                      should exist. E.g: AUTO, ZONE_1, ZONE_2. This property is immutable.'
+                    type: string
+                  bootCdrom:
+                    description: |-
+                      DEPRECATED Please refer to ionoscloud_server_boot_device_selection [string] The associated boot drive, if any. Must be the UUID of a bootable CDROM image that can be retrieved using the ionoscloud_image data source.
+                      The associated boot drive, if any. Must be the UUID of a bootable CDROM image that can be retrieved using the ionoscloud_image data source.
+                    type: string
+                  bootImage:
+                    description: '[string] The image or snapshot UUID / name. May
+                      also be an image alias. It is required if licence_type is not
+                      provided.'
+                    type: string
+                  cores:
+                    description: '[integer] Number of server CPU cores.'
+                    type: number
+                  datacenterId:
+                    description: '[string] The ID of a Virtual Data Center.'
+                    type: string
+                  datacenterIdRef:
+                    description: Reference to a Datacenter in compute to populate
+                      datacenterId.
+                    properties:
+                      name:
+                        description: Name of the referenced object.
+                        type: string
+                      namespace:
+                        description: Namespace of the referenced object
+                        type: string
+                      policy:
+                        description: Policies for referencing.
+                        properties:
+                          resolution:
+                            default: Required
+                            description: |-
+                              Resolution specifies whether resolution of this reference is required.
+                              The default is 'Required', which means the reconcile will fail if the
+                              reference cannot be resolved. 'Optional' means this reference will be
+                              a no-op if it cannot be resolved.
+                            enum:
+                            - Required
+                            - Optional
+                            type: string
+                          resolve:
+                            description: |-
+                              Resolve specifies when this reference should be resolved. The default
+                              is 'IfNotPresent', which will attempt to resolve the reference only when
+                              the corresponding field is not present. Use 'Always' to resolve the
+                              reference on every reconcile.
+                            enum:
+                            - Always
+                            - IfNotPresent
+                            type: string
+                        type: object
+                    required:
+                    - name
+                    type: object
+                  datacenterIdSelector:
+                    description: Selector for a Datacenter in compute to populate
+                      datacenterId.
+                    properties:
+                      matchControllerRef:
+                        description: |-
+                          MatchControllerRef ensures an object with the same controller reference
+                          as the selecting object is selected.
+                        type: boolean
+                      matchLabels:
+                        additionalProperties:
+                          type: string
+                        description: MatchLabels ensures an object with matching labels
+                          is selected.
+                        type: object
+                      namespace:
+                        description: Namespace for the selector
+                        type: string
+                      policy:
+                        description: Policies for selection.
+                        properties:
+                          resolution:
+                            default: Required
+                            description: |-
+                              Resolution specifies whether resolution of this reference is required.
+                              The default is 'Required', which means the reconcile will fail if the
+                              reference cannot be resolved. 'Optional' means this reference will be
+                              a no-op if it cannot be resolved.
+                            enum:
+                            - Required
+                            - Optional
+                            type: string
+                          resolve:
+                            description: |-
+                              Resolve specifies when this reference should be resolved. The default
+                              is 'IfNotPresent', which will attempt to resolve the reference only when
+                              the corresponding field is not present. Use 'Always' to resolve the
+                              reference on every reconcile.
+                            enum:
+                            - Always
+                            - IfNotPresent
+                            type: string
+                        type: object
+                    type: object
+                  firewallruleIds:
+                    description: (Computed) The associated firewall rules.
+                    items:
+                      type: string
+                    type: array
+                  hostname:
+                    description: |-
+                      (Computed)[string] The hostname of the resource. Allowed characters are a-z, 0-9 and - (minus). Hostname should not start with minus and should not be longer than 63 characters. If no value provided explicitly, it will be populated with the name of the server
+                      The hostname of the resource. Allowed characters are a-z, 0-9 and - (minus). Hostname should not start with minus and should not be longer than 63 characters. If no value provided explicitly, it will be populated with the name of the server
+                    type: string
+                  imageName:
+                    description: '[string] The name, ID or alias of the image. May
+                      also be a snapshot ID. It is required if licence_type is not
+                      provided. Attribute is immutable.'
+                    type: string
+                  imagePasswordSecretRef:
+                    description: '[string] The password for the image.'
+                    properties:
+                      key:
+                        type: string
+                      name:
+                        description: Name of the secret.
+                        type: string
+                    required:
+                    - key
+                    - name
+                    type: object
+                  label:
+                    description: 'A label can be seen as an object with only two required
+                      fields: key and value, both of the string type. Please check
+                      the example presented above to see how a label can be used in
+                      the plan. A server can have multiple labels.'
+                    items:
+                      properties:
+                        key:
+                          type: string
+                        value:
+                          type: string
+                      type: object
+                    type: array
+                  name:
+                    description: '[string] The name of the server.'
+                    type: string
+                  nic:
+                    description: See the Nic section.
+                    properties:
+                      dhcp:
+                        type: boolean
+                      dhcpv6:
+                        type: boolean
+                      firewall:
+                        description: |-
+                          Allows to define firewall rules inline in the server. See the Firewall section.
+                          Firewall rules created in the server resource. The rules can also be created as separate resources outside the server resource
+                        items:
+                          properties:
+                            icmpCode:
+                              type: string
+                            icmpType:
+                              type: string
+                            name:
+                              description: '[string] The name of the server.'
+                              type: string
+                            portRangeEnd:
+                              type: number
+                            portRangeStart:
+                              type: number
+                            protocol:
+                              type: string
+                            sourceIp:
+                              type: string
+                            sourceMac:
+                              type: string
+                            targetIp:
+                              type: string
+                            type:
+                              type: string
+                          type: object
+                        type: array
+                      firewallActive:
+                        type: boolean
+                      firewallType:
+                        type: string
+                      ips:
+                        description: Collection of IP addresses assigned to a nic.
+                          Explicitly assigned public IPs need to come from reserved
+                          IP blocks, Passing value null or empty array will assign
+                          an IP address automatically.
+                        items:
+                          type: string
+                        type: array
+                      ipv6CidrBlock:
+                        type: string
+                      ipv6Ips:
+                        items:
+                          type: string
+                        type: array
+                      lan:
+                        type: number
+                      lanRef:
+                        description: Reference to a Lan in compute to populate lan.
+                        properties:
+                          name:
+                            description: Name of the referenced object.
+                            type: string
+                          namespace:
+                            description: Namespace of the referenced object
+                            type: string
+                          policy:
+                            description: Policies for referencing.
+                            properties:
+                              resolution:
+                                default: Required
+                                description: |-
+                                  Resolution specifies whether resolution of this reference is required.
+                                  The default is 'Required', which means the reconcile will fail if the
+                                  reference cannot be resolved. 'Optional' means this reference will be
+                                  a no-op if it cannot be resolved.
+                                enum:
+                                - Required
+                                - Optional
+                                type: string
+                              resolve:
+                                description: |-
+                                  Resolve specifies when this reference should be resolved. The default
+                                  is 'IfNotPresent', which will attempt to resolve the reference only when
+                                  the corresponding field is not present. Use 'Always' to resolve the
+                                  reference on every reconcile.
+                                enum:
+                                - Always
+                                - IfNotPresent
+                                type: string
+                            type: object
+                        required:
+                        - name
+                        type: object
+                      lanSelector:
+                        description: Selector for a Lan in compute to populate lan.
+                        properties:
+                          matchControllerRef:
+                            description: |-
+                              MatchControllerRef ensures an object with the same controller reference
+                              as the selecting object is selected.
+                            type: boolean
+                          matchLabels:
+                            additionalProperties:
+                              type: string
+                            description: MatchLabels ensures an object with matching
+                              labels is selected.
+                            type: object
+                          namespace:
+                            description: Namespace for the selector
+                            type: string
+                          policy:
+                            description: Policies for selection.
+                            properties:
+                              resolution:
+                                default: Required
+                                description: |-
+                                  Resolution specifies whether resolution of this reference is required.
+                                  The default is 'Required', which means the reconcile will fail if the
+                                  reference cannot be resolved. 'Optional' means this reference will be
+                                  a no-op if it cannot be resolved.
+                                enum:
+                                - Required
+                                - Optional
+                                type: string
+                              resolve:
+                                description: |-
+                                  Resolve specifies when this reference should be resolved. The default
+                                  is 'IfNotPresent', which will attempt to resolve the reference only when
+                                  the corresponding field is not present. Use 'Always' to resolve the
+                                  reference on every reconcile.
+                                enum:
+                                - Always
+                                - IfNotPresent
+                                type: string
+                            type: object
+                        type: object
+                      mac:
+                        type: string
+                      name:
+                        description: '[string] The name of the server.'
+                        type: string
+                      securityGroupsIds:
+                        description: |-
+                          The list of Security Group IDs for the resource.
+                          The list of Security Group IDs for the NIC
+                        items:
+                          type: string
+                        type: array
+                        x-kubernetes-list-type: set
+                    type: object
+                  ram:
+                    description: '[integer] The amount of memory for the server in
+                      MB.'
+                    type: number
+                  securityGroupsIds:
+                    description: |-
+                      The list of Security Group IDs for the resource.
+                      The list of Security Group IDs for the server
+                    items:
+                      type: string
+                    type: array
+                    x-kubernetes-list-type: set
+                  sshKeys:
+                    description: |-
+                      [list] Immutable List of absolute or relative paths to files containing public SSH key that will be injected into IonosCloud provided Linux images. Also accepts ssh keys directly. Public SSH keys are set on the image as authorized keys for appropriate SSH login to the instance using the corresponding private key. This field may only be set in creation requests. When reading, it always returns null. SSH keys are only supported if a public Linux image is used for the volume creation. Does not support ~ expansion to homedir in the given path.
+                      Public SSH keys are set on the image as authorized keys for appropriate SSH login to the instance using the corresponding private key. This field may only be set in creation requests. When reading, it always returns null. SSH keys are only supported if a public Linux image is used for the volume creation.
+                    items:
+                      type: string
+                    type: array
+                  vmState:
+                    description: 'Sets the power state of the vcpu server. Possible
+                      values: `RUNNING` or `SHUTOFF`.'
+                    type: string
+                  volume:
+                    description: See the Volume section.
+                    properties:
+                      availabilityZone:
+                        description: '[string] The availability zone in which the
+                          server should exist. E.g: AUTO, ZONE_1, ZONE_2. This property
+                          is immutable.'
+                        type: string
+                      backupUnitId:
+                        description: The uuid of the Backup Unit that user has access
+                          to. The property is immutable and is only allowed to be
+                          set on a new volume creation. It is mandatory to provide
+                          either 'public image' or 'imageAlias' in conjunction with
+                          this property.
+                        type: string
+                      bus:
+                        type: string
+                      diskType:
+                        type: string
+                      exposeSerial:
+                        description: If set to `true` will expose the serial id of
+                          the disk attached to the server. If set to `false` will
+                          not expose the serial id. Some operating systems or software
+                          solutions require the serial id to be exposed to work properly.
+                          Exposing the serial can influence licensed software (e.g.
+                          Windows) behavior
+                        type: boolean
+                      licenceType:
+                        description: '[string] Sets the OS type of the server.'
+                        type: string
+                      name:
+                        description: '[string] The name of the server.'
+                        type: string
+                      size:
+                        description: The size of the volume in GB.
+                        type: number
+                      userData:
+                        description: The cloud-init configuration for the volume as
+                          base64 encoded string. The property is immutable and is
+                          only allowed to be set on a new volume creation. It is mandatory
+                          to provide either 'public image' or 'imageAlias' that has
+                          cloud-init compatibility in conjunction with this property.
+                        type: string
+                    type: object
+                type: object
+              initProvider:
+                description: |-
+                  THIS IS A BETA FIELD. It will be honored
+                  unless the Management Policies feature flag is disabled.
+                  InitProvider holds the same fields as ForProvider, with the exception
+                  of Identifier and other resource reference fields. The fields that are
+                  in InitProvider are merged into ForProvider when the resource is created.
+                  The same fields are also added to the terraform ignore_changes hook, to
+                  avoid updating them after creation. This is useful for fields that are
+                  required on creation, but we do not desire to update them after creation,
+                  for example because of an external controller is managing them, like an
+                  autoscaler.
+                properties:
+                  availabilityZone:
+                    description: '[string] The availability zone in which the server
+                      should exist. E.g: AUTO, ZONE_1, ZONE_2. This property is immutable.'
+                    type: string
+                  bootCdrom:
+                    description: |-
+                      DEPRECATED Please refer to ionoscloud_server_boot_device_selection [string] The associated boot drive, if any. Must be the UUID of a bootable CDROM image that can be retrieved using the ionoscloud_image data source.
+                      The associated boot drive, if any. Must be the UUID of a bootable CDROM image that can be retrieved using the ionoscloud_image data source.
+                    type: string
+                  bootImage:
+                    description: '[string] The image or snapshot UUID / name. May
+                      also be an image alias. It is required if licence_type is not
+                      provided.'
+                    type: string
+                  cores:
+                    description: '[integer] Number of server CPU cores.'
+                    type: number
+                  datacenterId:
+                    description: '[string] The ID of a Virtual Data Center.'
+                    type: string
+                  datacenterIdRef:
+                    description: Reference to a Datacenter in compute to populate
+                      datacenterId.
+                    properties:
+                      name:
+                        description: Name of the referenced object.
+                        type: string
+                      namespace:
+                        description: Namespace of the referenced object
+                        type: string
+                      policy:
+                        description: Policies for referencing.
+                        properties:
+                          resolution:
+                            default: Required
+                            description: |-
+                              Resolution specifies whether resolution of this reference is required.
+                              The default is 'Required', which means the reconcile will fail if the
+                              reference cannot be resolved. 'Optional' means this reference will be
+                              a no-op if it cannot be resolved.
+                            enum:
+                            - Required
+                            - Optional
+                            type: string
+                          resolve:
+                            description: |-
+                              Resolve specifies when this reference should be resolved. The default
+                              is 'IfNotPresent', which will attempt to resolve the reference only when
+                              the corresponding field is not present. Use 'Always' to resolve the
+                              reference on every reconcile.
+                            enum:
+                            - Always
+                            - IfNotPresent
+                            type: string
+                        type: object
+                    required:
+                    - name
+                    type: object
+                  datacenterIdSelector:
+                    description: Selector for a Datacenter in compute to populate
+                      datacenterId.
+                    properties:
+                      matchControllerRef:
+                        description: |-
+                          MatchControllerRef ensures an object with the same controller reference
+                          as the selecting object is selected.
+                        type: boolean
+                      matchLabels:
+                        additionalProperties:
+                          type: string
+                        description: MatchLabels ensures an object with matching labels
+                          is selected.
+                        type: object
+                      namespace:
+                        description: Namespace for the selector
+                        type: string
+                      policy:
+                        description: Policies for selection.
+                        properties:
+                          resolution:
+                            default: Required
+                            description: |-
+                              Resolution specifies whether resolution of this reference is required.
+                              The default is 'Required', which means the reconcile will fail if the
+                              reference cannot be resolved. 'Optional' means this reference will be
+                              a no-op if it cannot be resolved.
+                            enum:
+                            - Required
+                            - Optional
+                            type: string
+                          resolve:
+                            description: |-
+                              Resolve specifies when this reference should be resolved. The default
+                              is 'IfNotPresent', which will attempt to resolve the reference only when
+                              the corresponding field is not present. Use 'Always' to resolve the
+                              reference on every reconcile.
+                            enum:
+                            - Always
+                            - IfNotPresent
+                            type: string
+                        type: object
+                    type: object
+                  firewallruleIds:
+                    description: (Computed) The associated firewall rules.
+                    items:
+                      type: string
+                    type: array
+                  hostname:
+                    description: |-
+                      (Computed)[string] The hostname of the resource. Allowed characters are a-z, 0-9 and - (minus). Hostname should not start with minus and should not be longer than 63 characters. If no value provided explicitly, it will be populated with the name of the server
+                      The hostname of the resource. Allowed characters are a-z, 0-9 and - (minus). Hostname should not start with minus and should not be longer than 63 characters. If no value provided explicitly, it will be populated with the name of the server
+                    type: string
+                  imageName:
+                    description: '[string] The name, ID or alias of the image. May
+                      also be a snapshot ID. It is required if licence_type is not
+                      provided. Attribute is immutable.'
+                    type: string
+                  imagePasswordSecretRef:
+                    description: '[string] The password for the image.'
+                    properties:
+                      key:
+                        type: string
+                      name:
+                        description: Name of the secret.
+                        type: string
+                    required:
+                    - key
+                    - name
+                    type: object
+                  label:
+                    description: 'A label can be seen as an object with only two required
+                      fields: key and value, both of the string type. Please check
+                      the example presented above to see how a label can be used in
+                      the plan. A server can have multiple labels.'
+                    items:
+                      properties:
+                        key:
+                          type: string
+                        value:
+                          type: string
+                      type: object
+                    type: array
+                  name:
+                    description: '[string] The name of the server.'
+                    type: string
+                  nic:
+                    description: See the Nic section.
+                    properties:
+                      dhcp:
+                        type: boolean
+                      dhcpv6:
+                        type: boolean
+                      firewall:
+                        description: |-
+                          Allows to define firewall rules inline in the server. See the Firewall section.
+                          Firewall rules created in the server resource. The rules can also be created as separate resources outside the server resource
+                        items:
+                          properties:
+                            icmpCode:
+                              type: string
+                            icmpType:
+                              type: string
+                            name:
+                              description: '[string] The name of the server.'
+                              type: string
+                            portRangeEnd:
+                              type: number
+                            portRangeStart:
+                              type: number
+                            protocol:
+                              type: string
+                            sourceIp:
+                              type: string
+                            sourceMac:
+                              type: string
+                            targetIp:
+                              type: string
+                            type:
+                              type: string
+                          type: object
+                        type: array
+                      firewallActive:
+                        type: boolean
+                      firewallType:
+                        type: string
+                      ips:
+                        description: Collection of IP addresses assigned to a nic.
+                          Explicitly assigned public IPs need to come from reserved
+                          IP blocks, Passing value null or empty array will assign
+                          an IP address automatically.
+                        items:
+                          type: string
+                        type: array
+                      ipv6CidrBlock:
+                        type: string
+                      ipv6Ips:
+                        items:
+                          type: string
+                        type: array
+                      lan:
+                        type: number
+                      lanRef:
+                        description: Reference to a Lan in compute to populate lan.
+                        properties:
+                          name:
+                            description: Name of the referenced object.
+                            type: string
+                          namespace:
+                            description: Namespace of the referenced object
+                            type: string
+                          policy:
+                            description: Policies for referencing.
+                            properties:
+                              resolution:
+                                default: Required
+                                description: |-
+                                  Resolution specifies whether resolution of this reference is required.
+                                  The default is 'Required', which means the reconcile will fail if the
+                                  reference cannot be resolved. 'Optional' means this reference will be
+                                  a no-op if it cannot be resolved.
+                                enum:
+                                - Required
+                                - Optional
+                                type: string
+                              resolve:
+                                description: |-
+                                  Resolve specifies when this reference should be resolved. The default
+                                  is 'IfNotPresent', which will attempt to resolve the reference only when
+                                  the corresponding field is not present. Use 'Always' to resolve the
+                                  reference on every reconcile.
+                                enum:
+                                - Always
+                                - IfNotPresent
+                                type: string
+                            type: object
+                        required:
+                        - name
+                        type: object
+                      lanSelector:
+                        description: Selector for a Lan in compute to populate lan.
+                        properties:
+                          matchControllerRef:
+                            description: |-
+                              MatchControllerRef ensures an object with the same controller reference
+                              as the selecting object is selected.
+                            type: boolean
+                          matchLabels:
+                            additionalProperties:
+                              type: string
+                            description: MatchLabels ensures an object with matching
+                              labels is selected.
+                            type: object
+                          namespace:
+                            description: Namespace for the selector
+                            type: string
+                          policy:
+                            description: Policies for selection.
+                            properties:
+                              resolution:
+                                default: Required
+                                description: |-
+                                  Resolution specifies whether resolution of this reference is required.
+                                  The default is 'Required', which means the reconcile will fail if the
+                                  reference cannot be resolved. 'Optional' means this reference will be
+                                  a no-op if it cannot be resolved.
+                                enum:
+                                - Required
+                                - Optional
+                                type: string
+                              resolve:
+                                description: |-
+                                  Resolve specifies when this reference should be resolved. The default
+                                  is 'IfNotPresent', which will attempt to resolve the reference only when
+                                  the corresponding field is not present. Use 'Always' to resolve the
+                                  reference on every reconcile.
+                                enum:
+                                - Always
+                                - IfNotPresent
+                                type: string
+                            type: object
+                        type: object
+                      mac:
+                        type: string
+                      name:
+                        description: '[string] The name of the server.'
+                        type: string
+                      securityGroupsIds:
+                        description: |-
+                          The list of Security Group IDs for the resource.
+                          The list of Security Group IDs for the NIC
+                        items:
+                          type: string
+                        type: array
+                        x-kubernetes-list-type: set
+                    type: object
+                  ram:
+                    description: '[integer] The amount of memory for the server in
+                      MB.'
+                    type: number
+                  securityGroupsIds:
+                    description: |-
+                      The list of Security Group IDs for the resource.
+                      The list of Security Group IDs for the server
+                    items:
+                      type: string
+                    type: array
+                    x-kubernetes-list-type: set
+                  sshKeys:
+                    description: |-
+                      [list] Immutable List of absolute or relative paths to files containing public SSH key that will be injected into IonosCloud provided Linux images. Also accepts ssh keys directly. Public SSH keys are set on the image as authorized keys for appropriate SSH login to the instance using the corresponding private key. This field may only be set in creation requests. When reading, it always returns null. SSH keys are only supported if a public Linux image is used for the volume creation. Does not support ~ expansion to homedir in the given path.
+                      Public SSH keys are set on the image as authorized keys for appropriate SSH login to the instance using the corresponding private key. This field may only be set in creation requests. When reading, it always returns null. SSH keys are only supported if a public Linux image is used for the volume creation.
+                    items:
+                      type: string
+                    type: array
+                  vmState:
+                    description: 'Sets the power state of the vcpu server. Possible
+                      values: `RUNNING` or `SHUTOFF`.'
+                    type: string
+                  volume:
+                    description: See the Volume section.
+                    properties:
+                      availabilityZone:
+                        description: '[string] The availability zone in which the
+                          server should exist. E.g: AUTO, ZONE_1, ZONE_2. This property
+                          is immutable.'
+                        type: string
+                      backupUnitId:
+                        description: The uuid of the Backup Unit that user has access
+                          to. The property is immutable and is only allowed to be
+                          set on a new volume creation. It is mandatory to provide
+                          either 'public image' or 'imageAlias' in conjunction with
+                          this property.
+                        type: string
+                      bus:
+                        type: string
+                      diskType:
+                        type: string
+                      exposeSerial:
+                        description: If set to `true` will expose the serial id of
+                          the disk attached to the server. If set to `false` will
+                          not expose the serial id. Some operating systems or software
+                          solutions require the serial id to be exposed to work properly.
+                          Exposing the serial can influence licensed software (e.g.
+                          Windows) behavior
+                        type: boolean
+                      licenceType:
+                        description: '[string] Sets the OS type of the server.'
+                        type: string
+                      name:
+                        description: '[string] The name of the server.'
+                        type: string
+                      size:
+                        description: The size of the volume in GB.
+                        type: number
+                      userData:
+                        description: The cloud-init configuration for the volume as
+                          base64 encoded string. The property is immutable and is
+                          only allowed to be set on a new volume creation. It is mandatory
+                          to provide either 'public image' or 'imageAlias' that has
+                          cloud-init compatibility in conjunction with this property.
+                        type: string
+                    type: object
+                type: object
+              managementPolicies:
+                default:
+                - '*'
+                description: |-
+                  THIS IS A BETA FIELD. It is on by default but can be opted out
+                  through a Crossplane feature flag.
+                  ManagementPolicies specify the array of actions Crossplane is allowed to
+                  take on the managed and external resources.
+                  See the design doc for more information: https://github.com/crossplane/crossplane/blob/499895a25d1a1a0ba1604944ef98ac7a1a71f197/design/design-doc-observe-only-resources.md?plain=1#L223
+                  and this one: https://github.com/crossplane/crossplane/blob/444267e84783136daa93568b364a5f01228cacbe/design/one-pager-ignore-changes.md
+                items:
+                  description: |-
+                    A ManagementAction represents an action that the Crossplane controllers
+                    can take on an external resource.
+                  enum:
+                  - Observe
+                  - Create
+                  - Update
+                  - Delete
+                  - LateInitialize
+                  - '*'
+                  type: string
+                type: array
+              providerConfigRef:
+                default:
+                  kind: ClusterProviderConfig
+                  name: default
+                description: |-
+                  ProviderConfigReference specifies how the provider that will be used to
+                  create, observe, update, and delete this managed resource should be
+                  configured.
+                properties:
+                  kind:
+                    description: Kind of the referenced object.
+                    type: string
+                  name:
+                    description: Name of the referenced object.
+                    type: string
+                required:
+                - kind
+                - name
+                type: object
+              writeConnectionSecretToRef:
+                description: |-
+                  WriteConnectionSecretToReference specifies the namespace and name of a
+                  Secret to which any connection details for this managed resource should
+                  be written. Connection details frequently include the endpoint, username,
+                  and password required to connect to the managed resource.
+                properties:
+                  name:
+                    description: Name of the secret.
+                    type: string
+                required:
+                - name
+                type: object
+            required:
+            - forProvider
+            type: object
+            x-kubernetes-validations:
+            - message: spec.forProvider.cores is a required parameter
+              rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
+                || ''Update'' in self.managementPolicies) || has(self.forProvider.cores)
+                || (has(self.initProvider) && has(self.initProvider.cores))'
+            - message: spec.forProvider.name is a required parameter
+              rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
+                || ''Update'' in self.managementPolicies) || has(self.forProvider.name)
+                || (has(self.initProvider) && has(self.initProvider.name))'
+            - message: spec.forProvider.ram is a required parameter
+              rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
+                || ''Update'' in self.managementPolicies) || has(self.forProvider.ram)
+                || (has(self.initProvider) && has(self.initProvider.ram))'
+            - message: spec.forProvider.volume is a required parameter
+              rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
+                || ''Update'' in self.managementPolicies) || has(self.forProvider.volume)
+                || (has(self.initProvider) && has(self.initProvider.volume))'
+          status:
+            description: VCPUServerStatus defines the observed state of VCPUServer.
+            properties:
+              atProvider:
+                properties:
+                  availabilityZone:
+                    description: '[string] The availability zone in which the server
+                      should exist. E.g: AUTO, ZONE_1, ZONE_2. This property is immutable.'
+                    type: string
+                  bootCdrom:
+                    description: |-
+                      DEPRECATED Please refer to ionoscloud_server_boot_device_selection [string] The associated boot drive, if any. Must be the UUID of a bootable CDROM image that can be retrieved using the ionoscloud_image data source.
+                      The associated boot drive, if any. Must be the UUID of a bootable CDROM image that can be retrieved using the ionoscloud_image data source.
+                    type: string
+                  bootImage:
+                    description: '[string] The image or snapshot UUID / name. May
+                      also be an image alias. It is required if licence_type is not
+                      provided.'
+                    type: string
+                  bootVolume:
+                    description: (Computed) The associated boot volume.
+                    type: string
+                  cores:
+                    description: '[integer] Number of server CPU cores.'
+                    type: number
+                  cpuFamily:
+                    type: string
+                  datacenterId:
+                    description: '[string] The ID of a Virtual Data Center.'
+                    type: string
+                  firewallruleId:
+                    description: (Computed) The associated firewall rule.
+                    type: string
+                  firewallruleIds:
+                    description: (Computed) The associated firewall rules.
+                    items:
+                      type: string
+                    type: array
+                  hostname:
+                    description: |-
+                      (Computed)[string] The hostname of the resource. Allowed characters are a-z, 0-9 and - (minus). Hostname should not start with minus and should not be longer than 63 characters. If no value provided explicitly, it will be populated with the name of the server
+                      The hostname of the resource. Allowed characters are a-z, 0-9 and - (minus). Hostname should not start with minus and should not be longer than 63 characters. If no value provided explicitly, it will be populated with the name of the server
+                    type: string
+                  id:
+                    type: string
+                  imageName:
+                    description: '[string] The name, ID or alias of the image. May
+                      also be a snapshot ID. It is required if licence_type is not
+                      provided. Attribute is immutable.'
+                    type: string
+                  inlineVolumeIds:
+                    description: |-
+                      (Computed) A list with the IDs for the volumes that are defined inside the server resource.
+                      A list that contains the IDs for the volumes defined inside the server resource.
+                    items:
+                      type: string
+                    type: array
+                  label:
+                    description: 'A label can be seen as an object with only two required
+                      fields: key and value, both of the string type. Please check
+                      the example presented above to see how a label can be used in
+                      the plan. A server can have multiple labels.'
+                    items:
+                      properties:
+                        key:
+                          type: string
+                        value:
+                          type: string
+                      type: object
+                    type: array
+                  name:
+                    description: '[string] The name of the server.'
+                    type: string
+                  nic:
+                    description: See the Nic section.
+                    properties:
+                      deviceNumber:
+                        type: number
+                      dhcp:
+                        type: boolean
+                      dhcpv6:
+                        type: boolean
+                      firewall:
+                        description: |-
+                          Allows to define firewall rules inline in the server. See the Firewall section.
+                          Firewall rules created in the server resource. The rules can also be created as separate resources outside the server resource
+                        items:
+                          properties:
+                            icmpCode:
+                              type: string
+                            icmpType:
+                              type: string
+                            id:
+                              type: string
+                            name:
+                              description: '[string] The name of the server.'
+                              type: string
+                            portRangeEnd:
+                              type: number
+                            portRangeStart:
+                              type: number
+                            protocol:
+                              type: string
+                            sourceIp:
+                              type: string
+                            sourceMac:
+                              type: string
+                            targetIp:
+                              type: string
+                            type:
+                              type: string
+                          type: object
+                        type: array
+                      firewallActive:
+                        type: boolean
+                      firewallType:
+                        type: string
+                      id:
+                        type: string
+                      ips:
+                        description: Collection of IP addresses assigned to a nic.
+                          Explicitly assigned public IPs need to come from reserved
+                          IP blocks, Passing value null or empty array will assign
+                          an IP address automatically.
+                        items:
+                          type: string
+                        type: array
+                      ipv6CidrBlock:
+                        type: string
+                      ipv6Ips:
+                        items:
+                          type: string
+                        type: array
+                      lan:
+                        type: number
+                      mac:
+                        type: string
+                      name:
+                        description: '[string] The name of the server.'
+                        type: string
+                      pciSlot:
+                        type: number
+                      securityGroupsIds:
+                        description: |-
+                          The list of Security Group IDs for the resource.
+                          The list of Security Group IDs for the NIC
+                        items:
+                          type: string
+                        type: array
+                        x-kubernetes-list-type: set
+                    type: object
+                  primaryIp:
+                    description: (Computed) The associated IP address.
+                    type: string
+                  primaryNic:
+                    description: |-
+                      (Computed) The associated NIC.
+                      Id of the primary network interface
+                    type: string
+                  ram:
+                    description: '[integer] The amount of memory for the server in
+                      MB.'
+                    type: number
+                  securityGroupsIds:
+                    description: |-
+                      The list of Security Group IDs for the resource.
+                      The list of Security Group IDs for the server
+                    items:
+                      type: string
+                    type: array
+                    x-kubernetes-list-type: set
+                  sshKeys:
+                    description: |-
+                      [list] Immutable List of absolute or relative paths to files containing public SSH key that will be injected into IonosCloud provided Linux images. Also accepts ssh keys directly. Public SSH keys are set on the image as authorized keys for appropriate SSH login to the instance using the corresponding private key. This field may only be set in creation requests. When reading, it always returns null. SSH keys are only supported if a public Linux image is used for the volume creation. Does not support ~ expansion to homedir in the given path.
+                      Public SSH keys are set on the image as authorized keys for appropriate SSH login to the instance using the corresponding private key. This field may only be set in creation requests. When reading, it always returns null. SSH keys are only supported if a public Linux image is used for the volume creation.
+                    items:
+                      type: string
+                    type: array
+                  type:
+                    type: string
+                  vmState:
+                    description: 'Sets the power state of the vcpu server. Possible
+                      values: `RUNNING` or `SHUTOFF`.'
+                    type: string
+                  volume:
+                    description: See the Volume section.
+                    properties:
+                      availabilityZone:
+                        description: '[string] The availability zone in which the
+                          server should exist. E.g: AUTO, ZONE_1, ZONE_2. This property
+                          is immutable.'
+                        type: string
+                      backupUnitId:
+                        description: The uuid of the Backup Unit that user has access
+                          to. The property is immutable and is only allowed to be
+                          set on a new volume creation. It is mandatory to provide
+                          either 'public image' or 'imageAlias' in conjunction with
+                          this property.
+                        type: string
+                      bootServer:
+                        description: The UUID of the attached server.
+                        type: string
+                      bus:
+                        type: string
+                      cpuHotPlug:
+                        type: boolean
+                      deviceNumber:
+                        type: number
+                      discVirtioHotPlug:
+                        type: boolean
+                      discVirtioHotUnplug:
+                        type: boolean
+                      diskType:
+                        type: string
+                      exposeSerial:
+                        description: If set to `true` will expose the serial id of
+                          the disk attached to the server. If set to `false` will
+                          not expose the serial id. Some operating systems or software
+                          solutions require the serial id to be exposed to work properly.
+                          Exposing the serial can influence licensed software (e.g.
+                          Windows) behavior
+                        type: boolean
+                      licenceType:
+                        description: '[string] Sets the OS type of the server.'
+                        type: string
+                      name:
+                        description: '[string] The name of the server.'
+                        type: string
+                      nicHotPlug:
+                        type: boolean
+                      nicHotUnplug:
+                        type: boolean
+                      pciSlot:
+                        type: number
+                      ramHotPlug:
+                        type: boolean
+                      size:
+                        description: The size of the volume in GB.
+                        type: number
+                      userData:
+                        description: The cloud-init configuration for the volume as
+                          base64 encoded string. The property is immutable and is
+                          only allowed to be set on a new volume creation. It is mandatory
+                          to provide either 'public image' or 'imageAlias' that has
+                          cloud-init compatibility in conjunction with this property.
+                        type: string
+                    type: object
+                type: object
+              conditions:
+                description: Conditions of the resource.
+                items:
+                  description: A Condition that may apply to a resource.
+                  properties:
+                    lastTransitionTime:
+                      description: |-
+                        LastTransitionTime is the last time this condition transitioned from one
+                        status to another.
+                      format: date-time
+                      type: string
+                    message:
+                      description: |-
+                        A Message containing details about this condition's last transition from
+                        one status to another, if any.
+                      type: string
+                    observedGeneration:
+                      description: |-
+                        ObservedGeneration represents the .metadata.generation that the condition was set based upon.
+                        For instance, if .metadata.generation is currently 12, but the .status.conditions[x].observedGeneration is 9, the condition is out of date
+                        with respect to the current state of the instance.
+                      format: int64
+                      type: integer
+                    reason:
+                      description: A Reason for this condition's last transition from
+                        one status to another.
+                      type: string
+                    status:
+                      description: Status of this condition; is it currently True,
+                        False, or Unknown?
+                      type: string
+                    type:
+                      description: |-
+                        Type of this condition. At most one of each condition type may apply to
+                        a resource at any point in time.
+                      type: string
+                  required:
+                  - lastTransitionTime
+                  - reason
+                  - status
+                  - type
+                  type: object
+                type: array
+                x-kubernetes-list-map-keys:
+                - type
+                x-kubernetes-list-type: map
+              observedGeneration:
+                description: |-
+                  ObservedGeneration is the latest metadata.generation
+                  which resulted in either a ready state, or stalled due to error
+                  it can not recover from without human intervention.
+                format: int64
+                type: integer
+            type: object
+        required:
+        - spec
+        type: object
+    served: true
+    storage: true
+    subresources:
+      status: {}

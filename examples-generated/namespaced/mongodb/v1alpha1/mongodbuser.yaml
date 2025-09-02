@@ -1,4 +1,4 @@
-apiVersion: mongodb.ionoscloud.io/v1alpha1
+apiVersion: mongodb.m.ionoscloud.io/v1alpha1
 kind: MongodbUser
 metadata:
   annotations:
@@ -24,7 +24,7 @@ spec:
 
 ---
 
-apiVersion: compute.ionoscloud.io/v1alpha1
+apiVersion: compute.m.ionoscloud.io/v1alpha1
 kind: Datacenter
 metadata:
   annotations:
@@ -41,7 +41,7 @@ spec:
 
 ---
 
-apiVersion: compute.ionoscloud.io/v1alpha1
+apiVersion: compute.m.ionoscloud.io/v1alpha1
 kind: Lan
 metadata:
   annotations:
@@ -60,7 +60,7 @@ spec:
 
 ---
 
-apiVersion: mongodb.ionoscloud.io/v1alpha1
+apiVersion: mongodb.m.ionoscloud.io/v1alpha1
 kind: MongodbCluster
 metadata:
   annotations:

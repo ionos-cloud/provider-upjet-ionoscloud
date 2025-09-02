@@ -1,4 +1,4 @@
-apiVersion: nfs.ionoscloud.io/v1alpha1
+apiVersion: nfs.m.ionoscloud.io/v1alpha1
 kind: NFSShare
 metadata:
   annotations:
@@ -28,7 +28,7 @@ spec:
 
 ---
 
-apiVersion: compute.ionoscloud.io/v1alpha1
+apiVersion: compute.m.ionoscloud.io/v1alpha1
 kind: Datacenter
 metadata:
   annotations:
@@ -46,7 +46,7 @@ spec:
 
 ---
 
-apiVersion: compute.ionoscloud.io/v1alpha1
+apiVersion: compute.m.ionoscloud.io/v1alpha1
 kind: Lan
 metadata:
   annotations:
@@ -65,7 +65,7 @@ spec:
 
 ---
 
-apiVersion: nfs.ionoscloud.io/v1alpha1
+apiVersion: nfs.m.ionoscloud.io/v1alpha1
 kind: NFSCluster
 metadata:
   annotations:

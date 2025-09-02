@@ -1,4 +1,4 @@
-apiVersion: vpnipsec.ionoscloud.io/v1alpha1
+apiVersion: vpnipsec.m.ionoscloud.io/v1alpha1
 kind: VpnIpsecTunnel
 metadata:
   annotations:
@@ -38,7 +38,7 @@ spec:
 
 ---
 
-apiVersion: compute.ionoscloud.io/v1alpha1
+apiVersion: compute.m.ionoscloud.io/v1alpha1
 kind: Datacenter
 metadata:
   annotations:
@@ -54,7 +54,7 @@ spec:
 
 ---
 
-apiVersion: compute.ionoscloud.io/v1alpha1
+apiVersion: compute.m.ionoscloud.io/v1alpha1
 kind: Ipblock
 metadata:
   annotations:
@@ -71,7 +71,7 @@ spec:
 
 ---
 
-apiVersion: compute.ionoscloud.io/v1alpha1
+apiVersion: compute.m.ionoscloud.io/v1alpha1
 kind: Lan
 metadata:
   annotations:
@@ -90,7 +90,7 @@ spec:
 
 ---
 
-apiVersion: vpnipsec.ionoscloud.io/v1alpha1
+apiVersion: vpnipsec.m.ionoscloud.io/v1alpha1
 kind: VpnIpsecGateway
 metadata:
   annotations:

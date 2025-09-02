@@ -1,0 +1,1775 @@
+---
+apiVersion: apiextensions.k8s.io/v1
+kind: CustomResourceDefinition
+metadata:
+  annotations:
+    controller-gen.kubebuilder.io/version: v0.18.0
+  name: autoscalinggroups.asg.m.ionoscloud.io
+spec:
+  group: asg.m.ionoscloud.io
+  names:
+    categories:
+    - crossplane
+    - managed
+    - ionos
+    kind: AutoscalingGroup
+    listKind: AutoscalingGroupList
+    plural: autoscalinggroups
+    singular: autoscalinggroup
+  scope: Namespaced
+  versions:
+  - additionalPrinterColumns:
+    - jsonPath: .status.conditions[?(@.type=='Synced')].status
+      name: SYNCED
+      type: string
+    - jsonPath: .status.conditions[?(@.type=='Ready')].status
+      name: READY
+      type: string
+    - jsonPath: .metadata.annotations.crossplane\.io/external-name
+      name: EXTERNAL-NAME
+      type: string
+    - jsonPath: .metadata.creationTimestamp
+      name: AGE
+      type: date
+    name: v1alpha1
+    schema:
+      openAPIV3Schema:
+        description: AutoscalingGroup is the Schema for the AutoscalingGroups API.
+          <no value>
+        properties:
+          apiVersion:
+            description: |-
+              APIVersion defines the versioned schema of this representation of an object.
+              Servers should convert recognized schemas to the latest internal value, and
+              may reject unrecognized values.
+              More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#resources
+            type: string
+          kind:
+            description: |-
+              Kind is a string value representing the REST resource this object represents.
+              Servers may infer this from the endpoint the client submits requests to.
+              Cannot be updated.
+              In CamelCase.
+              More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#types-kinds
+            type: string
+          metadata:
+            type: object
+          spec:
+            description: AutoscalingGroupSpec defines the desired state of AutoscalingGroup
+            properties:
+              forProvider:
+                properties:
+                  datacenterId:
+                    description: Unique identifier for the resource
+                    type: string
+                  datacenterIdRef:
+                    description: Reference to a Datacenter in compute to populate
+                      datacenterId.
+                    properties:
+                      name:
+                        description: Name of the referenced object.
+                        type: string
+                      namespace:
+                        description: Namespace of the referenced object
+                        type: string
+                      policy:
+                        description: Policies for referencing.
+                        properties:
+                          resolution:
+                            default: Required
+                            description: |-
+                              Resolution specifies whether resolution of this reference is required.
+                              The default is 'Required', which means the reconcile will fail if the
+                              reference cannot be resolved. 'Optional' means this reference will be
+                              a no-op if it cannot be resolved.
+                            enum:
+                            - Required
+                            - Optional
+                            type: string
+                          resolve:
+                            description: |-
+                              Resolve specifies when this reference should be resolved. The default
+                              is 'IfNotPresent', which will attempt to resolve the reference only when
+                              the corresponding field is not present. Use 'Always' to resolve the
+                              reference on every reconcile.
+                            enum:
+                            - Always
+                            - IfNotPresent
+                            type: string
+                        type: object
+                    required:
+                    - name
+                    type: object
+                  datacenterIdSelector:
+                    description: Selector for a Datacenter in compute to populate
+                      datacenterId.
+                    properties:
+                      matchControllerRef:
+                        description: |-
+                          MatchControllerRef ensures an object with the same controller reference
+                          as the selecting object is selected.
+                        type: boolean
+                      matchLabels:
+                        additionalProperties:
+                          type: string
+                        description: MatchLabels ensures an object with matching labels
+                          is selected.
+                        type: object
+                      namespace:
+                        description: Namespace for the selector
+                        type: string
+                      policy:
+                        description: Policies for selection.
+                        properties:
+                          resolution:
+                            default: Required
+                            description: |-
+                              Resolution specifies whether resolution of this reference is required.
+                              The default is 'Required', which means the reconcile will fail if the
+                              reference cannot be resolved. 'Optional' means this reference will be
+                              a no-op if it cannot be resolved.
+                            enum:
+                            - Required
+                            - Optional
+                            type: string
+                          resolve:
+                            description: |-
+                              Resolve specifies when this reference should be resolved. The default
+                              is 'IfNotPresent', which will attempt to resolve the reference only when
+                              the corresponding field is not present. Use 'Always' to resolve the
+                              reference on every reconcile.
+                            enum:
+                            - Always
+                            - IfNotPresent
+                            type: string
+                        type: object
+                    type: object
+                  maxReplicaCount:
+                    description: The maximum value for the number of replicas on a
+                      VM Auto Scaling Group. Must be >= 0 and <= 200. Will be enforced
+                      for both automatic and manual changes.
+                    type: number
+                  minReplicaCount:
+                    description: The minimum value for the number of replicas on a
+                      VM Auto Scaling Group. Must be >= 0 and <= 200. Will be enforced
+                      for both automatic and manual changes
+                    type: number
+                  name:
+                    description: User-defined name for the Autoscaling Group.
+                    type: string
+                  policy:
+                    description: Defines the behavior of this VM Auto Scaling Group.
+                      A policy consists of triggers and actions, where an action is
+                      an automated behavior, and the trigger defines the circumstances
+                      under which the action is triggered. Currently, two separate
+                      actions are supported, namely scaling inward and outward, triggered
+                      by the thresholds defined for a particular metric.
+                    properties:
+                      metric:
+                        description: The Metric that should trigger the scaling actions.
+                          Metric values are checked at fixed intervals.
+                        type: string
+                      range:
+                        description: Specifies the time range for which the samples
+                          are to be aggregated. Must be >= 2 minutes.
+                        type: string
+                      scaleInAction:
+                        description: Defines the action to be taken when the 'scaleInThreshold'
+                          is exceeded. Here, scaling is always about removing VMs
+                          associated with this VM Auto Scaling Group. By default,
+                          the termination policy is 'OLDEST_SERVER_FIRST' is effective.
+                        properties:
+                          amount:
+                            description: When 'amountType=ABSOLUTE' specifies the
+                              absolute number of VMs that are removed. The value must
+                              be between 1 to 10. 'amountType=PERCENTAGE' specifies
+                              the percentage value that is applied to the current
+                              number of replicas of the VM Auto Scaling Group. The
+                              value must be between 1 to 200. At least one VM is always
+                              removed. Note that for 'SCALE_IN' operations, volumes
+                              are not deleted after the server is deleted.
+                            type: number
+                          amountType:
+                            description: 'The type for the given amount. Possible
+                              values are: [ABSOLUTE, PERCENTAGE].'
+                            type: string
+                          cooldownPeriod:
+                            description: The minimum time that elapses after the start
+                              of this scaling action until the following scaling action
+                              is started. While a scaling action is in progress, no
+                              second action is initiated for the same VM Auto Scaling
+                              Group. Instead, the metric is re-evaluated after the
+                              current scaling action completes (either successfully
+                              or with errors). This is currently validated with a
+                              minimum value of 2 minutes and a maximum of 24 hours.
+                              The default value is 5 minutes if not specified.
+                            type: string
+                          deleteVolumes:
+                            description: If set to 'true', when deleting an replica
+                              during scale in, any attached volume will also be deleted.
+                              When set to 'false', all volumes remain in the datacenter
+                              and must be deleted manually. Note that every scale-out
+                              creates new volumes. When they are not deleted, they
+                              will eventually use all of your contracts resource limits.
+                              At this point, scaling out would not be possible anymore.
+                            type: boolean
+                          terminationPolicyType:
+                            description: The type of termination policy for the VM
+                              Auto Scaling Group to follow a specific pattern for
+                              scaling-in replicas. The default termination policy
+                              is 'OLDEST_SERVER_FIRST'.
+                            type: string
+                        type: object
+                      scaleInThreshold:
+                        description: The upper threshold for the value of the 'metric'.
+                          Used with the 'greater than' (>) operator. A scale-out action
+                          is triggered when this value is exceeded, specified by the
+                          'scale_out_action' property. The value must have a lower
+                          minimum delta to the 'scale_in_threshold', depending on
+                          the metric, to avoid competing for actions simultaneously.
+                          If 'properties.policy.unit=TOTAL', a value >= 40 must be
+                          chosen.
+                        type: number
+                      scaleOutAction:
+                        description: Defines the action to be performed when the 'scaleOutThreshold'
+                          is exceeded. Here, scaling is always about adding new VMs
+                          to this VM Auto Scaling Group.
+                        properties:
+                          amount:
+                            description: When 'amountType=ABSOLUTE' specifies the
+                              absolute number of VMs that are added. The value must
+                              be between 1 to 10. 'amountType=PERCENTAGE' specifies
+                              the percentage value that is applied to the current
+                              number of replicas of the VM Auto Scaling Group. The
+                              value must be between 1 to 200. At least one VM is always
+                              added or removed.
+                            type: number
+                          amountType:
+                            description: 'The type for the given amount. Possible
+                              values are: [ABSOLUTE, PERCENTAGE].'
+                            type: string
+                          cooldownPeriod:
+                            description: The minimum time that elapses after the start
+                              of this scaling action until the following scaling action
+                              is started. While a scaling action is in progress, no
+                              second action is initiated for the same VM Auto Scaling
+                              Group. Instead, the metric is re-evaluated after the
+                              current scaling action completes (either successfully
+                              or with errors). This is currently validated with a
+                              minimum value of 2 minutes and a maximum of 24 hours.
+                              The default value is 5 minutes if not specified.
+                            type: string
+                        type: object
+                      scaleOutThreshold:
+                        description: The upper threshold for the value of the 'metric'.
+                          Used with the 'greater than' (>) operator. A scale-out action
+                          is triggered when this value is exceeded, specified by the
+                          'scaleOutAction' property. The value must have a lower minimum
+                          delta to the 'scaleInThreshold', depending on the metric,
+                          to avoid competing for actions simultaneously. If 'properties.policy.unit=TOTAL',
+                          a value >= 40 must be chosen.
+                        type: number
+                      unit:
+                        description: 'Units of the applied Metric. Possible values
+                          are: PER_HOUR, PER_MINUTE, PER_SECOND, TOTAL.'
+                        type: string
+                    type: object
+                  replicaConfiguration:
+                    items:
+                      properties:
+                        availabilityZone:
+                          description: The zone where the VMs are created using this
+                            configuration.
+                          type: string
+                        cores:
+                          description: The total number of cores for the VMs.
+                          type: number
+                        cpuFamily:
+                          description: The zone where the VMs are created using this
+                            configuration.
+                          type: string
+                        nic:
+                          description: Set of NICs associated with this Replica.
+                          items:
+                            properties:
+                              dhcp:
+                                description: Dhcp flag for this replica Nic. This
+                                  is an optional attribute with default value of 'true'
+                                  if not given in the request payload or given as
+                                  null.
+                                type: boolean
+                              firewallActive:
+                                description: Activate or deactivate the firewall.
+                                  By default, an active firewall without any defined
+                                  rules will block all incoming network traffic except
+                                  for the firewall rules that explicitly allows certain
+                                  protocols, IP addresses and ports.
+                                type: boolean
+                              firewallRule:
+                                description: List of all firewall rules for the specified
+                                  NIC.
+                                items:
+                                  properties:
+                                    icmpCode:
+                                      description: Sets the allowed code (from 0 to
+                                        254) when ICMP protocol is selected. The value
+                                        'null' allows all codes.
+                                      type: number
+                                    icmpType:
+                                      description: Sets the allowed type (from 0 to
+                                        254) if the protocol ICMP is selected. The
+                                        value 'null' allows all types.
+                                      type: number
+                                    name:
+                                      description: The name of the firewall rule.
+                                      type: string
+                                    portRangeEnd:
+                                      description: Sets the end range of the allowed
+                                        port (from 1 to 65535) if the protocol TCP
+                                        or UDP is selected. The value 'null' for 'port_range_start'
+                                        and 'port_range_end' allows all ports.
+                                      type: number
+                                    portRangeStart:
+                                      description: Sets the initial range of the allowed
+                                        port (from 1 to 65535) if the protocol TCP
+                                        or UDP is selected. The value 'null' for 'port_range_start'
+                                        and 'port_range_end' allows all ports.
+                                      type: number
+                                    protocol:
+                                      description: The protocol for the rule. The
+                                        property cannot be modified after its creation
+                                        (not allowed in update requests).
+                                      type: string
+                                    sourceIp:
+                                      description: Only traffic originating from the
+                                        respective IPv4 address is permitted. The
+                                        value 'null' allows traffic from any IP address.
+                                      type: string
+                                    sourceMac:
+                                      description: 'Only traffic originating from
+                                        the respective MAC address is permitted. Valid
+                                        format: ''aa:bb:cc:dd:ee:ff''. The value ''null''
+                                        allows traffic from any MAC address.'
+                                      type: string
+                                    targetIp:
+                                      description: If the target NIC has multiple
+                                        IP addresses, only the traffic directed to
+                                        the respective IP address of the NIC is allowed.
+                                        The value 'null' allows traffic to any target
+                                        IP address.
+                                      type: string
+                                    type:
+                                      description: The firewall rule type. If not
+                                        specified, the default value 'INGRESS' is
+                                        used.
+                                      type: string
+                                  type: object
+                                type: array
+                              firewallType:
+                                description: The type of firewall rules that will
+                                  be allowed on the NIC. If not specified, the default
+                                  INGRESS value is used.
+                                type: string
+                              flowLog:
+                                description: List of all flow logs for the specified
+                                  NIC.
+                                items:
+                                  properties:
+                                    action:
+                                      description: 'Specifies the traffic direction
+                                        pattern. Valid values: ACCEPTED, REJECTED,
+                                        ALL. Immutable, forces re-recreation of the
+                                        nic resource.'
+                                      type: string
+                                    bucket:
+                                      description: The bucket name of an existing
+                                        IONOS Object Storage bucket. Immutable, forces
+                                        re-recreation of the nic resource.
+                                      type: string
+                                    direction:
+                                      description: 'Specifies the traffic direction
+                                        pattern. Valid values: INGRESS, EGRESS, BIDIRECTIONAL.
+                                        Immutable, forces re-recreation of the nic
+                                        resource.'
+                                      type: string
+                                    name:
+                                      description: The resource name.
+                                      type: string
+                                  type: object
+                                type: array
+                              lan:
+                                description: Lan ID for this replica Nic.
+                                type: number
+                              lanRef:
+                                description: Reference to a Lan in compute to populate
+                                  lan.
+                                properties:
+                                  name:
+                                    description: Name of the referenced object.
+                                    type: string
+                                  namespace:
+                                    description: Namespace of the referenced object
+                                    type: string
+                                  policy:
+                                    description: Policies for referencing.
+                                    properties:
+                                      resolution:
+                                        default: Required
+                                        description: |-
+                                          Resolution specifies whether resolution of this reference is required.
+                                          The default is 'Required', which means the reconcile will fail if the
+                                          reference cannot be resolved. 'Optional' means this reference will be
+                                          a no-op if it cannot be resolved.
+                                        enum:
+                                        - Required
+                                        - Optional
+                                        type: string
+                                      resolve:
+                                        description: |-
+                                          Resolve specifies when this reference should be resolved. The default
+                                          is 'IfNotPresent', which will attempt to resolve the reference only when
+                                          the corresponding field is not present. Use 'Always' to resolve the
+                                          reference on every reconcile.
+                                        enum:
+                                        - Always
+                                        - IfNotPresent
+                                        type: string
+                                    type: object
+                                required:
+                                - name
+                                type: object
+                              lanSelector:
+                                description: Selector for a Lan in compute to populate
+                                  lan.
+                                properties:
+                                  matchControllerRef:
+                                    description: |-
+                                      MatchControllerRef ensures an object with the same controller reference
+                                      as the selecting object is selected.
+                                    type: boolean
+                                  matchLabels:
+                                    additionalProperties:
+                                      type: string
+                                    description: MatchLabels ensures an object with
+                                      matching labels is selected.
+                                    type: object
+                                  namespace:
+                                    description: Namespace for the selector
+                                    type: string
+                                  policy:
+                                    description: Policies for selection.
+                                    properties:
+                                      resolution:
+                                        default: Required
+                                        description: |-
+                                          Resolution specifies whether resolution of this reference is required.
+                                          The default is 'Required', which means the reconcile will fail if the
+                                          reference cannot be resolved. 'Optional' means this reference will be
+                                          a no-op if it cannot be resolved.
+                                        enum:
+                                        - Required
+                                        - Optional
+                                        type: string
+                                      resolve:
+                                        description: |-
+                                          Resolve specifies when this reference should be resolved. The default
+                                          is 'IfNotPresent', which will attempt to resolve the reference only when
+                                          the corresponding field is not present. Use 'Always' to resolve the
+                                          reference on every reconcile.
+                                        enum:
+                                        - Always
+                                        - IfNotPresent
+                                        type: string
+                                    type: object
+                                type: object
+                              name:
+                                description: Name for this replica NIC.
+                                type: string
+                              targetGroup:
+                                description: In order to link VM to ALB, target group
+                                  must be provided.
+                                properties:
+                                  port:
+                                    description: The port for the target group.
+                                    type: number
+                                  targetGroupId:
+                                    description: The ID of the target group.
+                                    type: string
+                                  targetGroupIdRef:
+                                    description: Reference to a TargetGroup in alb
+                                      to populate targetGroupId.
+                                    properties:
+                                      name:
+                                        description: Name of the referenced object.
+                                        type: string
+                                      namespace:
+                                        description: Namespace of the referenced object
+                                        type: string
+                                      policy:
+                                        description: Policies for referencing.
+                                        properties:
+                                          resolution:
+                                            default: Required
+                                            description: |-
+                                              Resolution specifies whether resolution of this reference is required.
+                                              The default is 'Required', which means the reconcile will fail if the
+                                              reference cannot be resolved. 'Optional' means this reference will be
+                                              a no-op if it cannot be resolved.
+                                            enum:
+                                            - Required
+                                            - Optional
+                                            type: string
+                                          resolve:
+                                            description: |-
+                                              Resolve specifies when this reference should be resolved. The default
+                                              is 'IfNotPresent', which will attempt to resolve the reference only when
+                                              the corresponding field is not present. Use 'Always' to resolve the
+                                              reference on every reconcile.
+                                            enum:
+                                            - Always
+                                            - IfNotPresent
+                                            type: string
+                                        type: object
+                                    required:
+                                    - name
+                                    type: object
+                                  targetGroupIdSelector:
+                                    description: Selector for a TargetGroup in alb
+                                      to populate targetGroupId.
+                                    properties:
+                                      matchControllerRef:
+                                        description: |-
+                                          MatchControllerRef ensures an object with the same controller reference
+                                          as the selecting object is selected.
+                                        type: boolean
+                                      matchLabels:
+                                        additionalProperties:
+                                          type: string
+                                        description: MatchLabels ensures an object
+                                          with matching labels is selected.
+                                        type: object
+                                      namespace:
+                                        description: Namespace for the selector
+                                        type: string
+                                      policy:
+                                        description: Policies for selection.
+                                        properties:
+                                          resolution:
+                                            default: Required
+                                            description: |-
+                                              Resolution specifies whether resolution of this reference is required.
+                                              The default is 'Required', which means the reconcile will fail if the
+                                              reference cannot be resolved. 'Optional' means this reference will be
+                                              a no-op if it cannot be resolved.
+                                            enum:
+                                            - Required
+                                            - Optional
+                                            type: string
+                                          resolve:
+                                            description: |-
+                                              Resolve specifies when this reference should be resolved. The default
+                                              is 'IfNotPresent', which will attempt to resolve the reference only when
+                                              the corresponding field is not present. Use 'Always' to resolve the
+                                              reference on every reconcile.
+                                            enum:
+                                            - Always
+                                            - IfNotPresent
+                                            type: string
+                                        type: object
+                                    type: object
+                                  weight:
+                                    description: The weight for the target group.
+                                    type: number
+                                type: object
+                            type: object
+                          type: array
+                        ram:
+                          description: The amount of memory for the VMs in MB, e.g.
+                            2048. Size must be specified in multiples of 256 MB with
+                            a minimum of 256 MB; however, if you set ramHotPlug to
+                            TRUE then you must use a minimum of 1024 MB. If you set
+                            the RAM size more than 240GB, then ramHotPlug will be
+                            set to FALSE and can not be set to TRUE unless RAM size
+                            not set to less than 240GB.
+                          type: number
+                        volume:
+                          description: List of volumes associated with this Replica.
+                          items:
+                            properties:
+                              backupUnitId:
+                                description: The uuid of the Backup Unit that user
+                                  has access to. The property is immutable and is
+                                  only allowed to be set on a new volume creation.
+                                  It is mandatory to provide either 'public image'
+                                  or 'imageAlias' in conjunction with this property.
+                                type: string
+                              bootOrder:
+                                description: |-
+                                  Determines whether the volume will be used as a boot volume. Set to NONE, the volume will not be used as boot volume.
+                                  Set to PRIMARY, the volume will be used as boot volume and set to AUTO will delegate the decision to the provisioning engine to decide whether to use the volume as boot volume.
+                                  Notice that exactly one volume can be set to PRIMARY or all of them set to AUTO.
+                                type: string
+                              bus:
+                                description: The bus type of the volume. Default setting
+                                  is 'VIRTIO'. The bus type 'IDE' is also supported.
+                                type: string
+                              image:
+                                description: The image installed on the disk. Currently,
+                                  only the UUID of the image is supported. Note that
+                                  either 'image' or 'imageAlias' must be specified,
+                                  but not both.
+                                type: string
+                              imageAlias:
+                                description: The image installed on the volume. Must
+                                  be an 'imageAlias' as specified via the images API.
+                                  Note that one of 'image' or 'imageAlias' must be
+                                  set, but not both.
+                                type: string
+                              imagePasswordSecretRef:
+                                description: Image password for this replica volume.
+                                properties:
+                                  key:
+                                    type: string
+                                  name:
+                                    description: Name of the secret.
+                                    type: string
+                                required:
+                                - key
+                                - name
+                                type: object
+                              name:
+                                description: Name for this replica volume.
+                                type: string
+                              size:
+                                description: User-defined size for this replica volume
+                                  in GB.
+                                type: number
+                              sshKeys:
+                                items:
+                                  type: string
+                                type: array
+                              type:
+                                description: 'Storage Type for this replica volume.
+                                  Possible values: SSD, HDD, SSD_STANDARD or SSD_PREMIUM'
+                                type: string
+                              userData:
+                                description: User-data (Cloud Init) for this replica
+                                  volume.
+                                type: string
+                            type: object
+                          type: array
+                      type: object
+                    type: array
+                type: object
+              initProvider:
+                description: |-
+                  THIS IS A BETA FIELD. It will be honored
+                  unless the Management Policies feature flag is disabled.
+                  InitProvider holds the same fields as ForProvider, with the exception
+                  of Identifier and other resource reference fields. The fields that are
+                  in InitProvider are merged into ForProvider when the resource is created.
+                  The same fields are also added to the terraform ignore_changes hook, to
+                  avoid updating them after creation. This is useful for fields that are
+                  required on creation, but we do not desire to update them after creation,
+                  for example because of an external controller is managing them, like an
+                  autoscaler.
+                properties:
+                  datacenterId:
+                    description: Unique identifier for the resource
+                    type: string
+                  datacenterIdRef:
+                    description: Reference to a Datacenter in compute to populate
+                      datacenterId.
+                    properties:
+                      name:
+                        description: Name of the referenced object.
+                        type: string
+                      namespace:
+                        description: Namespace of the referenced object
+                        type: string
+                      policy:
+                        description: Policies for referencing.
+                        properties:
+                          resolution:
+                            default: Required
+                            description: |-
+                              Resolution specifies whether resolution of this reference is required.
+                              The default is 'Required', which means the reconcile will fail if the
+                              reference cannot be resolved. 'Optional' means this reference will be
+                              a no-op if it cannot be resolved.
+                            enum:
+                            - Required
+                            - Optional
+                            type: string
+                          resolve:
+                            description: |-
+                              Resolve specifies when this reference should be resolved. The default
+                              is 'IfNotPresent', which will attempt to resolve the reference only when
+                              the corresponding field is not present. Use 'Always' to resolve the
+                              reference on every reconcile.
+                            enum:
+                            - Always
+                            - IfNotPresent
+                            type: string
+                        type: object
+                    required:
+                    - name
+                    type: object
+                  datacenterIdSelector:
+                    description: Selector for a Datacenter in compute to populate
+                      datacenterId.
+                    properties:
+                      matchControllerRef:
+                        description: |-
+                          MatchControllerRef ensures an object with the same controller reference
+                          as the selecting object is selected.
+                        type: boolean
+                      matchLabels:
+                        additionalProperties:
+                          type: string
+                        description: MatchLabels ensures an object with matching labels
+                          is selected.
+                        type: object
+                      namespace:
+                        description: Namespace for the selector
+                        type: string
+                      policy:
+                        description: Policies for selection.
+                        properties:
+                          resolution:
+                            default: Required
+                            description: |-
+                              Resolution specifies whether resolution of this reference is required.
+                              The default is 'Required', which means the reconcile will fail if the
+                              reference cannot be resolved. 'Optional' means this reference will be
+                              a no-op if it cannot be resolved.
+                            enum:
+                            - Required
+                            - Optional
+                            type: string
+                          resolve:
+                            description: |-
+                              Resolve specifies when this reference should be resolved. The default
+                              is 'IfNotPresent', which will attempt to resolve the reference only when
+                              the corresponding field is not present. Use 'Always' to resolve the
+                              reference on every reconcile.
+                            enum:
+                            - Always
+                            - IfNotPresent
+                            type: string
+                        type: object
+                    type: object
+                  maxReplicaCount:
+                    description: The maximum value for the number of replicas on a
+                      VM Auto Scaling Group. Must be >= 0 and <= 200. Will be enforced
+                      for both automatic and manual changes.
+                    type: number
+                  minReplicaCount:
+                    description: The minimum value for the number of replicas on a
+                      VM Auto Scaling Group. Must be >= 0 and <= 200. Will be enforced
+                      for both automatic and manual changes
+                    type: number
+                  name:
+                    description: User-defined name for the Autoscaling Group.
+                    type: string
+                  policy:
+                    description: Defines the behavior of this VM Auto Scaling Group.
+                      A policy consists of triggers and actions, where an action is
+                      an automated behavior, and the trigger defines the circumstances
+                      under which the action is triggered. Currently, two separate
+                      actions are supported, namely scaling inward and outward, triggered
+                      by the thresholds defined for a particular metric.
+                    properties:
+                      metric:
+                        description: The Metric that should trigger the scaling actions.
+                          Metric values are checked at fixed intervals.
+                        type: string
+                      range:
+                        description: Specifies the time range for which the samples
+                          are to be aggregated. Must be >= 2 minutes.
+                        type: string
+                      scaleInAction:
+                        description: Defines the action to be taken when the 'scaleInThreshold'
+                          is exceeded. Here, scaling is always about removing VMs
+                          associated with this VM Auto Scaling Group. By default,
+                          the termination policy is 'OLDEST_SERVER_FIRST' is effective.
+                        properties:
+                          amount:
+                            description: When 'amountType=ABSOLUTE' specifies the
+                              absolute number of VMs that are removed. The value must
+                              be between 1 to 10. 'amountType=PERCENTAGE' specifies
+                              the percentage value that is applied to the current
+                              number of replicas of the VM Auto Scaling Group. The
+                              value must be between 1 to 200. At least one VM is always
+                              removed. Note that for 'SCALE_IN' operations, volumes
+                              are not deleted after the server is deleted.
+                            type: number
+                          amountType:
+                            description: 'The type for the given amount. Possible
+                              values are: [ABSOLUTE, PERCENTAGE].'
+                            type: string
+                          cooldownPeriod:
+                            description: The minimum time that elapses after the start
+                              of this scaling action until the following scaling action
+                              is started. While a scaling action is in progress, no
+                              second action is initiated for the same VM Auto Scaling
+                              Group. Instead, the metric is re-evaluated after the
+                              current scaling action completes (either successfully
+                              or with errors). This is currently validated with a
+                              minimum value of 2 minutes and a maximum of 24 hours.
+                              The default value is 5 minutes if not specified.
+                            type: string
+                          deleteVolumes:
+                            description: If set to 'true', when deleting an replica
+                              during scale in, any attached volume will also be deleted.
+                              When set to 'false', all volumes remain in the datacenter
+                              and must be deleted manually. Note that every scale-out
+                              creates new volumes. When they are not deleted, they
+                              will eventually use all of your contracts resource limits.
+                              At this point, scaling out would not be possible anymore.
+                            type: boolean
+                          terminationPolicyType:
+                            description: The type of termination policy for the VM
+                              Auto Scaling Group to follow a specific pattern for
+                              scaling-in replicas. The default termination policy
+                              is 'OLDEST_SERVER_FIRST'.
+                            type: string
+                        type: object
+                      scaleInThreshold:
+                        description: The upper threshold for the value of the 'metric'.
+                          Used with the 'greater than' (>) operator. A scale-out action
+                          is triggered when this value is exceeded, specified by the
+                          'scale_out_action' property. The value must have a lower
+                          minimum delta to the 'scale_in_threshold', depending on
+                          the metric, to avoid competing for actions simultaneously.
+                          If 'properties.policy.unit=TOTAL', a value >= 40 must be
+                          chosen.
+                        type: number
+                      scaleOutAction:
+                        description: Defines the action to be performed when the 'scaleOutThreshold'
+                          is exceeded. Here, scaling is always about adding new VMs
+                          to this VM Auto Scaling Group.
+                        properties:
+                          amount:
+                            description: When 'amountType=ABSOLUTE' specifies the
+                              absolute number of VMs that are added. The value must
+                              be between 1 to 10. 'amountType=PERCENTAGE' specifies
+                              the percentage value that is applied to the current
+                              number of replicas of the VM Auto Scaling Group. The
+                              value must be between 1 to 200. At least one VM is always
+                              added or removed.
+                            type: number
+                          amountType:
+                            description: 'The type for the given amount. Possible
+                              values are: [ABSOLUTE, PERCENTAGE].'
+                            type: string
+                          cooldownPeriod:
+                            description: The minimum time that elapses after the start
+                              of this scaling action until the following scaling action
+                              is started. While a scaling action is in progress, no
+                              second action is initiated for the same VM Auto Scaling
+                              Group. Instead, the metric is re-evaluated after the
+                              current scaling action completes (either successfully
+                              or with errors). This is currently validated with a
+                              minimum value of 2 minutes and a maximum of 24 hours.
+                              The default value is 5 minutes if not specified.
+                            type: string
+                        type: object
+                      scaleOutThreshold:
+                        description: The upper threshold for the value of the 'metric'.
+                          Used with the 'greater than' (>) operator. A scale-out action
+                          is triggered when this value is exceeded, specified by the
+                          'scaleOutAction' property. The value must have a lower minimum
+                          delta to the 'scaleInThreshold', depending on the metric,
+                          to avoid competing for actions simultaneously. If 'properties.policy.unit=TOTAL',
+                          a value >= 40 must be chosen.
+                        type: number
+                      unit:
+                        description: 'Units of the applied Metric. Possible values
+                          are: PER_HOUR, PER_MINUTE, PER_SECOND, TOTAL.'
+                        type: string
+                    type: object
+                  replicaConfiguration:
+                    items:
+                      properties:
+                        availabilityZone:
+                          description: The zone where the VMs are created using this
+                            configuration.
+                          type: string
+                        cores:
+                          description: The total number of cores for the VMs.
+                          type: number
+                        cpuFamily:
+                          description: The zone where the VMs are created using this
+                            configuration.
+                          type: string
+                        nic:
+                          description: Set of NICs associated with this Replica.
+                          items:
+                            properties:
+                              dhcp:
+                                description: Dhcp flag for this replica Nic. This
+                                  is an optional attribute with default value of 'true'
+                                  if not given in the request payload or given as
+                                  null.
+                                type: boolean
+                              firewallActive:
+                                description: Activate or deactivate the firewall.
+                                  By default, an active firewall without any defined
+                                  rules will block all incoming network traffic except
+                                  for the firewall rules that explicitly allows certain
+                                  protocols, IP addresses and ports.
+                                type: boolean
+                              firewallRule:
+                                description: List of all firewall rules for the specified
+                                  NIC.
+                                items:
+                                  properties:
+                                    icmpCode:
+                                      description: Sets the allowed code (from 0 to
+                                        254) when ICMP protocol is selected. The value
+                                        'null' allows all codes.
+                                      type: number
+                                    icmpType:
+                                      description: Sets the allowed type (from 0 to
+                                        254) if the protocol ICMP is selected. The
+                                        value 'null' allows all types.
+                                      type: number
+                                    name:
+                                      description: The name of the firewall rule.
+                                      type: string
+                                    portRangeEnd:
+                                      description: Sets the end range of the allowed
+                                        port (from 1 to 65535) if the protocol TCP
+                                        or UDP is selected. The value 'null' for 'port_range_start'
+                                        and 'port_range_end' allows all ports.
+                                      type: number
+                                    portRangeStart:
+                                      description: Sets the initial range of the allowed
+                                        port (from 1 to 65535) if the protocol TCP
+                                        or UDP is selected. The value 'null' for 'port_range_start'
+                                        and 'port_range_end' allows all ports.
+                                      type: number
+                                    protocol:
+                                      description: The protocol for the rule. The
+                                        property cannot be modified after its creation
+                                        (not allowed in update requests).
+                                      type: string
+                                    sourceIp:
+                                      description: Only traffic originating from the
+                                        respective IPv4 address is permitted. The
+                                        value 'null' allows traffic from any IP address.
+                                      type: string
+                                    sourceMac:
+                                      description: 'Only traffic originating from
+                                        the respective MAC address is permitted. Valid
+                                        format: ''aa:bb:cc:dd:ee:ff''. The value ''null''
+                                        allows traffic from any MAC address.'
+                                      type: string
+                                    targetIp:
+                                      description: If the target NIC has multiple
+                                        IP addresses, only the traffic directed to
+                                        the respective IP address of the NIC is allowed.
+                                        The value 'null' allows traffic to any target
+                                        IP address.
+                                      type: string
+                                    type:
+                                      description: The firewall rule type. If not
+                                        specified, the default value 'INGRESS' is
+                                        used.
+                                      type: string
+                                  type: object
+                                type: array
+                              firewallType:
+                                description: The type of firewall rules that will
+                                  be allowed on the NIC. If not specified, the default
+                                  INGRESS value is used.
+                                type: string
+                              flowLog:
+                                description: List of all flow logs for the specified
+                                  NIC.
+                                items:
+                                  properties:
+                                    action:
+                                      description: 'Specifies the traffic direction
+                                        pattern. Valid values: ACCEPTED, REJECTED,
+                                        ALL. Immutable, forces re-recreation of the
+                                        nic resource.'
+                                      type: string
+                                    bucket:
+                                      description: The bucket name of an existing
+                                        IONOS Object Storage bucket. Immutable, forces
+                                        re-recreation of the nic resource.
+                                      type: string
+                                    direction:
+                                      description: 'Specifies the traffic direction
+                                        pattern. Valid values: INGRESS, EGRESS, BIDIRECTIONAL.
+                                        Immutable, forces re-recreation of the nic
+                                        resource.'
+                                      type: string
+                                    name:
+                                      description: The resource name.
+                                      type: string
+                                  type: object
+                                type: array
+                              lan:
+                                description: Lan ID for this replica Nic.
+                                type: number
+                              lanRef:
+                                description: Reference to a Lan in compute to populate
+                                  lan.
+                                properties:
+                                  name:
+                                    description: Name of the referenced object.
+                                    type: string
+                                  namespace:
+                                    description: Namespace of the referenced object
+                                    type: string
+                                  policy:
+                                    description: Policies for referencing.
+                                    properties:
+                                      resolution:
+                                        default: Required
+                                        description: |-
+                                          Resolution specifies whether resolution of this reference is required.
+                                          The default is 'Required', which means the reconcile will fail if the
+                                          reference cannot be resolved. 'Optional' means this reference will be
+                                          a no-op if it cannot be resolved.
+                                        enum:
+                                        - Required
+                                        - Optional
+                                        type: string
+                                      resolve:
+                                        description: |-
+                                          Resolve specifies when this reference should be resolved. The default
+                                          is 'IfNotPresent', which will attempt to resolve the reference only when
+                                          the corresponding field is not present. Use 'Always' to resolve the
+                                          reference on every reconcile.
+                                        enum:
+                                        - Always
+                                        - IfNotPresent
+                                        type: string
+                                    type: object
+                                required:
+                                - name
+                                type: object
+                              lanSelector:
+                                description: Selector for a Lan in compute to populate
+                                  lan.
+                                properties:
+                                  matchControllerRef:
+                                    description: |-
+                                      MatchControllerRef ensures an object with the same controller reference
+                                      as the selecting object is selected.
+                                    type: boolean
+                                  matchLabels:
+                                    additionalProperties:
+                                      type: string
+                                    description: MatchLabels ensures an object with
+                                      matching labels is selected.
+                                    type: object
+                                  namespace:
+                                    description: Namespace for the selector
+                                    type: string
+                                  policy:
+                                    description: Policies for selection.
+                                    properties:
+                                      resolution:
+                                        default: Required
+                                        description: |-
+                                          Resolution specifies whether resolution of this reference is required.
+                                          The default is 'Required', which means the reconcile will fail if the
+                                          reference cannot be resolved. 'Optional' means this reference will be
+                                          a no-op if it cannot be resolved.
+                                        enum:
+                                        - Required
+                                        - Optional
+                                        type: string
+                                      resolve:
+                                        description: |-
+                                          Resolve specifies when this reference should be resolved. The default
+                                          is 'IfNotPresent', which will attempt to resolve the reference only when
+                                          the corresponding field is not present. Use 'Always' to resolve the
+                                          reference on every reconcile.
+                                        enum:
+                                        - Always
+                                        - IfNotPresent
+                                        type: string
+                                    type: object
+                                type: object
+                              name:
+                                description: Name for this replica NIC.
+                                type: string
+                              targetGroup:
+                                description: In order to link VM to ALB, target group
+                                  must be provided.
+                                properties:
+                                  port:
+                                    description: The port for the target group.
+                                    type: number
+                                  targetGroupId:
+                                    description: The ID of the target group.
+                                    type: string
+                                  targetGroupIdRef:
+                                    description: Reference to a TargetGroup in alb
+                                      to populate targetGroupId.
+                                    properties:
+                                      name:
+                                        description: Name of the referenced object.
+                                        type: string
+                                      namespace:
+                                        description: Namespace of the referenced object
+                                        type: string
+                                      policy:
+                                        description: Policies for referencing.
+                                        properties:
+                                          resolution:
+                                            default: Required
+                                            description: |-
+                                              Resolution specifies whether resolution of this reference is required.
+                                              The default is 'Required', which means the reconcile will fail if the
+                                              reference cannot be resolved. 'Optional' means this reference will be
+                                              a no-op if it cannot be resolved.
+                                            enum:
+                                            - Required
+                                            - Optional
+                                            type: string
+                                          resolve:
+                                            description: |-
+                                              Resolve specifies when this reference should be resolved. The default
+                                              is 'IfNotPresent', which will attempt to resolve the reference only when
+                                              the corresponding field is not present. Use 'Always' to resolve the
+                                              reference on every reconcile.
+                                            enum:
+                                            - Always
+                                            - IfNotPresent
+                                            type: string
+                                        type: object
+                                    required:
+                                    - name
+                                    type: object
+                                  targetGroupIdSelector:
+                                    description: Selector for a TargetGroup in alb
+                                      to populate targetGroupId.
+                                    properties:
+                                      matchControllerRef:
+                                        description: |-
+                                          MatchControllerRef ensures an object with the same controller reference
+                                          as the selecting object is selected.
+                                        type: boolean
+                                      matchLabels:
+                                        additionalProperties:
+                                          type: string
+                                        description: MatchLabels ensures an object
+                                          with matching labels is selected.
+                                        type: object
+                                      namespace:
+                                        description: Namespace for the selector
+                                        type: string
+                                      policy:
+                                        description: Policies for selection.
+                                        properties:
+                                          resolution:
+                                            default: Required
+                                            description: |-
+                                              Resolution specifies whether resolution of this reference is required.
+                                              The default is 'Required', which means the reconcile will fail if the
+                                              reference cannot be resolved. 'Optional' means this reference will be
+                                              a no-op if it cannot be resolved.
+                                            enum:
+                                            - Required
+                                            - Optional
+                                            type: string
+                                          resolve:
+                                            description: |-
+                                              Resolve specifies when this reference should be resolved. The default
+                                              is 'IfNotPresent', which will attempt to resolve the reference only when
+                                              the corresponding field is not present. Use 'Always' to resolve the
+                                              reference on every reconcile.
+                                            enum:
+                                            - Always
+                                            - IfNotPresent
+                                            type: string
+                                        type: object
+                                    type: object
+                                  weight:
+                                    description: The weight for the target group.
+                                    type: number
+                                type: object
+                            type: object
+                          type: array
+                        ram:
+                          description: The amount of memory for the VMs in MB, e.g.
+                            2048. Size must be specified in multiples of 256 MB with
+                            a minimum of 256 MB; however, if you set ramHotPlug to
+                            TRUE then you must use a minimum of 1024 MB. If you set
+                            the RAM size more than 240GB, then ramHotPlug will be
+                            set to FALSE and can not be set to TRUE unless RAM size
+                            not set to less than 240GB.
+                          type: number
+                        volume:
+                          description: List of volumes associated with this Replica.
+                          items:
+                            properties:
+                              backupUnitId:
+                                description: The uuid of the Backup Unit that user
+                                  has access to. The property is immutable and is
+                                  only allowed to be set on a new volume creation.
+                                  It is mandatory to provide either 'public image'
+                                  or 'imageAlias' in conjunction with this property.
+                                type: string
+                              bootOrder:
+                                description: |-
+                                  Determines whether the volume will be used as a boot volume. Set to NONE, the volume will not be used as boot volume.
+                                  Set to PRIMARY, the volume will be used as boot volume and set to AUTO will delegate the decision to the provisioning engine to decide whether to use the volume as boot volume.
+                                  Notice that exactly one volume can be set to PRIMARY or all of them set to AUTO.
+                                type: string
+                              bus:
+                                description: The bus type of the volume. Default setting
+                                  is 'VIRTIO'. The bus type 'IDE' is also supported.
+                                type: string
+                              image:
+                                description: The image installed on the disk. Currently,
+                                  only the UUID of the image is supported. Note that
+                                  either 'image' or 'imageAlias' must be specified,
+                                  but not both.
+                                type: string
+                              imageAlias:
+                                description: The image installed on the volume. Must
+                                  be an 'imageAlias' as specified via the images API.
+                                  Note that one of 'image' or 'imageAlias' must be
+                                  set, but not both.
+                                type: string
+                              imagePasswordSecretRef:
+                                description: Image password for this replica volume.
+                                properties:
+                                  key:
+                                    type: string
+                                  name:
+                                    description: Name of the secret.
+                                    type: string
+                                required:
+                                - key
+                                - name
+                                type: object
+                              name:
+                                description: Name for this replica volume.
+                                type: string
+                              size:
+                                description: User-defined size for this replica volume
+                                  in GB.
+                                type: number
+                              sshKeys:
+                                items:
+                                  type: string
+                                type: array
+                              type:
+                                description: 'Storage Type for this replica volume.
+                                  Possible values: SSD, HDD, SSD_STANDARD or SSD_PREMIUM'
+                                type: string
+                              userData:
+                                description: User-data (Cloud Init) for this replica
+                                  volume.
+                                type: string
+                            type: object
+                          type: array
+                      type: object
+                    type: array
+                type: object
+              managementPolicies:
+                default:
+                - '*'
+                description: |-
+                  THIS IS A BETA FIELD. It is on by default but can be opted out
+                  through a Crossplane feature flag.
+                  ManagementPolicies specify the array of actions Crossplane is allowed to
+                  take on the managed and external resources.
+                  See the design doc for more information: https://github.com/crossplane/crossplane/blob/499895a25d1a1a0ba1604944ef98ac7a1a71f197/design/design-doc-observe-only-resources.md?plain=1#L223
+                  and this one: https://github.com/crossplane/crossplane/blob/444267e84783136daa93568b364a5f01228cacbe/design/one-pager-ignore-changes.md
+                items:
+                  description: |-
+                    A ManagementAction represents an action that the Crossplane controllers
+                    can take on an external resource.
+                  enum:
+                  - Observe
+                  - Create
+                  - Update
+                  - Delete
+                  - LateInitialize
+                  - '*'
+                  type: string
+                type: array
+              providerConfigRef:
+                default:
+                  kind: ClusterProviderConfig
+                  name: default
+                description: |-
+                  ProviderConfigReference specifies how the provider that will be used to
+                  create, observe, update, and delete this managed resource should be
+                  configured.
+                properties:
+                  kind:
+                    description: Kind of the referenced object.
+                    type: string
+                  name:
+                    description: Name of the referenced object.
+                    type: string
+                required:
+                - kind
+                - name
+                type: object
+              writeConnectionSecretToRef:
+                description: |-
+                  WriteConnectionSecretToReference specifies the namespace and name of a
+                  Secret to which any connection details for this managed resource should
+                  be written. Connection details frequently include the endpoint, username,
+                  and password required to connect to the managed resource.
+                properties:
+                  name:
+                    description: Name of the secret.
+                    type: string
+                required:
+                - name
+                type: object
+            required:
+            - forProvider
+            type: object
+            x-kubernetes-validations:
+            - message: spec.forProvider.maxReplicaCount is a required parameter
+              rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
+                || ''Update'' in self.managementPolicies) || has(self.forProvider.maxReplicaCount)
+                || (has(self.initProvider) && has(self.initProvider.maxReplicaCount))'
+            - message: spec.forProvider.minReplicaCount is a required parameter
+              rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
+                || ''Update'' in self.managementPolicies) || has(self.forProvider.minReplicaCount)
+                || (has(self.initProvider) && has(self.initProvider.minReplicaCount))'
+            - message: spec.forProvider.name is a required parameter
+              rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
+                || ''Update'' in self.managementPolicies) || has(self.forProvider.name)
+                || (has(self.initProvider) && has(self.initProvider.name))'
+            - message: spec.forProvider.policy is a required parameter
+              rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
+                || ''Update'' in self.managementPolicies) || has(self.forProvider.policy)
+                || (has(self.initProvider) && has(self.initProvider.policy))'
+            - message: spec.forProvider.replicaConfiguration is a required parameter
+              rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
+                || ''Update'' in self.managementPolicies) || has(self.forProvider.replicaConfiguration)
+                || (has(self.initProvider) && has(self.initProvider.replicaConfiguration))'
+          status:
+            description: AutoscalingGroupStatus defines the observed state of AutoscalingGroup.
+            properties:
+              atProvider:
+                properties:
+                  datacenterId:
+                    description: Unique identifier for the resource
+                    type: string
+                  id:
+                    type: string
+                  location:
+                    description: Location of the data center.
+                    type: string
+                  maxReplicaCount:
+                    description: The maximum value for the number of replicas on a
+                      VM Auto Scaling Group. Must be >= 0 and <= 200. Will be enforced
+                      for both automatic and manual changes.
+                    type: number
+                  minReplicaCount:
+                    description: The minimum value for the number of replicas on a
+                      VM Auto Scaling Group. Must be >= 0 and <= 200. Will be enforced
+                      for both automatic and manual changes
+                    type: number
+                  name:
+                    description: User-defined name for the Autoscaling Group.
+                    type: string
+                  policy:
+                    description: Defines the behavior of this VM Auto Scaling Group.
+                      A policy consists of triggers and actions, where an action is
+                      an automated behavior, and the trigger defines the circumstances
+                      under which the action is triggered. Currently, two separate
+                      actions are supported, namely scaling inward and outward, triggered
+                      by the thresholds defined for a particular metric.
+                    properties:
+                      metric:
+                        description: The Metric that should trigger the scaling actions.
+                          Metric values are checked at fixed intervals.
+                        type: string
+                      range:
+                        description: Specifies the time range for which the samples
+                          are to be aggregated. Must be >= 2 minutes.
+                        type: string
+                      scaleInAction:
+                        description: Defines the action to be taken when the 'scaleInThreshold'
+                          is exceeded. Here, scaling is always about removing VMs
+                          associated with this VM Auto Scaling Group. By default,
+                          the termination policy is 'OLDEST_SERVER_FIRST' is effective.
+                        properties:
+                          amount:
+                            description: When 'amountType=ABSOLUTE' specifies the
+                              absolute number of VMs that are removed. The value must
+                              be between 1 to 10. 'amountType=PERCENTAGE' specifies
+                              the percentage value that is applied to the current
+                              number of replicas of the VM Auto Scaling Group. The
+                              value must be between 1 to 200. At least one VM is always
+                              removed. Note that for 'SCALE_IN' operations, volumes
+                              are not deleted after the server is deleted.
+                            type: number
+                          amountType:
+                            description: 'The type for the given amount. Possible
+                              values are: [ABSOLUTE, PERCENTAGE].'
+                            type: string
+                          cooldownPeriod:
+                            description: The minimum time that elapses after the start
+                              of this scaling action until the following scaling action
+                              is started. While a scaling action is in progress, no
+                              second action is initiated for the same VM Auto Scaling
+                              Group. Instead, the metric is re-evaluated after the
+                              current scaling action completes (either successfully
+                              or with errors). This is currently validated with a
+                              minimum value of 2 minutes and a maximum of 24 hours.
+                              The default value is 5 minutes if not specified.
+                            type: string
+                          deleteVolumes:
+                            description: If set to 'true', when deleting an replica
+                              during scale in, any attached volume will also be deleted.
+                              When set to 'false', all volumes remain in the datacenter
+                              and must be deleted manually. Note that every scale-out
+                              creates new volumes. When they are not deleted, they
+                              will eventually use all of your contracts resource limits.
+                              At this point, scaling out would not be possible anymore.
+                            type: boolean
+                          terminationPolicyType:
+                            description: The type of termination policy for the VM
+                              Auto Scaling Group to follow a specific pattern for
+                              scaling-in replicas. The default termination policy
+                              is 'OLDEST_SERVER_FIRST'.
+                            type: string
+                        type: object
+                      scaleInThreshold:
+                        description: The upper threshold for the value of the 'metric'.
+                          Used with the 'greater than' (>) operator. A scale-out action
+                          is triggered when this value is exceeded, specified by the
+                          'scale_out_action' property. The value must have a lower
+                          minimum delta to the 'scale_in_threshold', depending on
+                          the metric, to avoid competing for actions simultaneously.
+                          If 'properties.policy.unit=TOTAL', a value >= 40 must be
+                          chosen.
+                        type: number
+                      scaleOutAction:
+                        description: Defines the action to be performed when the 'scaleOutThreshold'
+                          is exceeded. Here, scaling is always about adding new VMs
+                          to this VM Auto Scaling Group.
+                        properties:
+                          amount:
+                            description: When 'amountType=ABSOLUTE' specifies the
+                              absolute number of VMs that are added. The value must
+                              be between 1 to 10. 'amountType=PERCENTAGE' specifies
+                              the percentage value that is applied to the current
+                              number of replicas of the VM Auto Scaling Group. The
+                              value must be between 1 to 200. At least one VM is always
+                              added or removed.
+                            type: number
+                          amountType:
+                            description: 'The type for the given amount. Possible
+                              values are: [ABSOLUTE, PERCENTAGE].'
+                            type: string
+                          cooldownPeriod:
+                            description: The minimum time that elapses after the start
+                              of this scaling action until the following scaling action
+                              is started. While a scaling action is in progress, no
+                              second action is initiated for the same VM Auto Scaling
+                              Group. Instead, the metric is re-evaluated after the
+                              current scaling action completes (either successfully
+                              or with errors). This is currently validated with a
+                              minimum value of 2 minutes and a maximum of 24 hours.
+                              The default value is 5 minutes if not specified.
+                            type: string
+                        type: object
+                      scaleOutThreshold:
+                        description: The upper threshold for the value of the 'metric'.
+                          Used with the 'greater than' (>) operator. A scale-out action
+                          is triggered when this value is exceeded, specified by the
+                          'scaleOutAction' property. The value must have a lower minimum
+                          delta to the 'scaleInThreshold', depending on the metric,
+                          to avoid competing for actions simultaneously. If 'properties.policy.unit=TOTAL',
+                          a value >= 40 must be chosen.
+                        type: number
+                      unit:
+                        description: 'Units of the applied Metric. Possible values
+                          are: PER_HOUR, PER_MINUTE, PER_SECOND, TOTAL.'
+                        type: string
+                    type: object
+                  replicaConfiguration:
+                    items:
+                      properties:
+                        availabilityZone:
+                          description: The zone where the VMs are created using this
+                            configuration.
+                          type: string
+                        cores:
+                          description: The total number of cores for the VMs.
+                          type: number
+                        cpuFamily:
+                          description: The zone where the VMs are created using this
+                            configuration.
+                          type: string
+                        nic:
+                          description: Set of NICs associated with this Replica.
+                          items:
+                            properties:
+                              dhcp:
+                                description: Dhcp flag for this replica Nic. This
+                                  is an optional attribute with default value of 'true'
+                                  if not given in the request payload or given as
+                                  null.
+                                type: boolean
+                              firewallActive:
+                                description: Activate or deactivate the firewall.
+                                  By default, an active firewall without any defined
+                                  rules will block all incoming network traffic except
+                                  for the firewall rules that explicitly allows certain
+                                  protocols, IP addresses and ports.
+                                type: boolean
+                              firewallRule:
+                                description: List of all firewall rules for the specified
+                                  NIC.
+                                items:
+                                  properties:
+                                    icmpCode:
+                                      description: Sets the allowed code (from 0 to
+                                        254) when ICMP protocol is selected. The value
+                                        'null' allows all codes.
+                                      type: number
+                                    icmpType:
+                                      description: Sets the allowed type (from 0 to
+                                        254) if the protocol ICMP is selected. The
+                                        value 'null' allows all types.
+                                      type: number
+                                    name:
+                                      description: The name of the firewall rule.
+                                      type: string
+                                    portRangeEnd:
+                                      description: Sets the end range of the allowed
+                                        port (from 1 to 65535) if the protocol TCP
+                                        or UDP is selected. The value 'null' for 'port_range_start'
+                                        and 'port_range_end' allows all ports.
+                                      type: number
+                                    portRangeStart:
+                                      description: Sets the initial range of the allowed
+                                        port (from 1 to 65535) if the protocol TCP
+                                        or UDP is selected. The value 'null' for 'port_range_start'
+                                        and 'port_range_end' allows all ports.
+                                      type: number
+                                    protocol:
+                                      description: The protocol for the rule. The
+                                        property cannot be modified after its creation
+                                        (not allowed in update requests).
+                                      type: string
+                                    sourceIp:
+                                      description: Only traffic originating from the
+                                        respective IPv4 address is permitted. The
+                                        value 'null' allows traffic from any IP address.
+                                      type: string
+                                    sourceMac:
+                                      description: 'Only traffic originating from
+                                        the respective MAC address is permitted. Valid
+                                        format: ''aa:bb:cc:dd:ee:ff''. The value ''null''
+                                        allows traffic from any MAC address.'
+                                      type: string
+                                    targetIp:
+                                      description: If the target NIC has multiple
+                                        IP addresses, only the traffic directed to
+                                        the respective IP address of the NIC is allowed.
+                                        The value 'null' allows traffic to any target
+                                        IP address.
+                                      type: string
+                                    type:
+                                      description: The firewall rule type. If not
+                                        specified, the default value 'INGRESS' is
+                                        used.
+                                      type: string
+                                  type: object
+                                type: array
+                              firewallType:
+                                description: The type of firewall rules that will
+                                  be allowed on the NIC. If not specified, the default
+                                  INGRESS value is used.
+                                type: string
+                              flowLog:
+                                description: List of all flow logs for the specified
+                                  NIC.
+                                items:
+                                  properties:
+                                    action:
+                                      description: 'Specifies the traffic direction
+                                        pattern. Valid values: ACCEPTED, REJECTED,
+                                        ALL. Immutable, forces re-recreation of the
+                                        nic resource.'
+                                      type: string
+                                    bucket:
+                                      description: The bucket name of an existing
+                                        IONOS Object Storage bucket. Immutable, forces
+                                        re-recreation of the nic resource.
+                                      type: string
+                                    direction:
+                                      description: 'Specifies the traffic direction
+                                        pattern. Valid values: INGRESS, EGRESS, BIDIRECTIONAL.
+                                        Immutable, forces re-recreation of the nic
+                                        resource.'
+                                      type: string
+                                    id:
+                                      description: The resource's unique identifier.
+                                      type: string
+                                    name:
+                                      description: The resource name.
+                                      type: string
+                                  type: object
+                                type: array
+                              lan:
+                                description: Lan ID for this replica Nic.
+                                type: number
+                              name:
+                                description: Name for this replica NIC.
+                                type: string
+                              targetGroup:
+                                description: In order to link VM to ALB, target group
+                                  must be provided.
+                                properties:
+                                  port:
+                                    description: The port for the target group.
+                                    type: number
+                                  targetGroupId:
+                                    description: The ID of the target group.
+                                    type: string
+                                  weight:
+                                    description: The weight for the target group.
+                                    type: number
+                                type: object
+                            type: object
+                          type: array
+                        ram:
+                          description: The amount of memory for the VMs in MB, e.g.
+                            2048. Size must be specified in multiples of 256 MB with
+                            a minimum of 256 MB; however, if you set ramHotPlug to
+                            TRUE then you must use a minimum of 1024 MB. If you set
+                            the RAM size more than 240GB, then ramHotPlug will be
+                            set to FALSE and can not be set to TRUE unless RAM size
+                            not set to less than 240GB.
+                          type: number
+                        volume:
+                          description: List of volumes associated with this Replica.
+                          items:
+                            properties:
+                              backupUnitId:
+                                description: The uuid of the Backup Unit that user
+                                  has access to. The property is immutable and is
+                                  only allowed to be set on a new volume creation.
+                                  It is mandatory to provide either 'public image'
+                                  or 'imageAlias' in conjunction with this property.
+                                type: string
+                              bootOrder:
+                                description: |-
+                                  Determines whether the volume will be used as a boot volume. Set to NONE, the volume will not be used as boot volume.
+                                  Set to PRIMARY, the volume will be used as boot volume and set to AUTO will delegate the decision to the provisioning engine to decide whether to use the volume as boot volume.
+                                  Notice that exactly one volume can be set to PRIMARY or all of them set to AUTO.
+                                type: string
+                              bus:
+                                description: The bus type of the volume. Default setting
+                                  is 'VIRTIO'. The bus type 'IDE' is also supported.
+                                type: string
+                              image:
+                                description: The image installed on the disk. Currently,
+                                  only the UUID of the image is supported. Note that
+                                  either 'image' or 'imageAlias' must be specified,
+                                  but not both.
+                                type: string
+                              imageAlias:
+                                description: The image installed on the volume. Must
+                                  be an 'imageAlias' as specified via the images API.
+                                  Note that one of 'image' or 'imageAlias' must be
+                                  set, but not both.
+                                type: string
+                              name:
+                                description: Name for this replica volume.
+                                type: string
+                              size:
+                                description: User-defined size for this replica volume
+                                  in GB.
+                                type: number
+                              sshKeys:
+                                items:
+                                  type: string
+                                type: array
+                              type:
+                                description: 'Storage Type for this replica volume.
+                                  Possible values: SSD, HDD, SSD_STANDARD or SSD_PREMIUM'
+                                type: string
+                              userData:
+                                description: User-data (Cloud Init) for this replica
+                                  volume.
+                                type: string
+                            type: object
+                          type: array
+                      type: object
+                    type: array
+                type: object
+              conditions:
+                description: Conditions of the resource.
+                items:
+                  description: A Condition that may apply to a resource.
+                  properties:
+                    lastTransitionTime:
+                      description: |-
+                        LastTransitionTime is the last time this condition transitioned from one
+                        status to another.
+                      format: date-time
+                      type: string
+                    message:
+                      description: |-
+                        A Message containing details about this condition's last transition from
+                        one status to another, if any.
+                      type: string
+                    observedGeneration:
+                      description: |-
+                        ObservedGeneration represents the .metadata.generation that the condition was set based upon.
+                        For instance, if .metadata.generation is currently 12, but the .status.conditions[x].observedGeneration is 9, the condition is out of date
+                        with respect to the current state of the instance.
+                      format: int64
+                      type: integer
+                    reason:
+                      description: A Reason for this condition's last transition from
+                        one status to another.
+                      type: string
+                    status:
+                      description: Status of this condition; is it currently True,
+                        False, or Unknown?
+                      type: string
+                    type:
+                      description: |-
+                        Type of this condition. At most one of each condition type may apply to
+                        a resource at any point in time.
+                      type: string
+                  required:
+                  - lastTransitionTime
+                  - reason
+                  - status
+                  - type
+                  type: object
+                type: array
+                x-kubernetes-list-map-keys:
+                - type
+                x-kubernetes-list-type: map
+              observedGeneration:
+                description: |-
+                  ObservedGeneration is the latest metadata.generation
+                  which resulted in either a ready state, or stalled due to error
+                  it can not recover from without human intervention.
+                format: int64
+                type: integer
+            type: object
+        required:
+        - spec
+        type: object
+    served: true
+    storage: true
+    subresources:
+      status: {}
