@@ -26,5 +26,20 @@ spec:
       key: credentials
 EOF
 
+echo "Creating a default cluster provider config..."
+cat <<EOF | ${KUBECTL} apply -f -
+apiVersion: aws.m.upbound.io/v1beta1
+kind: ClusterProviderConfig
+metadata:
+  name: default
+spec:
+  credentials:
+    source: Secret
+    secretRef:
+      name: provider-secret
+      namespace: upbound-system
+      key: credentials
+EOF
+
 ${KUBECTL} wait provider.pkg --all --for condition=Healthy --timeout 5m
 ${KUBECTL} -n upbound-system wait --for=condition=Available deployment --all --timeout=5m
