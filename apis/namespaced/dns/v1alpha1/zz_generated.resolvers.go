@@ -25,7 +25,7 @@ func (mg *DnsRecord) ResolveReferences( // ResolveReferences of this DnsRecord.
 	var rsp reference.NamespacedResolutionResponse
 	var err error
 	{
-		m, l, err = apisresolver.GetManagedResource("dns.upjet-ionoscloud.ionoscloud.io", "v1alpha1", "DnsZone", "DnsZoneList")
+		m, l, err = apisresolver.GetManagedResource("dns.m.ionoscloud.io", "v1alpha1", "DnsZone", "DnsZoneList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
@@ -45,7 +45,7 @@ func (mg *DnsRecord) ResolveReferences( // ResolveReferences of this DnsRecord.
 	mg.Spec.ForProvider.ZoneID = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.ZoneIDRef = rsp.ResolvedReference
 	{
-		m, l, err = apisresolver.GetManagedResource("dns.upjet-ionoscloud.ionoscloud.io", "v1alpha1", "DnsZone", "DnsZoneList")
+		m, l, err = apisresolver.GetManagedResource("dns.m.ionoscloud.io", "v1alpha1", "DnsZone", "DnsZoneList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}

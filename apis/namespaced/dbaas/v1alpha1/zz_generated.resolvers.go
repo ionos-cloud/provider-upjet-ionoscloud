@@ -27,7 +27,7 @@ func (mg *MariadbCluster) ResolveReferences( // ResolveReferences of this Mariad
 
 	if mg.Spec.ForProvider.Connections != nil {
 		{
-			m, l, err = apisresolver.GetManagedResource("compute.upjet-ionoscloud.ionoscloud.io", "v1alpha1", "Datacenter", "DatacenterList")
+			m, l, err = apisresolver.GetManagedResource("compute.m.ionoscloud.io", "v1alpha1", "Datacenter", "DatacenterList")
 			if err != nil {
 				return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 			}
@@ -49,7 +49,7 @@ func (mg *MariadbCluster) ResolveReferences( // ResolveReferences of this Mariad
 	}
 	if mg.Spec.ForProvider.Connections != nil {
 		{
-			m, l, err = apisresolver.GetManagedResource("compute.upjet-ionoscloud.ionoscloud.io", "v1alpha1", "Lan", "LanList")
+			m, l, err = apisresolver.GetManagedResource("compute.m.ionoscloud.io", "v1alpha1", "Lan", "LanList")
 			if err != nil {
 				return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 			}
@@ -71,7 +71,7 @@ func (mg *MariadbCluster) ResolveReferences( // ResolveReferences of this Mariad
 	}
 	if mg.Spec.InitProvider.Connections != nil {
 		{
-			m, l, err = apisresolver.GetManagedResource("compute.upjet-ionoscloud.ionoscloud.io", "v1alpha1", "Datacenter", "DatacenterList")
+			m, l, err = apisresolver.GetManagedResource("compute.m.ionoscloud.io", "v1alpha1", "Datacenter", "DatacenterList")
 			if err != nil {
 				return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 			}
@@ -93,7 +93,7 @@ func (mg *MariadbCluster) ResolveReferences( // ResolveReferences of this Mariad
 	}
 	if mg.Spec.InitProvider.Connections != nil {
 		{
-			m, l, err = apisresolver.GetManagedResource("compute.upjet-ionoscloud.ionoscloud.io", "v1alpha1", "Lan", "LanList")
+			m, l, err = apisresolver.GetManagedResource("compute.m.ionoscloud.io", "v1alpha1", "Lan", "LanList")
 			if err != nil {
 				return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 			}

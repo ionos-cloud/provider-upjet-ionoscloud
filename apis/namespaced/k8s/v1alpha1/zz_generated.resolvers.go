@@ -28,7 +28,7 @@ func (mg *Cluster) ResolveReferences( // ResolveReferences of this Cluster.
 
 	for i3 := 0; i3 < len(mg.Spec.ForProvider.S3Buckets); i3++ {
 		{
-			m, l, err = apisresolver.GetManagedResource("objectstorage.upjet-ionoscloud.ionoscloud.io", "v1alpha1", "Bucket", "BucketList")
+			m, l, err = apisresolver.GetManagedResource("objectstorage.m.ionoscloud.io", "v1alpha1", "Bucket", "BucketList")
 			if err != nil {
 				return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 			}
@@ -50,7 +50,7 @@ func (mg *Cluster) ResolveReferences( // ResolveReferences of this Cluster.
 	}
 	for i3 := 0; i3 < len(mg.Spec.InitProvider.S3Buckets); i3++ {
 		{
-			m, l, err = apisresolver.GetManagedResource("objectstorage.upjet-ionoscloud.ionoscloud.io", "v1alpha1", "Bucket", "BucketList")
+			m, l, err = apisresolver.GetManagedResource("objectstorage.m.ionoscloud.io", "v1alpha1", "Bucket", "BucketList")
 			if err != nil {
 				return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 			}
@@ -83,7 +83,7 @@ func (mg *NodePool) ResolveReferences(ctx context.Context, c client.Reader) erro
 	var rsp reference.NamespacedResolutionResponse
 	var err error
 	{
-		m, l, err = apisresolver.GetManagedResource("compute.upjet-ionoscloud.ionoscloud.io", "v1alpha1", "Datacenter", "DatacenterList")
+		m, l, err = apisresolver.GetManagedResource("compute.m.ionoscloud.io", "v1alpha1", "Datacenter", "DatacenterList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
@@ -103,7 +103,7 @@ func (mg *NodePool) ResolveReferences(ctx context.Context, c client.Reader) erro
 	mg.Spec.ForProvider.DatacenterID = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.DatacenterIDRef = rsp.ResolvedReference
 	{
-		m, l, err = apisresolver.GetManagedResource("k8s.upjet-ionoscloud.ionoscloud.io", "v1alpha1", "Cluster", "ClusterList")
+		m, l, err = apisresolver.GetManagedResource("k8s.m.ionoscloud.io", "v1alpha1", "Cluster", "ClusterList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
@@ -123,7 +123,7 @@ func (mg *NodePool) ResolveReferences(ctx context.Context, c client.Reader) erro
 	mg.Spec.ForProvider.K8SClusterID = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.K8SClusterIDRef = rsp.ResolvedReference
 	{
-		m, l, err = apisresolver.GetManagedResource("k8s.upjet-ionoscloud.ionoscloud.io", "v1alpha1", "Cluster", "ClusterList")
+		m, l, err = apisresolver.GetManagedResource("k8s.m.ionoscloud.io", "v1alpha1", "Cluster", "ClusterList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
@@ -145,7 +145,7 @@ func (mg *NodePool) ResolveReferences(ctx context.Context, c client.Reader) erro
 
 	for i3 := 0; i3 < len(mg.Spec.ForProvider.Lans); i3++ {
 		{
-			m, l, err = apisresolver.GetManagedResource("compute.upjet-ionoscloud.ionoscloud.io", "v1alpha1", "Lan", "LanList")
+			m, l, err = apisresolver.GetManagedResource("compute.m.ionoscloud.io", "v1alpha1", "Lan", "LanList")
 			if err != nil {
 				return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 			}
@@ -166,7 +166,7 @@ func (mg *NodePool) ResolveReferences(ctx context.Context, c client.Reader) erro
 
 	}
 	{
-		m, l, err = apisresolver.GetManagedResource("compute.upjet-ionoscloud.ionoscloud.io", "v1alpha1", "Datacenter", "DatacenterList")
+		m, l, err = apisresolver.GetManagedResource("compute.m.ionoscloud.io", "v1alpha1", "Datacenter", "DatacenterList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
@@ -185,7 +185,7 @@ func (mg *NodePool) ResolveReferences(ctx context.Context, c client.Reader) erro
 	mg.Spec.InitProvider.DatacenterID = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.InitProvider.DatacenterIDRef = rsp.ResolvedReference
 	{
-		m, l, err = apisresolver.GetManagedResource("k8s.upjet-ionoscloud.ionoscloud.io", "v1alpha1", "Cluster", "ClusterList")
+		m, l, err = apisresolver.GetManagedResource("k8s.m.ionoscloud.io", "v1alpha1", "Cluster", "ClusterList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
@@ -205,7 +205,7 @@ func (mg *NodePool) ResolveReferences(ctx context.Context, c client.Reader) erro
 	mg.Spec.InitProvider.K8SClusterID = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.InitProvider.K8SClusterIDRef = rsp.ResolvedReference
 	{
-		m, l, err = apisresolver.GetManagedResource("k8s.upjet-ionoscloud.ionoscloud.io", "v1alpha1", "Cluster", "ClusterList")
+		m, l, err = apisresolver.GetManagedResource("k8s.m.ionoscloud.io", "v1alpha1", "Cluster", "ClusterList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
@@ -227,7 +227,7 @@ func (mg *NodePool) ResolveReferences(ctx context.Context, c client.Reader) erro
 
 	for i3 := 0; i3 < len(mg.Spec.InitProvider.Lans); i3++ {
 		{
-			m, l, err = apisresolver.GetManagedResource("compute.upjet-ionoscloud.ionoscloud.io", "v1alpha1", "Lan", "LanList")
+			m, l, err = apisresolver.GetManagedResource("compute.m.ionoscloud.io", "v1alpha1", "Lan", "LanList")
 			if err != nil {
 				return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 			}

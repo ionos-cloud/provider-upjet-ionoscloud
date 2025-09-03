@@ -25,7 +25,7 @@ func (mg *Route) ResolveReferences( // ResolveReferences of this Route.
 	var rsp reference.ResolutionResponse
 	var err error
 	{
-		m, l, err = apisresolver.GetManagedResource("apigateway.upjet-ionoscloud.ionoscloud.io", "v1alpha1", "Apigateway", "ApigatewayList")
+		m, l, err = apisresolver.GetManagedResource("apigateway.ionoscloud.io", "v1alpha1", "Apigateway", "ApigatewayList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
@@ -45,7 +45,7 @@ func (mg *Route) ResolveReferences( // ResolveReferences of this Route.
 	mg.Spec.ForProvider.GatewayID = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.GatewayIDRef = rsp.ResolvedReference
 	{
-		m, l, err = apisresolver.GetManagedResource("apigateway.upjet-ionoscloud.ionoscloud.io", "v1alpha1", "Apigateway", "ApigatewayList")
+		m, l, err = apisresolver.GetManagedResource("apigateway.ionoscloud.io", "v1alpha1", "Apigateway", "ApigatewayList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}

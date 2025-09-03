@@ -25,7 +25,7 @@ func (mg *AutoscalingGroup) ResolveReferences( // ResolveReferences of this Auto
 	var rsp reference.ResolutionResponse
 	var err error
 	{
-		m, l, err = apisresolver.GetManagedResource("compute.upjet-ionoscloud.ionoscloud.io", "v1alpha1", "Datacenter", "DatacenterList")
+		m, l, err = apisresolver.GetManagedResource("compute.ionoscloud.io", "v1alpha1", "Datacenter", "DatacenterList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
@@ -48,7 +48,7 @@ func (mg *AutoscalingGroup) ResolveReferences( // ResolveReferences of this Auto
 	for i3 := 0; i3 < len(mg.Spec.ForProvider.ReplicaConfiguration); i3++ {
 		for i4 := 0; i4 < len(mg.Spec.ForProvider.ReplicaConfiguration[i3].Nic); i4++ {
 			{
-				m, l, err = apisresolver.GetManagedResource("compute.upjet-ionoscloud.ionoscloud.io", "v1alpha1", "Lan", "LanList")
+				m, l, err = apisresolver.GetManagedResource("compute.ionoscloud.io", "v1alpha1", "Lan", "LanList")
 				if err != nil {
 					return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 				}
@@ -73,7 +73,7 @@ func (mg *AutoscalingGroup) ResolveReferences( // ResolveReferences of this Auto
 		for i4 := 0; i4 < len(mg.Spec.ForProvider.ReplicaConfiguration[i3].Nic); i4++ {
 			if mg.Spec.ForProvider.ReplicaConfiguration[i3].Nic[i4].TargetGroup != nil {
 				{
-					m, l, err = apisresolver.GetManagedResource("alb.upjet-ionoscloud.ionoscloud.io", "v1alpha1", "TargetGroup", "TargetGroupList")
+					m, l, err = apisresolver.GetManagedResource("alb.ionoscloud.io", "v1alpha1", "TargetGroup", "TargetGroupList")
 					if err != nil {
 						return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 					}
@@ -96,7 +96,7 @@ func (mg *AutoscalingGroup) ResolveReferences( // ResolveReferences of this Auto
 		}
 	}
 	{
-		m, l, err = apisresolver.GetManagedResource("compute.upjet-ionoscloud.ionoscloud.io", "v1alpha1", "Datacenter", "DatacenterList")
+		m, l, err = apisresolver.GetManagedResource("compute.ionoscloud.io", "v1alpha1", "Datacenter", "DatacenterList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
@@ -118,7 +118,7 @@ func (mg *AutoscalingGroup) ResolveReferences( // ResolveReferences of this Auto
 	for i3 := 0; i3 < len(mg.Spec.InitProvider.ReplicaConfiguration); i3++ {
 		for i4 := 0; i4 < len(mg.Spec.InitProvider.ReplicaConfiguration[i3].Nic); i4++ {
 			{
-				m, l, err = apisresolver.GetManagedResource("compute.upjet-ionoscloud.ionoscloud.io", "v1alpha1", "Lan", "LanList")
+				m, l, err = apisresolver.GetManagedResource("compute.ionoscloud.io", "v1alpha1", "Lan", "LanList")
 				if err != nil {
 					return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 				}
@@ -143,7 +143,7 @@ func (mg *AutoscalingGroup) ResolveReferences( // ResolveReferences of this Auto
 		for i4 := 0; i4 < len(mg.Spec.InitProvider.ReplicaConfiguration[i3].Nic); i4++ {
 			if mg.Spec.InitProvider.ReplicaConfiguration[i3].Nic[i4].TargetGroup != nil {
 				{
-					m, l, err = apisresolver.GetManagedResource("alb.upjet-ionoscloud.ionoscloud.io", "v1alpha1", "TargetGroup", "TargetGroupList")
+					m, l, err = apisresolver.GetManagedResource("alb.ionoscloud.io", "v1alpha1", "TargetGroup", "TargetGroupList")
 					if err != nil {
 						return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 					}

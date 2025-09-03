@@ -27,7 +27,7 @@ func (mg *BootDeviceSelection) ResolveReferences( // ResolveReferences of this B
 	var rsp reference.NamespacedResolutionResponse
 	var err error
 	{
-		m, l, err = apisresolver.GetManagedResource("compute.upjet-ionoscloud.ionoscloud.io", "v1alpha1", "Volume", "VolumeList")
+		m, l, err = apisresolver.GetManagedResource("compute.m.ionoscloud.io", "v1alpha1", "Volume", "VolumeList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
@@ -47,7 +47,7 @@ func (mg *BootDeviceSelection) ResolveReferences( // ResolveReferences of this B
 	mg.Spec.ForProvider.BootDeviceID = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.BootDeviceIDRef = rsp.ResolvedReference
 	{
-		m, l, err = apisresolver.GetManagedResource("compute.upjet-ionoscloud.ionoscloud.io", "v1alpha1", "Datacenter", "DatacenterList")
+		m, l, err = apisresolver.GetManagedResource("compute.m.ionoscloud.io", "v1alpha1", "Datacenter", "DatacenterList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
@@ -67,7 +67,7 @@ func (mg *BootDeviceSelection) ResolveReferences( // ResolveReferences of this B
 	mg.Spec.ForProvider.DatacenterID = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.DatacenterIDRef = rsp.ResolvedReference
 	{
-		m, l, err = apisresolver.GetManagedResource("compute.upjet-ionoscloud.ionoscloud.io", "v1alpha1", "Server", "ServerList")
+		m, l, err = apisresolver.GetManagedResource("compute.m.ionoscloud.io", "v1alpha1", "Server", "ServerList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
@@ -87,7 +87,7 @@ func (mg *BootDeviceSelection) ResolveReferences( // ResolveReferences of this B
 	mg.Spec.ForProvider.ServerID = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.ServerIDRef = rsp.ResolvedReference
 	{
-		m, l, err = apisresolver.GetManagedResource("compute.upjet-ionoscloud.ionoscloud.io", "v1alpha1", "Volume", "VolumeList")
+		m, l, err = apisresolver.GetManagedResource("compute.m.ionoscloud.io", "v1alpha1", "Volume", "VolumeList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
@@ -107,7 +107,7 @@ func (mg *BootDeviceSelection) ResolveReferences( // ResolveReferences of this B
 	mg.Spec.InitProvider.BootDeviceID = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.InitProvider.BootDeviceIDRef = rsp.ResolvedReference
 	{
-		m, l, err = apisresolver.GetManagedResource("compute.upjet-ionoscloud.ionoscloud.io", "v1alpha1", "Datacenter", "DatacenterList")
+		m, l, err = apisresolver.GetManagedResource("compute.m.ionoscloud.io", "v1alpha1", "Datacenter", "DatacenterList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
@@ -127,7 +127,7 @@ func (mg *BootDeviceSelection) ResolveReferences( // ResolveReferences of this B
 	mg.Spec.InitProvider.DatacenterID = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.InitProvider.DatacenterIDRef = rsp.ResolvedReference
 	{
-		m, l, err = apisresolver.GetManagedResource("compute.upjet-ionoscloud.ionoscloud.io", "v1alpha1", "Server", "ServerList")
+		m, l, err = apisresolver.GetManagedResource("compute.m.ionoscloud.io", "v1alpha1", "Server", "ServerList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
@@ -159,7 +159,7 @@ func (mg *CubeServer) ResolveReferences(ctx context.Context, c client.Reader) er
 	var rsp reference.NamespacedResolutionResponse
 	var err error
 	{
-		m, l, err = apisresolver.GetManagedResource("compute.upjet-ionoscloud.ionoscloud.io", "v1alpha1", "Datacenter", "DatacenterList")
+		m, l, err = apisresolver.GetManagedResource("compute.m.ionoscloud.io", "v1alpha1", "Datacenter", "DatacenterList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
@@ -181,7 +181,7 @@ func (mg *CubeServer) ResolveReferences(ctx context.Context, c client.Reader) er
 
 	if mg.Spec.ForProvider.Nic != nil {
 		{
-			m, l, err = apisresolver.GetManagedResource("compute.upjet-ionoscloud.ionoscloud.io", "v1alpha1", "Lan", "LanList")
+			m, l, err = apisresolver.GetManagedResource("compute.m.ionoscloud.io", "v1alpha1", "Lan", "LanList")
 			if err != nil {
 				return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 			}
@@ -202,7 +202,7 @@ func (mg *CubeServer) ResolveReferences(ctx context.Context, c client.Reader) er
 
 	}
 	{
-		m, l, err = apisresolver.GetManagedResource("compute.upjet-ionoscloud.ionoscloud.io", "v1alpha1", "Datacenter", "DatacenterList")
+		m, l, err = apisresolver.GetManagedResource("compute.m.ionoscloud.io", "v1alpha1", "Datacenter", "DatacenterList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
@@ -223,7 +223,7 @@ func (mg *CubeServer) ResolveReferences(ctx context.Context, c client.Reader) er
 
 	if mg.Spec.InitProvider.Nic != nil {
 		{
-			m, l, err = apisresolver.GetManagedResource("compute.upjet-ionoscloud.ionoscloud.io", "v1alpha1", "Lan", "LanList")
+			m, l, err = apisresolver.GetManagedResource("compute.m.ionoscloud.io", "v1alpha1", "Lan", "LanList")
 			if err != nil {
 				return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 			}
@@ -256,7 +256,7 @@ func (mg *Firewall) ResolveReferences(ctx context.Context, c client.Reader) erro
 	var rsp reference.NamespacedResolutionResponse
 	var err error
 	{
-		m, l, err = apisresolver.GetManagedResource("compute.upjet-ionoscloud.ionoscloud.io", "v1alpha1", "Datacenter", "DatacenterList")
+		m, l, err = apisresolver.GetManagedResource("compute.m.ionoscloud.io", "v1alpha1", "Datacenter", "DatacenterList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
@@ -276,7 +276,7 @@ func (mg *Firewall) ResolveReferences(ctx context.Context, c client.Reader) erro
 	mg.Spec.ForProvider.DatacenterID = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.DatacenterIDRef = rsp.ResolvedReference
 	{
-		m, l, err = apisresolver.GetManagedResource("compute.upjet-ionoscloud.ionoscloud.io", "v1alpha1", "Nic", "NicList")
+		m, l, err = apisresolver.GetManagedResource("compute.m.ionoscloud.io", "v1alpha1", "Nic", "NicList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
@@ -296,7 +296,7 @@ func (mg *Firewall) ResolveReferences(ctx context.Context, c client.Reader) erro
 	mg.Spec.ForProvider.NicID = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.NicIDRef = rsp.ResolvedReference
 	{
-		m, l, err = apisresolver.GetManagedResource("compute.upjet-ionoscloud.ionoscloud.io", "v1alpha1", "Server", "ServerList")
+		m, l, err = apisresolver.GetManagedResource("compute.m.ionoscloud.io", "v1alpha1", "Server", "ServerList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
@@ -316,7 +316,7 @@ func (mg *Firewall) ResolveReferences(ctx context.Context, c client.Reader) erro
 	mg.Spec.ForProvider.ServerID = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.ServerIDRef = rsp.ResolvedReference
 	{
-		m, l, err = apisresolver.GetManagedResource("compute.upjet-ionoscloud.ionoscloud.io", "v1alpha1", "Ipblock", "IpblockList")
+		m, l, err = apisresolver.GetManagedResource("compute.m.ionoscloud.io", "v1alpha1", "Ipblock", "IpblockList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
@@ -336,7 +336,7 @@ func (mg *Firewall) ResolveReferences(ctx context.Context, c client.Reader) erro
 	mg.Spec.ForProvider.SourceIP = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.SourceIPRef = rsp.ResolvedReference
 	{
-		m, l, err = apisresolver.GetManagedResource("compute.upjet-ionoscloud.ionoscloud.io", "v1alpha1", "Ipblock", "IpblockList")
+		m, l, err = apisresolver.GetManagedResource("compute.m.ionoscloud.io", "v1alpha1", "Ipblock", "IpblockList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
@@ -356,7 +356,7 @@ func (mg *Firewall) ResolveReferences(ctx context.Context, c client.Reader) erro
 	mg.Spec.ForProvider.TargetIP = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.TargetIPRef = rsp.ResolvedReference
 	{
-		m, l, err = apisresolver.GetManagedResource("compute.upjet-ionoscloud.ionoscloud.io", "v1alpha1", "Datacenter", "DatacenterList")
+		m, l, err = apisresolver.GetManagedResource("compute.m.ionoscloud.io", "v1alpha1", "Datacenter", "DatacenterList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
@@ -376,7 +376,7 @@ func (mg *Firewall) ResolveReferences(ctx context.Context, c client.Reader) erro
 	mg.Spec.InitProvider.DatacenterID = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.InitProvider.DatacenterIDRef = rsp.ResolvedReference
 	{
-		m, l, err = apisresolver.GetManagedResource("compute.upjet-ionoscloud.ionoscloud.io", "v1alpha1", "Nic", "NicList")
+		m, l, err = apisresolver.GetManagedResource("compute.m.ionoscloud.io", "v1alpha1", "Nic", "NicList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
@@ -396,7 +396,7 @@ func (mg *Firewall) ResolveReferences(ctx context.Context, c client.Reader) erro
 	mg.Spec.InitProvider.NicID = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.InitProvider.NicIDRef = rsp.ResolvedReference
 	{
-		m, l, err = apisresolver.GetManagedResource("compute.upjet-ionoscloud.ionoscloud.io", "v1alpha1", "Server", "ServerList")
+		m, l, err = apisresolver.GetManagedResource("compute.m.ionoscloud.io", "v1alpha1", "Server", "ServerList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
@@ -416,7 +416,7 @@ func (mg *Firewall) ResolveReferences(ctx context.Context, c client.Reader) erro
 	mg.Spec.InitProvider.ServerID = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.InitProvider.ServerIDRef = rsp.ResolvedReference
 	{
-		m, l, err = apisresolver.GetManagedResource("compute.upjet-ionoscloud.ionoscloud.io", "v1alpha1", "Ipblock", "IpblockList")
+		m, l, err = apisresolver.GetManagedResource("compute.m.ionoscloud.io", "v1alpha1", "Ipblock", "IpblockList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
@@ -436,7 +436,7 @@ func (mg *Firewall) ResolveReferences(ctx context.Context, c client.Reader) erro
 	mg.Spec.InitProvider.SourceIP = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.InitProvider.SourceIPRef = rsp.ResolvedReference
 	{
-		m, l, err = apisresolver.GetManagedResource("compute.upjet-ionoscloud.ionoscloud.io", "v1alpha1", "Ipblock", "IpblockList")
+		m, l, err = apisresolver.GetManagedResource("compute.m.ionoscloud.io", "v1alpha1", "Ipblock", "IpblockList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
@@ -468,7 +468,7 @@ func (mg *Group) ResolveReferences(ctx context.Context, c client.Reader) error {
 	var mrsp reference.MultiNamespacedResolutionResponse
 	var err error
 	{
-		m, l, err = apisresolver.GetManagedResource("compute.upjet-ionoscloud.ionoscloud.io", "v1alpha1", "User", "UserList")
+		m, l, err = apisresolver.GetManagedResource("compute.m.ionoscloud.io", "v1alpha1", "User", "UserList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
@@ -488,7 +488,7 @@ func (mg *Group) ResolveReferences(ctx context.Context, c client.Reader) error {
 	mg.Spec.ForProvider.UserIds = reference.ToPtrValues(mrsp.ResolvedValues)
 	mg.Spec.ForProvider.UserIdsRefs = mrsp.ResolvedReferences
 	{
-		m, l, err = apisresolver.GetManagedResource("compute.upjet-ionoscloud.ionoscloud.io", "v1alpha1", "User", "UserList")
+		m, l, err = apisresolver.GetManagedResource("compute.m.ionoscloud.io", "v1alpha1", "User", "UserList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
@@ -520,7 +520,7 @@ func (mg *Ipfailover) ResolveReferences(ctx context.Context, c client.Reader) er
 	var rsp reference.NamespacedResolutionResponse
 	var err error
 	{
-		m, l, err = apisresolver.GetManagedResource("compute.upjet-ionoscloud.ionoscloud.io", "v1alpha1", "Datacenter", "DatacenterList")
+		m, l, err = apisresolver.GetManagedResource("compute.m.ionoscloud.io", "v1alpha1", "Datacenter", "DatacenterList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
@@ -540,7 +540,7 @@ func (mg *Ipfailover) ResolveReferences(ctx context.Context, c client.Reader) er
 	mg.Spec.ForProvider.DatacenterID = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.DatacenterIDRef = rsp.ResolvedReference
 	{
-		m, l, err = apisresolver.GetManagedResource("compute.upjet-ionoscloud.ionoscloud.io", "v1alpha1", "Ipblock", "IpblockList")
+		m, l, err = apisresolver.GetManagedResource("compute.m.ionoscloud.io", "v1alpha1", "Ipblock", "IpblockList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
@@ -560,7 +560,7 @@ func (mg *Ipfailover) ResolveReferences(ctx context.Context, c client.Reader) er
 	mg.Spec.ForProvider.IP = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.IPRef = rsp.ResolvedReference
 	{
-		m, l, err = apisresolver.GetManagedResource("compute.upjet-ionoscloud.ionoscloud.io", "v1alpha1", "Lan", "LanList")
+		m, l, err = apisresolver.GetManagedResource("compute.m.ionoscloud.io", "v1alpha1", "Lan", "LanList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
@@ -580,7 +580,7 @@ func (mg *Ipfailover) ResolveReferences(ctx context.Context, c client.Reader) er
 	mg.Spec.ForProvider.LanID = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.LanIDRef = rsp.ResolvedReference
 	{
-		m, l, err = apisresolver.GetManagedResource("compute.upjet-ionoscloud.ionoscloud.io", "v1alpha1", "Server", "ServerList")
+		m, l, err = apisresolver.GetManagedResource("compute.m.ionoscloud.io", "v1alpha1", "Server", "ServerList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
@@ -600,7 +600,7 @@ func (mg *Ipfailover) ResolveReferences(ctx context.Context, c client.Reader) er
 	mg.Spec.ForProvider.Nicuuid = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.NicuuidRef = rsp.ResolvedReference
 	{
-		m, l, err = apisresolver.GetManagedResource("compute.upjet-ionoscloud.ionoscloud.io", "v1alpha1", "Datacenter", "DatacenterList")
+		m, l, err = apisresolver.GetManagedResource("compute.m.ionoscloud.io", "v1alpha1", "Datacenter", "DatacenterList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
@@ -620,7 +620,7 @@ func (mg *Ipfailover) ResolveReferences(ctx context.Context, c client.Reader) er
 	mg.Spec.InitProvider.DatacenterID = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.InitProvider.DatacenterIDRef = rsp.ResolvedReference
 	{
-		m, l, err = apisresolver.GetManagedResource("compute.upjet-ionoscloud.ionoscloud.io", "v1alpha1", "Ipblock", "IpblockList")
+		m, l, err = apisresolver.GetManagedResource("compute.m.ionoscloud.io", "v1alpha1", "Ipblock", "IpblockList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
@@ -640,7 +640,7 @@ func (mg *Ipfailover) ResolveReferences(ctx context.Context, c client.Reader) er
 	mg.Spec.InitProvider.IP = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.InitProvider.IPRef = rsp.ResolvedReference
 	{
-		m, l, err = apisresolver.GetManagedResource("compute.upjet-ionoscloud.ionoscloud.io", "v1alpha1", "Lan", "LanList")
+		m, l, err = apisresolver.GetManagedResource("compute.m.ionoscloud.io", "v1alpha1", "Lan", "LanList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
@@ -660,7 +660,7 @@ func (mg *Ipfailover) ResolveReferences(ctx context.Context, c client.Reader) er
 	mg.Spec.InitProvider.LanID = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.InitProvider.LanIDRef = rsp.ResolvedReference
 	{
-		m, l, err = apisresolver.GetManagedResource("compute.upjet-ionoscloud.ionoscloud.io", "v1alpha1", "Server", "ServerList")
+		m, l, err = apisresolver.GetManagedResource("compute.m.ionoscloud.io", "v1alpha1", "Server", "ServerList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
@@ -692,7 +692,7 @@ func (mg *Lan) ResolveReferences(ctx context.Context, c client.Reader) error {
 	var rsp reference.NamespacedResolutionResponse
 	var err error
 	{
-		m, l, err = apisresolver.GetManagedResource("compute.upjet-ionoscloud.ionoscloud.io", "v1alpha1", "Datacenter", "DatacenterList")
+		m, l, err = apisresolver.GetManagedResource("compute.m.ionoscloud.io", "v1alpha1", "Datacenter", "DatacenterList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
@@ -712,7 +712,7 @@ func (mg *Lan) ResolveReferences(ctx context.Context, c client.Reader) error {
 	mg.Spec.ForProvider.DatacenterID = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.DatacenterIDRef = rsp.ResolvedReference
 	{
-		m, l, err = apisresolver.GetManagedResource("compute.upjet-ionoscloud.ionoscloud.io", "v1alpha1", "Crossconnect", "CrossconnectList")
+		m, l, err = apisresolver.GetManagedResource("compute.m.ionoscloud.io", "v1alpha1", "Crossconnect", "CrossconnectList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
@@ -732,7 +732,7 @@ func (mg *Lan) ResolveReferences(ctx context.Context, c client.Reader) error {
 	mg.Spec.ForProvider.Pcc = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.PccRef = rsp.ResolvedReference
 	{
-		m, l, err = apisresolver.GetManagedResource("compute.upjet-ionoscloud.ionoscloud.io", "v1alpha1", "Datacenter", "DatacenterList")
+		m, l, err = apisresolver.GetManagedResource("compute.m.ionoscloud.io", "v1alpha1", "Datacenter", "DatacenterList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
@@ -752,7 +752,7 @@ func (mg *Lan) ResolveReferences(ctx context.Context, c client.Reader) error {
 	mg.Spec.InitProvider.DatacenterID = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.InitProvider.DatacenterIDRef = rsp.ResolvedReference
 	{
-		m, l, err = apisresolver.GetManagedResource("compute.upjet-ionoscloud.ionoscloud.io", "v1alpha1", "Crossconnect", "CrossconnectList")
+		m, l, err = apisresolver.GetManagedResource("compute.m.ionoscloud.io", "v1alpha1", "Crossconnect", "CrossconnectList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
@@ -785,7 +785,7 @@ func (mg *Loadbalancer) ResolveReferences(ctx context.Context, c client.Reader) 
 	var mrsp reference.MultiNamespacedResolutionResponse
 	var err error
 	{
-		m, l, err = apisresolver.GetManagedResource("compute.upjet-ionoscloud.ionoscloud.io", "v1alpha1", "Datacenter", "DatacenterList")
+		m, l, err = apisresolver.GetManagedResource("compute.m.ionoscloud.io", "v1alpha1", "Datacenter", "DatacenterList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
@@ -805,7 +805,7 @@ func (mg *Loadbalancer) ResolveReferences(ctx context.Context, c client.Reader) 
 	mg.Spec.ForProvider.DatacenterID = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.DatacenterIDRef = rsp.ResolvedReference
 	{
-		m, l, err = apisresolver.GetManagedResource("compute.upjet-ionoscloud.ionoscloud.io", "v1alpha1", "Server", "ServerList")
+		m, l, err = apisresolver.GetManagedResource("compute.m.ionoscloud.io", "v1alpha1", "Server", "ServerList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
@@ -825,7 +825,7 @@ func (mg *Loadbalancer) ResolveReferences(ctx context.Context, c client.Reader) 
 	mg.Spec.ForProvider.NicIds = reference.ToPtrValues(mrsp.ResolvedValues)
 	mg.Spec.ForProvider.NicIdsRefs = mrsp.ResolvedReferences
 	{
-		m, l, err = apisresolver.GetManagedResource("compute.upjet-ionoscloud.ionoscloud.io", "v1alpha1", "Datacenter", "DatacenterList")
+		m, l, err = apisresolver.GetManagedResource("compute.m.ionoscloud.io", "v1alpha1", "Datacenter", "DatacenterList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
@@ -845,7 +845,7 @@ func (mg *Loadbalancer) ResolveReferences(ctx context.Context, c client.Reader) 
 	mg.Spec.InitProvider.DatacenterID = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.InitProvider.DatacenterIDRef = rsp.ResolvedReference
 	{
-		m, l, err = apisresolver.GetManagedResource("compute.upjet-ionoscloud.ionoscloud.io", "v1alpha1", "Server", "ServerList")
+		m, l, err = apisresolver.GetManagedResource("compute.m.ionoscloud.io", "v1alpha1", "Server", "ServerList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
@@ -877,7 +877,7 @@ func (mg *Nic) ResolveReferences(ctx context.Context, c client.Reader) error {
 	var rsp reference.NamespacedResolutionResponse
 	var err error
 	{
-		m, l, err = apisresolver.GetManagedResource("compute.upjet-ionoscloud.ionoscloud.io", "v1alpha1", "Datacenter", "DatacenterList")
+		m, l, err = apisresolver.GetManagedResource("compute.m.ionoscloud.io", "v1alpha1", "Datacenter", "DatacenterList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
@@ -897,7 +897,7 @@ func (mg *Nic) ResolveReferences(ctx context.Context, c client.Reader) error {
 	mg.Spec.ForProvider.DatacenterID = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.DatacenterIDRef = rsp.ResolvedReference
 	{
-		m, l, err = apisresolver.GetManagedResource("compute.upjet-ionoscloud.ionoscloud.io", "v1alpha1", "Lan", "LanList")
+		m, l, err = apisresolver.GetManagedResource("compute.m.ionoscloud.io", "v1alpha1", "Lan", "LanList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
@@ -917,7 +917,7 @@ func (mg *Nic) ResolveReferences(ctx context.Context, c client.Reader) error {
 	mg.Spec.ForProvider.Lan = reference.ToFloatPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.LanRef = rsp.ResolvedReference
 	{
-		m, l, err = apisresolver.GetManagedResource("compute.upjet-ionoscloud.ionoscloud.io", "v1alpha1", "Server", "ServerList")
+		m, l, err = apisresolver.GetManagedResource("compute.m.ionoscloud.io", "v1alpha1", "Server", "ServerList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
@@ -937,7 +937,7 @@ func (mg *Nic) ResolveReferences(ctx context.Context, c client.Reader) error {
 	mg.Spec.ForProvider.ServerID = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.ServerIDRef = rsp.ResolvedReference
 	{
-		m, l, err = apisresolver.GetManagedResource("compute.upjet-ionoscloud.ionoscloud.io", "v1alpha1", "Datacenter", "DatacenterList")
+		m, l, err = apisresolver.GetManagedResource("compute.m.ionoscloud.io", "v1alpha1", "Datacenter", "DatacenterList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
@@ -957,7 +957,7 @@ func (mg *Nic) ResolveReferences(ctx context.Context, c client.Reader) error {
 	mg.Spec.InitProvider.DatacenterID = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.InitProvider.DatacenterIDRef = rsp.ResolvedReference
 	{
-		m, l, err = apisresolver.GetManagedResource("compute.upjet-ionoscloud.ionoscloud.io", "v1alpha1", "Lan", "LanList")
+		m, l, err = apisresolver.GetManagedResource("compute.m.ionoscloud.io", "v1alpha1", "Lan", "LanList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
@@ -977,7 +977,7 @@ func (mg *Nic) ResolveReferences(ctx context.Context, c client.Reader) error {
 	mg.Spec.InitProvider.Lan = reference.ToFloatPtrValue(rsp.ResolvedValue)
 	mg.Spec.InitProvider.LanRef = rsp.ResolvedReference
 	{
-		m, l, err = apisresolver.GetManagedResource("compute.upjet-ionoscloud.ionoscloud.io", "v1alpha1", "Server", "ServerList")
+		m, l, err = apisresolver.GetManagedResource("compute.m.ionoscloud.io", "v1alpha1", "Server", "ServerList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
@@ -1009,7 +1009,7 @@ func (mg *Server) ResolveReferences(ctx context.Context, c client.Reader) error 
 	var rsp reference.NamespacedResolutionResponse
 	var err error
 	{
-		m, l, err = apisresolver.GetManagedResource("compute.upjet-ionoscloud.ionoscloud.io", "v1alpha1", "Datacenter", "DatacenterList")
+		m, l, err = apisresolver.GetManagedResource("compute.m.ionoscloud.io", "v1alpha1", "Datacenter", "DatacenterList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
@@ -1031,7 +1031,7 @@ func (mg *Server) ResolveReferences(ctx context.Context, c client.Reader) error 
 
 	if mg.Spec.ForProvider.Nic != nil {
 		{
-			m, l, err = apisresolver.GetManagedResource("compute.upjet-ionoscloud.ionoscloud.io", "v1alpha1", "Lan", "LanList")
+			m, l, err = apisresolver.GetManagedResource("compute.m.ionoscloud.io", "v1alpha1", "Lan", "LanList")
 			if err != nil {
 				return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 			}
@@ -1052,7 +1052,7 @@ func (mg *Server) ResolveReferences(ctx context.Context, c client.Reader) error 
 
 	}
 	{
-		m, l, err = apisresolver.GetManagedResource("compute.upjet-ionoscloud.ionoscloud.io", "v1alpha1", "Datacenter", "DatacenterList")
+		m, l, err = apisresolver.GetManagedResource("compute.m.ionoscloud.io", "v1alpha1", "Datacenter", "DatacenterList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
@@ -1073,7 +1073,7 @@ func (mg *Server) ResolveReferences(ctx context.Context, c client.Reader) error 
 
 	if mg.Spec.InitProvider.Nic != nil {
 		{
-			m, l, err = apisresolver.GetManagedResource("compute.upjet-ionoscloud.ionoscloud.io", "v1alpha1", "Lan", "LanList")
+			m, l, err = apisresolver.GetManagedResource("compute.m.ionoscloud.io", "v1alpha1", "Lan", "LanList")
 			if err != nil {
 				return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 			}
@@ -1106,7 +1106,7 @@ func (mg *Share) ResolveReferences(ctx context.Context, c client.Reader) error {
 	var rsp reference.NamespacedResolutionResponse
 	var err error
 	{
-		m, l, err = apisresolver.GetManagedResource("compute.upjet-ionoscloud.ionoscloud.io", "v1alpha1", "Group", "GroupList")
+		m, l, err = apisresolver.GetManagedResource("compute.m.ionoscloud.io", "v1alpha1", "Group", "GroupList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
@@ -1126,7 +1126,7 @@ func (mg *Share) ResolveReferences(ctx context.Context, c client.Reader) error {
 	mg.Spec.ForProvider.GroupID = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.GroupIDRef = rsp.ResolvedReference
 	{
-		m, l, err = apisresolver.GetManagedResource("compute.upjet-ionoscloud.ionoscloud.io", "v1alpha1", "Datacenter", "DatacenterList")
+		m, l, err = apisresolver.GetManagedResource("compute.m.ionoscloud.io", "v1alpha1", "Datacenter", "DatacenterList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
@@ -1146,7 +1146,7 @@ func (mg *Share) ResolveReferences(ctx context.Context, c client.Reader) error {
 	mg.Spec.ForProvider.ResourceID = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.ResourceIDRef = rsp.ResolvedReference
 	{
-		m, l, err = apisresolver.GetManagedResource("compute.upjet-ionoscloud.ionoscloud.io", "v1alpha1", "Group", "GroupList")
+		m, l, err = apisresolver.GetManagedResource("compute.m.ionoscloud.io", "v1alpha1", "Group", "GroupList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
@@ -1166,7 +1166,7 @@ func (mg *Share) ResolveReferences(ctx context.Context, c client.Reader) error {
 	mg.Spec.InitProvider.GroupID = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.InitProvider.GroupIDRef = rsp.ResolvedReference
 	{
-		m, l, err = apisresolver.GetManagedResource("compute.upjet-ionoscloud.ionoscloud.io", "v1alpha1", "Datacenter", "DatacenterList")
+		m, l, err = apisresolver.GetManagedResource("compute.m.ionoscloud.io", "v1alpha1", "Datacenter", "DatacenterList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
@@ -1198,7 +1198,7 @@ func (mg *Snapshot) ResolveReferences(ctx context.Context, c client.Reader) erro
 	var rsp reference.NamespacedResolutionResponse
 	var err error
 	{
-		m, l, err = apisresolver.GetManagedResource("compute.upjet-ionoscloud.ionoscloud.io", "v1alpha1", "Datacenter", "DatacenterList")
+		m, l, err = apisresolver.GetManagedResource("compute.m.ionoscloud.io", "v1alpha1", "Datacenter", "DatacenterList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
@@ -1218,7 +1218,7 @@ func (mg *Snapshot) ResolveReferences(ctx context.Context, c client.Reader) erro
 	mg.Spec.ForProvider.DatacenterID = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.DatacenterIDRef = rsp.ResolvedReference
 	{
-		m, l, err = apisresolver.GetManagedResource("compute.upjet-ionoscloud.ionoscloud.io", "v1alpha1", "Volume", "VolumeList")
+		m, l, err = apisresolver.GetManagedResource("compute.m.ionoscloud.io", "v1alpha1", "Volume", "VolumeList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
@@ -1238,7 +1238,7 @@ func (mg *Snapshot) ResolveReferences(ctx context.Context, c client.Reader) erro
 	mg.Spec.ForProvider.VolumeID = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.VolumeIDRef = rsp.ResolvedReference
 	{
-		m, l, err = apisresolver.GetManagedResource("compute.upjet-ionoscloud.ionoscloud.io", "v1alpha1", "Datacenter", "DatacenterList")
+		m, l, err = apisresolver.GetManagedResource("compute.m.ionoscloud.io", "v1alpha1", "Datacenter", "DatacenterList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
@@ -1258,7 +1258,7 @@ func (mg *Snapshot) ResolveReferences(ctx context.Context, c client.Reader) erro
 	mg.Spec.InitProvider.DatacenterID = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.InitProvider.DatacenterIDRef = rsp.ResolvedReference
 	{
-		m, l, err = apisresolver.GetManagedResource("compute.upjet-ionoscloud.ionoscloud.io", "v1alpha1", "Volume", "VolumeList")
+		m, l, err = apisresolver.GetManagedResource("compute.m.ionoscloud.io", "v1alpha1", "Volume", "VolumeList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
@@ -1290,7 +1290,7 @@ func (mg *User) ResolveReferences(ctx context.Context, c client.Reader) error {
 	var mrsp reference.MultiNamespacedResolutionResponse
 	var err error
 	{
-		m, l, err = apisresolver.GetManagedResource("compute.upjet-ionoscloud.ionoscloud.io", "v1alpha1", "Group", "GroupList")
+		m, l, err = apisresolver.GetManagedResource("compute.m.ionoscloud.io", "v1alpha1", "Group", "GroupList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
@@ -1310,7 +1310,7 @@ func (mg *User) ResolveReferences(ctx context.Context, c client.Reader) error {
 	mg.Spec.ForProvider.GroupIds = reference.ToPtrValues(mrsp.ResolvedValues)
 	mg.Spec.ForProvider.GroupIdsRefs = mrsp.ResolvedReferences
 	{
-		m, l, err = apisresolver.GetManagedResource("compute.upjet-ionoscloud.ionoscloud.io", "v1alpha1", "Group", "GroupList")
+		m, l, err = apisresolver.GetManagedResource("compute.m.ionoscloud.io", "v1alpha1", "Group", "GroupList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
@@ -1342,7 +1342,7 @@ func (mg *VCPUServer) ResolveReferences(ctx context.Context, c client.Reader) er
 	var rsp reference.NamespacedResolutionResponse
 	var err error
 	{
-		m, l, err = apisresolver.GetManagedResource("compute.upjet-ionoscloud.ionoscloud.io", "v1alpha1", "Datacenter", "DatacenterList")
+		m, l, err = apisresolver.GetManagedResource("compute.m.ionoscloud.io", "v1alpha1", "Datacenter", "DatacenterList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
@@ -1364,7 +1364,7 @@ func (mg *VCPUServer) ResolveReferences(ctx context.Context, c client.Reader) er
 
 	if mg.Spec.ForProvider.Nic != nil {
 		{
-			m, l, err = apisresolver.GetManagedResource("compute.upjet-ionoscloud.ionoscloud.io", "v1alpha1", "Lan", "LanList")
+			m, l, err = apisresolver.GetManagedResource("compute.m.ionoscloud.io", "v1alpha1", "Lan", "LanList")
 			if err != nil {
 				return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 			}
@@ -1385,7 +1385,7 @@ func (mg *VCPUServer) ResolveReferences(ctx context.Context, c client.Reader) er
 
 	}
 	{
-		m, l, err = apisresolver.GetManagedResource("compute.upjet-ionoscloud.ionoscloud.io", "v1alpha1", "Datacenter", "DatacenterList")
+		m, l, err = apisresolver.GetManagedResource("compute.m.ionoscloud.io", "v1alpha1", "Datacenter", "DatacenterList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
@@ -1406,7 +1406,7 @@ func (mg *VCPUServer) ResolveReferences(ctx context.Context, c client.Reader) er
 
 	if mg.Spec.InitProvider.Nic != nil {
 		{
-			m, l, err = apisresolver.GetManagedResource("compute.upjet-ionoscloud.ionoscloud.io", "v1alpha1", "Lan", "LanList")
+			m, l, err = apisresolver.GetManagedResource("compute.m.ionoscloud.io", "v1alpha1", "Lan", "LanList")
 			if err != nil {
 				return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 			}
@@ -1439,7 +1439,7 @@ func (mg *Volume) ResolveReferences(ctx context.Context, c client.Reader) error 
 	var rsp reference.NamespacedResolutionResponse
 	var err error
 	{
-		m, l, err = apisresolver.GetManagedResource("compute.upjet-ionoscloud.ionoscloud.io", "v1alpha1", "Datacenter", "DatacenterList")
+		m, l, err = apisresolver.GetManagedResource("compute.m.ionoscloud.io", "v1alpha1", "Datacenter", "DatacenterList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
@@ -1459,7 +1459,7 @@ func (mg *Volume) ResolveReferences(ctx context.Context, c client.Reader) error 
 	mg.Spec.ForProvider.DatacenterID = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.DatacenterIDRef = rsp.ResolvedReference
 	{
-		m, l, err = apisresolver.GetManagedResource("compute.upjet-ionoscloud.ionoscloud.io", "v1alpha1", "Server", "ServerList")
+		m, l, err = apisresolver.GetManagedResource("compute.m.ionoscloud.io", "v1alpha1", "Server", "ServerList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
@@ -1479,7 +1479,7 @@ func (mg *Volume) ResolveReferences(ctx context.Context, c client.Reader) error 
 	mg.Spec.ForProvider.ServerID = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.ServerIDRef = rsp.ResolvedReference
 	{
-		m, l, err = apisresolver.GetManagedResource("compute.upjet-ionoscloud.ionoscloud.io", "v1alpha1", "Datacenter", "DatacenterList")
+		m, l, err = apisresolver.GetManagedResource("compute.m.ionoscloud.io", "v1alpha1", "Datacenter", "DatacenterList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
@@ -1499,7 +1499,7 @@ func (mg *Volume) ResolveReferences(ctx context.Context, c client.Reader) error 
 	mg.Spec.InitProvider.DatacenterID = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.InitProvider.DatacenterIDRef = rsp.ResolvedReference
 	{
-		m, l, err = apisresolver.GetManagedResource("compute.upjet-ionoscloud.ionoscloud.io", "v1alpha1", "Server", "ServerList")
+		m, l, err = apisresolver.GetManagedResource("compute.m.ionoscloud.io", "v1alpha1", "Server", "ServerList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}

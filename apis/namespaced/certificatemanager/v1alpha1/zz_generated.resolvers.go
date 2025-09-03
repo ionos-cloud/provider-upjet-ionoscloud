@@ -26,7 +26,7 @@ func (mg *AutoCertificate) ResolveReferences( // ResolveReferences of this AutoC
 	var rsp reference.NamespacedResolutionResponse
 	var err error
 	{
-		m, l, err = apisresolver.GetManagedResource("certificatemanager.upjet-ionoscloud.ionoscloud.io", "v1alpha1", "AutoCertificateProvider", "AutoCertificateProviderList")
+		m, l, err = apisresolver.GetManagedResource("certificatemanager.m.ionoscloud.io", "v1alpha1", "AutoCertificateProvider", "AutoCertificateProviderList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
@@ -46,7 +46,7 @@ func (mg *AutoCertificate) ResolveReferences( // ResolveReferences of this AutoC
 	mg.Spec.ForProvider.Location = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.LocationRef = rsp.ResolvedReference
 	{
-		m, l, err = apisresolver.GetManagedResource("certificatemanager.upjet-ionoscloud.ionoscloud.io", "v1alpha1", "AutoCertificateProvider", "AutoCertificateProviderList")
+		m, l, err = apisresolver.GetManagedResource("certificatemanager.m.ionoscloud.io", "v1alpha1", "AutoCertificateProvider", "AutoCertificateProviderList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
@@ -66,7 +66,7 @@ func (mg *AutoCertificate) ResolveReferences( // ResolveReferences of this AutoC
 	mg.Spec.ForProvider.ProviderID = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.ProviderIDRef = rsp.ResolvedReference
 	{
-		m, l, err = apisresolver.GetManagedResource("certificatemanager.upjet-ionoscloud.ionoscloud.io", "v1alpha1", "AutoCertificateProvider", "AutoCertificateProviderList")
+		m, l, err = apisresolver.GetManagedResource("certificatemanager.m.ionoscloud.io", "v1alpha1", "AutoCertificateProvider", "AutoCertificateProviderList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
@@ -86,7 +86,7 @@ func (mg *AutoCertificate) ResolveReferences( // ResolveReferences of this AutoC
 	mg.Spec.InitProvider.Location = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.InitProvider.LocationRef = rsp.ResolvedReference
 	{
-		m, l, err = apisresolver.GetManagedResource("certificatemanager.upjet-ionoscloud.ionoscloud.io", "v1alpha1", "AutoCertificateProvider", "AutoCertificateProviderList")
+		m, l, err = apisresolver.GetManagedResource("certificatemanager.m.ionoscloud.io", "v1alpha1", "AutoCertificateProvider", "AutoCertificateProviderList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}

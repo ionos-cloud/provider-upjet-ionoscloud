@@ -26,7 +26,7 @@ func (mg *Loadbalancer) ResolveReferences( // ResolveReferences of this Loadbala
 	var rsp reference.ResolutionResponse
 	var err error
 	{
-		m, l, err = apisresolver.GetManagedResource("compute.upjet-ionoscloud.ionoscloud.io", "v1alpha1", "Datacenter", "DatacenterList")
+		m, l, err = apisresolver.GetManagedResource("compute.ionoscloud.io", "v1alpha1", "Datacenter", "DatacenterList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
@@ -46,7 +46,7 @@ func (mg *Loadbalancer) ResolveReferences( // ResolveReferences of this Loadbala
 	mg.Spec.ForProvider.DatacenterID = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.DatacenterIDRef = rsp.ResolvedReference
 	{
-		m, l, err = apisresolver.GetManagedResource("compute.upjet-ionoscloud.ionoscloud.io", "v1alpha1", "Lan", "LanList")
+		m, l, err = apisresolver.GetManagedResource("compute.ionoscloud.io", "v1alpha1", "Lan", "LanList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
@@ -66,7 +66,7 @@ func (mg *Loadbalancer) ResolveReferences( // ResolveReferences of this Loadbala
 	mg.Spec.ForProvider.ListenerLan = reference.ToFloatPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.ListenerLanRef = rsp.ResolvedReference
 	{
-		m, l, err = apisresolver.GetManagedResource("compute.upjet-ionoscloud.ionoscloud.io", "v1alpha1", "Lan", "LanList")
+		m, l, err = apisresolver.GetManagedResource("compute.ionoscloud.io", "v1alpha1", "Lan", "LanList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
@@ -86,7 +86,7 @@ func (mg *Loadbalancer) ResolveReferences( // ResolveReferences of this Loadbala
 	mg.Spec.ForProvider.TargetLan = reference.ToFloatPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.TargetLanRef = rsp.ResolvedReference
 	{
-		m, l, err = apisresolver.GetManagedResource("compute.upjet-ionoscloud.ionoscloud.io", "v1alpha1", "Datacenter", "DatacenterList")
+		m, l, err = apisresolver.GetManagedResource("compute.ionoscloud.io", "v1alpha1", "Datacenter", "DatacenterList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
@@ -106,7 +106,7 @@ func (mg *Loadbalancer) ResolveReferences( // ResolveReferences of this Loadbala
 	mg.Spec.InitProvider.DatacenterID = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.InitProvider.DatacenterIDRef = rsp.ResolvedReference
 	{
-		m, l, err = apisresolver.GetManagedResource("compute.upjet-ionoscloud.ionoscloud.io", "v1alpha1", "Lan", "LanList")
+		m, l, err = apisresolver.GetManagedResource("compute.ionoscloud.io", "v1alpha1", "Lan", "LanList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
@@ -126,7 +126,7 @@ func (mg *Loadbalancer) ResolveReferences( // ResolveReferences of this Loadbala
 	mg.Spec.InitProvider.ListenerLan = reference.ToFloatPtrValue(rsp.ResolvedValue)
 	mg.Spec.InitProvider.ListenerLanRef = rsp.ResolvedReference
 	{
-		m, l, err = apisresolver.GetManagedResource("compute.upjet-ionoscloud.ionoscloud.io", "v1alpha1", "Lan", "LanList")
+		m, l, err = apisresolver.GetManagedResource("compute.ionoscloud.io", "v1alpha1", "Lan", "LanList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
@@ -159,7 +159,7 @@ func (mg *LoadbalancerForwardingrule) ResolveReferences(ctx context.Context, c c
 	var mrsp reference.MultiResolutionResponse
 	var err error
 	{
-		m, l, err = apisresolver.GetManagedResource("alb.upjet-ionoscloud.ionoscloud.io", "v1alpha1", "Loadbalancer", "LoadbalancerList")
+		m, l, err = apisresolver.GetManagedResource("alb.ionoscloud.io", "v1alpha1", "Loadbalancer", "LoadbalancerList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
@@ -179,7 +179,7 @@ func (mg *LoadbalancerForwardingrule) ResolveReferences(ctx context.Context, c c
 	mg.Spec.ForProvider.ApplicationLoadbalancerID = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.ApplicationLoadbalancerIDRef = rsp.ResolvedReference
 	{
-		m, l, err = apisresolver.GetManagedResource("compute.upjet-ionoscloud.ionoscloud.io", "v1alpha1", "Datacenter", "DatacenterList")
+		m, l, err = apisresolver.GetManagedResource("compute.ionoscloud.io", "v1alpha1", "Datacenter", "DatacenterList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
@@ -199,7 +199,7 @@ func (mg *LoadbalancerForwardingrule) ResolveReferences(ctx context.Context, c c
 	mg.Spec.ForProvider.DatacenterID = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.DatacenterIDRef = rsp.ResolvedReference
 	{
-		m, l, err = apisresolver.GetManagedResource("certificatemanager.upjet-ionoscloud.ionoscloud.io", "v1alpha1", "Certificate", "CertificateList")
+		m, l, err = apisresolver.GetManagedResource("certificatemanager.ionoscloud.io", "v1alpha1", "Certificate", "CertificateList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
@@ -219,7 +219,7 @@ func (mg *LoadbalancerForwardingrule) ResolveReferences(ctx context.Context, c c
 	mg.Spec.ForProvider.ServerCertificates = reference.ToPtrValues(mrsp.ResolvedValues)
 	mg.Spec.ForProvider.ServerCertificatesRefs = mrsp.ResolvedReferences
 	{
-		m, l, err = apisresolver.GetManagedResource("alb.upjet-ionoscloud.ionoscloud.io", "v1alpha1", "Loadbalancer", "LoadbalancerList")
+		m, l, err = apisresolver.GetManagedResource("alb.ionoscloud.io", "v1alpha1", "Loadbalancer", "LoadbalancerList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
@@ -239,7 +239,7 @@ func (mg *LoadbalancerForwardingrule) ResolveReferences(ctx context.Context, c c
 	mg.Spec.InitProvider.ApplicationLoadbalancerID = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.InitProvider.ApplicationLoadbalancerIDRef = rsp.ResolvedReference
 	{
-		m, l, err = apisresolver.GetManagedResource("compute.upjet-ionoscloud.ionoscloud.io", "v1alpha1", "Datacenter", "DatacenterList")
+		m, l, err = apisresolver.GetManagedResource("compute.ionoscloud.io", "v1alpha1", "Datacenter", "DatacenterList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
@@ -259,7 +259,7 @@ func (mg *LoadbalancerForwardingrule) ResolveReferences(ctx context.Context, c c
 	mg.Spec.InitProvider.DatacenterID = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.InitProvider.DatacenterIDRef = rsp.ResolvedReference
 	{
-		m, l, err = apisresolver.GetManagedResource("certificatemanager.upjet-ionoscloud.ionoscloud.io", "v1alpha1", "Certificate", "CertificateList")
+		m, l, err = apisresolver.GetManagedResource("certificatemanager.ionoscloud.io", "v1alpha1", "Certificate", "CertificateList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}

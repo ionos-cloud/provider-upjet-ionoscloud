@@ -28,7 +28,7 @@ func (mg *VpnIpsecGateway) ResolveReferences( // ResolveReferences of this VpnIp
 
 	for i3 := 0; i3 < len(mg.Spec.ForProvider.Connections); i3++ {
 		{
-			m, l, err = apisresolver.GetManagedResource("compute.upjet-ionoscloud.ionoscloud.io", "v1alpha1", "Datacenter", "DatacenterList")
+			m, l, err = apisresolver.GetManagedResource("compute.ionoscloud.io", "v1alpha1", "Datacenter", "DatacenterList")
 			if err != nil {
 				return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 			}
@@ -50,7 +50,7 @@ func (mg *VpnIpsecGateway) ResolveReferences( // ResolveReferences of this VpnIp
 	}
 	for i3 := 0; i3 < len(mg.Spec.ForProvider.Connections); i3++ {
 		{
-			m, l, err = apisresolver.GetManagedResource("compute.upjet-ionoscloud.ionoscloud.io", "v1alpha1", "Lan", "LanList")
+			m, l, err = apisresolver.GetManagedResource("compute.ionoscloud.io", "v1alpha1", "Lan", "LanList")
 			if err != nil {
 				return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 			}
@@ -71,7 +71,7 @@ func (mg *VpnIpsecGateway) ResolveReferences( // ResolveReferences of this VpnIp
 
 	}
 	{
-		m, l, err = apisresolver.GetManagedResource("compute.upjet-ionoscloud.ionoscloud.io", "v1alpha1", "Ipblock", "IpblockList")
+		m, l, err = apisresolver.GetManagedResource("compute.ionoscloud.io", "v1alpha1", "Ipblock", "IpblockList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
@@ -92,7 +92,7 @@ func (mg *VpnIpsecGateway) ResolveReferences( // ResolveReferences of this VpnIp
 
 	for i3 := 0; i3 < len(mg.Spec.InitProvider.Connections); i3++ {
 		{
-			m, l, err = apisresolver.GetManagedResource("compute.upjet-ionoscloud.ionoscloud.io", "v1alpha1", "Datacenter", "DatacenterList")
+			m, l, err = apisresolver.GetManagedResource("compute.ionoscloud.io", "v1alpha1", "Datacenter", "DatacenterList")
 			if err != nil {
 				return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 			}
@@ -114,7 +114,7 @@ func (mg *VpnIpsecGateway) ResolveReferences( // ResolveReferences of this VpnIp
 	}
 	for i3 := 0; i3 < len(mg.Spec.InitProvider.Connections); i3++ {
 		{
-			m, l, err = apisresolver.GetManagedResource("compute.upjet-ionoscloud.ionoscloud.io", "v1alpha1", "Lan", "LanList")
+			m, l, err = apisresolver.GetManagedResource("compute.ionoscloud.io", "v1alpha1", "Lan", "LanList")
 			if err != nil {
 				return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 			}
@@ -135,7 +135,7 @@ func (mg *VpnIpsecGateway) ResolveReferences( // ResolveReferences of this VpnIp
 
 	}
 	{
-		m, l, err = apisresolver.GetManagedResource("compute.upjet-ionoscloud.ionoscloud.io", "v1alpha1", "Ipblock", "IpblockList")
+		m, l, err = apisresolver.GetManagedResource("compute.ionoscloud.io", "v1alpha1", "Ipblock", "IpblockList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
@@ -166,7 +166,7 @@ func (mg *VpnIpsecTunnel) ResolveReferences(ctx context.Context, c client.Reader
 	var rsp reference.ResolutionResponse
 	var err error
 	{
-		m, l, err = apisresolver.GetManagedResource("vpnipsec.upjet-ionoscloud.ionoscloud.io", "v1alpha1", "VpnIpsecGateway", "VpnIpsecGatewayList")
+		m, l, err = apisresolver.GetManagedResource("vpnipsec.ionoscloud.io", "v1alpha1", "VpnIpsecGateway", "VpnIpsecGatewayList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
@@ -186,7 +186,7 @@ func (mg *VpnIpsecTunnel) ResolveReferences(ctx context.Context, c client.Reader
 	mg.Spec.ForProvider.GatewayID = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.GatewayIDRef = rsp.ResolvedReference
 	{
-		m, l, err = apisresolver.GetManagedResource("vpnipsec.upjet-ionoscloud.ionoscloud.io", "v1alpha1", "VpnIpsecGateway", "VpnIpsecGatewayList")
+		m, l, err = apisresolver.GetManagedResource("vpnipsec.ionoscloud.io", "v1alpha1", "VpnIpsecGateway", "VpnIpsecGatewayList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}

@@ -28,7 +28,7 @@ func (mg *MongodbCluster) ResolveReferences( // ResolveReferences of this Mongod
 
 	if mg.Spec.ForProvider.Connections != nil {
 		{
-			m, l, err = apisresolver.GetManagedResource("compute.upjet-ionoscloud.ionoscloud.io", "v1alpha1", "Datacenter", "DatacenterList")
+			m, l, err = apisresolver.GetManagedResource("compute.ionoscloud.io", "v1alpha1", "Datacenter", "DatacenterList")
 			if err != nil {
 				return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 			}
@@ -50,7 +50,7 @@ func (mg *MongodbCluster) ResolveReferences( // ResolveReferences of this Mongod
 	}
 	if mg.Spec.ForProvider.Connections != nil {
 		{
-			m, l, err = apisresolver.GetManagedResource("compute.upjet-ionoscloud.ionoscloud.io", "v1alpha1", "Lan", "LanList")
+			m, l, err = apisresolver.GetManagedResource("compute.ionoscloud.io", "v1alpha1", "Lan", "LanList")
 			if err != nil {
 				return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 			}
@@ -71,7 +71,7 @@ func (mg *MongodbCluster) ResolveReferences( // ResolveReferences of this Mongod
 
 	}
 	{
-		m, l, err = apisresolver.GetManagedResource("compute.upjet-ionoscloud.ionoscloud.io", "v1alpha1", "Datacenter", "DatacenterList")
+		m, l, err = apisresolver.GetManagedResource("compute.ionoscloud.io", "v1alpha1", "Datacenter", "DatacenterList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
@@ -92,7 +92,7 @@ func (mg *MongodbCluster) ResolveReferences( // ResolveReferences of this Mongod
 
 	if mg.Spec.InitProvider.Connections != nil {
 		{
-			m, l, err = apisresolver.GetManagedResource("compute.upjet-ionoscloud.ionoscloud.io", "v1alpha1", "Datacenter", "DatacenterList")
+			m, l, err = apisresolver.GetManagedResource("compute.ionoscloud.io", "v1alpha1", "Datacenter", "DatacenterList")
 			if err != nil {
 				return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 			}
@@ -114,7 +114,7 @@ func (mg *MongodbCluster) ResolveReferences( // ResolveReferences of this Mongod
 	}
 	if mg.Spec.InitProvider.Connections != nil {
 		{
-			m, l, err = apisresolver.GetManagedResource("compute.upjet-ionoscloud.ionoscloud.io", "v1alpha1", "Lan", "LanList")
+			m, l, err = apisresolver.GetManagedResource("compute.ionoscloud.io", "v1alpha1", "Lan", "LanList")
 			if err != nil {
 				return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 			}
@@ -135,7 +135,7 @@ func (mg *MongodbCluster) ResolveReferences( // ResolveReferences of this Mongod
 
 	}
 	{
-		m, l, err = apisresolver.GetManagedResource("compute.upjet-ionoscloud.ionoscloud.io", "v1alpha1", "Datacenter", "DatacenterList")
+		m, l, err = apisresolver.GetManagedResource("compute.ionoscloud.io", "v1alpha1", "Datacenter", "DatacenterList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
@@ -166,7 +166,7 @@ func (mg *MongodbUser) ResolveReferences(ctx context.Context, c client.Reader) e
 	var rsp reference.ResolutionResponse
 	var err error
 	{
-		m, l, err = apisresolver.GetManagedResource("mongodb.upjet-ionoscloud.ionoscloud.io", "v1alpha1", "MongodbCluster", "MongodbClusterList")
+		m, l, err = apisresolver.GetManagedResource("mongodb.ionoscloud.io", "v1alpha1", "MongodbCluster", "MongodbClusterList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
@@ -186,7 +186,7 @@ func (mg *MongodbUser) ResolveReferences(ctx context.Context, c client.Reader) e
 	mg.Spec.ForProvider.ClusterID = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.ClusterIDRef = rsp.ResolvedReference
 	{
-		m, l, err = apisresolver.GetManagedResource("mongodb.upjet-ionoscloud.ionoscloud.io", "v1alpha1", "MongodbCluster", "MongodbClusterList")
+		m, l, err = apisresolver.GetManagedResource("mongodb.ionoscloud.io", "v1alpha1", "MongodbCluster", "MongodbClusterList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}

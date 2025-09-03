@@ -28,7 +28,7 @@ func (mg *PostgresqlCluster) ResolveReferences( // ResolveReferences of this Pos
 
 	if mg.Spec.ForProvider.Connections != nil {
 		{
-			m, l, err = apisresolver.GetManagedResource("compute.upjet-ionoscloud.ionoscloud.io", "v1alpha1", "Datacenter", "DatacenterList")
+			m, l, err = apisresolver.GetManagedResource("compute.ionoscloud.io", "v1alpha1", "Datacenter", "DatacenterList")
 			if err != nil {
 				return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 			}
@@ -50,7 +50,7 @@ func (mg *PostgresqlCluster) ResolveReferences( // ResolveReferences of this Pos
 	}
 	if mg.Spec.ForProvider.Connections != nil {
 		{
-			m, l, err = apisresolver.GetManagedResource("compute.upjet-ionoscloud.ionoscloud.io", "v1alpha1", "Lan", "LanList")
+			m, l, err = apisresolver.GetManagedResource("compute.ionoscloud.io", "v1alpha1", "Lan", "LanList")
 			if err != nil {
 				return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 			}
@@ -71,7 +71,7 @@ func (mg *PostgresqlCluster) ResolveReferences( // ResolveReferences of this Pos
 
 	}
 	{
-		m, l, err = apisresolver.GetManagedResource("compute.upjet-ionoscloud.ionoscloud.io", "v1alpha1", "Datacenter", "DatacenterList")
+		m, l, err = apisresolver.GetManagedResource("compute.ionoscloud.io", "v1alpha1", "Datacenter", "DatacenterList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
@@ -92,7 +92,7 @@ func (mg *PostgresqlCluster) ResolveReferences( // ResolveReferences of this Pos
 
 	if mg.Spec.InitProvider.Connections != nil {
 		{
-			m, l, err = apisresolver.GetManagedResource("compute.upjet-ionoscloud.ionoscloud.io", "v1alpha1", "Datacenter", "DatacenterList")
+			m, l, err = apisresolver.GetManagedResource("compute.ionoscloud.io", "v1alpha1", "Datacenter", "DatacenterList")
 			if err != nil {
 				return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 			}
@@ -114,7 +114,7 @@ func (mg *PostgresqlCluster) ResolveReferences( // ResolveReferences of this Pos
 	}
 	if mg.Spec.InitProvider.Connections != nil {
 		{
-			m, l, err = apisresolver.GetManagedResource("compute.upjet-ionoscloud.ionoscloud.io", "v1alpha1", "Lan", "LanList")
+			m, l, err = apisresolver.GetManagedResource("compute.ionoscloud.io", "v1alpha1", "Lan", "LanList")
 			if err != nil {
 				return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 			}
@@ -135,7 +135,7 @@ func (mg *PostgresqlCluster) ResolveReferences( // ResolveReferences of this Pos
 
 	}
 	{
-		m, l, err = apisresolver.GetManagedResource("compute.upjet-ionoscloud.ionoscloud.io", "v1alpha1", "Datacenter", "DatacenterList")
+		m, l, err = apisresolver.GetManagedResource("compute.ionoscloud.io", "v1alpha1", "Datacenter", "DatacenterList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
@@ -166,7 +166,7 @@ func (mg *PostgresqlDatabase) ResolveReferences(ctx context.Context, c client.Re
 	var rsp reference.ResolutionResponse
 	var err error
 	{
-		m, l, err = apisresolver.GetManagedResource("postgresql.upjet-ionoscloud.ionoscloud.io", "v1alpha1", "PostgresqlCluster", "PostgresqlClusterList")
+		m, l, err = apisresolver.GetManagedResource("postgresql.ionoscloud.io", "v1alpha1", "PostgresqlCluster", "PostgresqlClusterList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
@@ -186,7 +186,7 @@ func (mg *PostgresqlDatabase) ResolveReferences(ctx context.Context, c client.Re
 	mg.Spec.ForProvider.ClusterID = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.ClusterIDRef = rsp.ResolvedReference
 	{
-		m, l, err = apisresolver.GetManagedResource("postgresql.upjet-ionoscloud.ionoscloud.io", "v1alpha1", "PostgresqlCluster", "PostgresqlClusterList")
+		m, l, err = apisresolver.GetManagedResource("postgresql.ionoscloud.io", "v1alpha1", "PostgresqlCluster", "PostgresqlClusterList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
@@ -218,7 +218,7 @@ func (mg *PostgresqlUser) ResolveReferences(ctx context.Context, c client.Reader
 	var rsp reference.ResolutionResponse
 	var err error
 	{
-		m, l, err = apisresolver.GetManagedResource("postgresql.upjet-ionoscloud.ionoscloud.io", "v1alpha1", "PostgresqlCluster", "PostgresqlClusterList")
+		m, l, err = apisresolver.GetManagedResource("postgresql.ionoscloud.io", "v1alpha1", "PostgresqlCluster", "PostgresqlClusterList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
@@ -238,7 +238,7 @@ func (mg *PostgresqlUser) ResolveReferences(ctx context.Context, c client.Reader
 	mg.Spec.ForProvider.ClusterID = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.ClusterIDRef = rsp.ResolvedReference
 	{
-		m, l, err = apisresolver.GetManagedResource("postgresql.upjet-ionoscloud.ionoscloud.io", "v1alpha1", "PostgresqlCluster", "PostgresqlClusterList")
+		m, l, err = apisresolver.GetManagedResource("postgresql.ionoscloud.io", "v1alpha1", "PostgresqlCluster", "PostgresqlClusterList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}

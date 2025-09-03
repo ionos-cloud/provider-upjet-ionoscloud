@@ -27,7 +27,7 @@ func (mg *NFSCluster) ResolveReferences( // ResolveReferences of this NFSCluster
 
 	if mg.Spec.ForProvider.Connections != nil {
 		{
-			m, l, err = apisresolver.GetManagedResource("compute.upjet-ionoscloud.ionoscloud.io", "v1alpha1", "Datacenter", "DatacenterList")
+			m, l, err = apisresolver.GetManagedResource("compute.ionoscloud.io", "v1alpha1", "Datacenter", "DatacenterList")
 			if err != nil {
 				return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 			}
@@ -49,7 +49,7 @@ func (mg *NFSCluster) ResolveReferences( // ResolveReferences of this NFSCluster
 	}
 	if mg.Spec.ForProvider.Connections != nil {
 		{
-			m, l, err = apisresolver.GetManagedResource("compute.upjet-ionoscloud.ionoscloud.io", "v1alpha1", "Lan", "LanList")
+			m, l, err = apisresolver.GetManagedResource("compute.ionoscloud.io", "v1alpha1", "Lan", "LanList")
 			if err != nil {
 				return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 			}
@@ -71,7 +71,7 @@ func (mg *NFSCluster) ResolveReferences( // ResolveReferences of this NFSCluster
 	}
 	if mg.Spec.InitProvider.Connections != nil {
 		{
-			m, l, err = apisresolver.GetManagedResource("compute.upjet-ionoscloud.ionoscloud.io", "v1alpha1", "Datacenter", "DatacenterList")
+			m, l, err = apisresolver.GetManagedResource("compute.ionoscloud.io", "v1alpha1", "Datacenter", "DatacenterList")
 			if err != nil {
 				return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 			}
@@ -93,7 +93,7 @@ func (mg *NFSCluster) ResolveReferences( // ResolveReferences of this NFSCluster
 	}
 	if mg.Spec.InitProvider.Connections != nil {
 		{
-			m, l, err = apisresolver.GetManagedResource("compute.upjet-ionoscloud.ionoscloud.io", "v1alpha1", "Lan", "LanList")
+			m, l, err = apisresolver.GetManagedResource("compute.ionoscloud.io", "v1alpha1", "Lan", "LanList")
 			if err != nil {
 				return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 			}
@@ -126,7 +126,7 @@ func (mg *NFSShare) ResolveReferences(ctx context.Context, c client.Reader) erro
 	var rsp reference.ResolutionResponse
 	var err error
 	{
-		m, l, err = apisresolver.GetManagedResource("nfs.upjet-ionoscloud.ionoscloud.io", "v1alpha1", "NFSCluster", "NFSClusterList")
+		m, l, err = apisresolver.GetManagedResource("nfs.ionoscloud.io", "v1alpha1", "NFSCluster", "NFSClusterList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
@@ -146,7 +146,7 @@ func (mg *NFSShare) ResolveReferences(ctx context.Context, c client.Reader) erro
 	mg.Spec.ForProvider.ClusterID = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.ClusterIDRef = rsp.ResolvedReference
 	{
-		m, l, err = apisresolver.GetManagedResource("nfs.upjet-ionoscloud.ionoscloud.io", "v1alpha1", "NFSCluster", "NFSClusterList")
+		m, l, err = apisresolver.GetManagedResource("nfs.ionoscloud.io", "v1alpha1", "NFSCluster", "NFSClusterList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}

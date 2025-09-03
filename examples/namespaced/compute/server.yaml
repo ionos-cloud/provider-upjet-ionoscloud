@@ -17,7 +17,6 @@ spec:
     imagePasswordSecretRef:
       key: password
       name: pwsecret
-      namespace: upbound-system
     name: Crossplane Server Example2
     nic:
       dhcp: true

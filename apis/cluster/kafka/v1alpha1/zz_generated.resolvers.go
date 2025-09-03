@@ -28,7 +28,7 @@ func (mg *Kafka) ResolveReferences( // ResolveReferences of this Kafka.
 
 	if mg.Spec.ForProvider.Connections != nil {
 		{
-			m, l, err = apisresolver.GetManagedResource("compute.upjet-ionoscloud.ionoscloud.io", "v1alpha1", "Datacenter", "DatacenterList")
+			m, l, err = apisresolver.GetManagedResource("compute.ionoscloud.io", "v1alpha1", "Datacenter", "DatacenterList")
 			if err != nil {
 				return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 			}
@@ -50,7 +50,7 @@ func (mg *Kafka) ResolveReferences( // ResolveReferences of this Kafka.
 	}
 	if mg.Spec.ForProvider.Connections != nil {
 		{
-			m, l, err = apisresolver.GetManagedResource("compute.upjet-ionoscloud.ionoscloud.io", "v1alpha1", "Lan", "LanList")
+			m, l, err = apisresolver.GetManagedResource("compute.ionoscloud.io", "v1alpha1", "Lan", "LanList")
 			if err != nil {
 				return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 			}
@@ -71,7 +71,7 @@ func (mg *Kafka) ResolveReferences( // ResolveReferences of this Kafka.
 
 	}
 	{
-		m, l, err = apisresolver.GetManagedResource("compute.upjet-ionoscloud.ionoscloud.io", "v1alpha1", "Datacenter", "DatacenterList")
+		m, l, err = apisresolver.GetManagedResource("compute.ionoscloud.io", "v1alpha1", "Datacenter", "DatacenterList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
@@ -92,7 +92,7 @@ func (mg *Kafka) ResolveReferences( // ResolveReferences of this Kafka.
 
 	if mg.Spec.InitProvider.Connections != nil {
 		{
-			m, l, err = apisresolver.GetManagedResource("compute.upjet-ionoscloud.ionoscloud.io", "v1alpha1", "Datacenter", "DatacenterList")
+			m, l, err = apisresolver.GetManagedResource("compute.ionoscloud.io", "v1alpha1", "Datacenter", "DatacenterList")
 			if err != nil {
 				return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 			}
@@ -114,7 +114,7 @@ func (mg *Kafka) ResolveReferences( // ResolveReferences of this Kafka.
 	}
 	if mg.Spec.InitProvider.Connections != nil {
 		{
-			m, l, err = apisresolver.GetManagedResource("compute.upjet-ionoscloud.ionoscloud.io", "v1alpha1", "Lan", "LanList")
+			m, l, err = apisresolver.GetManagedResource("compute.ionoscloud.io", "v1alpha1", "Lan", "LanList")
 			if err != nil {
 				return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 			}
@@ -135,7 +135,7 @@ func (mg *Kafka) ResolveReferences( // ResolveReferences of this Kafka.
 
 	}
 	{
-		m, l, err = apisresolver.GetManagedResource("compute.upjet-ionoscloud.ionoscloud.io", "v1alpha1", "Datacenter", "DatacenterList")
+		m, l, err = apisresolver.GetManagedResource("compute.ionoscloud.io", "v1alpha1", "Datacenter", "DatacenterList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
@@ -166,7 +166,7 @@ func (mg *KafkaTopic) ResolveReferences(ctx context.Context, c client.Reader) er
 	var rsp reference.ResolutionResponse
 	var err error
 	{
-		m, l, err = apisresolver.GetManagedResource("kafka.upjet-ionoscloud.ionoscloud.io", "v1alpha1", "Kafka", "KafkaList")
+		m, l, err = apisresolver.GetManagedResource("kafka.ionoscloud.io", "v1alpha1", "Kafka", "KafkaList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
@@ -186,7 +186,7 @@ func (mg *KafkaTopic) ResolveReferences(ctx context.Context, c client.Reader) er
 	mg.Spec.ForProvider.ClusterID = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.ClusterIDRef = rsp.ResolvedReference
 	{
-		m, l, err = apisresolver.GetManagedResource("kafka.upjet-ionoscloud.ionoscloud.io", "v1alpha1", "Kafka", "KafkaList")
+		m, l, err = apisresolver.GetManagedResource("kafka.ionoscloud.io", "v1alpha1", "Kafka", "KafkaList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
@@ -206,7 +206,7 @@ func (mg *KafkaTopic) ResolveReferences(ctx context.Context, c client.Reader) er
 	mg.Spec.ForProvider.Location = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.LocationRef = rsp.ResolvedReference
 	{
-		m, l, err = apisresolver.GetManagedResource("kafka.upjet-ionoscloud.ionoscloud.io", "v1alpha1", "Kafka", "KafkaList")
+		m, l, err = apisresolver.GetManagedResource("kafka.ionoscloud.io", "v1alpha1", "Kafka", "KafkaList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
@@ -226,7 +226,7 @@ func (mg *KafkaTopic) ResolveReferences(ctx context.Context, c client.Reader) er
 	mg.Spec.InitProvider.ClusterID = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.InitProvider.ClusterIDRef = rsp.ResolvedReference
 	{
-		m, l, err = apisresolver.GetManagedResource("kafka.upjet-ionoscloud.ionoscloud.io", "v1alpha1", "Kafka", "KafkaList")
+		m, l, err = apisresolver.GetManagedResource("kafka.ionoscloud.io", "v1alpha1", "Kafka", "KafkaList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}

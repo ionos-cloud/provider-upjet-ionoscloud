@@ -25,7 +25,7 @@ func (mg *Distribution) ResolveReferences( // ResolveReferences of this Distribu
 	var rsp reference.ResolutionResponse
 	var err error
 	{
-		m, l, err = apisresolver.GetManagedResource("certificatemanager.upjet-ionoscloud.ionoscloud.io", "v1alpha1", "Certificate", "CertificateList")
+		m, l, err = apisresolver.GetManagedResource("certificatemanager.ionoscloud.io", "v1alpha1", "Certificate", "CertificateList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
@@ -45,7 +45,7 @@ func (mg *Distribution) ResolveReferences( // ResolveReferences of this Distribu
 	mg.Spec.ForProvider.CertificateID = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.CertificateIDRef = rsp.ResolvedReference
 	{
-		m, l, err = apisresolver.GetManagedResource("certificatemanager.upjet-ionoscloud.ionoscloud.io", "v1alpha1", "Certificate", "CertificateList")
+		m, l, err = apisresolver.GetManagedResource("certificatemanager.ionoscloud.io", "v1alpha1", "Certificate", "CertificateList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
