@@ -28,7 +28,7 @@ EOF
 
 echo "Creating a default cluster provider config..."
 cat <<EOF | ${KUBECTL} apply -f -
-apiVersion: aws.m.upbound.io/v1beta1
+apiVersion: upjet-ionoscloud.m.ionoscloud.io/v1beta1
 kind: ClusterProviderConfig
 metadata:
   name: default
@@ -36,8 +36,8 @@ spec:
   credentials:
     source: Secret
     secretRef:
-      name: provider-secret
-      namespace: upbound-system
+      name: example-provider-secret
+      namespace: crossplane-system
       key: credentials
 EOF
 
