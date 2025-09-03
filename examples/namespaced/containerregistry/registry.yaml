@@ -1,4 +1,4 @@
-apiVersion: containerregistry.ionoscloud.io/v1alpha1
+apiVersion: containerregistry.m.ionoscloud.io/v1alpha1
 kind: Registry
 metadata:
   annotations:
@@ -19,7 +19,7 @@ spec:
     location: de/fra
     name: ${Rand.RFC1123Subdomain}-registry
 ---
-apiVersion: containerregistry.ionoscloud.io/v1alpha1
+apiVersion: containerregistry.m.ionoscloud.io/v1alpha1
 kind: RegistryToken
 metadata:
   annotations:

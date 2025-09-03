@@ -1,4 +1,4 @@
-apiVersion: alb.ionoscloud.io/v1alpha1
+apiVersion: alb.m.ionoscloud.io/v1alpha1
 kind: TargetGroup
 metadata:
   annotations:

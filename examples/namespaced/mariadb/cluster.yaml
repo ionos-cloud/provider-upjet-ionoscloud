@@ -1,4 +1,4 @@
-apiVersion: dbaas.mariadb.ionoscloud.io/v1alpha1
+apiVersion: dbaas.mariadb.m.ionoscloud.io/v1alpha1
 kind: MariadbCluster
 metadata:
   annotations:

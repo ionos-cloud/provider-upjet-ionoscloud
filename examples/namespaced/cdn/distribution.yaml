@@ -1,4 +1,4 @@
-apiVersion: cdn.ionoscloud.io/v1alpha1
+apiVersion: cdn.m.ionoscloud.io/v1alpha1
 kind: Distribution
 metadata:
   annotations:
@@ -38,7 +38,7 @@ spec:
         waf: false
 
 ---
-apiVersion: certificatemanager.ionoscloud.io/v1alpha1
+apiVersion: certificatemanager.m.ionoscloud.io/v1alpha1
 kind: Certificate
 metadata:
   annotations:

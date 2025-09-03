@@ -1,4 +1,4 @@
-apiVersion: apigateway.ionoscloud.io/v1alpha1
+apiVersion: apigateway.m.ionoscloud.io/v1alpha1
 kind: Route
 metadata:
   annotations:
@@ -30,7 +30,7 @@ spec:
 
 ---
 
-apiVersion: apigateway.ionoscloud.io/v1alpha1
+apiVersion: apigateway.m.ionoscloud.io/v1alpha1
 kind: Apigateway
 metadata:
   annotations:

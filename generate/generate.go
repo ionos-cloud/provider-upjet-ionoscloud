@@ -44,6 +44,5 @@ import (
 
 	_ "github.com/crossplane/upjet/v2/cmd/scraper" //nolint:typecheck
 
-	_ "github.com/crossplane/upjet/cmd/resolver"
 	_ "github.com/crossplane/upjet/v2/cmd/resolver"
 )

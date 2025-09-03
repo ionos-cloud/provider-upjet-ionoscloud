@@ -1,4 +1,4 @@
-apiVersion: objectstorage.ionoscloud.io/v1alpha1
+apiVersion: objectstorage.m.ionoscloud.io/v1alpha1
 kind: Bucket
 metadata:
   annotations:
@@ -11,7 +11,7 @@ spec:
   forProvider:
     objectLockEnabled: true
 ---
-apiVersion: objectstorage.ionoscloud.io/v1alpha1
+apiVersion: objectstorage.m.ionoscloud.io/v1alpha1
 kind: BucketObjectLockConfiguration
 metadata:
   annotations:

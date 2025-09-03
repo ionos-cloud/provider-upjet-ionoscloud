@@ -1,4 +1,4 @@
-apiVersion: containerregistry.ionoscloud.io/v1alpha1
+apiVersion: containerregistry.m.ionoscloud.io/v1alpha1
 kind: RegistryToken
 metadata:
   annotations:

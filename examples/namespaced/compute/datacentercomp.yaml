@@ -1,4 +1,4 @@
-apiVersion: compute.ionoscloud.io/v1alpha1
+apiVersion: compute.m.ionoscloud.io/v1alpha1
 kind: Datacenter
 metadata:
   annotations:
@@ -15,7 +15,7 @@ spec:
     location: de/txl
     name: mytestserver
 ---
-apiVersion: compute.ionoscloud.io/v1alpha1
+apiVersion: compute.m.ionoscloud.io/v1alpha1
 kind: Server
 metadata:
   annotations:

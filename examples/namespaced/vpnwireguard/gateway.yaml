@@ -1,4 +1,4 @@
-apiVersion: vpnwireguard.ionoscloud.io/v1alpha1
+apiVersion: vpnwireguard.m.ionoscloud.io/v1alpha1
 kind: VpnWireguardGateway
 metadata:
   annotations:
@@ -40,7 +40,7 @@ spec:
 
 ---
 
-apiVersion: compute.ionoscloud.io/v1alpha1
+apiVersion: compute.m.ionoscloud.io/v1alpha1
 kind: Ipblock
 metadata:
   annotations:
@@ -57,7 +57,7 @@ spec:
 
 ---
 
-apiVersion: compute.ionoscloud.io/v1alpha1
+apiVersion: compute.m.ionoscloud.io/v1alpha1
 kind: Lan
 metadata:
   annotations:
@@ -74,7 +74,7 @@ spec:
     name: Lan Example
     public: false
 ---
-apiVersion: compute.ionoscloud.io/v1alpha1
+apiVersion: compute.m.ionoscloud.io/v1alpha1
 kind: Datacenter
 metadata:
   annotations:

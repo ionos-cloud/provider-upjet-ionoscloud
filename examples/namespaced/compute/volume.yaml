@@ -1,4 +1,4 @@
-apiVersion: compute.ionoscloud.io/v1alpha1
+apiVersion: compute.m.ionoscloud.io/v1alpha1
 kind: Volume
 metadata:
   annotations:
@@ -26,7 +26,7 @@ spec:
 
 ---
 
-apiVersion: compute.ionoscloud.io/v1alpha1
+apiVersion: compute.m.ionoscloud.io/v1alpha1
 kind: Datacenter
 metadata:
   annotations:
@@ -44,7 +44,7 @@ spec:
 
 ---
 
-apiVersion: compute.ionoscloud.io/v1alpha1
+apiVersion: compute.m.ionoscloud.io/v1alpha1
 kind: Lan
 metadata:
   annotations:
@@ -63,7 +63,7 @@ spec:
 
 ---
 
-apiVersion: compute.ionoscloud.io/v1alpha1
+apiVersion: compute.m.ionoscloud.io/v1alpha1
 kind: Server
 metadata:
   annotations:

@@ -1,4 +1,4 @@
-apiVersion: k8s.ionoscloud.io/v1alpha1
+apiVersion: k8s.m.ionoscloud.io/v1alpha1
 kind: NodePool
 metadata:
   annotations:
@@ -47,7 +47,7 @@ spec:
 
 ---
 
-apiVersion: compute.ionoscloud.io/v1alpha1
+apiVersion: compute.m.ionoscloud.io/v1alpha1
 kind: Datacenter
 metadata:
   annotations:
@@ -65,7 +65,7 @@ spec:
 
 ---
 
-apiVersion: k8s.ionoscloud.io/v1alpha1
+apiVersion: k8s.m.ionoscloud.io/v1alpha1
 kind: Cluster
 metadata:
   annotations:
@@ -84,7 +84,7 @@ spec:
 
 ---
 
-apiVersion: compute.ionoscloud.io/v1alpha1
+apiVersion: compute.m.ionoscloud.io/v1alpha1
 kind: Lan
 metadata:
   annotations:

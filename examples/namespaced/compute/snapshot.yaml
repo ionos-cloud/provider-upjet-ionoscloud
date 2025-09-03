@@ -1,4 +1,4 @@
-apiVersion: compute.ionoscloud.io/v1alpha1
+apiVersion: compute.m.ionoscloud.io/v1alpha1
 kind: Snapshot
 metadata:
   annotations:
@@ -19,7 +19,7 @@ spec:
 
 ---
 
-apiVersion: compute.ionoscloud.io/v1alpha1
+apiVersion: compute.m.ionoscloud.io/v1alpha1
 kind: Datacenter
 metadata:
   annotations:
@@ -36,7 +36,7 @@ spec:
     secAuthProtection: false
 ---
 
-apiVersion: compute.ionoscloud.io/v1alpha1
+apiVersion: compute.m.ionoscloud.io/v1alpha1
 kind: Server
 metadata:
   annotations:

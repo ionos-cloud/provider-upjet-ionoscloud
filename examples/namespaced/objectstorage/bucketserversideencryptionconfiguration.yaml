@@ -10,7 +10,7 @@ metadata:
 spec:
   forProvider: {}
 ---
-apiVersion: objectstorage.ionoscloud.io/v1alpha1
+apiVersion: objectstorage.m.ionoscloud.io/v1alpha1
 kind: BucketServerSideEncryptionConfiguration
 metadata:
   annotations:

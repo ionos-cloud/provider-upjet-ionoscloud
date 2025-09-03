@@ -1,4 +1,4 @@
-apiVersion: inmemorydb.replicaset.ionoscloud.io/v1alpha1
+apiVersion: inmemorydb.replicaset.m.ionoscloud.io/v1alpha1
 kind: InMemoryDBReplicaset
 metadata:
   annotations:

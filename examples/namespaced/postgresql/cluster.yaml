@@ -1,4 +1,4 @@
-apiVersion: compute.ionoscloud.io/v1alpha1
+apiVersion: compute.m.ionoscloud.io/v1alpha1
 kind: Datacenter
 metadata:
   annotations:
@@ -14,7 +14,7 @@ spec:
     name: Datacenter Example
     secAuthProtection: false
 ---
-apiVersion: compute.ionoscloud.io/v1alpha1
+apiVersion: compute.m.ionoscloud.io/v1alpha1
 kind: Lan
 metadata:
   annotations:
@@ -31,7 +31,7 @@ spec:
     name: Lan Example
     public: false
 ---
-apiVersion: postgresql.ionoscloud.io/v1alpha1
+apiVersion: postgresql.m.ionoscloud.io/v1alpha1
 kind: PostgresqlCluster
 metadata:
   annotations:

@@ -1,4 +1,4 @@
-apiVersion: natgateway.ionoscloud.io/v1alpha1
+apiVersion: natgateway.m.ionoscloud.io/v1alpha1
 kind: Natgateway
 metadata:
   annotations:

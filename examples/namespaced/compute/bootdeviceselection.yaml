@@ -1,4 +1,4 @@
-apiVersion: compute.ionoscloud.io/v1alpha1
+apiVersion: compute.m.ionoscloud.io/v1alpha1
 kind: BootDeviceSelection
 metadata:
   annotations:
@@ -21,7 +21,7 @@ spec:
 
 ---
 
-apiVersion: compute.ionoscloud.io/v1alpha1
+apiVersion: compute.m.ionoscloud.io/v1alpha1
 kind: Server
 metadata:
   annotations:
@@ -68,7 +68,7 @@ stringData:
   password: "Upboundtest1"
 ---
 
-apiVersion: compute.ionoscloud.io/v1alpha1
+apiVersion: compute.m.ionoscloud.io/v1alpha1
 kind: Volume
 metadata:
   annotations:

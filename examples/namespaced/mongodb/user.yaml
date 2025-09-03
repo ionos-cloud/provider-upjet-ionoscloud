@@ -1,4 +1,4 @@
-apiVersion: mongodb.ionoscloud.io/v1alpha1
+apiVersion: mongodb.m.ionoscloud.io/v1alpha1
 kind: MongodbUser
 metadata:
   annotations:

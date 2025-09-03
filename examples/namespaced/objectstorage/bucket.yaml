@@ -1,4 +1,4 @@
-apiVersion: objectstorage.ionoscloud.io/v1alpha1
+apiVersion: objectstorage.n.ionoscloud.io/v1alpha1
 kind: Bucket
 metadata:
   annotations:

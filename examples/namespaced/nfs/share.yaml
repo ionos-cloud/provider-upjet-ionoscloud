@@ -1,4 +1,4 @@
-apiVersion: nfs.ionoscloud.io/v1alpha1
+apiVersion: nfs.m.ionoscloud.io/v1alpha1
 kind: NFSShare
 metadata:
   annotations:

@@ -164,6 +164,7 @@ cobertura:
 submodules:
 	@git submodule sync
 	@git submodule update --init --recursive
+	@git submodule update --remote --recursive
 
 # This is for running out-of-cluster locally, and is for convenience. Running
 # this make target will print out the command which was used. For more control,

@@ -10,7 +10,7 @@ import (
 	"path/filepath"
 
 	"github.com/crossplane/upjet/v2/pkg/pipeline"
-	"github.com/ionos-cloud/terraform-provider-ionoscloud/v6/xpprovider"
+	ionosterraform "github.com/ionos-cloud/terraform-provider-ionoscloud/v6/xpprovider"
 	"gopkg.in/alecthomas/kingpin.v2"
 
 	"github.com/ionos-cloud/provider-upjet-ionoscloud/config"
@@ -28,7 +28,7 @@ func main() {
 		panic(fmt.Sprintf("cannot calculate the absolute path with %s", *repoRoot))
 	}
 
-	fwProvider, sdkProvider := xpprovider.GetProvider()
+	fwProvider, sdkProvider := ionosterraform.GetProvider()
 	providerCluster, err := config.GetProvider(fwProvider, sdkProvider, true)
 	kingpin.FatalIfError(err, "Cannot get terraform provider configuration")
 	pns, err := config.GetProviderNamespaced(fwProvider, sdkProvider, true)

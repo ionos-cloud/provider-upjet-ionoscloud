@@ -1,4 +1,4 @@
-apiVersion: vpnipsec.ionoscloud.io/v1alpha1
+apiVersion: vpnipsec.m.ionoscloud.io/v1alpha1
 kind: VpnIpsecTunnel
 metadata:
   annotations:
