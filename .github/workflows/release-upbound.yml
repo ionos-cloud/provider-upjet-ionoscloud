@@ -14,7 +14,11 @@ on:
       version_tag:
         description: 'The version tag to publish (e.g., v1.1.6)'
         required: true
-
+      branch:
+        description: "branch  from which to release"
+        required: true
+        type: string
+        default: "main"
 env:
   # Common versions
   GOLANGCI_VERSION: 'v2.1.6'
@@ -48,7 +52,7 @@ jobs:
         uses: actions/checkout@v4
         with:
           submodules: true
-
+          ref:  ${{ github.event.inputs.branch }}
       - name: Get modified CRDs
         id: modified-crds
         uses: tj-actions/changed-files@v46
