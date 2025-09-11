@@ -77,10 +77,10 @@ jobs:
 
     steps:
       - name: Checkout
-        uses: actions/checkout@f43a0e5ff2bd294095638e18286ca9a3d1956744 #v3
+        uses: actions/checkout@v4
         with:
           submodules: true
-
+          ref:  ${{ github.event.inputs.branch }}
       - name: Setup Go
         uses: actions/setup-go@v5
         with:
@@ -124,7 +124,7 @@ jobs:
         uses: actions/checkout@f43a0e5ff2bd294095638e18286ca9a3d1956744 #v3
         with:
           submodules: true
-
+          ref:  ${{ github.event.inputs.branch }}
       - name: Setup Go
         uses: actions/setup-go@v5
         with:
@@ -164,10 +164,10 @@ jobs:
 
     steps:
       - name: Checkout
-        uses: actions/checkout@f43a0e5ff2bd294095638e18286ca9a3d1956744 #v3
+        uses: actions/checkout@v4
         with:
           submodules: true
-
+          ref:  ${{ github.event.inputs.branch }}
       - name: Fetch History
         run: git fetch --prune --unshallow
 
@@ -293,7 +293,7 @@ jobs:
           install: true
 
       - name: Login to Upbound
-        uses: docker/login-action@v2
+        uses: docker/login-action@v3
         if: env.UPBOUND_MARKETPLACE_PUSH_ROBOT_USR != ''
         with:
           registry: xpkg.upbound.io
@@ -301,10 +301,10 @@ jobs:
           password: ${{ secrets.UPBOUND_MARKETPLACE_PUSH_ROBOT_PSW }}
 
       - name: Checkout
-        uses: actions/checkout@f43a0e5ff2bd294095638e18286ca9a3d1956744 #v3
+        uses: actions/checkout@v4
         with:
           submodules: true
-
+          ref:  ${{ github.event.inputs.branch }}
       - name: Fetch History
         run: git fetch --prune --unshallow
 
@@ -348,4 +348,7 @@ jobs:
           path: _output/**
 
       - name: Publish Artifacts
-        run: make publish BRANCH_NAME=${GITHUB_REF##*/} VERSION=$VERSION_TAG
+        run: |
+          branch_name=${GITHUB_REF##*/}
+          echo "Branch name: ${branch_name}"
+          make publish BRANCH_NAME="${branch_name}" VERSION=$VERSION_TAG
