@@ -84,17 +84,17 @@ provider-upjet-ionoscloud   True        True      xpkg.upbound.io/ionos-cloud/pr
 
 ### Using a Ionoscloud token
 ```shell
-kubectl -n upbound-system create secret generic ionoscloud-secret --from-literal=credentials="{\"token\":\"${IONOS_TOKEN}\"}"
+kubectl -n crossplane-system create secret generic ionoscloud-secret --from-literal=credentials="{\"token\":\"${IONOS_TOKEN}\"}"
 ```
 
 ### With Object Storage access
 ```shell
-kubectl -n upbound-system create secret generic ionoscloud-secret --from-literal=credentials="{\"token\":\"${IONOS_TOKEN}\",\"s3_access_key\":\"${IONOS_S3_ACCESS_KEY}\",\"s3_secret_key\":\"${IONOS_S3_SECRET_KEY}\"}"
+kubectl -n crossplane-system create secret generic ionoscloud-secret --from-literal=credentials="{\"token\":\"${IONOS_TOKEN}\",\"s3_access_key\":\"${IONOS_S3_ACCESS_KEY}\",\"s3_secret_key\":\"${IONOS_S3_SECRET_KEY}\"}"
 ```
 
 ### Using the Ionoscloud username and password(not recommended)
 ```shell
-kubectl -n upbound-system create secret generic ionoscloud-secret --from-literal=credentials="{\"user\":\"${IONOS_USERNAME}\",\"password\":\"${IONOS_PASSWORD}\"}"
+kubectl -n crossplane-system create secret generic ionoscloud-secret --from-literal=credentials="{\"user\":\"${IONOS_USERNAME}\",\"password\":\"${IONOS_PASSWORD}\"}"
 ```
 
 ### Fields that can be set using the credentials secret:
@@ -112,9 +112,9 @@ kubectl -n upbound-system create secret generic ionoscloud-secret --from-literal
 
 View the secret with `kubectl describe secret`
 ```shell
-kubectl describe secret ionoscloud-secret -n upbound-system
+kubectl describe secret ionoscloud-secret -n crossplane-system
 Name:         ionoscloud-secret
-Namespace:    upbound-system
+Namespace:    crossplane-system
 Labels:       <none>
 Annotations:  <none>
 
@@ -140,7 +140,7 @@ spec:
   credentials:
     source: Secret
     secretRef:
-      namespace: upbound-system
+      namespace: crossplane-system
       name: ionoscloud-secret
       key: credentials
 EOF
@@ -167,7 +167,7 @@ Spec:
     Secret Ref:
       Key:        credentials
       Name:       ionoscloud-secret
-      Namespace:  upbound-system
+      Namespace:  crossplane-system
     Source:       Secret
 ```
 
@@ -215,6 +215,30 @@ NAME      SYNCED   READY   EXTERNAL-NAME                          AGE
 example   True     True    5bc1d7a9-2b1d-488c-b16f-8b946017ecde   5m3s
 ```
 The datacenter creation is finalized when the values `READY` and `SYNCED` are `True`.
+
+**Note** to use a different `ProviderConfig` for each resource you can specify `providerConfigRef` in the resource definition.
+
+
+```shell
+cat <<EOF | kubectl apply -f -
+apiVersion: compute.ionoscloud.io/v1alpha1
+kind: Datacenter
+metadata:
+  annotations:
+    meta.upbound.io/example-id: compute/v1alpha1/datacenter
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  providerConfigRef:
+    name: differentConfig
+  forProvider:
+    description: datacenter description
+    location: de/fra
+    name: crossplane upjet example
+    secAuthProtection: false
+EOF
+```
 
 ## Delete the managed resource
 ```shell
