@@ -7,13 +7,11 @@ package clients
 import (
 	"context"
 	"encoding/json"
-	"os"
 	"strconv"
 
 	"github.com/crossplane/crossplane-runtime/v2/pkg/resource"
 	"github.com/hashicorp/terraform-plugin-framework/provider"
 	"github.com/ionos-cloud/sdk-go-bundle/shared"
-	ionoscloud "github.com/ionos-cloud/sdk-go/v6"
 	"github.com/ionos-cloud/terraform-provider-ionoscloud/v6/services/bundleclient"
 	"github.com/ionos-cloud/terraform-provider-ionoscloud/v6/services/clientoptions"
 	"github.com/pkg/errors"
@@ -65,8 +63,9 @@ func TerraformSetupBuilder(version, providerSource, providerVersion string, fwPr
 
 		ionosSDKBundleClient := bundleclient.New(clientoptions.TerraformClientOptions{
 			ClientOptions: shared.ClientOptions{
-				Endpoint:      creds["endpoint"],
-				SkipTLSVerify: boolInsecure,
+				Endpoint:       creds["endpoint"],
+				SkipTLSVerify:  boolInsecure,
+				ContractNumber: creds["contract_number"],
 				Credentials: shared.Credentials{
 					Username:    creds["user"],
 					Password:    creds["password"],
@@ -97,11 +96,6 @@ func TerraformSetupBuilder(version, providerSource, providerVersion string, fwPr
 			"insecure":        boolInsecure,
 			"endpoint":        creds["endpoint"],
 			"contract_number": creds["contract_number"],
-		}
-
-		if creds["contract_number"] != "" {
-			// set contract number in env so it is used by the SDK
-			os.Setenv(ionoscloud.IonosContractNumber, creds["contract_number"])
 		}
 
 		return ps, nil
