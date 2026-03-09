@@ -1,8 +1,8 @@
 module github.com/ionos-cloud/provider-upjet-ionoscloud
 
-go 1.25
+go 1.26
 
-toolchain go1.25.8
+toolchain go1.26.1
 
 require (
 	dario.cat/mergo v1.0.2
