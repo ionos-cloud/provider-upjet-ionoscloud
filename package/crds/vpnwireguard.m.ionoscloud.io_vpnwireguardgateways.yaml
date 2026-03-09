@@ -3,7 +3,7 @@ apiVersion: apiextensions.k8s.io/v1
 kind: CustomResourceDefinition
 metadata:
   annotations:
-    controller-gen.kubebuilder.io/version: v0.18.0
+    controller-gen.kubebuilder.io/version: v0.20.0
   name: vpnwireguardgateways.vpnwireguard.m.ionoscloud.io
 spec:
   group: vpnwireguard.m.ionoscloud.io
@@ -151,12 +151,14 @@ spec:
                               type: object
                           type: object
                         ipv4Cidr:
-                          description: '[String] The IPv4 CIDR for the WireGuard Gateway
-                            connection.'
+                          description: |-
+                            [String] A LAN IPv4 address in CIDR notation that will be assigned to the VPN Gateway. This will be the private gateway address for LAN clients to route traffic over the VPN Gateway, this should be within the subnet already assigned to the LAN.
+                            A LAN IPv4 address in CIDR notation that will be assigned to the VPN Gateway. This will be the private gateway address for LAN clients to route traffic over the VPN Gateway, this should be within the subnet already assigned to the LAN.
                           type: string
                         ipv6Cidr:
-                          description: '[String] The IPv6 CIDR for the WireGuard Gateway
-                            connection.'
+                          description: |-
+                            [String] A LAN IPv6 address in CIDR notation that will be assigned to the VPN Gateway. This will be the private gateway address for LAN clients to route traffic over the VPN Gateway, this should be within the subnet already assigned to the LAN.
+                            A LAN IPv6 address in CIDR notation that will be assigned to the VPN Gateway. This will be the private gateway address for LAN clients to route traffic over the VPN Gateway, this should be within the subnet already assigned to the LAN.
                           type: string
                         lanId:
                           description: '[String] The ID of the LAN where the WireGuard
@@ -346,9 +348,8 @@ spec:
                     type: number
                   location:
                     description: |-
-                      [String] The location of the WireGuard Gateway. Supported locations: de/fra, de/txl, es/vit,
-                      gb/bhx, gb/lhr, us/ewr, us/las, us/mci, fr/par.
-                      The location of the WireGuard Gateway. Supported locations: de/fra, de/txl, es/vit, gb/bhx, gb/lhr, us/ewr, us/las, us/mci, fr/par
+                      [String] The location of the WireGuard Gateway. Supported locations: de/fra, de/fra/2, de/txl, es/vit, gb/bhx, gb/lhr, us/ewr, us/las, us/mci, fr/par.
+                      The location of the WireGuard Gateway. Supported locations: de/fra, de/fra/2, de/txl, es/vit, gb/bhx, gb/lhr, us/ewr, us/las, us/mci, fr/par
                     type: string
                   maintenanceWindow:
                     description: |-
@@ -494,12 +495,14 @@ spec:
                               type: object
                           type: object
                         ipv4Cidr:
-                          description: '[String] The IPv4 CIDR for the WireGuard Gateway
-                            connection.'
+                          description: |-
+                            [String] A LAN IPv4 address in CIDR notation that will be assigned to the VPN Gateway. This will be the private gateway address for LAN clients to route traffic over the VPN Gateway, this should be within the subnet already assigned to the LAN.
+                            A LAN IPv4 address in CIDR notation that will be assigned to the VPN Gateway. This will be the private gateway address for LAN clients to route traffic over the VPN Gateway, this should be within the subnet already assigned to the LAN.
                           type: string
                         ipv6Cidr:
-                          description: '[String] The IPv6 CIDR for the WireGuard Gateway
-                            connection.'
+                          description: |-
+                            [String] A LAN IPv6 address in CIDR notation that will be assigned to the VPN Gateway. This will be the private gateway address for LAN clients to route traffic over the VPN Gateway, this should be within the subnet already assigned to the LAN.
+                            A LAN IPv6 address in CIDR notation that will be assigned to the VPN Gateway. This will be the private gateway address for LAN clients to route traffic over the VPN Gateway, this should be within the subnet already assigned to the LAN.
                           type: string
                         lanId:
                           description: '[String] The ID of the LAN where the WireGuard
@@ -689,9 +692,8 @@ spec:
                     type: number
                   location:
                     description: |-
-                      [String] The location of the WireGuard Gateway. Supported locations: de/fra, de/txl, es/vit,
-                      gb/bhx, gb/lhr, us/ewr, us/las, us/mci, fr/par.
-                      The location of the WireGuard Gateway. Supported locations: de/fra, de/txl, es/vit, gb/bhx, gb/lhr, us/ewr, us/las, us/mci, fr/par
+                      [String] The location of the WireGuard Gateway. Supported locations: de/fra, de/fra/2, de/txl, es/vit, gb/bhx, gb/lhr, us/ewr, us/las, us/mci, fr/par.
+                      The location of the WireGuard Gateway. Supported locations: de/fra, de/fra/2, de/txl, es/vit, gb/bhx, gb/lhr, us/ewr, us/las, us/mci, fr/par
                     type: string
                   maintenanceWindow:
                     description: |-
@@ -819,12 +821,14 @@ spec:
                             WireGuard Gateway is located.'
                           type: string
                         ipv4Cidr:
-                          description: '[String] The IPv4 CIDR for the WireGuard Gateway
-                            connection.'
+                          description: |-
+                            [String] A LAN IPv4 address in CIDR notation that will be assigned to the VPN Gateway. This will be the private gateway address for LAN clients to route traffic over the VPN Gateway, this should be within the subnet already assigned to the LAN.
+                            A LAN IPv4 address in CIDR notation that will be assigned to the VPN Gateway. This will be the private gateway address for LAN clients to route traffic over the VPN Gateway, this should be within the subnet already assigned to the LAN.
                           type: string
                         ipv6Cidr:
-                          description: '[String] The IPv6 CIDR for the WireGuard Gateway
-                            connection.'
+                          description: |-
+                            [String] A LAN IPv6 address in CIDR notation that will be assigned to the VPN Gateway. This will be the private gateway address for LAN clients to route traffic over the VPN Gateway, this should be within the subnet already assigned to the LAN.
+                            A LAN IPv6 address in CIDR notation that will be assigned to the VPN Gateway. This will be the private gateway address for LAN clients to route traffic over the VPN Gateway, this should be within the subnet already assigned to the LAN.
                           type: string
                         lanId:
                           description: '[String] The ID of the LAN where the WireGuard
@@ -856,9 +860,8 @@ spec:
                     type: number
                   location:
                     description: |-
-                      [String] The location of the WireGuard Gateway. Supported locations: de/fra, de/txl, es/vit,
-                      gb/bhx, gb/lhr, us/ewr, us/las, us/mci, fr/par.
-                      The location of the WireGuard Gateway. Supported locations: de/fra, de/txl, es/vit, gb/bhx, gb/lhr, us/ewr, us/las, us/mci, fr/par
+                      [String] The location of the WireGuard Gateway. Supported locations: de/fra, de/fra/2, de/txl, es/vit, gb/bhx, gb/lhr, us/ewr, us/las, us/mci, fr/par.
+                      The location of the WireGuard Gateway. Supported locations: de/fra, de/fra/2, de/txl, es/vit, gb/bhx, gb/lhr, us/ewr, us/las, us/mci, fr/par
                     type: string
                   maintenanceWindow:
                     description: |-

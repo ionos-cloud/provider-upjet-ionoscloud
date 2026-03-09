@@ -8,21 +8,17 @@ metadata:
   name: example
 spec:
   forProvider:
-    cores: 1
+    availabilityZone: AUTO
     datacenterIdSelector:
       matchLabels:
         testing.upbound.io/example-name: example
-    imageName: ${data.ionoscloud_image.example.name}
+    hostname: gpu-server-example
+    imageName: ubuntu:latest
     imagePasswordSecretRef:
       key: attribute.result
       name: example-password
       namespace: upbound-system
-    label:
-    - key: labelkey1
-      value: labelvalue1
-    - key: labelkey2
-      value: labelvalue2
-    name: Server Example
+    name: GPU Server Example
     nic:
     - dhcp: true
       firewall:
@@ -30,28 +26,25 @@ spec:
         portRangeEnd: 22
         portRangeStart: 22
         protocol: TCP
-        sourceIp: ${ionoscloud_ipblock.example.ips[2]}
-        sourceMac: 00:0a:95:9d:68:17
-        targetIp: ${ionoscloud_ipblock.example.ips[3]}
-        type: EGRESS
+        type: INGRESS
       firewallActive: true
-      firewallType: BIDIRECTIONAL
+      firewallType: INGRESS
       ips:
-      - ${ionoscloud_ipblock.example.ips[0]}
-      - ${ionoscloud_ipblock.example.ips[1]}
+      - ${ionoscloud_ipblock.webserver_ipblock.ips[0]}
       lanSelector:
         matchLabels:
           testing.upbound.io/example-name: example
       name: system
-    ram: 1024
-    type: ENTERPRISE
+    templateUuid: 6913ed82-a143-4c15-89ac-08fb375a97c5
+    vmState: RUNNING
     volume:
-    - availabilityZone: ZONE_1
+    - availabilityZone: AUTO
       bus: VIRTIO
-      diskType: SSD Standard
+      diskType: SSD Premium
+      exposeSerial: true
+      licenceType: LINUX
       name: system
-      size: 5
-      userData: foo
+      requireLegacyBios: false
 
 ---
 
@@ -65,10 +58,8 @@ metadata:
   name: example
 spec:
   forProvider:
-    description: Datacenter Description
-    location: us/las
+    location: de/fra/2
     name: Datacenter Example
-    secAuthProtection: false
 
 ---
 
@@ -78,13 +69,13 @@ metadata:
   annotations:
     meta.upbound.io/example-id: compute/v1alpha1/server
   labels:
-    testing.upbound.io/example-name: example
-  name: example
+    testing.upbound.io/example-name: webserver_ipblock
+  name: webserver-ipblock
 spec:
   forProvider:
-    location: us/las
-    name: IP Block Example
-    size: 4
+    location: de/fra
+    name: webserver_ipblock
+    size: 1
 
 ---
 

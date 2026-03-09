@@ -118,10 +118,12 @@ type NicInitParameters_2 struct {
 
 	// [list] Collection of IPv6 addresses assigned to a NIC. Explicitly assigned public IPs need to come from the NIC's Ipv6 CIDR block, Passing value null or empty array will assign an IPv6 address automatically from the NIC's CIDR block.
 	// Collection for IPv6 addresses assigned to a nic. Explicitly assigned IPv6 addresses need to come from inside the IPv6 CIDR block assigned to the nic.
+	// +listType=set
 	IPv6Ips []*string `json:"ipv6Ips,omitempty" tf:"ipv6_ips,omitempty"`
 
 	// [list] Collection of IP addresses assigned to a NIC. Explicitly assigned public IPs need to come from reserved IP blocks, Passing value null or empty array will assign an IP address automatically.
 	// Collection of IP addresses assigned to a nic. Explicitly assigned public IPs need to come from reserved IP blocks, Passing value null or empty array will assign an IP address automatically.
+	// +listType=set
 	Ips []*string `json:"ips,omitempty" tf:"ips,omitempty"`
 
 	// [integer] The LAN ID the NIC will sit on.
@@ -148,14 +150,14 @@ type NicInitParameters_2 struct {
 	SecurityGroupsIds []*string `json:"securityGroupsIds,omitempty" tf:"security_groups_ids,omitempty"`
 
 	// [string] The ID of a server.
-	// +crossplane:generate:reference:type=github.com/ionos-cloud/provider-upjet-ionoscloud/apis/cluster/compute/v1alpha1.Server
+	// +crossplane:generate:reference:type=github.com/ionos-cloud/provider-upjet-ionoscloud/apis/cluster/compute/v1alpha1.GPUServer
 	ServerID *string `json:"serverId,omitempty" tf:"server_id,omitempty"`
 
-	// Reference to a Server in compute to populate serverId.
+	// Reference to a GPUServer in compute to populate serverId.
 	// +kubebuilder:validation:Optional
 	ServerIDRef *v1.Reference `json:"serverIdRef,omitempty" tf:"-"`
 
-	// Selector for a Server in compute to populate serverId.
+	// Selector for a GPUServer in compute to populate serverId.
 	// +kubebuilder:validation:Optional
 	ServerIDSelector *v1.Selector `json:"serverIdSelector,omitempty" tf:"-"`
 }
@@ -197,10 +199,12 @@ type NicObservation_2 struct {
 
 	// [list] Collection of IPv6 addresses assigned to a NIC. Explicitly assigned public IPs need to come from the NIC's Ipv6 CIDR block, Passing value null or empty array will assign an IPv6 address automatically from the NIC's CIDR block.
 	// Collection for IPv6 addresses assigned to a nic. Explicitly assigned IPv6 addresses need to come from inside the IPv6 CIDR block assigned to the nic.
+	// +listType=set
 	IPv6Ips []*string `json:"ipv6Ips,omitempty" tf:"ipv6_ips,omitempty"`
 
 	// [list] Collection of IP addresses assigned to a NIC. Explicitly assigned public IPs need to come from reserved IP blocks, Passing value null or empty array will assign an IP address automatically.
 	// Collection of IP addresses assigned to a nic. Explicitly assigned public IPs need to come from reserved IP blocks, Passing value null or empty array will assign an IP address automatically.
+	// +listType=set
 	Ips []*string `json:"ips,omitempty" tf:"ips,omitempty"`
 
 	// [integer] The LAN ID the NIC will sit on.
@@ -272,11 +276,13 @@ type NicParameters_2 struct {
 	// [list] Collection of IPv6 addresses assigned to a NIC. Explicitly assigned public IPs need to come from the NIC's Ipv6 CIDR block, Passing value null or empty array will assign an IPv6 address automatically from the NIC's CIDR block.
 	// Collection for IPv6 addresses assigned to a nic. Explicitly assigned IPv6 addresses need to come from inside the IPv6 CIDR block assigned to the nic.
 	// +kubebuilder:validation:Optional
+	// +listType=set
 	IPv6Ips []*string `json:"ipv6Ips,omitempty" tf:"ipv6_ips,omitempty"`
 
 	// [list] Collection of IP addresses assigned to a NIC. Explicitly assigned public IPs need to come from reserved IP blocks, Passing value null or empty array will assign an IP address automatically.
 	// Collection of IP addresses assigned to a nic. Explicitly assigned public IPs need to come from reserved IP blocks, Passing value null or empty array will assign an IP address automatically.
 	// +kubebuilder:validation:Optional
+	// +listType=set
 	Ips []*string `json:"ips,omitempty" tf:"ips,omitempty"`
 
 	// [integer] The LAN ID the NIC will sit on.
@@ -307,15 +313,15 @@ type NicParameters_2 struct {
 	SecurityGroupsIds []*string `json:"securityGroupsIds,omitempty" tf:"security_groups_ids,omitempty"`
 
 	// [string] The ID of a server.
-	// +crossplane:generate:reference:type=github.com/ionos-cloud/provider-upjet-ionoscloud/apis/cluster/compute/v1alpha1.Server
+	// +crossplane:generate:reference:type=github.com/ionos-cloud/provider-upjet-ionoscloud/apis/cluster/compute/v1alpha1.GPUServer
 	// +kubebuilder:validation:Optional
 	ServerID *string `json:"serverId,omitempty" tf:"server_id,omitempty"`
 
-	// Reference to a Server in compute to populate serverId.
+	// Reference to a GPUServer in compute to populate serverId.
 	// +kubebuilder:validation:Optional
 	ServerIDRef *v1.Reference `json:"serverIdRef,omitempty" tf:"-"`
 
-	// Selector for a Server in compute to populate serverId.
+	// Selector for a GPUServer in compute to populate serverId.
 	// +kubebuilder:validation:Optional
 	ServerIDSelector *v1.Selector `json:"serverIdSelector,omitempty" tf:"-"`
 }

@@ -76,8 +76,8 @@ type VpnWireguardPeerInitParameters struct {
 	// +kubebuilder:validation:Optional
 	GatewayIDSelector *v1.NamespacedSelector `json:"gatewayIdSelector,omitempty" tf:"-"`
 
-	// [string] The location of the WireGuard Gateway.
-	// The location of the WireGuard Peer. Supported locations: de/fra, de/txl, es/vit, gb/bhx, gb/lhr, us/ewr, us/las, us/mci, fr/par
+	// [string] The location of the WireGuard Gateway. Supported locations: de/fra, de/fra/2, de/txl, es/vit, gb/bhx, gb/lhr, us/ewr, us/las, us/mci, fr/par.
+	// The location of the WireGuard Peer. Supported locations: de/fra, de/fra/2, de/txl, es/vit, gb/bhx, gb/lhr, us/ewr, us/las, us/mci, fr/par
 	Location *string `json:"location,omitempty" tf:"location,omitempty"`
 
 	// [string] The human-readable name of the WireGuard Gateway.
@@ -109,8 +109,8 @@ type VpnWireguardPeerObservation struct {
 
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
-	// [string] The location of the WireGuard Gateway.
-	// The location of the WireGuard Peer. Supported locations: de/fra, de/txl, es/vit, gb/bhx, gb/lhr, us/ewr, us/las, us/mci, fr/par
+	// [string] The location of the WireGuard Gateway. Supported locations: de/fra, de/fra/2, de/txl, es/vit, gb/bhx, gb/lhr, us/ewr, us/las, us/mci, fr/par.
+	// The location of the WireGuard Peer. Supported locations: de/fra, de/fra/2, de/txl, es/vit, gb/bhx, gb/lhr, us/ewr, us/las, us/mci, fr/par
 	Location *string `json:"location,omitempty" tf:"location,omitempty"`
 
 	// [string] The human-readable name of the WireGuard Gateway.
@@ -157,8 +157,8 @@ type VpnWireguardPeerParameters struct {
 	// +kubebuilder:validation:Optional
 	GatewayIDSelector *v1.NamespacedSelector `json:"gatewayIdSelector,omitempty" tf:"-"`
 
-	// [string] The location of the WireGuard Gateway.
-	// The location of the WireGuard Peer. Supported locations: de/fra, de/txl, es/vit, gb/bhx, gb/lhr, us/ewr, us/las, us/mci, fr/par
+	// [string] The location of the WireGuard Gateway. Supported locations: de/fra, de/fra/2, de/txl, es/vit, gb/bhx, gb/lhr, us/ewr, us/las, us/mci, fr/par.
+	// The location of the WireGuard Peer. Supported locations: de/fra, de/fra/2, de/txl, es/vit, gb/bhx, gb/lhr, us/ewr, us/las, us/mci, fr/par
 	// +kubebuilder:validation:Optional
 	Location *string `json:"location,omitempty" tf:"location,omitempty"`
 

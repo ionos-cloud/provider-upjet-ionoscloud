@@ -27,10 +27,12 @@ type ConnectionsInitParameters struct {
 	// +kubebuilder:validation:Optional
 	DatacenterIDSelector *v1.Selector `json:"datacenterIdSelector,omitempty" tf:"-"`
 
-	// [String] The IPv4 CIDR for the WireGuard Gateway connection.
+	// [String] A LAN IPv4 address in CIDR notation that will be assigned to the VPN Gateway. This will be the private gateway address for LAN clients to route traffic over the VPN Gateway, this should be within the subnet already assigned to the LAN.
+	// A LAN IPv4 address in CIDR notation that will be assigned to the VPN Gateway. This will be the private gateway address for LAN clients to route traffic over the VPN Gateway, this should be within the subnet already assigned to the LAN.
 	IPv4Cidr *string `json:"ipv4Cidr,omitempty" tf:"ipv4_cidr,omitempty"`
 
-	// [String] The IPv6 CIDR for the WireGuard Gateway connection.
+	// [String] A LAN IPv6 address in CIDR notation that will be assigned to the VPN Gateway. This will be the private gateway address for LAN clients to route traffic over the VPN Gateway, this should be within the subnet already assigned to the LAN.
+	// A LAN IPv6 address in CIDR notation that will be assigned to the VPN Gateway. This will be the private gateway address for LAN clients to route traffic over the VPN Gateway, this should be within the subnet already assigned to the LAN.
 	IPv6Cidr *string `json:"ipv6Cidr,omitempty" tf:"ipv6_cidr,omitempty"`
 
 	// [String] The ID of the LAN where the WireGuard Gateway is connected.
@@ -51,10 +53,12 @@ type ConnectionsObservation struct {
 	// [String] The ID of the datacenter where the WireGuard Gateway is located.
 	DatacenterID *string `json:"datacenterId,omitempty" tf:"datacenter_id,omitempty"`
 
-	// [String] The IPv4 CIDR for the WireGuard Gateway connection.
+	// [String] A LAN IPv4 address in CIDR notation that will be assigned to the VPN Gateway. This will be the private gateway address for LAN clients to route traffic over the VPN Gateway, this should be within the subnet already assigned to the LAN.
+	// A LAN IPv4 address in CIDR notation that will be assigned to the VPN Gateway. This will be the private gateway address for LAN clients to route traffic over the VPN Gateway, this should be within the subnet already assigned to the LAN.
 	IPv4Cidr *string `json:"ipv4Cidr,omitempty" tf:"ipv4_cidr,omitempty"`
 
-	// [String] The IPv6 CIDR for the WireGuard Gateway connection.
+	// [String] A LAN IPv6 address in CIDR notation that will be assigned to the VPN Gateway. This will be the private gateway address for LAN clients to route traffic over the VPN Gateway, this should be within the subnet already assigned to the LAN.
+	// A LAN IPv6 address in CIDR notation that will be assigned to the VPN Gateway. This will be the private gateway address for LAN clients to route traffic over the VPN Gateway, this should be within the subnet already assigned to the LAN.
 	IPv6Cidr *string `json:"ipv6Cidr,omitempty" tf:"ipv6_cidr,omitempty"`
 
 	// [String] The ID of the LAN where the WireGuard Gateway is connected.
@@ -76,11 +80,13 @@ type ConnectionsParameters struct {
 	// +kubebuilder:validation:Optional
 	DatacenterIDSelector *v1.Selector `json:"datacenterIdSelector,omitempty" tf:"-"`
 
-	// [String] The IPv4 CIDR for the WireGuard Gateway connection.
+	// [String] A LAN IPv4 address in CIDR notation that will be assigned to the VPN Gateway. This will be the private gateway address for LAN clients to route traffic over the VPN Gateway, this should be within the subnet already assigned to the LAN.
+	// A LAN IPv4 address in CIDR notation that will be assigned to the VPN Gateway. This will be the private gateway address for LAN clients to route traffic over the VPN Gateway, this should be within the subnet already assigned to the LAN.
 	// +kubebuilder:validation:Optional
 	IPv4Cidr *string `json:"ipv4Cidr,omitempty" tf:"ipv4_cidr,omitempty"`
 
-	// [String] The IPv6 CIDR for the WireGuard Gateway connection.
+	// [String] A LAN IPv6 address in CIDR notation that will be assigned to the VPN Gateway. This will be the private gateway address for LAN clients to route traffic over the VPN Gateway, this should be within the subnet already assigned to the LAN.
+	// A LAN IPv6 address in CIDR notation that will be assigned to the VPN Gateway. This will be the private gateway address for LAN clients to route traffic over the VPN Gateway, this should be within the subnet already assigned to the LAN.
 	// +kubebuilder:validation:Optional
 	IPv6Cidr *string `json:"ipv6Cidr,omitempty" tf:"ipv6_cidr,omitempty"`
 
@@ -166,9 +172,8 @@ type VpnWireguardGatewayInitParameters struct {
 
 	ListenPort *float64 `json:"listenPort,omitempty" tf:"listen_port,omitempty"`
 
-	// [String] The location of the WireGuard Gateway. Supported locations: de/fra, de/txl, es/vit,
-	// gb/bhx, gb/lhr, us/ewr, us/las, us/mci, fr/par.
-	// The location of the WireGuard Gateway. Supported locations: de/fra, de/txl, es/vit, gb/bhx, gb/lhr, us/ewr, us/las, us/mci, fr/par
+	// [String] The location of the WireGuard Gateway. Supported locations: de/fra, de/fra/2, de/txl, es/vit, gb/bhx, gb/lhr, us/ewr, us/las, us/mci, fr/par.
+	// The location of the WireGuard Gateway. Supported locations: de/fra, de/fra/2, de/txl, es/vit, gb/bhx, gb/lhr, us/ewr, us/las, us/mci, fr/par
 	Location *string `json:"location,omitempty" tf:"location,omitempty"`
 
 	// (Computed) A weekly 4 hour-long window, during which maintenance might occur.
@@ -212,9 +217,8 @@ type VpnWireguardGatewayObservation struct {
 
 	ListenPort *float64 `json:"listenPort,omitempty" tf:"listen_port,omitempty"`
 
-	// [String] The location of the WireGuard Gateway. Supported locations: de/fra, de/txl, es/vit,
-	// gb/bhx, gb/lhr, us/ewr, us/las, us/mci, fr/par.
-	// The location of the WireGuard Gateway. Supported locations: de/fra, de/txl, es/vit, gb/bhx, gb/lhr, us/ewr, us/las, us/mci, fr/par
+	// [String] The location of the WireGuard Gateway. Supported locations: de/fra, de/fra/2, de/txl, es/vit, gb/bhx, gb/lhr, us/ewr, us/las, us/mci, fr/par.
+	// The location of the WireGuard Gateway. Supported locations: de/fra, de/fra/2, de/txl, es/vit, gb/bhx, gb/lhr, us/ewr, us/las, us/mci, fr/par
 	Location *string `json:"location,omitempty" tf:"location,omitempty"`
 
 	// (Computed) A weekly 4 hour-long window, during which maintenance might occur.
@@ -276,9 +280,8 @@ type VpnWireguardGatewayParameters struct {
 	// +kubebuilder:validation:Optional
 	ListenPort *float64 `json:"listenPort,omitempty" tf:"listen_port,omitempty"`
 
-	// [String] The location of the WireGuard Gateway. Supported locations: de/fra, de/txl, es/vit,
-	// gb/bhx, gb/lhr, us/ewr, us/las, us/mci, fr/par.
-	// The location of the WireGuard Gateway. Supported locations: de/fra, de/txl, es/vit, gb/bhx, gb/lhr, us/ewr, us/las, us/mci, fr/par
+	// [String] The location of the WireGuard Gateway. Supported locations: de/fra, de/fra/2, de/txl, es/vit, gb/bhx, gb/lhr, us/ewr, us/las, us/mci, fr/par.
+	// The location of the WireGuard Gateway. Supported locations: de/fra, de/fra/2, de/txl, es/vit, gb/bhx, gb/lhr, us/ewr, us/las, us/mci, fr/par
 	// +kubebuilder:validation:Optional
 	Location *string `json:"location,omitempty" tf:"location,omitempty"`
 

@@ -3,7 +3,7 @@ apiVersion: apiextensions.k8s.io/v1
 kind: CustomResourceDefinition
 metadata:
   annotations:
-    controller-gen.kubebuilder.io/version: v0.18.0
+    controller-gen.kubebuilder.io/version: v0.20.0
   name: servers.compute.ionoscloud.io
 spec:
   group: compute.ionoscloud.io
@@ -35,7 +35,7 @@ spec:
     schema:
       openAPIV3Schema:
         description: Server is the Schema for the Servers API. Creates and manages
-          IonosCloud Server objects.
+          IonosCloud GPU Server objects.
         properties:
           apiVersion:
             description: |-
@@ -80,26 +80,12 @@ spec:
                     type: boolean
                   availabilityZone:
                     description: '[string] The availability zone in which the server
-                      should exist. E.g: AUTO, ZONE_1, ZONE_2. This property is immutable.'
-                    type: string
-                  bootCdrom:
-                    description: |-
-                      DEPRECATED Please refer to ionoscloud_server_boot_device_selection (Computed)[string] The associated boot drive, if any. Must be the UUID of a bootable CDROM image that can be retrieved using the ionoscloud_image data source.
-                      The associated boot drive, if any. Must be the UUID of a bootable CDROM image that you can retrieve using the image data source
+                      should exist. This property is immutable.'
                     type: string
                   bootImage:
                     description: '[string] The image or snapshot UUID / name. May
                       also be an image alias. It is required if licence_type is not
                       provided.'
-                    type: string
-                  cores:
-                    description: (Computed)[integer] Number of server CPU cores.
-                    type: number
-                  cpuFamily:
-                    description: '[string] CPU architecture on which server gets provisioned;
-                      not all CPU architectures are available in all datacenter regions;
-                      available CPU architectures can be retrieved from the datacenter
-                      resource. E.g.: "INTEL_SKYLAKE" or "INTEL_XEON".'
                     type: string
                   datacenterId:
                     description: '[string] The ID of a Virtual Data Center.'
@@ -180,14 +166,9 @@ spec:
                             type: string
                         type: object
                     type: object
-                  firewallruleIds:
-                    description: (Computed) The associated firewall rules.
-                    items:
-                      type: string
-                    type: array
                   hostname:
                     description: |-
-                      (Computed)[string] The hostname of the resource. Allowed characters are a-z, 0-9 and - (minus). Hostname should not start with minus and should not be longer than 63 characters. If no value provided explicitly, it will be populated with the name of the server
+                      (Computed) The hostname of the resource. Allowed characters are a-z, 0-9 and - (minus). Hostname should not start with minus and should not be longer than 63 characters. If no value provided explicitly, it will be populated with the name of the server.
                       The hostname of the resource. Allowed characters are a-z, 0-9 and - (minus). Hostname should not start with minus and should not be longer than 63 characters. If no value provided explicitly, it will be populated with the name of the server
                     type: string
                   imageName:
@@ -212,21 +193,6 @@ spec:
                     - name
                     - namespace
                     type: object
-                  label:
-                    description: '[set] A label can be seen as an object with only
-                      two required fields: key and value, both of the string type.
-                      Please check the example presented above to see how a label
-                      can be used in the plan. A server can have multiple labels.'
-                    items:
-                      properties:
-                        key:
-                          description: '[string] The key of the label.'
-                          type: string
-                        value:
-                          description: '[string] The value of the label.'
-                          type: string
-                      type: object
-                    type: array
                   name:
                     description: '[string] The name of the server.'
                     type: string
@@ -240,46 +206,35 @@ spec:
                           through DHCP.
                         type: boolean
                       firewall:
-                        description: |-
-                          Allows to define firewall rules inline in the server. See the Firewall section.
-                          Firewall rules created in the server resource. The rules can also be created as separate resources outside the server resource
-                        items:
-                          properties:
-                            icmpCode:
-                              type: string
-                            icmpType:
-                              description: '(Computed)[string] Server usages: * type
-                                - Server usages: ENTERPRISE now named dedicated core,
-                                CUBE or VCPU. This property is immutable.'
-                              type: string
-                            name:
-                              description: '[string] The name of the server.'
-                              type: string
-                            portRangeEnd:
-                              type: number
-                            portRangeStart:
-                              type: number
-                            protocol:
-                              type: string
-                            sourceIp:
-                              type: string
-                            sourceMac:
-                              type: string
-                            targetIp:
-                              type: string
-                            type:
-                              description: '(Computed)[string] Server usages: * type
-                                - Server usages: ENTERPRISE now named dedicated core,
-                                CUBE or VCPU. This property is immutable.'
-                              type: string
-                          type: object
-                        type: array
+                        description: Firewall rules created in the server resource.
+                          The rules can also be created as separate resources outside
+                          the server resource
+                        properties:
+                          icmpCode:
+                            type: string
+                          icmpType:
+                            type: string
+                          name:
+                            description: '[string] The name of the server.'
+                            type: string
+                          portRangeEnd:
+                            type: number
+                          portRangeStart:
+                            type: number
+                          protocol:
+                            type: string
+                          sourceIp:
+                            type: string
+                          sourceMac:
+                            type: string
+                          targetIp:
+                            type: string
+                          type:
+                            type: string
+                        type: object
                       firewallActive:
                         type: boolean
                       firewallType:
-                        description: '(Computed)[string] Server usages: * type - Server
-                          usages: ENTERPRISE now named dedicated core, CUBE or VCPU.
-                          This property is immutable.'
                         type: string
                       ips:
                         description: Collection of IP addresses assigned to a nic.
@@ -289,6 +244,7 @@ spec:
                         items:
                           type: string
                         type: array
+                        x-kubernetes-list-type: set
                       ipv6CidrBlock:
                         description: IPv6 CIDR block assigned to the NIC.
                         type: string
@@ -299,6 +255,7 @@ spec:
                         items:
                           type: string
                         type: array
+                        x-kubernetes-list-type: set
                       lan:
                         type: number
                       lanRef:
@@ -382,61 +339,44 @@ spec:
                         type: string
                       securityGroupsIds:
                         description: |-
-                          The list of Security Group IDs for the
+                          The list of Security Group IDs for the resource.
                           The list of Security Group IDs for the NIC
                         items:
                           type: string
                         type: array
                         x-kubernetes-list-type: set
                     type: object
-                  ram:
-                    description: (Computed)[integer] The amount of memory for the
-                      server in MB.
-                    type: number
                   securityGroupsIds:
                     description: |-
-                      The list of Security Group IDs for the
+                      The list of Security Group IDs for the resource.
                       The list of Security Group IDs for the server
                     items:
                       type: string
                     type: array
                     x-kubernetes-list-type: set
                   sshKeyPath:
-                    description: |-
-                      [list] List of absolute paths to files containing a public SSH key that will be injected into IonosCloud provided Linux images.  Also accepts ssh keys directly. Required for IonosCloud Linux images. Required if image_password is not provided. Does not support ~ expansion to homedir in the given path. This property is immutable.
-                      Immutable List of absolute or relative paths to files containing public SSH key that will be injected into IonosCloud provided Linux images. Does not support `~` expansion to homedir in the given path. Public SSH keys are set on the image as authorized keys for appropriate SSH login to the instance using the corresponding private key. This field may only be set in creation requests. When reading, it always returns null. SSH keys are only supported if a public Linux image is used for the volume creation. This property is immutable.
-                    items:
-                      type: string
-                    type: array
-                  sshKeys:
-                    description: |-
-                      [list] Immutable List of absolute or relative paths to files containing public SSH key that will be injected into IonosCloud provided Linux images. Also accepts ssh keys directly. Public SSH keys are set on the image as authorized keys for appropriate SSH login to the instance using the corresponding private key. This field may only be set in creation requests. When reading, it always returns null. SSH keys are only supported if a public Linux image is used for the volume creation. Does not support ~ expansion to homedir in the given path.
-                      Public SSH keys are set on the image as authorized keys for appropriate SSH login to the instance using the corresponding private key. This field may only be set in creation requests. When reading, it always returns null. SSH keys are only supported if a public Linux image is used for the volume creation.
+                    description: '[list] List of paths to files containing a public
+                      SSH key that will be injected into IonosCloud provided Linux
+                      images. Required for IonosCloud Linux images. Required if image_password
+                      is not provided.'
                     items:
                       type: string
                     type: array
                   templateUuid:
-                    description: '[string] The UUID of the template for creating a
-                      CUBE server; the available templates for CUBE servers can be
-                      found on the templates resource'
-                    type: string
-                  type:
-                    description: |-
-                      (Computed)[string] Server usages: * type - Server usages: ENTERPRISE now named dedicated core, CUBE or VCPU. This property is immutable.
-                      server usages: ENTERPRISE or CUBE
+                    description: '[string] The UUID of the template used for creating
+                      a GPU server.'
                     type: string
                   vmState:
                     description: |-
-                      [string] Sets the power state of the server. E.g: RUNNING, SHUTOFF or SUSPENDED. SUSPENDED state is only valid for cube. SHUTOFF state is only valid for enterprise(dedicated core).
-                      Sets the power state of the server. Possible values: `RUNNING`, `SHUTOFF` or `SUSPENDED`. SUSPENDED state is only valid for cube. SHUTOFF state is only valid for enterprise
+                      [string] Sets the power state of the GPU server. E.g: RUNNING or SUSPENDED.
+                      Sets the power state of the gpu server. Possible values: `RUNNING` or `SUSPENDED`.
                     type: string
                   volume:
                     description: See the Volume section.
                     properties:
                       availabilityZone:
                         description: '[string] The availability zone in which the
-                          server should exist. E.g: AUTO, ZONE_1, ZONE_2. This property
-                          is immutable.'
+                          server should exist. This property is immutable.'
                         type: string
                       backupUnitId:
                         description: The uuid of the Backup Unit that user has access
@@ -448,9 +388,6 @@ spec:
                       bus:
                         type: string
                       diskType:
-                        description: '(Computed)[string] Server usages: * type - Server
-                          usages: ENTERPRISE now named dedicated core, CUBE or VCPU.
-                          This property is immutable.'
                         type: string
                       exposeSerial:
                         description: If set to `true` will expose the serial id of
@@ -460,32 +397,16 @@ spec:
                           Exposing the serial can influence licensed software (e.g.
                           Windows) behavior
                         type: boolean
-                      imagePassword:
-                        description: '[string] Required if ssh_key_path is not provided.'
-                        type: string
                       licenceType:
                         description: '[string] Sets the OS type of the server.'
                         type: string
                       name:
                         description: '[string] The name of the server.'
                         type: string
-                      size:
-                        description: The size of the volume in GB.
-                        type: number
-                      sshKeyPath:
-                        description: |-
-                          [list] List of absolute paths to files containing a public SSH key that will be injected into IonosCloud provided Linux images.  Also accepts ssh keys directly. Required for IonosCloud Linux images. Required if image_password is not provided. Does not support ~ expansion to homedir in the given path. This property is immutable.
-                          Public SSH keys are set on the image as authorized keys for appropriate SSH login to the instance using the corresponding private key. This field may only be set in creation requests. When reading, it always returns null. SSH keys are only supported if a public Linux image is used for the volume creation.
-                        items:
-                          type: string
-                        type: array
-                      sshKeys:
-                        description: |-
-                          [list] Immutable List of absolute or relative paths to files containing public SSH key that will be injected into IonosCloud provided Linux images. Also accepts ssh keys directly. Public SSH keys are set on the image as authorized keys for appropriate SSH login to the instance using the corresponding private key. This field may only be set in creation requests. When reading, it always returns null. SSH keys are only supported if a public Linux image is used for the volume creation. Does not support ~ expansion to homedir in the given path.
-                          Public SSH keys are set on the image as authorized keys for appropriate SSH login to the instance using the corresponding private key. This field may only be set in creation requests. When reading, it always returns null. SSH keys are only supported if a public Linux image is used for the volume creation.
-                        items:
-                          type: string
-                        type: array
+                      requireLegacyBios:
+                        description: Indicates if the image requires the legacy BIOS
+                          for compatibility or specific needs.
+                        type: boolean
                       userData:
                         description: The cloud-init configuration for the volume as
                           base64 encoded string. The property is immutable and is
@@ -515,26 +436,12 @@ spec:
                     type: boolean
                   availabilityZone:
                     description: '[string] The availability zone in which the server
-                      should exist. E.g: AUTO, ZONE_1, ZONE_2. This property is immutable.'
-                    type: string
-                  bootCdrom:
-                    description: |-
-                      DEPRECATED Please refer to ionoscloud_server_boot_device_selection (Computed)[string] The associated boot drive, if any. Must be the UUID of a bootable CDROM image that can be retrieved using the ionoscloud_image data source.
-                      The associated boot drive, if any. Must be the UUID of a bootable CDROM image that you can retrieve using the image data source
+                      should exist. This property is immutable.'
                     type: string
                   bootImage:
                     description: '[string] The image or snapshot UUID / name. May
                       also be an image alias. It is required if licence_type is not
                       provided.'
-                    type: string
-                  cores:
-                    description: (Computed)[integer] Number of server CPU cores.
-                    type: number
-                  cpuFamily:
-                    description: '[string] CPU architecture on which server gets provisioned;
-                      not all CPU architectures are available in all datacenter regions;
-                      available CPU architectures can be retrieved from the datacenter
-                      resource. E.g.: "INTEL_SKYLAKE" or "INTEL_XEON".'
                     type: string
                   datacenterId:
                     description: '[string] The ID of a Virtual Data Center.'
@@ -615,14 +522,9 @@ spec:
                             type: string
                         type: object
                     type: object
-                  firewallruleIds:
-                    description: (Computed) The associated firewall rules.
-                    items:
-                      type: string
-                    type: array
                   hostname:
                     description: |-
-                      (Computed)[string] The hostname of the resource. Allowed characters are a-z, 0-9 and - (minus). Hostname should not start with minus and should not be longer than 63 characters. If no value provided explicitly, it will be populated with the name of the server
+                      (Computed) The hostname of the resource. Allowed characters are a-z, 0-9 and - (minus). Hostname should not start with minus and should not be longer than 63 characters. If no value provided explicitly, it will be populated with the name of the server.
                       The hostname of the resource. Allowed characters are a-z, 0-9 and - (minus). Hostname should not start with minus and should not be longer than 63 characters. If no value provided explicitly, it will be populated with the name of the server
                     type: string
                   imageName:
@@ -647,21 +549,6 @@ spec:
                     - name
                     - namespace
                     type: object
-                  label:
-                    description: '[set] A label can be seen as an object with only
-                      two required fields: key and value, both of the string type.
-                      Please check the example presented above to see how a label
-                      can be used in the plan. A server can have multiple labels.'
-                    items:
-                      properties:
-                        key:
-                          description: '[string] The key of the label.'
-                          type: string
-                        value:
-                          description: '[string] The value of the label.'
-                          type: string
-                      type: object
-                    type: array
                   name:
                     description: '[string] The name of the server.'
                     type: string
@@ -675,46 +562,35 @@ spec:
                           through DHCP.
                         type: boolean
                       firewall:
-                        description: |-
-                          Allows to define firewall rules inline in the server. See the Firewall section.
-                          Firewall rules created in the server resource. The rules can also be created as separate resources outside the server resource
-                        items:
-                          properties:
-                            icmpCode:
-                              type: string
-                            icmpType:
-                              description: '(Computed)[string] Server usages: * type
-                                - Server usages: ENTERPRISE now named dedicated core,
-                                CUBE or VCPU. This property is immutable.'
-                              type: string
-                            name:
-                              description: '[string] The name of the server.'
-                              type: string
-                            portRangeEnd:
-                              type: number
-                            portRangeStart:
-                              type: number
-                            protocol:
-                              type: string
-                            sourceIp:
-                              type: string
-                            sourceMac:
-                              type: string
-                            targetIp:
-                              type: string
-                            type:
-                              description: '(Computed)[string] Server usages: * type
-                                - Server usages: ENTERPRISE now named dedicated core,
-                                CUBE or VCPU. This property is immutable.'
-                              type: string
-                          type: object
-                        type: array
+                        description: Firewall rules created in the server resource.
+                          The rules can also be created as separate resources outside
+                          the server resource
+                        properties:
+                          icmpCode:
+                            type: string
+                          icmpType:
+                            type: string
+                          name:
+                            description: '[string] The name of the server.'
+                            type: string
+                          portRangeEnd:
+                            type: number
+                          portRangeStart:
+                            type: number
+                          protocol:
+                            type: string
+                          sourceIp:
+                            type: string
+                          sourceMac:
+                            type: string
+                          targetIp:
+                            type: string
+                          type:
+                            type: string
+                        type: object
                       firewallActive:
                         type: boolean
                       firewallType:
-                        description: '(Computed)[string] Server usages: * type - Server
-                          usages: ENTERPRISE now named dedicated core, CUBE or VCPU.
-                          This property is immutable.'
                         type: string
                       ips:
                         description: Collection of IP addresses assigned to a nic.
@@ -724,6 +600,7 @@ spec:
                         items:
                           type: string
                         type: array
+                        x-kubernetes-list-type: set
                       ipv6CidrBlock:
                         description: IPv6 CIDR block assigned to the NIC.
                         type: string
@@ -734,6 +611,7 @@ spec:
                         items:
                           type: string
                         type: array
+                        x-kubernetes-list-type: set
                       lan:
                         type: number
                       lanRef:
@@ -817,61 +695,44 @@ spec:
                         type: string
                       securityGroupsIds:
                         description: |-
-                          The list of Security Group IDs for the
+                          The list of Security Group IDs for the resource.
                           The list of Security Group IDs for the NIC
                         items:
                           type: string
                         type: array
                         x-kubernetes-list-type: set
                     type: object
-                  ram:
-                    description: (Computed)[integer] The amount of memory for the
-                      server in MB.
-                    type: number
                   securityGroupsIds:
                     description: |-
-                      The list of Security Group IDs for the
+                      The list of Security Group IDs for the resource.
                       The list of Security Group IDs for the server
                     items:
                       type: string
                     type: array
                     x-kubernetes-list-type: set
                   sshKeyPath:
-                    description: |-
-                      [list] List of absolute paths to files containing a public SSH key that will be injected into IonosCloud provided Linux images.  Also accepts ssh keys directly. Required for IonosCloud Linux images. Required if image_password is not provided. Does not support ~ expansion to homedir in the given path. This property is immutable.
-                      Immutable List of absolute or relative paths to files containing public SSH key that will be injected into IonosCloud provided Linux images. Does not support `~` expansion to homedir in the given path. Public SSH keys are set on the image as authorized keys for appropriate SSH login to the instance using the corresponding private key. This field may only be set in creation requests. When reading, it always returns null. SSH keys are only supported if a public Linux image is used for the volume creation. This property is immutable.
-                    items:
-                      type: string
-                    type: array
-                  sshKeys:
-                    description: |-
-                      [list] Immutable List of absolute or relative paths to files containing public SSH key that will be injected into IonosCloud provided Linux images. Also accepts ssh keys directly. Public SSH keys are set on the image as authorized keys for appropriate SSH login to the instance using the corresponding private key. This field may only be set in creation requests. When reading, it always returns null. SSH keys are only supported if a public Linux image is used for the volume creation. Does not support ~ expansion to homedir in the given path.
-                      Public SSH keys are set on the image as authorized keys for appropriate SSH login to the instance using the corresponding private key. This field may only be set in creation requests. When reading, it always returns null. SSH keys are only supported if a public Linux image is used for the volume creation.
+                    description: '[list] List of paths to files containing a public
+                      SSH key that will be injected into IonosCloud provided Linux
+                      images. Required for IonosCloud Linux images. Required if image_password
+                      is not provided.'
                     items:
                       type: string
                     type: array
                   templateUuid:
-                    description: '[string] The UUID of the template for creating a
-                      CUBE server; the available templates for CUBE servers can be
-                      found on the templates resource'
-                    type: string
-                  type:
-                    description: |-
-                      (Computed)[string] Server usages: * type - Server usages: ENTERPRISE now named dedicated core, CUBE or VCPU. This property is immutable.
-                      server usages: ENTERPRISE or CUBE
+                    description: '[string] The UUID of the template used for creating
+                      a GPU server.'
                     type: string
                   vmState:
                     description: |-
-                      [string] Sets the power state of the server. E.g: RUNNING, SHUTOFF or SUSPENDED. SUSPENDED state is only valid for cube. SHUTOFF state is only valid for enterprise(dedicated core).
-                      Sets the power state of the server. Possible values: `RUNNING`, `SHUTOFF` or `SUSPENDED`. SUSPENDED state is only valid for cube. SHUTOFF state is only valid for enterprise
+                      [string] Sets the power state of the GPU server. E.g: RUNNING or SUSPENDED.
+                      Sets the power state of the gpu server. Possible values: `RUNNING` or `SUSPENDED`.
                     type: string
                   volume:
                     description: See the Volume section.
                     properties:
                       availabilityZone:
                         description: '[string] The availability zone in which the
-                          server should exist. E.g: AUTO, ZONE_1, ZONE_2. This property
-                          is immutable.'
+                          server should exist. This property is immutable.'
                         type: string
                       backupUnitId:
                         description: The uuid of the Backup Unit that user has access
@@ -883,9 +744,6 @@ spec:
                       bus:
                         type: string
                       diskType:
-                        description: '(Computed)[string] Server usages: * type - Server
-                          usages: ENTERPRISE now named dedicated core, CUBE or VCPU.
-                          This property is immutable.'
                         type: string
                       exposeSerial:
                         description: If set to `true` will expose the serial id of
@@ -895,32 +753,16 @@ spec:
                           Exposing the serial can influence licensed software (e.g.
                           Windows) behavior
                         type: boolean
-                      imagePassword:
-                        description: '[string] Required if ssh_key_path is not provided.'
-                        type: string
                       licenceType:
                         description: '[string] Sets the OS type of the server.'
                         type: string
                       name:
                         description: '[string] The name of the server.'
                         type: string
-                      size:
-                        description: The size of the volume in GB.
-                        type: number
-                      sshKeyPath:
-                        description: |-
-                          [list] List of absolute paths to files containing a public SSH key that will be injected into IonosCloud provided Linux images.  Also accepts ssh keys directly. Required for IonosCloud Linux images. Required if image_password is not provided. Does not support ~ expansion to homedir in the given path. This property is immutable.
-                          Public SSH keys are set on the image as authorized keys for appropriate SSH login to the instance using the corresponding private key. This field may only be set in creation requests. When reading, it always returns null. SSH keys are only supported if a public Linux image is used for the volume creation.
-                        items:
-                          type: string
-                        type: array
-                      sshKeys:
-                        description: |-
-                          [list] Immutable List of absolute or relative paths to files containing public SSH key that will be injected into IonosCloud provided Linux images. Also accepts ssh keys directly. Public SSH keys are set on the image as authorized keys for appropriate SSH login to the instance using the corresponding private key. This field may only be set in creation requests. When reading, it always returns null. SSH keys are only supported if a public Linux image is used for the volume creation. Does not support ~ expansion to homedir in the given path.
-                          Public SSH keys are set on the image as authorized keys for appropriate SSH login to the instance using the corresponding private key. This field may only be set in creation requests. When reading, it always returns null. SSH keys are only supported if a public Linux image is used for the volume creation.
-                        items:
-                          type: string
-                        type: array
+                      requireLegacyBios:
+                        description: Indicates if the image requires the legacy BIOS
+                          for compatibility or specific needs.
+                        type: boolean
                       userData:
                         description: The cloud-init configuration for the volume as
                           base64 encoded string. The property is immutable and is
@@ -1021,6 +863,14 @@ spec:
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
                 || ''Update'' in self.managementPolicies) || has(self.forProvider.name)
                 || (has(self.initProvider) && has(self.initProvider.name))'
+            - message: spec.forProvider.templateUuid is a required parameter
+              rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
+                || ''Update'' in self.managementPolicies) || has(self.forProvider.templateUuid)
+                || (has(self.initProvider) && has(self.initProvider.templateUuid))'
+            - message: spec.forProvider.volume is a required parameter
+              rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
+                || ''Update'' in self.managementPolicies) || has(self.forProvider.volume)
+                || (has(self.initProvider) && has(self.initProvider.volume))'
           status:
             description: ServerStatus defines the observed state of Server.
             properties:
@@ -1033,12 +883,7 @@ spec:
                     type: boolean
                   availabilityZone:
                     description: '[string] The availability zone in which the server
-                      should exist. E.g: AUTO, ZONE_1, ZONE_2. This property is immutable.'
-                    type: string
-                  bootCdrom:
-                    description: |-
-                      DEPRECATED Please refer to ionoscloud_server_boot_device_selection (Computed)[string] The associated boot drive, if any. Must be the UUID of a bootable CDROM image that can be retrieved using the ionoscloud_image data source.
-                      The associated boot drive, if any. Must be the UUID of a bootable CDROM image that you can retrieve using the image data source
+                      should exist. This property is immutable.'
                     type: string
                   bootImage:
                     description: '[string] The image or snapshot UUID / name. May
@@ -1048,29 +893,15 @@ spec:
                   bootVolume:
                     description: (Computed) The associated boot volume.
                     type: string
-                  cores:
-                    description: (Computed)[integer] Number of server CPU cores.
-                    type: number
-                  cpuFamily:
-                    description: '[string] CPU architecture on which server gets provisioned;
-                      not all CPU architectures are available in all datacenter regions;
-                      available CPU architectures can be retrieved from the datacenter
-                      resource. E.g.: "INTEL_SKYLAKE" or "INTEL_XEON".'
-                    type: string
                   datacenterId:
                     description: '[string] The ID of a Virtual Data Center.'
                     type: string
                   firewallruleId:
                     description: (Computed) The associated firewall rule.
                     type: string
-                  firewallruleIds:
-                    description: (Computed) The associated firewall rules.
-                    items:
-                      type: string
-                    type: array
                   hostname:
                     description: |-
-                      (Computed)[string] The hostname of the resource. Allowed characters are a-z, 0-9 and - (minus). Hostname should not start with minus and should not be longer than 63 characters. If no value provided explicitly, it will be populated with the name of the server
+                      (Computed) The hostname of the resource. Allowed characters are a-z, 0-9 and - (minus). Hostname should not start with minus and should not be longer than 63 characters. If no value provided explicitly, it will be populated with the name of the server.
                       The hostname of the resource. Allowed characters are a-z, 0-9 and - (minus). Hostname should not start with minus and should not be longer than 63 characters. If no value provided explicitly, it will be populated with the name of the server
                     type: string
                   id:
@@ -1081,26 +912,10 @@ spec:
                       provided. Attribute is immutable.'
                     type: string
                   inlineVolumeIds:
-                    description: |-
-                      (Computed) A list with the IDs for the volumes that are defined inside the server resource.
-                      A list that contains the IDs for the volumes defined inside the server resource.
+                    description: A list that contains the IDs for the volumes defined
+                      inside the gpu server resource.
                     items:
                       type: string
-                    type: array
-                  label:
-                    description: '[set] A label can be seen as an object with only
-                      two required fields: key and value, both of the string type.
-                      Please check the example presented above to see how a label
-                      can be used in the plan. A server can have multiple labels.'
-                    items:
-                      properties:
-                        key:
-                          description: '[string] The key of the label.'
-                          type: string
-                        value:
-                          description: '[string] The value of the label.'
-                          type: string
-                      type: object
                     type: array
                   name:
                     description: '[string] The name of the server.'
@@ -1117,48 +932,37 @@ spec:
                           through DHCP.
                         type: boolean
                       firewall:
-                        description: |-
-                          Allows to define firewall rules inline in the server. See the Firewall section.
-                          Firewall rules created in the server resource. The rules can also be created as separate resources outside the server resource
-                        items:
-                          properties:
-                            icmpCode:
-                              type: string
-                            icmpType:
-                              description: '(Computed)[string] Server usages: * type
-                                - Server usages: ENTERPRISE now named dedicated core,
-                                CUBE or VCPU. This property is immutable.'
-                              type: string
-                            id:
-                              type: string
-                            name:
-                              description: '[string] The name of the server.'
-                              type: string
-                            portRangeEnd:
-                              type: number
-                            portRangeStart:
-                              type: number
-                            protocol:
-                              type: string
-                            sourceIp:
-                              type: string
-                            sourceMac:
-                              type: string
-                            targetIp:
-                              type: string
-                            type:
-                              description: '(Computed)[string] Server usages: * type
-                                - Server usages: ENTERPRISE now named dedicated core,
-                                CUBE or VCPU. This property is immutable.'
-                              type: string
-                          type: object
-                        type: array
+                        description: Firewall rules created in the server resource.
+                          The rules can also be created as separate resources outside
+                          the server resource
+                        properties:
+                          icmpCode:
+                            type: string
+                          icmpType:
+                            type: string
+                          id:
+                            type: string
+                          name:
+                            description: '[string] The name of the server.'
+                            type: string
+                          portRangeEnd:
+                            type: number
+                          portRangeStart:
+                            type: number
+                          protocol:
+                            type: string
+                          sourceIp:
+                            type: string
+                          sourceMac:
+                            type: string
+                          targetIp:
+                            type: string
+                          type:
+                            type: string
+                        type: object
                       firewallActive:
                         type: boolean
                       firewallType:
-                        description: '(Computed)[string] Server usages: * type - Server
-                          usages: ENTERPRISE now named dedicated core, CUBE or VCPU.
-                          This property is immutable.'
                         type: string
                       id:
                         type: string
@@ -1170,6 +974,7 @@ spec:
                         items:
                           type: string
                         type: array
+                        x-kubernetes-list-type: set
                       ipv6CidrBlock:
                         description: IPv6 CIDR block assigned to the NIC.
                         type: string
@@ -1180,6 +985,7 @@ spec:
                         items:
                           type: string
                         type: array
+                        x-kubernetes-list-type: set
                       lan:
                         type: number
                       mac:
@@ -1191,7 +997,7 @@ spec:
                         type: number
                       securityGroupsIds:
                         description: |-
-                          The list of Security Group IDs for the
+                          The list of Security Group IDs for the resource.
                           The list of Security Group IDs for the NIC
                         items:
                           type: string
@@ -1202,58 +1008,39 @@ spec:
                     description: (Computed) The associated IP address.
                     type: string
                   primaryNic:
-                    description: |-
-                      (Computed) The associated NIC.
-                      Id of the primary network interface
+                    description: (Computed) The associated NIC.
                     type: string
-                  ram:
-                    description: (Computed)[integer] The amount of memory for the
-                      server in MB.
-                    type: number
                   securityGroupsIds:
                     description: |-
-                      The list of Security Group IDs for the
+                      The list of Security Group IDs for the resource.
                       The list of Security Group IDs for the server
                     items:
                       type: string
                     type: array
                     x-kubernetes-list-type: set
                   sshKeyPath:
-                    description: |-
-                      [list] List of absolute paths to files containing a public SSH key that will be injected into IonosCloud provided Linux images.  Also accepts ssh keys directly. Required for IonosCloud Linux images. Required if image_password is not provided. Does not support ~ expansion to homedir in the given path. This property is immutable.
-                      Immutable List of absolute or relative paths to files containing public SSH key that will be injected into IonosCloud provided Linux images. Does not support `~` expansion to homedir in the given path. Public SSH keys are set on the image as authorized keys for appropriate SSH login to the instance using the corresponding private key. This field may only be set in creation requests. When reading, it always returns null. SSH keys are only supported if a public Linux image is used for the volume creation. This property is immutable.
-                    items:
-                      type: string
-                    type: array
-                  sshKeys:
-                    description: |-
-                      [list] Immutable List of absolute or relative paths to files containing public SSH key that will be injected into IonosCloud provided Linux images. Also accepts ssh keys directly. Public SSH keys are set on the image as authorized keys for appropriate SSH login to the instance using the corresponding private key. This field may only be set in creation requests. When reading, it always returns null. SSH keys are only supported if a public Linux image is used for the volume creation. Does not support ~ expansion to homedir in the given path.
-                      Public SSH keys are set on the image as authorized keys for appropriate SSH login to the instance using the corresponding private key. This field may only be set in creation requests. When reading, it always returns null. SSH keys are only supported if a public Linux image is used for the volume creation.
+                    description: '[list] List of paths to files containing a public
+                      SSH key that will be injected into IonosCloud provided Linux
+                      images. Required for IonosCloud Linux images. Required if image_password
+                      is not provided.'
                     items:
                       type: string
                     type: array
                   templateUuid:
-                    description: '[string] The UUID of the template for creating a
-                      CUBE server; the available templates for CUBE servers can be
-                      found on the templates resource'
-                    type: string
-                  type:
-                    description: |-
-                      (Computed)[string] Server usages: * type - Server usages: ENTERPRISE now named dedicated core, CUBE or VCPU. This property is immutable.
-                      server usages: ENTERPRISE or CUBE
+                    description: '[string] The UUID of the template used for creating
+                      a GPU server.'
                     type: string
                   vmState:
                     description: |-
-                      [string] Sets the power state of the server. E.g: RUNNING, SHUTOFF or SUSPENDED. SUSPENDED state is only valid for cube. SHUTOFF state is only valid for enterprise(dedicated core).
-                      Sets the power state of the server. Possible values: `RUNNING`, `SHUTOFF` or `SUSPENDED`. SUSPENDED state is only valid for cube. SHUTOFF state is only valid for enterprise
+                      [string] Sets the power state of the GPU server. E.g: RUNNING or SUSPENDED.
+                      Sets the power state of the gpu server. Possible values: `RUNNING` or `SUSPENDED`.
                     type: string
                   volume:
                     description: See the Volume section.
                     properties:
                       availabilityZone:
                         description: '[string] The availability zone in which the
-                          server should exist. E.g: AUTO, ZONE_1, ZONE_2. This property
-                          is immutable.'
+                          server should exist. This property is immutable.'
                         type: string
                       backupUnitId:
                         description: The uuid of the Backup Unit that user has access
@@ -1276,9 +1063,6 @@ spec:
                       discVirtioHotUnplug:
                         type: boolean
                       diskType:
-                        description: '(Computed)[string] Server usages: * type - Server
-                          usages: ENTERPRISE now named dedicated core, CUBE or VCPU.
-                          This property is immutable.'
                         type: string
                       exposeSerial:
                         description: If set to `true` will expose the serial id of
@@ -1288,9 +1072,6 @@ spec:
                           Exposing the serial can influence licensed software (e.g.
                           Windows) behavior
                         type: boolean
-                      imagePassword:
-                        description: '[string] Required if ssh_key_path is not provided.'
-                        type: string
                       licenceType:
                         description: '[string] Sets the OS type of the server.'
                         type: string
@@ -1305,23 +1086,10 @@ spec:
                         type: number
                       ramHotPlug:
                         type: boolean
-                      size:
-                        description: The size of the volume in GB.
-                        type: number
-                      sshKeyPath:
-                        description: |-
-                          [list] List of absolute paths to files containing a public SSH key that will be injected into IonosCloud provided Linux images.  Also accepts ssh keys directly. Required for IonosCloud Linux images. Required if image_password is not provided. Does not support ~ expansion to homedir in the given path. This property is immutable.
-                          Public SSH keys are set on the image as authorized keys for appropriate SSH login to the instance using the corresponding private key. This field may only be set in creation requests. When reading, it always returns null. SSH keys are only supported if a public Linux image is used for the volume creation.
-                        items:
-                          type: string
-                        type: array
-                      sshKeys:
-                        description: |-
-                          [list] Immutable List of absolute or relative paths to files containing public SSH key that will be injected into IonosCloud provided Linux images. Also accepts ssh keys directly. Public SSH keys are set on the image as authorized keys for appropriate SSH login to the instance using the corresponding private key. This field may only be set in creation requests. When reading, it always returns null. SSH keys are only supported if a public Linux image is used for the volume creation. Does not support ~ expansion to homedir in the given path.
-                          Public SSH keys are set on the image as authorized keys for appropriate SSH login to the instance using the corresponding private key. This field may only be set in creation requests. When reading, it always returns null. SSH keys are only supported if a public Linux image is used for the volume creation.
-                        items:
-                          type: string
-                        type: array
+                      requireLegacyBios:
+                        description: Indicates if the image requires the legacy BIOS
+                          for compatibility or specific needs.
+                        type: boolean
                       userData:
                         description: The cloud-init configuration for the volume as
                           base64 encoded string. The property is immutable and is

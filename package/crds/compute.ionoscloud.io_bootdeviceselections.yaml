@@ -3,7 +3,7 @@ apiVersion: apiextensions.k8s.io/v1
 kind: CustomResourceDefinition
 metadata:
   annotations:
-    controller-gen.kubebuilder.io/version: v0.18.0
+    controller-gen.kubebuilder.io/version: v0.20.0
   name: bootdeviceselections.compute.ionoscloud.io
 spec:
   group: compute.ionoscloud.io
@@ -237,7 +237,7 @@ spec:
                       selected.
                     type: string
                   serverIdRef:
-                    description: Reference to a Server in compute to populate serverId.
+                    description: Reference to a GPUServer in compute to populate serverId.
                     properties:
                       name:
                         description: Name of the referenced object.
@@ -271,7 +271,7 @@ spec:
                     - name
                     type: object
                   serverIdSelector:
-                    description: Selector for a Server in compute to populate serverId.
+                    description: Selector for a GPUServer in compute to populate serverId.
                     properties:
                       matchControllerRef:
                         description: |-
@@ -488,7 +488,7 @@ spec:
                       selected.
                     type: string
                   serverIdRef:
-                    description: Reference to a Server in compute to populate serverId.
+                    description: Reference to a GPUServer in compute to populate serverId.
                     properties:
                       name:
                         description: Name of the referenced object.
@@ -522,7 +522,7 @@ spec:
                     - name
                     type: object
                   serverIdSelector:
-                    description: Selector for a Server in compute to populate serverId.
+                    description: Selector for a GPUServer in compute to populate serverId.
                     properties:
                       matchControllerRef:
                         description: |-

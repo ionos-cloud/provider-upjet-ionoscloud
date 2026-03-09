@@ -92,6 +92,10 @@ type GroupInitParameters struct {
 	// [Boolean] The group will be allowed to create snapshots.
 	CreateSnapshot *bool `json:"createSnapshot,omitempty" tf:"create_snapshot,omitempty"`
 
+	// [Boolean] When set to true, information about users will be stored in state under users attribute, default value is true.
+	// When set to true, information about users will be stored in state
+	GetUsersData *bool `json:"getUsersData,omitempty" tf:"get_users_data,omitempty"`
+
 	// [Boolean]  The group will be allowed to access and manage the Data Platform.
 	// Privilege for a group to access and manage the Data Platform.
 	ManageDataplatform *bool `json:"manageDataplatform,omitempty" tf:"manage_dataplatform,omitempty"`
@@ -207,6 +211,10 @@ type GroupObservation struct {
 
 	// [Boolean] The group will be allowed to create snapshots.
 	CreateSnapshot *bool `json:"createSnapshot,omitempty" tf:"create_snapshot,omitempty"`
+
+	// [Boolean] When set to true, information about users will be stored in state under users attribute, default value is true.
+	// When set to true, information about users will be stored in state
+	GetUsersData *bool `json:"getUsersData,omitempty" tf:"get_users_data,omitempty"`
 
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
@@ -340,6 +348,11 @@ type GroupParameters struct {
 	// +kubebuilder:validation:Optional
 	CreateSnapshot *bool `json:"createSnapshot,omitempty" tf:"create_snapshot,omitempty"`
 
+	// [Boolean] When set to true, information about users will be stored in state under users attribute, default value is true.
+	// When set to true, information about users will be stored in state
+	// +kubebuilder:validation:Optional
+	GetUsersData *bool `json:"getUsersData,omitempty" tf:"get_users_data,omitempty"`
+
 	// [Boolean]  The group will be allowed to access and manage the Data Platform.
 	// Privilege for a group to access and manage the Data Platform.
 	// +kubebuilder:validation:Optional
@@ -403,8 +416,6 @@ type UsersObservation struct {
 
 	// [string] A name for the group.
 	LastName *string `json:"lastName,omitempty" tf:"last_name,omitempty"`
-
-	Password *string `json:"password,omitempty" tf:"password,omitempty"`
 }
 
 type UsersParameters struct {

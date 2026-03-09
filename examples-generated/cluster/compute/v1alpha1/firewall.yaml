@@ -91,7 +91,7 @@ spec:
 ---
 
 apiVersion: compute.ionoscloud.io/v1alpha1
-kind: Server
+kind: GPUServer
 metadata:
   annotations:
     meta.upbound.io/example-id: compute/v1alpha1/firewall

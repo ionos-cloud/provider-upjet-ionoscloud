@@ -16,7 +16,7 @@ import (
 
 type BackupInitParameters struct {
 
-	// [string] The physical location where the cluster will be created. Property cannot be modified after datacenter creation (disallowed in update requests). Available locations: de/txl, gb/lhr, es/vit. Update forces cluster re-creation.
+	// [string] The physical location where the cluster will be created. Property cannot be modified after datacenter creation (disallowed in update requests). Available locations: de/fra, us/las, us/ewr, de/txl, gb/lhr, gb/bhx, es/vit, fr/par, us/mci, de/fra/2. Update forces cluster re-creation.
 	// The location where the cluster backups will be stored. If not set, the backup is stored in the nearest location of the cluster. Examples: de, eu-sounth-2, eu-central-2
 	Location *string `json:"location,omitempty" tf:"location,omitempty"`
 
@@ -29,7 +29,7 @@ type BackupInitParameters struct {
 
 type BackupObservation struct {
 
-	// [string] The physical location where the cluster will be created. Property cannot be modified after datacenter creation (disallowed in update requests). Available locations: de/txl, gb/lhr, es/vit. Update forces cluster re-creation.
+	// [string] The physical location where the cluster will be created. Property cannot be modified after datacenter creation (disallowed in update requests). Available locations: de/fra, us/las, us/ewr, de/txl, gb/lhr, gb/bhx, es/vit, fr/par, us/mci, de/fra/2. Update forces cluster re-creation.
 	// The location where the cluster backups will be stored. If not set, the backup is stored in the nearest location of the cluster. Examples: de, eu-sounth-2, eu-central-2
 	Location *string `json:"location,omitempty" tf:"location,omitempty"`
 
@@ -42,7 +42,7 @@ type BackupObservation struct {
 
 type BackupParameters struct {
 
-	// [string] The physical location where the cluster will be created. Property cannot be modified after datacenter creation (disallowed in update requests). Available locations: de/txl, gb/lhr, es/vit. Update forces cluster re-creation.
+	// [string] The physical location where the cluster will be created. Property cannot be modified after datacenter creation (disallowed in update requests). Available locations: de/fra, us/las, us/ewr, de/txl, gb/lhr, gb/bhx, es/vit, fr/par, us/mci, de/fra/2. Update forces cluster re-creation.
 	// The location where the cluster backups will be stored. If not set, the backup is stored in the nearest location of the cluster. Examples: de, eu-sounth-2, eu-central-2
 	// +kubebuilder:validation:Optional
 	Location *string `json:"location,omitempty" tf:"location,omitempty"`
@@ -229,7 +229,7 @@ type MongodbClusterInitParameters struct {
 	// The total number of instances in the cluster (one master and n-1 standbys). Example: 1, 3, 5, 7. For enterprise edition at least 3.
 	Instances *float64 `json:"instances,omitempty" tf:"instances,omitempty"`
 
-	// [string] The physical location where the cluster will be created. Property cannot be modified after datacenter creation (disallowed in update requests). Available locations: de/txl, gb/lhr, es/vit. Update forces cluster re-creation.
+	// [string] The physical location where the cluster will be created. Property cannot be modified after datacenter creation (disallowed in update requests). Available locations: de/fra, us/las, us/ewr, de/txl, gb/lhr, gb/bhx, es/vit, fr/par, us/mci, de/fra/2. Update forces cluster re-creation.
 	// The physical location where the cluster will be created. This will be where all of your instances live. Property cannot be modified after datacenter creation (disallowed in update requests). Available locations: de/txl, gb/lhr, es/vit. Update forces cluster re-creation.
 	// +crossplane:generate:reference:type=github.com/ionos-cloud/provider-upjet-ionoscloud/apis/namespaced/compute/v1alpha1.Datacenter
 	// +crossplane:generate:reference:extractor=github.com/ionos-cloud/provider-upjet-ionoscloud/config/common.DatacenterLocation()
@@ -312,7 +312,7 @@ type MongodbClusterObservation struct {
 	// The total number of instances in the cluster (one master and n-1 standbys). Example: 1, 3, 5, 7. For enterprise edition at least 3.
 	Instances *float64 `json:"instances,omitempty" tf:"instances,omitempty"`
 
-	// [string] The physical location where the cluster will be created. Property cannot be modified after datacenter creation (disallowed in update requests). Available locations: de/txl, gb/lhr, es/vit. Update forces cluster re-creation.
+	// [string] The physical location where the cluster will be created. Property cannot be modified after datacenter creation (disallowed in update requests). Available locations: de/fra, us/las, us/ewr, de/txl, gb/lhr, gb/bhx, es/vit, fr/par, us/mci, de/fra/2. Update forces cluster re-creation.
 	// The physical location where the cluster will be created. This will be where all of your instances live. Property cannot be modified after datacenter creation (disallowed in update requests). Available locations: de/txl, gb/lhr, es/vit. Update forces cluster re-creation.
 	Location *string `json:"location,omitempty" tf:"location,omitempty"`
 
@@ -386,7 +386,7 @@ type MongodbClusterParameters struct {
 	// +kubebuilder:validation:Optional
 	Instances *float64 `json:"instances,omitempty" tf:"instances,omitempty"`
 
-	// [string] The physical location where the cluster will be created. Property cannot be modified after datacenter creation (disallowed in update requests). Available locations: de/txl, gb/lhr, es/vit. Update forces cluster re-creation.
+	// [string] The physical location where the cluster will be created. Property cannot be modified after datacenter creation (disallowed in update requests). Available locations: de/fra, us/las, us/ewr, de/txl, gb/lhr, gb/bhx, es/vit, fr/par, us/mci, de/fra/2. Update forces cluster re-creation.
 	// The physical location where the cluster will be created. This will be where all of your instances live. Property cannot be modified after datacenter creation (disallowed in update requests). Available locations: de/txl, gb/lhr, es/vit. Update forces cluster re-creation.
 	// +crossplane:generate:reference:type=github.com/ionos-cloud/provider-upjet-ionoscloud/apis/namespaced/compute/v1alpha1.Datacenter
 	// +crossplane:generate:reference:extractor=github.com/ionos-cloud/provider-upjet-ionoscloud/config/common.DatacenterLocation()

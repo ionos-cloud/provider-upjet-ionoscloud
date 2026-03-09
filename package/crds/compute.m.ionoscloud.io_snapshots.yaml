@@ -3,7 +3,7 @@ apiVersion: apiextensions.k8s.io/v1
 kind: CustomResourceDefinition
 metadata:
   annotations:
-    controller-gen.kubebuilder.io/version: v0.18.0
+    controller-gen.kubebuilder.io/version: v0.20.0
   name: snapshots.compute.m.ionoscloud.io
 spec:
   group: compute.m.ionoscloud.io
@@ -183,6 +183,11 @@ spec:
                   ramHotPlug:
                     description: (Computed)[string] Is capable of memory hot plug
                       (no reboot required). Can only be updated.
+                    type: boolean
+                  requireLegacyBios:
+                    description: |-
+                      (Computed)[boolean] Indicates if the image requires the legacy BIOS for compatibility or specific needs. During creation, if an image is used, the value will be inherited from the image, regardless of the value set in the plan. Later on, the value can be updated.
+                      Indicates if the image requires the legacy BIOS for compatibility or specific needs.
                     type: boolean
                   secAuthProtection:
                     description: |-
@@ -412,6 +417,11 @@ spec:
                     description: (Computed)[string] Is capable of memory hot plug
                       (no reboot required). Can only be updated.
                     type: boolean
+                  requireLegacyBios:
+                    description: |-
+                      (Computed)[boolean] Indicates if the image requires the legacy BIOS for compatibility or specific needs. During creation, if an image is used, the value will be inherited from the image, regardless of the value set in the plan. Later on, the value can be updated.
+                      Indicates if the image requires the legacy BIOS for compatibility or specific needs.
+                    type: boolean
                   secAuthProtection:
                     description: |-
                       Boolean value representing if the snapshot requires extra protection e.g. two factor protection
@@ -632,6 +642,11 @@ spec:
                     type: boolean
                   ramHotUnplug:
                     description: Is capable of memory hot unplug (no reboot required)
+                    type: boolean
+                  requireLegacyBios:
+                    description: |-
+                      (Computed)[boolean] Indicates if the image requires the legacy BIOS for compatibility or specific needs. During creation, if an image is used, the value will be inherited from the image, regardless of the value set in the plan. Later on, the value can be updated.
+                      Indicates if the image requires the legacy BIOS for compatibility or specific needs.
                     type: boolean
                   secAuthProtection:
                     description: |-

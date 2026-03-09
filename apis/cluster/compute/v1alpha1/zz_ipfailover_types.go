@@ -56,15 +56,15 @@ type IpfailoverInitParameters struct {
 
 	// [string] The ID of a NIC.
 	// The UUID of the master NIC
-	// +crossplane:generate:reference:type=github.com/ionos-cloud/provider-upjet-ionoscloud/apis/cluster/compute/v1alpha1.Server
+	// +crossplane:generate:reference:type=github.com/ionos-cloud/provider-upjet-ionoscloud/apis/cluster/compute/v1alpha1.GPUServer
 	// +crossplane:generate:reference:extractor=github.com/ionos-cloud/provider-upjet-ionoscloud/config/common.ServerPrimaryNIC()
 	Nicuuid *string `json:"nicuuid,omitempty" tf:"nicuuid,omitempty"`
 
-	// Reference to a Server in compute to populate nicuuid.
+	// Reference to a GPUServer in compute to populate nicuuid.
 	// +kubebuilder:validation:Optional
 	NicuuidRef *v1.Reference `json:"nicuuidRef,omitempty" tf:"-"`
 
-	// Selector for a Server in compute to populate nicuuid.
+	// Selector for a GPUServer in compute to populate nicuuid.
 	// +kubebuilder:validation:Optional
 	NicuuidSelector *v1.Selector `json:"nicuuidSelector,omitempty" tf:"-"`
 }
@@ -134,16 +134,16 @@ type IpfailoverParameters struct {
 
 	// [string] The ID of a NIC.
 	// The UUID of the master NIC
-	// +crossplane:generate:reference:type=github.com/ionos-cloud/provider-upjet-ionoscloud/apis/cluster/compute/v1alpha1.Server
+	// +crossplane:generate:reference:type=github.com/ionos-cloud/provider-upjet-ionoscloud/apis/cluster/compute/v1alpha1.GPUServer
 	// +crossplane:generate:reference:extractor=github.com/ionos-cloud/provider-upjet-ionoscloud/config/common.ServerPrimaryNIC()
 	// +kubebuilder:validation:Optional
 	Nicuuid *string `json:"nicuuid,omitempty" tf:"nicuuid,omitempty"`
 
-	// Reference to a Server in compute to populate nicuuid.
+	// Reference to a GPUServer in compute to populate nicuuid.
 	// +kubebuilder:validation:Optional
 	NicuuidRef *v1.Reference `json:"nicuuidRef,omitempty" tf:"-"`
 
-	// Selector for a Server in compute to populate nicuuid.
+	// Selector for a GPUServer in compute to populate nicuuid.
 	// +kubebuilder:validation:Optional
 	NicuuidSelector *v1.Selector `json:"nicuuidSelector,omitempty" tf:"-"`
 }

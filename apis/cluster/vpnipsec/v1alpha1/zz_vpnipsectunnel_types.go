@@ -245,9 +245,8 @@ type VpnIpsecTunnelInitParameters struct {
 	// Settings for the initial security exchange phase.
 	Ike *IkeInitParameters `json:"ike,omitempty" tf:"ike,omitempty"`
 
-	// [string] The location of the IPSec Gateway Tunnel. Supported locations: de/fra, de/txl, es/vit,
-	// gb/lhr, us/ewr, us/las, us/mci, fr/par
-	// The location of the IPSec Gateway Tunnel. Supported locations: de/fra, de/txl, es/vit, gb/bhx, gb/lhr, us/ewr, us/las, us/mci, fr/par
+	// [string] The location of the IPSec Gateway Tunnel. Supported locations: de/fra, de/fra/2, de/txl, es/vit, gb/lhr, us/ewr, us/las, us/mci, fr/par.
+	// The location of the IPSec Gateway Tunnel. Supported locations: de/fra, de/fra/2, de/txl, es/vit, gb/bhx, gb/lhr, us/ewr, us/las, us/mci, fr/par
 	Location *string `json:"location,omitempty" tf:"location,omitempty"`
 
 	// [string] The name of the IPSec Gateway Tunnel.
@@ -295,9 +294,8 @@ type VpnIpsecTunnelObservation struct {
 	// Settings for the initial security exchange phase.
 	Ike *IkeObservation `json:"ike,omitempty" tf:"ike,omitempty"`
 
-	// [string] The location of the IPSec Gateway Tunnel. Supported locations: de/fra, de/txl, es/vit,
-	// gb/lhr, us/ewr, us/las, us/mci, fr/par
-	// The location of the IPSec Gateway Tunnel. Supported locations: de/fra, de/txl, es/vit, gb/bhx, gb/lhr, us/ewr, us/las, us/mci, fr/par
+	// [string] The location of the IPSec Gateway Tunnel. Supported locations: de/fra, de/fra/2, de/txl, es/vit, gb/lhr, us/ewr, us/las, us/mci, fr/par.
+	// The location of the IPSec Gateway Tunnel. Supported locations: de/fra, de/fra/2, de/txl, es/vit, gb/bhx, gb/lhr, us/ewr, us/las, us/mci, fr/par
 	Location *string `json:"location,omitempty" tf:"location,omitempty"`
 
 	// [string] The name of the IPSec Gateway Tunnel.
@@ -358,9 +356,8 @@ type VpnIpsecTunnelParameters struct {
 	// +kubebuilder:validation:Optional
 	Ike *IkeParameters `json:"ike,omitempty" tf:"ike,omitempty"`
 
-	// [string] The location of the IPSec Gateway Tunnel. Supported locations: de/fra, de/txl, es/vit,
-	// gb/lhr, us/ewr, us/las, us/mci, fr/par
-	// The location of the IPSec Gateway Tunnel. Supported locations: de/fra, de/txl, es/vit, gb/bhx, gb/lhr, us/ewr, us/las, us/mci, fr/par
+	// [string] The location of the IPSec Gateway Tunnel. Supported locations: de/fra, de/fra/2, de/txl, es/vit, gb/lhr, us/ewr, us/las, us/mci, fr/par.
+	// The location of the IPSec Gateway Tunnel. Supported locations: de/fra, de/fra/2, de/txl, es/vit, gb/bhx, gb/lhr, us/ewr, us/las, us/mci, fr/par
 	// +kubebuilder:validation:Optional
 	Location *string `json:"location,omitempty" tf:"location,omitempty"`
 

@@ -62,6 +62,10 @@ type VCPUServerInitParameters struct {
 	// See the Nic section.
 	Nic *VCPUServerNicInitParameters `json:"nic,omitempty" tf:"nic,omitempty"`
 
+	// [bool] Activate or deactivate the Multi Queue feature on all NICs of the server. This feature is beneficial to enable when the NICs are experiencing performance issues (e.g. low throughput). Toggling this feature will also initiate a restart of the server. If the specified value is true, the feature will be activated; if it is not specified or set to false, the feature will be deactivated.
+	// Activate or deactivate the Multi Queue feature on all NICs of this server. This feature is beneficial to enable when the NICs are experiencing performance issues (e.g. low throughput). Toggling this feature will also initiate a restart of the server. If the specified value is `true`, the feature will be activated; if it is not specified or set to `false`, the feature will be deactivated.
+	NicMultiQueue *bool `json:"nicMultiQueue,omitempty" tf:"nic_multi_queue,omitempty"`
+
 	// [integer] The amount of memory for the server in MB.
 	RAM *float64 `json:"ram,omitempty" tf:"ram,omitempty"`
 
@@ -187,21 +191,26 @@ type VCPUServerNicFirewallParameters struct {
 type VCPUServerNicInitParameters struct {
 	DHCP *bool `json:"dhcp,omitempty" tf:"dhcp,omitempty"`
 
+	// Indicates whether this NIC receives an IPv6 address through DHCP.
 	Dhcpv6 *bool `json:"dhcpv6,omitempty" tf:"dhcpv6,omitempty"`
 
 	// Allows to define firewall rules inline in the server. See the Firewall section.
 	// Firewall rules created in the server resource. The rules can also be created as separate resources outside the server resource
-	Firewall []VCPUServerNicFirewallInitParameters `json:"firewall,omitempty" tf:"firewall,omitempty"`
+	Firewall *VCPUServerNicFirewallInitParameters `json:"firewall,omitempty" tf:"firewall,omitempty"`
 
 	FirewallActive *bool `json:"firewallActive,omitempty" tf:"firewall_active,omitempty"`
 
 	FirewallType *string `json:"firewallType,omitempty" tf:"firewall_type,omitempty"`
 
+	// IPv6 CIDR block assigned to the NIC.
 	IPv6CidrBlock *string `json:"ipv6CidrBlock,omitempty" tf:"ipv6_cidr_block,omitempty"`
 
+	// Collection for IPv6 addresses assigned to a nic. Explicitly assigned IPv6 addresses need to come from inside the IPv6 CIDR block assigned to the nic.
+	// +listType=set
 	IPv6Ips []*string `json:"ipv6Ips,omitempty" tf:"ipv6_ips,omitempty"`
 
 	// Collection of IP addresses assigned to a nic. Explicitly assigned public IPs need to come from reserved IP blocks, Passing value null or empty array will assign an IP address automatically.
+	// +listType=set
 	Ips []*string `json:"ips,omitempty" tf:"ips,omitempty"`
 
 	// +crossplane:generate:reference:type=github.com/ionos-cloud/provider-upjet-ionoscloud/apis/cluster/compute/v1alpha1.Lan
@@ -231,11 +240,12 @@ type VCPUServerNicObservation struct {
 
 	DeviceNumber *float64 `json:"deviceNumber,omitempty" tf:"device_number,omitempty"`
 
+	// Indicates whether this NIC receives an IPv6 address through DHCP.
 	Dhcpv6 *bool `json:"dhcpv6,omitempty" tf:"dhcpv6,omitempty"`
 
 	// Allows to define firewall rules inline in the server. See the Firewall section.
 	// Firewall rules created in the server resource. The rules can also be created as separate resources outside the server resource
-	Firewall []VCPUServerNicFirewallObservation `json:"firewall,omitempty" tf:"firewall,omitempty"`
+	Firewall *VCPUServerNicFirewallObservation `json:"firewall,omitempty" tf:"firewall,omitempty"`
 
 	FirewallActive *bool `json:"firewallActive,omitempty" tf:"firewall_active,omitempty"`
 
@@ -243,11 +253,15 @@ type VCPUServerNicObservation struct {
 
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
+	// IPv6 CIDR block assigned to the NIC.
 	IPv6CidrBlock *string `json:"ipv6CidrBlock,omitempty" tf:"ipv6_cidr_block,omitempty"`
 
+	// Collection for IPv6 addresses assigned to a nic. Explicitly assigned IPv6 addresses need to come from inside the IPv6 CIDR block assigned to the nic.
+	// +listType=set
 	IPv6Ips []*string `json:"ipv6Ips,omitempty" tf:"ipv6_ips,omitempty"`
 
 	// Collection of IP addresses assigned to a nic. Explicitly assigned public IPs need to come from reserved IP blocks, Passing value null or empty array will assign an IP address automatically.
+	// +listType=set
 	Ips []*string `json:"ips,omitempty" tf:"ips,omitempty"`
 
 	Lan *float64 `json:"lan,omitempty" tf:"lan,omitempty"`
@@ -270,13 +284,14 @@ type VCPUServerNicParameters struct {
 	// +kubebuilder:validation:Optional
 	DHCP *bool `json:"dhcp,omitempty" tf:"dhcp,omitempty"`
 
+	// Indicates whether this NIC receives an IPv6 address through DHCP.
 	// +kubebuilder:validation:Optional
 	Dhcpv6 *bool `json:"dhcpv6,omitempty" tf:"dhcpv6,omitempty"`
 
 	// Allows to define firewall rules inline in the server. See the Firewall section.
 	// Firewall rules created in the server resource. The rules can also be created as separate resources outside the server resource
 	// +kubebuilder:validation:Optional
-	Firewall []VCPUServerNicFirewallParameters `json:"firewall,omitempty" tf:"firewall,omitempty"`
+	Firewall *VCPUServerNicFirewallParameters `json:"firewall,omitempty" tf:"firewall,omitempty"`
 
 	// +kubebuilder:validation:Optional
 	FirewallActive *bool `json:"firewallActive,omitempty" tf:"firewall_active,omitempty"`
@@ -284,14 +299,18 @@ type VCPUServerNicParameters struct {
 	// +kubebuilder:validation:Optional
 	FirewallType *string `json:"firewallType,omitempty" tf:"firewall_type,omitempty"`
 
+	// IPv6 CIDR block assigned to the NIC.
 	// +kubebuilder:validation:Optional
 	IPv6CidrBlock *string `json:"ipv6CidrBlock,omitempty" tf:"ipv6_cidr_block,omitempty"`
 
+	// Collection for IPv6 addresses assigned to a nic. Explicitly assigned IPv6 addresses need to come from inside the IPv6 CIDR block assigned to the nic.
 	// +kubebuilder:validation:Optional
+	// +listType=set
 	IPv6Ips []*string `json:"ipv6Ips,omitempty" tf:"ipv6_ips,omitempty"`
 
 	// Collection of IP addresses assigned to a nic. Explicitly assigned public IPs need to come from reserved IP blocks, Passing value null or empty array will assign an IP address automatically.
 	// +kubebuilder:validation:Optional
+	// +listType=set
 	Ips []*string `json:"ips,omitempty" tf:"ips,omitempty"`
 
 	// +crossplane:generate:reference:type=github.com/ionos-cloud/provider-upjet-ionoscloud/apis/cluster/compute/v1alpha1.Lan
@@ -370,6 +389,10 @@ type VCPUServerObservation struct {
 
 	// See the Nic section.
 	Nic *VCPUServerNicObservation `json:"nic,omitempty" tf:"nic,omitempty"`
+
+	// [bool] Activate or deactivate the Multi Queue feature on all NICs of the server. This feature is beneficial to enable when the NICs are experiencing performance issues (e.g. low throughput). Toggling this feature will also initiate a restart of the server. If the specified value is true, the feature will be activated; if it is not specified or set to false, the feature will be deactivated.
+	// Activate or deactivate the Multi Queue feature on all NICs of this server. This feature is beneficial to enable when the NICs are experiencing performance issues (e.g. low throughput). Toggling this feature will also initiate a restart of the server. If the specified value is `true`, the feature will be activated; if it is not specified or set to `false`, the feature will be deactivated.
+	NicMultiQueue *bool `json:"nicMultiQueue,omitempty" tf:"nic_multi_queue,omitempty"`
 
 	// (Computed) The associated IP address.
 	PrimaryIP *string `json:"primaryIp,omitempty" tf:"primary_ip,omitempty"`
@@ -460,6 +483,11 @@ type VCPUServerParameters struct {
 	// +kubebuilder:validation:Optional
 	Nic *VCPUServerNicParameters `json:"nic,omitempty" tf:"nic,omitempty"`
 
+	// [bool] Activate or deactivate the Multi Queue feature on all NICs of the server. This feature is beneficial to enable when the NICs are experiencing performance issues (e.g. low throughput). Toggling this feature will also initiate a restart of the server. If the specified value is true, the feature will be activated; if it is not specified or set to false, the feature will be deactivated.
+	// Activate or deactivate the Multi Queue feature on all NICs of this server. This feature is beneficial to enable when the NICs are experiencing performance issues (e.g. low throughput). Toggling this feature will also initiate a restart of the server. If the specified value is `true`, the feature will be activated; if it is not specified or set to `false`, the feature will be deactivated.
+	// +kubebuilder:validation:Optional
+	NicMultiQueue *bool `json:"nicMultiQueue,omitempty" tf:"nic_multi_queue,omitempty"`
+
 	// [integer] The amount of memory for the server in MB.
 	// +kubebuilder:validation:Optional
 	RAM *float64 `json:"ram,omitempty" tf:"ram,omitempty"`
@@ -504,6 +532,9 @@ type VCPUServerVolumeInitParameters struct {
 
 	// [string] The name of the server.
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+
+	// Indicates if the image requires the legacy BIOS for compatibility or specific needs.
+	RequireLegacyBios *bool `json:"requireLegacyBios,omitempty" tf:"require_legacy_bios,omitempty"`
 
 	// The size of the volume in GB.
 	Size *float64 `json:"size,omitempty" tf:"size,omitempty"`
@@ -552,6 +583,9 @@ type VCPUServerVolumeObservation struct {
 
 	RAMHotPlug *bool `json:"ramHotPlug,omitempty" tf:"ram_hot_plug,omitempty"`
 
+	// Indicates if the image requires the legacy BIOS for compatibility or specific needs.
+	RequireLegacyBios *bool `json:"requireLegacyBios,omitempty" tf:"require_legacy_bios,omitempty"`
+
 	// The size of the volume in GB.
 	Size *float64 `json:"size,omitempty" tf:"size,omitempty"`
 
@@ -586,6 +620,10 @@ type VCPUServerVolumeParameters struct {
 	// [string] The name of the server.
 	// +kubebuilder:validation:Optional
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+
+	// Indicates if the image requires the legacy BIOS for compatibility or specific needs.
+	// +kubebuilder:validation:Optional
+	RequireLegacyBios *bool `json:"requireLegacyBios,omitempty" tf:"require_legacy_bios,omitempty"`
 
 	// The size of the volume in GB.
 	// +kubebuilder:validation:Optional

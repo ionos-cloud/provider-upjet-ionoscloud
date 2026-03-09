@@ -6,8 +6,11 @@ metadata:
   labels:
     testing.upbound.io/example-name: example
   name: example
-  namespace: upbound-system
+  namespace: crossplane-system
 spec:
+  providerConfigRef:
+    kind: ProviderConfig
+    name: ionos-provider-config
   forProvider:
     description: datacenter description
     location: de/fra

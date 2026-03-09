@@ -10,6 +10,10 @@ metadata:
 spec:
   forProvider:
     active: true
+    timeouts:
+    - create: 10m
+      delete: 10m
+      update: 10m
     userIdSelector:
       matchLabels:
         testing.upbound.io/example-name: example
@@ -27,6 +31,7 @@ metadata:
   namespace: upbound-system
 spec:
   forProvider:
+    active: true
     administrator: false
     email: unique@email.com
     firstName: example

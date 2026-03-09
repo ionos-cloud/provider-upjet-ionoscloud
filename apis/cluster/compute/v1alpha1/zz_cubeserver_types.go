@@ -243,6 +243,8 @@ type FirewallInitParameters struct {
 }
 
 type FirewallObservation struct {
+	ID *string `json:"id,omitempty" tf:"id,omitempty"`
+
 	IcmpCode *string `json:"icmpCode,omitempty" tf:"icmp_code,omitempty"`
 
 	IcmpType *string `json:"icmpType,omitempty" tf:"icmp_type,omitempty"`
@@ -305,6 +307,7 @@ type NicInitParameters struct {
 	// Indicates whether this NIC receives an IPv6 address through DHCP.
 	Dhcpv6 *bool `json:"dhcpv6,omitempty" tf:"dhcpv6,omitempty"`
 
+	// Firewall rules created in the server resource. The rules can also be created as separate resources outside the server resource
 	Firewall *FirewallInitParameters `json:"firewall,omitempty" tf:"firewall,omitempty"`
 
 	FirewallActive *bool `json:"firewallActive,omitempty" tf:"firewall_active,omitempty"`
@@ -315,8 +318,11 @@ type NicInitParameters struct {
 	IPv6CidrBlock *string `json:"ipv6CidrBlock,omitempty" tf:"ipv6_cidr_block,omitempty"`
 
 	// Collection for IPv6 addresses assigned to a nic. Explicitly assigned IPv6 addresses need to come from inside the IPv6 CIDR block assigned to the nic.
+	// +listType=set
 	IPv6Ips []*string `json:"ipv6Ips,omitempty" tf:"ipv6_ips,omitempty"`
 
+	// Collection of IP addresses assigned to a nic. Explicitly assigned public IPs need to come from reserved IP blocks, Passing value null or empty array will assign an IP address automatically.
+	// +listType=set
 	Ips []*string `json:"ips,omitempty" tf:"ips,omitempty"`
 
 	// +crossplane:generate:reference:type=github.com/ionos-cloud/provider-upjet-ionoscloud/apis/cluster/compute/v1alpha1.Lan
@@ -349,18 +355,24 @@ type NicObservation struct {
 	// Indicates whether this NIC receives an IPv6 address through DHCP.
 	Dhcpv6 *bool `json:"dhcpv6,omitempty" tf:"dhcpv6,omitempty"`
 
+	// Firewall rules created in the server resource. The rules can also be created as separate resources outside the server resource
 	Firewall *FirewallObservation `json:"firewall,omitempty" tf:"firewall,omitempty"`
 
 	FirewallActive *bool `json:"firewallActive,omitempty" tf:"firewall_active,omitempty"`
 
 	FirewallType *string `json:"firewallType,omitempty" tf:"firewall_type,omitempty"`
 
+	ID *string `json:"id,omitempty" tf:"id,omitempty"`
+
 	// IPv6 CIDR block assigned to the NIC.
 	IPv6CidrBlock *string `json:"ipv6CidrBlock,omitempty" tf:"ipv6_cidr_block,omitempty"`
 
 	// Collection for IPv6 addresses assigned to a nic. Explicitly assigned IPv6 addresses need to come from inside the IPv6 CIDR block assigned to the nic.
+	// +listType=set
 	IPv6Ips []*string `json:"ipv6Ips,omitempty" tf:"ipv6_ips,omitempty"`
 
+	// Collection of IP addresses assigned to a nic. Explicitly assigned public IPs need to come from reserved IP blocks, Passing value null or empty array will assign an IP address automatically.
+	// +listType=set
 	Ips []*string `json:"ips,omitempty" tf:"ips,omitempty"`
 
 	Lan *float64 `json:"lan,omitempty" tf:"lan,omitempty"`
@@ -387,6 +399,7 @@ type NicParameters struct {
 	// +kubebuilder:validation:Optional
 	Dhcpv6 *bool `json:"dhcpv6,omitempty" tf:"dhcpv6,omitempty"`
 
+	// Firewall rules created in the server resource. The rules can also be created as separate resources outside the server resource
 	// +kubebuilder:validation:Optional
 	Firewall *FirewallParameters `json:"firewall,omitempty" tf:"firewall,omitempty"`
 
@@ -402,9 +415,12 @@ type NicParameters struct {
 
 	// Collection for IPv6 addresses assigned to a nic. Explicitly assigned IPv6 addresses need to come from inside the IPv6 CIDR block assigned to the nic.
 	// +kubebuilder:validation:Optional
+	// +listType=set
 	IPv6Ips []*string `json:"ipv6Ips,omitempty" tf:"ipv6_ips,omitempty"`
 
+	// Collection of IP addresses assigned to a nic. Explicitly assigned public IPs need to come from reserved IP blocks, Passing value null or empty array will assign an IP address automatically.
 	// +kubebuilder:validation:Optional
+	// +listType=set
 	Ips []*string `json:"ips,omitempty" tf:"ips,omitempty"`
 
 	// +crossplane:generate:reference:type=github.com/ionos-cloud/provider-upjet-ionoscloud/apis/cluster/compute/v1alpha1.Lan
@@ -457,6 +473,9 @@ type VolumeInitParameters struct {
 	// [string] The name of the server.
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
+	// Indicates if the image requires the legacy BIOS for compatibility or specific needs.
+	RequireLegacyBios *bool `json:"requireLegacyBios,omitempty" tf:"require_legacy_bios,omitempty"`
+
 	// [list] List of paths to files containing a public SSH key that will be injected into IonosCloud provided Linux images. Required for IonosCloud Linux images. Required if image_password is not provided.
 	SSHKeyPath []*string `json:"sshKeyPath,omitempty" tf:"ssh_key_path,omitempty"`
 
@@ -507,6 +526,9 @@ type VolumeObservation struct {
 
 	RAMHotPlug *bool `json:"ramHotPlug,omitempty" tf:"ram_hot_plug,omitempty"`
 
+	// Indicates if the image requires the legacy BIOS for compatibility or specific needs.
+	RequireLegacyBios *bool `json:"requireLegacyBios,omitempty" tf:"require_legacy_bios,omitempty"`
+
 	// [list] List of paths to files containing a public SSH key that will be injected into IonosCloud provided Linux images. Required for IonosCloud Linux images. Required if image_password is not provided.
 	SSHKeyPath []*string `json:"sshKeyPath,omitempty" tf:"ssh_key_path,omitempty"`
 
@@ -545,6 +567,10 @@ type VolumeParameters struct {
 	// [string] The name of the server.
 	// +kubebuilder:validation:Optional
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+
+	// Indicates if the image requires the legacy BIOS for compatibility or specific needs.
+	// +kubebuilder:validation:Optional
+	RequireLegacyBios *bool `json:"requireLegacyBios,omitempty" tf:"require_legacy_bios,omitempty"`
 
 	// [list] List of paths to files containing a public SSH key that will be injected into IonosCloud provided Linux images. Required for IonosCloud Linux images. Required if image_password is not provided.
 	// +kubebuilder:validation:Optional

@@ -3,7 +3,7 @@ apiVersion: apiextensions.k8s.io/v1
 kind: CustomResourceDefinition
 metadata:
   annotations:
-    controller-gen.kubebuilder.io/version: v0.18.0
+    controller-gen.kubebuilder.io/version: v0.20.0
   name: vpnipsecgateways.vpnipsec.ionoscloud.io
 spec:
   group: vpnipsec.ionoscloud.io
@@ -163,15 +163,13 @@ spec:
                           type: object
                         ipv4Cidr:
                           description: |-
-                            [string] Describes the private ipv4 subnet in your LAN that should be accessible by the
-                            VPN Gateway. Note: this should be the subnet already assigned to the LAN
-                            Describes the private ipv4 subnet in your LAN that should be accessible by the VPN Gateway. Note: this should be the subnet already assigned to the LAN
+                            [string] A LAN IPv4 address in CIDR notation that will be assigned to the VPN Gateway. This will be the private gateway address for LAN clients to route traffic over the VPN Gateway, this should be within the subnet already assigned to the LAN.
+                            A LAN IPv4 address in CIDR notation that will be assigned to the VPN Gateway. This will be the private gateway address for LAN clients to route traffic over the VPN Gateway, this should be within the subnet already assigned to the LAN.
                           type: string
                         ipv6Cidr:
                           description: |-
-                            [string] Describes the ipv6 subnet in your LAN that should be accessible by the VPN
-                            Gateway. Note: this should be the subnet already assigned to the LAN
-                            Describes the ipv6 subnet in your LAN that should be accessible by the VPN Gateway. Note: this should be the subnet already assigned to the LAN
+                            [string] A LAN IPv6 address in CIDR notation that will be assigned to the VPN Gateway. This will be the private gateway address for LAN clients to route traffic over the VPN Gateway, this should be within the subnet already assigned to the LAN.
+                            A LAN IPv6 address in CIDR notation that will be assigned to the VPN Gateway. This will be the private gateway address for LAN clients to route traffic over the VPN Gateway, this should be within the subnet already assigned to the LAN.
                           type: string
                         lanId:
                           description: |-
@@ -341,9 +339,8 @@ spec:
                     type: object
                   location:
                     description: |-
-                      [string] The location of the IPSec Gateway. Supported locations: de/fra, de/txl, es/vit,
-                      gb/bhx, gb/lhr, us/ewr, us/las, us/mci, fr/par.
-                      The location of the IPSec Gateway. Supported locations: de/fra, de/txl, es/vit, gb/bhx, gb/lhr, us/ewr, us/las, us/mci, fr/par
+                      [string] The location of the IPSec Gateway. Supported locations: de/fra, de/fra/2, de/txl, es/vit, gb/bhx, gb/lhr, us/ewr, us/las, us/mci, fr/par.
+                      The location of the IPSec Gateway. Supported locations: de/fra, de/fra/2, de/txl, es/vit, gb/bhx, gb/lhr, us/ewr, us/las, us/mci, fr/par
                     type: string
                   maintenanceWindow:
                     description: |-
@@ -481,15 +478,13 @@ spec:
                           type: object
                         ipv4Cidr:
                           description: |-
-                            [string] Describes the private ipv4 subnet in your LAN that should be accessible by the
-                            VPN Gateway. Note: this should be the subnet already assigned to the LAN
-                            Describes the private ipv4 subnet in your LAN that should be accessible by the VPN Gateway. Note: this should be the subnet already assigned to the LAN
+                            [string] A LAN IPv4 address in CIDR notation that will be assigned to the VPN Gateway. This will be the private gateway address for LAN clients to route traffic over the VPN Gateway, this should be within the subnet already assigned to the LAN.
+                            A LAN IPv4 address in CIDR notation that will be assigned to the VPN Gateway. This will be the private gateway address for LAN clients to route traffic over the VPN Gateway, this should be within the subnet already assigned to the LAN.
                           type: string
                         ipv6Cidr:
                           description: |-
-                            [string] Describes the ipv6 subnet in your LAN that should be accessible by the VPN
-                            Gateway. Note: this should be the subnet already assigned to the LAN
-                            Describes the ipv6 subnet in your LAN that should be accessible by the VPN Gateway. Note: this should be the subnet already assigned to the LAN
+                            [string] A LAN IPv6 address in CIDR notation that will be assigned to the VPN Gateway. This will be the private gateway address for LAN clients to route traffic over the VPN Gateway, this should be within the subnet already assigned to the LAN.
+                            A LAN IPv6 address in CIDR notation that will be assigned to the VPN Gateway. This will be the private gateway address for LAN clients to route traffic over the VPN Gateway, this should be within the subnet already assigned to the LAN.
                           type: string
                         lanId:
                           description: |-
@@ -659,9 +654,8 @@ spec:
                     type: object
                   location:
                     description: |-
-                      [string] The location of the IPSec Gateway. Supported locations: de/fra, de/txl, es/vit,
-                      gb/bhx, gb/lhr, us/ewr, us/las, us/mci, fr/par.
-                      The location of the IPSec Gateway. Supported locations: de/fra, de/txl, es/vit, gb/bhx, gb/lhr, us/ewr, us/las, us/mci, fr/par
+                      [string] The location of the IPSec Gateway. Supported locations: de/fra, de/fra/2, de/txl, es/vit, gb/bhx, gb/lhr, us/ewr, us/las, us/mci, fr/par.
+                      The location of the IPSec Gateway. Supported locations: de/fra, de/fra/2, de/txl, es/vit, gb/bhx, gb/lhr, us/ewr, us/las, us/mci, fr/par
                     type: string
                   maintenanceWindow:
                     description: |-
@@ -810,15 +804,13 @@ spec:
                           type: string
                         ipv4Cidr:
                           description: |-
-                            [string] Describes the private ipv4 subnet in your LAN that should be accessible by the
-                            VPN Gateway. Note: this should be the subnet already assigned to the LAN
-                            Describes the private ipv4 subnet in your LAN that should be accessible by the VPN Gateway. Note: this should be the subnet already assigned to the LAN
+                            [string] A LAN IPv4 address in CIDR notation that will be assigned to the VPN Gateway. This will be the private gateway address for LAN clients to route traffic over the VPN Gateway, this should be within the subnet already assigned to the LAN.
+                            A LAN IPv4 address in CIDR notation that will be assigned to the VPN Gateway. This will be the private gateway address for LAN clients to route traffic over the VPN Gateway, this should be within the subnet already assigned to the LAN.
                           type: string
                         ipv6Cidr:
                           description: |-
-                            [string] Describes the ipv6 subnet in your LAN that should be accessible by the VPN
-                            Gateway. Note: this should be the subnet already assigned to the LAN
-                            Describes the ipv6 subnet in your LAN that should be accessible by the VPN Gateway. Note: this should be the subnet already assigned to the LAN
+                            [string] A LAN IPv6 address in CIDR notation that will be assigned to the VPN Gateway. This will be the private gateway address for LAN clients to route traffic over the VPN Gateway, this should be within the subnet already assigned to the LAN.
+                            A LAN IPv6 address in CIDR notation that will be assigned to the VPN Gateway. This will be the private gateway address for LAN clients to route traffic over the VPN Gateway, this should be within the subnet already assigned to the LAN.
                           type: string
                         lanId:
                           description: |-
@@ -842,9 +834,8 @@ spec:
                     type: string
                   location:
                     description: |-
-                      [string] The location of the IPSec Gateway. Supported locations: de/fra, de/txl, es/vit,
-                      gb/bhx, gb/lhr, us/ewr, us/las, us/mci, fr/par.
-                      The location of the IPSec Gateway. Supported locations: de/fra, de/txl, es/vit, gb/bhx, gb/lhr, us/ewr, us/las, us/mci, fr/par
+                      [string] The location of the IPSec Gateway. Supported locations: de/fra, de/fra/2, de/txl, es/vit, gb/bhx, gb/lhr, us/ewr, us/las, us/mci, fr/par.
+                      The location of the IPSec Gateway. Supported locations: de/fra, de/fra/2, de/txl, es/vit, gb/bhx, gb/lhr, us/ewr, us/las, us/mci, fr/par
                     type: string
                   maintenanceWindow:
                     description: |-

@@ -12,8 +12,6 @@ import (
 	loadbalancer "github.com/ionos-cloud/provider-upjet-ionoscloud/internal/controller/cluster/alb/loadbalancer"
 	loadbalancerforwardingrule "github.com/ionos-cloud/provider-upjet-ionoscloud/internal/controller/cluster/alb/loadbalancerforwardingrule"
 	targetgroup "github.com/ionos-cloud/provider-upjet-ionoscloud/internal/controller/cluster/alb/targetgroup"
-	apigateway "github.com/ionos-cloud/provider-upjet-ionoscloud/internal/controller/cluster/apigateway/apigateway"
-	route "github.com/ionos-cloud/provider-upjet-ionoscloud/internal/controller/cluster/apigateway/route"
 	autoscalinggroup "github.com/ionos-cloud/provider-upjet-ionoscloud/internal/controller/cluster/asg/autoscalinggroup"
 	distribution "github.com/ionos-cloud/provider-upjet-ionoscloud/internal/controller/cluster/cdn/distribution"
 	autocertificate "github.com/ionos-cloud/provider-upjet-ionoscloud/internal/controller/cluster/certificatemanager/autocertificate"
@@ -24,6 +22,7 @@ import (
 	cubeserver "github.com/ionos-cloud/provider-upjet-ionoscloud/internal/controller/cluster/compute/cubeserver"
 	datacenter "github.com/ionos-cloud/provider-upjet-ionoscloud/internal/controller/cluster/compute/datacenter"
 	firewall "github.com/ionos-cloud/provider-upjet-ionoscloud/internal/controller/cluster/compute/firewall"
+	gpuserver "github.com/ionos-cloud/provider-upjet-ionoscloud/internal/controller/cluster/compute/gpuserver"
 	group "github.com/ionos-cloud/provider-upjet-ionoscloud/internal/controller/cluster/compute/group"
 	ipblock "github.com/ionos-cloud/provider-upjet-ionoscloud/internal/controller/cluster/compute/ipblock"
 	ipfailover "github.com/ionos-cloud/provider-upjet-ionoscloud/internal/controller/cluster/compute/ipfailover"
@@ -39,14 +38,12 @@ import (
 	volume "github.com/ionos-cloud/provider-upjet-ionoscloud/internal/controller/cluster/compute/volume"
 	registry "github.com/ionos-cloud/provider-upjet-ionoscloud/internal/controller/cluster/containerregistry/registry"
 	registrytoken "github.com/ionos-cloud/provider-upjet-ionoscloud/internal/controller/cluster/containerregistry/registrytoken"
-	cluster "github.com/ionos-cloud/provider-upjet-ionoscloud/internal/controller/cluster/dataplatform/cluster"
-	nodepool "github.com/ionos-cloud/provider-upjet-ionoscloud/internal/controller/cluster/dataplatform/nodepool"
 	mariadbcluster "github.com/ionos-cloud/provider-upjet-ionoscloud/internal/controller/cluster/dbaas/mariadbcluster"
 	dnsrecord "github.com/ionos-cloud/provider-upjet-ionoscloud/internal/controller/cluster/dns/dnsrecord"
 	dnszone "github.com/ionos-cloud/provider-upjet-ionoscloud/internal/controller/cluster/dns/dnszone"
 	inmemorydbreplicaset "github.com/ionos-cloud/provider-upjet-ionoscloud/internal/controller/cluster/inmemorydb/inmemorydbreplicaset"
-	clusterk8s "github.com/ionos-cloud/provider-upjet-ionoscloud/internal/controller/cluster/k8s/cluster"
-	nodepoolk8s "github.com/ionos-cloud/provider-upjet-ionoscloud/internal/controller/cluster/k8s/nodepool"
+	cluster "github.com/ionos-cloud/provider-upjet-ionoscloud/internal/controller/cluster/k8s/cluster"
+	nodepool "github.com/ionos-cloud/provider-upjet-ionoscloud/internal/controller/cluster/k8s/nodepool"
 	kafka "github.com/ionos-cloud/provider-upjet-ionoscloud/internal/controller/cluster/kafka/kafka"
 	kafkatopic "github.com/ionos-cloud/provider-upjet-ionoscloud/internal/controller/cluster/kafka/kafkatopic"
 	pipeline "github.com/ionos-cloud/provider-upjet-ionoscloud/internal/controller/cluster/log/pipeline"
@@ -88,8 +85,6 @@ func Setup(mgr ctrl.Manager, o controller.Options) error {
 		loadbalancer.Setup,
 		loadbalancerforwardingrule.Setup,
 		targetgroup.Setup,
-		apigateway.Setup,
-		route.Setup,
 		autoscalinggroup.Setup,
 		distribution.Setup,
 		autocertificate.Setup,
@@ -100,6 +95,7 @@ func Setup(mgr ctrl.Manager, o controller.Options) error {
 		cubeserver.Setup,
 		datacenter.Setup,
 		firewall.Setup,
+		gpuserver.Setup,
 		group.Setup,
 		ipblock.Setup,
 		ipfailover.Setup,
@@ -115,14 +111,12 @@ func Setup(mgr ctrl.Manager, o controller.Options) error {
 		volume.Setup,
 		registry.Setup,
 		registrytoken.Setup,
-		cluster.Setup,
-		nodepool.Setup,
 		mariadbcluster.Setup,
 		dnsrecord.Setup,
 		dnszone.Setup,
 		inmemorydbreplicaset.Setup,
-		clusterk8s.Setup,
-		nodepoolk8s.Setup,
+		cluster.Setup,
+		nodepool.Setup,
 		kafka.Setup,
 		kafkatopic.Setup,
 		pipeline.Setup,
@@ -170,8 +164,6 @@ func SetupGated(mgr ctrl.Manager, o controller.Options) error {
 		loadbalancer.SetupGated,
 		loadbalancerforwardingrule.SetupGated,
 		targetgroup.SetupGated,
-		apigateway.SetupGated,
-		route.SetupGated,
 		autoscalinggroup.SetupGated,
 		distribution.SetupGated,
 		autocertificate.SetupGated,
@@ -182,6 +174,7 @@ func SetupGated(mgr ctrl.Manager, o controller.Options) error {
 		cubeserver.SetupGated,
 		datacenter.SetupGated,
 		firewall.SetupGated,
+		gpuserver.SetupGated,
 		group.SetupGated,
 		ipblock.SetupGated,
 		ipfailover.SetupGated,
@@ -197,14 +190,12 @@ func SetupGated(mgr ctrl.Manager, o controller.Options) error {
 		volume.SetupGated,
 		registry.SetupGated,
 		registrytoken.SetupGated,
-		cluster.SetupGated,
-		nodepool.SetupGated,
 		mariadbcluster.SetupGated,
 		dnsrecord.SetupGated,
 		dnszone.SetupGated,
 		inmemorydbreplicaset.SetupGated,
-		clusterk8s.SetupGated,
-		nodepoolk8s.SetupGated,
+		cluster.SetupGated,
+		nodepool.SetupGated,
 		kafka.SetupGated,
 		kafkatopic.SetupGated,
 		pipeline.SetupGated,

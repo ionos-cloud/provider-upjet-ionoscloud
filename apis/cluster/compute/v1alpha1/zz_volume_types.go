@@ -55,6 +55,10 @@ type VolumeInitParameters_2 struct {
 	// [string] The name of the volume.
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
+	// (Computed)[boolean] Indicates if the image requires the legacy BIOS for compatibility or specific needs. During creation, if an image is used, the value will be inherited from the image, regardless of the value set in the plan. Later on, the value can be updated.
+	// Indicates if the image requires the legacy BIOS for compatibility or specific needs.
+	RequireLegacyBios *bool `json:"requireLegacyBios,omitempty" tf:"require_legacy_bios,omitempty"`
+
 	// [list] List of absolute paths to files containing a public SSH key that will be injected into IonosCloud provided Linux images. Also accepts ssh keys directly. Required for IonosCloud Linux images. Required if image_password is not provided. This property is immutable.
 	SSHKeyPath []*string `json:"sshKeyPath,omitempty" tf:"ssh_key_path,omitempty"`
 
@@ -62,14 +66,14 @@ type VolumeInitParameters_2 struct {
 	SSHKeys []*string `json:"sshKeys,omitempty" tf:"ssh_keys,omitempty"`
 
 	// [string] The ID of a server.
-	// +crossplane:generate:reference:type=github.com/ionos-cloud/provider-upjet-ionoscloud/apis/cluster/compute/v1alpha1.Server
+	// +crossplane:generate:reference:type=github.com/ionos-cloud/provider-upjet-ionoscloud/apis/cluster/compute/v1alpha1.GPUServer
 	ServerID *string `json:"serverId,omitempty" tf:"server_id,omitempty"`
 
-	// Reference to a Server in compute to populate serverId.
+	// Reference to a GPUServer in compute to populate serverId.
 	// +kubebuilder:validation:Optional
 	ServerIDRef *v1.Reference `json:"serverIdRef,omitempty" tf:"-"`
 
-	// Selector for a Server in compute to populate serverId.
+	// Selector for a GPUServer in compute to populate serverId.
 	// +kubebuilder:validation:Optional
 	ServerIDSelector *v1.Selector `json:"serverIdSelector,omitempty" tf:"-"`
 
@@ -148,6 +152,10 @@ type VolumeObservation_2 struct {
 	// (Computed)[string] Is capable of memory hot plug (no reboot required)
 	RAMHotPlug *bool `json:"ramHotPlug,omitempty" tf:"ram_hot_plug,omitempty"`
 
+	// (Computed)[boolean] Indicates if the image requires the legacy BIOS for compatibility or specific needs. During creation, if an image is used, the value will be inherited from the image, regardless of the value set in the plan. Later on, the value can be updated.
+	// Indicates if the image requires the legacy BIOS for compatibility or specific needs.
+	RequireLegacyBios *bool `json:"requireLegacyBios,omitempty" tf:"require_legacy_bios,omitempty"`
+
 	// [list] List of absolute paths to files containing a public SSH key that will be injected into IonosCloud provided Linux images. Also accepts ssh keys directly. Required for IonosCloud Linux images. Required if image_password is not provided. This property is immutable.
 	SSHKeyPath []*string `json:"sshKeyPath,omitempty" tf:"ssh_key_path,omitempty"`
 
@@ -219,6 +227,11 @@ type VolumeParameters_2 struct {
 	// +kubebuilder:validation:Optional
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
+	// (Computed)[boolean] Indicates if the image requires the legacy BIOS for compatibility or specific needs. During creation, if an image is used, the value will be inherited from the image, regardless of the value set in the plan. Later on, the value can be updated.
+	// Indicates if the image requires the legacy BIOS for compatibility or specific needs.
+	// +kubebuilder:validation:Optional
+	RequireLegacyBios *bool `json:"requireLegacyBios,omitempty" tf:"require_legacy_bios,omitempty"`
+
 	// [list] List of absolute paths to files containing a public SSH key that will be injected into IonosCloud provided Linux images. Also accepts ssh keys directly. Required for IonosCloud Linux images. Required if image_password is not provided. This property is immutable.
 	// +kubebuilder:validation:Optional
 	SSHKeyPath []*string `json:"sshKeyPath,omitempty" tf:"ssh_key_path,omitempty"`
@@ -228,15 +241,15 @@ type VolumeParameters_2 struct {
 	SSHKeys []*string `json:"sshKeys,omitempty" tf:"ssh_keys,omitempty"`
 
 	// [string] The ID of a server.
-	// +crossplane:generate:reference:type=github.com/ionos-cloud/provider-upjet-ionoscloud/apis/cluster/compute/v1alpha1.Server
+	// +crossplane:generate:reference:type=github.com/ionos-cloud/provider-upjet-ionoscloud/apis/cluster/compute/v1alpha1.GPUServer
 	// +kubebuilder:validation:Optional
 	ServerID *string `json:"serverId,omitempty" tf:"server_id,omitempty"`
 
-	// Reference to a Server in compute to populate serverId.
+	// Reference to a GPUServer in compute to populate serverId.
 	// +kubebuilder:validation:Optional
 	ServerIDRef *v1.Reference `json:"serverIdRef,omitempty" tf:"-"`
 
-	// Selector for a Server in compute to populate serverId.
+	// Selector for a GPUServer in compute to populate serverId.
 	// +kubebuilder:validation:Optional
 	ServerIDSelector *v1.Selector `json:"serverIdSelector,omitempty" tf:"-"`
 

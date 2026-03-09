@@ -37,15 +37,15 @@ type LoadbalancerInitParameters struct {
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
 	// [list] A list of NIC IDs that are part of the load balancer.
-	// +crossplane:generate:reference:type=github.com/ionos-cloud/provider-upjet-ionoscloud/apis/cluster/compute/v1alpha1.Server
+	// +crossplane:generate:reference:type=github.com/ionos-cloud/provider-upjet-ionoscloud/apis/cluster/compute/v1alpha1.GPUServer
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("primary_nic",true)
 	NicIds []*string `json:"nicIds,omitempty" tf:"nic_ids,omitempty"`
 
-	// References to Server in compute to populate nicIds.
+	// References to GPUServer in compute to populate nicIds.
 	// +kubebuilder:validation:Optional
 	NicIdsRefs []v1.Reference `json:"nicIdsRefs,omitempty" tf:"-"`
 
-	// Selector for a list of Server in compute to populate nicIds.
+	// Selector for a list of GPUServer in compute to populate nicIds.
 	// +kubebuilder:validation:Optional
 	NicIdsSelector *v1.Selector `json:"nicIdsSelector,omitempty" tf:"-"`
 }
@@ -98,16 +98,16 @@ type LoadbalancerParameters struct {
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
 	// [list] A list of NIC IDs that are part of the load balancer.
-	// +crossplane:generate:reference:type=github.com/ionos-cloud/provider-upjet-ionoscloud/apis/cluster/compute/v1alpha1.Server
+	// +crossplane:generate:reference:type=github.com/ionos-cloud/provider-upjet-ionoscloud/apis/cluster/compute/v1alpha1.GPUServer
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("primary_nic",true)
 	// +kubebuilder:validation:Optional
 	NicIds []*string `json:"nicIds,omitempty" tf:"nic_ids,omitempty"`
 
-	// References to Server in compute to populate nicIds.
+	// References to GPUServer in compute to populate nicIds.
 	// +kubebuilder:validation:Optional
 	NicIdsRefs []v1.Reference `json:"nicIdsRefs,omitempty" tf:"-"`
 
-	// Selector for a list of Server in compute to populate nicIds.
+	// Selector for a list of GPUServer in compute to populate nicIds.
 	// +kubebuilder:validation:Optional
 	NicIdsSelector *v1.Selector `json:"nicIdsSelector,omitempty" tf:"-"`
 }

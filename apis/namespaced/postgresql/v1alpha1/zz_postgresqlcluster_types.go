@@ -273,7 +273,7 @@ type PostgresqlClusterInitParameters struct {
 	// The total number of instances in the cluster (one master and n-1 standbys)
 	Instances *float64 `json:"instances,omitempty" tf:"instances,omitempty"`
 
-	// [string] The physical location where the cluster will be created. This will be where all of your instances live. Property cannot be modified after datacenter creation. Possible values are: de/fra, de/txl, gb/lhr, es/vit, us/ewr, us/las. This attribute is immutable(disallowed in update requests).
+	// [string] The physical location where the cluster will be created. This will be where all of your instances live. Property cannot be modified after datacenter creation. Available locations: de/fra, us/las, us/ewr, de/txl, gb/lhr, gb/bhx, es/vit, fr/par, us/mci, de/fra/2. This attribute is immutable (disallowed in update requests).
 	// The physical location where the cluster will be created. This will be where all of your instances live. Property cannot be modified after datacenter creation (disallowed in update requests)
 	// +crossplane:generate:reference:type=github.com/ionos-cloud/provider-upjet-ionoscloud/apis/namespaced/compute/v1alpha1.Datacenter
 	// +crossplane:generate:reference:extractor=github.com/ionos-cloud/provider-upjet-ionoscloud/config/common.DatacenterLocation()
@@ -356,7 +356,7 @@ type PostgresqlClusterObservation struct {
 	// The total number of instances in the cluster (one master and n-1 standbys)
 	Instances *float64 `json:"instances,omitempty" tf:"instances,omitempty"`
 
-	// [string] The physical location where the cluster will be created. This will be where all of your instances live. Property cannot be modified after datacenter creation. Possible values are: de/fra, de/txl, gb/lhr, es/vit, us/ewr, us/las. This attribute is immutable(disallowed in update requests).
+	// [string] The physical location where the cluster will be created. This will be where all of your instances live. Property cannot be modified after datacenter creation. Available locations: de/fra, us/las, us/ewr, de/txl, gb/lhr, gb/bhx, es/vit, fr/par, us/mci, de/fra/2. This attribute is immutable (disallowed in update requests).
 	// The physical location where the cluster will be created. This will be where all of your instances live. Property cannot be modified after datacenter creation (disallowed in update requests)
 	Location *string `json:"location,omitempty" tf:"location,omitempty"`
 
@@ -432,7 +432,7 @@ type PostgresqlClusterParameters struct {
 	// +kubebuilder:validation:Optional
 	Instances *float64 `json:"instances,omitempty" tf:"instances,omitempty"`
 
-	// [string] The physical location where the cluster will be created. This will be where all of your instances live. Property cannot be modified after datacenter creation. Possible values are: de/fra, de/txl, gb/lhr, es/vit, us/ewr, us/las. This attribute is immutable(disallowed in update requests).
+	// [string] The physical location where the cluster will be created. This will be where all of your instances live. Property cannot be modified after datacenter creation. Available locations: de/fra, us/las, us/ewr, de/txl, gb/lhr, gb/bhx, es/vit, fr/par, us/mci, de/fra/2. This attribute is immutable (disallowed in update requests).
 	// The physical location where the cluster will be created. This will be where all of your instances live. Property cannot be modified after datacenter creation (disallowed in update requests)
 	// +crossplane:generate:reference:type=github.com/ionos-cloud/provider-upjet-ionoscloud/apis/namespaced/compute/v1alpha1.Datacenter
 	// +crossplane:generate:reference:extractor=github.com/ionos-cloud/provider-upjet-ionoscloud/config/common.DatacenterLocation()

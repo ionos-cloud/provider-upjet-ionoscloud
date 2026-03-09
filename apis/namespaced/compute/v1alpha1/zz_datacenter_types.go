@@ -41,7 +41,7 @@ type DatacenterInitParameters struct {
 	// A description for the datacenter, e.g. staging, production
 	Description *string `json:"description,omitempty" tf:"description,omitempty"`
 
-	// [string] The regional location where the Virtual Data Center will be created. This argument is immutable.
+	// [string] The regional location where the Virtual Data Center will be created. This argument is immutable. Available locations: de/fra, us/las, us/ewr, de/txl, gb/lhr, gb/bhx, es/vit, fr/par, us/mci, de/fra/2
 	Location *string `json:"location,omitempty" tf:"location,omitempty"`
 
 	// [string] The name of the Virtual Data Center.
@@ -70,7 +70,7 @@ type DatacenterObservation struct {
 	// Auto-assigned /56 IPv6 CIDR block, if IPv6 is enabled for the datacenter. Read-only
 	IPv6CidrBlock *string `json:"ipv6CidrBlock,omitempty" tf:"ipv6_cidr_block,omitempty"`
 
-	// [string] The regional location where the Virtual Data Center will be created. This argument is immutable.
+	// [string] The regional location where the Virtual Data Center will be created. This argument is immutable. Available locations: de/fra, us/las, us/ewr, de/txl, gb/lhr, gb/bhx, es/vit, fr/par, us/mci, de/fra/2
 	Location *string `json:"location,omitempty" tf:"location,omitempty"`
 
 	// [string] The name of the Virtual Data Center.
@@ -90,7 +90,7 @@ type DatacenterParameters struct {
 	// +kubebuilder:validation:Optional
 	Description *string `json:"description,omitempty" tf:"description,omitempty"`
 
-	// [string] The regional location where the Virtual Data Center will be created. This argument is immutable.
+	// [string] The regional location where the Virtual Data Center will be created. This argument is immutable. Available locations: de/fra, us/las, us/ewr, de/txl, gb/lhr, gb/bhx, es/vit, fr/par, us/mci, de/fra/2
 	// +kubebuilder:validation:Optional
 	Location *string `json:"location,omitempty" tf:"location,omitempty"`
 

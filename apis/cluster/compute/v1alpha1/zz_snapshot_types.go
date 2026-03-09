@@ -58,6 +58,10 @@ type SnapshotInitParameters struct {
 	// (Computed)[string] Is capable of memory hot plug (no reboot required). Can only be updated.
 	RAMHotPlug *bool `json:"ramHotPlug,omitempty" tf:"ram_hot_plug,omitempty"`
 
+	// (Computed)[boolean] Indicates if the image requires the legacy BIOS for compatibility or specific needs. During creation, if an image is used, the value will be inherited from the image, regardless of the value set in the plan. Later on, the value can be updated.
+	// Indicates if the image requires the legacy BIOS for compatibility or specific needs.
+	RequireLegacyBios *bool `json:"requireLegacyBios,omitempty" tf:"require_legacy_bios,omitempty"`
+
 	// Boolean value representing if the snapshot requires extra protection e.g. two factor protection
 	// Boolean value representing if the snapshot requires extra protection e.g. two factor protection
 	SecAuthProtection *bool `json:"secAuthProtection,omitempty" tf:"sec_auth_protection,omitempty"`
@@ -128,6 +132,10 @@ type SnapshotObservation struct {
 	// Is capable of memory hot unplug (no reboot required)
 	RAMHotUnplug *bool `json:"ramHotUnplug,omitempty" tf:"ram_hot_unplug,omitempty"`
 
+	// (Computed)[boolean] Indicates if the image requires the legacy BIOS for compatibility or specific needs. During creation, if an image is used, the value will be inherited from the image, regardless of the value set in the plan. Later on, the value can be updated.
+	// Indicates if the image requires the legacy BIOS for compatibility or specific needs.
+	RequireLegacyBios *bool `json:"requireLegacyBios,omitempty" tf:"require_legacy_bios,omitempty"`
+
 	// Boolean value representing if the snapshot requires extra protection e.g. two factor protection
 	// Boolean value representing if the snapshot requires extra protection e.g. two factor protection
 	SecAuthProtection *bool `json:"secAuthProtection,omitempty" tf:"sec_auth_protection,omitempty"`
@@ -194,6 +202,11 @@ type SnapshotParameters struct {
 	// (Computed)[string] Is capable of memory hot plug (no reboot required). Can only be updated.
 	// +kubebuilder:validation:Optional
 	RAMHotPlug *bool `json:"ramHotPlug,omitempty" tf:"ram_hot_plug,omitempty"`
+
+	// (Computed)[boolean] Indicates if the image requires the legacy BIOS for compatibility or specific needs. During creation, if an image is used, the value will be inherited from the image, regardless of the value set in the plan. Later on, the value can be updated.
+	// Indicates if the image requires the legacy BIOS for compatibility or specific needs.
+	// +kubebuilder:validation:Optional
+	RequireLegacyBios *bool `json:"requireLegacyBios,omitempty" tf:"require_legacy_bios,omitempty"`
 
 	// Boolean value representing if the snapshot requires extra protection e.g. two factor protection
 	// Boolean value representing if the snapshot requires extra protection e.g. two factor protection

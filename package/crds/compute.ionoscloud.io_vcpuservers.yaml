@@ -3,7 +3,7 @@ apiVersion: apiextensions.k8s.io/v1
 kind: CustomResourceDefinition
 metadata:
   annotations:
-    controller-gen.kubebuilder.io/version: v0.18.0
+    controller-gen.kubebuilder.io/version: v0.20.0
   name: vcpuservers.compute.ionoscloud.io
 spec:
   group: compute.ionoscloud.io
@@ -223,36 +223,36 @@ spec:
                       dhcp:
                         type: boolean
                       dhcpv6:
+                        description: Indicates whether this NIC receives an IPv6 address
+                          through DHCP.
                         type: boolean
                       firewall:
                         description: |-
                           Allows to define firewall rules inline in the server. See the Firewall section.
                           Firewall rules created in the server resource. The rules can also be created as separate resources outside the server resource
-                        items:
-                          properties:
-                            icmpCode:
-                              type: string
-                            icmpType:
-                              type: string
-                            name:
-                              description: '[string] The name of the server.'
-                              type: string
-                            portRangeEnd:
-                              type: number
-                            portRangeStart:
-                              type: number
-                            protocol:
-                              type: string
-                            sourceIp:
-                              type: string
-                            sourceMac:
-                              type: string
-                            targetIp:
-                              type: string
-                            type:
-                              type: string
-                          type: object
-                        type: array
+                        properties:
+                          icmpCode:
+                            type: string
+                          icmpType:
+                            type: string
+                          name:
+                            description: '[string] The name of the server.'
+                            type: string
+                          portRangeEnd:
+                            type: number
+                          portRangeStart:
+                            type: number
+                          protocol:
+                            type: string
+                          sourceIp:
+                            type: string
+                          sourceMac:
+                            type: string
+                          targetIp:
+                            type: string
+                          type:
+                            type: string
+                        type: object
                       firewallActive:
                         type: boolean
                       firewallType:
@@ -265,12 +265,18 @@ spec:
                         items:
                           type: string
                         type: array
+                        x-kubernetes-list-type: set
                       ipv6CidrBlock:
+                        description: IPv6 CIDR block assigned to the NIC.
                         type: string
                       ipv6Ips:
+                        description: Collection for IPv6 addresses assigned to a nic.
+                          Explicitly assigned IPv6 addresses need to come from inside
+                          the IPv6 CIDR block assigned to the nic.
                         items:
                           type: string
                         type: array
+                        x-kubernetes-list-type: set
                       lan:
                         type: number
                       lanRef:
@@ -361,6 +367,11 @@ spec:
                         type: array
                         x-kubernetes-list-type: set
                     type: object
+                  nicMultiQueue:
+                    description: |-
+                      [bool] Activate or deactivate the Multi Queue feature on all NICs of the server. This feature is beneficial to enable when the NICs are experiencing performance issues (e.g. low throughput). Toggling this feature will also initiate a restart of the server. If the specified value is true, the feature will be activated; if it is not specified or set to false, the feature will be deactivated.
+                      Activate or deactivate the Multi Queue feature on all NICs of this server. This feature is beneficial to enable when the NICs are experiencing performance issues (e.g. low throughput). Toggling this feature will also initiate a restart of the server. If the specified value is `true`, the feature will be activated; if it is not specified or set to `false`, the feature will be deactivated.
+                    type: boolean
                   ram:
                     description: '[integer] The amount of memory for the server in
                       MB.'
@@ -417,6 +428,10 @@ spec:
                       name:
                         description: '[string] The name of the server.'
                         type: string
+                      requireLegacyBios:
+                        description: Indicates if the image requires the legacy BIOS
+                          for compatibility or specific needs.
+                        type: boolean
                       size:
                         description: The size of the volume in GB.
                         type: number
@@ -592,36 +607,36 @@ spec:
                       dhcp:
                         type: boolean
                       dhcpv6:
+                        description: Indicates whether this NIC receives an IPv6 address
+                          through DHCP.
                         type: boolean
                       firewall:
                         description: |-
                           Allows to define firewall rules inline in the server. See the Firewall section.
                           Firewall rules created in the server resource. The rules can also be created as separate resources outside the server resource
-                        items:
-                          properties:
-                            icmpCode:
-                              type: string
-                            icmpType:
-                              type: string
-                            name:
-                              description: '[string] The name of the server.'
-                              type: string
-                            portRangeEnd:
-                              type: number
-                            portRangeStart:
-                              type: number
-                            protocol:
-                              type: string
-                            sourceIp:
-                              type: string
-                            sourceMac:
-                              type: string
-                            targetIp:
-                              type: string
-                            type:
-                              type: string
-                          type: object
-                        type: array
+                        properties:
+                          icmpCode:
+                            type: string
+                          icmpType:
+                            type: string
+                          name:
+                            description: '[string] The name of the server.'
+                            type: string
+                          portRangeEnd:
+                            type: number
+                          portRangeStart:
+                            type: number
+                          protocol:
+                            type: string
+                          sourceIp:
+                            type: string
+                          sourceMac:
+                            type: string
+                          targetIp:
+                            type: string
+                          type:
+                            type: string
+                        type: object
                       firewallActive:
                         type: boolean
                       firewallType:
@@ -634,12 +649,18 @@ spec:
                         items:
                           type: string
                         type: array
+                        x-kubernetes-list-type: set
                       ipv6CidrBlock:
+                        description: IPv6 CIDR block assigned to the NIC.
                         type: string
                       ipv6Ips:
+                        description: Collection for IPv6 addresses assigned to a nic.
+                          Explicitly assigned IPv6 addresses need to come from inside
+                          the IPv6 CIDR block assigned to the nic.
                         items:
                           type: string
                         type: array
+                        x-kubernetes-list-type: set
                       lan:
                         type: number
                       lanRef:
@@ -730,6 +751,11 @@ spec:
                         type: array
                         x-kubernetes-list-type: set
                     type: object
+                  nicMultiQueue:
+                    description: |-
+                      [bool] Activate or deactivate the Multi Queue feature on all NICs of the server. This feature is beneficial to enable when the NICs are experiencing performance issues (e.g. low throughput). Toggling this feature will also initiate a restart of the server. If the specified value is true, the feature will be activated; if it is not specified or set to false, the feature will be deactivated.
+                      Activate or deactivate the Multi Queue feature on all NICs of this server. This feature is beneficial to enable when the NICs are experiencing performance issues (e.g. low throughput). Toggling this feature will also initiate a restart of the server. If the specified value is `true`, the feature will be activated; if it is not specified or set to `false`, the feature will be deactivated.
+                    type: boolean
                   ram:
                     description: '[integer] The amount of memory for the server in
                       MB.'
@@ -786,6 +812,10 @@ spec:
                       name:
                         description: '[string] The name of the server.'
                         type: string
+                      requireLegacyBios:
+                        description: Indicates if the image requires the legacy BIOS
+                          for compatibility or specific needs.
+                        type: boolean
                       size:
                         description: The size of the volume in GB.
                         type: number
@@ -982,38 +1012,38 @@ spec:
                       dhcp:
                         type: boolean
                       dhcpv6:
+                        description: Indicates whether this NIC receives an IPv6 address
+                          through DHCP.
                         type: boolean
                       firewall:
                         description: |-
                           Allows to define firewall rules inline in the server. See the Firewall section.
                           Firewall rules created in the server resource. The rules can also be created as separate resources outside the server resource
-                        items:
-                          properties:
-                            icmpCode:
-                              type: string
-                            icmpType:
-                              type: string
-                            id:
-                              type: string
-                            name:
-                              description: '[string] The name of the server.'
-                              type: string
-                            portRangeEnd:
-                              type: number
-                            portRangeStart:
-                              type: number
-                            protocol:
-                              type: string
-                            sourceIp:
-                              type: string
-                            sourceMac:
-                              type: string
-                            targetIp:
-                              type: string
-                            type:
-                              type: string
-                          type: object
-                        type: array
+                        properties:
+                          icmpCode:
+                            type: string
+                          icmpType:
+                            type: string
+                          id:
+                            type: string
+                          name:
+                            description: '[string] The name of the server.'
+                            type: string
+                          portRangeEnd:
+                            type: number
+                          portRangeStart:
+                            type: number
+                          protocol:
+                            type: string
+                          sourceIp:
+                            type: string
+                          sourceMac:
+                            type: string
+                          targetIp:
+                            type: string
+                          type:
+                            type: string
+                        type: object
                       firewallActive:
                         type: boolean
                       firewallType:
@@ -1028,12 +1058,18 @@ spec:
                         items:
                           type: string
                         type: array
+                        x-kubernetes-list-type: set
                       ipv6CidrBlock:
+                        description: IPv6 CIDR block assigned to the NIC.
                         type: string
                       ipv6Ips:
+                        description: Collection for IPv6 addresses assigned to a nic.
+                          Explicitly assigned IPv6 addresses need to come from inside
+                          the IPv6 CIDR block assigned to the nic.
                         items:
                           type: string
                         type: array
+                        x-kubernetes-list-type: set
                       lan:
                         type: number
                       mac:
@@ -1052,6 +1088,11 @@ spec:
                         type: array
                         x-kubernetes-list-type: set
                     type: object
+                  nicMultiQueue:
+                    description: |-
+                      [bool] Activate or deactivate the Multi Queue feature on all NICs of the server. This feature is beneficial to enable when the NICs are experiencing performance issues (e.g. low throughput). Toggling this feature will also initiate a restart of the server. If the specified value is true, the feature will be activated; if it is not specified or set to false, the feature will be deactivated.
+                      Activate or deactivate the Multi Queue feature on all NICs of this server. This feature is beneficial to enable when the NICs are experiencing performance issues (e.g. low throughput). Toggling this feature will also initiate a restart of the server. If the specified value is `true`, the feature will be activated; if it is not specified or set to `false`, the feature will be deactivated.
+                    type: boolean
                   primaryIp:
                     description: (Computed) The associated IP address.
                     type: string
@@ -1136,6 +1177,10 @@ spec:
                       pciSlot:
                         type: number
                       ramHotPlug:
+                        type: boolean
+                      requireLegacyBios:
+                        description: Indicates if the image requires the legacy BIOS
+                          for compatibility or specific needs.
                         type: boolean
                       size:
                         description: The size of the volume in GB.

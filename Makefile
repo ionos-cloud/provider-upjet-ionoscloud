@@ -13,7 +13,8 @@ TERRAFORM_VERSION_VALID := $(shell [ "$(TERRAFORM_VERSION)" = "`printf "$(TERRAF
 TERRAFORM_VERSION_VALID := $(shell [ "$(TERRAFORM_VERSION)" = "`printf "$(TERRAFORM_VERSION)\n1.6" | sort -V | head -n1`" ] && echo 1 || echo 0)
 export TERRAFORM_PROVIDER_SOURCE ?= ionos-cloud/ionoscloud
 export TERRAFORM_PROVIDER_REPO ?= https://github.com/ionos-cloud/terraform-provider-ionoscloud
-export TERRAFORM_PROVIDER_VERSION ?= 6.7.12
+export TERRAFORM_PROVIDER_REPO ?= https://github.com/ionos-cloud/terraform-provider-ionoscloud
+export TERRAFORM_PROVIDER_VERSION ?= 6.7.23
 export TERRAFORM_PROVIDER_DOWNLOAD_NAME ?= terraform-provider-ionoscloud
 export TERRAFORM_PROVIDER_DOWNLOAD_URL_PREFIX ?= https://github.com/ionos-cloud/$(TERRAFORM_PROVIDER_DOWNLOAD_NAME)/releases/download/v$(TERRAFORM_PROVIDER_VERSION)
 export TERRAFORM_NATIVE_PROVIDER_BINARY ?= terraform-provider-ionoscloud_v6_7_12
@@ -54,10 +55,10 @@ GO_SUBDIRS += cmd internal apis generate
 
 # ====================================================================================
 # Setup Kubernetes tools
-KIND_VERSION = v0.29.0
+KIND_VERSION = v0.31.0
 UP_VERSION = v0.40.2
 UP_CHANNEL = stable
-UPTEST_VERSION = v1.4.0
+UPTEST_VERSION = v2.2.0
 -include build/makelib/k8s_tools.mk
 
 # ====================================================================================
@@ -85,7 +86,7 @@ XPKGS = $(PROJECT_NAME)
 # We want submodules to be set up the first time `make` is run.
 # We manage the build/ folder and its Makefiles as a submodule.
 # The first time `make` is run, the includes of build/*.mk files will
-# all fail, and this target will be run. The next time, the default as defined
+# all fail, and this target will be run. The next time, the default as definedpr
 # by the includes will be run instead.
 fallthrough: submodules
 	@echo Initial setup complete. Running make again . . .
@@ -176,7 +177,7 @@ run: go.build
 
 # ====================================================================================
 # End to End Testing
-CROSSPLANE_VERSION = 1.20.1
+CROSSPLANE_VERSION = 2.2.0
 CROSSPLANE_NAMESPACE = upbound-system
 -include build/makelib/local.xpkg.mk
 -include build/makelib/controlplane.mk

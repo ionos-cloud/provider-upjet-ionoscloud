@@ -3,7 +3,7 @@ apiVersion: apiextensions.k8s.io/v1
 kind: CustomResourceDefinition
 metadata:
   annotations:
-    controller-gen.kubebuilder.io/version: v0.18.0
+    controller-gen.kubebuilder.io/version: v0.20.0
   name: cubeservers.compute.ionoscloud.io
 spec:
   group: compute.ionoscloud.io
@@ -212,6 +212,9 @@ spec:
                           through DHCP.
                         type: boolean
                       firewall:
+                        description: Firewall rules created in the server resource.
+                          The rules can also be created as separate resources outside
+                          the server resource
                         properties:
                           icmpCode:
                             type: string
@@ -240,9 +243,14 @@ spec:
                       firewallType:
                         type: string
                       ips:
+                        description: Collection of IP addresses assigned to a nic.
+                          Explicitly assigned public IPs need to come from reserved
+                          IP blocks, Passing value null or empty array will assign
+                          an IP address automatically.
                         items:
                           type: string
                         type: array
+                        x-kubernetes-list-type: set
                       ipv6CidrBlock:
                         description: IPv6 CIDR block assigned to the NIC.
                         type: string
@@ -253,6 +261,7 @@ spec:
                         items:
                           type: string
                         type: array
+                        x-kubernetes-list-type: set
                       lan:
                         type: number
                       lanRef:
@@ -404,6 +413,10 @@ spec:
                       name:
                         description: '[string] The name of the server.'
                         type: string
+                      requireLegacyBios:
+                        description: Indicates if the image requires the legacy BIOS
+                          for compatibility or specific needs.
+                        type: boolean
                       sshKeyPath:
                         description: '[list] List of paths to files containing a public
                           SSH key that will be injected into IonosCloud provided Linux
@@ -573,6 +586,9 @@ spec:
                           through DHCP.
                         type: boolean
                       firewall:
+                        description: Firewall rules created in the server resource.
+                          The rules can also be created as separate resources outside
+                          the server resource
                         properties:
                           icmpCode:
                             type: string
@@ -601,9 +617,14 @@ spec:
                       firewallType:
                         type: string
                       ips:
+                        description: Collection of IP addresses assigned to a nic.
+                          Explicitly assigned public IPs need to come from reserved
+                          IP blocks, Passing value null or empty array will assign
+                          an IP address automatically.
                         items:
                           type: string
                         type: array
+                        x-kubernetes-list-type: set
                       ipv6CidrBlock:
                         description: IPv6 CIDR block assigned to the NIC.
                         type: string
@@ -614,6 +635,7 @@ spec:
                         items:
                           type: string
                         type: array
+                        x-kubernetes-list-type: set
                       lan:
                         type: number
                       lanRef:
@@ -765,6 +787,10 @@ spec:
                       name:
                         description: '[string] The name of the server.'
                         type: string
+                      requireLegacyBios:
+                        description: Indicates if the image requires the legacy BIOS
+                          for compatibility or specific needs.
+                        type: boolean
                       sshKeyPath:
                         description: '[list] List of paths to files containing a public
                           SSH key that will be injected into IonosCloud provided Linux
@@ -952,10 +978,15 @@ spec:
                           through DHCP.
                         type: boolean
                       firewall:
+                        description: Firewall rules created in the server resource.
+                          The rules can also be created as separate resources outside
+                          the server resource
                         properties:
                           icmpCode:
                             type: string
                           icmpType:
+                            type: string
+                          id:
                             type: string
                           name:
                             description: '[string] The name of the server.'
@@ -979,10 +1010,17 @@ spec:
                         type: boolean
                       firewallType:
                         type: string
+                      id:
+                        type: string
                       ips:
+                        description: Collection of IP addresses assigned to a nic.
+                          Explicitly assigned public IPs need to come from reserved
+                          IP blocks, Passing value null or empty array will assign
+                          an IP address automatically.
                         items:
                           type: string
                         type: array
+                        x-kubernetes-list-type: set
                       ipv6CidrBlock:
                         description: IPv6 CIDR block assigned to the NIC.
                         type: string
@@ -993,6 +1031,7 @@ spec:
                         items:
                           type: string
                         type: array
+                        x-kubernetes-list-type: set
                       lan:
                         type: number
                       mac:
@@ -1096,6 +1135,10 @@ spec:
                       pciSlot:
                         type: number
                       ramHotPlug:
+                        type: boolean
+                      requireLegacyBios:
+                        description: Indicates if the image requires the legacy BIOS
+                          for compatibility or specific needs.
                         type: boolean
                       sshKeyPath:
                         description: '[list] List of paths to files containing a public
