@@ -1,0 +1,99 @@
+apiVersion: gpu.m.ionoscloud.io/v1alpha1
+kind: Server
+metadata:
+  annotations:
+    meta.upbound.io/example-id: gpu/v1alpha1/server
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+  namespace: upbound-system
+spec:
+  forProvider:
+    availabilityZone: AUTO
+    datacenterIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    hostname: gpu-server-example
+    imageName: ubuntu:latest
+    imagePasswordSecretRef:
+      key: attribute.result
+      name: example-password
+    name: GPU Server Example
+    nic:
+    - dhcp: true
+      firewall:
+      - name: SSH
+        portRangeEnd: 22
+        portRangeStart: 22
+        protocol: TCP
+        type: INGRESS
+      firewallActive: true
+      firewallType: INGRESS
+      ips:
+      - ${ionoscloud_ipblock.webserver_ipblock.ips[0]}
+      lanSelector:
+        matchLabels:
+          testing.upbound.io/example-name: example
+      name: system
+    templateUuid: 6913ed82-a143-4c15-89ac-08fb375a97c5
+    vmState: RUNNING
+    volume:
+    - availabilityZone: AUTO
+      bus: VIRTIO
+      diskType: SSD Premium
+      exposeSerial: true
+      licenceType: LINUX
+      name: system
+      requireLegacyBios: false
+
+---
+
+apiVersion: compute.m.ionoscloud.io/v1alpha1
+kind: Datacenter
+metadata:
+  annotations:
+    meta.upbound.io/example-id: gpu/v1alpha1/server
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+  namespace: upbound-system
+spec:
+  forProvider:
+    location: de/fra/2
+    name: Datacenter Example
+
+---
+
+apiVersion: compute.m.ionoscloud.io/v1alpha1
+kind: Ipblock
+metadata:
+  annotations:
+    meta.upbound.io/example-id: gpu/v1alpha1/server
+  labels:
+    testing.upbound.io/example-name: webserver_ipblock
+  name: webserver-ipblock
+  namespace: upbound-system
+spec:
+  forProvider:
+    location: de/fra
+    name: webserver_ipblock
+    size: 1
+
+---
+
+apiVersion: compute.m.ionoscloud.io/v1alpha1
+kind: Lan
+metadata:
+  annotations:
+    meta.upbound.io/example-id: gpu/v1alpha1/server
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+  namespace: upbound-system
+spec:
+  forProvider:
+    datacenterIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    name: Lan Example
+    public: true
