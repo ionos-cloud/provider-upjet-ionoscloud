@@ -54,7 +54,7 @@ spec:
 ---
 
 apiVersion: compute.ionoscloud.io/v1alpha1
-kind: GPUServer
+kind: Server
 metadata:
   annotations:
     meta.upbound.io/example-id: compute/v1alpha1/snapshot

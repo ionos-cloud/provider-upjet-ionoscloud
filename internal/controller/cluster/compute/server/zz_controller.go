@@ -43,7 +43,7 @@ func Setup(mgr ctrl.Manager, o tjcontroller.Options) error {
 	ac := tjcontroller.NewAPICallbacks(mgr, xpresource.ManagedKind(v1alpha1.Server_GroupVersionKind), tjcontroller.WithEventHandler(eventHandler), tjcontroller.WithStatusUpdates(false))
 	opts := []managed.ReconcilerOption{
 		managed.WithExternalConnecter(
-			tjcontroller.NewTerraformPluginSDKAsyncConnector(mgr.GetClient(), o.OperationTrackerStore, o.SetupFn, o.Provider.Resources["ionoscloud_gpu_server"],
+			tjcontroller.NewTerraformPluginSDKAsyncConnector(mgr.GetClient(), o.OperationTrackerStore, o.SetupFn, o.Provider.Resources["ionoscloud_server"],
 				tjcontroller.WithTerraformPluginSDKAsyncLogger(o.Logger),
 				tjcontroller.WithTerraformPluginSDKAsyncConnectorEventHandler(eventHandler),
 				tjcontroller.WithTerraformPluginSDKAsyncCallbackProvider(ac),

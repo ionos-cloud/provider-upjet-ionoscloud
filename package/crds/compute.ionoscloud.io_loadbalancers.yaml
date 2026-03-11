@@ -169,7 +169,7 @@ spec:
                       type: string
                     type: array
                   nicIdsRefs:
-                    description: References to GPUServer in compute to populate nicIds.
+                    description: References to Server in compute to populate nicIds.
                     items:
                       description: A Reference to a named object.
                       properties:
@@ -206,7 +206,7 @@ spec:
                       type: object
                     type: array
                   nicIdsSelector:
-                    description: Selector for a list of GPUServer in compute to populate
+                    description: Selector for a list of Server in compute to populate
                       nicIds.
                     properties:
                       matchControllerRef:
@@ -356,7 +356,7 @@ spec:
                       type: string
                     type: array
                   nicIdsRefs:
-                    description: References to GPUServer in compute to populate nicIds.
+                    description: References to Server in compute to populate nicIds.
                     items:
                       description: A Reference to a named object.
                       properties:
@@ -393,7 +393,7 @@ spec:
                       type: object
                     type: array
                   nicIdsSelector:
-                    description: Selector for a list of GPUServer in compute to populate
+                    description: Selector for a list of Server in compute to populate
                       nicIds.
                     properties:
                       matchControllerRef:

@@ -16,7 +16,7 @@ import (
 
 // GetTerraformResourceType returns Terraform resource type for this GPUServer
 func (mg *GPUServer) GetTerraformResourceType() string {
-	return "ionoscloud_server"
+	return "ionoscloud_gpu_server"
 }
 
 // GetConnectionDetailsMapping for this GPUServer

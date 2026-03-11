@@ -314,7 +314,7 @@ spec:
                       The UUID of the master NIC
                     type: string
                   nicuuidRef:
-                    description: Reference to a GPUServer in compute to populate nicuuid.
+                    description: Reference to a Server in compute to populate nicuuid.
                     properties:
                       name:
                         description: Name of the referenced object.
@@ -348,7 +348,7 @@ spec:
                     - name
                     type: object
                   nicuuidSelector:
-                    description: Selector for a GPUServer in compute to populate nicuuid.
+                    description: Selector for a Server in compute to populate nicuuid.
                     properties:
                       matchControllerRef:
                         description: |-
@@ -642,7 +642,7 @@ spec:
                       The UUID of the master NIC
                     type: string
                   nicuuidRef:
-                    description: Reference to a GPUServer in compute to populate nicuuid.
+                    description: Reference to a Server in compute to populate nicuuid.
                     properties:
                       name:
                         description: Name of the referenced object.
@@ -676,7 +676,7 @@ spec:
                     - name
                     type: object
                   nicuuidSelector:
-                    description: Selector for a GPUServer in compute to populate nicuuid.
+                    description: Selector for a Server in compute to populate nicuuid.
                     properties:
                       matchControllerRef:
                         description: |-

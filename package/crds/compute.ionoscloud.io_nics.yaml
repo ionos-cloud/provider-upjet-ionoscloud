@@ -318,7 +318,7 @@ spec:
                     description: '[string] The ID of a server.'
                     type: string
                   serverIdRef:
-                    description: Reference to a GPUServer in compute to populate serverId.
+                    description: Reference to a Server in compute to populate serverId.
                     properties:
                       name:
                         description: Name of the referenced object.
@@ -352,7 +352,7 @@ spec:
                     - name
                     type: object
                   serverIdSelector:
-                    description: Selector for a GPUServer in compute to populate serverId.
+                    description: Selector for a Server in compute to populate serverId.
                     properties:
                       matchControllerRef:
                         description: |-
@@ -650,7 +650,7 @@ spec:
                     description: '[string] The ID of a server.'
                     type: string
                   serverIdRef:
-                    description: Reference to a GPUServer in compute to populate serverId.
+                    description: Reference to a Server in compute to populate serverId.
                     properties:
                       name:
                         description: Name of the referenced object.
@@ -684,7 +684,7 @@ spec:
                     - name
                     type: object
                   serverIdSelector:
-                    description: Selector for a GPUServer in compute to populate serverId.
+                    description: Selector for a Server in compute to populate serverId.
                     properties:
                       matchControllerRef:
                         description: |-
