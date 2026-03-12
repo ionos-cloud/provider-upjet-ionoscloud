@@ -8,7 +8,7 @@ metadata:
   name: example
 spec:
   forProvider:
-    cores: 1
+    templateUuid: e15d15e7-ea9a-48ae-a60a-29b9463f4519
     datacenterIdSelector:
       matchLabels:
         testing.upbound.io/example-name: example
@@ -17,12 +17,7 @@ spec:
       key: password
       name: pwsecret
       namespace: upbound-system
-    label:
-    - key: labelkey1
-      value: labelvalue1
-    - key: labelkey2
-      value: labelvalue2
-    name: Server Example
+    name: GPU Server Example
     nic:
       dhcp: true
       firewall:
@@ -38,16 +33,14 @@ spec:
         matchLabels:
           testing.upbound.io/example-name: example
       name: system
-    ram: 1024
-    type: ENTERPRISE
     volume:
       availabilityZone: ZONE_1
       bus: VIRTIO
+      exposeSerial: true
       diskType: SSD Standard
       name: system
-      size: 5
       userData: foo
-
+      requireLegacyBios: false
 ---
 
 apiVersion: compute.ionoscloud.io/v1alpha1
@@ -61,7 +54,7 @@ metadata:
 spec:
   forProvider:
     description: Datacenter Description
-    location: us/las
+    location: de/fra/2
     name: Datacenter Example
     secAuthProtection: false
 

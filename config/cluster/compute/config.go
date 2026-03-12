@@ -81,6 +81,7 @@ func Configure(p *config.Provider) {
 	p.AddResourceConfigurator("ionoscloud_gpu_server", func(r *config.Resource) {
 		r.ShortGroup = shortGroupName
 		r.Kind = "GPUServer"
+		r.UseAsync = true
 		r.References["datacenter_id"] = config.Reference{
 			TerraformName: "ionoscloud_datacenter",
 		}
