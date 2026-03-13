@@ -387,8 +387,6 @@ spec:
                         type: string
                       bus:
                         type: string
-                      diskType:
-                        type: string
                       exposeSerial:
                         description: If set to `true` will expose the serial id of
                           the disk attached to the server. If set to `false` will
@@ -742,8 +740,6 @@ spec:
                           this property.
                         type: string
                       bus:
-                        type: string
-                      diskType:
                         type: string
                       exposeSerial:
                         description: If set to `true` will expose the serial id of

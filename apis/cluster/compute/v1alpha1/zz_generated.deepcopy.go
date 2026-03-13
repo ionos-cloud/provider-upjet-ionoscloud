@@ -2800,11 +2800,6 @@ func (in *GPUServerVolumeInitParameters) DeepCopyInto(out *GPUServerVolumeInitPa
 		*out = new(string)
 		**out = **in
 	}
-	if in.DiskType != nil {
-		in, out := &in.DiskType, &out.DiskType
-		*out = new(string)
-		**out = **in
-	}
 	if in.ExposeSerial != nil {
 		in, out := &in.ExposeSerial, &out.ExposeSerial
 		*out = new(bool)
@@ -2962,11 +2957,6 @@ func (in *GPUServerVolumeParameters) DeepCopyInto(out *GPUServerVolumeParameters
 	}
 	if in.Bus != nil {
 		in, out := &in.Bus, &out.Bus
-		*out = new(string)
-		**out = **in
-	}
-	if in.DiskType != nil {
-		in, out := &in.DiskType, &out.DiskType
 		*out = new(string)
 		**out = **in
 	}

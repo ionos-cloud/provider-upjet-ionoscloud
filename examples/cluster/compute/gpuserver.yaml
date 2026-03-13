@@ -8,7 +8,7 @@ metadata:
   name: example
 spec:
   forProvider:
-    templateUuid: e15d15e7-ea9a-48ae-a60a-29b9463f4519
+    templateUuid: "6913ed82-a143-4c15-89ac-08fb375a97c5"
     datacenterIdSelector:
       matchLabels:
         testing.upbound.io/example-name: example
@@ -17,13 +17,13 @@ spec:
       key: password
       name: pwsecret
       namespace: upbound-system
-    name: GPU Server Example
+    name: GPU Server Example 2
     nic:
       dhcp: true
       firewall:
         name: SSH2
         portRangeEnd: 23
-        portRangeStart: 22
+        portRangeStart: 20
         protocol: TCP
         sourceMac: 00:0a:95:9d:68:18
         type: EGRESS
@@ -37,7 +37,6 @@ spec:
       availabilityZone: ZONE_1
       bus: VIRTIO
       exposeSerial: true
-      diskType: SSD Standard
       name: system
       userData: foo
       requireLegacyBios: false

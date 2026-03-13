@@ -40,7 +40,6 @@ spec:
     volume:
     - availabilityZone: AUTO
       bus: VIRTIO
-      diskType: SSD Premium
       exposeSerial: true
       licenceType: LINUX
       name: system

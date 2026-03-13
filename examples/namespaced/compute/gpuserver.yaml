@@ -9,7 +9,7 @@ metadata:
   namespace: upbound-system
 spec:
   forProvider:
-    templateUuid: e15d15e7-ea9a-48ae-a60a-29b9463f4519
+    templateUuid: "6913ed82-a143-4c15-89ac-08fb375a97c5"
     datacenterIdSelector:
       matchLabels:
         testing.upbound.io/example-name: example
@@ -38,7 +38,6 @@ spec:
       availabilityZone: ZONE_1
       bus: VIRTIO
       exposeSerial: true
-      diskType: SSD Standard
       name: system
       userData: foo
       requireLegacyBios: false
