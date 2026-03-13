@@ -106,8 +106,8 @@ type KafkaInitParameters struct {
 	// The network connection for your Kafka Cluster. Only one connection is allowed.
 	Connections *ConnectionsInitParameters `json:"connections,omitempty" tf:"connections,omitempty"`
 
-	// [string] The location of the Kafka Cluster. Possible values: de/fra, de/txl. If this is not set and if no value is provided for the IONOS_API_URL env var, the default location will be: de/fra.
-	// The location of your Kafka Cluster. Supported locations: de/fra, de/txl
+	// [string] The location of the Kafka Cluster. Possible values: de/fra, de/fra/2, de/txl, fr/par, es/vit, gb/lhr, gb/bhx, us/las, us/mci, us/ewr. If this is not set and if no value is provided for the IONOS_API_URL env var, the default location will be: de/fra.
+	// The location of your Kafka Cluster. Supported locations: de/fra, de/fra/2, de/txl, fr/par, es/vit, gb/lhr, gb/bhx, us/las, us/mci, us/ewr
 	// +crossplane:generate:reference:type=github.com/ionos-cloud/provider-upjet-ionoscloud/apis/cluster/compute/v1alpha1.Datacenter
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("location",false)
 	Location *string `json:"location,omitempty" tf:"location,omitempty"`
@@ -128,8 +128,8 @@ type KafkaInitParameters struct {
 	// The size of your Kafka Cluster. The size of the Kafka Cluster is given in T-shirt sizes. Valid values are: XS, S
 	Size *string `json:"size,omitempty" tf:"size,omitempty"`
 
-	// [string] Version of the Kafka Cluster. Possible values: 3.8.0, 3.9.0
-	// The desired Kafka Version. Supported versions: 3.8.0
+	// [string] Version of the Kafka Cluster. Possible values: 3.9.0
+	// The desired Kafka Version. Supported versions: 3.9.0
 	Version *string `json:"version,omitempty" tf:"version,omitempty"`
 }
 
@@ -147,8 +147,8 @@ type KafkaObservation struct {
 	// (Computed)[string] The UUID of the Kafka Cluster.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
-	// [string] The location of the Kafka Cluster. Possible values: de/fra, de/txl. If this is not set and if no value is provided for the IONOS_API_URL env var, the default location will be: de/fra.
-	// The location of your Kafka Cluster. Supported locations: de/fra, de/txl
+	// [string] The location of the Kafka Cluster. Possible values: de/fra, de/fra/2, de/txl, fr/par, es/vit, gb/lhr, gb/bhx, us/las, us/mci, us/ewr. If this is not set and if no value is provided for the IONOS_API_URL env var, the default location will be: de/fra.
+	// The location of your Kafka Cluster. Supported locations: de/fra, de/fra/2, de/txl, fr/par, es/vit, gb/lhr, gb/bhx, us/las, us/mci, us/ewr
 	Location *string `json:"location,omitempty" tf:"location,omitempty"`
 
 	// [string] Name of the Kafka Cluster.
@@ -159,8 +159,8 @@ type KafkaObservation struct {
 	// The size of your Kafka Cluster. The size of the Kafka Cluster is given in T-shirt sizes. Valid values are: XS, S
 	Size *string `json:"size,omitempty" tf:"size,omitempty"`
 
-	// [string] Version of the Kafka Cluster. Possible values: 3.8.0, 3.9.0
-	// The desired Kafka Version. Supported versions: 3.8.0
+	// [string] Version of the Kafka Cluster. Possible values: 3.9.0
+	// The desired Kafka Version. Supported versions: 3.9.0
 	Version *string `json:"version,omitempty" tf:"version,omitempty"`
 }
 
@@ -171,8 +171,8 @@ type KafkaParameters struct {
 	// +kubebuilder:validation:Optional
 	Connections *ConnectionsParameters `json:"connections,omitempty" tf:"connections,omitempty"`
 
-	// [string] The location of the Kafka Cluster. Possible values: de/fra, de/txl. If this is not set and if no value is provided for the IONOS_API_URL env var, the default location will be: de/fra.
-	// The location of your Kafka Cluster. Supported locations: de/fra, de/txl
+	// [string] The location of the Kafka Cluster. Possible values: de/fra, de/fra/2, de/txl, fr/par, es/vit, gb/lhr, gb/bhx, us/las, us/mci, us/ewr. If this is not set and if no value is provided for the IONOS_API_URL env var, the default location will be: de/fra.
+	// The location of your Kafka Cluster. Supported locations: de/fra, de/fra/2, de/txl, fr/par, es/vit, gb/lhr, gb/bhx, us/las, us/mci, us/ewr
 	// +crossplane:generate:reference:type=github.com/ionos-cloud/provider-upjet-ionoscloud/apis/cluster/compute/v1alpha1.Datacenter
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("location",false)
 	// +kubebuilder:validation:Optional
@@ -196,8 +196,8 @@ type KafkaParameters struct {
 	// +kubebuilder:validation:Optional
 	Size *string `json:"size,omitempty" tf:"size,omitempty"`
 
-	// [string] Version of the Kafka Cluster. Possible values: 3.8.0, 3.9.0
-	// The desired Kafka Version. Supported versions: 3.8.0
+	// [string] Version of the Kafka Cluster. Possible values: 3.9.0
+	// The desired Kafka Version. Supported versions: 3.9.0
 	// +kubebuilder:validation:Optional
 	Version *string `json:"version,omitempty" tf:"version,omitempty"`
 }

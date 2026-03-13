@@ -1,0 +1,88 @@
+apiVersion: compute.ionoscloud.io/v1alpha1
+kind: GPUServer
+metadata:
+  annotations:
+    meta.upbound.io/example-id: compute/v1alpha1/gpuserver
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+  namespace: upbound-system
+spec:
+  forProvider:
+    templateUuid: "6913ed82-a143-4c15-89ac-08fb375a97c5"
+    datacenterIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    imageName: "ubuntu:latest"
+    imagePasswordSecretRef:
+      key: password
+      name: pwsecret
+      namespace: upbound-system
+    name: GPU Server Example
+    nic:
+      dhcp: true
+      firewall:
+        name: SSH2
+        portRangeEnd: 23
+        portRangeStart: 22
+        protocol: TCP
+        sourceMac: 00:0a:95:9d:68:18
+        type: EGRESS
+      firewallActive: true
+      firewallType: BIDIRECTIONAL
+      lanSelector:
+        matchLabels:
+          testing.upbound.io/example-name: example
+      name: system
+    volume:
+      availabilityZone: ZONE_1
+      bus: VIRTIO
+      exposeSerial: true
+      name: system
+      userData: foo
+      requireLegacyBios: false
+---
+
+apiVersion: compute.ionoscloud.io/v1alpha1
+kind: Datacenter
+metadata:
+  annotations:
+    meta.upbound.io/example-id: compute/v1alpha1/gpuserver
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+  namespace: upbound-system
+spec:
+  forProvider:
+    description: Datacenter Description
+    location: de/fra/2
+    name: Datacenter Example
+    secAuthProtection: false
+
+---
+
+apiVersion: compute.ionoscloud.io/v1alpha1
+kind: Lan
+metadata:
+  annotations:
+    meta.upbound.io/example-id: compute/v1alpha1/gpuserver
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+  namespace: upbound-system
+spec:
+  forProvider:
+    datacenterIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    name: Lan Example
+    public: true
+---
+
+apiVersion: v1
+kind: Secret
+metadata:
+  name: pwsecret
+  namespace: upbound-system
+stringData:
+  password: "Upboundtest1"

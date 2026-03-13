@@ -3,7 +3,7 @@ apiVersion: apiextensions.k8s.io/v1
 kind: CustomResourceDefinition
 metadata:
   annotations:
-    controller-gen.kubebuilder.io/version: v0.18.0
+    controller-gen.kubebuilder.io/version: v0.20.0
   name: nics.compute.ionoscloud.io
 spec:
   group: compute.ionoscloud.io
@@ -207,6 +207,7 @@ spec:
                     items:
                       type: string
                     type: array
+                    x-kubernetes-list-type: set
                   ipv6CidrBlock:
                     description: |-
                       (Computed, Optional) Automatically assigned /80 IPv6 CIDR block if the NIC is connected to an IPv6 enabled LAN. You can also specify an /80 IPv6 CIDR block for the NIC on your own, which must be inside the /64 IPv6 CIDR block of the LAN and unique.
@@ -219,6 +220,7 @@ spec:
                     items:
                       type: string
                     type: array
+                    x-kubernetes-list-type: set
                   lan:
                     description: '[integer] The LAN ID the NIC will sit on.'
                     type: number
@@ -537,6 +539,7 @@ spec:
                     items:
                       type: string
                     type: array
+                    x-kubernetes-list-type: set
                   ipv6CidrBlock:
                     description: |-
                       (Computed, Optional) Automatically assigned /80 IPv6 CIDR block if the NIC is connected to an IPv6 enabled LAN. You can also specify an /80 IPv6 CIDR block for the NIC on your own, which must be inside the /64 IPv6 CIDR block of the LAN and unique.
@@ -549,6 +552,7 @@ spec:
                     items:
                       type: string
                     type: array
+                    x-kubernetes-list-type: set
                   lan:
                     description: '[integer] The LAN ID the NIC will sit on.'
                     type: number
@@ -882,6 +886,7 @@ spec:
                     items:
                       type: string
                     type: array
+                    x-kubernetes-list-type: set
                   ipv6CidrBlock:
                     description: |-
                       (Computed, Optional) Automatically assigned /80 IPv6 CIDR block if the NIC is connected to an IPv6 enabled LAN. You can also specify an /80 IPv6 CIDR block for the NIC on your own, which must be inside the /64 IPv6 CIDR block of the LAN and unique.
@@ -894,6 +899,7 @@ spec:
                     items:
                       type: string
                     type: array
+                    x-kubernetes-list-type: set
                   lan:
                     description: '[integer] The LAN ID the NIC will sit on.'
                     type: number

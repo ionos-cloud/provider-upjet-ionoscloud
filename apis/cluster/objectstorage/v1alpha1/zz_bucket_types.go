@@ -23,7 +23,7 @@ type BucketInitParameters struct {
 	// Whether object lock is enabled for the bucket
 	ObjectLockEnabled *bool `json:"objectLockEnabled,omitempty" tf:"object_lock_enabled,omitempty"`
 
-	// [string] Specifies the Region where the bucket will be created. Please refer to the list of available regions
+	// [string] Specifies the Region where the bucket will be created. Available regions are: eu-central-3, eu-central-4, us-central-1. Can be used only if the region is the same as the global region (set using IONOS_S3_REGION env var or s3_region provider attribute) or if the global region is unset. For using multiple different regions, please check the Working with multiple regions/locations section presented here.
 	// The region of the bucket. Defaults to eu-central-3.
 	Region *string `json:"region,omitempty" tf:"region,omitempty"`
 
@@ -46,7 +46,7 @@ type BucketObservation struct {
 	// Whether object lock is enabled for the bucket
 	ObjectLockEnabled *bool `json:"objectLockEnabled,omitempty" tf:"object_lock_enabled,omitempty"`
 
-	// [string] Specifies the Region where the bucket will be created. Please refer to the list of available regions
+	// [string] Specifies the Region where the bucket will be created. Available regions are: eu-central-3, eu-central-4, us-central-1. Can be used only if the region is the same as the global region (set using IONOS_S3_REGION env var or s3_region provider attribute) or if the global region is unset. For using multiple different regions, please check the Working with multiple regions/locations section presented here.
 	// The region of the bucket. Defaults to eu-central-3.
 	Region *string `json:"region,omitempty" tf:"region,omitempty"`
 
@@ -68,7 +68,7 @@ type BucketParameters struct {
 	// +kubebuilder:validation:Optional
 	ObjectLockEnabled *bool `json:"objectLockEnabled,omitempty" tf:"object_lock_enabled,omitempty"`
 
-	// [string] Specifies the Region where the bucket will be created. Please refer to the list of available regions
+	// [string] Specifies the Region where the bucket will be created. Available regions are: eu-central-3, eu-central-4, us-central-1. Can be used only if the region is the same as the global region (set using IONOS_S3_REGION env var or s3_region provider attribute) or if the global region is unset. For using multiple different regions, please check the Working with multiple regions/locations section presented here.
 	// The region of the bucket. Defaults to eu-central-3.
 	// +kubebuilder:validation:Optional
 	Region *string `json:"region,omitempty" tf:"region,omitempty"`

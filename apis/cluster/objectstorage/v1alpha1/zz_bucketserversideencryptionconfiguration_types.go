@@ -91,10 +91,6 @@ type BucketServerSideEncryptionConfigurationParameters struct {
 }
 
 type BucketServerSideEncryptionConfigurationRuleInitParameters struct {
-
-	// [block] Defines the default encryption settings.
-	// Defines the default encryption settings.
-	ApplyServerSideEncryptionByDefault *ApplyServerSideEncryptionByDefaultInitParameters `json:"applyServerSideEncryptionByDefault,omitempty" tf:"apply_server_side_encryption_by_default,omitempty"`
 }
 
 type BucketServerSideEncryptionConfigurationRuleObservation struct {
@@ -105,11 +101,6 @@ type BucketServerSideEncryptionConfigurationRuleObservation struct {
 }
 
 type BucketServerSideEncryptionConfigurationRuleParameters struct {
-
-	// [block] Defines the default encryption settings.
-	// Defines the default encryption settings.
-	// +kubebuilder:validation:Optional
-	ApplyServerSideEncryptionByDefault *ApplyServerSideEncryptionByDefaultParameters `json:"applyServerSideEncryptionByDefault" tf:"apply_server_side_encryption_by_default,omitempty"`
 }
 
 // BucketServerSideEncryptionConfigurationSpec defines the desired state of BucketServerSideEncryptionConfiguration

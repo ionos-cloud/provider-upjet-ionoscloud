@@ -3,7 +3,7 @@ apiVersion: apiextensions.k8s.io/v1
 kind: CustomResourceDefinition
 metadata:
   annotations:
-    controller-gen.kubebuilder.io/version: v0.18.0
+    controller-gen.kubebuilder.io/version: v0.20.0
   name: groups.compute.m.ionoscloud.io
 spec:
   group: compute.m.ionoscloud.io
@@ -153,6 +153,11 @@ spec:
                     type: boolean
                   createSnapshot:
                     description: '[Boolean] The group will be allowed to create snapshots.'
+                    type: boolean
+                  getUsersData:
+                    description: |-
+                      [Boolean] When set to true, information about users will be stored in state under users attribute, default value is true.
+                      When set to true, information about users will be stored in state
                     type: boolean
                   manageDataplatform:
                     description: |-
@@ -381,6 +386,11 @@ spec:
                     type: boolean
                   createSnapshot:
                     description: '[Boolean] The group will be allowed to create snapshots.'
+                    type: boolean
+                  getUsersData:
+                    description: |-
+                      [Boolean] When set to true, information about users will be stored in state under users attribute, default value is true.
+                      When set to true, information about users will be stored in state
                     type: boolean
                   manageDataplatform:
                     description: |-
@@ -665,6 +675,11 @@ spec:
                   createSnapshot:
                     description: '[Boolean] The group will be allowed to create snapshots.'
                     type: boolean
+                  getUsersData:
+                    description: |-
+                      [Boolean] When set to true, information about users will be stored in state under users attribute, default value is true.
+                      When set to true, information about users will be stored in state
+                    type: boolean
                   id:
                     type: string
                   manageDataplatform:
@@ -719,8 +734,6 @@ spec:
                           type: string
                         lastName:
                           description: '[string] A name for the group.'
-                          type: string
-                        password:
                           type: string
                       type: object
                     type: array

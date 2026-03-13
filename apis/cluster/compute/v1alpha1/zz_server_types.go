@@ -42,94 +42,6 @@ type LabelParameters struct {
 	Value *string `json:"value" tf:"value,omitempty"`
 }
 
-type NicFirewallInitParameters struct {
-	IcmpCode *string `json:"icmpCode,omitempty" tf:"icmp_code,omitempty"`
-
-	// (Computed)[string] Server usages: * type - Server usages: ENTERPRISE now named dedicated core, CUBE or VCPU. This property is immutable.
-	IcmpType *string `json:"icmpType,omitempty" tf:"icmp_type,omitempty"`
-
-	// [string] The name of the server.
-	Name *string `json:"name,omitempty" tf:"name,omitempty"`
-
-	PortRangeEnd *float64 `json:"portRangeEnd,omitempty" tf:"port_range_end,omitempty"`
-
-	PortRangeStart *float64 `json:"portRangeStart,omitempty" tf:"port_range_start,omitempty"`
-
-	Protocol *string `json:"protocol,omitempty" tf:"protocol,omitempty"`
-
-	SourceIP *string `json:"sourceIp,omitempty" tf:"source_ip,omitempty"`
-
-	SourceMac *string `json:"sourceMac,omitempty" tf:"source_mac,omitempty"`
-
-	TargetIP *string `json:"targetIp,omitempty" tf:"target_ip,omitempty"`
-
-	// (Computed)[string] Server usages: * type - Server usages: ENTERPRISE now named dedicated core, CUBE or VCPU. This property is immutable.
-	Type *string `json:"type,omitempty" tf:"type,omitempty"`
-}
-
-type NicFirewallObservation struct {
-	ID *string `json:"id,omitempty" tf:"id,omitempty"`
-
-	IcmpCode *string `json:"icmpCode,omitempty" tf:"icmp_code,omitempty"`
-
-	// (Computed)[string] Server usages: * type - Server usages: ENTERPRISE now named dedicated core, CUBE or VCPU. This property is immutable.
-	IcmpType *string `json:"icmpType,omitempty" tf:"icmp_type,omitempty"`
-
-	// [string] The name of the server.
-	Name *string `json:"name,omitempty" tf:"name,omitempty"`
-
-	PortRangeEnd *float64 `json:"portRangeEnd,omitempty" tf:"port_range_end,omitempty"`
-
-	PortRangeStart *float64 `json:"portRangeStart,omitempty" tf:"port_range_start,omitempty"`
-
-	Protocol *string `json:"protocol,omitempty" tf:"protocol,omitempty"`
-
-	SourceIP *string `json:"sourceIp,omitempty" tf:"source_ip,omitempty"`
-
-	SourceMac *string `json:"sourceMac,omitempty" tf:"source_mac,omitempty"`
-
-	TargetIP *string `json:"targetIp,omitempty" tf:"target_ip,omitempty"`
-
-	// (Computed)[string] Server usages: * type - Server usages: ENTERPRISE now named dedicated core, CUBE or VCPU. This property is immutable.
-	Type *string `json:"type,omitempty" tf:"type,omitempty"`
-}
-
-type NicFirewallParameters struct {
-
-	// +kubebuilder:validation:Optional
-	IcmpCode *string `json:"icmpCode,omitempty" tf:"icmp_code,omitempty"`
-
-	// (Computed)[string] Server usages: * type - Server usages: ENTERPRISE now named dedicated core, CUBE or VCPU. This property is immutable.
-	// +kubebuilder:validation:Optional
-	IcmpType *string `json:"icmpType,omitempty" tf:"icmp_type,omitempty"`
-
-	// [string] The name of the server.
-	// +kubebuilder:validation:Optional
-	Name *string `json:"name,omitempty" tf:"name,omitempty"`
-
-	// +kubebuilder:validation:Optional
-	PortRangeEnd *float64 `json:"portRangeEnd,omitempty" tf:"port_range_end,omitempty"`
-
-	// +kubebuilder:validation:Optional
-	PortRangeStart *float64 `json:"portRangeStart,omitempty" tf:"port_range_start,omitempty"`
-
-	// +kubebuilder:validation:Optional
-	Protocol *string `json:"protocol" tf:"protocol,omitempty"`
-
-	// +kubebuilder:validation:Optional
-	SourceIP *string `json:"sourceIp,omitempty" tf:"source_ip,omitempty"`
-
-	// +kubebuilder:validation:Optional
-	SourceMac *string `json:"sourceMac,omitempty" tf:"source_mac,omitempty"`
-
-	// +kubebuilder:validation:Optional
-	TargetIP *string `json:"targetIp,omitempty" tf:"target_ip,omitempty"`
-
-	// (Computed)[string] Server usages: * type - Server usages: ENTERPRISE now named dedicated core, CUBE or VCPU. This property is immutable.
-	// +kubebuilder:validation:Optional
-	Type *string `json:"type,omitempty" tf:"type,omitempty"`
-}
-
 type ServerInitParameters struct {
 
 	// [bool] When set to true, allows the update of immutable fields by first destroying and then re-creating the server.
@@ -186,6 +98,10 @@ type ServerInitParameters struct {
 	// See the Nic section.
 	Nic *ServerNicInitParameters `json:"nic,omitempty" tf:"nic,omitempty"`
 
+	// [bool] Activate or deactivate the Multi Queue feature on all NICs of the server. This feature is beneficial to enable when the NICs are experiencing performance issues (e.g. low throughput). Toggling this feature will also initiate a restart of the server. If the specified value is true, the feature will be activated; if it is not specified or set to false, the feature will be deactivated. The feature cannot be activated for CUBE servers.
+	// Activate or deactivate the Multi Queue feature on all NICs of this server. This feature is beneficial to enable when the NICs are experiencing performance issues (e.g. low throughput). Toggling this feature will also initiate a restart of the server. If the specified value is `true`, the feature will be activated; if it is not specified or set to `false`, the feature will be deactivated.
+	NicMultiQueue *bool `json:"nicMultiQueue,omitempty" tf:"nic_multi_queue,omitempty"`
+
 	// (Computed)[integer] The amount of memory for the server in MB.
 	RAM *float64 `json:"ram,omitempty" tf:"ram,omitempty"`
 
@@ -217,6 +133,94 @@ type ServerInitParameters struct {
 	Volume *ServerVolumeInitParameters `json:"volume,omitempty" tf:"volume,omitempty"`
 }
 
+type ServerNicFirewallInitParameters struct {
+	IcmpCode *string `json:"icmpCode,omitempty" tf:"icmp_code,omitempty"`
+
+	// (Computed)[string] Server usages: * type - Server usages: ENTERPRISE now named dedicated core, CUBE or VCPU. This property is immutable.
+	IcmpType *string `json:"icmpType,omitempty" tf:"icmp_type,omitempty"`
+
+	// [string] The name of the server.
+	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+
+	PortRangeEnd *float64 `json:"portRangeEnd,omitempty" tf:"port_range_end,omitempty"`
+
+	PortRangeStart *float64 `json:"portRangeStart,omitempty" tf:"port_range_start,omitempty"`
+
+	Protocol *string `json:"protocol,omitempty" tf:"protocol,omitempty"`
+
+	SourceIP *string `json:"sourceIp,omitempty" tf:"source_ip,omitempty"`
+
+	SourceMac *string `json:"sourceMac,omitempty" tf:"source_mac,omitempty"`
+
+	TargetIP *string `json:"targetIp,omitempty" tf:"target_ip,omitempty"`
+
+	// (Computed)[string] Server usages: * type - Server usages: ENTERPRISE now named dedicated core, CUBE or VCPU. This property is immutable.
+	Type *string `json:"type,omitempty" tf:"type,omitempty"`
+}
+
+type ServerNicFirewallObservation struct {
+	ID *string `json:"id,omitempty" tf:"id,omitempty"`
+
+	IcmpCode *string `json:"icmpCode,omitempty" tf:"icmp_code,omitempty"`
+
+	// (Computed)[string] Server usages: * type - Server usages: ENTERPRISE now named dedicated core, CUBE or VCPU. This property is immutable.
+	IcmpType *string `json:"icmpType,omitempty" tf:"icmp_type,omitempty"`
+
+	// [string] The name of the server.
+	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+
+	PortRangeEnd *float64 `json:"portRangeEnd,omitempty" tf:"port_range_end,omitempty"`
+
+	PortRangeStart *float64 `json:"portRangeStart,omitempty" tf:"port_range_start,omitempty"`
+
+	Protocol *string `json:"protocol,omitempty" tf:"protocol,omitempty"`
+
+	SourceIP *string `json:"sourceIp,omitempty" tf:"source_ip,omitempty"`
+
+	SourceMac *string `json:"sourceMac,omitempty" tf:"source_mac,omitempty"`
+
+	TargetIP *string `json:"targetIp,omitempty" tf:"target_ip,omitempty"`
+
+	// (Computed)[string] Server usages: * type - Server usages: ENTERPRISE now named dedicated core, CUBE or VCPU. This property is immutable.
+	Type *string `json:"type,omitempty" tf:"type,omitempty"`
+}
+
+type ServerNicFirewallParameters struct {
+
+	// +kubebuilder:validation:Optional
+	IcmpCode *string `json:"icmpCode,omitempty" tf:"icmp_code,omitempty"`
+
+	// (Computed)[string] Server usages: * type - Server usages: ENTERPRISE now named dedicated core, CUBE or VCPU. This property is immutable.
+	// +kubebuilder:validation:Optional
+	IcmpType *string `json:"icmpType,omitempty" tf:"icmp_type,omitempty"`
+
+	// [string] The name of the server.
+	// +kubebuilder:validation:Optional
+	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	PortRangeEnd *float64 `json:"portRangeEnd,omitempty" tf:"port_range_end,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	PortRangeStart *float64 `json:"portRangeStart,omitempty" tf:"port_range_start,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Protocol *string `json:"protocol" tf:"protocol,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	SourceIP *string `json:"sourceIp,omitempty" tf:"source_ip,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	SourceMac *string `json:"sourceMac,omitempty" tf:"source_mac,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	TargetIP *string `json:"targetIp,omitempty" tf:"target_ip,omitempty"`
+
+	// (Computed)[string] Server usages: * type - Server usages: ENTERPRISE now named dedicated core, CUBE or VCPU. This property is immutable.
+	// +kubebuilder:validation:Optional
+	Type *string `json:"type,omitempty" tf:"type,omitempty"`
+}
+
 type ServerNicInitParameters struct {
 	DHCP *bool `json:"dhcp,omitempty" tf:"dhcp,omitempty"`
 
@@ -225,7 +229,7 @@ type ServerNicInitParameters struct {
 
 	// Allows to define firewall rules inline in the server. See the Firewall section.
 	// Firewall rules created in the server resource. The rules can also be created as separate resources outside the server resource
-	Firewall []NicFirewallInitParameters `json:"firewall,omitempty" tf:"firewall,omitempty"`
+	Firewall *ServerNicFirewallInitParameters `json:"firewall,omitempty" tf:"firewall,omitempty"`
 
 	FirewallActive *bool `json:"firewallActive,omitempty" tf:"firewall_active,omitempty"`
 
@@ -236,9 +240,11 @@ type ServerNicInitParameters struct {
 	IPv6CidrBlock *string `json:"ipv6CidrBlock,omitempty" tf:"ipv6_cidr_block,omitempty"`
 
 	// Collection for IPv6 addresses assigned to a nic. Explicitly assigned IPv6 addresses need to come from inside the IPv6 CIDR block assigned to the nic.
+	// +listType=set
 	IPv6Ips []*string `json:"ipv6Ips,omitempty" tf:"ipv6_ips,omitempty"`
 
 	// Collection of IP addresses assigned to a nic. Explicitly assigned public IPs need to come from reserved IP blocks, Passing value null or empty array will assign an IP address automatically.
+	// +listType=set
 	Ips []*string `json:"ips,omitempty" tf:"ips,omitempty"`
 
 	// +crossplane:generate:reference:type=github.com/ionos-cloud/provider-upjet-ionoscloud/apis/cluster/compute/v1alpha1.Lan
@@ -273,7 +279,7 @@ type ServerNicObservation struct {
 
 	// Allows to define firewall rules inline in the server. See the Firewall section.
 	// Firewall rules created in the server resource. The rules can also be created as separate resources outside the server resource
-	Firewall []NicFirewallObservation `json:"firewall,omitempty" tf:"firewall,omitempty"`
+	Firewall *ServerNicFirewallObservation `json:"firewall,omitempty" tf:"firewall,omitempty"`
 
 	FirewallActive *bool `json:"firewallActive,omitempty" tf:"firewall_active,omitempty"`
 
@@ -286,9 +292,11 @@ type ServerNicObservation struct {
 	IPv6CidrBlock *string `json:"ipv6CidrBlock,omitempty" tf:"ipv6_cidr_block,omitempty"`
 
 	// Collection for IPv6 addresses assigned to a nic. Explicitly assigned IPv6 addresses need to come from inside the IPv6 CIDR block assigned to the nic.
+	// +listType=set
 	IPv6Ips []*string `json:"ipv6Ips,omitempty" tf:"ipv6_ips,omitempty"`
 
 	// Collection of IP addresses assigned to a nic. Explicitly assigned public IPs need to come from reserved IP blocks, Passing value null or empty array will assign an IP address automatically.
+	// +listType=set
 	Ips []*string `json:"ips,omitempty" tf:"ips,omitempty"`
 
 	Lan *float64 `json:"lan,omitempty" tf:"lan,omitempty"`
@@ -318,7 +326,7 @@ type ServerNicParameters struct {
 	// Allows to define firewall rules inline in the server. See the Firewall section.
 	// Firewall rules created in the server resource. The rules can also be created as separate resources outside the server resource
 	// +kubebuilder:validation:Optional
-	Firewall []NicFirewallParameters `json:"firewall,omitempty" tf:"firewall,omitempty"`
+	Firewall *ServerNicFirewallParameters `json:"firewall,omitempty" tf:"firewall,omitempty"`
 
 	// +kubebuilder:validation:Optional
 	FirewallActive *bool `json:"firewallActive,omitempty" tf:"firewall_active,omitempty"`
@@ -333,10 +341,12 @@ type ServerNicParameters struct {
 
 	// Collection for IPv6 addresses assigned to a nic. Explicitly assigned IPv6 addresses need to come from inside the IPv6 CIDR block assigned to the nic.
 	// +kubebuilder:validation:Optional
+	// +listType=set
 	IPv6Ips []*string `json:"ipv6Ips,omitempty" tf:"ipv6_ips,omitempty"`
 
 	// Collection of IP addresses assigned to a nic. Explicitly assigned public IPs need to come from reserved IP blocks, Passing value null or empty array will assign an IP address automatically.
 	// +kubebuilder:validation:Optional
+	// +listType=set
 	Ips []*string `json:"ips,omitempty" tf:"ips,omitempty"`
 
 	// +crossplane:generate:reference:type=github.com/ionos-cloud/provider-upjet-ionoscloud/apis/cluster/compute/v1alpha1.Lan
@@ -420,6 +430,10 @@ type ServerObservation struct {
 
 	// See the Nic section.
 	Nic *ServerNicObservation `json:"nic,omitempty" tf:"nic,omitempty"`
+
+	// [bool] Activate or deactivate the Multi Queue feature on all NICs of the server. This feature is beneficial to enable when the NICs are experiencing performance issues (e.g. low throughput). Toggling this feature will also initiate a restart of the server. If the specified value is true, the feature will be activated; if it is not specified or set to false, the feature will be deactivated. The feature cannot be activated for CUBE servers.
+	// Activate or deactivate the Multi Queue feature on all NICs of this server. This feature is beneficial to enable when the NICs are experiencing performance issues (e.g. low throughput). Toggling this feature will also initiate a restart of the server. If the specified value is `true`, the feature will be activated; if it is not specified or set to `false`, the feature will be deactivated.
+	NicMultiQueue *bool `json:"nicMultiQueue,omitempty" tf:"nic_multi_queue,omitempty"`
 
 	// (Computed) The associated IP address.
 	PrimaryIP *string `json:"primaryIp,omitempty" tf:"primary_ip,omitempty"`
@@ -529,6 +543,11 @@ type ServerParameters struct {
 	// +kubebuilder:validation:Optional
 	Nic *ServerNicParameters `json:"nic,omitempty" tf:"nic,omitempty"`
 
+	// [bool] Activate or deactivate the Multi Queue feature on all NICs of the server. This feature is beneficial to enable when the NICs are experiencing performance issues (e.g. low throughput). Toggling this feature will also initiate a restart of the server. If the specified value is true, the feature will be activated; if it is not specified or set to false, the feature will be deactivated. The feature cannot be activated for CUBE servers.
+	// Activate or deactivate the Multi Queue feature on all NICs of this server. This feature is beneficial to enable when the NICs are experiencing performance issues (e.g. low throughput). Toggling this feature will also initiate a restart of the server. If the specified value is `true`, the feature will be activated; if it is not specified or set to `false`, the feature will be deactivated.
+	// +kubebuilder:validation:Optional
+	NicMultiQueue *bool `json:"nicMultiQueue,omitempty" tf:"nic_multi_queue,omitempty"`
+
 	// (Computed)[integer] The amount of memory for the server in MB.
 	// +kubebuilder:validation:Optional
 	RAM *float64 `json:"ram,omitempty" tf:"ram,omitempty"`
@@ -593,6 +612,9 @@ type ServerVolumeInitParameters struct {
 	// [string] The name of the server.
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
+	// Indicates if the image requires the legacy BIOS for compatibility or specific needs.
+	RequireLegacyBios *bool `json:"requireLegacyBios,omitempty" tf:"require_legacy_bios,omitempty"`
+
 	// [list] List of absolute paths to files containing a public SSH key that will be injected into IonosCloud provided Linux images.  Also accepts ssh keys directly. Required for IonosCloud Linux images. Required if image_password is not provided. Does not support ~ expansion to homedir in the given path. This property is immutable.
 	// Public SSH keys are set on the image as authorized keys for appropriate SSH login to the instance using the corresponding private key. This field may only be set in creation requests. When reading, it always returns null. SSH keys are only supported if a public Linux image is used for the volume creation.
 	SSHKeyPath []*string `json:"sshKeyPath,omitempty" tf:"ssh_key_path,omitempty"`
@@ -652,6 +674,9 @@ type ServerVolumeObservation struct {
 
 	RAMHotPlug *bool `json:"ramHotPlug,omitempty" tf:"ram_hot_plug,omitempty"`
 
+	// Indicates if the image requires the legacy BIOS for compatibility or specific needs.
+	RequireLegacyBios *bool `json:"requireLegacyBios,omitempty" tf:"require_legacy_bios,omitempty"`
+
 	// [list] List of absolute paths to files containing a public SSH key that will be injected into IonosCloud provided Linux images.  Also accepts ssh keys directly. Required for IonosCloud Linux images. Required if image_password is not provided. Does not support ~ expansion to homedir in the given path. This property is immutable.
 	// Public SSH keys are set on the image as authorized keys for appropriate SSH login to the instance using the corresponding private key. This field may only be set in creation requests. When reading, it always returns null. SSH keys are only supported if a public Linux image is used for the volume creation.
 	SSHKeyPath []*string `json:"sshKeyPath,omitempty" tf:"ssh_key_path,omitempty"`
@@ -699,6 +724,10 @@ type ServerVolumeParameters struct {
 	// [string] The name of the server.
 	// +kubebuilder:validation:Optional
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+
+	// Indicates if the image requires the legacy BIOS for compatibility or specific needs.
+	// +kubebuilder:validation:Optional
+	RequireLegacyBios *bool `json:"requireLegacyBios,omitempty" tf:"require_legacy_bios,omitempty"`
 
 	// [list] List of absolute paths to files containing a public SSH key that will be injected into IonosCloud provided Linux images.  Also accepts ssh keys directly. Required for IonosCloud Linux images. Required if image_password is not provided. Does not support ~ expansion to homedir in the given path. This property is immutable.
 	// Public SSH keys are set on the image as authorized keys for appropriate SSH login to the instance using the corresponding private key. This field may only be set in creation requests. When reading, it always returns null. SSH keys are only supported if a public Linux image is used for the volume creation.

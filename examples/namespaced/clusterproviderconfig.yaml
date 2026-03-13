@@ -1,11 +1,11 @@
 apiVersion: upjet-ionoscloud.m.ionoscloud.io/v1beta1
 kind: ClusterProviderConfig
 metadata:
-  name: default
+  name: cluster-ionos-provider-config
 spec:
   credentials:
     source: Secret
     secretRef:
-      name: example-provider-secret
       namespace: crossplane-system
+      name: ionos-credentials
       key: credentials

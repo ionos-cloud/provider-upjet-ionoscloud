@@ -26,7 +26,7 @@ spec:
     maintenanceWindow:
     - dayOfTheWeek: Sunday
       time: "09:00:00"
-    mongodbVersion: "5.0"
+    mongodbVersion: "6.0"
     templateId: 6b78ea06-ee0e-4689-998c-fc9c46e781f6
 
 ---

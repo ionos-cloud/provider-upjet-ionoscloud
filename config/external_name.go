@@ -22,6 +22,7 @@ var TerraformPluginSDKExternalNameConfigs = map[string]config.ExternalName{
 	"ionoscloud_ipblock":                      config.IdentifierFromProvider,
 	"ionoscloud_snapshot":                     config.IdentifierFromProvider,
 	"ionoscloud_server":                       config.IdentifierFromProvider,
+	"ionoscloud_gpu_server":                   config.IdentifierFromProvider,
 	"ionoscloud_volume":                       config.IdentifierFromProvider,
 	"ionoscloud_loadbalancer":                 config.IdentifierFromProvider,
 	"ionoscloud_ipfailover":                   config.IdentifierFromProvider,

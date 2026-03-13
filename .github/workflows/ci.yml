@@ -10,8 +10,9 @@ on:
 
 env:
   # Common versions
-  GOLANGCI_VERSION: 'v2.6.0'
+  GOLANGCI_VERSION: 'v2.11.0'
   DOCKER_BUILDX_VERSION: 'v0.8.2'
+  GOIMPORTS_VERSION: 'v0.41.0'
 
 jobs:
   detect-noop:
@@ -105,17 +106,17 @@ jobs:
 
     steps:
       - name: Checkout
-        uses: actions/checkout@f43a0e5ff2bd294095638e18286ca9a3d1956744 #v3
+        uses: actions/checkout@v6
         with:
           submodules: true
 
       - name: Setup Go
-        uses: actions/setup-go@v5
+        uses: actions/setup-go@v6
         with:
           go-version-file: 'go.mod'
 
       - name: Install goimports
-        run: go install golang.org/x/tools/cmd/goimports
+        run: go install golang.org/x/tools/cmd/goimports@${{ env.GOIMPORTS_VERSION }}
 
       - name: Find the Go Build Cache
         id: go

@@ -3,7 +3,7 @@ apiVersion: apiextensions.k8s.io/v1
 kind: CustomResourceDefinition
 metadata:
   annotations:
-    controller-gen.kubebuilder.io/version: v0.18.0
+    controller-gen.kubebuilder.io/version: v0.20.0
   name: bucketserversideencryptionconfigurations.objectstorage.m.ionoscloud.io
 spec:
   group: objectstorage.m.ionoscloud.io
@@ -153,18 +153,6 @@ spec:
                       [block] A block of rule as defined below.
                       Specifies the default server-side encryption configuration.
                     items:
-                      properties:
-                        applyServerSideEncryptionByDefault:
-                          description: |-
-                            [block] Defines the default encryption settings.
-                            Defines the default encryption settings.
-                          properties:
-                            sseAlgorithm:
-                              description: |-
-                                [string] Server-side encryption algorithm to use. Valid values are 'AES256'
-                                Server-side encryption algorithm to use. Valid values are 'AES256'
-                              type: string
-                          type: object
                       type: object
                     type: array
                 type: object
@@ -273,18 +261,6 @@ spec:
                       [block] A block of rule as defined below.
                       Specifies the default server-side encryption configuration.
                     items:
-                      properties:
-                        applyServerSideEncryptionByDefault:
-                          description: |-
-                            [block] Defines the default encryption settings.
-                            Defines the default encryption settings.
-                          properties:
-                            sseAlgorithm:
-                              description: |-
-                                [string] Server-side encryption algorithm to use. Valid values are 'AES256'
-                                Server-side encryption algorithm to use. Valid values are 'AES256'
-                              type: string
-                          type: object
                       type: object
                     type: array
                 type: object

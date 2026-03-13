@@ -12,8 +12,6 @@ import (
 	loadbalancer "github.com/ionos-cloud/provider-upjet-ionoscloud/internal/controller/namespaced/alb/loadbalancer"
 	loadbalancerforwardingrule "github.com/ionos-cloud/provider-upjet-ionoscloud/internal/controller/namespaced/alb/loadbalancerforwardingrule"
 	targetgroup "github.com/ionos-cloud/provider-upjet-ionoscloud/internal/controller/namespaced/alb/targetgroup"
-	apigateway "github.com/ionos-cloud/provider-upjet-ionoscloud/internal/controller/namespaced/apigateway/apigateway"
-	route "github.com/ionos-cloud/provider-upjet-ionoscloud/internal/controller/namespaced/apigateway/route"
 	autoscalinggroup "github.com/ionos-cloud/provider-upjet-ionoscloud/internal/controller/namespaced/asg/autoscalinggroup"
 	distribution "github.com/ionos-cloud/provider-upjet-ionoscloud/internal/controller/namespaced/cdn/distribution"
 	autocertificate "github.com/ionos-cloud/provider-upjet-ionoscloud/internal/controller/namespaced/certificatemanager/autocertificate"
@@ -39,14 +37,13 @@ import (
 	volume "github.com/ionos-cloud/provider-upjet-ionoscloud/internal/controller/namespaced/compute/volume"
 	registry "github.com/ionos-cloud/provider-upjet-ionoscloud/internal/controller/namespaced/containerregistry/registry"
 	registrytoken "github.com/ionos-cloud/provider-upjet-ionoscloud/internal/controller/namespaced/containerregistry/registrytoken"
-	cluster "github.com/ionos-cloud/provider-upjet-ionoscloud/internal/controller/namespaced/dataplatform/cluster"
-	nodepool "github.com/ionos-cloud/provider-upjet-ionoscloud/internal/controller/namespaced/dataplatform/nodepool"
 	mariadbcluster "github.com/ionos-cloud/provider-upjet-ionoscloud/internal/controller/namespaced/dbaas/mariadbcluster"
 	dnsrecord "github.com/ionos-cloud/provider-upjet-ionoscloud/internal/controller/namespaced/dns/dnsrecord"
 	dnszone "github.com/ionos-cloud/provider-upjet-ionoscloud/internal/controller/namespaced/dns/dnszone"
+	servergpu "github.com/ionos-cloud/provider-upjet-ionoscloud/internal/controller/namespaced/gpu/server"
 	inmemorydbreplicaset "github.com/ionos-cloud/provider-upjet-ionoscloud/internal/controller/namespaced/inmemorydb/inmemorydbreplicaset"
-	clusterk8s "github.com/ionos-cloud/provider-upjet-ionoscloud/internal/controller/namespaced/k8s/cluster"
-	nodepoolk8s "github.com/ionos-cloud/provider-upjet-ionoscloud/internal/controller/namespaced/k8s/nodepool"
+	cluster "github.com/ionos-cloud/provider-upjet-ionoscloud/internal/controller/namespaced/k8s/cluster"
+	nodepool "github.com/ionos-cloud/provider-upjet-ionoscloud/internal/controller/namespaced/k8s/nodepool"
 	kafka "github.com/ionos-cloud/provider-upjet-ionoscloud/internal/controller/namespaced/kafka/kafka"
 	kafkatopic "github.com/ionos-cloud/provider-upjet-ionoscloud/internal/controller/namespaced/kafka/kafkatopic"
 	pipeline "github.com/ionos-cloud/provider-upjet-ionoscloud/internal/controller/namespaced/log/pipeline"
@@ -88,8 +85,6 @@ func Setup(mgr ctrl.Manager, o controller.Options) error {
 		loadbalancer.Setup,
 		loadbalancerforwardingrule.Setup,
 		targetgroup.Setup,
-		apigateway.Setup,
-		route.Setup,
 		autoscalinggroup.Setup,
 		distribution.Setup,
 		autocertificate.Setup,
@@ -115,14 +110,13 @@ func Setup(mgr ctrl.Manager, o controller.Options) error {
 		volume.Setup,
 		registry.Setup,
 		registrytoken.Setup,
-		cluster.Setup,
-		nodepool.Setup,
 		mariadbcluster.Setup,
 		dnsrecord.Setup,
 		dnszone.Setup,
+		servergpu.Setup,
 		inmemorydbreplicaset.Setup,
-		clusterk8s.Setup,
-		nodepoolk8s.Setup,
+		cluster.Setup,
+		nodepool.Setup,
 		kafka.Setup,
 		kafkatopic.Setup,
 		pipeline.Setup,
@@ -170,8 +164,6 @@ func SetupGated(mgr ctrl.Manager, o controller.Options) error {
 		loadbalancer.SetupGated,
 		loadbalancerforwardingrule.SetupGated,
 		targetgroup.SetupGated,
-		apigateway.SetupGated,
-		route.SetupGated,
 		autoscalinggroup.SetupGated,
 		distribution.SetupGated,
 		autocertificate.SetupGated,
@@ -197,14 +189,13 @@ func SetupGated(mgr ctrl.Manager, o controller.Options) error {
 		volume.SetupGated,
 		registry.SetupGated,
 		registrytoken.SetupGated,
-		cluster.SetupGated,
-		nodepool.SetupGated,
 		mariadbcluster.SetupGated,
 		dnsrecord.SetupGated,
 		dnszone.SetupGated,
+		servergpu.SetupGated,
 		inmemorydbreplicaset.SetupGated,
-		clusterk8s.SetupGated,
-		nodepoolk8s.SetupGated,
+		cluster.SetupGated,
+		nodepool.SetupGated,
 		kafka.SetupGated,
 		kafkatopic.SetupGated,
 		pipeline.SetupGated,

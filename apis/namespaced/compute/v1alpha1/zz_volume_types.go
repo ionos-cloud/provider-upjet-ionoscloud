@@ -56,6 +56,10 @@ type VolumeInitParameters_2 struct {
 	// [string] The name of the volume.
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
+	// (Computed)[boolean] Indicates if the image requires the legacy BIOS for compatibility or specific needs. During creation, if an image is used, the value will be inherited from the image, regardless of the value set in the plan. Later on, the value can be updated.
+	// Indicates if the image requires the legacy BIOS for compatibility or specific needs.
+	RequireLegacyBios *bool `json:"requireLegacyBios,omitempty" tf:"require_legacy_bios,omitempty"`
+
 	// [list] List of absolute paths to files containing a public SSH key that will be injected into IonosCloud provided Linux images. Also accepts ssh keys directly. Required for IonosCloud Linux images. Required if image_password is not provided. This property is immutable.
 	SSHKeyPath []*string `json:"sshKeyPath,omitempty" tf:"ssh_key_path,omitempty"`
 
@@ -149,6 +153,10 @@ type VolumeObservation_2 struct {
 	// (Computed)[string] Is capable of memory hot plug (no reboot required)
 	RAMHotPlug *bool `json:"ramHotPlug,omitempty" tf:"ram_hot_plug,omitempty"`
 
+	// (Computed)[boolean] Indicates if the image requires the legacy BIOS for compatibility or specific needs. During creation, if an image is used, the value will be inherited from the image, regardless of the value set in the plan. Later on, the value can be updated.
+	// Indicates if the image requires the legacy BIOS for compatibility or specific needs.
+	RequireLegacyBios *bool `json:"requireLegacyBios,omitempty" tf:"require_legacy_bios,omitempty"`
+
 	// [list] List of absolute paths to files containing a public SSH key that will be injected into IonosCloud provided Linux images. Also accepts ssh keys directly. Required for IonosCloud Linux images. Required if image_password is not provided. This property is immutable.
 	SSHKeyPath []*string `json:"sshKeyPath,omitempty" tf:"ssh_key_path,omitempty"`
 
@@ -219,6 +227,11 @@ type VolumeParameters_2 struct {
 	// [string] The name of the volume.
 	// +kubebuilder:validation:Optional
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+
+	// (Computed)[boolean] Indicates if the image requires the legacy BIOS for compatibility or specific needs. During creation, if an image is used, the value will be inherited from the image, regardless of the value set in the plan. Later on, the value can be updated.
+	// Indicates if the image requires the legacy BIOS for compatibility or specific needs.
+	// +kubebuilder:validation:Optional
+	RequireLegacyBios *bool `json:"requireLegacyBios,omitempty" tf:"require_legacy_bios,omitempty"`
 
 	// [list] List of absolute paths to files containing a public SSH key that will be injected into IonosCloud provided Linux images. Also accepts ssh keys directly. Required for IonosCloud Linux images. Required if image_password is not provided. This property is immutable.
 	// +kubebuilder:validation:Optional

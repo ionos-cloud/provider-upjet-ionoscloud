@@ -102,3 +102,30 @@ func IgnoreEmptyDiffForComputed(ignoreList []string) func(diff *terraform.Instan
 		return diff, nil
 	}
 }
+
+// IgnoreDiffForFields removes specific fields from Terraform diffs. This is
+// useful for immutable attributes that may appear as provider-side drift and
+// should not trigger update planning.
+// todo: use this as a last way to fix a diff problem, as it can hide real issues if used excessively.
+// Always try to solve diff problems by fixxing the issue in terraform, or in the generator first, and use this only if there is no other way to fix a diff problem.
+func IgnoreDiffForFields(ignoreList []string) func(diff *terraform.InstanceDiff, state *terraform.InstanceState, config *terraform.ResourceConfig) (*terraform.InstanceDiff, error) {
+	return func(diff *terraform.InstanceDiff, state *terraform.InstanceState, config *terraform.ResourceConfig) (*terraform.InstanceDiff, error) {
+		// skip diff customization on create
+		if state == nil || state.Empty() {
+			return diff, nil
+		}
+		if config == nil {
+			return nil, errors.New("resource config cannot be nil")
+		}
+		// skip no diff or destroy diffs
+		if diff == nil || diff.Empty() || diff.Destroy || diff.Attributes == nil {
+			return diff, nil
+		}
+
+		for _, key := range ignoreList {
+			delete(diff.Attributes, key)
+		}
+
+		return diff, nil
+	}
+}

@@ -22,6 +22,9 @@ func (tr *Datacenter) Hub() {}
 func (tr *Firewall) Hub() {}
 
 // Hub marks this type as a conversion hub.
+func (tr *GPUServer) Hub() {}
+
+// Hub marks this type as a conversion hub.
 func (tr *Group) Hub() {}
 
 // Hub marks this type as a conversion hub.

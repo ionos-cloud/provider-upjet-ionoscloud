@@ -23,6 +23,7 @@ env:
   # Common versions
   GOLANGCI_VERSION: 'v2.1.6'
   DOCKER_BUILDX_VERSION: 'v0.8.2'
+  GOIMPORTS_VERSION: 'v0.41.0'
 
   # Common users. We can't run a step 'if secrets.XXX != ""' but we can run a
   # step 'if env.XXX != ""', so we copy these to succinctly test whether
@@ -131,7 +132,7 @@ jobs:
           go-version-file: 'go.mod'
 
       - name: Install goimports
-        run: go install golang.org/x/tools/cmd/goimports
+        run: go install golang.org/x/tools/cmd/goimports@${{ env.GOIMPORTS_VERSION }}
 
       - name: Find the Go Build Cache
         id: go

@@ -23,7 +23,7 @@ type AutoCertificateProviderInitParameters struct {
 	// [list] External account binding details.
 	ExternalAccountBinding []ExternalAccountBindingInitParameters `json:"externalAccountBinding,omitempty" tf:"external_account_binding,omitempty"`
 
-	// [string] The location of the provider.
+	// [string] The location of the provider. Available locations: de/fra, de/fra/2.
 	// The location of the certificate provider
 	Location *string `json:"location,omitempty" tf:"location,omitempty"`
 
@@ -47,7 +47,7 @@ type AutoCertificateProviderObservation struct {
 
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
-	// [string] The location of the provider.
+	// [string] The location of the provider. Available locations: de/fra, de/fra/2.
 	// The location of the certificate provider
 	Location *string `json:"location,omitempty" tf:"location,omitempty"`
 
@@ -71,7 +71,7 @@ type AutoCertificateProviderParameters struct {
 	// +kubebuilder:validation:Optional
 	ExternalAccountBinding []ExternalAccountBindingParameters `json:"externalAccountBinding,omitempty" tf:"external_account_binding,omitempty"`
 
-	// [string] The location of the provider.
+	// [string] The location of the provider. Available locations: de/fra, de/fra/2.
 	// The location of the certificate provider
 	// +kubebuilder:validation:Optional
 	Location *string `json:"location,omitempty" tf:"location,omitempty"`

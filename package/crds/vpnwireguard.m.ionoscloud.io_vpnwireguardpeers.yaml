@@ -3,7 +3,7 @@ apiVersion: apiextensions.k8s.io/v1
 kind: CustomResourceDefinition
 metadata:
   annotations:
-    controller-gen.kubebuilder.io/version: v0.18.0
+    controller-gen.kubebuilder.io/version: v0.20.0
   name: vpnwireguardpeers.vpnwireguard.m.ionoscloud.io
 spec:
   group: vpnwireguard.m.ionoscloud.io
@@ -176,8 +176,8 @@ spec:
                     type: object
                   location:
                     description: |-
-                      [string] The location of the WireGuard Gateway.
-                      The location of the WireGuard Peer. Supported locations: de/fra, de/txl, es/vit, gb/bhx, gb/lhr, us/ewr, us/las, us/mci, fr/par
+                      [string] The location of the WireGuard Gateway. Supported locations: de/fra, de/fra/2, de/txl, es/vit, gb/bhx, gb/lhr, us/ewr, us/las, us/mci, fr/par.
+                      The location of the WireGuard Peer. Supported locations: de/fra, de/fra/2, de/txl, es/vit, gb/bhx, gb/lhr, us/ewr, us/las, us/mci, fr/par
                     type: string
                   name:
                     description: |-
@@ -320,8 +320,8 @@ spec:
                     type: object
                   location:
                     description: |-
-                      [string] The location of the WireGuard Gateway.
-                      The location of the WireGuard Peer. Supported locations: de/fra, de/txl, es/vit, gb/bhx, gb/lhr, us/ewr, us/las, us/mci, fr/par
+                      [string] The location of the WireGuard Gateway. Supported locations: de/fra, de/fra/2, de/txl, es/vit, gb/bhx, gb/lhr, us/ewr, us/las, us/mci, fr/par.
+                      The location of the WireGuard Peer. Supported locations: de/fra, de/fra/2, de/txl, es/vit, gb/bhx, gb/lhr, us/ewr, us/las, us/mci, fr/par
                     type: string
                   name:
                     description: |-
@@ -447,8 +447,8 @@ spec:
                     type: string
                   location:
                     description: |-
-                      [string] The location of the WireGuard Gateway.
-                      The location of the WireGuard Peer. Supported locations: de/fra, de/txl, es/vit, gb/bhx, gb/lhr, us/ewr, us/las, us/mci, fr/par
+                      [string] The location of the WireGuard Gateway. Supported locations: de/fra, de/fra/2, de/txl, es/vit, gb/bhx, gb/lhr, us/ewr, us/las, us/mci, fr/par.
+                      The location of the WireGuard Peer. Supported locations: de/fra, de/fra/2, de/txl, es/vit, gb/bhx, gb/lhr, us/ewr, us/las, us/mci, fr/par
                     type: string
                   name:
                     description: |-

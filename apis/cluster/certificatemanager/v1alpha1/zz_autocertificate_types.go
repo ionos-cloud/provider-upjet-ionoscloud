@@ -23,7 +23,7 @@ type AutoCertificateInitParameters struct {
 	// The key algorithm used to generate the certificate
 	KeyAlgorithm *string `json:"keyAlgorithm,omitempty" tf:"key_algorithm,omitempty"`
 
-	// [string] The location of the auto-certificate.
+	// [string] The location of the auto-certificate. Available locations: de/fra, de/fra/2.
 	// The location of the auto-certificate
 	// +crossplane:generate:reference:type=github.com/ionos-cloud/provider-upjet-ionoscloud/apis/cluster/certificatemanager/v1alpha1.AutoCertificateProvider
 	// +crossplane:generate:reference:extractor=github.com/ionos-cloud/provider-upjet-ionoscloud/config/common.AutoCertificateProviderLocation()
@@ -75,7 +75,7 @@ type AutoCertificateObservation struct {
 	// The ID of the last certificate that was issued
 	LastIssuedCertificateID *string `json:"lastIssuedCertificateId,omitempty" tf:"last_issued_certificate_id,omitempty"`
 
-	// [string] The location of the auto-certificate.
+	// [string] The location of the auto-certificate. Available locations: de/fra, de/fra/2.
 	// The location of the auto-certificate
 	Location *string `json:"location,omitempty" tf:"location,omitempty"`
 
@@ -104,7 +104,7 @@ type AutoCertificateParameters struct {
 	// +kubebuilder:validation:Optional
 	KeyAlgorithm *string `json:"keyAlgorithm,omitempty" tf:"key_algorithm,omitempty"`
 
-	// [string] The location of the auto-certificate.
+	// [string] The location of the auto-certificate. Available locations: de/fra, de/fra/2.
 	// The location of the auto-certificate
 	// +crossplane:generate:reference:type=github.com/ionos-cloud/provider-upjet-ionoscloud/apis/cluster/certificatemanager/v1alpha1.AutoCertificateProvider
 	// +crossplane:generate:reference:extractor=github.com/ionos-cloud/provider-upjet-ionoscloud/config/common.AutoCertificateProviderLocation()

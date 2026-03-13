@@ -29,14 +29,12 @@ type ConnectionsInitParameters struct {
 	// +kubebuilder:validation:Optional
 	DatacenterIDSelector *v1.NamespacedSelector `json:"datacenterIdSelector,omitempty" tf:"-"`
 
-	// [string] Describes the private ipv4 subnet in your LAN that should be accessible by the
-	// VPN Gateway. Note: this should be the subnet already assigned to the LAN
-	// Describes the private ipv4 subnet in your LAN that should be accessible by the VPN Gateway. Note: this should be the subnet already assigned to the LAN
+	// [string] A LAN IPv4 address in CIDR notation that will be assigned to the VPN Gateway. This will be the private gateway address for LAN clients to route traffic over the VPN Gateway, this should be within the subnet already assigned to the LAN.
+	// A LAN IPv4 address in CIDR notation that will be assigned to the VPN Gateway. This will be the private gateway address for LAN clients to route traffic over the VPN Gateway, this should be within the subnet already assigned to the LAN.
 	IPv4Cidr *string `json:"ipv4Cidr,omitempty" tf:"ipv4_cidr,omitempty"`
 
-	// [string] Describes the ipv6 subnet in your LAN that should be accessible by the VPN
-	// Gateway. Note: this should be the subnet already assigned to the LAN
-	// Describes the ipv6 subnet in your LAN that should be accessible by the VPN Gateway. Note: this should be the subnet already assigned to the LAN
+	// [string] A LAN IPv6 address in CIDR notation that will be assigned to the VPN Gateway. This will be the private gateway address for LAN clients to route traffic over the VPN Gateway, this should be within the subnet already assigned to the LAN.
+	// A LAN IPv6 address in CIDR notation that will be assigned to the VPN Gateway. This will be the private gateway address for LAN clients to route traffic over the VPN Gateway, this should be within the subnet already assigned to the LAN.
 	IPv6Cidr *string `json:"ipv6Cidr,omitempty" tf:"ipv6_cidr,omitempty"`
 
 	// [string] The numeric LAN ID to connect your VPN Gateway to.
@@ -59,14 +57,12 @@ type ConnectionsObservation struct {
 	// The datacenter to connect your VPN Gateway to.
 	DatacenterID *string `json:"datacenterId,omitempty" tf:"datacenter_id,omitempty"`
 
-	// [string] Describes the private ipv4 subnet in your LAN that should be accessible by the
-	// VPN Gateway. Note: this should be the subnet already assigned to the LAN
-	// Describes the private ipv4 subnet in your LAN that should be accessible by the VPN Gateway. Note: this should be the subnet already assigned to the LAN
+	// [string] A LAN IPv4 address in CIDR notation that will be assigned to the VPN Gateway. This will be the private gateway address for LAN clients to route traffic over the VPN Gateway, this should be within the subnet already assigned to the LAN.
+	// A LAN IPv4 address in CIDR notation that will be assigned to the VPN Gateway. This will be the private gateway address for LAN clients to route traffic over the VPN Gateway, this should be within the subnet already assigned to the LAN.
 	IPv4Cidr *string `json:"ipv4Cidr,omitempty" tf:"ipv4_cidr,omitempty"`
 
-	// [string] Describes the ipv6 subnet in your LAN that should be accessible by the VPN
-	// Gateway. Note: this should be the subnet already assigned to the LAN
-	// Describes the ipv6 subnet in your LAN that should be accessible by the VPN Gateway. Note: this should be the subnet already assigned to the LAN
+	// [string] A LAN IPv6 address in CIDR notation that will be assigned to the VPN Gateway. This will be the private gateway address for LAN clients to route traffic over the VPN Gateway, this should be within the subnet already assigned to the LAN.
+	// A LAN IPv6 address in CIDR notation that will be assigned to the VPN Gateway. This will be the private gateway address for LAN clients to route traffic over the VPN Gateway, this should be within the subnet already assigned to the LAN.
 	IPv6Cidr *string `json:"ipv6Cidr,omitempty" tf:"ipv6_cidr,omitempty"`
 
 	// [string] The numeric LAN ID to connect your VPN Gateway to.
@@ -90,15 +86,13 @@ type ConnectionsParameters struct {
 	// +kubebuilder:validation:Optional
 	DatacenterIDSelector *v1.NamespacedSelector `json:"datacenterIdSelector,omitempty" tf:"-"`
 
-	// [string] Describes the private ipv4 subnet in your LAN that should be accessible by the
-	// VPN Gateway. Note: this should be the subnet already assigned to the LAN
-	// Describes the private ipv4 subnet in your LAN that should be accessible by the VPN Gateway. Note: this should be the subnet already assigned to the LAN
+	// [string] A LAN IPv4 address in CIDR notation that will be assigned to the VPN Gateway. This will be the private gateway address for LAN clients to route traffic over the VPN Gateway, this should be within the subnet already assigned to the LAN.
+	// A LAN IPv4 address in CIDR notation that will be assigned to the VPN Gateway. This will be the private gateway address for LAN clients to route traffic over the VPN Gateway, this should be within the subnet already assigned to the LAN.
 	// +kubebuilder:validation:Optional
 	IPv4Cidr *string `json:"ipv4Cidr" tf:"ipv4_cidr,omitempty"`
 
-	// [string] Describes the ipv6 subnet in your LAN that should be accessible by the VPN
-	// Gateway. Note: this should be the subnet already assigned to the LAN
-	// Describes the ipv6 subnet in your LAN that should be accessible by the VPN Gateway. Note: this should be the subnet already assigned to the LAN
+	// [string] A LAN IPv6 address in CIDR notation that will be assigned to the VPN Gateway. This will be the private gateway address for LAN clients to route traffic over the VPN Gateway, this should be within the subnet already assigned to the LAN.
+	// A LAN IPv6 address in CIDR notation that will be assigned to the VPN Gateway. This will be the private gateway address for LAN clients to route traffic over the VPN Gateway, this should be within the subnet already assigned to the LAN.
 	// +kubebuilder:validation:Optional
 	IPv6Cidr *string `json:"ipv6Cidr,omitempty" tf:"ipv6_cidr,omitempty"`
 
@@ -178,9 +172,8 @@ type VpnIpsecGatewayInitParameters struct {
 	// +kubebuilder:validation:Optional
 	GatewayIPSelector *v1.NamespacedSelector `json:"gatewayIpSelector,omitempty" tf:"-"`
 
-	// [string] The location of the IPSec Gateway. Supported locations: de/fra, de/txl, es/vit,
-	// gb/bhx, gb/lhr, us/ewr, us/las, us/mci, fr/par.
-	// The location of the IPSec Gateway. Supported locations: de/fra, de/txl, es/vit, gb/bhx, gb/lhr, us/ewr, us/las, us/mci, fr/par
+	// [string] The location of the IPSec Gateway. Supported locations: de/fra, de/fra/2, de/txl, es/vit, gb/bhx, gb/lhr, us/ewr, us/las, us/mci, fr/par.
+	// The location of the IPSec Gateway. Supported locations: de/fra, de/fra/2, de/txl, es/vit, gb/bhx, gb/lhr, us/ewr, us/las, us/mci, fr/par
 	Location *string `json:"location,omitempty" tf:"location,omitempty"`
 
 	// (Computed) A weekly 4 hour-long window, during which maintenance might occur.
@@ -219,9 +212,8 @@ type VpnIpsecGatewayObservation struct {
 
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
-	// [string] The location of the IPSec Gateway. Supported locations: de/fra, de/txl, es/vit,
-	// gb/bhx, gb/lhr, us/ewr, us/las, us/mci, fr/par.
-	// The location of the IPSec Gateway. Supported locations: de/fra, de/txl, es/vit, gb/bhx, gb/lhr, us/ewr, us/las, us/mci, fr/par
+	// [string] The location of the IPSec Gateway. Supported locations: de/fra, de/fra/2, de/txl, es/vit, gb/bhx, gb/lhr, us/ewr, us/las, us/mci, fr/par.
+	// The location of the IPSec Gateway. Supported locations: de/fra, de/fra/2, de/txl, es/vit, gb/bhx, gb/lhr, us/ewr, us/las, us/mci, fr/par
 	Location *string `json:"location,omitempty" tf:"location,omitempty"`
 
 	// (Computed) A weekly 4 hour-long window, during which maintenance might occur.
@@ -271,9 +263,8 @@ type VpnIpsecGatewayParameters struct {
 	// +kubebuilder:validation:Optional
 	GatewayIPSelector *v1.NamespacedSelector `json:"gatewayIpSelector,omitempty" tf:"-"`
 
-	// [string] The location of the IPSec Gateway. Supported locations: de/fra, de/txl, es/vit,
-	// gb/bhx, gb/lhr, us/ewr, us/las, us/mci, fr/par.
-	// The location of the IPSec Gateway. Supported locations: de/fra, de/txl, es/vit, gb/bhx, gb/lhr, us/ewr, us/las, us/mci, fr/par
+	// [string] The location of the IPSec Gateway. Supported locations: de/fra, de/fra/2, de/txl, es/vit, gb/bhx, gb/lhr, us/ewr, us/las, us/mci, fr/par.
+	// The location of the IPSec Gateway. Supported locations: de/fra, de/fra/2, de/txl, es/vit, gb/bhx, gb/lhr, us/ewr, us/las, us/mci, fr/par
 	// +kubebuilder:validation:Optional
 	Location *string `json:"location,omitempty" tf:"location,omitempty"`
 
