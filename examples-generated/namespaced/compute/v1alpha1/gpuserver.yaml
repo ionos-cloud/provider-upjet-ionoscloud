@@ -1,8 +1,8 @@
-apiVersion: gpu.m.ionoscloud.io/v1alpha1
-kind: Server
+apiVersion: compute.m.ionoscloud.io/v1alpha1
+kind: GPUServer
 metadata:
   annotations:
-    meta.upbound.io/example-id: gpu/v1alpha1/server
+    meta.upbound.io/example-id: compute/v1alpha1/gpuserver
   labels:
     testing.upbound.io/example-name: example
   name: example
@@ -40,7 +40,6 @@ spec:
     volume:
     - availabilityZone: AUTO
       bus: VIRTIO
-      diskType: SSD Premium
       exposeSerial: true
       licenceType: LINUX
       name: system
@@ -52,7 +51,7 @@ apiVersion: compute.m.ionoscloud.io/v1alpha1
 kind: Datacenter
 metadata:
   annotations:
-    meta.upbound.io/example-id: gpu/v1alpha1/server
+    meta.upbound.io/example-id: compute/v1alpha1/gpuserver
   labels:
     testing.upbound.io/example-name: example
   name: example
@@ -68,7 +67,7 @@ apiVersion: compute.m.ionoscloud.io/v1alpha1
 kind: Ipblock
 metadata:
   annotations:
-    meta.upbound.io/example-id: gpu/v1alpha1/server
+    meta.upbound.io/example-id: compute/v1alpha1/gpuserver
   labels:
     testing.upbound.io/example-name: webserver_ipblock
   name: webserver-ipblock
@@ -85,7 +84,7 @@ apiVersion: compute.m.ionoscloud.io/v1alpha1
 kind: Lan
 metadata:
   annotations:
-    meta.upbound.io/example-id: gpu/v1alpha1/server
+    meta.upbound.io/example-id: compute/v1alpha1/gpuserver
   labels:
     testing.upbound.io/example-name: example
   name: example

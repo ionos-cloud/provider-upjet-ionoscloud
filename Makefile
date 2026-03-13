@@ -21,7 +21,7 @@ export TERRAFORM_NATIVE_PROVIDER_BINARY ?= terraform-provider-ionoscloud_v6_7_12
 export TERRAFORM_DOCS_PATH ?= docs/resources
 
 
-PLATFORMS ?= linux_amd64 linux_arm64
+PLATFORMS ?= linux_amd64
 
 # -include will silently skip missing files, which allows us
 # to load those files with a target in the Makefile. If only

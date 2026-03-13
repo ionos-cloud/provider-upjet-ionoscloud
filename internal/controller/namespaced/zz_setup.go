@@ -22,6 +22,7 @@ import (
 	cubeserver "github.com/ionos-cloud/provider-upjet-ionoscloud/internal/controller/namespaced/compute/cubeserver"
 	datacenter "github.com/ionos-cloud/provider-upjet-ionoscloud/internal/controller/namespaced/compute/datacenter"
 	firewall "github.com/ionos-cloud/provider-upjet-ionoscloud/internal/controller/namespaced/compute/firewall"
+	gpuserver "github.com/ionos-cloud/provider-upjet-ionoscloud/internal/controller/namespaced/compute/gpuserver"
 	group "github.com/ionos-cloud/provider-upjet-ionoscloud/internal/controller/namespaced/compute/group"
 	ipblock "github.com/ionos-cloud/provider-upjet-ionoscloud/internal/controller/namespaced/compute/ipblock"
 	ipfailover "github.com/ionos-cloud/provider-upjet-ionoscloud/internal/controller/namespaced/compute/ipfailover"
@@ -40,7 +41,6 @@ import (
 	mariadbcluster "github.com/ionos-cloud/provider-upjet-ionoscloud/internal/controller/namespaced/dbaas/mariadbcluster"
 	dnsrecord "github.com/ionos-cloud/provider-upjet-ionoscloud/internal/controller/namespaced/dns/dnsrecord"
 	dnszone "github.com/ionos-cloud/provider-upjet-ionoscloud/internal/controller/namespaced/dns/dnszone"
-	servergpu "github.com/ionos-cloud/provider-upjet-ionoscloud/internal/controller/namespaced/gpu/server"
 	inmemorydbreplicaset "github.com/ionos-cloud/provider-upjet-ionoscloud/internal/controller/namespaced/inmemorydb/inmemorydbreplicaset"
 	cluster "github.com/ionos-cloud/provider-upjet-ionoscloud/internal/controller/namespaced/k8s/cluster"
 	nodepool "github.com/ionos-cloud/provider-upjet-ionoscloud/internal/controller/namespaced/k8s/nodepool"
@@ -95,6 +95,7 @@ func Setup(mgr ctrl.Manager, o controller.Options) error {
 		cubeserver.Setup,
 		datacenter.Setup,
 		firewall.Setup,
+		gpuserver.Setup,
 		group.Setup,
 		ipblock.Setup,
 		ipfailover.Setup,
@@ -113,7 +114,6 @@ func Setup(mgr ctrl.Manager, o controller.Options) error {
 		mariadbcluster.Setup,
 		dnsrecord.Setup,
 		dnszone.Setup,
-		servergpu.Setup,
 		inmemorydbreplicaset.Setup,
 		cluster.Setup,
 		nodepool.Setup,
@@ -174,6 +174,7 @@ func SetupGated(mgr ctrl.Manager, o controller.Options) error {
 		cubeserver.SetupGated,
 		datacenter.SetupGated,
 		firewall.SetupGated,
+		gpuserver.SetupGated,
 		group.SetupGated,
 		ipblock.SetupGated,
 		ipfailover.SetupGated,
@@ -192,7 +193,6 @@ func SetupGated(mgr ctrl.Manager, o controller.Options) error {
 		mariadbcluster.SetupGated,
 		dnsrecord.SetupGated,
 		dnszone.SetupGated,
-		servergpu.SetupGated,
 		inmemorydbreplicaset.SetupGated,
 		cluster.SetupGated,
 		nodepool.SetupGated,

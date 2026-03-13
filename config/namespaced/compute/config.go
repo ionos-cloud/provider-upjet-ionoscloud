@@ -2,6 +2,7 @@ package compute
 
 import (
 	"github.com/crossplane/upjet/v2/pkg/config"
+	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/schema"
 
 	"github.com/ionos-cloud/provider-upjet-ionoscloud/config/common"
 )
@@ -78,6 +79,26 @@ func Configure(p *config.Provider) {
 		}
 	})
 
+	p.AddResourceConfigurator("ionoscloud_gpu_server", func(r *config.Resource) {
+		r.ShortGroup = shortGroupName
+		r.Kind = "GPUServer"
+		r.UseAsync = true
+		r.References["datacenter_id"] = config.Reference{
+			TerraformName: "ionoscloud_datacenter",
+		}
+		r.References["nic.lan"] = config.Reference{
+			TerraformName: "ionoscloud_lan",
+		}
+
+		// The disk_type field is immutable and causes issues during updates (e.g. "volume.0.disk_type attribute is immutable").
+		// We override it to be Computed only, so it cannot be configured by the user at all.
+		// This effectively removes it from spec.forProvider and keeps it only in status.atProvider.
+		s := r.TerraformResource.Schema["volume"].Elem.(*schema.Resource).Schema["disk_type"]
+		s.Computed = true
+		s.Optional = false
+		s.Required = false
+		s.ForceNew = false
+	})
 	p.AddResourceConfigurator("ionoscloud_volume", func(r *config.Resource) {
 		r.ShortGroup = shortGroupName
 		r.References["datacenter_id"] = config.Reference{

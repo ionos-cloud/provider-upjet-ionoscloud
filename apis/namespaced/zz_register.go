@@ -18,7 +18,6 @@ import (
 	v1alpha1containerregistry "github.com/ionos-cloud/provider-upjet-ionoscloud/apis/namespaced/containerregistry/v1alpha1"
 	v1alpha1dbaas "github.com/ionos-cloud/provider-upjet-ionoscloud/apis/namespaced/dbaas/v1alpha1"
 	v1alpha1dns "github.com/ionos-cloud/provider-upjet-ionoscloud/apis/namespaced/dns/v1alpha1"
-	v1alpha1gpu "github.com/ionos-cloud/provider-upjet-ionoscloud/apis/namespaced/gpu/v1alpha1"
 	v1alpha1inmemorydb "github.com/ionos-cloud/provider-upjet-ionoscloud/apis/namespaced/inmemorydb/v1alpha1"
 	v1alpha1k8s "github.com/ionos-cloud/provider-upjet-ionoscloud/apis/namespaced/k8s/v1alpha1"
 	v1alpha1kafka "github.com/ionos-cloud/provider-upjet-ionoscloud/apis/namespaced/kafka/v1alpha1"
@@ -46,7 +45,6 @@ func init() {
 		v1alpha1containerregistry.SchemeBuilder.AddToScheme,
 		v1alpha1dbaas.SchemeBuilder.AddToScheme,
 		v1alpha1dns.SchemeBuilder.AddToScheme,
-		v1alpha1gpu.SchemeBuilder.AddToScheme,
 		v1alpha1inmemorydb.SchemeBuilder.AddToScheme,
 		v1alpha1k8s.SchemeBuilder.AddToScheme,
 		v1alpha1kafka.SchemeBuilder.AddToScheme,
