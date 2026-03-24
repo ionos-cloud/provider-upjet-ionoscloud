@@ -117,4 +117,4 @@ metadata:
   name: example-password
   namespace: upbound-system
 stringData:
-  password: "Upboundtest1"
+  password: "<REPLACE_WITH_YOUR_PASSWORD>"

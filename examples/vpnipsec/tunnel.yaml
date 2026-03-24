@@ -42,5 +42,5 @@ metadata:
   name: example-secret
   namespace: upbound-system
 stringData:
-  password: "Upboundtest!"
+  password: "<REPLACE_WITH_YOUR_PASSWORD>"
 
