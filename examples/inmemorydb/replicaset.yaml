@@ -75,4 +75,4 @@ spec:
     name: pwsecret
     namespace: upbound-system
   stringData:
-    password: "Upboundtest!"
+    password: "<REPLACE_WITH_YOUR_PASSWORD>"

@@ -35,7 +35,7 @@ spec:
     name: privkey
     namespace: upbound-system
   stringData:
-    privateKey: "my_secret_key"
+    privateKey: "<REPLACE_WITH_YOUR_WIREGUARD_PRIVATE_KEY>"
 
 ---
 
