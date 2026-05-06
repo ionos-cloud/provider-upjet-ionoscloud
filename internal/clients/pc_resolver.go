@@ -36,7 +36,7 @@ func legacyToModernProviderConfigSpec(pc *clusterv1beta1.ProviderConfig) (*names
 
 func resolveProviderConfig(ctx context.Context, crClient client.Client, mg xpresource.Managed) (*namespacedv1beta1.ClusterProviderConfig, error) {
 	switch managed := mg.(type) {
-	case xpresource.LegacyManaged:
+	case xpresource.LegacyManaged: //nolint:staticcheck // still handling the cluster-scoped MRs
 		return resolveProviderConfigLegacy(ctx, crClient, managed)
 	case xpresource.ModernManaged:
 		return resolveProviderConfigModern(ctx, crClient, managed)
@@ -45,7 +45,7 @@ func resolveProviderConfig(ctx context.Context, crClient client.Client, mg xpres
 	}
 }
 
-func resolveProviderConfigLegacy(ctx context.Context, client client.Client, mg xpresource.LegacyManaged) (*namespacedv1beta1.ClusterProviderConfig, error) {
+func resolveProviderConfigLegacy(ctx context.Context, client client.Client, mg xpresource.LegacyManaged) (*namespacedv1beta1.ClusterProviderConfig, error) { //nolint:staticcheck // still handling the cluster-scoped MRs
 	configRef := mg.GetProviderConfigReference()
 	if configRef == nil {
 		return nil, errors.New(errNoProviderConfig)

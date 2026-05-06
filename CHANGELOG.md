@@ -2,18 +2,17 @@
 
 All notable changes to this project will be documented in this file.
 
-## [Unreleased]
+## [0.5.4]
+- Update crossplane-runtime to v2.2.1
+
+
+## [0.5.3]
 
 ### Changed
 - Updated Terraform provider to v6.7.23
 - Updated Go to v1.26.1
 - Updated linter configuration
 - Added `contract_number` support in Terraform client options and environment variable
-
-## [v0.6.0] - 2025-09-11
-
-### Fixed
-- Fix checkout from branch in release workflow
 
 ## [v0.5.0] - 2025-09-11
 
