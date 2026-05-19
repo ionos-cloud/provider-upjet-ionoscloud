@@ -277,6 +277,11 @@ spec:
                             type: string
                         type: object
                     type: object
+                  location:
+                    description: The location of the resource. This field should be
+                      used only if you are also using a file configuration and should
+                      not be configured otherwise.
+                    type: string
                   loggingFormat:
                     description: Specifies the format of the logs.
                     type: string
@@ -602,6 +607,11 @@ spec:
                             type: string
                         type: object
                     type: object
+                  location:
+                    description: The location of the resource. This field should be
+                      used only if you are also using a file configuration and should
+                      not be configured otherwise.
+                    type: string
                   loggingFormat:
                     description: Specifies the format of the logs.
                     type: string
@@ -825,6 +835,11 @@ spec:
                       [int] Id of the listening LAN. (inbound)
                       Id of the listening LAN. (inbound)
                     type: number
+                  location:
+                    description: The location of the resource. This field should be
+                      used only if you are also using a file configuration and should
+                      not be configured otherwise.
+                    type: string
                   loggingFormat:
                     description: Specifies the format of the logs.
                     type: string

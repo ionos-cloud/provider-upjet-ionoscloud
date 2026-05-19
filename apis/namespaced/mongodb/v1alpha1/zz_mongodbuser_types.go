@@ -28,6 +28,9 @@ type MongodbUserInitParameters struct {
 	// +kubebuilder:validation:Optional
 	ClusterIDSelector *v1.NamespacedSelector `json:"clusterIdSelector,omitempty" tf:"-"`
 
+	// The location of the resource. This field should be used only if you are also using a file configuration and should not be configured otherwise.
+	Location *string `json:"location,omitempty" tf:"location,omitempty"`
+
 	// [string] User password. Updates to the value of the field force the cluster to be re-created.
 	PasswordSecretRef v1.LocalSecretKeySelector `json:"passwordSecretRef" tf:"-"`
 
@@ -44,6 +47,9 @@ type MongodbUserObservation struct {
 	ClusterID *string `json:"clusterId,omitempty" tf:"cluster_id,omitempty"`
 
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
+
+	// The location of the resource. This field should be used only if you are also using a file configuration and should not be configured otherwise.
+	Location *string `json:"location,omitempty" tf:"location,omitempty"`
 
 	// [string] a list of mongodb user roles. Updates to the value of the field force the cluster to be re-created.
 	Roles []RolesObservation `json:"roles,omitempty" tf:"roles,omitempty"`
@@ -66,6 +72,10 @@ type MongodbUserParameters struct {
 	// Selector for a MongodbCluster in mongodb to populate clusterId.
 	// +kubebuilder:validation:Optional
 	ClusterIDSelector *v1.NamespacedSelector `json:"clusterIdSelector,omitempty" tf:"-"`
+
+	// The location of the resource. This field should be used only if you are also using a file configuration and should not be configured otherwise.
+	// +kubebuilder:validation:Optional
+	Location *string `json:"location,omitempty" tf:"location,omitempty"`
 
 	// [string] User password. Updates to the value of the field force the cluster to be re-created.
 	// +kubebuilder:validation:Optional

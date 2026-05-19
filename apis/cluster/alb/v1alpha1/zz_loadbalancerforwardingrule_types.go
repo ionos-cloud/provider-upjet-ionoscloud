@@ -255,6 +255,10 @@ type LoadbalancerForwardingruleInitParameters struct {
 	// Listening (inbound) port number; valid range is 1 to 65535.
 	ListenerPort *float64 `json:"listenerPort,omitempty" tf:"listener_port,omitempty"`
 
+	// [string] The location for redirecting; mandatory and valid only for REDIRECT actions.
+	// The location of the resource. This field should be used only if you are also using a file configuration and should not be configured otherwise.
+	Location *string `json:"location,omitempty" tf:"location,omitempty"`
+
 	// [string] The name of the Application Load Balancer forwarding rule.
 	// The name of the Application Load Balancer forwarding rule.
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
@@ -304,6 +308,10 @@ type LoadbalancerForwardingruleObservation struct {
 	// [int] Listening (inbound) port number; valid range is 1 to 65535.
 	// Listening (inbound) port number; valid range is 1 to 65535.
 	ListenerPort *float64 `json:"listenerPort,omitempty" tf:"listener_port,omitempty"`
+
+	// [string] The location for redirecting; mandatory and valid only for REDIRECT actions.
+	// The location of the resource. This field should be used only if you are also using a file configuration and should not be configured otherwise.
+	Location *string `json:"location,omitempty" tf:"location,omitempty"`
 
 	// [string] The name of the Application Load Balancer forwarding rule.
 	// The name of the Application Load Balancer forwarding rule.
@@ -367,6 +375,11 @@ type LoadbalancerForwardingruleParameters struct {
 	// +kubebuilder:validation:Optional
 	ListenerPort *float64 `json:"listenerPort,omitempty" tf:"listener_port,omitempty"`
 
+	// [string] The location for redirecting; mandatory and valid only for REDIRECT actions.
+	// The location of the resource. This field should be used only if you are also using a file configuration and should not be configured otherwise.
+	// +kubebuilder:validation:Optional
+	Location *string `json:"location,omitempty" tf:"location,omitempty"`
+
 	// [string] The name of the Application Load Balancer forwarding rule.
 	// The name of the Application Load Balancer forwarding rule.
 	// +kubebuilder:validation:Optional
@@ -421,7 +434,7 @@ type LoadbalancerForwardingruleStatus struct {
 // +kubebuilder:subresource:status
 // +kubebuilder:storageversion
 
-// LoadbalancerForwardingrule is the Schema for the LoadbalancerForwardingrules API. Creates and manages IonosCloud Application Load Balancer Forwarding Rule.
+// LoadbalancerForwardingrule is the Schema for the LoadbalancerForwardingrules API. Creates and manages IONOS CLOUD Application Load Balancer Forwarding Rule.
 // +kubebuilder:printcolumn:name="SYNCED",type="string",JSONPath=".status.conditions[?(@.type=='Synced')].status"
 // +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"
 // +kubebuilder:printcolumn:name="EXTERNAL-NAME",type="string",JSONPath=".metadata.annotations.crossplane\\.io/external-name"

@@ -87,6 +87,9 @@ type NatgatewayInitParameters struct {
 	// A list of Local Area Networks the node pool should be part of
 	Lans []LansInitParameters `json:"lans,omitempty" tf:"lans,omitempty"`
 
+	// The location of the resource. This field should be used only if you are also using a file configuration and should not be configured otherwise.
+	Location *string `json:"location,omitempty" tf:"location,omitempty"`
+
 	// [string] Name of the NAT gateway.
 	// Name of the NAT gateway
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
@@ -108,6 +111,9 @@ type NatgatewayObservation struct {
 	// [list] A list of Local Area Networks the node pool should be part of.
 	// A list of Local Area Networks the node pool should be part of
 	Lans []LansObservation `json:"lans,omitempty" tf:"lans,omitempty"`
+
+	// The location of the resource. This field should be used only if you are also using a file configuration and should not be configured otherwise.
+	Location *string `json:"location,omitempty" tf:"location,omitempty"`
 
 	// [string] Name of the NAT gateway.
 	// Name of the NAT gateway
@@ -138,6 +144,10 @@ type NatgatewayParameters struct {
 	// A list of Local Area Networks the node pool should be part of
 	// +kubebuilder:validation:Optional
 	Lans []LansParameters `json:"lans,omitempty" tf:"lans,omitempty"`
+
+	// The location of the resource. This field should be used only if you are also using a file configuration and should not be configured otherwise.
+	// +kubebuilder:validation:Optional
+	Location *string `json:"location,omitempty" tf:"location,omitempty"`
 
 	// [string] Name of the NAT gateway.
 	// Name of the NAT gateway

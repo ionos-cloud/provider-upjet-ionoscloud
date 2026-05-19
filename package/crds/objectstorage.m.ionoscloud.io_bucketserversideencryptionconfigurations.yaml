@@ -36,7 +36,7 @@ spec:
       openAPIV3Schema:
         description: BucketServerSideEncryptionConfiguration is the Schema for the
           BucketServerSideEncryptionConfigurations API. Manages Buckets server side
-          encryption configuration on IonosCloud.
+          encryption configuration on IONOS CLOUD.
         properties:
           apiVersion:
             description: |-

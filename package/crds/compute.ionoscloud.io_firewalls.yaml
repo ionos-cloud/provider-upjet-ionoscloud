@@ -160,6 +160,11 @@ spec:
                     description: '[string] Defines the allowed code (from 0 to 254)
                       if protocol ICMP is chosen. Value null allows all codes.'
                     type: string
+                  location:
+                    description: The location of the resource. This field should be
+                      used only if you are also using a file configuration and should
+                      not be configured otherwise.
+                    type: string
                   name:
                     description: '[string] The name of the firewall rule.'
                     type: string
@@ -598,6 +603,11 @@ spec:
                   icmpType:
                     description: '[string] Defines the allowed code (from 0 to 254)
                       if protocol ICMP is chosen. Value null allows all codes.'
+                    type: string
+                  location:
+                    description: The location of the resource. This field should be
+                      used only if you are also using a file configuration and should
+                      not be configured otherwise.
                     type: string
                   name:
                     description: '[string] The name of the firewall rule.'
@@ -1046,6 +1056,11 @@ spec:
                       if protocol ICMP is chosen. Value null allows all codes.'
                     type: string
                   id:
+                    type: string
+                  location:
+                    description: The location of the resource. This field should be
+                      used only if you are also using a file configuration and should
+                      not be configured otherwise.
                     type: string
                   name:
                     description: '[string] The name of the firewall rule.'

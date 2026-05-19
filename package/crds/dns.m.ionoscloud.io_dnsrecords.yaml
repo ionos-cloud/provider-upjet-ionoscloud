@@ -67,7 +67,8 @@ spec:
                       not. Default is true.'
                     type: boolean
                   name:
-                    description: '[string] The name of the DNS Record.'
+                    description: '[string] The name of the DNS Record. This property
+                      is immutable.'
                     type: string
                   priority:
                     description: '[int] The priority for the DNS Record.'
@@ -188,7 +189,8 @@ spec:
                       not. Default is true.'
                     type: boolean
                   name:
-                    description: '[string] The name of the DNS Record.'
+                    description: '[string] The name of the DNS Record. This property
+                      is immutable.'
                     type: string
                   priority:
                     description: '[int] The priority for the DNS Record.'
@@ -377,7 +379,8 @@ spec:
                   id:
                     type: string
                   name:
-                    description: '[string] The name of the DNS Record.'
+                    description: '[string] The name of the DNS Record. This property
+                      is immutable.'
                     type: string
                   priority:
                     description: '[int] The priority for the DNS Record.'

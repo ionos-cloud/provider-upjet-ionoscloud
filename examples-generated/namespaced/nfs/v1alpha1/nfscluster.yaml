@@ -21,7 +21,8 @@ spec:
     name: test
     nfs:
     - minVersion: "4.2"
-    size: 2
+    size: 2048
+    sizeUnit: GiB
 
 ---
 

@@ -22,7 +22,7 @@ type DnsRecordInitParameters struct {
 	// [bool] Indicates if the DNS Record is active or not. Default is true.
 	Enabled *bool `json:"enabled,omitempty" tf:"enabled,omitempty"`
 
-	// [string] The name of the DNS Record.
+	// [string] The name of the DNS Record. This property is immutable.
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
 	// [int] The priority for the DNS Record.
@@ -60,7 +60,7 @@ type DnsRecordObservation struct {
 
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
-	// [string] The name of the DNS Record.
+	// [string] The name of the DNS Record. This property is immutable.
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
 	// [int] The priority for the DNS Record.
@@ -86,7 +86,7 @@ type DnsRecordParameters struct {
 	// +kubebuilder:validation:Optional
 	Enabled *bool `json:"enabled,omitempty" tf:"enabled,omitempty"`
 
-	// [string] The name of the DNS Record.
+	// [string] The name of the DNS Record. This property is immutable.
 	// +kubebuilder:validation:Optional
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 

@@ -35,7 +35,7 @@ spec:
     schema:
       openAPIV3Schema:
         description: Registry is the Schema for the Registrys API. Creates and manages
-          IonosCloud Container Registry.
+          IONOS CLOUD Container Registry.
         properties:
           apiVersion:
             description: |-

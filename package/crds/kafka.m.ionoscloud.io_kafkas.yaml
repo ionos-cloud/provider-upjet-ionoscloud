@@ -34,8 +34,8 @@ spec:
     name: v1alpha1
     schema:
       openAPIV3Schema:
-        description: Kafka is the Schema for the Kafkas API. Creates and manages IonosCloud
-          Kafka Cluster objects.
+        description: Kafka is the Schema for the Kafkas API. Creates and manages IONOS
+          CLOUD Kafka Cluster objects.
         properties:
           apiVersion:
             description: |-

@@ -229,7 +229,7 @@ type KafkaStatus struct {
 // +kubebuilder:subresource:status
 // +kubebuilder:storageversion
 
-// Kafka is the Schema for the Kafkas API. Creates and manages IonosCloud Kafka Cluster objects.
+// Kafka is the Schema for the Kafkas API. Creates and manages IONOS CLOUD Kafka Cluster objects.
 // +kubebuilder:printcolumn:name="SYNCED",type="string",JSONPath=".status.conditions[?(@.type=='Synced')].status"
 // +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"
 // +kubebuilder:printcolumn:name="EXTERNAL-NAME",type="string",JSONPath=".metadata.annotations.crossplane\\.io/external-name"

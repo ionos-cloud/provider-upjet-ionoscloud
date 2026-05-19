@@ -35,7 +35,7 @@ spec:
     schema:
       openAPIV3Schema:
         description: LoadbalancerForwardingrule is the Schema for the LoadbalancerForwardingrules
-          API. Creates and manages IonosCloud Application Load Balancer Forwarding
+          API. Creates and manages IONOS CLOUD Application Load Balancer Forwarding
           Rule.
         properties:
           apiVersion:
@@ -325,6 +325,11 @@ spec:
                       [int] Listening (inbound) port number; valid range is 1 to 65535.
                       Listening (inbound) port number; valid range is 1 to 65535.
                     type: number
+                  location:
+                    description: |-
+                      [string] The location for redirecting; mandatory and valid only for REDIRECT actions.
+                      The location of the resource. This field should be used only if you are also using a file configuration and should not be configured otherwise.
+                    type: string
                   name:
                     description: |-
                       [string] The name of the Application Load Balancer forwarding rule.
@@ -706,6 +711,11 @@ spec:
                       [int] Listening (inbound) port number; valid range is 1 to 65535.
                       Listening (inbound) port number; valid range is 1 to 65535.
                     type: number
+                  location:
+                    description: |-
+                      [string] The location for redirecting; mandatory and valid only for REDIRECT actions.
+                      The location of the resource. This field should be used only if you are also using a file configuration and should not be configured otherwise.
+                    type: string
                   name:
                     description: |-
                       [string] The name of the Application Load Balancer forwarding rule.
@@ -995,6 +1005,11 @@ spec:
                       [int] Listening (inbound) port number; valid range is 1 to 65535.
                       Listening (inbound) port number; valid range is 1 to 65535.
                     type: number
+                  location:
+                    description: |-
+                      [string] The location for redirecting; mandatory and valid only for REDIRECT actions.
+                      The location of the resource. This field should be used only if you are also using a file configuration and should not be configured otherwise.
+                    type: string
                   name:
                     description: |-
                       [string] The name of the Application Load Balancer forwarding rule.

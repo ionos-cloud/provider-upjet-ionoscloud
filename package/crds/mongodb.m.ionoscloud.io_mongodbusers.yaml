@@ -145,6 +145,11 @@ spec:
                             type: string
                         type: object
                     type: object
+                  location:
+                    description: The location of the resource. This field should be
+                      used only if you are also using a file configuration and should
+                      not be configured otherwise.
+                    type: string
                   passwordSecretRef:
                     description: '[string] User password. Updates to the value of
                       the field force the cluster to be re-created.'
@@ -279,6 +284,11 @@ spec:
                             type: string
                         type: object
                     type: object
+                  location:
+                    description: The location of the resource. This field should be
+                      used only if you are also using a file configuration and should
+                      not be configured otherwise.
+                    type: string
                   passwordSecretRef:
                     description: '[string] User password. Updates to the value of
                       the field force the cluster to be re-created.'
@@ -392,6 +402,11 @@ spec:
                       the value of the field force the cluster to be re-created.'
                     type: string
                   id:
+                    type: string
+                  location:
+                    description: The location of the resource. This field should be
+                      used only if you are also using a file configuration and should
+                      not be configured otherwise.
                     type: string
                   roles:
                     description: '[string] a list of mongodb user roles. Updates to

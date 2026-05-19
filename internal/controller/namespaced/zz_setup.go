@@ -71,6 +71,7 @@ import (
 	postgresqlcluster "github.com/ionos-cloud/provider-upjet-ionoscloud/internal/controller/namespaced/postgresql/postgresqlcluster"
 	postgresqldatabase "github.com/ionos-cloud/provider-upjet-ionoscloud/internal/controller/namespaced/postgresql/postgresqldatabase"
 	postgresqluser "github.com/ionos-cloud/provider-upjet-ionoscloud/internal/controller/namespaced/postgresql/postgresqluser"
+	postgresqlclusterpostgresqlv2 "github.com/ionos-cloud/provider-upjet-ionoscloud/internal/controller/namespaced/postgresqlv2/postgresqlcluster"
 	providerconfig "github.com/ionos-cloud/provider-upjet-ionoscloud/internal/controller/namespaced/providerconfig"
 	vpnipsecgateway "github.com/ionos-cloud/provider-upjet-ionoscloud/internal/controller/namespaced/vpnipsec/vpnipsecgateway"
 	vpnipsectunnel "github.com/ionos-cloud/provider-upjet-ionoscloud/internal/controller/namespaced/vpnipsec/vpnipsectunnel"
@@ -144,6 +145,7 @@ func Setup(mgr ctrl.Manager, o controller.Options) error {
 		postgresqlcluster.Setup,
 		postgresqldatabase.Setup,
 		postgresqluser.Setup,
+		postgresqlclusterpostgresqlv2.Setup,
 		providerconfig.Setup,
 		vpnipsecgateway.Setup,
 		vpnipsectunnel.Setup,
@@ -223,6 +225,7 @@ func SetupGated(mgr ctrl.Manager, o controller.Options) error {
 		postgresqlcluster.SetupGated,
 		postgresqldatabase.SetupGated,
 		postgresqluser.SetupGated,
+		postgresqlclusterpostgresqlv2.SetupGated,
 		providerconfig.SetupGated,
 		vpnipsecgateway.SetupGated,
 		vpnipsectunnel.SetupGated,

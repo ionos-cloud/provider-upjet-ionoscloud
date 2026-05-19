@@ -33,6 +33,9 @@ type LoadbalancerInitParameters struct {
 	// [string] IPv4 address of the load balancer.
 	IP *string `json:"ip,omitempty" tf:"ip,omitempty"`
 
+	// The location of the resource. This field should be used only if you are also using a file configuration and should not be configured otherwise.
+	Location *string `json:"location,omitempty" tf:"location,omitempty"`
+
 	// [string] The name of the load balancer.
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
@@ -63,6 +66,9 @@ type LoadbalancerObservation struct {
 	// [string] IPv4 address of the load balancer.
 	IP *string `json:"ip,omitempty" tf:"ip,omitempty"`
 
+	// The location of the resource. This field should be used only if you are also using a file configuration and should not be configured otherwise.
+	Location *string `json:"location,omitempty" tf:"location,omitempty"`
+
 	// [string] The name of the load balancer.
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
@@ -92,6 +98,10 @@ type LoadbalancerParameters struct {
 	// [string] IPv4 address of the load balancer.
 	// +kubebuilder:validation:Optional
 	IP *string `json:"ip,omitempty" tf:"ip,omitempty"`
+
+	// The location of the resource. This field should be used only if you are also using a file configuration and should not be configured otherwise.
+	// +kubebuilder:validation:Optional
+	Location *string `json:"location,omitempty" tf:"location,omitempty"`
 
 	// [string] The name of the load balancer.
 	// +kubebuilder:validation:Optional

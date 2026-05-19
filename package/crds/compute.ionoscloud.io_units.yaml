@@ -34,8 +34,8 @@ spec:
     name: v1alpha1
     schema:
       openAPIV3Schema:
-        description: Unit is the Schema for the Units API. Creates and manages IonosCloud
-          Backup Units.
+        description: Unit is the Schema for the Units API. Creates and manages IONOS
+          CLOUD Backup Units.
         properties:
           apiVersion:
             description: |-

@@ -32,6 +32,9 @@ type CredentialsParameters struct {
 type RegistryTokenInitParameters struct {
 	ExpiryDate *string `json:"expiryDate,omitempty" tf:"expiry_date,omitempty"`
 
+	// The location of the resource. This field should be used only if you are also using a file configuration and should not be configured otherwise.
+	Location *string `json:"location,omitempty" tf:"location,omitempty"`
+
 	// [string] The name of the container registry token. Immutable, update forces re-creation of the resource.
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
@@ -68,6 +71,9 @@ type RegistryTokenObservation struct {
 
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
+	// The location of the resource. This field should be used only if you are also using a file configuration and should not be configured otherwise.
+	Location *string `json:"location,omitempty" tf:"location,omitempty"`
+
 	// [string] The name of the container registry token. Immutable, update forces re-creation of the resource.
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
@@ -90,6 +96,10 @@ type RegistryTokenParameters struct {
 
 	// +kubebuilder:validation:Optional
 	ExpiryDate *string `json:"expiryDate,omitempty" tf:"expiry_date,omitempty"`
+
+	// The location of the resource. This field should be used only if you are also using a file configuration and should not be configured otherwise.
+	// +kubebuilder:validation:Optional
+	Location *string `json:"location,omitempty" tf:"location,omitempty"`
 
 	// [string] The name of the container registry token. Immutable, update forces re-creation of the resource.
 	// +kubebuilder:validation:Optional
@@ -192,7 +202,7 @@ type RegistryTokenStatus struct {
 // +kubebuilder:subresource:status
 // +kubebuilder:storageversion
 
-// RegistryToken is the Schema for the RegistryTokens API. Creates and manages IonosCloud Container Registry Token.
+// RegistryToken is the Schema for the RegistryTokens API. Creates and manages IONOS CLOUD Container Registry Token.
 // +kubebuilder:printcolumn:name="SYNCED",type="string",JSONPath=".status.conditions[?(@.type=='Synced')].status"
 // +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"
 // +kubebuilder:printcolumn:name="EXTERNAL-NAME",type="string",JSONPath=".metadata.annotations.crossplane\\.io/external-name"

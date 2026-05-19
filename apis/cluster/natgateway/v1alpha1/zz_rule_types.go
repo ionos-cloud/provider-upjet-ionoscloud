@@ -27,6 +27,8 @@ type RuleInitParameters struct {
 	// +kubebuilder:validation:Optional
 	DatacenterIDSelector *v1.Selector `json:"datacenterIdSelector,omitempty" tf:"-"`
 
+	Location *string `json:"location,omitempty" tf:"location,omitempty"`
+
 	// [string] Name of the NAT gateway rule.
 	// Name of the NAT gateway rule
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
@@ -75,6 +77,8 @@ type RuleObservation struct {
 
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
+	Location *string `json:"location,omitempty" tf:"location,omitempty"`
+
 	// [string] Name of the NAT gateway rule.
 	// Name of the NAT gateway rule
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
@@ -121,6 +125,9 @@ type RuleParameters struct {
 	// Selector for a Datacenter in compute to populate datacenterId.
 	// +kubebuilder:validation:Optional
 	DatacenterIDSelector *v1.Selector `json:"datacenterIdSelector,omitempty" tf:"-"`
+
+	// +kubebuilder:validation:Optional
+	Location *string `json:"location,omitempty" tf:"location,omitempty"`
 
 	// [string] Name of the NAT gateway rule.
 	// Name of the NAT gateway rule

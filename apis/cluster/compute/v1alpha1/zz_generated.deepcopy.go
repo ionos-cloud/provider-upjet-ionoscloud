@@ -73,6 +73,11 @@ func (in *BootDeviceSelectionInitParameters) DeepCopyInto(out *BootDeviceSelecti
 		*out = new(v1.Selector)
 		(*in).DeepCopyInto(*out)
 	}
+	if in.Location != nil {
+		in, out := &in.Location, &out.Location
+		*out = new(string)
+		**out = **in
+	}
 	if in.ServerID != nil {
 		in, out := &in.ServerID, &out.ServerID
 		*out = new(string)
@@ -155,6 +160,11 @@ func (in *BootDeviceSelectionObservation) DeepCopyInto(out *BootDeviceSelectionO
 		*out = new(string)
 		**out = **in
 	}
+	if in.Location != nil {
+		in, out := &in.Location, &out.Location
+		*out = new(string)
+		**out = **in
+	}
 	if in.ServerID != nil {
 		in, out := &in.ServerID, &out.ServerID
 		*out = new(string)
@@ -204,6 +214,11 @@ func (in *BootDeviceSelectionParameters) DeepCopyInto(out *BootDeviceSelectionPa
 		in, out := &in.DatacenterIDSelector, &out.DatacenterIDSelector
 		*out = new(v1.Selector)
 		(*in).DeepCopyInto(*out)
+	}
+	if in.Location != nil {
+		in, out := &in.Location, &out.Location
+		*out = new(string)
+		**out = **in
 	}
 	if in.ServerID != nil {
 		in, out := &in.ServerID, &out.ServerID
@@ -432,6 +447,11 @@ func (in *CrossconnectInitParameters) DeepCopyInto(out *CrossconnectInitParamete
 		*out = new(string)
 		**out = **in
 	}
+	if in.Location != nil {
+		in, out := &in.Location, &out.Location
+		*out = new(string)
+		**out = **in
+	}
 	if in.Name != nil {
 		in, out := &in.Name, &out.Name
 		*out = new(string)
@@ -506,6 +526,11 @@ func (in *CrossconnectObservation) DeepCopyInto(out *CrossconnectObservation) {
 		*out = new(string)
 		**out = **in
 	}
+	if in.Location != nil {
+		in, out := &in.Location, &out.Location
+		*out = new(string)
+		**out = **in
+	}
 	if in.Name != nil {
 		in, out := &in.Name, &out.Name
 		*out = new(string)
@@ -540,6 +565,11 @@ func (in *CrossconnectParameters) DeepCopyInto(out *CrossconnectParameters) {
 	}
 	if in.Description != nil {
 		in, out := &in.Description, &out.Description
+		*out = new(string)
+		**out = **in
+	}
+	if in.Location != nil {
+		in, out := &in.Location, &out.Location
 		*out = new(string)
 		**out = **in
 	}
@@ -678,6 +708,11 @@ func (in *CubeServerInitParameters) DeepCopyInto(out *CubeServerInitParameters) 
 	if in.ImagePasswordSecretRef != nil {
 		in, out := &in.ImagePasswordSecretRef, &out.ImagePasswordSecretRef
 		*out = new(v1.SecretKeySelector)
+		**out = **in
+	}
+	if in.Location != nil {
+		in, out := &in.Location, &out.Location
+		*out = new(string)
 		**out = **in
 	}
 	if in.Name != nil {
@@ -835,6 +870,11 @@ func (in *CubeServerObservation) DeepCopyInto(out *CubeServerObservation) {
 			}
 		}
 	}
+	if in.Location != nil {
+		in, out := &in.Location, &out.Location
+		*out = new(string)
+		**out = **in
+	}
 	if in.Name != nil {
 		in, out := &in.Name, &out.Name
 		*out = new(string)
@@ -955,6 +995,11 @@ func (in *CubeServerParameters) DeepCopyInto(out *CubeServerParameters) {
 	if in.ImagePasswordSecretRef != nil {
 		in, out := &in.ImagePasswordSecretRef, &out.ImagePasswordSecretRef
 		*out = new(v1.SecretKeySelector)
+		**out = **in
+	}
+	if in.Location != nil {
+		in, out := &in.Location, &out.Location
+		*out = new(string)
 		**out = **in
 	}
 	if in.Name != nil {
@@ -1403,6 +1448,11 @@ func (in *FirewallInitParameters_2) DeepCopyInto(out *FirewallInitParameters_2) 
 		*out = new(string)
 		**out = **in
 	}
+	if in.Location != nil {
+		in, out := &in.Location, &out.Location
+		*out = new(string)
+		**out = **in
+	}
 	if in.Name != nil {
 		in, out := &in.Name, &out.Name
 		*out = new(string)
@@ -1630,6 +1680,11 @@ func (in *FirewallObservation_2) DeepCopyInto(out *FirewallObservation_2) {
 		*out = new(string)
 		**out = **in
 	}
+	if in.Location != nil {
+		in, out := &in.Location, &out.Location
+		*out = new(string)
+		**out = **in
+	}
 	if in.Name != nil {
 		in, out := &in.Name, &out.Name
 		*out = new(string)
@@ -1782,6 +1837,11 @@ func (in *FirewallParameters_2) DeepCopyInto(out *FirewallParameters_2) {
 	}
 	if in.IcmpType != nil {
 		in, out := &in.IcmpType, &out.IcmpType
+		*out = new(string)
+		**out = **in
+	}
+	if in.Location != nil {
+		in, out := &in.Location, &out.Location
 		*out = new(string)
 		**out = **in
 	}
@@ -2105,6 +2165,11 @@ func (in *GPUServerInitParameters) DeepCopyInto(out *GPUServerInitParameters) {
 	if in.ImagePasswordSecretRef != nil {
 		in, out := &in.ImagePasswordSecretRef, &out.ImagePasswordSecretRef
 		*out = new(v1.SecretKeySelector)
+		**out = **in
+	}
+	if in.Location != nil {
+		in, out := &in.Location, &out.Location
+		*out = new(string)
 		**out = **in
 	}
 	if in.Name != nil {
@@ -2571,6 +2636,11 @@ func (in *GPUServerObservation) DeepCopyInto(out *GPUServerObservation) {
 			}
 		}
 	}
+	if in.Location != nil {
+		in, out := &in.Location, &out.Location
+		*out = new(string)
+		**out = **in
+	}
 	if in.Name != nil {
 		in, out := &in.Name, &out.Name
 		*out = new(string)
@@ -2686,6 +2756,11 @@ func (in *GPUServerParameters) DeepCopyInto(out *GPUServerParameters) {
 	if in.ImagePasswordSecretRef != nil {
 		in, out := &in.ImagePasswordSecretRef, &out.ImagePasswordSecretRef
 		*out = new(v1.SecretKeySelector)
+		**out = **in
+	}
+	if in.Location != nil {
+		in, out := &in.Location, &out.Location
+		*out = new(string)
 		**out = **in
 	}
 	if in.Name != nil {
@@ -4062,6 +4137,11 @@ func (in *IpfailoverInitParameters) DeepCopyInto(out *IpfailoverInitParameters) 
 		*out = new(v1.Selector)
 		(*in).DeepCopyInto(*out)
 	}
+	if in.Location != nil {
+		in, out := &in.Location, &out.Location
+		*out = new(string)
+		**out = **in
+	}
 	if in.Nicuuid != nil {
 		in, out := &in.Nicuuid, &out.Nicuuid
 		*out = new(string)
@@ -4144,6 +4224,11 @@ func (in *IpfailoverObservation) DeepCopyInto(out *IpfailoverObservation) {
 		*out = new(string)
 		**out = **in
 	}
+	if in.Location != nil {
+		in, out := &in.Location, &out.Location
+		*out = new(string)
+		**out = **in
+	}
 	if in.Nicuuid != nil {
 		in, out := &in.Nicuuid, &out.Nicuuid
 		*out = new(string)
@@ -4208,6 +4293,11 @@ func (in *IpfailoverParameters) DeepCopyInto(out *IpfailoverParameters) {
 		in, out := &in.LanIDSelector, &out.LanIDSelector
 		*out = new(v1.Selector)
 		(*in).DeepCopyInto(*out)
+	}
+	if in.Location != nil {
+		in, out := &in.Location, &out.Location
+		*out = new(string)
+		**out = **in
 	}
 	if in.Nicuuid != nil {
 		in, out := &in.Nicuuid, &out.Nicuuid
@@ -4401,6 +4491,11 @@ func (in *LanInitParameters) DeepCopyInto(out *LanInitParameters) {
 		*out = new(string)
 		**out = **in
 	}
+	if in.Location != nil {
+		in, out := &in.Location, &out.Location
+		*out = new(string)
+		**out = **in
+	}
 	if in.Name != nil {
 		in, out := &in.Name, &out.Name
 		*out = new(string)
@@ -4500,6 +4595,11 @@ func (in *LanObservation) DeepCopyInto(out *LanObservation) {
 		*out = new(string)
 		**out = **in
 	}
+	if in.Location != nil {
+		in, out := &in.Location, &out.Location
+		*out = new(string)
+		**out = **in
+	}
 	if in.Name != nil {
 		in, out := &in.Name, &out.Name
 		*out = new(string)
@@ -4552,6 +4652,11 @@ func (in *LanParameters) DeepCopyInto(out *LanParameters) {
 	}
 	if in.IPv6CidrBlock != nil {
 		in, out := &in.IPv6CidrBlock, &out.IPv6CidrBlock
+		*out = new(string)
+		**out = **in
+	}
+	if in.Location != nil {
+		in, out := &in.Location, &out.Location
 		*out = new(string)
 		**out = **in
 	}
@@ -4682,6 +4787,11 @@ func (in *LoadbalancerInitParameters) DeepCopyInto(out *LoadbalancerInitParamete
 		*out = new(string)
 		**out = **in
 	}
+	if in.Location != nil {
+		in, out := &in.Location, &out.Location
+		*out = new(string)
+		**out = **in
+	}
 	if in.Name != nil {
 		in, out := &in.Name, &out.Name
 		*out = new(string)
@@ -4777,6 +4887,11 @@ func (in *LoadbalancerObservation) DeepCopyInto(out *LoadbalancerObservation) {
 		*out = new(string)
 		**out = **in
 	}
+	if in.Location != nil {
+		in, out := &in.Location, &out.Location
+		*out = new(string)
+		**out = **in
+	}
 	if in.Name != nil {
 		in, out := &in.Name, &out.Name
 		*out = new(string)
@@ -4830,6 +4945,11 @@ func (in *LoadbalancerParameters) DeepCopyInto(out *LoadbalancerParameters) {
 	}
 	if in.IP != nil {
 		in, out := &in.IP, &out.IP
+		*out = new(string)
+		**out = **in
+	}
+	if in.Location != nil {
+		in, out := &in.Location, &out.Location
 		*out = new(string)
 		**out = **in
 	}
@@ -5323,6 +5443,11 @@ func (in *NicInitParameters_2) DeepCopyInto(out *NicInitParameters_2) {
 		*out = new(v1.Selector)
 		(*in).DeepCopyInto(*out)
 	}
+	if in.Location != nil {
+		in, out := &in.Location, &out.Location
+		*out = new(string)
+		**out = **in
+	}
 	if in.Mac != nil {
 		in, out := &in.Mac, &out.Mac
 		*out = new(string)
@@ -5586,6 +5711,11 @@ func (in *NicObservation_2) DeepCopyInto(out *NicObservation_2) {
 		*out = new(float64)
 		**out = **in
 	}
+	if in.Location != nil {
+		in, out := &in.Location, &out.Location
+		*out = new(string)
+		**out = **in
+	}
 	if in.Mac != nil {
 		in, out := &in.Mac, &out.Mac
 		*out = new(string)
@@ -5816,6 +5946,11 @@ func (in *NicParameters_2) DeepCopyInto(out *NicParameters_2) {
 		in, out := &in.LanSelector, &out.LanSelector
 		*out = new(v1.Selector)
 		(*in).DeepCopyInto(*out)
+	}
+	if in.Location != nil {
+		in, out := &in.Location, &out.Location
+		*out = new(string)
+		**out = **in
 	}
 	if in.Mac != nil {
 		in, out := &in.Mac, &out.Mac
@@ -6077,6 +6212,11 @@ func (in *ServerInitParameters) DeepCopyInto(out *ServerInitParameters) {
 		for i := range *in {
 			(*in)[i].DeepCopyInto(&(*out)[i])
 		}
+	}
+	if in.Location != nil {
+		in, out := &in.Location, &out.Location
+		*out = new(string)
+		**out = **in
 	}
 	if in.Name != nil {
 		in, out := &in.Name, &out.Name
@@ -6801,6 +6941,11 @@ func (in *ServerObservation) DeepCopyInto(out *ServerObservation) {
 			(*in)[i].DeepCopyInto(&(*out)[i])
 		}
 	}
+	if in.Location != nil {
+		in, out := &in.Location, &out.Location
+		*out = new(string)
+		**out = **in
+	}
 	if in.Name != nil {
 		in, out := &in.Name, &out.Name
 		*out = new(string)
@@ -6976,6 +7121,11 @@ func (in *ServerParameters) DeepCopyInto(out *ServerParameters) {
 		for i := range *in {
 			(*in)[i].DeepCopyInto(&(*out)[i])
 		}
+	}
+	if in.Location != nil {
+		in, out := &in.Location, &out.Location
+		*out = new(string)
+		**out = **in
 	}
 	if in.Name != nil {
 		in, out := &in.Name, &out.Name
@@ -7732,6 +7882,11 @@ func (in *SnapshotInitParameters) DeepCopyInto(out *SnapshotInitParameters) {
 		*out = new(string)
 		**out = **in
 	}
+	if in.Location != nil {
+		in, out := &in.Location, &out.Location
+		*out = new(string)
+		**out = **in
+	}
 	if in.Name != nil {
 		in, out := &in.Name, &out.Name
 		*out = new(string)
@@ -7976,6 +8131,11 @@ func (in *SnapshotParameters) DeepCopyInto(out *SnapshotParameters) {
 	}
 	if in.LicenceType != nil {
 		in, out := &in.LicenceType, &out.LicenceType
+		*out = new(string)
+		**out = **in
+	}
+	if in.Location != nil {
+		in, out := &in.Location, &out.Location
 		*out = new(string)
 		**out = **in
 	}
@@ -8761,6 +8921,11 @@ func (in *VCPUServerInitParameters) DeepCopyInto(out *VCPUServerInitParameters) 
 			(*in)[i].DeepCopyInto(&(*out)[i])
 		}
 	}
+	if in.Location != nil {
+		in, out := &in.Location, &out.Location
+		*out = new(string)
+		**out = **in
+	}
 	if in.Name != nil {
 		in, out := &in.Name, &out.Name
 		*out = new(string)
@@ -9533,6 +9698,11 @@ func (in *VCPUServerObservation) DeepCopyInto(out *VCPUServerObservation) {
 			(*in)[i].DeepCopyInto(&(*out)[i])
 		}
 	}
+	if in.Location != nil {
+		in, out := &in.Location, &out.Location
+		*out = new(string)
+		**out = **in
+	}
 	if in.Name != nil {
 		in, out := &in.Name, &out.Name
 		*out = new(string)
@@ -9682,6 +9852,11 @@ func (in *VCPUServerParameters) DeepCopyInto(out *VCPUServerParameters) {
 		for i := range *in {
 			(*in)[i].DeepCopyInto(&(*out)[i])
 		}
+	}
+	if in.Location != nil {
+		in, out := &in.Location, &out.Location
+		*out = new(string)
+		**out = **in
 	}
 	if in.Name != nil {
 		in, out := &in.Name, &out.Name
@@ -10183,6 +10358,11 @@ func (in *VolumeInitParameters_2) DeepCopyInto(out *VolumeInitParameters_2) {
 		*out = new(string)
 		**out = **in
 	}
+	if in.Location != nil {
+		in, out := &in.Location, &out.Location
+		*out = new(string)
+		**out = **in
+	}
 	if in.Name != nil {
 		in, out := &in.Name, &out.Name
 		*out = new(string)
@@ -10493,6 +10673,11 @@ func (in *VolumeObservation_2) DeepCopyInto(out *VolumeObservation_2) {
 		*out = new(string)
 		**out = **in
 	}
+	if in.Location != nil {
+		in, out := &in.Location, &out.Location
+		*out = new(string)
+		**out = **in
+	}
 	if in.Name != nil {
 		in, out := &in.Name, &out.Name
 		*out = new(string)
@@ -10708,6 +10893,11 @@ func (in *VolumeParameters_2) DeepCopyInto(out *VolumeParameters_2) {
 	}
 	if in.LicenceType != nil {
 		in, out := &in.LicenceType, &out.LicenceType
+		*out = new(string)
+		**out = **in
+	}
+	if in.Location != nil {
+		in, out := &in.Location, &out.Location
 		*out = new(string)
 		**out = **in
 	}

@@ -188,6 +188,9 @@ type NodePoolInitParameters struct {
 	// A list of Local Area Networks the node pool should be part of
 	Lans []LansInitParameters `json:"lans,omitempty" tf:"lans,omitempty"`
 
+	// The location of the resource. This field should be used only if you are also using a file configuration and should not be configured otherwise.
+	Location *string `json:"location,omitempty" tf:"location,omitempty"`
+
 	// See the maintenance_window section in the example above
 	// A maintenance window comprise of a day of the week and a time for maintenance to be allowed
 	MaintenanceWindow *NodePoolMaintenanceWindowInitParameters `json:"maintenanceWindow,omitempty" tf:"maintenance_window,omitempty"`
@@ -304,6 +307,9 @@ type NodePoolObservation struct {
 	// [list] A list of numeric LAN id's you want this node pool to be part of. For more details, please check the API documentation, as well as the example above
 	// A list of Local Area Networks the node pool should be part of
 	Lans []LansObservation `json:"lans,omitempty" tf:"lans,omitempty"`
+
+	// The location of the resource. This field should be used only if you are also using a file configuration and should not be configured otherwise.
+	Location *string `json:"location,omitempty" tf:"location,omitempty"`
 
 	// See the maintenance_window section in the example above
 	// A maintenance window comprise of a day of the week and a time for maintenance to be allowed
@@ -423,6 +429,10 @@ type NodePoolParameters struct {
 	// +kubebuilder:validation:Optional
 	Lans []LansParameters `json:"lans,omitempty" tf:"lans,omitempty"`
 
+	// The location of the resource. This field should be used only if you are also using a file configuration and should not be configured otherwise.
+	// +kubebuilder:validation:Optional
+	Location *string `json:"location,omitempty" tf:"location,omitempty"`
+
 	// See the maintenance_window section in the example above
 	// A maintenance window comprise of a day of the week and a time for maintenance to be allowed
 	// +kubebuilder:validation:Optional
@@ -526,7 +536,7 @@ type NodePoolStatus struct {
 // +kubebuilder:subresource:status
 // +kubebuilder:storageversion
 
-// NodePool is the Schema for the NodePools API. Creates and manages IonosCloud Kubernetes Node Pools.
+// NodePool is the Schema for the NodePools API. Creates and manages IONOS CLOUD Kubernetes Node Pools.
 // +kubebuilder:printcolumn:name="SYNCED",type="string",JSONPath=".status.conditions[?(@.type=='Synced')].status"
 // +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"
 // +kubebuilder:printcolumn:name="EXTERNAL-NAME",type="string",JSONPath=".metadata.annotations.crossplane\\.io/external-name"

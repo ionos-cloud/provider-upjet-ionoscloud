@@ -27,6 +27,9 @@ type PostgresqlDatabaseInitParameters struct {
 	// +kubebuilder:validation:Optional
 	ClusterIDSelector *v1.Selector `json:"clusterIdSelector,omitempty" tf:"-"`
 
+	// The location of the resource. This field should be used only if you are also using a file configuration and should not be configured otherwise.
+	Location *string `json:"location,omitempty" tf:"location,omitempty"`
+
 	// [string] The name of the database. Immutable, forces re-creation.
 	// The databasename of a given database.
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
@@ -42,6 +45,9 @@ type PostgresqlDatabaseObservation struct {
 	ClusterID *string `json:"clusterId,omitempty" tf:"cluster_id,omitempty"`
 
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
+
+	// The location of the resource. This field should be used only if you are also using a file configuration and should not be configured otherwise.
+	Location *string `json:"location,omitempty" tf:"location,omitempty"`
 
 	// [string] The name of the database. Immutable, forces re-creation.
 	// The databasename of a given database.
@@ -66,6 +72,10 @@ type PostgresqlDatabaseParameters struct {
 	// Selector for a PostgresqlCluster in postgresql to populate clusterId.
 	// +kubebuilder:validation:Optional
 	ClusterIDSelector *v1.Selector `json:"clusterIdSelector,omitempty" tf:"-"`
+
+	// The location of the resource. This field should be used only if you are also using a file configuration and should not be configured otherwise.
+	// +kubebuilder:validation:Optional
+	Location *string `json:"location,omitempty" tf:"location,omitempty"`
 
 	// [string] The name of the database. Immutable, forces re-creation.
 	// The databasename of a given database.

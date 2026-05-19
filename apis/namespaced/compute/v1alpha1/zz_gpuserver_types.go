@@ -48,13 +48,16 @@ type GPUServerInitParameters struct {
 	// [string] Required if ssh_key_path is not provided.
 	ImagePasswordSecretRef *v1.LocalSecretKeySelector `json:"imagePasswordSecretRef,omitempty" tf:"-"`
 
+	// The location of the resource. This field should be used only if you are also using a file configuration and should not be configured otherwise.
+	Location *string `json:"location,omitempty" tf:"location,omitempty"`
+
 	// [string] The name of the server.
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
 	// See the Nic section.
 	Nic *GPUServerNicInitParameters `json:"nic,omitempty" tf:"nic,omitempty"`
 
-	// [list] List of paths to files containing a public SSH key that will be injected into IonosCloud provided Linux images. Required for IonosCloud Linux images. Required if image_password is not provided.
+	// [list] List of paths to files containing a public SSH key that will be injected into IONOS CLOUD provided Linux images. Required for IONOS CLOUD Linux images. Required if image_password is not provided.
 	SSHKeyPath []*string `json:"sshKeyPath,omitempty" tf:"ssh_key_path,omitempty"`
 
 	// The list of Security Group IDs for the resource.
@@ -254,6 +257,9 @@ type GPUServerObservation struct {
 	// A list that contains the IDs for the volumes defined inside the gpu server resource.
 	InlineVolumeIds []*string `json:"inlineVolumeIds,omitempty" tf:"inline_volume_ids,omitempty"`
 
+	// The location of the resource. This field should be used only if you are also using a file configuration and should not be configured otherwise.
+	Location *string `json:"location,omitempty" tf:"location,omitempty"`
+
 	// [string] The name of the server.
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
@@ -266,7 +272,7 @@ type GPUServerObservation struct {
 	// (Computed) The associated NIC.
 	PrimaryNic *string `json:"primaryNic,omitempty" tf:"primary_nic,omitempty"`
 
-	// [list] List of paths to files containing a public SSH key that will be injected into IonosCloud provided Linux images. Required for IonosCloud Linux images. Required if image_password is not provided.
+	// [list] List of paths to files containing a public SSH key that will be injected into IONOS CLOUD provided Linux images. Required for IONOS CLOUD Linux images. Required if image_password is not provided.
 	SSHKeyPath []*string `json:"sshKeyPath,omitempty" tf:"ssh_key_path,omitempty"`
 
 	// The list of Security Group IDs for the resource.
@@ -326,6 +332,10 @@ type GPUServerParameters struct {
 	// +kubebuilder:validation:Optional
 	ImagePasswordSecretRef *v1.LocalSecretKeySelector `json:"imagePasswordSecretRef,omitempty" tf:"-"`
 
+	// The location of the resource. This field should be used only if you are also using a file configuration and should not be configured otherwise.
+	// +kubebuilder:validation:Optional
+	Location *string `json:"location,omitempty" tf:"location,omitempty"`
+
 	// [string] The name of the server.
 	// +kubebuilder:validation:Optional
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
@@ -334,7 +344,7 @@ type GPUServerParameters struct {
 	// +kubebuilder:validation:Optional
 	Nic *GPUServerNicParameters `json:"nic,omitempty" tf:"nic,omitempty"`
 
-	// [list] List of paths to files containing a public SSH key that will be injected into IonosCloud provided Linux images. Required for IonosCloud Linux images. Required if image_password is not provided.
+	// [list] List of paths to files containing a public SSH key that will be injected into IONOS CLOUD provided Linux images. Required for IONOS CLOUD Linux images. Required if image_password is not provided.
 	// +kubebuilder:validation:Optional
 	SSHKeyPath []*string `json:"sshKeyPath,omitempty" tf:"ssh_key_path,omitempty"`
 
@@ -574,7 +584,7 @@ type GPUServerStatus struct {
 // +kubebuilder:subresource:status
 // +kubebuilder:storageversion
 
-// GPUServer is the Schema for the GPUServers API. Creates and manages IonosCloud GPU Server objects.
+// GPUServer is the Schema for the GPUServers API. Creates and manages IONOS CLOUD GPU Server objects.
 // +kubebuilder:printcolumn:name="SYNCED",type="string",JSONPath=".status.conditions[?(@.type=='Synced')].status"
 // +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"
 // +kubebuilder:printcolumn:name="EXTERNAL-NAME",type="string",JSONPath=".metadata.annotations.crossplane\\.io/external-name"

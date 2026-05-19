@@ -246,6 +246,11 @@ spec:
                           type: object
                       type: object
                     type: array
+                  location:
+                    description: The location of the resource. This field should be
+                      used only if you are also using a file configuration and should
+                      not be configured otherwise.
+                    type: string
                   name:
                     description: |-
                       [string] Name of the NAT gateway.
@@ -446,6 +451,11 @@ spec:
                           type: object
                       type: object
                     type: array
+                  location:
+                    description: The location of the resource. This field should be
+                      used only if you are also using a file configuration and should
+                      not be configured otherwise.
+                    type: string
                   name:
                     description: |-
                       [string] Name of the NAT gateway.
@@ -590,6 +600,11 @@ spec:
                           type: number
                       type: object
                     type: array
+                  location:
+                    description: The location of the resource. This field should be
+                      used only if you are also using a file configuration and should
+                      not be configured otherwise.
+                    type: string
                   name:
                     description: |-
                       [string] Name of the NAT gateway.

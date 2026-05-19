@@ -505,6 +505,11 @@ func (in *RegistryTokenInitParameters) DeepCopyInto(out *RegistryTokenInitParame
 		*out = new(string)
 		**out = **in
 	}
+	if in.Location != nil {
+		in, out := &in.Location, &out.Location
+		*out = new(string)
+		**out = **in
+	}
 	if in.Name != nil {
 		in, out := &in.Name, &out.Name
 		*out = new(string)
@@ -606,6 +611,11 @@ func (in *RegistryTokenObservation) DeepCopyInto(out *RegistryTokenObservation) 
 		*out = new(string)
 		**out = **in
 	}
+	if in.Location != nil {
+		in, out := &in.Location, &out.Location
+		*out = new(string)
+		**out = **in
+	}
 	if in.Name != nil {
 		in, out := &in.Name, &out.Name
 		*out = new(string)
@@ -650,6 +660,11 @@ func (in *RegistryTokenParameters) DeepCopyInto(out *RegistryTokenParameters) {
 	*out = *in
 	if in.ExpiryDate != nil {
 		in, out := &in.ExpiryDate, &out.ExpiryDate
+		*out = new(string)
+		**out = **in
+	}
+	if in.Location != nil {
+		in, out := &in.Location, &out.Location
 		*out = new(string)
 		**out = **in
 	}

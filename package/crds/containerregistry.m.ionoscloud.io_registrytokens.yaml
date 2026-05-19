@@ -35,7 +35,7 @@ spec:
     schema:
       openAPIV3Schema:
         description: RegistryToken is the Schema for the RegistryTokens API. Creates
-          and manages IonosCloud Container Registry Token.
+          and manages IONOS CLOUD Container Registry Token.
         properties:
           apiVersion:
             description: |-
@@ -60,6 +60,11 @@ spec:
               forProvider:
                 properties:
                   expiryDate:
+                    type: string
+                  location:
+                    description: The location of the resource. This field should be
+                      used only if you are also using a file configuration and should
+                      not be configured otherwise.
                     type: string
                   name:
                     description: '[string] The name of the container registry token.
@@ -195,6 +200,11 @@ spec:
                   autoscaler.
                 properties:
                   expiryDate:
+                    type: string
+                  location:
+                    description: The location of the resource. This field should be
+                      used only if you are also using a file configuration and should
+                      not be configured otherwise.
                     type: string
                   name:
                     description: '[string] The name of the container registry token.
@@ -402,6 +412,11 @@ spec:
                   expiryDate:
                     type: string
                   id:
+                    type: string
+                  location:
+                    description: The location of the resource. This field should be
+                      used only if you are also using a file configuration and should
+                      not be configured otherwise.
                     type: string
                   name:
                     description: '[string] The name of the container registry token.

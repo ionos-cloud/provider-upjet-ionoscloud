@@ -138,6 +138,9 @@ type NicInitParameters_2 struct {
 	// +kubebuilder:validation:Optional
 	LanSelector *v1.Selector `json:"lanSelector,omitempty" tf:"-"`
 
+	// The location of the resource. This field should be used only if you are also using a file configuration and should not be configured otherwise.
+	Location *string `json:"location,omitempty" tf:"location,omitempty"`
+
 	// The MAC address of the NIC. Can be set on creation only. If not set, one will be assigned automatically by the API. Immutable, update forces re-creation.
 	Mac *string `json:"mac,omitempty" tf:"mac,omitempty"`
 
@@ -209,6 +212,9 @@ type NicObservation_2 struct {
 
 	// [integer] The LAN ID the NIC will sit on.
 	Lan *float64 `json:"lan,omitempty" tf:"lan,omitempty"`
+
+	// The location of the resource. This field should be used only if you are also using a file configuration and should not be configured otherwise.
+	Location *string `json:"location,omitempty" tf:"location,omitempty"`
 
 	// The MAC address of the NIC. Can be set on creation only. If not set, one will be assigned automatically by the API. Immutable, update forces re-creation.
 	Mac *string `json:"mac,omitempty" tf:"mac,omitempty"`
@@ -297,6 +303,10 @@ type NicParameters_2 struct {
 	// Selector for a Lan in compute to populate lan.
 	// +kubebuilder:validation:Optional
 	LanSelector *v1.Selector `json:"lanSelector,omitempty" tf:"-"`
+
+	// The location of the resource. This field should be used only if you are also using a file configuration and should not be configured otherwise.
+	// +kubebuilder:validation:Optional
+	Location *string `json:"location,omitempty" tf:"location,omitempty"`
 
 	// The MAC address of the NIC. Can be set on creation only. If not set, one will be assigned automatically by the API. Immutable, update forces re-creation.
 	// +kubebuilder:validation:Optional

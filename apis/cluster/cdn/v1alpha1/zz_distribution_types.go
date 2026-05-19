@@ -278,7 +278,7 @@ type DistributionStatus struct {
 // +kubebuilder:subresource:status
 // +kubebuilder:storageversion
 
-// Distribution is the Schema for the Distributions API. Creates and manages IonosCloud CDN Distributions.
+// Distribution is the Schema for the Distributions API. Creates and manages IONOS CLOUD CDN Distributions.
 // +kubebuilder:printcolumn:name="SYNCED",type="string",JSONPath=".status.conditions[?(@.type=='Synced')].status"
 // +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"
 // +kubebuilder:printcolumn:name="EXTERNAL-NAME",type="string",JSONPath=".metadata.annotations.crossplane\\.io/external-name"

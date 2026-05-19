@@ -35,7 +35,7 @@ spec:
     schema:
       openAPIV3Schema:
         description: StorageAccesskey is the Schema for the StorageAccesskeys API.
-          Creates and manages IonosCloud Object Storage Accesskeys.
+          Creates and manages IONOS CLOUD Object Storage Accesskeys.
         properties:
           apiVersion:
             description: |-

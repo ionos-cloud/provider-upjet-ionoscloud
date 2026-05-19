@@ -266,9 +266,14 @@ spec:
                     type: object
                   size:
                     description: |-
-                      The size of the Network File Storage cluster in TiB. Note that the cluster size cannot be reduced after provisioning. This value determines the billing fees. Default is 2. The minimum value is 2 and the maximum value is 42.
+                      The size of the Network File Storage cluster. Note that the cluster size cannot be reduced after provisioning. This value determines the billing fees.
                       The size of the Network File Storage Cluster. Minimum size is 2.
                     type: number
+                  sizeUnit:
+                    description: |-
+                      The unit of the size attribute. Accepted values: TiB, GiB. Defaults to TiB.
+                      The unit of the 'size' attribute. Can be 'TiB' or 'GiB'. Defaults to 'TiB'.
+                    type: string
                 type: object
               initProvider:
                 description: |-
@@ -476,9 +481,14 @@ spec:
                     type: object
                   size:
                     description: |-
-                      The size of the Network File Storage cluster in TiB. Note that the cluster size cannot be reduced after provisioning. This value determines the billing fees. Default is 2. The minimum value is 2 and the maximum value is 42.
+                      The size of the Network File Storage cluster. Note that the cluster size cannot be reduced after provisioning. This value determines the billing fees.
                       The size of the Network File Storage Cluster. Minimum size is 2.
                     type: number
+                  sizeUnit:
+                    description: |-
+                      The unit of the size attribute. Accepted values: TiB, GiB. Defaults to TiB.
+                      The unit of the 'size' attribute. Can be 'TiB' or 'GiB'. Defaults to 'TiB'.
+                    type: string
                 type: object
               managementPolicies:
                 default:
@@ -629,9 +639,14 @@ spec:
                     type: object
                   size:
                     description: |-
-                      The size of the Network File Storage cluster in TiB. Note that the cluster size cannot be reduced after provisioning. This value determines the billing fees. Default is 2. The minimum value is 2 and the maximum value is 42.
+                      The size of the Network File Storage cluster. Note that the cluster size cannot be reduced after provisioning. This value determines the billing fees.
                       The size of the Network File Storage Cluster. Minimum size is 2.
                     type: number
+                  sizeUnit:
+                    description: |-
+                      The unit of the size attribute. Accepted values: TiB, GiB. Defaults to TiB.
+                      The unit of the 'size' attribute. Can be 'TiB' or 'GiB'. Defaults to 'TiB'.
+                    type: string
                 type: object
               conditions:
                 description: Conditions of the resource.

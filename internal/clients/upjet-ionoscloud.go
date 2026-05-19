@@ -61,7 +61,7 @@ func TerraformSetupBuilder(version, providerSource, providerVersion string, fwPr
 			}
 		}
 
-		ionosSDKBundleClient := bundleclient.New(clientoptions.TerraformClientOptions{
+		ionosSDKBundleClient := bundleclient.New(ctx, clientoptions.TerraformClientOptions{
 			ClientOptions: shared.ClientOptions{
 				Endpoint:      creds["endpoint"],
 				SkipTLSVerify: boolInsecure,

@@ -35,7 +35,7 @@ spec:
     schema:
       openAPIV3Schema:
         description: BucketCorsConfiguration is the Schema for the BucketCorsConfigurations
-          API. Manages Buckets cors_configuration on IonosCloud.
+          API. Manages Buckets cors_configuration on IONOS CLOUD.
         properties:
           apiVersion:
             description: |-

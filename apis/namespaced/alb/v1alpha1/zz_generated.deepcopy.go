@@ -763,6 +763,11 @@ func (in *LoadbalancerForwardingruleInitParameters) DeepCopyInto(out *Loadbalanc
 		*out = new(float64)
 		**out = **in
 	}
+	if in.Location != nil {
+		in, out := &in.Location, &out.Location
+		*out = new(string)
+		**out = **in
+	}
 	if in.Name != nil {
 		in, out := &in.Name, &out.Name
 		*out = new(string)
@@ -880,6 +885,11 @@ func (in *LoadbalancerForwardingruleObservation) DeepCopyInto(out *LoadbalancerF
 		*out = new(float64)
 		**out = **in
 	}
+	if in.Location != nil {
+		in, out := &in.Location, &out.Location
+		*out = new(string)
+		**out = **in
+	}
 	if in.Name != nil {
 		in, out := &in.Name, &out.Name
 		*out = new(string)
@@ -966,6 +976,11 @@ func (in *LoadbalancerForwardingruleParameters) DeepCopyInto(out *LoadbalancerFo
 	if in.ListenerPort != nil {
 		in, out := &in.ListenerPort, &out.ListenerPort
 		*out = new(float64)
+		**out = **in
+	}
+	if in.Location != nil {
+		in, out := &in.Location, &out.Location
+		*out = new(string)
 		**out = **in
 	}
 	if in.Name != nil {
@@ -1113,6 +1128,11 @@ func (in *LoadbalancerInitParameters) DeepCopyInto(out *LoadbalancerInitParamete
 		*out = new(v1.NamespacedSelector)
 		(*in).DeepCopyInto(*out)
 	}
+	if in.Location != nil {
+		in, out := &in.Location, &out.Location
+		*out = new(string)
+		**out = **in
+	}
 	if in.LoggingFormat != nil {
 		in, out := &in.LoggingFormat, &out.LoggingFormat
 		*out = new(string)
@@ -1232,6 +1252,11 @@ func (in *LoadbalancerObservation) DeepCopyInto(out *LoadbalancerObservation) {
 		*out = new(float64)
 		**out = **in
 	}
+	if in.Location != nil {
+		in, out := &in.Location, &out.Location
+		*out = new(string)
+		**out = **in
+	}
 	if in.LoggingFormat != nil {
 		in, out := &in.LoggingFormat, &out.LoggingFormat
 		*out = new(string)
@@ -1323,6 +1348,11 @@ func (in *LoadbalancerParameters) DeepCopyInto(out *LoadbalancerParameters) {
 		in, out := &in.ListenerLanSelector, &out.ListenerLanSelector
 		*out = new(v1.NamespacedSelector)
 		(*in).DeepCopyInto(*out)
+	}
+	if in.Location != nil {
+		in, out := &in.Location, &out.Location
+		*out = new(string)
+		**out = **in
 	}
 	if in.LoggingFormat != nil {
 		in, out := &in.LoggingFormat, &out.LoggingFormat

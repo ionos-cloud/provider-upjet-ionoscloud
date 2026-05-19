@@ -16,8 +16,8 @@ import (
 
 type AutoCertificateInitParameters struct {
 
-	// [string] The common name (DNS) of the certificate to issue. The common name needs to be part of a zone in IONOS Cloud DNS.
-	// The common name (DNS) of the certificate to issue. The common name needs to be part of a zone in IONOS Cloud DNS
+	// [string] The common name (DNS) of the certificate to issue. The common name needs to be part of a zone in IONOS CLOUD DNS.
+	// The common name (DNS) of the certificate to issue. The common name needs to be part of a zone in IONOS CLOUD DNS
 	CommonName *string `json:"commonName,omitempty" tf:"common_name,omitempty"`
 
 	// [string] The key algorithm used to generate the certificate.
@@ -55,15 +55,15 @@ type AutoCertificateInitParameters struct {
 	// +kubebuilder:validation:Optional
 	ProviderIDSelector *v1.NamespacedSelector `json:"providerIdSelector,omitempty" tf:"-"`
 
-	// [list][string] Optional additional names to be added to the issued certificate. The additional names needs to be part of a zone in IONOS Cloud DNS.
-	// Optional additional names to be added to the issued certificate. The additional names needs to be part of a zone in IONOS Cloud DNS
+	// [list][string] Optional additional names to be added to the issued certificate. The additional names needs to be part of a zone in IONOS CLOUD DNS.
+	// Optional additional names to be added to the issued certificate. The additional names needs to be part of a zone in IONOS CLOUD DNS
 	SubjectAlternativeNames []*string `json:"subjectAlternativeNames,omitempty" tf:"subject_alternative_names,omitempty"`
 }
 
 type AutoCertificateObservation struct {
 
-	// [string] The common name (DNS) of the certificate to issue. The common name needs to be part of a zone in IONOS Cloud DNS.
-	// The common name (DNS) of the certificate to issue. The common name needs to be part of a zone in IONOS Cloud DNS
+	// [string] The common name (DNS) of the certificate to issue. The common name needs to be part of a zone in IONOS CLOUD DNS.
+	// The common name (DNS) of the certificate to issue. The common name needs to be part of a zone in IONOS CLOUD DNS
 	CommonName *string `json:"commonName,omitempty" tf:"common_name,omitempty"`
 
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
@@ -88,15 +88,15 @@ type AutoCertificateObservation struct {
 	// The certificate provider used to issue the certificates
 	ProviderID *string `json:"providerId,omitempty" tf:"provider_id,omitempty"`
 
-	// [list][string] Optional additional names to be added to the issued certificate. The additional names needs to be part of a zone in IONOS Cloud DNS.
-	// Optional additional names to be added to the issued certificate. The additional names needs to be part of a zone in IONOS Cloud DNS
+	// [list][string] Optional additional names to be added to the issued certificate. The additional names needs to be part of a zone in IONOS CLOUD DNS.
+	// Optional additional names to be added to the issued certificate. The additional names needs to be part of a zone in IONOS CLOUD DNS
 	SubjectAlternativeNames []*string `json:"subjectAlternativeNames,omitempty" tf:"subject_alternative_names,omitempty"`
 }
 
 type AutoCertificateParameters struct {
 
-	// [string] The common name (DNS) of the certificate to issue. The common name needs to be part of a zone in IONOS Cloud DNS.
-	// The common name (DNS) of the certificate to issue. The common name needs to be part of a zone in IONOS Cloud DNS
+	// [string] The common name (DNS) of the certificate to issue. The common name needs to be part of a zone in IONOS CLOUD DNS.
+	// The common name (DNS) of the certificate to issue. The common name needs to be part of a zone in IONOS CLOUD DNS
 	// +kubebuilder:validation:Optional
 	CommonName *string `json:"commonName,omitempty" tf:"common_name,omitempty"`
 
@@ -139,8 +139,8 @@ type AutoCertificateParameters struct {
 	// +kubebuilder:validation:Optional
 	ProviderIDSelector *v1.NamespacedSelector `json:"providerIdSelector,omitempty" tf:"-"`
 
-	// [list][string] Optional additional names to be added to the issued certificate. The additional names needs to be part of a zone in IONOS Cloud DNS.
-	// Optional additional names to be added to the issued certificate. The additional names needs to be part of a zone in IONOS Cloud DNS
+	// [list][string] Optional additional names to be added to the issued certificate. The additional names needs to be part of a zone in IONOS CLOUD DNS.
+	// Optional additional names to be added to the issued certificate. The additional names needs to be part of a zone in IONOS CLOUD DNS
 	// +kubebuilder:validation:Optional
 	SubjectAlternativeNames []*string `json:"subjectAlternativeNames,omitempty" tf:"subject_alternative_names,omitempty"`
 }

@@ -35,7 +35,7 @@ spec:
     schema:
       openAPIV3Schema:
         description: KafkaTopic is the Schema for the KafkaTopics API. Creates and
-          manages IonosCloud Kafka Cluster Topic objects.
+          manages IONOS CLOUD Kafka Cluster Topic objects.
         properties:
           apiVersion:
             description: |-

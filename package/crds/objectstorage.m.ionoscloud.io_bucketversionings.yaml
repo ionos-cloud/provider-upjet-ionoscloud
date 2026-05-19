@@ -35,7 +35,7 @@ spec:
     schema:
       openAPIV3Schema:
         description: BucketVersioning is the Schema for the BucketVersionings API.
-          Manages Buckets versioning on IonosCloud.
+          Manages Buckets versioning on IONOS CLOUD.
         properties:
           apiVersion:
             description: |-

@@ -28,6 +28,7 @@ import (
 	v1alpha1nlb "github.com/ionos-cloud/provider-upjet-ionoscloud/apis/namespaced/nlb/v1alpha1"
 	v1alpha1objectstorage "github.com/ionos-cloud/provider-upjet-ionoscloud/apis/namespaced/objectstorage/v1alpha1"
 	v1alpha1postgresql "github.com/ionos-cloud/provider-upjet-ionoscloud/apis/namespaced/postgresql/v1alpha1"
+	v1alpha1postgresqlv2 "github.com/ionos-cloud/provider-upjet-ionoscloud/apis/namespaced/postgresqlv2/v1alpha1"
 	v1alpha1namespaced "github.com/ionos-cloud/provider-upjet-ionoscloud/apis/namespaced/v1alpha1"
 	v1beta1 "github.com/ionos-cloud/provider-upjet-ionoscloud/apis/namespaced/v1beta1"
 	v1alpha1vpnipsec "github.com/ionos-cloud/provider-upjet-ionoscloud/apis/namespaced/vpnipsec/v1alpha1"
@@ -55,6 +56,7 @@ func init() {
 		v1alpha1nlb.SchemeBuilder.AddToScheme,
 		v1alpha1objectstorage.SchemeBuilder.AddToScheme,
 		v1alpha1postgresql.SchemeBuilder.AddToScheme,
+		v1alpha1postgresqlv2.SchemeBuilder.AddToScheme,
 		v1alpha1namespaced.SchemeBuilder.AddToScheme,
 		v1beta1.SchemeBuilder.AddToScheme,
 		v1alpha1vpnipsec.SchemeBuilder.AddToScheme,

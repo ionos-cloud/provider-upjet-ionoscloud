@@ -61,8 +61,8 @@ spec:
                 properties:
                   commonName:
                     description: |-
-                      [string] The common name (DNS) of the certificate to issue. The common name needs to be part of a zone in IONOS Cloud DNS.
-                      The common name (DNS) of the certificate to issue. The common name needs to be part of a zone in IONOS Cloud DNS
+                      [string] The common name (DNS) of the certificate to issue. The common name needs to be part of a zone in IONOS CLOUD DNS.
+                      The common name (DNS) of the certificate to issue. The common name needs to be part of a zone in IONOS CLOUD DNS
                     type: string
                   keyAlgorithm:
                     description: |-
@@ -250,8 +250,8 @@ spec:
                     type: object
                   subjectAlternativeNames:
                     description: |-
-                      [list][string] Optional additional names to be added to the issued certificate. The additional names needs to be part of a zone in IONOS Cloud DNS.
-                      Optional additional names to be added to the issued certificate. The additional names needs to be part of a zone in IONOS Cloud DNS
+                      [list][string] Optional additional names to be added to the issued certificate. The additional names needs to be part of a zone in IONOS CLOUD DNS.
+                      Optional additional names to be added to the issued certificate. The additional names needs to be part of a zone in IONOS CLOUD DNS
                     items:
                       type: string
                     type: array
@@ -271,8 +271,8 @@ spec:
                 properties:
                   commonName:
                     description: |-
-                      [string] The common name (DNS) of the certificate to issue. The common name needs to be part of a zone in IONOS Cloud DNS.
-                      The common name (DNS) of the certificate to issue. The common name needs to be part of a zone in IONOS Cloud DNS
+                      [string] The common name (DNS) of the certificate to issue. The common name needs to be part of a zone in IONOS CLOUD DNS.
+                      The common name (DNS) of the certificate to issue. The common name needs to be part of a zone in IONOS CLOUD DNS
                     type: string
                   keyAlgorithm:
                     description: |-
@@ -460,8 +460,8 @@ spec:
                     type: object
                   subjectAlternativeNames:
                     description: |-
-                      [list][string] Optional additional names to be added to the issued certificate. The additional names needs to be part of a zone in IONOS Cloud DNS.
-                      Optional additional names to be added to the issued certificate. The additional names needs to be part of a zone in IONOS Cloud DNS
+                      [list][string] Optional additional names to be added to the issued certificate. The additional names needs to be part of a zone in IONOS CLOUD DNS.
+                      Optional additional names to be added to the issued certificate. The additional names needs to be part of a zone in IONOS CLOUD DNS
                     items:
                       type: string
                     type: array
@@ -544,8 +544,8 @@ spec:
                 properties:
                   commonName:
                     description: |-
-                      [string] The common name (DNS) of the certificate to issue. The common name needs to be part of a zone in IONOS Cloud DNS.
-                      The common name (DNS) of the certificate to issue. The common name needs to be part of a zone in IONOS Cloud DNS
+                      [string] The common name (DNS) of the certificate to issue. The common name needs to be part of a zone in IONOS CLOUD DNS.
+                      The common name (DNS) of the certificate to issue. The common name needs to be part of a zone in IONOS CLOUD DNS
                     type: string
                   id:
                     type: string
@@ -576,8 +576,8 @@ spec:
                     type: string
                   subjectAlternativeNames:
                     description: |-
-                      [list][string] Optional additional names to be added to the issued certificate. The additional names needs to be part of a zone in IONOS Cloud DNS.
-                      Optional additional names to be added to the issued certificate. The additional names needs to be part of a zone in IONOS Cloud DNS
+                      [list][string] Optional additional names to be added to the issued certificate. The additional names needs to be part of a zone in IONOS CLOUD DNS.
+                      Optional additional names to be added to the issued certificate. The additional names needs to be part of a zone in IONOS CLOUD DNS
                     items:
                       type: string
                     type: array

@@ -24,6 +24,23 @@ func Configure(p *config.Provider) {
 		},
 	)
 	p.AddResourceConfigurator(
+		"ionoscloud_pg_cluster_v2", func(r *config.Resource) {
+			r.ShortGroup = "postgresqlv2"
+			r.Kind = "PostgresqlCluster"
+			r.References["connections.datacenter_id"] = config.Reference{
+				TerraformName: "ionoscloud_datacenter",
+			}
+			r.References["connections.lan_id"] = config.Reference{
+				TerraformName: "ionoscloud_lan",
+			}
+			r.References["location"] = config.Reference{
+				TerraformName: "ionoscloud_datacenter",
+				Extractor:     "github.com/ionos-cloud/provider-upjet-ionoscloud/config/common.DatacenterLocation()",
+			}
+			r.UseAsync = true
+		},
+	)
+	p.AddResourceConfigurator(
 		"ionoscloud_pg_user", func(r *config.Resource) {
 			r.ShortGroup = "postgresql"
 			r.Kind = "PostgresqlUser"

@@ -195,7 +195,7 @@ type BucketCorsConfigurationStatus struct {
 // +kubebuilder:subresource:status
 // +kubebuilder:storageversion
 
-// BucketCorsConfiguration is the Schema for the BucketCorsConfigurations API. Manages Buckets cors_configuration on IonosCloud.
+// BucketCorsConfiguration is the Schema for the BucketCorsConfigurations API. Manages Buckets cors_configuration on IONOS CLOUD.
 // +kubebuilder:printcolumn:name="SYNCED",type="string",JSONPath=".status.conditions[?(@.type=='Synced')].status"
 // +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"
 // +kubebuilder:printcolumn:name="EXTERNAL-NAME",type="string",JSONPath=".metadata.annotations.crossplane\\.io/external-name"

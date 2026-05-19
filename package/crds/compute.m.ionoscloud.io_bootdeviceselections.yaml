@@ -230,6 +230,11 @@ spec:
                             type: string
                         type: object
                     type: object
+                  location:
+                    description: The location of the resource. This field should be
+                      used only if you are also using a file configuration and should
+                      not be configured otherwise.
+                    type: string
                   serverId:
                     description: ID of the Server for which the boot device will be
                       selected.
@@ -499,6 +504,11 @@ spec:
                             type: string
                         type: object
                     type: object
+                  location:
+                    description: The location of the resource. This field should be
+                      used only if you are also using a file configuration and should
+                      not be configured otherwise.
+                    type: string
                   serverId:
                     description: ID of the Server for which the boot device will be
                       selected.
@@ -661,6 +671,11 @@ spec:
                       will be the default boot volume.
                     type: string
                   id:
+                    type: string
+                  location:
+                    description: The location of the resource. This field should be
+                      used only if you are also using a file configuration and should
+                      not be configured otherwise.
                     type: string
                   serverId:
                     description: ID of the Server for which the boot device will be

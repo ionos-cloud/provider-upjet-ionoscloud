@@ -306,7 +306,7 @@ type PostgresqlClusterInitParameters struct {
 	// The storage type used in your cluster.
 	StorageType *string `json:"storageType,omitempty" tf:"storage_type,omitempty"`
 
-	// [string] Represents different modes of replication. Can have one of the following values: ASYNCHRONOUS, SYNCHRONOUS, STRICTLY_SYNCHRONOUS. This attribute is immutable(disallowed in update requests).
+	// [string] Represents different modes of replication. Can have one of the following values: ASYNCHRONOUS, STRICTLY_SYNCHRONOUS. The SYNCHRONOUS value has been deprecated for create requests.
 	// Represents different modes of replication.
 	SynchronizationMode *string `json:"synchronizationMode,omitempty" tf:"synchronization_mode,omitempty"`
 }
@@ -379,7 +379,7 @@ type PostgresqlClusterObservation struct {
 	// The storage type used in your cluster.
 	StorageType *string `json:"storageType,omitempty" tf:"storage_type,omitempty"`
 
-	// [string] Represents different modes of replication. Can have one of the following values: ASYNCHRONOUS, SYNCHRONOUS, STRICTLY_SYNCHRONOUS. This attribute is immutable(disallowed in update requests).
+	// [string] Represents different modes of replication. Can have one of the following values: ASYNCHRONOUS, STRICTLY_SYNCHRONOUS. The SYNCHRONOUS value has been deprecated for create requests.
 	// Represents different modes of replication.
 	SynchronizationMode *string `json:"synchronizationMode,omitempty" tf:"synchronization_mode,omitempty"`
 }
@@ -471,7 +471,7 @@ type PostgresqlClusterParameters struct {
 	// +kubebuilder:validation:Optional
 	StorageType *string `json:"storageType,omitempty" tf:"storage_type,omitempty"`
 
-	// [string] Represents different modes of replication. Can have one of the following values: ASYNCHRONOUS, SYNCHRONOUS, STRICTLY_SYNCHRONOUS. This attribute is immutable(disallowed in update requests).
+	// [string] Represents different modes of replication. Can have one of the following values: ASYNCHRONOUS, STRICTLY_SYNCHRONOUS. The SYNCHRONOUS value has been deprecated for create requests.
 	// Represents different modes of replication.
 	// +kubebuilder:validation:Optional
 	SynchronizationMode *string `json:"synchronizationMode,omitempty" tf:"synchronization_mode,omitempty"`

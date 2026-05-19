@@ -54,6 +54,8 @@ type IpfailoverInitParameters struct {
 	// +kubebuilder:validation:Optional
 	LanIDSelector *v1.Selector `json:"lanIdSelector,omitempty" tf:"-"`
 
+	Location *string `json:"location,omitempty" tf:"location,omitempty"`
+
 	// [string] The ID of a NIC.
 	// The UUID of the master NIC
 	// +crossplane:generate:reference:type=github.com/ionos-cloud/provider-upjet-ionoscloud/apis/cluster/compute/v1alpha1.Server
@@ -82,6 +84,8 @@ type IpfailoverObservation struct {
 
 	// [string] The ID of a LAN.
 	LanID *string `json:"lanId,omitempty" tf:"lan_id,omitempty"`
+
+	Location *string `json:"location,omitempty" tf:"location,omitempty"`
 
 	// [string] The ID of a NIC.
 	// The UUID of the master NIC
@@ -131,6 +135,9 @@ type IpfailoverParameters struct {
 	// Selector for a Lan in compute to populate lanId.
 	// +kubebuilder:validation:Optional
 	LanIDSelector *v1.Selector `json:"lanIdSelector,omitempty" tf:"-"`
+
+	// +kubebuilder:validation:Optional
+	Location *string `json:"location,omitempty" tf:"location,omitempty"`
 
 	// [string] The ID of a NIC.
 	// The UUID of the master NIC

@@ -120,7 +120,7 @@ type BucketPublicAccessBlockStatus struct {
 // +kubebuilder:subresource:status
 // +kubebuilder:storageversion
 
-// BucketPublicAccessBlock is the Schema for the BucketPublicAccessBlocks API. Creates and manages IonosCloud IONOS Object Storage Public Access Block for buckets.
+// BucketPublicAccessBlock is the Schema for the BucketPublicAccessBlocks API. Creates and manages IONOS CLOUD Object Storage Public Access Block for buckets.
 // +kubebuilder:printcolumn:name="SYNCED",type="string",JSONPath=".status.conditions[?(@.type=='Synced')].status"
 // +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"
 // +kubebuilder:printcolumn:name="EXTERNAL-NAME",type="string",JSONPath=".metadata.annotations.crossplane\\.io/external-name"

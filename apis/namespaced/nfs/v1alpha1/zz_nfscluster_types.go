@@ -115,9 +115,13 @@ type NFSClusterInitParameters struct {
 	// The name of the Network File Storage Cluster.
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
-	// The size of the Network File Storage cluster in TiB. Note that the cluster size cannot be reduced after provisioning. This value determines the billing fees. Default is 2. The minimum value is 2 and the maximum value is 42.
+	// The size of the Network File Storage cluster. Note that the cluster size cannot be reduced after provisioning. This value determines the billing fees.
 	// The size of the Network File Storage Cluster. Minimum size is 2.
 	Size *float64 `json:"size,omitempty" tf:"size,omitempty"`
+
+	// The unit of the size attribute. Accepted values: TiB, GiB. Defaults to TiB.
+	// The unit of the 'size' attribute. Can be 'TiB' or 'GiB'. Defaults to 'TiB'.
+	SizeUnit *string `json:"sizeUnit,omitempty" tf:"size_unit,omitempty"`
 }
 
 type NFSClusterObservation struct {
@@ -139,9 +143,13 @@ type NFSClusterObservation struct {
 	// The name of the Network File Storage Cluster.
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
-	// The size of the Network File Storage cluster in TiB. Note that the cluster size cannot be reduced after provisioning. This value determines the billing fees. Default is 2. The minimum value is 2 and the maximum value is 42.
+	// The size of the Network File Storage cluster. Note that the cluster size cannot be reduced after provisioning. This value determines the billing fees.
 	// The size of the Network File Storage Cluster. Minimum size is 2.
 	Size *float64 `json:"size,omitempty" tf:"size,omitempty"`
+
+	// The unit of the size attribute. Accepted values: TiB, GiB. Defaults to TiB.
+	// The unit of the 'size' attribute. Can be 'TiB' or 'GiB'. Defaults to 'TiB'.
+	SizeUnit *string `json:"sizeUnit,omitempty" tf:"size_unit,omitempty"`
 }
 
 type NFSClusterParameters struct {
@@ -165,10 +173,15 @@ type NFSClusterParameters struct {
 	// +kubebuilder:validation:Optional
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
-	// The size of the Network File Storage cluster in TiB. Note that the cluster size cannot be reduced after provisioning. This value determines the billing fees. Default is 2. The minimum value is 2 and the maximum value is 42.
+	// The size of the Network File Storage cluster. Note that the cluster size cannot be reduced after provisioning. This value determines the billing fees.
 	// The size of the Network File Storage Cluster. Minimum size is 2.
 	// +kubebuilder:validation:Optional
 	Size *float64 `json:"size,omitempty" tf:"size,omitempty"`
+
+	// The unit of the size attribute. Accepted values: TiB, GiB. Defaults to TiB.
+	// The unit of the 'size' attribute. Can be 'TiB' or 'GiB'. Defaults to 'TiB'.
+	// +kubebuilder:validation:Optional
+	SizeUnit *string `json:"sizeUnit,omitempty" tf:"size_unit,omitempty"`
 }
 
 type NFSInitParameters struct {
