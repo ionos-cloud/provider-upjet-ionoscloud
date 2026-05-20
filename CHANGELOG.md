@@ -4,7 +4,7 @@ All notable changes to this project will be documented in this file.
 
 ## [0.5.4]
 - Update crossplane-runtime to v2.2.1
-
+- Remove stale files from the `apis` directory
 
 ## [0.5.3]
 
