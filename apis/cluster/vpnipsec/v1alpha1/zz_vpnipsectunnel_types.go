@@ -215,9 +215,9 @@ type VpnIpsecTunnelInitParameters struct {
 	Auth []AuthInitParameters `json:"auth,omitempty" tf:"auth,omitempty"`
 
 	// [list] The network CIDRs on the "Left" side that are allowed to connect to the IPSec
-	// tunnel, i.e. the CIDRs within your IONOS Cloud LAN. Specify "0.0.0.0/0" or "::/0" for all addresses. Minimum items: 1.
+	// tunnel, i.e. the CIDRs within your IONOS CLOUD LAN. Specify "0.0.0.0/0" or "::/0" for all addresses. Minimum items: 1.
 	// Maximum items: 20.
-	// The network CIDRs on the "Left" side that are allowed to connect to the IPSec tunnel, i.e. the CIDRs within your IONOS Cloud LAN. Specify "0.0.0.0/0" or "::/0" for all addresses.
+	// The network CIDRs on the "Left" side that are allowed to connect to the IPSec tunnel, i.e. the CIDRs within your IONOS CLOUD LAN. Specify "0.0.0.0/0" or "::/0" for all addresses.
 	CloudNetworkCidrs []*string `json:"cloudNetworkCidrs,omitempty" tf:"cloud_network_cidrs,omitempty"`
 
 	// [string] The human-readable description of your IPSec Gateway Tunnel.
@@ -271,9 +271,9 @@ type VpnIpsecTunnelObservation struct {
 	Auth []AuthObservation `json:"auth,omitempty" tf:"auth,omitempty"`
 
 	// [list] The network CIDRs on the "Left" side that are allowed to connect to the IPSec
-	// tunnel, i.e. the CIDRs within your IONOS Cloud LAN. Specify "0.0.0.0/0" or "::/0" for all addresses. Minimum items: 1.
+	// tunnel, i.e. the CIDRs within your IONOS CLOUD LAN. Specify "0.0.0.0/0" or "::/0" for all addresses. Minimum items: 1.
 	// Maximum items: 20.
-	// The network CIDRs on the "Left" side that are allowed to connect to the IPSec tunnel, i.e. the CIDRs within your IONOS Cloud LAN. Specify "0.0.0.0/0" or "::/0" for all addresses.
+	// The network CIDRs on the "Left" side that are allowed to connect to the IPSec tunnel, i.e. the CIDRs within your IONOS CLOUD LAN. Specify "0.0.0.0/0" or "::/0" for all addresses.
 	CloudNetworkCidrs []*string `json:"cloudNetworkCidrs,omitempty" tf:"cloud_network_cidrs,omitempty"`
 
 	// [string] The human-readable description of your IPSec Gateway Tunnel.
@@ -321,9 +321,9 @@ type VpnIpsecTunnelParameters struct {
 	Auth []AuthParameters `json:"auth,omitempty" tf:"auth,omitempty"`
 
 	// [list] The network CIDRs on the "Left" side that are allowed to connect to the IPSec
-	// tunnel, i.e. the CIDRs within your IONOS Cloud LAN. Specify "0.0.0.0/0" or "::/0" for all addresses. Minimum items: 1.
+	// tunnel, i.e. the CIDRs within your IONOS CLOUD LAN. Specify "0.0.0.0/0" or "::/0" for all addresses. Minimum items: 1.
 	// Maximum items: 20.
-	// The network CIDRs on the "Left" side that are allowed to connect to the IPSec tunnel, i.e. the CIDRs within your IONOS Cloud LAN. Specify "0.0.0.0/0" or "::/0" for all addresses.
+	// The network CIDRs on the "Left" side that are allowed to connect to the IPSec tunnel, i.e. the CIDRs within your IONOS CLOUD LAN. Specify "0.0.0.0/0" or "::/0" for all addresses.
 	// +kubebuilder:validation:Optional
 	CloudNetworkCidrs []*string `json:"cloudNetworkCidrs,omitempty" tf:"cloud_network_cidrs,omitempty"`
 

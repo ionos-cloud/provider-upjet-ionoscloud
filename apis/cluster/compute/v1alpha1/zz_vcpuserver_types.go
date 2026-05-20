@@ -56,6 +56,9 @@ type VCPUServerInitParameters struct {
 	// A label can be seen as an object with only two required fields: key and value, both of the string type. Please check the example presented above to see how a label can be used in the plan. A server can have multiple labels.
 	Label []VCPUServerLabelInitParameters `json:"label,omitempty" tf:"label,omitempty"`
 
+	// The location of the resource. This field should be used only if you are also using a file configuration and should not be configured otherwise.
+	Location *string `json:"location,omitempty" tf:"location,omitempty"`
+
 	// [string] The name of the server.
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
@@ -69,7 +72,7 @@ type VCPUServerInitParameters struct {
 	// [integer] The amount of memory for the server in MB.
 	RAM *float64 `json:"ram,omitempty" tf:"ram,omitempty"`
 
-	// [list] Immutable List of absolute or relative paths to files containing public SSH key that will be injected into IonosCloud provided Linux images. Also accepts ssh keys directly. Public SSH keys are set on the image as authorized keys for appropriate SSH login to the instance using the corresponding private key. This field may only be set in creation requests. When reading, it always returns null. SSH keys are only supported if a public Linux image is used for the volume creation. Does not support ~ expansion to homedir in the given path.
+	// [list] Immutable List of absolute or relative paths to files containing public SSH key that will be injected into IONOS CLOUD provided Linux images. Also accepts ssh keys directly. Public SSH keys are set on the image as authorized keys for appropriate SSH login to the instance using the corresponding private key. This field may only be set in creation requests. When reading, it always returns null. SSH keys are only supported if a public Linux image is used for the volume creation. Does not support ~ expansion to homedir in the given path.
 	// Public SSH keys are set on the image as authorized keys for appropriate SSH login to the instance using the corresponding private key. This field may only be set in creation requests. When reading, it always returns null. SSH keys are only supported if a public Linux image is used for the volume creation.
 	SSHKeys []*string `json:"sshKeys,omitempty" tf:"ssh_keys,omitempty"`
 
@@ -384,6 +387,9 @@ type VCPUServerObservation struct {
 	// A label can be seen as an object with only two required fields: key and value, both of the string type. Please check the example presented above to see how a label can be used in the plan. A server can have multiple labels.
 	Label []VCPUServerLabelObservation `json:"label,omitempty" tf:"label,omitempty"`
 
+	// The location of the resource. This field should be used only if you are also using a file configuration and should not be configured otherwise.
+	Location *string `json:"location,omitempty" tf:"location,omitempty"`
+
 	// [string] The name of the server.
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
@@ -404,7 +410,7 @@ type VCPUServerObservation struct {
 	// [integer] The amount of memory for the server in MB.
 	RAM *float64 `json:"ram,omitempty" tf:"ram,omitempty"`
 
-	// [list] Immutable List of absolute or relative paths to files containing public SSH key that will be injected into IonosCloud provided Linux images. Also accepts ssh keys directly. Public SSH keys are set on the image as authorized keys for appropriate SSH login to the instance using the corresponding private key. This field may only be set in creation requests. When reading, it always returns null. SSH keys are only supported if a public Linux image is used for the volume creation. Does not support ~ expansion to homedir in the given path.
+	// [list] Immutable List of absolute or relative paths to files containing public SSH key that will be injected into IONOS CLOUD provided Linux images. Also accepts ssh keys directly. Public SSH keys are set on the image as authorized keys for appropriate SSH login to the instance using the corresponding private key. This field may only be set in creation requests. When reading, it always returns null. SSH keys are only supported if a public Linux image is used for the volume creation. Does not support ~ expansion to homedir in the given path.
 	// Public SSH keys are set on the image as authorized keys for appropriate SSH login to the instance using the corresponding private key. This field may only be set in creation requests. When reading, it always returns null. SSH keys are only supported if a public Linux image is used for the volume creation.
 	SSHKeys []*string `json:"sshKeys,omitempty" tf:"ssh_keys,omitempty"`
 
@@ -475,6 +481,10 @@ type VCPUServerParameters struct {
 	// +kubebuilder:validation:Optional
 	Label []VCPUServerLabelParameters `json:"label,omitempty" tf:"label,omitempty"`
 
+	// The location of the resource. This field should be used only if you are also using a file configuration and should not be configured otherwise.
+	// +kubebuilder:validation:Optional
+	Location *string `json:"location,omitempty" tf:"location,omitempty"`
+
 	// [string] The name of the server.
 	// +kubebuilder:validation:Optional
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
@@ -492,7 +502,7 @@ type VCPUServerParameters struct {
 	// +kubebuilder:validation:Optional
 	RAM *float64 `json:"ram,omitempty" tf:"ram,omitempty"`
 
-	// [list] Immutable List of absolute or relative paths to files containing public SSH key that will be injected into IonosCloud provided Linux images. Also accepts ssh keys directly. Public SSH keys are set on the image as authorized keys for appropriate SSH login to the instance using the corresponding private key. This field may only be set in creation requests. When reading, it always returns null. SSH keys are only supported if a public Linux image is used for the volume creation. Does not support ~ expansion to homedir in the given path.
+	// [list] Immutable List of absolute or relative paths to files containing public SSH key that will be injected into IONOS CLOUD provided Linux images. Also accepts ssh keys directly. Public SSH keys are set on the image as authorized keys for appropriate SSH login to the instance using the corresponding private key. This field may only be set in creation requests. When reading, it always returns null. SSH keys are only supported if a public Linux image is used for the volume creation. Does not support ~ expansion to homedir in the given path.
 	// Public SSH keys are set on the image as authorized keys for appropriate SSH login to the instance using the corresponding private key. This field may only be set in creation requests. When reading, it always returns null. SSH keys are only supported if a public Linux image is used for the volume creation.
 	// +kubebuilder:validation:Optional
 	SSHKeys []*string `json:"sshKeys,omitempty" tf:"ssh_keys,omitempty"`
@@ -661,7 +671,7 @@ type VCPUServerStatus struct {
 // +kubebuilder:subresource:status
 // +kubebuilder:storageversion
 
-// VCPUServer is the Schema for the VCPUServers API. Creates and manages IonosCloud VCPU Server objects.
+// VCPUServer is the Schema for the VCPUServers API. Creates and manages IONOS CLOUD VCPU Server objects.
 // +kubebuilder:printcolumn:name="SYNCED",type="string",JSONPath=".status.conditions[?(@.type=='Synced')].status"
 // +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"
 // +kubebuilder:printcolumn:name="EXTERNAL-NAME",type="string",JSONPath=".metadata.annotations.crossplane\\.io/external-name"

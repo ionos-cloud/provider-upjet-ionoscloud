@@ -175,6 +175,11 @@ spec:
                       (Computed)[string] OS type of this Snapshot
                       OS type of this Snapshot
                     type: string
+                  location:
+                    description: |-
+                      Location of that image/snapshot
+                      The location of the resource. This field should be used only if you are also using a file configuration and should not be configured otherwise.
+                    type: string
                   name:
                     description: |-
                       [string] The name of the snapshot.
@@ -395,6 +400,11 @@ spec:
                     description: |-
                       (Computed)[string] OS type of this Snapshot
                       OS type of this Snapshot
+                    type: string
+                  location:
+                    description: |-
+                      Location of that image/snapshot
+                      The location of the resource. This field should be used only if you are also using a file configuration and should not be configured otherwise.
                     type: string
                   name:
                     description: |-
@@ -639,7 +649,7 @@ spec:
                   location:
                     description: |-
                       Location of that image/snapshot
-                      Location of that image/snapshot
+                      The location of the resource. This field should be used only if you are also using a file configuration and should not be configured otherwise.
                     type: string
                   name:
                     description: |-

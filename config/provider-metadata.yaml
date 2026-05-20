@@ -2,7 +2,7 @@ name: ionos-cloud/ionoscloud
 resources:
     Datacenter NSG Selection:
         subCategory: Compute Engine
-        description: Links a Network Security Group to a IonosCloud datacenter.
+        description: Links a Network Security Group to a IONOS CLOUD datacenter.
         name: Datacenter NSG Selection
         title: Datacenter NSG Selection
         argumentDocs:
@@ -11,7 +11,7 @@ resources:
         importStatements: []
     Server Boot Device Selection:
         subCategory: Compute Engine
-        description: Manages the selection of boot devices for IonosCloud Server objects.
+        description: Manages the selection of boot devices for IONOS CLOUD Server objects.
         name: Server Boot Device Selection
         title: Server Boot Device Selection
         argumentDocs:
@@ -23,7 +23,7 @@ resources:
         importStatements: []
     ionoscloud_application_loadbalancer:
         subCategory: Application Load Balancer
-        description: Creates and manages IonosCloud Application Load Balancer.
+        description: Creates and manages IONOS CLOUD Application Load Balancer.
         name: ionoscloud_application_loadbalancer
         title: application_loadbalancer
         examples:
@@ -84,7 +84,7 @@ resources:
             - terraform import ionoscloud_application_loadbalancer.myalb datacenter uuid/applicationLoadBalancer uuid
     ionoscloud_application_loadbalancer_forwardingrule:
         subCategory: Application Load Balancer
-        description: Creates and manages IonosCloud Application Load Balancer Forwarding Rule.
+        description: Creates and manages IONOS CLOUD Application Load Balancer Forwarding Rule.
         name: ionoscloud_application_loadbalancer_forwardingrule
         title: application_loadbalancer_forwardingrule
         examples:
@@ -241,13 +241,13 @@ resources:
                       "server": "https://acme-v02.api.letsencrypt.org/directory"
                     }
         argumentDocs:
-            common_name: '- (Required)[string] The common name (DNS) of the certificate to issue. The common name needs to be part of a zone in IONOS Cloud DNS.'
+            common_name: '- (Required)[string] The common name (DNS) of the certificate to issue. The common name needs to be part of a zone in IONOS CLOUD DNS.'
             key_algorithm: '- (Required)[string] The key algorithm used to generate the certificate.'
             last_issued_certificate_id: '- (Computed)[string] The ID of the last certificate that was issued.'
             location: '- (Required)[string] The location of the auto-certificate. Available locations: de/fra, de/fra/2.'
             name: '- (Required)[string] A certificate name used for management purposes.'
             provider_id: '- (Required)[string] The certificate provider used to issue the certificates.'
-            subject_alternative_names: '- (Optional)[list][string] Optional additional names to be added to the issued certificate. The additional names needs to be part of a zone in IONOS Cloud DNS.'
+            subject_alternative_names: '- (Optional)[list][string] Optional additional names to be added to the issued certificate. The additional names needs to be part of a zone in IONOS CLOUD DNS.'
         importStatements:
             - terraform import ionoscloud_auto_certificate.example location:auto_certificate_id
     ionoscloud_auto_certificate_provider:
@@ -282,7 +282,7 @@ resources:
             - terraform import ionoscloud_auto_certificate_provider.example location:provider_id
     ionoscloud_backup_unit:
         subCategory: Managed Backup
-        description: Creates and manages IonosCloud Backup Units.
+        description: Creates and manages IONOS CLOUD Backup Units.
         name: ionoscloud_backup_unit
         title: backup_unit
         examples:
@@ -311,7 +311,7 @@ resources:
             - terraform import ionoscloud_backup_unit.demo backup_unit_uuid
     ionoscloud_cdn_distribution:
         subCategory: CDN
-        description: Creates and manages IonosCloud CDN Distributions.
+        description: Creates and manages IONOS CLOUD CDN Distributions.
         name: ionoscloud_cdn_distribution
         title: cdn_distribution
         examples:
@@ -426,7 +426,7 @@ resources:
             - terraform import ionoscloud_certificate.mycert certificate uuid
     ionoscloud_container_registry:
         subCategory: Container Registry
-        description: Creates and manages IonosCloud Container Registry.
+        description: Creates and manages IONOS CLOUD Container Registry.
         name: ionoscloud_container_registry
         title: ionoscloud_container_registry
         examples:
@@ -461,7 +461,7 @@ resources:
             - terraform import ionoscloud_container_registry.mycr container_registry uuid
     ionoscloud_container_registry_token:
         subCategory: Container Registry Token
-        description: Creates and manages IonosCloud Container Registry Token.
+        description: Creates and manages IONOS CLOUD Container Registry Token.
         name: ionoscloud_container_registry_token
         title: ionoscloud_container_registry_token
         examples:
@@ -516,7 +516,7 @@ resources:
             - terraform import ionoscloud_container_registry_token.mycrtoken container_registry uuid/container_registry_token uuid
     ionoscloud_cube_server:
         subCategory: Compute Engine
-        description: Creates and manages IonosCloud Cube Server objects.
+        description: Creates and manages IONOS CLOUD Cube Server objects.
         name: ionoscloud_cube_server
         title: ionoscloud_cube_server
         examples:
@@ -649,7 +649,7 @@ resources:
             primary_ip: '- (Computed) The associated IP address.'
             primary_nic: '- (Computed) The associated NIC.'
             security_groups_ids: '- (Optional) The list of Security Group IDs for the resource.'
-            ssh_key_path: '- (Optional)[list] List of paths to files containing a public SSH key that will be injected into IonosCloud provided Linux images. Required for IonosCloud Linux images. Required if image_password is not provided.'
+            ssh_key_path: '- (Optional)[list] List of paths to files containing a public SSH key that will be injected into IONOS CLOUD provided Linux images. Required for IONOS CLOUD Linux images. Required if image_password is not provided.'
             template_uuid: '- (Required)[string] The UUID of the template for creating a CUBE server; the available templates for CUBE servers can be found on the templates resource'
             vm_state: '- (Optional)[string] Sets the power state of the cube server. E.g: RUNNING or SUSPENDED.'
             volume: '- (Required) See the Volume section.'
@@ -657,7 +657,7 @@ resources:
             - terraform import ionoscloud_cube_server.myserver datacenter uuid/server uuid
     ionoscloud_datacenter:
         subCategory: Compute Engine
-        description: Creates and manages IonosCloud Virtual Data Center.
+        description: Creates and manages IONOS CLOUD Virtual Data Center.
         name: ionoscloud_datacenter
         title: datacenter
         examples:
@@ -735,7 +735,7 @@ resources:
         argumentDocs:
             content: '- (Required)[string] The content of the DNS Record.'
             enabled: '- (Optional)[bool] Indicates if the DNS Record is active or not. Default is true.'
-            name: '- (Required)[string] The name of the DNS Record.'
+            name: '- (Required)[string] The name of the DNS Record. This property is immutable.'
             priority: '- (Optional)[int] The priority for the DNS Record.'
             ttl: '- (Optional)[int] Time to live for the DNS Record. Default is 3600.'
             type: '- (Required)[string] The type of the DNS Record, can have one of these values: A, AAAA, CNAME, ALIAS, MX, NS, SRV, TXT, CAA, SSHFP, TLSA, SMIMEA, DS, HTTPS, SVCB, OPENPGPKEY, CERT, URI, RP, LOC. More details about types can be found here.'
@@ -790,7 +790,7 @@ resources:
         argumentDocs:
             description: '- (Optional)[string] The description for the DNS Zone.'
             enabled: '- (Optional)[bool] Indicates if the DNS Zone is active or not. Default is true.'
-            name: '- (Required)[string] The name of the DNS Zone.'
+            name: '- (Required)[string] The name of the DNS Zone. This property is immutable.'
         importStatements:
             - terraform import ionoscloud_dns_zone.examplezone_id
     ionoscloud_firewall:
@@ -889,7 +889,7 @@ resources:
             - terraform import ionoscloud_firewall.myfwruledatacenter uuid/server uuid/nic uuid/firewall uuid
     ionoscloud_gpu_server:
         subCategory: Compute Engine
-        description: Creates and manages IonosCloud GPU Server objects.
+        description: Creates and manages IONOS CLOUD GPU Server objects.
         name: ionoscloud_gpu_server
         title: ionoscloud_gpu_server
         examples:
@@ -982,7 +982,7 @@ resources:
             primary_ip: '- (Computed) The associated IP address.'
             primary_nic: '- (Computed) The associated NIC.'
             security_groups_ids: '- (Optional) The list of Security Group IDs for the resource.'
-            ssh_key_path: '- (Optional)[list] List of paths to files containing a public SSH key that will be injected into IonosCloud provided Linux images. Required for IonosCloud Linux images. Required if image_password is not provided.'
+            ssh_key_path: '- (Optional)[list] List of paths to files containing a public SSH key that will be injected into IONOS CLOUD provided Linux images. Required for IONOS CLOUD Linux images. Required if image_password is not provided.'
             template_uuid: '- (Required)[string] The UUID of the template used for creating a GPU server.'
             vm_state: '- (Optional)[string] Sets the power state of the GPU server. E.g: RUNNING or SUSPENDED.'
             volume: '- (Required) See the Volume section.'
@@ -1314,10 +1314,10 @@ resources:
             nicuuid: '- (Required)[string] The ID of a NIC.'
         importStatements:
             - terraform apply -parallelism=1
-            - terraform import ionoscloud_ipfailover.myipfailover datacenter uuid/lan uuid
+            - terraform import ionoscloud_ipfailover.myipfailover datacenter_uuid/lan_uuid/ip_address
     ionoscloud_k8s_cluster:
         subCategory: Managed Kubernetes
-        description: Creates and manages IonosCloud Kubernetes Clusters.
+        description: Creates and manages IONOS CLOUD Kubernetes Clusters.
         name: ionoscloud_k8s_cluster
         title: k8s_cluster
         examples:
@@ -1398,7 +1398,7 @@ resources:
             - terraform import ionoscloud_k8s_cluster.demo k8s_cluster uuid
     ionoscloud_k8s_node_pool:
         subCategory: Managed Kubernetes
-        description: Creates and manages IonosCloud Kubernetes Node Pools.
+        description: Creates and manages IONOS CLOUD Kubernetes Node Pools.
         name: ionoscloud_k8s_node_pool
         title: k8s_node_pool
         examples:
@@ -1538,7 +1538,7 @@ resources:
             - terraform import ionoscloud_k8s_node_pool.demo k8s_cluster_uuid/k8s_nodepool_id
     ionoscloud_kafka_cluster:
         subCategory: Event Streams for Apache Kafka
-        description: Creates and manages IonosCloud Kafka Cluster objects.
+        description: Creates and manages IONOS CLOUD Kafka Cluster objects.
         name: ionoscloud_kafka_cluster
         title: ionoscloud_kafka_cluster
         examples:
@@ -1653,7 +1653,7 @@ resources:
             - terraform import ionoscloud_kafka_cluster.mycluster location:kafka cluster uuid
     ionoscloud_kafka_cluster_topic:
         subCategory: Event Streams for Apache Kafka
-        description: Creates and manages IonosCloud Kafka Cluster Topic objects.
+        description: Creates and manages IONOS CLOUD Kafka Cluster Topic objects.
         name: ionoscloud_kafka_cluster_topic
         title: ionoscloud_kafka_cluster_topic
         examples:
@@ -2475,7 +2475,7 @@ resources:
                     {
                       "datacenter_id": "${ionoscloud_datacenter.example.id}",
                       "name": "Lan Example",
-                      "public": true
+                      "public": false
                     }
         argumentDocs:
             datacenter_id: '- (Required)[string] A Datacenter''s UUID.'
@@ -2835,7 +2835,8 @@ resources:
                       "min_version": "4.2"
                     }
                   ],
-                  "size": 2
+                  "size": 2048,
+                  "size_unit": "GiB"
                 }
               references:
                 connections.datacenter_id: ionoscloud_datacenter.nfs_dc.id
@@ -2871,7 +2872,8 @@ resources:
                       "min_version": "4.2"
                     }
                   ],
-                  "size": 2
+                  "size": 2048,
+                  "size_unit": "GiB"
                 }
               references:
                 connections.datacenter_id: ionoscloud_datacenter.nfs_dc.id
@@ -2931,12 +2933,13 @@ resources:
             min_version: '- (Optional) The minimum supported version of the NFS cluster. Supported values: 4.2. Default is 4.2.'
             name: '- (Required) The name of the Network File Storage cluster.'
             nfs: '- (Optional) The NFS configuration for the Network File Storage cluster. Each NFS configuration supports the following:'
-            size: '- (Required) The size of the Network File Storage cluster in TiB. Note that the cluster size cannot be reduced after provisioning. This value determines the billing fees. Default is 2. The minimum value is 2 and the maximum value is 42.'
+            size: '- (Required) The size of the Network File Storage cluster. Note that the cluster size cannot be reduced after provisioning. This value determines the billing fees.'
+            size_unit: '- (Optional) The unit of the size attribute. Accepted values: TiB, GiB. Defaults to TiB.'
         importStatements:
             - terraform import ionoscloud_nfs_cluster.name location:uuid
     ionoscloud_nfs_share:
         subCategory: Network File Storage
-        description: Creates and manages Network File Storage (NFS) Share objects on IonosCloud.
+        description: Creates and manages Network File Storage (NFS) Share objects on IONOS CLOUD.
         name: ionoscloud_nfs_share
         title: nfs_share
         examples:
@@ -2998,7 +3001,8 @@ resources:
                           "min_version": "4.2"
                         }
                       ],
-                      "size": 2
+                      "size": 2048,
+                      "size_unit": "GiB"
                     }
         argumentDocs:
             all-anonymous: '- Map all users to anonymous uid.'
@@ -3212,7 +3216,7 @@ resources:
             - terraform import ionoscloud_nic.mynic datacenter uuid/server uuid/nic uuid
     ionoscloud_object_storage_accesskey:
         subCategory: Object storage management
-        description: Creates and manages IonosCloud Object Storage Accesskeys.
+        description: Creates and manages IONOS CLOUD Object Storage Accesskeys.
         name: ionoscloud_object_storage_accesskey
         title: object_storage_accesskey
         examples:
@@ -3332,8 +3336,8 @@ resources:
                       "time": "09:00:00"
                     }
                   ],
-                  "postgres_version": "12",
-                  "ram": 2048,
+                  "postgres_version": "14",
+                  "ram": 4096,
                   "storage_size": 10240,
                   "storage_type": "HDD",
                   "synchronization_mode": "ASYNCHRONOUS"
@@ -3412,11 +3416,113 @@ resources:
             recovery_target_time: '- (Optional)[string] If this value is supplied as ISO 8601 timestamp, the backup will be replayed up until the given timestamp. If empty, the backup will be applied completely.'
             storage_size: '- (Required)[int] The amount of storage per instance in MB. Has to be a multiple of 2048.'
             storage_type: '- (Required)[string] SSD, SSD Standard, SSD Premium, or HDD. Value "SSD" is deprecated, use the equivalent "SSD Premium" instead. This attribute is immutable(disallowed in update requests).'
-            synchronization_mode: '- (Required) [string] Represents different modes of replication. Can have one of the following values: ASYNCHRONOUS, SYNCHRONOUS, STRICTLY_SYNCHRONOUS. This attribute is immutable(disallowed in update requests).'
+            synchronization_mode: '- (Required) [string] Represents different modes of replication. Can have one of the following values: ASYNCHRONOUS, STRICTLY_SYNCHRONOUS. The SYNCHRONOUS value has been deprecated for create requests.'
             time: '- (Required)[string]'
             username: '- (Required)[string] The username for the initial postgres user. Some system usernames are restricted (e.g. "postgres", "admin", "standby")'
         importStatements:
             - terraform import ionoscloud_pg_cluster.mycluser cluster uuid
+    ionoscloud_pg_cluster_v2:
+        subCategory: Database as a Service - PostgreSQL v2
+        description: Creates and manages DBaaS PostgreSQL v2 Cluster objects.
+        name: ionoscloud_pg_cluster_v2
+        title: ionoscloud_pg_cluster_v2
+        examples:
+            - name: example
+              manifest: |-
+                {
+                  "backup_location": "de",
+                  "connection_pooler": "DISABLED",
+                  "connections": {
+                    "datacenter_id": "${ionoscloud_datacenter.example.id}",
+                    "lan_id": "${ionoscloud_lan.example.id}",
+                    "primary_instance_address": "192.168.1.100/24"
+                  },
+                  "credentials": {
+                    "database": "mydb",
+                    "password": "${random_password.cluster_password.result}",
+                    "username": "username"
+                  },
+                  "description": "Production PostgreSQL cluster",
+                  "instances": {
+                    "cores": 2,
+                    "count": 1,
+                    "ram": 4,
+                    "storage_size": 10
+                  },
+                  "location": "de/txl",
+                  "logs_enabled": true,
+                  "maintenance_window": {
+                    "day_of_the_week": "Sunday",
+                    "time": "09:00:00"
+                  },
+                  "metrics_enabled": true,
+                  "name": "PostgreSQL_cluster",
+                  "replication_mode": "ASYNCHRONOUS",
+                  "restore_from_backup": {
+                    "recovery_target_datetime": "2024-12-06T13:54:08Z",
+                    "source_backup_id": "backup_uuid"
+                  },
+                  "timeouts": {
+                    "create": "60m",
+                    "delete": "60m",
+                    "update": "60m"
+                  },
+                  "version": "17"
+                }
+              dependencies:
+                ionoscloud_datacenter.example: |-
+                    {
+                      "location": "de/txl",
+                      "name": "example"
+                    }
+                ionoscloud_lan.example: |-
+                    {
+                      "datacenter_id": "${ionoscloud_datacenter.example.id}",
+                      "name": "example",
+                      "public": false
+                    }
+                random_password.cluster_password: |-
+                    {
+                      "length": 16,
+                      "override_special": "@$!%*?\u0026",
+                      "special": true
+                    }
+        argumentDocs:
+            backup_location: '- (Required)[string] The S3 location where the backups will be created. Supported locations are provided by the ionoscloud_pg_backup_location_v2 data source.'
+            connection_pooler: '- (Optional)(Computed)[string] Defines how database connections are managed and reused. Possible values: DISABLED, TRANSACTION, SESSION.'
+            connections: '- (Required)[object] Connection information of the PostgreSQL cluster.'
+            cores: '- (Required)[int] The number of CPU cores per instance.'
+            count: '- (Required)[int] The total number of instances in the cluster (one primary and n-1 secondary).'
+            create: '- (Default 60m) Time to wait for the cluster to be provisioned.'
+            credentials: '- (Required)[object] Credentials for the master database user to be created.'
+            database: '- (Required)[string] The name of the initial database to be created.'
+            datacenter_id: '- (Required)[string] The datacenter to connect your instance to.'
+            day_of_the_week: '- (Required)[string] The name of the week day.'
+            delete: '- (Default 60m) Time to wait for the cluster to be deleted.'
+            description: '- (Optional)[string] Human-readable description for the cluster.'
+            dns_name: '- (Computed)[string] The DNS name used to access the cluster.'
+            instances: '- (Required)[object] The instance configuration for the PostgreSQL cluster.'
+            lan_id: '- (Required)[string] The numeric LAN ID to connect your instance to.'
+            location: '- (Required)[string] The location of the PostgreSQL cluster. This is used for routing to the regional API endpoint. Changing this value will destroy the existing cluster and create a new one in the specified location. Available locations: de/fra, de/fra/2, de/txl, es/vit, fr/par, gb/bhx, gb/lhr, us/ewr, us/las, us/mci.'
+            logs_enabled: '- (Optional)(Computed)[bool] Enables or disables the collection and reporting of logs for observability of this cluster.'
+            maintenance_window: '- (Required)[object] A weekly 4 hour-long window, during which maintenance might occur.'
+            metrics_enabled: '- (Optional)(Computed)[bool] Enables or disables the collection and reporting of metrics for observability of this cluster.'
+            name: '- (Required)[string] The name of the PostgreSQL cluster.'
+            password: '- (Required, WriteOnly)[string] The password for the master database user. This value is never stored in state (requires Terraform 1.11+).'
+            primary_instance_address: '- (Required)[string] The IP and netmask that will be assigned to the cluster primary instance.'
+            ram: '- (Required)[int] The amount of memory per instance in gigabytes (GB).'
+            read: '- (Default 60m) Time to wait for the cluster to be read.'
+            recovery_target_datetime: '- (Optional)[string] If supplied as ISO 8601 timestamp, the backup will be replayed up until the given timestamp. If empty, the backup will be applied completely.'
+            replication_mode: '- (Required)[string] Replication mode across the instances. Possible values: ASYNCHRONOUS, STRICTLY_SYNCHRONOUS.'
+            restore_from_backup: '- (Optional)[object] Configures the cluster to be initialized with data from an existing backup.'
+            source_backup_id: '- (Optional)[string] The UUID of the backup to restore data from.'
+            storage_size: '- (Required)[int] The amount of storage per instance in gigabytes (GB).'
+            time: '- (Required)[string] Start of the maintenance window in UTC time.'
+            update: '- (Default 60m) Time to wait for the cluster to be updated.'
+            username: '- (Required)[string] The username of the master database user.'
+            version: '- (Optional)(Computed)[string] The PostgreSQL version of the cluster. If omitted, the API assigns a default version.'
+        importStatements:
+            - terraform import ionoscloud_pg_cluster_v2.mycluster de/txl:cluster_uuid
     ionoscloud_pg_database:
         subCategory: Database as a Service - Postgres
         description: Creates and manages DbaaS Postgres Database objects.
@@ -3548,7 +3654,7 @@ resources:
                 }
         argumentDocs:
             create: '- (Optional)[string] Time to wait for the bucket to be created. Default is 10m.'
-            delete: '- (Optional)[string] Time to wait for the bucket to be deleted. Default is 10m.'
+            delete: '- (Optional)[string] Time to wait for the bucket to be deleted. Default is 60m.'
             force_destroy: '- (Optional)[bool] Default is false.By setting force_destroy to true, you instruct Terraform to delete the bucket and all its contents during the terraform destroy process. This is particularly useful when dealing with buckets that contain objects, as it allows for automatic cleanup without requiring the manual deletion of objects beforehand. If force_destroy is not set or is set to false, Terraform will refuse to delete a bucket that still contains objects. You must manually empty the bucket before Terraform can remove it.There is a significant risk of accidental data loss when using this attribute, as it irreversibly deletes all contents of the bucket. It''s crucial to ensure that the bucket does not contain critical data before using force_destroy.'
             id: '- (Computed) Name of the bucket'
             name: '- (Required)[string] The bucket name. [ 3 .. 63 ] characters'
@@ -3561,7 +3667,7 @@ resources:
             - terraform import ionoscloud_s3_bucket.example bucket_name
     ionoscloud_s3_bucket_cors_configuration:
         subCategory: Object Storage
-        description: Manages Buckets cors_configuration on IonosCloud.
+        description: Manages Buckets cors_configuration on IONOS CLOUD.
         name: ionoscloud_s3_bucket_cors_configuration
         title: s3_bucket_cors_configuration
         examples:
@@ -3609,7 +3715,7 @@ resources:
             - terraform import ionoscloud_s3_bucket_cors_configuration.example example
     ionoscloud_s3_bucket_lifecycle_configuration:
         subCategory: Object Storage
-        description: Manages Buckets lifecycle configuration on IonosCloud.
+        description: Manages Buckets lifecycle configuration on IONOS CLOUD.
         name: ionoscloud_s3_bucket_lifecycle_configuration
         title: s3_bucket_lifecycle_configuration
         examples:
@@ -3688,7 +3794,7 @@ resources:
             - terraform import ionoscloud_s3_bucket_lifecycle_configuration.example example
     ionoscloud_s3_bucket_object_lock_configuration:
         subCategory: Object Storage
-        description: Manages Buckets object_lock_configuration on IonosCloud.
+        description: Manages Buckets object_lock_configuration on IONOS CLOUD.
         name: ionoscloud_s3_bucket_object_lock_configuration
         title: s3_bucket_object_lock_configuration
         examples:
@@ -3728,7 +3834,7 @@ resources:
             - terraform import ionoscloud_s3_bucket_object_lock_configuration.example example
     ionoscloud_s3_bucket_policy:
         subCategory: Object Storage
-        description: Creates and manages IonosCloud IONOS Object Storage Buckets policies.
+        description: Creates and manages IONOS CLOUD Object Storage Buckets policies.
         name: ionoscloud_s3_bucket_policy
         title: s3_bucket_policy
         examples:
@@ -3752,7 +3858,7 @@ resources:
             - terraform import ionoscloud_s3_bucket_policy.example example
     ionoscloud_s3_bucket_public_access_block:
         subCategory: Object Storage
-        description: Creates and manages IonosCloud IONOS Object Storage Public Access Block for buckets.
+        description: Creates and manages IONOS CLOUD Object Storage Public Access Block for buckets.
         name: ionoscloud_s3_bucket_public_access_block
         title: s3_bucket_public_access_block
         examples:
@@ -3777,7 +3883,7 @@ resources:
             - terraform import ionoscloud_s3_bucket_public_access_block.example example
     ionoscloud_s3_bucket_server_side_encryption_configuration:
         subCategory: Object Storage
-        description: Manages Buckets server side encryption configuration on IonosCloud.
+        description: Manages Buckets server side encryption configuration on IONOS CLOUD.
         name: ionoscloud_s3_bucket_server_side_encryption_configuration
         title: s3_bucket_server_side_encryption_configuration
         examples:
@@ -3811,7 +3917,7 @@ resources:
             - terraform import ionoscloud_s3_bucket_server_side_encryption_configuration.example example
     ionoscloud_s3_bucket_versioning:
         subCategory: Object Storage
-        description: Manages Buckets versioning on IonosCloud.
+        description: Manages Buckets versioning on IONOS CLOUD.
         name: ionoscloud_s3_bucket_versioning
         title: s3_bucket_versioning
         examples:
@@ -3841,7 +3947,7 @@ resources:
             - terraform import ionoscloud_s3_bucket_versioning.example example
     ionoscloud_s3_bucket_website_configuration:
         subCategory: Object Storage
-        description: Manages Buckets website configuration on IonosCloud.
+        description: Manages Buckets website configuration on IONOS CLOUD.
         name: ionoscloud_s3_bucket_website_configuration
         title: s3_bucket_website_configuration
         examples:
@@ -4089,7 +4195,7 @@ resources:
             - terraform import ionoscloud_s3_object.example target/example
     ionoscloud_server:
         subCategory: Compute Engine
-        description: Creates and manages IonosCloud Server objects.
+        description: Creates and manages IONOS CLOUD Server objects.
         name: ionoscloud_server
         title: server
         examples:
@@ -4382,8 +4488,8 @@ resources:
             primary_nic: '- (Computed) The associated NIC.'
             ram: '- (Optional)(Computed)[integer] The amount of memory for the server in MB.'
             security_groups_ids: '- (Optional) The list of Security Group IDs for the'
-            ssh_key_path: '- (Optional)[list] List of absolute paths to files containing a public SSH key that will be injected into IonosCloud provided Linux images.  Also accepts ssh keys directly. Required for IonosCloud Linux images. Required if image_password is not provided. Does not support ~ expansion to homedir in the given path. This property is immutable.'
-            ssh_keys: '- (Optional)[list] Immutable List of absolute or relative paths to files containing public SSH key that will be injected into IonosCloud provided Linux images. Also accepts ssh keys directly. Public SSH keys are set on the image as authorized keys for appropriate SSH login to the instance using the corresponding private key. This field may only be set in creation requests. When reading, it always returns null. SSH keys are only supported if a public Linux image is used for the volume creation. Does not support ~ expansion to homedir in the given path.'
+            ssh_key_path: '- (Optional)[list] List of absolute paths to files containing a public SSH key that will be injected into IONOS CLOUD provided Linux images.  Also accepts ssh keys directly. Required for IONOS CLOUD Linux images. Required if image_password is not provided. Does not support ~ expansion to homedir in the given path. This property is immutable.'
+            ssh_keys: '- (Optional)[list] Immutable List of absolute or relative paths to files containing public SSH key that will be injected into IONOS CLOUD provided Linux images. Also accepts ssh keys directly. Public SSH keys are set on the image as authorized keys for appropriate SSH login to the instance using the corresponding private key. This field may only be set in creation requests. When reading, it always returns null. SSH keys are only supported if a public Linux image is used for the volume creation. Does not support ~ expansion to homedir in the given path.'
             template_uuid: '- (Optional)[string] The UUID of the template for creating a CUBE server; the available templates for CUBE servers can be found on the templates resource'
             type: '- (Optional)(Computed)[string] Server usages: * type - Server usages: ENTERPRISE now named dedicated core, CUBE or VCPU. This property is immutable.'
             value: '- (Required)[string] The value of the label.'
@@ -4430,6 +4536,61 @@ resources:
                       "name": "Group Example",
                       "reserve_ip": true,
                       "s3_privilege": true
+                    }
+            - name: k8s_share_group1
+              manifest: |-
+                {
+                  "edit_privilege": true,
+                  "group_id": "${ionoscloud_group.group1.id}",
+                  "resource_id": "${ionoscloud_k8s_cluster.example.id}",
+                  "share_privilege": false
+                }
+              references:
+                group_id: ionoscloud_group.group1.id
+                resource_id: ionoscloud_k8s_cluster.example.id
+              dependencies:
+                ionoscloud_group.group1: |-
+                    {
+                      "create_k8s_cluster": true,
+                      "name": "Group 1"
+                    }
+                ionoscloud_group.group2: |-
+                    {
+                      "create_k8s_cluster": true,
+                      "name": "Group 2"
+                    }
+                ionoscloud_k8s_cluster.example: |-
+                    {
+                      "name": "k8s-example"
+                    }
+            - name: k8s_share_group2
+              manifest: |-
+                {
+                  "depends_on": [
+                    "${ionoscloud_share.k8s_share_group1}"
+                  ],
+                  "edit_privilege": true,
+                  "group_id": "${ionoscloud_group.group2.id}",
+                  "resource_id": "${ionoscloud_k8s_cluster.example.id}",
+                  "share_privilege": true
+                }
+              references:
+                group_id: ionoscloud_group.group2.id
+                resource_id: ionoscloud_k8s_cluster.example.id
+              dependencies:
+                ionoscloud_group.group1: |-
+                    {
+                      "create_k8s_cluster": true,
+                      "name": "Group 1"
+                    }
+                ionoscloud_group.group2: |-
+                    {
+                      "create_k8s_cluster": true,
+                      "name": "Group 2"
+                    }
+                ionoscloud_k8s_cluster.example: |-
+                    {
+                      "name": "k8s-example"
                     }
         argumentDocs:
             edit_privilege: '- (Optional)[Boolean] The group has permission to edit privileges on this resource.'
@@ -4517,7 +4678,7 @@ resources:
             - terraform import ionoscloud_snapshot.mysnapshot snapshot uuid
     ionoscloud_target_group:
         subCategory: Application Load Balancer
-        description: Creates and manages IonosCloud Target Group.
+        description: Creates and manages IONOS CLOUD Target Group.
         name: ionoscloud_target_group
         title: target_group
         examples:
@@ -4686,9 +4847,52 @@ resources:
             sec_auth_active: '- (Optional)[Boolean] Indicates if secure authentication is active for the user or not. it can not be used in create requests - can be used in update'
         importStatements:
             - terraform import ionoscloud_user.myuser user uuid
+    ionoscloud_user_object_storage_bucket:
+        subCategory: Object Storage
+        description: Creates and manages IONOS User-Owned Object Storage Buckets.
+        name: ionoscloud_user_object_storage_bucket
+        title: user_object_storage_bucket
+        examples:
+            - name: example
+              manifest: |-
+                {
+                  "force_destroy": true,
+                  "name": "example-user-bucket",
+                  "region": "de",
+                  "tags": {
+                    "environment": "production",
+                    "team": "platform"
+                  },
+                  "timeouts": [
+                    {
+                      "create": "10m",
+                      "delete": "10m"
+                    }
+                  ]
+                }
+        argumentDocs:
+            GetBucketLocation: response XML model. The region defaults to de when importing by bucket name alone. Use the region:name import format to specify the correct region explicitly.
+            create: '- (Optional)[string] Time to wait for the bucket to be created. Default is 10m.'
+            de: — Frankfurt, Germany (https://s3.eu-central-1.ionoscloud.com)
+            delete: '- (Optional)[string] Time to wait for the bucket to be deleted. Default is 60m.'
+            eu-central-2: — Berlin, Germany (https://s3.eu-central-2.ionoscloud.com)
+            eu-south-2: — Logroño, Spain (https://s3.eu-south-2.ionoscloud.com)
+            force_destroy: '- (Optional)[bool] Defaults to false. When set to true, all objects in the bucket are deleted before the bucket itself is destroyed, allowing Terraform to remove a non-empty bucket. Use with caution — this irreversibly deletes all bucket contents.'
+            id: '- (Computed) Same value as name.'
+            ionoscloud_s3_bucket: and its associated resources for full feature coverage.
+            name: '- (Required)[string] The bucket name. Must be between 3 and 63 characters.'
+            object_lock_enabled: '- (Optional)[bool] Whether Object Lock is enabled for the bucket. Defaults to false. Cannot be changed after creation — changing this value forces a new resource.'
+            read: '- (Optional)[string] Time to wait for the bucket read operations. Default is 10m.'
+            region: '- (Required)[string] The region where the bucket is created. Available regions:'
+            tags: '- (Optional) A mapping of tags to assign to the bucket.'
+            timeouts: '- (Optional) Timeouts for this resource.'
+        importStatements:
+            - |-
+              terraform import ionoscloud_user_object_storage_bucket.example de:my-bucket
+              terraform import ionoscloud_user_object_storage_bucket.example eu-central-2:my-bucket
     ionoscloud_vcpu_server:
         subCategory: Compute Engine
-        description: Creates and manages IonosCloud VCPU Server objects.
+        description: Creates and manages IONOS CLOUD VCPU Server objects.
         name: ionoscloud_vcpu_server
         title: ionoscloud_vcpu_server
         examples:
@@ -4802,14 +5006,14 @@ resources:
             primary_nic: '- (Computed) The associated NIC.'
             ram: '- (Optional)[integer] The amount of memory for the server in MB.'
             security_groups_ids: '- (Optional) The list of Security Group IDs for the resource.'
-            ssh_keys: '- (Optional)[list] Immutable List of absolute or relative paths to files containing public SSH key that will be injected into IonosCloud provided Linux images. Also accepts ssh keys directly. Public SSH keys are set on the image as authorized keys for appropriate SSH login to the instance using the corresponding private key. This field may only be set in creation requests. When reading, it always returns null. SSH keys are only supported if a public Linux image is used for the volume creation. Does not support ~ expansion to homedir in the given path.'
+            ssh_keys: '- (Optional)[list] Immutable List of absolute or relative paths to files containing public SSH key that will be injected into IONOS CLOUD provided Linux images. Also accepts ssh keys directly. Public SSH keys are set on the image as authorized keys for appropriate SSH login to the instance using the corresponding private key. This field may only be set in creation requests. When reading, it always returns null. SSH keys are only supported if a public Linux image is used for the volume creation. Does not support ~ expansion to homedir in the given path.'
             volume: '- (Required) See the Volume section.'
         importStatements:
             - terraform import ionoscloud_vcpu_server.myserver datacenter uuid/server uuid
             - terraform import ionoscloud_vcpu_server.myserver datacenter uuid/server uuid/primary nic id/firewall rule id
     ionoscloud_volume:
         subCategory: Compute Engine
-        description: Creates and manages IonosCloud Volume objects.
+        description: Creates and manages IONOS CLOUD Volume objects.
         name: ionoscloud_volume
         title: volume
         examples:
@@ -5021,8 +5225,8 @@ resources:
             require_legacy_bios: '- (Optional)(Computed)[boolean] Indicates if the image requires the legacy BIOS for compatibility or specific needs. During creation, if an image is used, the value will be inherited from the image, regardless of the value set in the plan. Later on, the value can be updated.'
             server_id: '- (Required)[string] The ID of a server.'
             size: '-  (Required)[integer] The size of the volume in GB.'
-            ssh_key_path: '-  (Optional)[list] List of absolute paths to files containing a public SSH key that will be injected into IonosCloud provided Linux images. Also accepts ssh keys directly. Required for IonosCloud Linux images. Required if image_password is not provided. This property is immutable.'
-            ssh_keys: '-  (Optional)[list] List of absolute paths to files containing a public SSH key that will be injected into IonosCloud provided Linux images. Also accepts ssh keys directly. Required for IonosCloud Linux images. Required if image_password is not provided. This property is immutable.'
+            ssh_key_path: '-  (Optional)[list] List of absolute paths to files containing a public SSH key that will be injected into IONOS CLOUD provided Linux images. Also accepts ssh keys directly. Required for IONOS CLOUD Linux images. Required if image_password is not provided. This property is immutable.'
+            ssh_keys: '-  (Optional)[list] List of absolute paths to files containing a public SSH key that will be injected into IONOS CLOUD provided Linux images. Also accepts ssh keys directly. Required for IONOS CLOUD Linux images. Required if image_password is not provided. This property is immutable.'
             sshkey: '- (Computed) The associated public SSH key.'
             user_data: '- (Optional)[string] The cloud-init configuration for the volume as base64 encoded string. The property is immutable and is only allowed to be set on a new volume creation. This option will work only with cloud-init compatible images.'
         importStatements:
@@ -5364,7 +5568,7 @@ resources:
                 items: 1.
             cloud_network_cidrs: |-
                 - (Required)[list] The network CIDRs on the "Left" side that are allowed to connect to the IPSec
-                tunnel, i.e. the CIDRs within your IONOS Cloud LAN. Specify "0.0.0.0/0" or "::/0" for all addresses. Minimum items: 1.
+                tunnel, i.e. the CIDRs within your IONOS CLOUD LAN. Specify "0.0.0.0/0" or "::/0" for all addresses. Minimum items: 1.
                 Maximum items: 20.
             description: '- (Optional)[string] The human-readable description of your IPSec Gateway Tunnel.'
             diffie_hellman_group: |-
@@ -5399,7 +5603,7 @@ resources:
         importStatements: []
     ionoscloud_vpn_wireguard_gateway:
         subCategory: VPN
-        description: Creates and manages IonosCloud VPN Wireguard Gateway objects.
+        description: Creates and manages IONOS CLOUD VPN Wireguard Gateway objects.
         name: ionoscloud_vpn_wireguard_gateway
         title: vpn_wireguard_gateway
         examples:
@@ -5472,7 +5676,7 @@ resources:
             - terraform import ionoscloud_vpn_wireguard_gateway.example_gateway location:id
     ionoscloud_vpn_wireguard_peer:
         subCategory: VPN
-        description: Creates and manages IonosCloud VPN Wireguard Gateway Peer objects.
+        description: Creates and manages IONOS CLOUD VPN Wireguard Gateway Peer objects.
         name: ionoscloud_vpn_wireguard_peer
         title: vpn_wireguard_peer
         examples:
@@ -5510,7 +5714,7 @@ resources:
             - terraform import ionoscloud_vpn_wireguard_peer.example gateway_id:peer_id
     network security group:
         subCategory: Compute Engine
-        description: Creates and manages IonosCloud Network Security Group.
+        description: Creates and manages IONOS CLOUD Network Security Group.
         name: network security group
         title: network security group
         argumentDocs:
@@ -5522,7 +5726,7 @@ resources:
             - terraform import ionoscloud_nsg.mynsg datacenter uuid/nsg uuid
     network security group rule:
         subCategory: Compute Engine
-        description: Creates and manages IonosCloud Network Security Group Firewall Rule.
+        description: Creates and manages IONOS CLOUD Network Security Group Firewall Rule.
         name: network security group rule
         title: network security group rule
         argumentDocs:
@@ -5539,4 +5743,4 @@ resources:
             target_ip: '- (Optional)(Computed)[string] In case the target NIC has multiple IP addresses, only traffic directed to the respective IP address of the NIC is allowed. Value null allows all target IPs.'
             type: '- (Optional)(Computed)[string] The type of firewall rule. If is not specified, it will take the default value INGRESS.'
         importStatements:
-            - terraform import ionoscloud_nsg.mynsg datacenter uuid/nsg uuid/firewall uuid
+            - terraform import ionoscloud_nsg_firewallrule.mynsg_firewallrule datacenter_uuid/nsg_uuid/firewall_uuid

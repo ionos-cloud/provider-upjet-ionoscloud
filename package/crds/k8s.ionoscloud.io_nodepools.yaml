@@ -35,7 +35,7 @@ spec:
     schema:
       openAPIV3Schema:
         description: NodePool is the Schema for the NodePools API. Creates and manages
-          IonosCloud Kubernetes Node Pools.
+          IONOS CLOUD Kubernetes Node Pools.
         properties:
           apiVersion:
             description: |-
@@ -470,6 +470,11 @@ spec:
                           type: array
                       type: object
                     type: array
+                  location:
+                    description: The location of the resource. This field should be
+                      used only if you are also using a file configuration and should
+                      not be configured otherwise.
+                    type: string
                   maintenanceWindow:
                     description: |-
                       See the maintenance_window section in the example above
@@ -934,6 +939,11 @@ spec:
                           type: array
                       type: object
                     type: array
+                  location:
+                    description: The location of the resource. This field should be
+                      used only if you are also using a file configuration and should
+                      not be configured otherwise.
+                    type: string
                   maintenanceWindow:
                     description: |-
                       See the maintenance_window section in the example above
@@ -1211,6 +1221,11 @@ spec:
                           type: array
                       type: object
                     type: array
+                  location:
+                    description: The location of the resource. This field should be
+                      used only if you are also using a file configuration and should
+                      not be configured otherwise.
+                    type: string
                   maintenanceWindow:
                     description: |-
                       See the maintenance_window section in the example above

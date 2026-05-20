@@ -35,7 +35,7 @@ spec:
     schema:
       openAPIV3Schema:
         description: CubeServer is the Schema for the CubeServers API. Creates and
-          manages IonosCloud Cube Server objects.
+          manages IONOS CLOUD Cube Server objects.
         properties:
           apiVersion:
             description: |-
@@ -199,6 +199,11 @@ spec:
                     - name
                     - namespace
                     type: object
+                  location:
+                    description: The location of the resource. This field should be
+                      used only if you are also using a file configuration and should
+                      not be configured otherwise.
+                    type: string
                   name:
                     description: '[string] The name of the server.'
                     type: string
@@ -362,8 +367,8 @@ spec:
                     x-kubernetes-list-type: set
                   sshKeyPath:
                     description: '[list] List of paths to files containing a public
-                      SSH key that will be injected into IonosCloud provided Linux
-                      images. Required for IonosCloud Linux images. Required if image_password
+                      SSH key that will be injected into IONOS CLOUD provided Linux
+                      images. Required for IONOS CLOUD Linux images. Required if image_password
                       is not provided.'
                     items:
                       type: string
@@ -419,9 +424,9 @@ spec:
                         type: boolean
                       sshKeyPath:
                         description: '[list] List of paths to files containing a public
-                          SSH key that will be injected into IonosCloud provided Linux
-                          images. Required for IonosCloud Linux images. Required if
-                          image_password is not provided.'
+                          SSH key that will be injected into IONOS CLOUD provided
+                          Linux images. Required for IONOS CLOUD Linux images. Required
+                          if image_password is not provided.'
                         items:
                           type: string
                         type: array
@@ -573,6 +578,11 @@ spec:
                     - name
                     - namespace
                     type: object
+                  location:
+                    description: The location of the resource. This field should be
+                      used only if you are also using a file configuration and should
+                      not be configured otherwise.
+                    type: string
                   name:
                     description: '[string] The name of the server.'
                     type: string
@@ -736,8 +746,8 @@ spec:
                     x-kubernetes-list-type: set
                   sshKeyPath:
                     description: '[list] List of paths to files containing a public
-                      SSH key that will be injected into IonosCloud provided Linux
-                      images. Required for IonosCloud Linux images. Required if image_password
+                      SSH key that will be injected into IONOS CLOUD provided Linux
+                      images. Required for IONOS CLOUD Linux images. Required if image_password
                       is not provided.'
                     items:
                       type: string
@@ -793,9 +803,9 @@ spec:
                         type: boolean
                       sshKeyPath:
                         description: '[list] List of paths to files containing a public
-                          SSH key that will be injected into IonosCloud provided Linux
-                          images. Required for IonosCloud Linux images. Required if
-                          image_password is not provided.'
+                          SSH key that will be injected into IONOS CLOUD provided
+                          Linux images. Required for IONOS CLOUD Linux images. Required
+                          if image_password is not provided.'
                         items:
                           type: string
                         type: array
@@ -963,6 +973,11 @@ spec:
                     items:
                       type: string
                     type: array
+                  location:
+                    description: The location of the resource. This field should be
+                      used only if you are also using a file configuration and should
+                      not be configured otherwise.
+                    type: string
                   name:
                     description: '[string] The name of the server.'
                     type: string
@@ -1066,8 +1081,8 @@ spec:
                     x-kubernetes-list-type: set
                   sshKeyPath:
                     description: '[list] List of paths to files containing a public
-                      SSH key that will be injected into IonosCloud provided Linux
-                      images. Required for IonosCloud Linux images. Required if image_password
+                      SSH key that will be injected into IONOS CLOUD provided Linux
+                      images. Required for IONOS CLOUD Linux images. Required if image_password
                       is not provided.'
                     items:
                       type: string
@@ -1142,9 +1157,9 @@ spec:
                         type: boolean
                       sshKeyPath:
                         description: '[list] List of paths to files containing a public
-                          SSH key that will be injected into IonosCloud provided Linux
-                          images. Required for IonosCloud Linux images. Required if
-                          image_password is not provided.'
+                          SSH key that will be injected into IONOS CLOUD provided
+                          Linux images. Required for IONOS CLOUD Linux images. Required
+                          if image_password is not provided.'
                         items:
                           type: string
                         type: array

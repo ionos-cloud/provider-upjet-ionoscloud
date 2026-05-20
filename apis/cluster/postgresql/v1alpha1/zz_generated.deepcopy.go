@@ -890,6 +890,11 @@ func (in *PostgresqlDatabaseInitParameters) DeepCopyInto(out *PostgresqlDatabase
 		*out = new(v1.Selector)
 		(*in).DeepCopyInto(*out)
 	}
+	if in.Location != nil {
+		in, out := &in.Location, &out.Location
+		*out = new(string)
+		**out = **in
+	}
 	if in.Name != nil {
 		in, out := &in.Name, &out.Name
 		*out = new(string)
@@ -957,6 +962,11 @@ func (in *PostgresqlDatabaseObservation) DeepCopyInto(out *PostgresqlDatabaseObs
 		*out = new(string)
 		**out = **in
 	}
+	if in.Location != nil {
+		in, out := &in.Location, &out.Location
+		*out = new(string)
+		**out = **in
+	}
 	if in.Name != nil {
 		in, out := &in.Name, &out.Name
 		*out = new(string)
@@ -996,6 +1006,11 @@ func (in *PostgresqlDatabaseParameters) DeepCopyInto(out *PostgresqlDatabasePara
 		in, out := &in.ClusterIDSelector, &out.ClusterIDSelector
 		*out = new(v1.Selector)
 		(*in).DeepCopyInto(*out)
+	}
+	if in.Location != nil {
+		in, out := &in.Location, &out.Location
+		*out = new(string)
+		**out = **in
 	}
 	if in.Name != nil {
 		in, out := &in.Name, &out.Name
@@ -1099,6 +1114,11 @@ func (in *PostgresqlUserInitParameters) DeepCopyInto(out *PostgresqlUserInitPara
 		*out = new(v1.Selector)
 		(*in).DeepCopyInto(*out)
 	}
+	if in.Location != nil {
+		in, out := &in.Location, &out.Location
+		*out = new(string)
+		**out = **in
+	}
 	in.PasswordSecretRef.DeepCopyInto(&out.PasswordSecretRef)
 	if in.Username != nil {
 		in, out := &in.Username, &out.Username
@@ -1167,6 +1187,11 @@ func (in *PostgresqlUserObservation) DeepCopyInto(out *PostgresqlUserObservation
 		*out = new(bool)
 		**out = **in
 	}
+	if in.Location != nil {
+		in, out := &in.Location, &out.Location
+		*out = new(string)
+		**out = **in
+	}
 	if in.Username != nil {
 		in, out := &in.Username, &out.Username
 		*out = new(string)
@@ -1201,6 +1226,11 @@ func (in *PostgresqlUserParameters) DeepCopyInto(out *PostgresqlUserParameters) 
 		in, out := &in.ClusterIDSelector, &out.ClusterIDSelector
 		*out = new(v1.Selector)
 		(*in).DeepCopyInto(*out)
+	}
+	if in.Location != nil {
+		in, out := &in.Location, &out.Location
+		*out = new(string)
+		**out = **in
 	}
 	in.PasswordSecretRef.DeepCopyInto(&out.PasswordSecretRef)
 	if in.Username != nil {

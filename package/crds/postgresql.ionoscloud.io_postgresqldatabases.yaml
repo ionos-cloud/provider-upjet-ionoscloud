@@ -153,6 +153,11 @@ spec:
                             type: string
                         type: object
                     type: object
+                  location:
+                    description: The location of the resource. This field should be
+                      used only if you are also using a file configuration and should
+                      not be configured otherwise.
+                    type: string
                   name:
                     description: |-
                       [string] The name of the database. Immutable, forces re-creation.
@@ -257,6 +262,11 @@ spec:
                             type: string
                         type: object
                     type: object
+                  location:
+                    description: The location of the resource. This field should be
+                      used only if you are also using a file configuration and should
+                      not be configured otherwise.
+                    type: string
                   name:
                     description: |-
                       [string] The name of the database. Immutable, forces re-creation.
@@ -373,6 +383,11 @@ spec:
                       forces re-creation.'
                     type: string
                   id:
+                    type: string
+                  location:
+                    description: The location of the resource. This field should be
+                      used only if you are also using a file configuration and should
+                      not be configured otherwise.
                     type: string
                   name:
                     description: |-

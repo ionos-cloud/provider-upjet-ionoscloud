@@ -39,6 +39,9 @@ type BootDeviceSelectionInitParameters struct {
 	// +kubebuilder:validation:Optional
 	DatacenterIDSelector *v1.Selector `json:"datacenterIdSelector,omitempty" tf:"-"`
 
+	// The location of the resource. This field should be used only if you are also using a file configuration and should not be configured otherwise.
+	Location *string `json:"location,omitempty" tf:"location,omitempty"`
+
 	// ID of the Server for which the boot device will be selected.
 	// +crossplane:generate:reference:type=github.com/ionos-cloud/provider-upjet-ionoscloud/apis/cluster/compute/v1alpha1.Server
 	ServerID *string `json:"serverId,omitempty" tf:"server_id,omitempty"`
@@ -64,6 +67,9 @@ type BootDeviceSelectionObservation struct {
 	DefaultBootVolumeID *string `json:"defaultBootVolumeId,omitempty" tf:"default_boot_volume_id,omitempty"`
 
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
+
+	// The location of the resource. This field should be used only if you are also using a file configuration and should not be configured otherwise.
+	Location *string `json:"location,omitempty" tf:"location,omitempty"`
 
 	// ID of the Server for which the boot device will be selected.
 	ServerID *string `json:"serverId,omitempty" tf:"server_id,omitempty"`
@@ -96,6 +102,10 @@ type BootDeviceSelectionParameters struct {
 	// Selector for a Datacenter in compute to populate datacenterId.
 	// +kubebuilder:validation:Optional
 	DatacenterIDSelector *v1.Selector `json:"datacenterIdSelector,omitempty" tf:"-"`
+
+	// The location of the resource. This field should be used only if you are also using a file configuration and should not be configured otherwise.
+	// +kubebuilder:validation:Optional
+	Location *string `json:"location,omitempty" tf:"location,omitempty"`
 
 	// ID of the Server for which the boot device will be selected.
 	// +crossplane:generate:reference:type=github.com/ionos-cloud/provider-upjet-ionoscloud/apis/cluster/compute/v1alpha1.Server

@@ -75,4 +75,4 @@ spec:
       matchLabels:
         testing.upbound.io/example-name: example
     name: Lan Example
-    public: true
+    public: false

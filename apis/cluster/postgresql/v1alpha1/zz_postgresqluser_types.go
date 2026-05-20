@@ -27,6 +27,9 @@ type PostgresqlUserInitParameters struct {
 	// +kubebuilder:validation:Optional
 	ClusterIDSelector *v1.Selector `json:"clusterIdSelector,omitempty" tf:"-"`
 
+	// The location of the resource. This field should be used only if you are also using a file configuration and should not be configured otherwise.
+	Location *string `json:"location,omitempty" tf:"location,omitempty"`
+
 	// [string] User password.
 	PasswordSecretRef v1.SecretKeySelector `json:"passwordSecretRef" tf:"-"`
 
@@ -44,6 +47,9 @@ type PostgresqlUserObservation struct {
 	// (Computed)[bool] Describes whether this user is a system user or not. A system user cannot be updated or deleted.
 	// Describes whether this user is a system user or not. A system user cannot be updated or deleted.
 	IsSystemUser *bool `json:"isSystemUser,omitempty" tf:"is_system_user,omitempty"`
+
+	// The location of the resource. This field should be used only if you are also using a file configuration and should not be configured otherwise.
+	Location *string `json:"location,omitempty" tf:"location,omitempty"`
 
 	// [string] Used for authentication. Updates to the value of the field force the cluster to be re-created.
 	Username *string `json:"username,omitempty" tf:"username,omitempty"`
@@ -63,6 +69,10 @@ type PostgresqlUserParameters struct {
 	// Selector for a PostgresqlCluster in postgresql to populate clusterId.
 	// +kubebuilder:validation:Optional
 	ClusterIDSelector *v1.Selector `json:"clusterIdSelector,omitempty" tf:"-"`
+
+	// The location of the resource. This field should be used only if you are also using a file configuration and should not be configured otherwise.
+	// +kubebuilder:validation:Optional
+	Location *string `json:"location,omitempty" tf:"location,omitempty"`
 
 	// [string] User password.
 	// +kubebuilder:validation:Optional

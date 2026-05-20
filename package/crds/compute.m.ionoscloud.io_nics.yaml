@@ -296,6 +296,11 @@ spec:
                             type: string
                         type: object
                     type: object
+                  location:
+                    description: The location of the resource. This field should be
+                      used only if you are also using a file configuration and should
+                      not be configured otherwise.
+                    type: string
                   mac:
                     description: The MAC address of the NIC. Can be set on creation
                       only. If not set, one will be assigned automatically by the
@@ -646,6 +651,11 @@ spec:
                             type: string
                         type: object
                     type: object
+                  location:
+                    description: The location of the resource. This field should be
+                      used only if you are also using a file configuration and should
+                      not be configured otherwise.
+                    type: string
                   mac:
                     description: The MAC address of the NIC. Can be set on creation
                       only. If not set, one will be assigned automatically by the
@@ -897,6 +907,11 @@ spec:
                   lan:
                     description: '[integer] The LAN ID the NIC will sit on.'
                     type: number
+                  location:
+                    description: The location of the resource. This field should be
+                      used only if you are also using a file configuration and should
+                      not be configured otherwise.
+                    type: string
                   mac:
                     description: The MAC address of the NIC. Can be set on creation
                       only. If not set, one will be assigned automatically by the

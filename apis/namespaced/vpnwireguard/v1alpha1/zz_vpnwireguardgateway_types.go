@@ -333,7 +333,7 @@ type VpnWireguardGatewayStatus struct {
 // +kubebuilder:subresource:status
 // +kubebuilder:storageversion
 
-// VpnWireguardGateway is the Schema for the VpnWireguardGateways API. Creates and manages IonosCloud VPN Wireguard Gateway objects.
+// VpnWireguardGateway is the Schema for the VpnWireguardGateways API. Creates and manages IONOS CLOUD VPN Wireguard Gateway objects.
 // +kubebuilder:printcolumn:name="SYNCED",type="string",JSONPath=".status.conditions[?(@.type=='Synced')].status"
 // +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"
 // +kubebuilder:printcolumn:name="EXTERNAL-NAME",type="string",JSONPath=".metadata.annotations.crossplane\\.io/external-name"

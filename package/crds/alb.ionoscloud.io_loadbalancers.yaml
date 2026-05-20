@@ -35,7 +35,7 @@ spec:
     schema:
       openAPIV3Schema:
         description: Loadbalancer is the Schema for the Loadbalancers API. Creates
-          and manages IonosCloud Application Load Balancer.
+          and manages IONOS CLOUD Application Load Balancer.
         properties:
           apiVersion:
             description: |-
@@ -281,6 +281,8 @@ spec:
                             type: string
                         type: object
                     type: object
+                  location:
+                    type: string
                   loggingFormat:
                     description: Specifies the format of the logs.
                     type: string
@@ -590,6 +592,8 @@ spec:
                             type: string
                         type: object
                     type: object
+                  location:
+                    type: string
                   loggingFormat:
                     description: Specifies the format of the logs.
                     type: string
@@ -837,6 +841,8 @@ spec:
                       [int] ID of the listening (inbound) LAN.
                       ID of the listening (inbound) LAN.
                     type: number
+                  location:
+                    type: string
                   loggingFormat:
                     description: Specifies the format of the logs.
                     type: string

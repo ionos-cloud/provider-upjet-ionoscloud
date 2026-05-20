@@ -205,7 +205,7 @@ type KafkaTopicStatus struct {
 // +kubebuilder:subresource:status
 // +kubebuilder:storageversion
 
-// KafkaTopic is the Schema for the KafkaTopics API. Creates and manages IonosCloud Kafka Cluster Topic objects.
+// KafkaTopic is the Schema for the KafkaTopics API. Creates and manages IONOS CLOUD Kafka Cluster Topic objects.
 // +kubebuilder:printcolumn:name="SYNCED",type="string",JSONPath=".status.conditions[?(@.type=='Synced')].status"
 // +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"
 // +kubebuilder:printcolumn:name="EXTERNAL-NAME",type="string",JSONPath=".metadata.annotations.crossplane\\.io/external-name"

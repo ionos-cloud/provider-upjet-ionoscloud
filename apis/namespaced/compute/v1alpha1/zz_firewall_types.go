@@ -34,6 +34,9 @@ type FirewallInitParameters_2 struct {
 	// [string] Defines the allowed code (from 0 to 254) if protocol ICMP is chosen. Value null allows all codes.
 	IcmpType *string `json:"icmpType,omitempty" tf:"icmp_type,omitempty"`
 
+	// The location of the resource. This field should be used only if you are also using a file configuration and should not be configured otherwise.
+	Location *string `json:"location,omitempty" tf:"location,omitempty"`
+
 	// [string] The name of the firewall rule.
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
@@ -116,6 +119,9 @@ type FirewallObservation_2 struct {
 	// [string] Defines the allowed code (from 0 to 254) if protocol ICMP is chosen. Value null allows all codes.
 	IcmpType *string `json:"icmpType,omitempty" tf:"icmp_type,omitempty"`
 
+	// The location of the resource. This field should be used only if you are also using a file configuration and should not be configured otherwise.
+	Location *string `json:"location,omitempty" tf:"location,omitempty"`
+
 	// [string] The name of the firewall rule.
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
@@ -169,6 +175,10 @@ type FirewallParameters_2 struct {
 	// [string] Defines the allowed code (from 0 to 254) if protocol ICMP is chosen. Value null allows all codes.
 	// +kubebuilder:validation:Optional
 	IcmpType *string `json:"icmpType,omitempty" tf:"icmp_type,omitempty"`
+
+	// The location of the resource. This field should be used only if you are also using a file configuration and should not be configured otherwise.
+	// +kubebuilder:validation:Optional
+	Location *string `json:"location,omitempty" tf:"location,omitempty"`
 
 	// [string] The name of the firewall rule.
 	// +kubebuilder:validation:Optional

@@ -83,6 +83,11 @@ spec:
                       [string] A short description for the cross-connection.
                       The desired description
                     type: string
+                  location:
+                    description: |-
+                      The physical location of the connectable datacenter
+                      The location of the resource. This field should be used only if you are also using a file configuration and should not be configured otherwise.
+                    type: string
                   name:
                     description: |-
                       [string] The name of the cross-connection.
@@ -118,6 +123,11 @@ spec:
                     description: |-
                       [string] A short description for the cross-connection.
                       The desired description
+                    type: string
+                  location:
+                    description: |-
+                      The physical location of the connectable datacenter
+                      The location of the resource. This field should be used only if you are also using a file configuration and should not be configured otherwise.
                     type: string
                   name:
                     description: |-
@@ -256,6 +266,11 @@ spec:
                     type: string
                   id:
                     description: The UUID of the connectable datacenter
+                    type: string
+                  location:
+                    description: |-
+                      The physical location of the connectable datacenter
+                      The location of the resource. This field should be used only if you are also using a file configuration and should not be configured otherwise.
                     type: string
                   name:
                     description: |-

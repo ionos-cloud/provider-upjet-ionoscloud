@@ -35,7 +35,7 @@ spec:
     schema:
       openAPIV3Schema:
         description: BucketLifecycleConfiguration is the Schema for the BucketLifecycleConfigurations
-          API. Manages Buckets lifecycle configuration on IonosCloud.
+          API. Manages Buckets lifecycle configuration on IONOS CLOUD.
         properties:
           apiVersion:
             description: |-

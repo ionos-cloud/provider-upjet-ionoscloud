@@ -35,7 +35,7 @@ spec:
     schema:
       openAPIV3Schema:
         description: VpnWireguardGateway is the Schema for the VpnWireguardGateways
-          API. Creates and manages IonosCloud VPN Wireguard Gateway objects.
+          API. Creates and manages IONOS CLOUD VPN Wireguard Gateway objects.
         properties:
           apiVersion:
             description: |-

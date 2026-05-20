@@ -121,7 +121,7 @@ type BucketVersioningStatus struct {
 // +kubebuilder:subresource:status
 // +kubebuilder:storageversion
 
-// BucketVersioning is the Schema for the BucketVersionings API. Manages Buckets versioning on IonosCloud.
+// BucketVersioning is the Schema for the BucketVersionings API. Manages Buckets versioning on IONOS CLOUD.
 // +kubebuilder:printcolumn:name="SYNCED",type="string",JSONPath=".status.conditions[?(@.type=='Synced')].status"
 // +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"
 // +kubebuilder:printcolumn:name="EXTERNAL-NAME",type="string",JSONPath=".metadata.annotations.crossplane\\.io/external-name"

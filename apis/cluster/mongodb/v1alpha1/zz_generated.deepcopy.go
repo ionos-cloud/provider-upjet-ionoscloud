@@ -850,6 +850,11 @@ func (in *MongodbUserInitParameters) DeepCopyInto(out *MongodbUserInitParameters
 		*out = new(v1.Selector)
 		(*in).DeepCopyInto(*out)
 	}
+	if in.Location != nil {
+		in, out := &in.Location, &out.Location
+		*out = new(string)
+		**out = **in
+	}
 	in.PasswordSecretRef.DeepCopyInto(&out.PasswordSecretRef)
 	if in.Roles != nil {
 		in, out := &in.Roles, &out.Roles
@@ -920,6 +925,11 @@ func (in *MongodbUserObservation) DeepCopyInto(out *MongodbUserObservation) {
 		*out = new(string)
 		**out = **in
 	}
+	if in.Location != nil {
+		in, out := &in.Location, &out.Location
+		*out = new(string)
+		**out = **in
+	}
 	if in.Roles != nil {
 		in, out := &in.Roles, &out.Roles
 		*out = make([]RolesObservation, len(*in))
@@ -961,6 +971,11 @@ func (in *MongodbUserParameters) DeepCopyInto(out *MongodbUserParameters) {
 		in, out := &in.ClusterIDSelector, &out.ClusterIDSelector
 		*out = new(v1.Selector)
 		(*in).DeepCopyInto(*out)
+	}
+	if in.Location != nil {
+		in, out := &in.Location, &out.Location
+		*out = new(string)
+		**out = **in
 	}
 	in.PasswordSecretRef.DeepCopyInto(&out.PasswordSecretRef)
 	if in.Roles != nil {

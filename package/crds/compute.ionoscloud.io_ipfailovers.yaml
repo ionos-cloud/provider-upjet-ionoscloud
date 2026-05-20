@@ -308,6 +308,8 @@ spec:
                             type: string
                         type: object
                     type: object
+                  location:
+                    type: string
                   nicuuid:
                     description: |-
                       [string] The ID of a NIC.
@@ -636,6 +638,8 @@ spec:
                             type: string
                         type: object
                     type: object
+                  location:
+                    type: string
                   nicuuid:
                     description: |-
                       [string] The ID of a NIC.
@@ -819,6 +823,8 @@ spec:
                     type: string
                   lanId:
                     description: '[string] The ID of a LAN.'
+                    type: string
+                  location:
                     type: string
                   nicuuid:
                     description: |-

@@ -35,7 +35,7 @@ spec:
     schema:
       openAPIV3Schema:
         description: Volume is the Schema for the Volumes API. Creates and manages
-          IonosCloud Volume objects.
+          IONOS CLOUD Volume objects.
         properties:
           apiVersion:
             description: |-
@@ -180,6 +180,11 @@ spec:
                   licenceType:
                     description: '[string] Required if image_name is not provided.'
                     type: string
+                  location:
+                    description: The location of the resource. This field should be
+                      used only if you are also using a file configuration and should
+                      not be configured otherwise.
+                    type: string
                   name:
                     description: '[string] The name of the volume.'
                     type: string
@@ -276,19 +281,19 @@ spec:
                     type: number
                   sshKeyPath:
                     description: '[list] List of absolute paths to files containing
-                      a public SSH key that will be injected into IonosCloud provided
-                      Linux images. Also accepts ssh keys directly. Required for IonosCloud
-                      Linux images. Required if image_password is not provided. This
-                      property is immutable.'
+                      a public SSH key that will be injected into IONOS CLOUD provided
+                      Linux images. Also accepts ssh keys directly. Required for IONOS
+                      CLOUD Linux images. Required if image_password is not provided.
+                      This property is immutable.'
                     items:
                       type: string
                     type: array
                   sshKeys:
                     description: '[list] List of absolute paths to files containing
-                      a public SSH key that will be injected into IonosCloud provided
-                      Linux images. Also accepts ssh keys directly. Required for IonosCloud
-                      Linux images. Required if image_password is not provided. This
-                      property is immutable.'
+                      a public SSH key that will be injected into IONOS CLOUD provided
+                      Linux images. Also accepts ssh keys directly. Required for IONOS
+                      CLOUD Linux images. Required if image_password is not provided.
+                      This property is immutable.'
                     items:
                       type: string
                     type: array
@@ -433,6 +438,11 @@ spec:
                   licenceType:
                     description: '[string] Required if image_name is not provided.'
                     type: string
+                  location:
+                    description: The location of the resource. This field should be
+                      used only if you are also using a file configuration and should
+                      not be configured otherwise.
+                    type: string
                   name:
                     description: '[string] The name of the volume.'
                     type: string
@@ -529,19 +539,19 @@ spec:
                     type: number
                   sshKeyPath:
                     description: '[list] List of absolute paths to files containing
-                      a public SSH key that will be injected into IonosCloud provided
-                      Linux images. Also accepts ssh keys directly. Required for IonosCloud
-                      Linux images. Required if image_password is not provided. This
-                      property is immutable.'
+                      a public SSH key that will be injected into IONOS CLOUD provided
+                      Linux images. Also accepts ssh keys directly. Required for IONOS
+                      CLOUD Linux images. Required if image_password is not provided.
+                      This property is immutable.'
                     items:
                       type: string
                     type: array
                   sshKeys:
                     description: '[list] List of absolute paths to files containing
-                      a public SSH key that will be injected into IonosCloud provided
-                      Linux images. Also accepts ssh keys directly. Required for IonosCloud
-                      Linux images. Required if image_password is not provided. This
-                      property is immutable.'
+                      a public SSH key that will be injected into IONOS CLOUD provided
+                      Linux images. Also accepts ssh keys directly. Required for IONOS
+                      CLOUD Linux images. Required if image_password is not provided.
+                      This property is immutable.'
                     items:
                       type: string
                     type: array
@@ -692,6 +702,11 @@ spec:
                   licenceType:
                     description: '[string] Required if image_name is not provided.'
                     type: string
+                  location:
+                    description: The location of the resource. This field should be
+                      used only if you are also using a file configuration and should
+                      not be configured otherwise.
+                    type: string
                   name:
                     description: '[string] The name of the volume.'
                     type: string
@@ -724,19 +739,19 @@ spec:
                     type: number
                   sshKeyPath:
                     description: '[list] List of absolute paths to files containing
-                      a public SSH key that will be injected into IonosCloud provided
-                      Linux images. Also accepts ssh keys directly. Required for IonosCloud
-                      Linux images. Required if image_password is not provided. This
-                      property is immutable.'
+                      a public SSH key that will be injected into IONOS CLOUD provided
+                      Linux images. Also accepts ssh keys directly. Required for IONOS
+                      CLOUD Linux images. Required if image_password is not provided.
+                      This property is immutable.'
                     items:
                       type: string
                     type: array
                   sshKeys:
                     description: '[list] List of absolute paths to files containing
-                      a public SSH key that will be injected into IonosCloud provided
-                      Linux images. Also accepts ssh keys directly. Required for IonosCloud
-                      Linux images. Required if image_password is not provided. This
-                      property is immutable.'
+                      a public SSH key that will be injected into IONOS CLOUD provided
+                      Linux images. Also accepts ssh keys directly. Required for IONOS
+                      CLOUD Linux images. Required if image_password is not provided.
+                      This property is immutable.'
                     items:
                       type: string
                     type: array

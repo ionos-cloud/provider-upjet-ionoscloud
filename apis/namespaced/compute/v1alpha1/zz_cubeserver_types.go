@@ -51,13 +51,16 @@ type CubeServerInitParameters struct {
 	// [string] Required if ssh_key_path is not provided.
 	ImagePasswordSecretRef *v1.LocalSecretKeySelector `json:"imagePasswordSecretRef,omitempty" tf:"-"`
 
+	// The location of the resource. This field should be used only if you are also using a file configuration and should not be configured otherwise.
+	Location *string `json:"location,omitempty" tf:"location,omitempty"`
+
 	// [string] The name of the server.
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
 	// See the Nic section.
 	Nic *NicInitParameters `json:"nic,omitempty" tf:"nic,omitempty"`
 
-	// [list] List of paths to files containing a public SSH key that will be injected into IonosCloud provided Linux images. Required for IonosCloud Linux images. Required if image_password is not provided.
+	// [list] List of paths to files containing a public SSH key that will be injected into IONOS CLOUD provided Linux images. Required for IONOS CLOUD Linux images. Required if image_password is not provided.
 	SSHKeyPath []*string `json:"sshKeyPath,omitempty" tf:"ssh_key_path,omitempty"`
 
 	// The list of Security Group IDs for the resource.
@@ -112,6 +115,9 @@ type CubeServerObservation struct {
 	// A list that contains the IDs for the volumes defined inside the cube server resource.
 	InlineVolumeIds []*string `json:"inlineVolumeIds,omitempty" tf:"inline_volume_ids,omitempty"`
 
+	// The location of the resource. This field should be used only if you are also using a file configuration and should not be configured otherwise.
+	Location *string `json:"location,omitempty" tf:"location,omitempty"`
+
 	// [string] The name of the server.
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
@@ -124,7 +130,7 @@ type CubeServerObservation struct {
 	// (Computed) The associated NIC.
 	PrimaryNic *string `json:"primaryNic,omitempty" tf:"primary_nic,omitempty"`
 
-	// [list] List of paths to files containing a public SSH key that will be injected into IonosCloud provided Linux images. Required for IonosCloud Linux images. Required if image_password is not provided.
+	// [list] List of paths to files containing a public SSH key that will be injected into IONOS CLOUD provided Linux images. Required for IONOS CLOUD Linux images. Required if image_password is not provided.
 	SSHKeyPath []*string `json:"sshKeyPath,omitempty" tf:"ssh_key_path,omitempty"`
 
 	// The list of Security Group IDs for the resource.
@@ -188,6 +194,10 @@ type CubeServerParameters struct {
 	// +kubebuilder:validation:Optional
 	ImagePasswordSecretRef *v1.LocalSecretKeySelector `json:"imagePasswordSecretRef,omitempty" tf:"-"`
 
+	// The location of the resource. This field should be used only if you are also using a file configuration and should not be configured otherwise.
+	// +kubebuilder:validation:Optional
+	Location *string `json:"location,omitempty" tf:"location,omitempty"`
+
 	// [string] The name of the server.
 	// +kubebuilder:validation:Optional
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
@@ -196,7 +206,7 @@ type CubeServerParameters struct {
 	// +kubebuilder:validation:Optional
 	Nic *NicParameters `json:"nic,omitempty" tf:"nic,omitempty"`
 
-	// [list] List of paths to files containing a public SSH key that will be injected into IonosCloud provided Linux images. Required for IonosCloud Linux images. Required if image_password is not provided.
+	// [list] List of paths to files containing a public SSH key that will be injected into IONOS CLOUD provided Linux images. Required for IONOS CLOUD Linux images. Required if image_password is not provided.
 	// +kubebuilder:validation:Optional
 	SSHKeyPath []*string `json:"sshKeyPath,omitempty" tf:"ssh_key_path,omitempty"`
 
@@ -477,7 +487,7 @@ type VolumeInitParameters struct {
 	// Indicates if the image requires the legacy BIOS for compatibility or specific needs.
 	RequireLegacyBios *bool `json:"requireLegacyBios,omitempty" tf:"require_legacy_bios,omitempty"`
 
-	// [list] List of paths to files containing a public SSH key that will be injected into IonosCloud provided Linux images. Required for IonosCloud Linux images. Required if image_password is not provided.
+	// [list] List of paths to files containing a public SSH key that will be injected into IONOS CLOUD provided Linux images. Required for IONOS CLOUD Linux images. Required if image_password is not provided.
 	SSHKeyPath []*string `json:"sshKeyPath,omitempty" tf:"ssh_key_path,omitempty"`
 
 	// The cloud-init configuration for the volume as base64 encoded string. The property is immutable and is only allowed to be set on a new volume creation. It is mandatory to provide either 'public image' or 'imageAlias' that has cloud-init compatibility in conjunction with this property.
@@ -530,7 +540,7 @@ type VolumeObservation struct {
 	// Indicates if the image requires the legacy BIOS for compatibility or specific needs.
 	RequireLegacyBios *bool `json:"requireLegacyBios,omitempty" tf:"require_legacy_bios,omitempty"`
 
-	// [list] List of paths to files containing a public SSH key that will be injected into IonosCloud provided Linux images. Required for IonosCloud Linux images. Required if image_password is not provided.
+	// [list] List of paths to files containing a public SSH key that will be injected into IONOS CLOUD provided Linux images. Required for IONOS CLOUD Linux images. Required if image_password is not provided.
 	SSHKeyPath []*string `json:"sshKeyPath,omitempty" tf:"ssh_key_path,omitempty"`
 
 	// The cloud-init configuration for the volume as base64 encoded string. The property is immutable and is only allowed to be set on a new volume creation. It is mandatory to provide either 'public image' or 'imageAlias' that has cloud-init compatibility in conjunction with this property.
@@ -573,7 +583,7 @@ type VolumeParameters struct {
 	// +kubebuilder:validation:Optional
 	RequireLegacyBios *bool `json:"requireLegacyBios,omitempty" tf:"require_legacy_bios,omitempty"`
 
-	// [list] List of paths to files containing a public SSH key that will be injected into IonosCloud provided Linux images. Required for IonosCloud Linux images. Required if image_password is not provided.
+	// [list] List of paths to files containing a public SSH key that will be injected into IONOS CLOUD provided Linux images. Required for IONOS CLOUD Linux images. Required if image_password is not provided.
 	// +kubebuilder:validation:Optional
 	SSHKeyPath []*string `json:"sshKeyPath,omitempty" tf:"ssh_key_path,omitempty"`
 
@@ -609,7 +619,7 @@ type CubeServerStatus struct {
 // +kubebuilder:subresource:status
 // +kubebuilder:storageversion
 
-// CubeServer is the Schema for the CubeServers API. Creates and manages IonosCloud Cube Server objects.
+// CubeServer is the Schema for the CubeServers API. Creates and manages IONOS CLOUD Cube Server objects.
 // +kubebuilder:printcolumn:name="SYNCED",type="string",JSONPath=".status.conditions[?(@.type=='Synced')].status"
 // +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"
 // +kubebuilder:printcolumn:name="EXTERNAL-NAME",type="string",JSONPath=".metadata.annotations.crossplane\\.io/external-name"

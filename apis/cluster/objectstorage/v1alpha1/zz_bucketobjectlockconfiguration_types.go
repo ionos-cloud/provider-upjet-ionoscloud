@@ -163,7 +163,7 @@ type BucketObjectLockConfigurationStatus struct {
 // +kubebuilder:subresource:status
 // +kubebuilder:storageversion
 
-// BucketObjectLockConfiguration is the Schema for the BucketObjectLockConfigurations API. Manages Buckets object_lock_configuration on IonosCloud.
+// BucketObjectLockConfiguration is the Schema for the BucketObjectLockConfigurations API. Manages Buckets object_lock_configuration on IONOS CLOUD.
 // +kubebuilder:printcolumn:name="SYNCED",type="string",JSONPath=".status.conditions[?(@.type=='Synced')].status"
 // +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"
 // +kubebuilder:printcolumn:name="EXTERNAL-NAME",type="string",JSONPath=".metadata.annotations.crossplane\\.io/external-name"

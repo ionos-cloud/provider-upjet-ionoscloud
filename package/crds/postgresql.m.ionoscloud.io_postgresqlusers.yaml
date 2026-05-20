@@ -145,6 +145,11 @@ spec:
                             type: string
                         type: object
                     type: object
+                  location:
+                    description: The location of the resource. This field should be
+                      used only if you are also using a file configuration and should
+                      not be configured otherwise.
+                    type: string
                   passwordSecretRef:
                     description: '[string] User password.'
                     properties:
@@ -261,6 +266,11 @@ spec:
                             type: string
                         type: object
                     type: object
+                  location:
+                    description: The location of the resource. This field should be
+                      used only if you are also using a file configuration and should
+                      not be configured otherwise.
+                    type: string
                   passwordSecretRef:
                     description: '[string] User password.'
                     properties:
@@ -362,6 +372,11 @@ spec:
                       (Computed)[bool] Describes whether this user is a system user or not. A system user cannot be updated or deleted.
                       Describes whether this user is a system user or not. A system user cannot be updated or deleted.
                     type: boolean
+                  location:
+                    description: The location of the resource. This field should be
+                      used only if you are also using a file configuration and should
+                      not be configured otherwise.
+                    type: string
                   username:
                     description: '[string] Used for authentication. Updates to the
                       value of the field force the cluster to be re-created.'

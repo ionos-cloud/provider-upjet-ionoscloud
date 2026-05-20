@@ -144,6 +144,8 @@ spec:
                             type: string
                         type: object
                     type: object
+                  location:
+                    type: string
                   name:
                     description: |-
                       [string] Name of the NAT gateway rule.
@@ -374,6 +376,8 @@ spec:
                             type: string
                         type: object
                     type: object
+                  location:
+                    type: string
                   name:
                     description: |-
                       [string] Name of the NAT gateway rule.
@@ -586,6 +590,8 @@ spec:
                     description: '[string] A Datacenter''s UUID.'
                     type: string
                   id:
+                    type: string
+                  location:
                     type: string
                   name:
                     description: |-

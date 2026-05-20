@@ -43,6 +43,10 @@ type CrossconnectInitParameters struct {
 	// The desired description
 	Description *string `json:"description,omitempty" tf:"description,omitempty"`
 
+	// The physical location of the connectable datacenter
+	// The location of the resource. This field should be used only if you are also using a file configuration and should not be configured otherwise.
+	Location *string `json:"location,omitempty" tf:"location,omitempty"`
+
 	// [string] The name of the cross-connection.
 	// The desired name
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
@@ -64,6 +68,10 @@ type CrossconnectObservation struct {
 	// The UUID of the connectable datacenter
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
+	// The physical location of the connectable datacenter
+	// The location of the resource. This field should be used only if you are also using a file configuration and should not be configured otherwise.
+	Location *string `json:"location,omitempty" tf:"location,omitempty"`
+
 	// [string] The name of the cross-connection.
 	// The desired name
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
@@ -83,6 +91,11 @@ type CrossconnectParameters struct {
 	// The desired description
 	// +kubebuilder:validation:Optional
 	Description *string `json:"description,omitempty" tf:"description,omitempty"`
+
+	// The physical location of the connectable datacenter
+	// The location of the resource. This field should be used only if you are also using a file configuration and should not be configured otherwise.
+	// +kubebuilder:validation:Optional
+	Location *string `json:"location,omitempty" tf:"location,omitempty"`
 
 	// [string] The name of the cross-connection.
 	// The desired name

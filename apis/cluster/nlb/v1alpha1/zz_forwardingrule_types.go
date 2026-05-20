@@ -43,6 +43,9 @@ type ForwardingruleInitParameters struct {
 	// Listening port number. (inbound) (range: 1 to 65535)
 	ListenerPort *float64 `json:"listenerPort,omitempty" tf:"listener_port,omitempty"`
 
+	// The location of the resource. This field should be used only if you are also using a file configuration and should not be configured otherwise.
+	Location *string `json:"location,omitempty" tf:"location,omitempty"`
+
 	// [string] A name of that Network Load Balancer forwarding rule.
 	// A name of that Network Load Balancer forwarding rule
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
@@ -89,6 +92,9 @@ type ForwardingruleObservation struct {
 	// [int] Listening port number. (inbound) (range: 1 to 65535)
 	// Listening port number. (inbound) (range: 1 to 65535)
 	ListenerPort *float64 `json:"listenerPort,omitempty" tf:"listener_port,omitempty"`
+
+	// The location of the resource. This field should be used only if you are also using a file configuration and should not be configured otherwise.
+	Location *string `json:"location,omitempty" tf:"location,omitempty"`
 
 	// [string] A name of that Network Load Balancer forwarding rule.
 	// A name of that Network Load Balancer forwarding rule
@@ -139,6 +145,10 @@ type ForwardingruleParameters struct {
 	// Listening port number. (inbound) (range: 1 to 65535)
 	// +kubebuilder:validation:Optional
 	ListenerPort *float64 `json:"listenerPort,omitempty" tf:"listener_port,omitempty"`
+
+	// The location of the resource. This field should be used only if you are also using a file configuration and should not be configured otherwise.
+	// +kubebuilder:validation:Optional
+	Location *string `json:"location,omitempty" tf:"location,omitempty"`
 
 	// [string] A name of that Network Load Balancer forwarding rule.
 	// A name of that Network Load Balancer forwarding rule

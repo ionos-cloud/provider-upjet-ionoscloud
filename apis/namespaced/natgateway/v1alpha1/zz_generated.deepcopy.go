@@ -178,6 +178,11 @@ func (in *NatgatewayInitParameters) DeepCopyInto(out *NatgatewayInitParameters) 
 			(*in)[i].DeepCopyInto(&(*out)[i])
 		}
 	}
+	if in.Location != nil {
+		in, out := &in.Location, &out.Location
+		*out = new(string)
+		**out = **in
+	}
 	if in.Name != nil {
 		in, out := &in.Name, &out.Name
 		*out = new(string)
@@ -258,6 +263,11 @@ func (in *NatgatewayObservation) DeepCopyInto(out *NatgatewayObservation) {
 			(*in)[i].DeepCopyInto(&(*out)[i])
 		}
 	}
+	if in.Location != nil {
+		in, out := &in.Location, &out.Location
+		*out = new(string)
+		**out = **in
+	}
 	if in.Name != nil {
 		in, out := &in.Name, &out.Name
 		*out = new(string)
@@ -310,6 +320,11 @@ func (in *NatgatewayParameters) DeepCopyInto(out *NatgatewayParameters) {
 		for i := range *in {
 			(*in)[i].DeepCopyInto(&(*out)[i])
 		}
+	}
+	if in.Location != nil {
+		in, out := &in.Location, &out.Location
+		*out = new(string)
+		**out = **in
 	}
 	if in.Name != nil {
 		in, out := &in.Name, &out.Name
@@ -419,6 +434,11 @@ func (in *RuleInitParameters) DeepCopyInto(out *RuleInitParameters) {
 		*out = new(v1.NamespacedSelector)
 		(*in).DeepCopyInto(*out)
 	}
+	if in.Location != nil {
+		in, out := &in.Location, &out.Location
+		*out = new(string)
+		**out = **in
+	}
 	if in.Name != nil {
 		in, out := &in.Name, &out.Name
 		*out = new(string)
@@ -526,6 +546,11 @@ func (in *RuleObservation) DeepCopyInto(out *RuleObservation) {
 		*out = new(string)
 		**out = **in
 	}
+	if in.Location != nil {
+		in, out := &in.Location, &out.Location
+		*out = new(string)
+		**out = **in
+	}
 	if in.Name != nil {
 		in, out := &in.Name, &out.Name
 		*out = new(string)
@@ -595,6 +620,11 @@ func (in *RuleParameters) DeepCopyInto(out *RuleParameters) {
 		in, out := &in.DatacenterIDSelector, &out.DatacenterIDSelector
 		*out = new(v1.NamespacedSelector)
 		(*in).DeepCopyInto(*out)
+	}
+	if in.Location != nil {
+		in, out := &in.Location, &out.Location
+		*out = new(string)
+		**out = **in
 	}
 	if in.Name != nil {
 		in, out := &in.Name, &out.Name

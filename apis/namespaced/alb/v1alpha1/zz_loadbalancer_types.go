@@ -126,6 +126,8 @@ type LoadbalancerInitParameters struct {
 	// +kubebuilder:validation:Optional
 	ListenerLanSelector *v1.NamespacedSelector `json:"listenerLanSelector,omitempty" tf:"-"`
 
+	Location *string `json:"location,omitempty" tf:"location,omitempty"`
+
 	// Specifies the format of the logs.
 	LoggingFormat *string `json:"loggingFormat,omitempty" tf:"logging_format,omitempty"`
 
@@ -178,6 +180,8 @@ type LoadbalancerObservation struct {
 	// [int] ID of the listening (inbound) LAN.
 	// ID of the listening (inbound) LAN.
 	ListenerLan *float64 `json:"listenerLan,omitempty" tf:"listener_lan,omitempty"`
+
+	Location *string `json:"location,omitempty" tf:"location,omitempty"`
 
 	// Specifies the format of the logs.
 	LoggingFormat *string `json:"loggingFormat,omitempty" tf:"logging_format,omitempty"`
@@ -245,6 +249,9 @@ type LoadbalancerParameters struct {
 	// +kubebuilder:validation:Optional
 	ListenerLanSelector *v1.NamespacedSelector `json:"listenerLanSelector,omitempty" tf:"-"`
 
+	// +kubebuilder:validation:Optional
+	Location *string `json:"location,omitempty" tf:"location,omitempty"`
+
 	// Specifies the format of the logs.
 	// +kubebuilder:validation:Optional
 	LoggingFormat *string `json:"loggingFormat,omitempty" tf:"logging_format,omitempty"`
@@ -296,7 +303,7 @@ type LoadbalancerStatus struct {
 // +kubebuilder:subresource:status
 // +kubebuilder:storageversion
 
-// Loadbalancer is the Schema for the Loadbalancers API. Creates and manages IonosCloud Application Load Balancer.
+// Loadbalancer is the Schema for the Loadbalancers API. Creates and manages IONOS CLOUD Application Load Balancer.
 // +kubebuilder:printcolumn:name="SYNCED",type="string",JSONPath=".status.conditions[?(@.type=='Synced')].status"
 // +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"
 // +kubebuilder:printcolumn:name="EXTERNAL-NAME",type="string",JSONPath=".metadata.annotations.crossplane\\.io/external-name"

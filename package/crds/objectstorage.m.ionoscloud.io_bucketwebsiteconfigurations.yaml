@@ -35,7 +35,7 @@ spec:
     schema:
       openAPIV3Schema:
         description: BucketWebsiteConfiguration is the Schema for the BucketWebsiteConfigurations
-          API. Manages Buckets website configuration on IonosCloud.
+          API. Manages Buckets website configuration on IONOS CLOUD.
         properties:
           apiVersion:
             description: |-

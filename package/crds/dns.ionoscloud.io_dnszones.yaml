@@ -81,7 +81,8 @@ spec:
                       Default is true.'
                     type: boolean
                   name:
-                    description: '[string] The name of the DNS Zone.'
+                    description: '[string] The name of the DNS Zone. This property
+                      is immutable.'
                     type: string
                 type: object
               initProvider:
@@ -105,7 +106,8 @@ spec:
                       Default is true.'
                     type: boolean
                   name:
-                    description: '[string] The name of the DNS Zone.'
+                    description: '[string] The name of the DNS Zone. This property
+                      is immutable.'
                     type: string
                 type: object
               managementPolicies:
@@ -214,7 +216,8 @@ spec:
                   id:
                     type: string
                   name:
-                    description: '[string] The name of the DNS Zone.'
+                    description: '[string] The name of the DNS Zone. This property
+                      is immutable.'
                     type: string
                   nameservers:
                     description: A list of available name servers.

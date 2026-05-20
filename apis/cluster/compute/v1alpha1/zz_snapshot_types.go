@@ -45,6 +45,10 @@ type SnapshotInitParameters struct {
 	// OS type of this Snapshot
 	LicenceType *string `json:"licenceType,omitempty" tf:"licence_type,omitempty"`
 
+	// Location of that image/snapshot
+	// The location of the resource. This field should be used only if you are also using a file configuration and should not be configured otherwise.
+	Location *string `json:"location,omitempty" tf:"location,omitempty"`
+
 	// [string] The name of the snapshot.
 	// A name of that resource
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
@@ -113,7 +117,7 @@ type SnapshotObservation struct {
 	LicenceType *string `json:"licenceType,omitempty" tf:"licence_type,omitempty"`
 
 	// Location of that image/snapshot
-	// Location of that image/snapshot
+	// The location of the resource. This field should be used only if you are also using a file configuration and should not be configured otherwise.
 	Location *string `json:"location,omitempty" tf:"location,omitempty"`
 
 	// [string] The name of the snapshot.
@@ -185,6 +189,11 @@ type SnapshotParameters struct {
 	// OS type of this Snapshot
 	// +kubebuilder:validation:Optional
 	LicenceType *string `json:"licenceType,omitempty" tf:"licence_type,omitempty"`
+
+	// Location of that image/snapshot
+	// The location of the resource. This field should be used only if you are also using a file configuration and should not be configured otherwise.
+	// +kubebuilder:validation:Optional
+	Location *string `json:"location,omitempty" tf:"location,omitempty"`
 
 	// [string] The name of the snapshot.
 	// A name of that resource

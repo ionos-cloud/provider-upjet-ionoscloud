@@ -35,7 +35,7 @@ spec:
     schema:
       openAPIV3Schema:
         description: BucketPolicy is the Schema for the BucketPolicys API. Creates
-          and manages IonosCloud IONOS Object Storage Buckets policies.
+          and manages IONOS CLOUD Object Storage Buckets policies.
         properties:
           apiVersion:
             description: |-

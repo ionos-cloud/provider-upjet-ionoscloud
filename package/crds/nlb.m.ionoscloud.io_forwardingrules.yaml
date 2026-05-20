@@ -185,6 +185,11 @@ spec:
                       [int] Listening port number. (inbound) (range: 1 to 65535)
                       Listening port number. (inbound) (range: 1 to 65535)
                     type: number
+                  location:
+                    description: The location of the resource. This field should be
+                      used only if you are also using a file configuration and should
+                      not be configured otherwise.
+                    type: string
                   name:
                     description: |-
                       [string] A name of that Network Load Balancer forwarding rule.
@@ -468,6 +473,11 @@ spec:
                       [int] Listening port number. (inbound) (range: 1 to 65535)
                       Listening port number. (inbound) (range: 1 to 65535)
                     type: number
+                  location:
+                    description: The location of the resource. This field should be
+                      used only if you are also using a file configuration and should
+                      not be configured otherwise.
+                    type: string
                   name:
                     description: |-
                       [string] A name of that Network Load Balancer forwarding rule.
@@ -746,6 +756,11 @@ spec:
                       [int] Listening port number. (inbound) (range: 1 to 65535)
                       Listening port number. (inbound) (range: 1 to 65535)
                     type: number
+                  location:
+                    description: The location of the resource. This field should be
+                      used only if you are also using a file configuration and should
+                      not be configured otherwise.
+                    type: string
                   name:
                     description: |-
                       [string] A name of that Network Load Balancer forwarding rule.

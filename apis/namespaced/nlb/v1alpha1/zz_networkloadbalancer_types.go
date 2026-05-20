@@ -124,6 +124,9 @@ type NetworkloadbalancerInitParameters struct {
 	// +kubebuilder:validation:Optional
 	ListenerLanSelector *v1.NamespacedSelector `json:"listenerLanSelector,omitempty" tf:"-"`
 
+	// The location of the resource. This field should be used only if you are also using a file configuration and should not be configured otherwise.
+	Location *string `json:"location,omitempty" tf:"location,omitempty"`
+
 	// Specifies the format of the logs.
 	LoggingFormat *string `json:"loggingFormat,omitempty" tf:"logging_format,omitempty"`
 
@@ -174,6 +177,9 @@ type NetworkloadbalancerObservation struct {
 	// [int] Id of the listening LAN. (inbound)
 	// Id of the listening LAN. (inbound)
 	ListenerLan *float64 `json:"listenerLan,omitempty" tf:"listener_lan,omitempty"`
+
+	// The location of the resource. This field should be used only if you are also using a file configuration and should not be configured otherwise.
+	Location *string `json:"location,omitempty" tf:"location,omitempty"`
 
 	// Specifies the format of the logs.
 	LoggingFormat *string `json:"loggingFormat,omitempty" tf:"logging_format,omitempty"`
@@ -238,6 +244,10 @@ type NetworkloadbalancerParameters struct {
 	// Selector for a Lan in compute to populate listenerLan.
 	// +kubebuilder:validation:Optional
 	ListenerLanSelector *v1.NamespacedSelector `json:"listenerLanSelector,omitempty" tf:"-"`
+
+	// The location of the resource. This field should be used only if you are also using a file configuration and should not be configured otherwise.
+	// +kubebuilder:validation:Optional
+	Location *string `json:"location,omitempty" tf:"location,omitempty"`
 
 	// Specifies the format of the logs.
 	// +kubebuilder:validation:Optional
