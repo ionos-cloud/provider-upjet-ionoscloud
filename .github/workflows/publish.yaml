@@ -1,11 +1,9 @@
 name: Publish Provider Package
 
 on:
-  workflow_run:
-    workflows:
-      - Tag
-    types:
-      - completed
+  push:
+    tags:
+      - 'v*'
   workflow_dispatch:
     inputs:
       version:
@@ -18,7 +16,6 @@ on:
 
 jobs:
   publish-provider-package:
-    if: github.event_name == 'workflow_dispatch' || github.event.workflow_run.conclusion == 'success'
     uses: crossplane-contrib/provider-workflows/.github/workflows/publish-provider.yml@main
     permissions:
       contents: read
@@ -26,7 +23,7 @@ jobs:
     with:
       repository: provider-upjet-ionoscloud
       registry_org: ionos-cloud
-      version: ${{ github.event_name == 'workflow_run' && github.event.workflow_run.head_branch || github.event.inputs.version }}
+      version: ${{ github.event_name == 'push' && github.ref_name || github.event.inputs.version }}
       go-version: ${{ github.event.inputs['go-version'] || '1.26' }}
       cleanup-disk: true
     secrets:
