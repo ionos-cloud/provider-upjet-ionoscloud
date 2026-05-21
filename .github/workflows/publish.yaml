@@ -10,8 +10,7 @@ on:
     inputs:
       version:
         description: "Version string to use while publishing the package (e.g. v1.0.0-alpha.1)"
-        default: ''
-        required: false
+        required: true
       go-version:
         description: 'Go version to use if building needs to be done'
         default: '1.26'
@@ -19,6 +18,7 @@ on:
 
 jobs:
   publish-provider-package:
+    if: github.event_name == 'workflow_dispatch' || github.event.workflow_run.conclusion == 'success'
     uses: crossplane-contrib/provider-workflows/.github/workflows/publish-provider.yml@main
     permissions:
       contents: read
@@ -27,7 +27,7 @@ jobs:
       repository: provider-upjet-ionoscloud
       registry_org: ionos-cloud
       version: ${{ github.event_name == 'workflow_run' && github.event.workflow_run.head_branch || github.event.inputs.version }}
-      go-version: ${{ github.event.inputs.go-version }}
+      go-version: ${{ github.event.inputs['go-version'] || '1.26' }}
       cleanup-disk: true
     secrets:
       GHCR_PAT: ${{ secrets.GITHUB_TOKEN }}
