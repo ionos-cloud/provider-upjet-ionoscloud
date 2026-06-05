@@ -8,7 +8,9 @@ metadata:
   name: example
 spec:
   forProvider:
-    backupLocation: eu-central-3
+    backup:
+      location: eu-central-3
+      retentionDays: 7
     connectionPooler: DISABLED
     connections:
       datacenterIdSelector:
@@ -24,6 +26,7 @@ spec:
         key: password
         name: pwsecret
       username: username
+      passwordVersion: "1"
     description: Production PostgreSQL cluster
     instances:
       cores: 2
