@@ -233,7 +233,7 @@ type ServerNicInitParameters struct {
 
 	// Allows to define firewall rules inline in the server. See the Firewall section.
 	// Firewall rules created in the server resource. The rules can also be created as separate resources outside the server resource
-	Firewall *ServerNicFirewallInitParameters `json:"firewall,omitempty" tf:"firewall,omitempty"`
+	Firewall []ServerNicFirewallInitParameters `json:"firewall,omitempty" tf:"firewall,omitempty"`
 
 	FirewallActive *bool `json:"firewallActive,omitempty" tf:"firewall_active,omitempty"`
 
@@ -283,7 +283,7 @@ type ServerNicObservation struct {
 
 	// Allows to define firewall rules inline in the server. See the Firewall section.
 	// Firewall rules created in the server resource. The rules can also be created as separate resources outside the server resource
-	Firewall *ServerNicFirewallObservation `json:"firewall,omitempty" tf:"firewall,omitempty"`
+	Firewall []ServerNicFirewallObservation `json:"firewall,omitempty" tf:"firewall,omitempty"`
 
 	FirewallActive *bool `json:"firewallActive,omitempty" tf:"firewall_active,omitempty"`
 
@@ -330,7 +330,7 @@ type ServerNicParameters struct {
 	// Allows to define firewall rules inline in the server. See the Firewall section.
 	// Firewall rules created in the server resource. The rules can also be created as separate resources outside the server resource
 	// +kubebuilder:validation:Optional
-	Firewall *ServerNicFirewallParameters `json:"firewall,omitempty" tf:"firewall,omitempty"`
+	Firewall []ServerNicFirewallParameters `json:"firewall,omitempty" tf:"firewall,omitempty"`
 
 	// +kubebuilder:validation:Optional
 	FirewallActive *bool `json:"firewallActive,omitempty" tf:"firewall_active,omitempty"`

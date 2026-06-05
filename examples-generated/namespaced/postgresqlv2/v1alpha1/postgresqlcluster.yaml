@@ -9,7 +9,9 @@ metadata:
   namespace: upbound-system
 spec:
   forProvider:
-    backupLocation: de
+    backup:
+      location: eu-central-3
+      retentionDays: 7
     connectionPooler: DISABLED
     connections:
       datacenterIdSelector:
@@ -22,8 +24,9 @@ spec:
     credentials:
       database: mydb
       passwordSecretRef:
-        key: attribute.result
-        name: example-password
+        key: attribute.cluster_password.result
+        name: example-
+      passwordVersion: "1"
       username: username
     description: Production PostgreSQL cluster
     instances:
@@ -41,11 +44,8 @@ spec:
     metricsEnabled: true
     name: PostgreSQL_cluster
     replicationMode: ASYNCHRONOUS
-    restoreFromBackup:
-      recoveryTargetDatetime: "2024-12-06T13:54:08Z"
-      sourceBackupId: backup_uuid
     timeouts:
-      create: 60m
+    - create: 60m
       delete: 60m
       update: 60m
     version: "17"
@@ -63,7 +63,7 @@ metadata:
   namespace: upbound-system
 spec:
   forProvider:
-    location: de/txl
+    location: ${local.location}
     name: example
 
 ---

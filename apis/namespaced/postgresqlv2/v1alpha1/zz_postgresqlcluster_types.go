@@ -14,6 +14,41 @@ import (
 	v2 "github.com/crossplane/crossplane-runtime/v2/apis/common/v2"
 )
 
+type BackupInitParameters struct {
+
+	// [string] The location of the PostgreSQL cluster. This is used for routing to the regional API endpoint. Changing this value will destroy the existing cluster and create a new one in the specified location. Available locations: de/fra, de/fra/2, de/txl, es/vit, fr/par, gb/bhx, gb/lhr, us/ewr, us/las, us/mci.
+	// The Object Storage location where the backups will be created. Supported locations are provided by the backup locations endpoint. Immutable — changing this forces a new cluster.
+	Location *string `json:"location,omitempty" tf:"location,omitempty"`
+
+	// [int] How many days cluster backups are retained.
+	// How many days cluster backups are retained.
+	RetentionDays *float64 `json:"retentionDays,omitempty" tf:"retention_days,omitempty"`
+}
+
+type BackupObservation struct {
+
+	// [string] The location of the PostgreSQL cluster. This is used for routing to the regional API endpoint. Changing this value will destroy the existing cluster and create a new one in the specified location. Available locations: de/fra, de/fra/2, de/txl, es/vit, fr/par, gb/bhx, gb/lhr, us/ewr, us/las, us/mci.
+	// The Object Storage location where the backups will be created. Supported locations are provided by the backup locations endpoint. Immutable — changing this forces a new cluster.
+	Location *string `json:"location,omitempty" tf:"location,omitempty"`
+
+	// [int] How many days cluster backups are retained.
+	// How many days cluster backups are retained.
+	RetentionDays *float64 `json:"retentionDays,omitempty" tf:"retention_days,omitempty"`
+}
+
+type BackupParameters struct {
+
+	// [string] The location of the PostgreSQL cluster. This is used for routing to the regional API endpoint. Changing this value will destroy the existing cluster and create a new one in the specified location. Available locations: de/fra, de/fra/2, de/txl, es/vit, fr/par, gb/bhx, gb/lhr, us/ewr, us/las, us/mci.
+	// The Object Storage location where the backups will be created. Supported locations are provided by the backup locations endpoint. Immutable — changing this forces a new cluster.
+	// +kubebuilder:validation:Optional
+	Location *string `json:"location" tf:"location,omitempty"`
+
+	// [int] How many days cluster backups are retained.
+	// How many days cluster backups are retained.
+	// +kubebuilder:validation:Optional
+	RetentionDays *float64 `json:"retentionDays" tf:"retention_days,omitempty"`
+}
+
 type ConnectionsInitParameters struct {
 
 	// [string] The datacenter to connect your instance to.
@@ -104,9 +139,13 @@ type CredentialsInitParameters struct {
 	// The name of the initial database to be created.
 	Database *string `json:"database,omitempty" tf:"database,omitempty"`
 
-	// [string] The password for the master database user.11+).
+	// [string] The password for the master database user.11+.
 	// The password for the master database user.
 	PasswordSecretRef v1.LocalSecretKeySelector `json:"passwordSecretRef" tf:"-"`
+
+	// [string] An arbitrary string (e.g.
+	// Arbitrary string incremented by the practitioner to trigger a password update when the write-only password field changes.
+	PasswordVersion *string `json:"passwordVersion,omitempty" tf:"password_version,omitempty"`
 
 	// [string] The username of the master database user.
 	// The username of the master database user.
@@ -118,6 +157,10 @@ type CredentialsObservation struct {
 	// [string] The name of the initial database to be created.
 	// The name of the initial database to be created.
 	Database *string `json:"database,omitempty" tf:"database,omitempty"`
+
+	// [string] An arbitrary string (e.g.
+	// Arbitrary string incremented by the practitioner to trigger a password update when the write-only password field changes.
+	PasswordVersion *string `json:"passwordVersion,omitempty" tf:"password_version,omitempty"`
 
 	// [string] The username of the master database user.
 	// The username of the master database user.
@@ -131,10 +174,15 @@ type CredentialsParameters struct {
 	// +kubebuilder:validation:Optional
 	Database *string `json:"database" tf:"database,omitempty"`
 
-	// [string] The password for the master database user.11+).
+	// [string] The password for the master database user.11+.
 	// The password for the master database user.
 	// +kubebuilder:validation:Optional
 	PasswordSecretRef v1.LocalSecretKeySelector `json:"passwordSecretRef" tf:"-"`
+
+	// [string] An arbitrary string (e.g.
+	// Arbitrary string incremented by the practitioner to trigger a password update when the write-only password field changes.
+	// +kubebuilder:validation:Optional
+	PasswordVersion *string `json:"passwordVersion" tf:"password_version,omitempty"`
 
 	// [string] The username of the master database user.
 	// The username of the master database user.
@@ -240,9 +288,8 @@ type MaintenanceWindowParameters struct {
 
 type PostgresqlClusterInitParameters struct {
 
-	// [string] The S3 location where the backups will be created. Supported locations are provided by the ionoscloud_pg_backup_location_v2 data source.
-	// The S3 location where the backups will be created. Supported locations are provided by the backup locations endpoint.
-	BackupLocation *string `json:"backupLocation,omitempty" tf:"backup_location,omitempty"`
+	// [object] Backup location and retention configuration.
+	Backup *BackupInitParameters `json:"backup,omitempty" tf:"backup,omitempty"`
 
 	// (Computed)[string] Defines how database connections are managed and reused. Possible values: DISABLED, TRANSACTION, SESSION.
 	// Defines how database connections are managed and reused.
@@ -297,16 +344,15 @@ type PostgresqlClusterInitParameters struct {
 	// [object] Configures the cluster to be initialized with data from an existing backup.
 	RestoreFromBackup *RestoreFromBackupInitParameters `json:"restoreFromBackup,omitempty" tf:"restore_from_backup,omitempty"`
 
-	// (Computed)[string] The PostgreSQL version of the cluster. If omitted, the API assigns a default version.
+	// [string] The PostgreSQL version of the cluster.
 	// The PostgreSQL version of the cluster.
 	Version *string `json:"version,omitempty" tf:"version,omitempty"`
 }
 
 type PostgresqlClusterObservation struct {
 
-	// [string] The S3 location where the backups will be created. Supported locations are provided by the ionoscloud_pg_backup_location_v2 data source.
-	// The S3 location where the backups will be created. Supported locations are provided by the backup locations endpoint.
-	BackupLocation *string `json:"backupLocation,omitempty" tf:"backup_location,omitempty"`
+	// [object] Backup location and retention configuration.
+	Backup *BackupObservation `json:"backup,omitempty" tf:"backup,omitempty"`
 
 	// (Computed)[string] Defines how database connections are managed and reused. Possible values: DISABLED, TRANSACTION, SESSION.
 	// Defines how database connections are managed and reused.
@@ -357,17 +403,16 @@ type PostgresqlClusterObservation struct {
 	// [object] Configures the cluster to be initialized with data from an existing backup.
 	RestoreFromBackup *RestoreFromBackupObservation `json:"restoreFromBackup,omitempty" tf:"restore_from_backup,omitempty"`
 
-	// (Computed)[string] The PostgreSQL version of the cluster. If omitted, the API assigns a default version.
+	// [string] The PostgreSQL version of the cluster.
 	// The PostgreSQL version of the cluster.
 	Version *string `json:"version,omitempty" tf:"version,omitempty"`
 }
 
 type PostgresqlClusterParameters struct {
 
-	// [string] The S3 location where the backups will be created. Supported locations are provided by the ionoscloud_pg_backup_location_v2 data source.
-	// The S3 location where the backups will be created. Supported locations are provided by the backup locations endpoint.
+	// [object] Backup location and retention configuration.
 	// +kubebuilder:validation:Optional
-	BackupLocation *string `json:"backupLocation,omitempty" tf:"backup_location,omitempty"`
+	Backup *BackupParameters `json:"backup,omitempty" tf:"backup,omitempty"`
 
 	// (Computed)[string] Defines how database connections are managed and reused. Possible values: DISABLED, TRANSACTION, SESSION.
 	// Defines how database connections are managed and reused.
@@ -434,7 +479,7 @@ type PostgresqlClusterParameters struct {
 	// +kubebuilder:validation:Optional
 	RestoreFromBackup *RestoreFromBackupParameters `json:"restoreFromBackup,omitempty" tf:"restore_from_backup,omitempty"`
 
-	// (Computed)[string] The PostgreSQL version of the cluster. If omitted, the API assigns a default version.
+	// [string] The PostgreSQL version of the cluster.
 	// The PostgreSQL version of the cluster.
 	// +kubebuilder:validation:Optional
 	Version *string `json:"version,omitempty" tf:"version,omitempty"`
@@ -446,8 +491,8 @@ type RestoreFromBackupInitParameters struct {
 	// If supplied as ISO 8601 timestamp, the backup will be replayed up until the given timestamp. If empty, the backup will be applied completely.
 	RecoveryTargetDatetime *string `json:"recoveryTargetDatetime,omitempty" tf:"recovery_target_datetime,omitempty"`
 
-	// [string] The UUID of the backup to restore data from.
-	// The UUID of the backup to restore data from.
+	// [string] The UUID of the backup to restore data from. Immutable — changing this forces a new cluster.
+	// The UUID of the backup to restore data from. Immutable — changing this forces a new cluster.
 	SourceBackupID *string `json:"sourceBackupId,omitempty" tf:"source_backup_id,omitempty"`
 }
 
@@ -457,8 +502,8 @@ type RestoreFromBackupObservation struct {
 	// If supplied as ISO 8601 timestamp, the backup will be replayed up until the given timestamp. If empty, the backup will be applied completely.
 	RecoveryTargetDatetime *string `json:"recoveryTargetDatetime,omitempty" tf:"recovery_target_datetime,omitempty"`
 
-	// [string] The UUID of the backup to restore data from.
-	// The UUID of the backup to restore data from.
+	// [string] The UUID of the backup to restore data from. Immutable — changing this forces a new cluster.
+	// The UUID of the backup to restore data from. Immutable — changing this forces a new cluster.
 	SourceBackupID *string `json:"sourceBackupId,omitempty" tf:"source_backup_id,omitempty"`
 }
 
@@ -469,10 +514,10 @@ type RestoreFromBackupParameters struct {
 	// +kubebuilder:validation:Optional
 	RecoveryTargetDatetime *string `json:"recoveryTargetDatetime,omitempty" tf:"recovery_target_datetime,omitempty"`
 
-	// [string] The UUID of the backup to restore data from.
-	// The UUID of the backup to restore data from.
+	// [string] The UUID of the backup to restore data from. Immutable — changing this forces a new cluster.
+	// The UUID of the backup to restore data from. Immutable — changing this forces a new cluster.
 	// +kubebuilder:validation:Optional
-	SourceBackupID *string `json:"sourceBackupId,omitempty" tf:"source_backup_id,omitempty"`
+	SourceBackupID *string `json:"sourceBackupId" tf:"source_backup_id,omitempty"`
 }
 
 // PostgresqlClusterSpec defines the desired state of PostgresqlCluster
@@ -511,7 +556,7 @@ type PostgresqlClusterStatus struct {
 type PostgresqlCluster struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.backupLocation) || (has(self.initProvider) && has(self.initProvider.backupLocation))",message="spec.forProvider.backupLocation is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.backup) || (has(self.initProvider) && has(self.initProvider.backup))",message="spec.forProvider.backup is a required parameter"
 	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.connections) || (has(self.initProvider) && has(self.initProvider.connections))",message="spec.forProvider.connections is a required parameter"
 	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.credentials) || (has(self.initProvider) && has(self.initProvider.credentials))",message="spec.forProvider.credentials is a required parameter"
 	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.instances) || (has(self.initProvider) && has(self.initProvider.instances))",message="spec.forProvider.instances is a required parameter"
