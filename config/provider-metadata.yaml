@@ -3225,6 +3225,8 @@ resources:
                 {
                   "description": "my description"
                 }
+            - name: example
+              manifest: '{}'
         argumentDocs:
             accesskey: '- (Computed)  Access key metadata is a string of 92 characters.'
             canonical_user_id: '- (Computed)  The canonical user ID which is valid for user-owned buckets.'
@@ -3430,7 +3432,10 @@ resources:
             - name: example
               manifest: |-
                 {
-                  "backup_location": "de",
+                  "backup": {
+                    "location": "eu-central-3",
+                    "retention_days": 7
+                  },
                   "connection_pooler": "DISABLED",
                   "connections": {
                     "datacenter_id": "${ionoscloud_datacenter.example.id}",
@@ -3439,7 +3444,8 @@ resources:
                   },
                   "credentials": {
                     "database": "mydb",
-                    "password": "${random_password.cluster_password.result}",
+                    "password": "${ephemeral.random_password.cluster_password.result}",
+                    "password_version": "1",
                     "username": "username"
                   },
                   "description": "Production PostgreSQL cluster",
@@ -3449,7 +3455,7 @@ resources:
                     "ram": 4,
                     "storage_size": 10
                   },
-                  "location": "de/txl",
+                  "location": "${local.location}",
                   "logs_enabled": true,
                   "maintenance_window": {
                     "day_of_the_week": "Sunday",
@@ -3458,21 +3464,21 @@ resources:
                   "metrics_enabled": true,
                   "name": "PostgreSQL_cluster",
                   "replication_mode": "ASYNCHRONOUS",
-                  "restore_from_backup": {
-                    "recovery_target_datetime": "2024-12-06T13:54:08Z",
-                    "source_backup_id": "backup_uuid"
-                  },
-                  "timeouts": {
-                    "create": "60m",
-                    "delete": "60m",
-                    "update": "60m"
-                  },
+                  "timeouts": [
+                    {
+                      "create": "60m",
+                      "delete": "60m",
+                      "update": "60m"
+                    }
+                  ],
                   "version": "17"
                 }
+              references:
+                location: local.location
               dependencies:
                 ionoscloud_datacenter.example: |-
                     {
-                      "location": "de/txl",
+                      "location": "${local.location}",
                       "name": "example"
                     }
                 ionoscloud_lan.example: |-
@@ -3481,14 +3487,8 @@ resources:
                       "name": "example",
                       "public": false
                     }
-                random_password.cluster_password: |-
-                    {
-                      "length": 16,
-                      "override_special": "@$!%*?\u0026",
-                      "special": true
-                    }
         argumentDocs:
-            backup_location: '- (Required)[string] The S3 location where the backups will be created. Supported locations are provided by the ionoscloud_pg_backup_location_v2 data source.'
+            backup: '- (Required)[object] Backup location and retention configuration.'
             connection_pooler: '- (Optional)(Computed)[string] Defines how database connections are managed and reused. Possible values: DISABLED, TRANSACTION, SESSION.'
             connections: '- (Required)[object] Connection information of the PostgreSQL cluster.'
             cores: '- (Required)[int] The number of CPU cores per instance.'
@@ -3503,24 +3503,25 @@ resources:
             dns_name: '- (Computed)[string] The DNS name used to access the cluster.'
             instances: '- (Required)[object] The instance configuration for the PostgreSQL cluster.'
             lan_id: '- (Required)[string] The numeric LAN ID to connect your instance to.'
-            location: '- (Required)[string] The location of the PostgreSQL cluster. This is used for routing to the regional API endpoint. Changing this value will destroy the existing cluster and create a new one in the specified location. Available locations: de/fra, de/fra/2, de/txl, es/vit, fr/par, gb/bhx, gb/lhr, us/ewr, us/las, us/mci.'
+            location: '- (Required, RequiresReplace)[string] The location of the PostgreSQL cluster. This is used for routing to the regional API endpoint. Changing this value will destroy the existing cluster and create a new one in the specified location. Available locations: de/fra, de/fra/2, de/txl, es/vit, fr/par, gb/bhx, gb/lhr, us/ewr, us/las, us/mci.'
             logs_enabled: '- (Optional)(Computed)[bool] Enables or disables the collection and reporting of logs for observability of this cluster.'
             maintenance_window: '- (Required)[object] A weekly 4 hour-long window, during which maintenance might occur.'
             metrics_enabled: '- (Optional)(Computed)[bool] Enables or disables the collection and reporting of metrics for observability of this cluster.'
             name: '- (Required)[string] The name of the PostgreSQL cluster.'
-            password: '- (Required, WriteOnly)[string] The password for the master database user. This value is never stored in state (requires Terraform 1.11+).'
+            password: '- (Required, Sensitive, WriteOnly)[string] The password for the master database user. This value is never stored in Terraform state. Requires Terraform 1.11+.'
+            password_version: '- (Required)[string] An arbitrary string (e.g. "1", "2") stored in Terraform state solely to trigger password updates. Increment this value whenever the write-only password field changes so Terraform detects a diff and sends the new password to the API.'
             primary_instance_address: '- (Required)[string] The IP and netmask that will be assigned to the cluster primary instance.'
             ram: '- (Required)[int] The amount of memory per instance in gigabytes (GB).'
-            read: '- (Default 60m) Time to wait for the cluster to be read.'
             recovery_target_datetime: '- (Optional)[string] If supplied as ISO 8601 timestamp, the backup will be replayed up until the given timestamp. If empty, the backup will be applied completely.'
             replication_mode: '- (Required)[string] Replication mode across the instances. Possible values: ASYNCHRONOUS, STRICTLY_SYNCHRONOUS.'
             restore_from_backup: '- (Optional)[object] Configures the cluster to be initialized with data from an existing backup.'
-            source_backup_id: '- (Optional)[string] The UUID of the backup to restore data from.'
+            retention_days: '- (Required)[int] How many days cluster backups are retained.'
+            source_backup_id: '- (Required)[string] The UUID of the backup to restore data from. Immutable — changing this forces a new cluster.'
             storage_size: '- (Required)[int] The amount of storage per instance in gigabytes (GB).'
             time: '- (Required)[string] Start of the maintenance window in UTC time.'
             update: '- (Default 60m) Time to wait for the cluster to be updated.'
             username: '- (Required)[string] The username of the master database user.'
-            version: '- (Optional)(Computed)[string] The PostgreSQL version of the cluster. If omitted, the API assigns a default version.'
+            version: '- (Required)[string] The PostgreSQL version of the cluster.'
         importStatements:
             - terraform import ionoscloud_pg_cluster_v2.mycluster de/txl:cluster_uuid
     ionoscloud_pg_database:
@@ -3652,6 +3653,8 @@ resources:
                     }
                   ]
                 }
+            - name: example
+              manifest: '{}'
         argumentDocs:
             create: '- (Optional)[string] Time to wait for the bucket to be created. Default is 10m.'
             delete: '- (Optional)[string] Time to wait for the bucket to be deleted. Default is 60m.'

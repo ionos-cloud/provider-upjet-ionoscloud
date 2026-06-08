@@ -73,11 +73,20 @@ spec:
                 type: string
               forProvider:
                 properties:
-                  backupLocation:
-                    description: |-
-                      [string] The S3 location where the backups will be created. Supported locations are provided by the ionoscloud_pg_backup_location_v2 data source.
-                      The S3 location where the backups will be created. Supported locations are provided by the backup locations endpoint.
-                    type: string
+                  backup:
+                    description: '[object] Backup location and retention configuration.'
+                    properties:
+                      location:
+                        description: |-
+                          [string] The location of the PostgreSQL cluster. This is used for routing to the regional API endpoint. Changing this value will destroy the existing cluster and create a new one in the specified location. Available locations: de/fra, de/fra/2, de/txl, es/vit, fr/par, gb/bhx, gb/lhr, us/ewr, us/las, us/mci.
+                          The Object Storage location where the backups will be created. Supported locations are provided by the backup locations endpoint. Immutable — changing this forces a new cluster.
+                        type: string
+                      retentionDays:
+                        description: |-
+                          [int] How many days cluster backups are retained.
+                          How many days cluster backups are retained.
+                        type: number
+                    type: object
                   connectionPooler:
                     description: |-
                       (Computed)[string] Defines how database connections are managed and reused. Possible values: DISABLED, TRANSACTION, SESSION.
@@ -264,7 +273,7 @@ spec:
                         type: string
                       passwordSecretRef:
                         description: |-
-                          [string] The password for the master database user.11+).
+                          [string] The password for the master database user.11+.
                           The password for the master database user.
                         properties:
                           key:
@@ -281,6 +290,11 @@ spec:
                         - name
                         - namespace
                         type: object
+                      passwordVersion:
+                        description: |-
+                          [string] An arbitrary string (e.g.
+                          Arbitrary string incremented by the practitioner to trigger a password update when the write-only password field changes.
+                        type: string
                       username:
                         description: |-
                           [string] The username of the master database user.
@@ -444,13 +458,13 @@ spec:
                         type: string
                       sourceBackupId:
                         description: |-
-                          [string] The UUID of the backup to restore data from.
-                          The UUID of the backup to restore data from.
+                          [string] The UUID of the backup to restore data from. Immutable — changing this forces a new cluster.
+                          The UUID of the backup to restore data from. Immutable — changing this forces a new cluster.
                         type: string
                     type: object
                   version:
                     description: |-
-                      (Computed)[string] The PostgreSQL version of the cluster. If omitted, the API assigns a default version.
+                      [string] The PostgreSQL version of the cluster.
                       The PostgreSQL version of the cluster.
                     type: string
                 type: object
@@ -467,11 +481,20 @@ spec:
                   for example because of an external controller is managing them, like an
                   autoscaler.
                 properties:
-                  backupLocation:
-                    description: |-
-                      [string] The S3 location where the backups will be created. Supported locations are provided by the ionoscloud_pg_backup_location_v2 data source.
-                      The S3 location where the backups will be created. Supported locations are provided by the backup locations endpoint.
-                    type: string
+                  backup:
+                    description: '[object] Backup location and retention configuration.'
+                    properties:
+                      location:
+                        description: |-
+                          [string] The location of the PostgreSQL cluster. This is used for routing to the regional API endpoint. Changing this value will destroy the existing cluster and create a new one in the specified location. Available locations: de/fra, de/fra/2, de/txl, es/vit, fr/par, gb/bhx, gb/lhr, us/ewr, us/las, us/mci.
+                          The Object Storage location where the backups will be created. Supported locations are provided by the backup locations endpoint. Immutable — changing this forces a new cluster.
+                        type: string
+                      retentionDays:
+                        description: |-
+                          [int] How many days cluster backups are retained.
+                          How many days cluster backups are retained.
+                        type: number
+                    type: object
                   connectionPooler:
                     description: |-
                       (Computed)[string] Defines how database connections are managed and reused. Possible values: DISABLED, TRANSACTION, SESSION.
@@ -658,7 +681,7 @@ spec:
                         type: string
                       passwordSecretRef:
                         description: |-
-                          [string] The password for the master database user.11+).
+                          [string] The password for the master database user.11+.
                           The password for the master database user.
                         properties:
                           key:
@@ -675,6 +698,11 @@ spec:
                         - name
                         - namespace
                         type: object
+                      passwordVersion:
+                        description: |-
+                          [string] An arbitrary string (e.g.
+                          Arbitrary string incremented by the practitioner to trigger a password update when the write-only password field changes.
+                        type: string
                       username:
                         description: |-
                           [string] The username of the master database user.
@@ -840,13 +868,13 @@ spec:
                         type: string
                       sourceBackupId:
                         description: |-
-                          [string] The UUID of the backup to restore data from.
-                          The UUID of the backup to restore data from.
+                          [string] The UUID of the backup to restore data from. Immutable — changing this forces a new cluster.
+                          The UUID of the backup to restore data from. Immutable — changing this forces a new cluster.
                         type: string
                     type: object
                   version:
                     description: |-
-                      (Computed)[string] The PostgreSQL version of the cluster. If omitted, the API assigns a default version.
+                      [string] The PostgreSQL version of the cluster.
                       The PostgreSQL version of the cluster.
                     type: string
                 type: object
@@ -937,10 +965,10 @@ spec:
             - forProvider
             type: object
             x-kubernetes-validations:
-            - message: spec.forProvider.backupLocation is a required parameter
+            - message: spec.forProvider.backup is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
-                || ''Update'' in self.managementPolicies) || has(self.forProvider.backupLocation)
-                || (has(self.initProvider) && has(self.initProvider.backupLocation))'
+                || ''Update'' in self.managementPolicies) || has(self.forProvider.backup)
+                || (has(self.initProvider) && has(self.initProvider.backup))'
             - message: spec.forProvider.connections is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
                 || ''Update'' in self.managementPolicies) || has(self.forProvider.connections)
@@ -974,11 +1002,20 @@ spec:
             properties:
               atProvider:
                 properties:
-                  backupLocation:
-                    description: |-
-                      [string] The S3 location where the backups will be created. Supported locations are provided by the ionoscloud_pg_backup_location_v2 data source.
-                      The S3 location where the backups will be created. Supported locations are provided by the backup locations endpoint.
-                    type: string
+                  backup:
+                    description: '[object] Backup location and retention configuration.'
+                    properties:
+                      location:
+                        description: |-
+                          [string] The location of the PostgreSQL cluster. This is used for routing to the regional API endpoint. Changing this value will destroy the existing cluster and create a new one in the specified location. Available locations: de/fra, de/fra/2, de/txl, es/vit, fr/par, gb/bhx, gb/lhr, us/ewr, us/las, us/mci.
+                          The Object Storage location where the backups will be created. Supported locations are provided by the backup locations endpoint. Immutable — changing this forces a new cluster.
+                        type: string
+                      retentionDays:
+                        description: |-
+                          [int] How many days cluster backups are retained.
+                          How many days cluster backups are retained.
+                        type: number
+                    type: object
                   connectionPooler:
                     description: |-
                       (Computed)[string] Defines how database connections are managed and reused. Possible values: DISABLED, TRANSACTION, SESSION.
@@ -1012,6 +1049,11 @@ spec:
                         description: |-
                           [string] The name of the initial database to be created.
                           The name of the initial database to be created.
+                        type: string
+                      passwordVersion:
+                        description: |-
+                          [string] An arbitrary string (e.g.
+                          Arbitrary string incremented by the practitioner to trigger a password update when the write-only password field changes.
                         type: string
                       username:
                         description: |-
@@ -1107,13 +1149,13 @@ spec:
                         type: string
                       sourceBackupId:
                         description: |-
-                          [string] The UUID of the backup to restore data from.
-                          The UUID of the backup to restore data from.
+                          [string] The UUID of the backup to restore data from. Immutable — changing this forces a new cluster.
+                          The UUID of the backup to restore data from. Immutable — changing this forces a new cluster.
                         type: string
                     type: object
                   version:
                     description: |-
-                      (Computed)[string] The PostgreSQL version of the cluster. If omitted, the API assigns a default version.
+                      [string] The PostgreSQL version of the cluster.
                       The PostgreSQL version of the cluster.
                     type: string
                 type: object

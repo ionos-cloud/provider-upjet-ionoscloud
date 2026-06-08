@@ -199,7 +199,7 @@ type VCPUServerNicInitParameters struct {
 
 	// Allows to define firewall rules inline in the server. See the Firewall section.
 	// Firewall rules created in the server resource. The rules can also be created as separate resources outside the server resource
-	Firewall *VCPUServerNicFirewallInitParameters `json:"firewall,omitempty" tf:"firewall,omitempty"`
+	Firewall []VCPUServerNicFirewallInitParameters `json:"firewall,omitempty" tf:"firewall,omitempty"`
 
 	FirewallActive *bool `json:"firewallActive,omitempty" tf:"firewall_active,omitempty"`
 
@@ -248,7 +248,7 @@ type VCPUServerNicObservation struct {
 
 	// Allows to define firewall rules inline in the server. See the Firewall section.
 	// Firewall rules created in the server resource. The rules can also be created as separate resources outside the server resource
-	Firewall *VCPUServerNicFirewallObservation `json:"firewall,omitempty" tf:"firewall,omitempty"`
+	Firewall []VCPUServerNicFirewallObservation `json:"firewall,omitempty" tf:"firewall,omitempty"`
 
 	FirewallActive *bool `json:"firewallActive,omitempty" tf:"firewall_active,omitempty"`
 
@@ -294,7 +294,7 @@ type VCPUServerNicParameters struct {
 	// Allows to define firewall rules inline in the server. See the Firewall section.
 	// Firewall rules created in the server resource. The rules can also be created as separate resources outside the server resource
 	// +kubebuilder:validation:Optional
-	Firewall *VCPUServerNicFirewallParameters `json:"firewall,omitempty" tf:"firewall,omitempty"`
+	Firewall []VCPUServerNicFirewallParameters `json:"firewall,omitempty" tf:"firewall,omitempty"`
 
 	// +kubebuilder:validation:Optional
 	FirewallActive *bool `json:"firewallActive,omitempty" tf:"firewall_active,omitempty"`

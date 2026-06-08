@@ -6550,8 +6550,10 @@ func (in *ServerNicInitParameters) DeepCopyInto(out *ServerNicInitParameters) {
 	}
 	if in.Firewall != nil {
 		in, out := &in.Firewall, &out.Firewall
-		*out = new(ServerNicFirewallInitParameters)
-		(*in).DeepCopyInto(*out)
+		*out = make([]ServerNicFirewallInitParameters, len(*in))
+		for i := range *in {
+			(*in)[i].DeepCopyInto(&(*out)[i])
+		}
 	}
 	if in.FirewallActive != nil {
 		in, out := &in.FirewallActive, &out.FirewallActive
@@ -6658,8 +6660,10 @@ func (in *ServerNicObservation) DeepCopyInto(out *ServerNicObservation) {
 	}
 	if in.Firewall != nil {
 		in, out := &in.Firewall, &out.Firewall
-		*out = new(ServerNicFirewallObservation)
-		(*in).DeepCopyInto(*out)
+		*out = make([]ServerNicFirewallObservation, len(*in))
+		for i := range *in {
+			(*in)[i].DeepCopyInto(&(*out)[i])
+		}
 	}
 	if in.FirewallActive != nil {
 		in, out := &in.FirewallActive, &out.FirewallActive
@@ -6761,8 +6765,10 @@ func (in *ServerNicParameters) DeepCopyInto(out *ServerNicParameters) {
 	}
 	if in.Firewall != nil {
 		in, out := &in.Firewall, &out.Firewall
-		*out = new(ServerNicFirewallParameters)
-		(*in).DeepCopyInto(*out)
+		*out = make([]ServerNicFirewallParameters, len(*in))
+		for i := range *in {
+			(*in)[i].DeepCopyInto(&(*out)[i])
+		}
 	}
 	if in.FirewallActive != nil {
 		in, out := &in.FirewallActive, &out.FirewallActive
@@ -9312,8 +9318,10 @@ func (in *VCPUServerNicInitParameters) DeepCopyInto(out *VCPUServerNicInitParame
 	}
 	if in.Firewall != nil {
 		in, out := &in.Firewall, &out.Firewall
-		*out = new(VCPUServerNicFirewallInitParameters)
-		(*in).DeepCopyInto(*out)
+		*out = make([]VCPUServerNicFirewallInitParameters, len(*in))
+		for i := range *in {
+			(*in)[i].DeepCopyInto(&(*out)[i])
+		}
 	}
 	if in.FirewallActive != nil {
 		in, out := &in.FirewallActive, &out.FirewallActive
@@ -9420,8 +9428,10 @@ func (in *VCPUServerNicObservation) DeepCopyInto(out *VCPUServerNicObservation) 
 	}
 	if in.Firewall != nil {
 		in, out := &in.Firewall, &out.Firewall
-		*out = new(VCPUServerNicFirewallObservation)
-		(*in).DeepCopyInto(*out)
+		*out = make([]VCPUServerNicFirewallObservation, len(*in))
+		for i := range *in {
+			(*in)[i].DeepCopyInto(&(*out)[i])
+		}
 	}
 	if in.FirewallActive != nil {
 		in, out := &in.FirewallActive, &out.FirewallActive
@@ -9523,8 +9533,10 @@ func (in *VCPUServerNicParameters) DeepCopyInto(out *VCPUServerNicParameters) {
 	}
 	if in.Firewall != nil {
 		in, out := &in.Firewall, &out.Firewall
-		*out = new(VCPUServerNicFirewallParameters)
-		(*in).DeepCopyInto(*out)
+		*out = make([]VCPUServerNicFirewallParameters, len(*in))
+		for i := range *in {
+			(*in)[i].DeepCopyInto(&(*out)[i])
+		}
 	}
 	if in.FirewallActive != nil {
 		in, out := &in.FirewallActive, &out.FirewallActive

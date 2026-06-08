@@ -235,29 +235,31 @@ spec:
                         description: |-
                           Allows to define firewall rules inline in the server. See the Firewall section.
                           Firewall rules created in the server resource. The rules can also be created as separate resources outside the server resource
-                        properties:
-                          icmpCode:
-                            type: string
-                          icmpType:
-                            type: string
-                          name:
-                            description: '[string] The name of the server.'
-                            type: string
-                          portRangeEnd:
-                            type: number
-                          portRangeStart:
-                            type: number
-                          protocol:
-                            type: string
-                          sourceIp:
-                            type: string
-                          sourceMac:
-                            type: string
-                          targetIp:
-                            type: string
-                          type:
-                            type: string
-                        type: object
+                        items:
+                          properties:
+                            icmpCode:
+                              type: string
+                            icmpType:
+                              type: string
+                            name:
+                              description: '[string] The name of the server.'
+                              type: string
+                            portRangeEnd:
+                              type: number
+                            portRangeStart:
+                              type: number
+                            protocol:
+                              type: string
+                            sourceIp:
+                              type: string
+                            sourceMac:
+                              type: string
+                            targetIp:
+                              type: string
+                            type:
+                              type: string
+                          type: object
+                        type: array
                       firewallActive:
                         type: boolean
                       firewallType:
@@ -624,29 +626,31 @@ spec:
                         description: |-
                           Allows to define firewall rules inline in the server. See the Firewall section.
                           Firewall rules created in the server resource. The rules can also be created as separate resources outside the server resource
-                        properties:
-                          icmpCode:
-                            type: string
-                          icmpType:
-                            type: string
-                          name:
-                            description: '[string] The name of the server.'
-                            type: string
-                          portRangeEnd:
-                            type: number
-                          portRangeStart:
-                            type: number
-                          protocol:
-                            type: string
-                          sourceIp:
-                            type: string
-                          sourceMac:
-                            type: string
-                          targetIp:
-                            type: string
-                          type:
-                            type: string
-                        type: object
+                        items:
+                          properties:
+                            icmpCode:
+                              type: string
+                            icmpType:
+                              type: string
+                            name:
+                              description: '[string] The name of the server.'
+                              type: string
+                            portRangeEnd:
+                              type: number
+                            portRangeStart:
+                              type: number
+                            protocol:
+                              type: string
+                            sourceIp:
+                              type: string
+                            sourceMac:
+                              type: string
+                            targetIp:
+                              type: string
+                            type:
+                              type: string
+                          type: object
+                        type: array
                       firewallActive:
                         type: boolean
                       firewallType:
@@ -1034,31 +1038,33 @@ spec:
                         description: |-
                           Allows to define firewall rules inline in the server. See the Firewall section.
                           Firewall rules created in the server resource. The rules can also be created as separate resources outside the server resource
-                        properties:
-                          icmpCode:
-                            type: string
-                          icmpType:
-                            type: string
-                          id:
-                            type: string
-                          name:
-                            description: '[string] The name of the server.'
-                            type: string
-                          portRangeEnd:
-                            type: number
-                          portRangeStart:
-                            type: number
-                          protocol:
-                            type: string
-                          sourceIp:
-                            type: string
-                          sourceMac:
-                            type: string
-                          targetIp:
-                            type: string
-                          type:
-                            type: string
-                        type: object
+                        items:
+                          properties:
+                            icmpCode:
+                              type: string
+                            icmpType:
+                              type: string
+                            id:
+                              type: string
+                            name:
+                              description: '[string] The name of the server.'
+                              type: string
+                            portRangeEnd:
+                              type: number
+                            portRangeStart:
+                              type: number
+                            protocol:
+                              type: string
+                            sourceIp:
+                              type: string
+                            sourceMac:
+                              type: string
+                            targetIp:
+                              type: string
+                            type:
+                              type: string
+                          type: object
+                        type: array
                       firewallActive:
                         type: boolean
                       firewallType:
