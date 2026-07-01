@@ -4,18 +4,18 @@ kind: CustomResourceDefinition
 metadata:
   annotations:
     controller-gen.kubebuilder.io/version: v0.20.0
-  name: postgresqlclusters.postgresqlv2.m.ionoscloud.io
+  name: inmemorydbclusters.inmemorydbv2.m.ionoscloud.io
 spec:
-  group: postgresqlv2.m.ionoscloud.io
+  group: inmemorydbv2.m.ionoscloud.io
   names:
     categories:
     - crossplane
     - managed
     - ionos
-    kind: PostgresqlCluster
-    listKind: PostgresqlClusterList
-    plural: postgresqlclusters
-    singular: postgresqlcluster
+    kind: InMemoryDBCluster
+    listKind: InMemoryDBClusterList
+    plural: inmemorydbclusters
+    singular: inmemorydbcluster
   scope: Namespaced
   versions:
   - additionalPrinterColumns:
@@ -34,8 +34,8 @@ spec:
     name: v1alpha1
     schema:
       openAPIV3Schema:
-        description: PostgresqlCluster is the Schema for the PostgresqlClusters API.
-          Creates and manages DBaaS PostgreSQL v2 Cluster objects.
+        description: InMemoryDBCluster is the Schema for the InMemoryDBClusters API.
+          Creates and manages an IONOS CLOUD InMemoryDB V2 Cluster.
         properties:
           apiVersion:
             description: |-
@@ -55,37 +55,18 @@ spec:
           metadata:
             type: object
           spec:
-            description: PostgresqlClusterSpec defines the desired state of PostgresqlCluster
+            description: InMemoryDBClusterSpec defines the desired state of InMemoryDBCluster
             properties:
               forProvider:
                 properties:
-                  backup:
-                    description: '[object] Backup location and retention configuration.'
-                    properties:
-                      location:
-                        description: |-
-                          [string] The location of the PostgreSQL cluster. This is used for routing to the regional API endpoint. Changing this value will destroy the existing cluster and create a new one in the specified location. Available locations: de/fra, de/fra/2, de/txl, es/vit, fr/par, gb/bhx, gb/lhr, us/ewr, us/las, us/mci.
-                          The Object Storage location where the backups will be created. Supported locations are provided by the backup locations endpoint. Immutable — changing this forces a new cluster.
-                        type: string
-                      retentionDays:
-                        description: |-
-                          [int] How many days cluster backups are retained.
-                          How many days cluster backups are retained.
-                        type: number
-                    type: object
-                  connectionPooler:
-                    description: |-
-                      (Computed)[string] Defines how database connections are managed and reused. Possible values: DISABLED, TRANSACTION, SESSION.
-                      Defines how database connections are managed and reused.
-                    type: string
                   connections:
-                    description: '[object] Connection information of the PostgreSQL
-                      cluster.'
+                    description: '[object] The network connection for your cluster.
+                      Only one connection is allowed.'
                     properties:
                       datacenterId:
                         description: |-
-                          [string] The datacenter to connect your instance to.
-                          The datacenter to connect your instance to.
+                          [string] The Virtual Data Center ID to connect to.
+                          The ID of the Virtual Data Center to connect the cluster to.
                         type: string
                       datacenterIdRef:
                         description: Reference to a Datacenter in compute to populate
@@ -171,8 +152,8 @@ spec:
                         type: object
                       lanId:
                         description: |-
-                          [string] The numeric LAN ID to connect your instance to.
-                          The numeric LAN ID to connect your instance to.
+                          [string] The numeric LAN ID within the data center.
+                          The numeric LAN ID within the data center.
                         type: string
                       lanIdRef:
                         description: Reference to a Lan in compute to populate lanId.
@@ -256,165 +237,81 @@ spec:
                         type: object
                       primaryInstanceAddress:
                         description: |-
-                          [string] The IP and netmask that will be assigned to the cluster primary instance.
-                          The IP and netmask that will be assigned to the cluster primary instance.
+                          [string] Primary instance IP in CIDR notation.
+                          The IP address and subnet mask assigned to the primary instance in CIDR notation.
                         type: string
                     type: object
                   credentials:
-                    description: '[object] Credentials for the master database user
-                      to be created.'
+                    description: '[object] Credentials for the InMemoryDB cluster
+                      user.'
                     properties:
-                      database:
-                        description: |-
-                          [string] The name of the initial database to be created.
-                          The name of the initial database to be created.
-                        type: string
-                      passwordSecretRef:
-                        description: |-
-                          [string] The password for the master database user.11+.
-                          The password for the master database user.
+                      password:
+                        description: '[object] Pre-hashed password.'
                         properties:
-                          key:
+                          algorithm:
+                            description: |-
+                              [string] Hash algorithm (SHA-256).
+                              The hashing algorithm used.
                             type: string
-                          name:
-                            description: Name of the secret.
-                            type: string
-                        required:
-                        - key
-                        - name
+                          hashSecretRef:
+                            description: |-
+                              [string] Sensitive. Hex-encoded SHA-256 hash (64 lowercase hex chars).
+                              The hex-encoded hash of the password.
+                            properties:
+                              key:
+                                type: string
+                              name:
+                                description: Name of the secret.
+                                type: string
+                            required:
+                            - key
+                            - name
+                            type: object
                         type: object
-                      passwordVersion:
-                        description: |-
-                          [string] An arbitrary string (e.g.
-                          Arbitrary string incremented by the practitioner to trigger a password update when the write-only password field changes.
-                        type: string
                       username:
                         description: |-
-                          [string] The username of the master database user.
-                          The username of the master database user.
+                          [string] Username (2–16 alphanumeric + underscore).
+                          The username for the In-Memory DB user.
                         type: string
                     type: object
                   description:
                     description: |-
-                      [string] Human-readable description for the cluster.
+                      [string] Human-readable description.
                       Human-readable description for the cluster.
                     type: string
+                  evictionPolicy:
+                    description: |-
+                      [string] Key eviction strategy: noeviction, allkeys-lru, allkeys-lfu, allkeys-random, volatile-lru, volatile-lfu, volatile-random, volatile-ttl.
+                      Defines the key eviction strategy when the memory limit is reached.
+                    type: string
                   instances:
-                    description: '[object] The instance configuration for the PostgreSQL
-                      cluster.'
+                    description: '[object] The instance sizing configuration.'
                     properties:
                       cores:
                         description: |-
-                          [int] The number of CPU cores per instance.
-                          The number of CPU cores per instance.
+                          [int] CPU cores per instance (1–62).
+                          The number of dedicated CPU cores per instance.
                         type: number
                       count:
                         description: |-
-                          [int] The total number of instances in the cluster (one primary and n-1 secondary).
-                          The total number of instances in the cluster (one primary and n-1 secondary).
+                          [int] Number of instances (1–5).
+                          The total number of instances in the cluster.
                         type: number
                       ram:
                         description: |-
-                          [int] The amount of memory per instance in gigabytes (GB).
-                          The amount of memory per instance in gigabytes (GB).
-                        type: number
-                      storageSize:
-                        description: |-
-                          [int] The amount of storage per instance in gigabytes (GB).
-                          The amount of storage per instance in gigabytes (GB).
+                          [int] RAM per instance in GB (4–240). The API does not support RAM downgrade. Storage is automatically derived from RAM and persistence mode.
+                          The amount of RAM per instance in gigabytes.
                         type: number
                     type: object
                   location:
                     description: |-
-                      [string] The location of the PostgreSQL cluster. This is used for routing to the regional API endpoint. Changing this value will destroy the existing cluster and create a new one in the specified location. Available locations: de/fra, de/fra/2, de/txl, es/vit, fr/par, gb/bhx, gb/lhr, us/ewr, us/las, us/mci.
-                      The location of the PostgreSQL cluster. This is used for routing to the regional API endpoint. Available locations: `de/fra`, `de/fra/2`, `de/txl`, `es/vit`, `fr/par`, `gb/bhx`, `gb/lhr`, `us/ewr`, `us/las`, `us/mci`.
+                      [string] The location of the cluster. Changing this forces a new resource. Available: de/fra, de/txl, es/vit, fr/par, gb/bhx, gb/lhr, us/ewr, us/las, us/mci.
+                      The location of the cluster. Used to route to the correct regional API endpoint. Available locations: `de/fra`, `de/txl`, `es/vit`, `fr/par`, `gb/bhx`, `gb/lhr`, `us/ewr`, `us/las`, `us/mci`.
                     type: string
-                  locationRef:
-                    description: Reference to a Datacenter in compute to populate
-                      location.
-                    properties:
-                      name:
-                        description: Name of the referenced object.
-                        type: string
-                      namespace:
-                        description: Namespace of the referenced object
-                        type: string
-                      policy:
-                        description: Policies for referencing.
-                        properties:
-                          resolution:
-                            default: Required
-                            description: |-
-                              Resolution specifies whether resolution of this reference is required.
-                              The default is 'Required', which means the reconcile will fail if the
-                              reference cannot be resolved. 'Optional' means this reference will be
-                              a no-op if it cannot be resolved.
-                            enum:
-                            - Required
-                            - Optional
-                            type: string
-                          resolve:
-                            description: |-
-                              Resolve specifies when this reference should be resolved. The default
-                              is 'IfNotPresent', which will attempt to resolve the reference only when
-                              the corresponding field is not present. Use 'Always' to resolve the
-                              reference on every reconcile.
-                            enum:
-                            - Always
-                            - IfNotPresent
-                            type: string
-                        type: object
-                    required:
-                    - name
-                    type: object
-                  locationSelector:
-                    description: Selector for a Datacenter in compute to populate
-                      location.
-                    properties:
-                      matchControllerRef:
-                        description: |-
-                          MatchControllerRef ensures an object with the same controller reference
-                          as the selecting object is selected.
-                        type: boolean
-                      matchLabels:
-                        additionalProperties:
-                          type: string
-                        description: MatchLabels ensures an object with matching labels
-                          is selected.
-                        type: object
-                      namespace:
-                        description: Namespace for the selector
-                        type: string
-                      policy:
-                        description: Policies for selection.
-                        properties:
-                          resolution:
-                            default: Required
-                            description: |-
-                              Resolution specifies whether resolution of this reference is required.
-                              The default is 'Required', which means the reconcile will fail if the
-                              reference cannot be resolved. 'Optional' means this reference will be
-                              a no-op if it cannot be resolved.
-                            enum:
-                            - Required
-                            - Optional
-                            type: string
-                          resolve:
-                            description: |-
-                              Resolve specifies when this reference should be resolved. The default
-                              is 'IfNotPresent', which will attempt to resolve the reference only when
-                              the corresponding field is not present. Use 'Always' to resolve the
-                              reference on every reconcile.
-                            enum:
-                            - Always
-                            - IfNotPresent
-                            type: string
-                        type: object
-                    type: object
                   logsEnabled:
                     description: |-
-                      (Computed)[bool] Enables or disables the collection and reporting of logs for observability of this cluster.
-                      Enables or disables the collection and reporting of logs for observability of this cluster.
+                      (Computed)[bool] Enable log collection for observability. If not set, the API default is used.
+                      Enables or disables log collection and reporting for observability.
                     type: boolean
                   maintenanceWindow:
                     description: '[object] A weekly 4 hour-long window, during which
@@ -422,49 +319,69 @@ spec:
                     properties:
                       dayOfTheWeek:
                         description: |-
-                          [string] The name of the week day.
+                          [string] Day of the week: Sunday–Saturday.
                           The name of the week day.
                         type: string
                       time:
                         description: |-
-                          [string] Start of the maintenance window in UTC time.
+                          [string] Start time in UTC (HH:MM:SS).
                           Start of the maintenance window in UTC time.
                         type: string
                     type: object
                   metricsEnabled:
                     description: |-
-                      (Computed)[bool] Enables or disables the collection and reporting of metrics for observability of this cluster.
-                      Enables or disables the collection and reporting of metrics for observability of this cluster.
+                      (Computed)[bool] Enable metrics collection for observability. If not set, the API default is used.
+                      Enables or disables metrics collection and reporting for observability.
                     type: boolean
                   name:
                     description: |-
-                      [string] The name of the PostgreSQL cluster.
-                      The name of the PostgreSQL cluster.
+                      [string] Cluster name (2–63 alphanumeric chars with dashes, underscores, dots).
+                      The name of the In-Memory DB cluster.
                     type: string
-                  replicationMode:
+                  persistenceMode:
                     description: |-
-                      [string] Replication mode across the instances. Possible values: ASYNCHRONOUS, STRICTLY_SYNCHRONOUS.
-                      Replication mode across the instances.
+                      (Computed)[string] Data persistence mode: None, AOF, RDB, RDB_AOF. If not set, the API default is used.
+                      Specifies how and whether data is persisted to disk.
                     type: string
-                  restoreFromBackup:
-                    description: '[object] Configures the cluster to be initialized
-                      with data from an existing backup.'
+                  restoreFromSnapshot:
+                    description: '[object] Restore configuration from a snapshot.'
                     properties:
                       recoveryTargetDatetime:
                         description: |-
-                          [string] If supplied as ISO 8601 timestamp, the backup will be replayed up until the given timestamp. If empty, the backup will be applied completely.
-                          If supplied as ISO 8601 timestamp, the backup will be replayed up until the given timestamp. If empty, the backup will be applied completely.
+                          [string] ISO 8601 timestamp to restore from the most recent snapshot at or before that time. Optional for create-time restore; must be provided for in-place restore via update.
+                          ISO 8601 timestamp to restore from the most recent snapshot at or before that time.
                         type: string
-                      sourceBackupId:
+                      sourceSnapshotId:
                         description: |-
-                          [string] The UUID of the backup to restore data from. Immutable — changing this forces a new cluster.
-                          The UUID of the backup to restore data from. Immutable — changing this forces a new cluster.
+                          [string] UUID of the snapshot to restore from. Must be provided when the block is used during cluster creation. Not applicable for in-place restore via update.
+                          The UUID of the snapshot to restore from.
                         type: string
+                    type: object
+                  snapshot:
+                    description: '[object] Snapshot configuration.'
+                    properties:
+                      location:
+                        description: |-
+                          [string] The location of the cluster. Changing this forces a new resource. Available: de/fra, de/txl, es/vit, fr/par, gb/bhx, gb/lhr, us/ewr, us/las, us/mci.
+                          The Object Storage location where snapshots will be stored (e.g. eu-central-3). Changing this forces the re-creation of the cluster.
+                        type: string
+                      retentionDays:
+                        description: |-
+                          [int] Days to retain snapshots (1–365).
+                          Number of days snapshots are retained before automatic deletion.
+                        type: number
+                      snapshotHours:
+                        description: |-
+                          [list of int] UTC hours for scheduled snapshots (0–23). At least one hour must be specified.
+                          Hours of the day (UTC) at which snapshots are taken. At least one hour must be specified.
+                        items:
+                          type: number
+                        type: array
                     type: object
                   version:
                     description: |-
-                      [string] The PostgreSQL version of the cluster.
-                      The PostgreSQL version of the cluster.
+                      [string] The InMemoryDB version. Upgrades only (see /versions endpoint).
+                      The In-Memory DB version. Use GET /versions to see supported values. Upgrades only (no downgrades).
                     type: string
                 type: object
               initProvider:
@@ -480,33 +397,14 @@ spec:
                   for example because of an external controller is managing them, like an
                   autoscaler.
                 properties:
-                  backup:
-                    description: '[object] Backup location and retention configuration.'
-                    properties:
-                      location:
-                        description: |-
-                          [string] The location of the PostgreSQL cluster. This is used for routing to the regional API endpoint. Changing this value will destroy the existing cluster and create a new one in the specified location. Available locations: de/fra, de/fra/2, de/txl, es/vit, fr/par, gb/bhx, gb/lhr, us/ewr, us/las, us/mci.
-                          The Object Storage location where the backups will be created. Supported locations are provided by the backup locations endpoint. Immutable — changing this forces a new cluster.
-                        type: string
-                      retentionDays:
-                        description: |-
-                          [int] How many days cluster backups are retained.
-                          How many days cluster backups are retained.
-                        type: number
-                    type: object
-                  connectionPooler:
-                    description: |-
-                      (Computed)[string] Defines how database connections are managed and reused. Possible values: DISABLED, TRANSACTION, SESSION.
-                      Defines how database connections are managed and reused.
-                    type: string
                   connections:
-                    description: '[object] Connection information of the PostgreSQL
-                      cluster.'
+                    description: '[object] The network connection for your cluster.
+                      Only one connection is allowed.'
                     properties:
                       datacenterId:
                         description: |-
-                          [string] The datacenter to connect your instance to.
-                          The datacenter to connect your instance to.
+                          [string] The Virtual Data Center ID to connect to.
+                          The ID of the Virtual Data Center to connect the cluster to.
                         type: string
                       datacenterIdRef:
                         description: Reference to a Datacenter in compute to populate
@@ -592,8 +490,8 @@ spec:
                         type: object
                       lanId:
                         description: |-
-                          [string] The numeric LAN ID to connect your instance to.
-                          The numeric LAN ID to connect your instance to.
+                          [string] The numeric LAN ID within the data center.
+                          The numeric LAN ID within the data center.
                         type: string
                       lanIdRef:
                         description: Reference to a Lan in compute to populate lanId.
@@ -677,167 +575,83 @@ spec:
                         type: object
                       primaryInstanceAddress:
                         description: |-
-                          [string] The IP and netmask that will be assigned to the cluster primary instance.
-                          The IP and netmask that will be assigned to the cluster primary instance.
+                          [string] Primary instance IP in CIDR notation.
+                          The IP address and subnet mask assigned to the primary instance in CIDR notation.
                         type: string
                     type: object
                   credentials:
-                    description: '[object] Credentials for the master database user
-                      to be created.'
+                    description: '[object] Credentials for the InMemoryDB cluster
+                      user.'
                     properties:
-                      database:
-                        description: |-
-                          [string] The name of the initial database to be created.
-                          The name of the initial database to be created.
-                        type: string
-                      passwordSecretRef:
-                        description: |-
-                          [string] The password for the master database user.11+.
-                          The password for the master database user.
+                      password:
+                        description: '[object] Pre-hashed password.'
                         properties:
-                          key:
+                          algorithm:
+                            description: |-
+                              [string] Hash algorithm (SHA-256).
+                              The hashing algorithm used.
                             type: string
-                          name:
-                            description: Name of the secret.
-                            type: string
+                          hashSecretRef:
+                            description: |-
+                              [string] Sensitive. Hex-encoded SHA-256 hash (64 lowercase hex chars).
+                              The hex-encoded hash of the password.
+                            properties:
+                              key:
+                                type: string
+                              name:
+                                description: Name of the secret.
+                                type: string
+                            required:
+                            - key
+                            - name
+                            type: object
                         required:
-                        - key
-                        - name
+                        - hashSecretRef
                         type: object
-                      passwordVersion:
-                        description: |-
-                          [string] An arbitrary string (e.g.
-                          Arbitrary string incremented by the practitioner to trigger a password update when the write-only password field changes.
-                        type: string
                       username:
                         description: |-
-                          [string] The username of the master database user.
-                          The username of the master database user.
+                          [string] Username (2–16 alphanumeric + underscore).
+                          The username for the In-Memory DB user.
                         type: string
-                    required:
-                    - passwordSecretRef
                     type: object
                   description:
                     description: |-
-                      [string] Human-readable description for the cluster.
+                      [string] Human-readable description.
                       Human-readable description for the cluster.
                     type: string
+                  evictionPolicy:
+                    description: |-
+                      [string] Key eviction strategy: noeviction, allkeys-lru, allkeys-lfu, allkeys-random, volatile-lru, volatile-lfu, volatile-random, volatile-ttl.
+                      Defines the key eviction strategy when the memory limit is reached.
+                    type: string
                   instances:
-                    description: '[object] The instance configuration for the PostgreSQL
-                      cluster.'
+                    description: '[object] The instance sizing configuration.'
                     properties:
                       cores:
                         description: |-
-                          [int] The number of CPU cores per instance.
-                          The number of CPU cores per instance.
+                          [int] CPU cores per instance (1–62).
+                          The number of dedicated CPU cores per instance.
                         type: number
                       count:
                         description: |-
-                          [int] The total number of instances in the cluster (one primary and n-1 secondary).
-                          The total number of instances in the cluster (one primary and n-1 secondary).
+                          [int] Number of instances (1–5).
+                          The total number of instances in the cluster.
                         type: number
                       ram:
                         description: |-
-                          [int] The amount of memory per instance in gigabytes (GB).
-                          The amount of memory per instance in gigabytes (GB).
-                        type: number
-                      storageSize:
-                        description: |-
-                          [int] The amount of storage per instance in gigabytes (GB).
-                          The amount of storage per instance in gigabytes (GB).
+                          [int] RAM per instance in GB (4–240). The API does not support RAM downgrade. Storage is automatically derived from RAM and persistence mode.
+                          The amount of RAM per instance in gigabytes.
                         type: number
                     type: object
                   location:
                     description: |-
-                      [string] The location of the PostgreSQL cluster. This is used for routing to the regional API endpoint. Changing this value will destroy the existing cluster and create a new one in the specified location. Available locations: de/fra, de/fra/2, de/txl, es/vit, fr/par, gb/bhx, gb/lhr, us/ewr, us/las, us/mci.
-                      The location of the PostgreSQL cluster. This is used for routing to the regional API endpoint. Available locations: `de/fra`, `de/fra/2`, `de/txl`, `es/vit`, `fr/par`, `gb/bhx`, `gb/lhr`, `us/ewr`, `us/las`, `us/mci`.
+                      [string] The location of the cluster. Changing this forces a new resource. Available: de/fra, de/txl, es/vit, fr/par, gb/bhx, gb/lhr, us/ewr, us/las, us/mci.
+                      The location of the cluster. Used to route to the correct regional API endpoint. Available locations: `de/fra`, `de/txl`, `es/vit`, `fr/par`, `gb/bhx`, `gb/lhr`, `us/ewr`, `us/las`, `us/mci`.
                     type: string
-                  locationRef:
-                    description: Reference to a Datacenter in compute to populate
-                      location.
-                    properties:
-                      name:
-                        description: Name of the referenced object.
-                        type: string
-                      namespace:
-                        description: Namespace of the referenced object
-                        type: string
-                      policy:
-                        description: Policies for referencing.
-                        properties:
-                          resolution:
-                            default: Required
-                            description: |-
-                              Resolution specifies whether resolution of this reference is required.
-                              The default is 'Required', which means the reconcile will fail if the
-                              reference cannot be resolved. 'Optional' means this reference will be
-                              a no-op if it cannot be resolved.
-                            enum:
-                            - Required
-                            - Optional
-                            type: string
-                          resolve:
-                            description: |-
-                              Resolve specifies when this reference should be resolved. The default
-                              is 'IfNotPresent', which will attempt to resolve the reference only when
-                              the corresponding field is not present. Use 'Always' to resolve the
-                              reference on every reconcile.
-                            enum:
-                            - Always
-                            - IfNotPresent
-                            type: string
-                        type: object
-                    required:
-                    - name
-                    type: object
-                  locationSelector:
-                    description: Selector for a Datacenter in compute to populate
-                      location.
-                    properties:
-                      matchControllerRef:
-                        description: |-
-                          MatchControllerRef ensures an object with the same controller reference
-                          as the selecting object is selected.
-                        type: boolean
-                      matchLabels:
-                        additionalProperties:
-                          type: string
-                        description: MatchLabels ensures an object with matching labels
-                          is selected.
-                        type: object
-                      namespace:
-                        description: Namespace for the selector
-                        type: string
-                      policy:
-                        description: Policies for selection.
-                        properties:
-                          resolution:
-                            default: Required
-                            description: |-
-                              Resolution specifies whether resolution of this reference is required.
-                              The default is 'Required', which means the reconcile will fail if the
-                              reference cannot be resolved. 'Optional' means this reference will be
-                              a no-op if it cannot be resolved.
-                            enum:
-                            - Required
-                            - Optional
-                            type: string
-                          resolve:
-                            description: |-
-                              Resolve specifies when this reference should be resolved. The default
-                              is 'IfNotPresent', which will attempt to resolve the reference only when
-                              the corresponding field is not present. Use 'Always' to resolve the
-                              reference on every reconcile.
-                            enum:
-                            - Always
-                            - IfNotPresent
-                            type: string
-                        type: object
-                    type: object
                   logsEnabled:
                     description: |-
-                      (Computed)[bool] Enables or disables the collection and reporting of logs for observability of this cluster.
-                      Enables or disables the collection and reporting of logs for observability of this cluster.
+                      (Computed)[bool] Enable log collection for observability. If not set, the API default is used.
+                      Enables or disables log collection and reporting for observability.
                     type: boolean
                   maintenanceWindow:
                     description: '[object] A weekly 4 hour-long window, during which
@@ -845,49 +659,69 @@ spec:
                     properties:
                       dayOfTheWeek:
                         description: |-
-                          [string] The name of the week day.
+                          [string] Day of the week: Sunday–Saturday.
                           The name of the week day.
                         type: string
                       time:
                         description: |-
-                          [string] Start of the maintenance window in UTC time.
+                          [string] Start time in UTC (HH:MM:SS).
                           Start of the maintenance window in UTC time.
                         type: string
                     type: object
                   metricsEnabled:
                     description: |-
-                      (Computed)[bool] Enables or disables the collection and reporting of metrics for observability of this cluster.
-                      Enables or disables the collection and reporting of metrics for observability of this cluster.
+                      (Computed)[bool] Enable metrics collection for observability. If not set, the API default is used.
+                      Enables or disables metrics collection and reporting for observability.
                     type: boolean
                   name:
                     description: |-
-                      [string] The name of the PostgreSQL cluster.
-                      The name of the PostgreSQL cluster.
+                      [string] Cluster name (2–63 alphanumeric chars with dashes, underscores, dots).
+                      The name of the In-Memory DB cluster.
                     type: string
-                  replicationMode:
+                  persistenceMode:
                     description: |-
-                      [string] Replication mode across the instances. Possible values: ASYNCHRONOUS, STRICTLY_SYNCHRONOUS.
-                      Replication mode across the instances.
+                      (Computed)[string] Data persistence mode: None, AOF, RDB, RDB_AOF. If not set, the API default is used.
+                      Specifies how and whether data is persisted to disk.
                     type: string
-                  restoreFromBackup:
-                    description: '[object] Configures the cluster to be initialized
-                      with data from an existing backup.'
+                  restoreFromSnapshot:
+                    description: '[object] Restore configuration from a snapshot.'
                     properties:
                       recoveryTargetDatetime:
                         description: |-
-                          [string] If supplied as ISO 8601 timestamp, the backup will be replayed up until the given timestamp. If empty, the backup will be applied completely.
-                          If supplied as ISO 8601 timestamp, the backup will be replayed up until the given timestamp. If empty, the backup will be applied completely.
+                          [string] ISO 8601 timestamp to restore from the most recent snapshot at or before that time. Optional for create-time restore; must be provided for in-place restore via update.
+                          ISO 8601 timestamp to restore from the most recent snapshot at or before that time.
                         type: string
-                      sourceBackupId:
+                      sourceSnapshotId:
                         description: |-
-                          [string] The UUID of the backup to restore data from. Immutable — changing this forces a new cluster.
-                          The UUID of the backup to restore data from. Immutable — changing this forces a new cluster.
+                          [string] UUID of the snapshot to restore from. Must be provided when the block is used during cluster creation. Not applicable for in-place restore via update.
+                          The UUID of the snapshot to restore from.
                         type: string
+                    type: object
+                  snapshot:
+                    description: '[object] Snapshot configuration.'
+                    properties:
+                      location:
+                        description: |-
+                          [string] The location of the cluster. Changing this forces a new resource. Available: de/fra, de/txl, es/vit, fr/par, gb/bhx, gb/lhr, us/ewr, us/las, us/mci.
+                          The Object Storage location where snapshots will be stored (e.g. eu-central-3). Changing this forces the re-creation of the cluster.
+                        type: string
+                      retentionDays:
+                        description: |-
+                          [int] Days to retain snapshots (1–365).
+                          Number of days snapshots are retained before automatic deletion.
+                        type: number
+                      snapshotHours:
+                        description: |-
+                          [list of int] UTC hours for scheduled snapshots (0–23). At least one hour must be specified.
+                          Hours of the day (UTC) at which snapshots are taken. At least one hour must be specified.
+                        items:
+                          type: number
+                        type: array
                     type: object
                   version:
                     description: |-
-                      [string] The PostgreSQL version of the cluster.
-                      The PostgreSQL version of the cluster.
+                      [string] The InMemoryDB version. Upgrades only (see /versions endpoint).
+                      The In-Memory DB version. Use GET /versions to see supported values. Upgrades only (no downgrades).
                     type: string
                 type: object
               managementPolicies:
@@ -949,10 +783,6 @@ spec:
             - forProvider
             type: object
             x-kubernetes-validations:
-            - message: spec.forProvider.backup is a required parameter
-              rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
-                || ''Update'' in self.managementPolicies) || has(self.forProvider.backup)
-                || (has(self.initProvider) && has(self.initProvider.backup))'
             - message: spec.forProvider.connections is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
                 || ''Update'' in self.managementPolicies) || has(self.forProvider.connections)
@@ -961,10 +791,18 @@ spec:
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
                 || ''Update'' in self.managementPolicies) || has(self.forProvider.credentials)
                 || (has(self.initProvider) && has(self.initProvider.credentials))'
+            - message: spec.forProvider.evictionPolicy is a required parameter
+              rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
+                || ''Update'' in self.managementPolicies) || has(self.forProvider.evictionPolicy)
+                || (has(self.initProvider) && has(self.initProvider.evictionPolicy))'
             - message: spec.forProvider.instances is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
                 || ''Update'' in self.managementPolicies) || has(self.forProvider.instances)
                 || (has(self.initProvider) && has(self.initProvider.instances))'
+            - message: spec.forProvider.location is a required parameter
+              rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
+                || ''Update'' in self.managementPolicies) || has(self.forProvider.location)
+                || (has(self.initProvider) && has(self.initProvider.location))'
             - message: spec.forProvider.maintenanceWindow is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
                 || ''Update'' in self.managementPolicies) || has(self.forProvider.maintenanceWindow)
@@ -973,125 +811,104 @@ spec:
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
                 || ''Update'' in self.managementPolicies) || has(self.forProvider.name)
                 || (has(self.initProvider) && has(self.initProvider.name))'
-            - message: spec.forProvider.replicationMode is a required parameter
+            - message: spec.forProvider.snapshot is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
-                || ''Update'' in self.managementPolicies) || has(self.forProvider.replicationMode)
-                || (has(self.initProvider) && has(self.initProvider.replicationMode))'
+                || ''Update'' in self.managementPolicies) || has(self.forProvider.snapshot)
+                || (has(self.initProvider) && has(self.initProvider.snapshot))'
             - message: spec.forProvider.version is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
                 || ''Update'' in self.managementPolicies) || has(self.forProvider.version)
                 || (has(self.initProvider) && has(self.initProvider.version))'
           status:
-            description: PostgresqlClusterStatus defines the observed state of PostgresqlCluster.
+            description: InMemoryDBClusterStatus defines the observed state of InMemoryDBCluster.
             properties:
               atProvider:
                 properties:
-                  backup:
-                    description: '[object] Backup location and retention configuration.'
-                    properties:
-                      location:
-                        description: |-
-                          [string] The location of the PostgreSQL cluster. This is used for routing to the regional API endpoint. Changing this value will destroy the existing cluster and create a new one in the specified location. Available locations: de/fra, de/fra/2, de/txl, es/vit, fr/par, gb/bhx, gb/lhr, us/ewr, us/las, us/mci.
-                          The Object Storage location where the backups will be created. Supported locations are provided by the backup locations endpoint. Immutable — changing this forces a new cluster.
-                        type: string
-                      retentionDays:
-                        description: |-
-                          [int] How many days cluster backups are retained.
-                          How many days cluster backups are retained.
-                        type: number
-                    type: object
-                  connectionPooler:
-                    description: |-
-                      (Computed)[string] Defines how database connections are managed and reused. Possible values: DISABLED, TRANSACTION, SESSION.
-                      Defines how database connections are managed and reused.
-                    type: string
                   connections:
-                    description: '[object] Connection information of the PostgreSQL
-                      cluster.'
+                    description: '[object] The network connection for your cluster.
+                      Only one connection is allowed.'
                     properties:
                       datacenterId:
                         description: |-
-                          [string] The datacenter to connect your instance to.
-                          The datacenter to connect your instance to.
+                          [string] The Virtual Data Center ID to connect to.
+                          The ID of the Virtual Data Center to connect the cluster to.
                         type: string
                       lanId:
                         description: |-
-                          [string] The numeric LAN ID to connect your instance to.
-                          The numeric LAN ID to connect your instance to.
+                          [string] The numeric LAN ID within the data center.
+                          The numeric LAN ID within the data center.
                         type: string
                       primaryInstanceAddress:
                         description: |-
-                          [string] The IP and netmask that will be assigned to the cluster primary instance.
-                          The IP and netmask that will be assigned to the cluster primary instance.
+                          [string] Primary instance IP in CIDR notation.
+                          The IP address and subnet mask assigned to the primary instance in CIDR notation.
                         type: string
                     type: object
                   credentials:
-                    description: '[object] Credentials for the master database user
-                      to be created.'
+                    description: '[object] Credentials for the InMemoryDB cluster
+                      user.'
                     properties:
-                      database:
-                        description: |-
-                          [string] The name of the initial database to be created.
-                          The name of the initial database to be created.
-                        type: string
-                      passwordVersion:
-                        description: |-
-                          [string] An arbitrary string (e.g.
-                          Arbitrary string incremented by the practitioner to trigger a password update when the write-only password field changes.
-                        type: string
+                      password:
+                        description: '[object] Pre-hashed password.'
+                        properties:
+                          algorithm:
+                            description: |-
+                              [string] Hash algorithm (SHA-256).
+                              The hashing algorithm used.
+                            type: string
+                        type: object
                       username:
                         description: |-
-                          [string] The username of the master database user.
-                          The username of the master database user.
+                          [string] Username (2–16 alphanumeric + underscore).
+                          The username for the In-Memory DB user.
                         type: string
                     type: object
                   description:
                     description: |-
-                      [string] Human-readable description for the cluster.
+                      [string] Human-readable description.
                       Human-readable description for the cluster.
                     type: string
                   dnsName:
                     description: |-
-                      (Computed)[string] The DNS name used to access the cluster.
-                      The DNS name used to access the cluster.
+                      The DNS name for connecting to the cluster's primary instance.
+                      The DNS name used to connect to the cluster's primary instance.
+                    type: string
+                  evictionPolicy:
+                    description: |-
+                      [string] Key eviction strategy: noeviction, allkeys-lru, allkeys-lfu, allkeys-random, volatile-lru, volatile-lfu, volatile-random, volatile-ttl.
+                      Defines the key eviction strategy when the memory limit is reached.
                     type: string
                   id:
-                    description: (String) The UUID of the cluster.
+                    description: The UUID of the cluster.
                     type: string
                   instances:
-                    description: '[object] The instance configuration for the PostgreSQL
-                      cluster.'
+                    description: '[object] The instance sizing configuration.'
                     properties:
                       cores:
                         description: |-
-                          [int] The number of CPU cores per instance.
-                          The number of CPU cores per instance.
+                          [int] CPU cores per instance (1–62).
+                          The number of dedicated CPU cores per instance.
                         type: number
                       count:
                         description: |-
-                          [int] The total number of instances in the cluster (one primary and n-1 secondary).
-                          The total number of instances in the cluster (one primary and n-1 secondary).
+                          [int] Number of instances (1–5).
+                          The total number of instances in the cluster.
                         type: number
                       ram:
                         description: |-
-                          [int] The amount of memory per instance in gigabytes (GB).
-                          The amount of memory per instance in gigabytes (GB).
-                        type: number
-                      storageSize:
-                        description: |-
-                          [int] The amount of storage per instance in gigabytes (GB).
-                          The amount of storage per instance in gigabytes (GB).
+                          [int] RAM per instance in GB (4–240). The API does not support RAM downgrade. Storage is automatically derived from RAM and persistence mode.
+                          The amount of RAM per instance in gigabytes.
                         type: number
                     type: object
                   location:
                     description: |-
-                      [string] The location of the PostgreSQL cluster. This is used for routing to the regional API endpoint. Changing this value will destroy the existing cluster and create a new one in the specified location. Available locations: de/fra, de/fra/2, de/txl, es/vit, fr/par, gb/bhx, gb/lhr, us/ewr, us/las, us/mci.
-                      The location of the PostgreSQL cluster. This is used for routing to the regional API endpoint. Available locations: `de/fra`, `de/fra/2`, `de/txl`, `es/vit`, `fr/par`, `gb/bhx`, `gb/lhr`, `us/ewr`, `us/las`, `us/mci`.
+                      [string] The location of the cluster. Changing this forces a new resource. Available: de/fra, de/txl, es/vit, fr/par, gb/bhx, gb/lhr, us/ewr, us/las, us/mci.
+                      The location of the cluster. Used to route to the correct regional API endpoint. Available locations: `de/fra`, `de/txl`, `es/vit`, `fr/par`, `gb/bhx`, `gb/lhr`, `us/ewr`, `us/las`, `us/mci`.
                     type: string
                   logsEnabled:
                     description: |-
-                      (Computed)[bool] Enables or disables the collection and reporting of logs for observability of this cluster.
-                      Enables or disables the collection and reporting of logs for observability of this cluster.
+                      (Computed)[bool] Enable log collection for observability. If not set, the API default is used.
+                      Enables or disables log collection and reporting for observability.
                     type: boolean
                   maintenanceWindow:
                     description: '[object] A weekly 4 hour-long window, during which
@@ -1099,49 +916,69 @@ spec:
                     properties:
                       dayOfTheWeek:
                         description: |-
-                          [string] The name of the week day.
+                          [string] Day of the week: Sunday–Saturday.
                           The name of the week day.
                         type: string
                       time:
                         description: |-
-                          [string] Start of the maintenance window in UTC time.
+                          [string] Start time in UTC (HH:MM:SS).
                           Start of the maintenance window in UTC time.
                         type: string
                     type: object
                   metricsEnabled:
                     description: |-
-                      (Computed)[bool] Enables or disables the collection and reporting of metrics for observability of this cluster.
-                      Enables or disables the collection and reporting of metrics for observability of this cluster.
+                      (Computed)[bool] Enable metrics collection for observability. If not set, the API default is used.
+                      Enables or disables metrics collection and reporting for observability.
                     type: boolean
                   name:
                     description: |-
-                      [string] The name of the PostgreSQL cluster.
-                      The name of the PostgreSQL cluster.
+                      [string] Cluster name (2–63 alphanumeric chars with dashes, underscores, dots).
+                      The name of the In-Memory DB cluster.
                     type: string
-                  replicationMode:
+                  persistenceMode:
                     description: |-
-                      [string] Replication mode across the instances. Possible values: ASYNCHRONOUS, STRICTLY_SYNCHRONOUS.
-                      Replication mode across the instances.
+                      (Computed)[string] Data persistence mode: None, AOF, RDB, RDB_AOF. If not set, the API default is used.
+                      Specifies how and whether data is persisted to disk.
                     type: string
-                  restoreFromBackup:
-                    description: '[object] Configures the cluster to be initialized
-                      with data from an existing backup.'
+                  restoreFromSnapshot:
+                    description: '[object] Restore configuration from a snapshot.'
                     properties:
                       recoveryTargetDatetime:
                         description: |-
-                          [string] If supplied as ISO 8601 timestamp, the backup will be replayed up until the given timestamp. If empty, the backup will be applied completely.
-                          If supplied as ISO 8601 timestamp, the backup will be replayed up until the given timestamp. If empty, the backup will be applied completely.
+                          [string] ISO 8601 timestamp to restore from the most recent snapshot at or before that time. Optional for create-time restore; must be provided for in-place restore via update.
+                          ISO 8601 timestamp to restore from the most recent snapshot at or before that time.
                         type: string
-                      sourceBackupId:
+                      sourceSnapshotId:
                         description: |-
-                          [string] The UUID of the backup to restore data from. Immutable — changing this forces a new cluster.
-                          The UUID of the backup to restore data from. Immutable — changing this forces a new cluster.
+                          [string] UUID of the snapshot to restore from. Must be provided when the block is used during cluster creation. Not applicable for in-place restore via update.
+                          The UUID of the snapshot to restore from.
                         type: string
+                    type: object
+                  snapshot:
+                    description: '[object] Snapshot configuration.'
+                    properties:
+                      location:
+                        description: |-
+                          [string] The location of the cluster. Changing this forces a new resource. Available: de/fra, de/txl, es/vit, fr/par, gb/bhx, gb/lhr, us/ewr, us/las, us/mci.
+                          The Object Storage location where snapshots will be stored (e.g. eu-central-3). Changing this forces the re-creation of the cluster.
+                        type: string
+                      retentionDays:
+                        description: |-
+                          [int] Days to retain snapshots (1–365).
+                          Number of days snapshots are retained before automatic deletion.
+                        type: number
+                      snapshotHours:
+                        description: |-
+                          [list of int] UTC hours for scheduled snapshots (0–23). At least one hour must be specified.
+                          Hours of the day (UTC) at which snapshots are taken. At least one hour must be specified.
+                        items:
+                          type: number
+                        type: array
                     type: object
                   version:
                     description: |-
-                      [string] The PostgreSQL version of the cluster.
-                      The PostgreSQL version of the cluster.
+                      [string] The InMemoryDB version. Upgrades only (see /versions endpoint).
+                      The In-Memory DB version. Use GET /versions to see supported values. Upgrades only (no downgrades).
                     type: string
                 type: object
               conditions:

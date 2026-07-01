@@ -2,6 +2,9 @@
 
 All notable changes to this project will be documented in this file.
 
+## [0.5.6]
+- Updated Terraform provider to v6.7.32
+
 ## [0.5.5]
 - Updated Terraform provider to v6.7.30
 
