@@ -1,0 +1,82 @@
+apiVersion: inmemorydbv2.ionoscloud.io/v1alpha1
+kind: InMemoryDBCluster
+metadata:
+  annotations:
+    meta.upbound.io/example-id: inmemorydbv2/v1alpha1/inmemorydbcluster
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    connections:
+      datacenterIdSelector:
+        matchLabels:
+          testing.upbound.io/example-name: example
+      lanIdSelector:
+        matchLabels:
+          testing.upbound.io/example-name: example
+      primaryInstanceAddress: 192.168.2.101/24
+    credentials:
+      password:
+        algorithm: SHA-256
+        hashSecretRef:
+          key: password
+          name: pwsecret
+          namespace: upbound-system
+      username: cacheuser
+    description: InMemoryDB cluster
+    evictionPolicy: allkeys-lru
+    instances:
+      cores: 1
+      count: 1
+      ram: 4
+    location: de/txl
+    logsEnabled: true
+    maintenanceWindow:
+      dayOfTheWeek: Sunday
+      time: "09:00:00"
+    metricsEnabled: true
+    name: my-inmemorydb-cluster
+    persistenceMode: RDB
+    snapshot:
+      location: eu-central-3
+      retentionDays: 7
+      snapshotHours:
+      - 0
+      - 6
+      - 12
+      - 18
+    version: "9.0"
+
+---
+
+apiVersion: compute.ionoscloud.io/v1alpha1
+kind: Datacenter
+metadata:
+  annotations:
+    meta.upbound.io/example-id: inmemorydbv2/v1alpha1/inmemorydbcluster
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    location: de/txl
+    name: example
+
+---
+
+apiVersion: compute.ionoscloud.io/v1alpha1
+kind: Lan
+metadata:
+  annotations:
+    meta.upbound.io/example-id: inmemorydbv2/v1alpha1/inmemorydbcluster
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    datacenterIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    name: example
+    public: false
