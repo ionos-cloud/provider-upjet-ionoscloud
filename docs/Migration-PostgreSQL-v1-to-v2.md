@@ -273,8 +273,8 @@ into `spec.forProvider` verbatim.
    `instances.ram` in GB, `replicationMode`, `backup.location`, etc.) — no
    manual unit conversion or field-mapping lookups required.
 
-    **Note**: for this method, all ids (like datacenterID) will be returned as a UUID, not using a selector or reference. 
-If you want to use a selector or reference, you will need to manually set that in the spec.
+   **Note:** For this method, all IDs (e.g. `datacenterId`) will be returned as UUIDs, not as selectors or references.
+   If you want to use a selector or reference, you will need to manually set that in the spec.
 
 3. Copy the `jq` output into `spec.forProvider`. `status.atProvider` never
    contains write-only fields, so you still need to set
