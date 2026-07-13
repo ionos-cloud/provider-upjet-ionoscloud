@@ -9,15 +9,12 @@ export TERRAFORM_VERSION ?= 1.5.7
 # Do not allow a version of terraform greater than 1.5.x, due to versions 1.6+ being
 # licensed under BSL, which is not permitted.
 TERRAFORM_VERSION_VALID := $(shell [ "$(TERRAFORM_VERSION)" = "`printf "$(TERRAFORM_VERSION)\n1.6" | sort -V | head -n1`" ] && echo 1 || echo 0)
-
-TERRAFORM_VERSION_VALID := $(shell [ "$(TERRAFORM_VERSION)" = "`printf "$(TERRAFORM_VERSION)\n1.6" | sort -V | head -n1`" ] && echo 1 || echo 0)
 export TERRAFORM_PROVIDER_SOURCE ?= ionos-cloud/ionoscloud
 export TERRAFORM_PROVIDER_REPO ?= https://github.com/ionos-cloud/terraform-provider-ionoscloud
-export TERRAFORM_PROVIDER_REPO ?= https://github.com/ionos-cloud/terraform-provider-ionoscloud
-export TERRAFORM_PROVIDER_VERSION ?= 6.7.30
+export TERRAFORM_PROVIDER_VERSION ?= 6.7.32
 export TERRAFORM_PROVIDER_DOWNLOAD_NAME ?= terraform-provider-ionoscloud
 export TERRAFORM_PROVIDER_DOWNLOAD_URL_PREFIX ?= https://github.com/ionos-cloud/$(TERRAFORM_PROVIDER_DOWNLOAD_NAME)/releases/download/v$(TERRAFORM_PROVIDER_VERSION)
-export TERRAFORM_NATIVE_PROVIDER_BINARY ?= terraform-provider-ionoscloud_v6_7_30
+export TERRAFORM_NATIVE_PROVIDER_BINARY ?= terraform-provider-ionoscloud_v6_7_32
 export TERRAFORM_DOCS_PATH ?= docs/resources
 
 

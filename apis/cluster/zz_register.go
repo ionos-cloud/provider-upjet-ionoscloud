@@ -19,6 +19,7 @@ import (
 	v1alpha1dbaas "github.com/ionos-cloud/provider-upjet-ionoscloud/apis/cluster/dbaas/v1alpha1"
 	v1alpha1dns "github.com/ionos-cloud/provider-upjet-ionoscloud/apis/cluster/dns/v1alpha1"
 	v1alpha1inmemorydb "github.com/ionos-cloud/provider-upjet-ionoscloud/apis/cluster/inmemorydb/v1alpha1"
+	v1alpha1inmemorydbv2 "github.com/ionos-cloud/provider-upjet-ionoscloud/apis/cluster/inmemorydbv2/v1alpha1"
 	v1alpha1k8s "github.com/ionos-cloud/provider-upjet-ionoscloud/apis/cluster/k8s/v1alpha1"
 	v1alpha1kafka "github.com/ionos-cloud/provider-upjet-ionoscloud/apis/cluster/kafka/v1alpha1"
 	v1alpha1log "github.com/ionos-cloud/provider-upjet-ionoscloud/apis/cluster/log/v1alpha1"
@@ -47,6 +48,7 @@ func init() {
 		v1alpha1dbaas.SchemeBuilder.AddToScheme,
 		v1alpha1dns.SchemeBuilder.AddToScheme,
 		v1alpha1inmemorydb.SchemeBuilder.AddToScheme,
+		v1alpha1inmemorydbv2.SchemeBuilder.AddToScheme,
 		v1alpha1k8s.SchemeBuilder.AddToScheme,
 		v1alpha1kafka.SchemeBuilder.AddToScheme,
 		v1alpha1log.SchemeBuilder.AddToScheme,

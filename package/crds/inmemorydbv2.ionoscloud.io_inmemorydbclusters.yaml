@@ -1,0 +1,1072 @@
+---
+apiVersion: apiextensions.k8s.io/v1
+kind: CustomResourceDefinition
+metadata:
+  annotations:
+    controller-gen.kubebuilder.io/version: v0.20.0
+  name: inmemorydbclusters.inmemorydbv2.ionoscloud.io
+spec:
+  group: inmemorydbv2.ionoscloud.io
+  names:
+    categories:
+    - crossplane
+    - managed
+    - ionos
+    kind: InMemoryDBCluster
+    listKind: InMemoryDBClusterList
+    plural: inmemorydbclusters
+    singular: inmemorydbcluster
+  scope: Cluster
+  versions:
+  - additionalPrinterColumns:
+    - jsonPath: .status.conditions[?(@.type=='Synced')].status
+      name: SYNCED
+      type: string
+    - jsonPath: .status.conditions[?(@.type=='Ready')].status
+      name: READY
+      type: string
+    - jsonPath: .metadata.annotations.crossplane\.io/external-name
+      name: EXTERNAL-NAME
+      type: string
+    - jsonPath: .metadata.creationTimestamp
+      name: AGE
+      type: date
+    name: v1alpha1
+    schema:
+      openAPIV3Schema:
+        description: InMemoryDBCluster is the Schema for the InMemoryDBClusters API.
+          Creates and manages an IONOS CLOUD InMemoryDB V2 Cluster.
+        properties:
+          apiVersion:
+            description: |-
+              APIVersion defines the versioned schema of this representation of an object.
+              Servers should convert recognized schemas to the latest internal value, and
+              may reject unrecognized values.
+              More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#resources
+            type: string
+          kind:
+            description: |-
+              Kind is a string value representing the REST resource this object represents.
+              Servers may infer this from the endpoint the client submits requests to.
+              Cannot be updated.
+              In CamelCase.
+              More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#types-kinds
+            type: string
+          metadata:
+            type: object
+          spec:
+            description: InMemoryDBClusterSpec defines the desired state of InMemoryDBCluster
+            properties:
+              deletionPolicy:
+                default: Delete
+                description: |-
+                  DeletionPolicy specifies what will happen to the underlying external
+                  when this managed resource is deleted - either "Delete" or "Orphan" the
+                  external resource.
+                  This field is planned to be deprecated in favor of the ManagementPolicies
+                  field in a future release. Currently, both could be set independently and
+                  non-default values would be honored if the feature flag is enabled.
+                  See the design doc for more information: https://github.com/crossplane/crossplane/blob/499895a25d1a1a0ba1604944ef98ac7a1a71f197/design/design-doc-observe-only-resources.md?plain=1#L223
+                enum:
+                - Orphan
+                - Delete
+                type: string
+              forProvider:
+                properties:
+                  connections:
+                    description: '[object] The network connection for your cluster.
+                      Only one connection is allowed.'
+                    properties:
+                      datacenterId:
+                        description: |-
+                          [string] The Virtual Data Center ID to connect to.
+                          The ID of the Virtual Data Center to connect the cluster to.
+                        type: string
+                      datacenterIdRef:
+                        description: Reference to a Datacenter in compute to populate
+                          datacenterId.
+                        properties:
+                          name:
+                            description: Name of the referenced object.
+                            type: string
+                          policy:
+                            description: Policies for referencing.
+                            properties:
+                              resolution:
+                                default: Required
+                                description: |-
+                                  Resolution specifies whether resolution of this reference is required.
+                                  The default is 'Required', which means the reconcile will fail if the
+                                  reference cannot be resolved. 'Optional' means this reference will be
+                                  a no-op if it cannot be resolved.
+                                enum:
+                                - Required
+                                - Optional
+                                type: string
+                              resolve:
+                                description: |-
+                                  Resolve specifies when this reference should be resolved. The default
+                                  is 'IfNotPresent', which will attempt to resolve the reference only when
+                                  the corresponding field is not present. Use 'Always' to resolve the
+                                  reference on every reconcile.
+                                enum:
+                                - Always
+                                - IfNotPresent
+                                type: string
+                            type: object
+                        required:
+                        - name
+                        type: object
+                      datacenterIdSelector:
+                        description: Selector for a Datacenter in compute to populate
+                          datacenterId.
+                        properties:
+                          matchControllerRef:
+                            description: |-
+                              MatchControllerRef ensures an object with the same controller reference
+                              as the selecting object is selected.
+                            type: boolean
+                          matchLabels:
+                            additionalProperties:
+                              type: string
+                            description: MatchLabels ensures an object with matching
+                              labels is selected.
+                            type: object
+                          policy:
+                            description: Policies for selection.
+                            properties:
+                              resolution:
+                                default: Required
+                                description: |-
+                                  Resolution specifies whether resolution of this reference is required.
+                                  The default is 'Required', which means the reconcile will fail if the
+                                  reference cannot be resolved. 'Optional' means this reference will be
+                                  a no-op if it cannot be resolved.
+                                enum:
+                                - Required
+                                - Optional
+                                type: string
+                              resolve:
+                                description: |-
+                                  Resolve specifies when this reference should be resolved. The default
+                                  is 'IfNotPresent', which will attempt to resolve the reference only when
+                                  the corresponding field is not present. Use 'Always' to resolve the
+                                  reference on every reconcile.
+                                enum:
+                                - Always
+                                - IfNotPresent
+                                type: string
+                            type: object
+                        type: object
+                      lanId:
+                        description: |-
+                          [string] The numeric LAN ID within the data center.
+                          The numeric LAN ID within the data center.
+                        type: string
+                      lanIdRef:
+                        description: Reference to a Lan in compute to populate lanId.
+                        properties:
+                          name:
+                            description: Name of the referenced object.
+                            type: string
+                          policy:
+                            description: Policies for referencing.
+                            properties:
+                              resolution:
+                                default: Required
+                                description: |-
+                                  Resolution specifies whether resolution of this reference is required.
+                                  The default is 'Required', which means the reconcile will fail if the
+                                  reference cannot be resolved. 'Optional' means this reference will be
+                                  a no-op if it cannot be resolved.
+                                enum:
+                                - Required
+                                - Optional
+                                type: string
+                              resolve:
+                                description: |-
+                                  Resolve specifies when this reference should be resolved. The default
+                                  is 'IfNotPresent', which will attempt to resolve the reference only when
+                                  the corresponding field is not present. Use 'Always' to resolve the
+                                  reference on every reconcile.
+                                enum:
+                                - Always
+                                - IfNotPresent
+                                type: string
+                            type: object
+                        required:
+                        - name
+                        type: object
+                      lanIdSelector:
+                        description: Selector for a Lan in compute to populate lanId.
+                        properties:
+                          matchControllerRef:
+                            description: |-
+                              MatchControllerRef ensures an object with the same controller reference
+                              as the selecting object is selected.
+                            type: boolean
+                          matchLabels:
+                            additionalProperties:
+                              type: string
+                            description: MatchLabels ensures an object with matching
+                              labels is selected.
+                            type: object
+                          policy:
+                            description: Policies for selection.
+                            properties:
+                              resolution:
+                                default: Required
+                                description: |-
+                                  Resolution specifies whether resolution of this reference is required.
+                                  The default is 'Required', which means the reconcile will fail if the
+                                  reference cannot be resolved. 'Optional' means this reference will be
+                                  a no-op if it cannot be resolved.
+                                enum:
+                                - Required
+                                - Optional
+                                type: string
+                              resolve:
+                                description: |-
+                                  Resolve specifies when this reference should be resolved. The default
+                                  is 'IfNotPresent', which will attempt to resolve the reference only when
+                                  the corresponding field is not present. Use 'Always' to resolve the
+                                  reference on every reconcile.
+                                enum:
+                                - Always
+                                - IfNotPresent
+                                type: string
+                            type: object
+                        type: object
+                      primaryInstanceAddress:
+                        description: |-
+                          [string] Primary instance IP in CIDR notation.
+                          The IP address and subnet mask assigned to the primary instance in CIDR notation.
+                        type: string
+                    type: object
+                  credentials:
+                    description: '[object] Credentials for the InMemoryDB cluster
+                      user.'
+                    properties:
+                      password:
+                        description: '[object] Pre-hashed password.'
+                        properties:
+                          algorithm:
+                            description: |-
+                              [string] Hash algorithm (SHA-256).
+                              The hashing algorithm used.
+                            type: string
+                          hashSecretRef:
+                            description: |-
+                              [string] Sensitive. Hex-encoded SHA-256 hash (64 lowercase hex chars).
+                              The hex-encoded hash of the password.
+                            properties:
+                              key:
+                                description: The key to select.
+                                type: string
+                              name:
+                                description: Name of the secret.
+                                type: string
+                              namespace:
+                                description: Namespace of the secret.
+                                type: string
+                            required:
+                            - key
+                            - name
+                            - namespace
+                            type: object
+                        type: object
+                      username:
+                        description: |-
+                          [string] Username (2–16 alphanumeric + underscore).
+                          The username for the In-Memory DB user.
+                        type: string
+                    type: object
+                  description:
+                    description: |-
+                      [string] Human-readable description.
+                      Human-readable description for the cluster.
+                    type: string
+                  evictionPolicy:
+                    description: |-
+                      [string] Key eviction strategy: noeviction, allkeys-lru, allkeys-lfu, allkeys-random, volatile-lru, volatile-lfu, volatile-random, volatile-ttl.
+                      Defines the key eviction strategy when the memory limit is reached.
+                    type: string
+                  instances:
+                    description: '[object] The instance sizing configuration.'
+                    properties:
+                      cores:
+                        description: |-
+                          [int] CPU cores per instance (1–62).
+                          The number of dedicated CPU cores per instance.
+                        type: number
+                      count:
+                        description: |-
+                          [int] Number of instances (1–5).
+                          The total number of instances in the cluster.
+                        type: number
+                      ram:
+                        description: |-
+                          [int] RAM per instance in GB (4–240). The API does not support RAM downgrade. Storage is automatically derived from RAM and persistence mode.
+                          The amount of RAM per instance in gigabytes.
+                        type: number
+                    type: object
+                  location:
+                    description: |-
+                      [string] The location of the cluster. Changing this forces a new resource. Available: de/fra, de/txl, es/vit, fr/par, gb/bhx, gb/lhr, us/ewr, us/las, us/mci.
+                      The location of the cluster. Used to route to the correct regional API endpoint. Available locations: `de/fra`, `de/txl`, `es/vit`, `fr/par`, `gb/bhx`, `gb/lhr`, `us/ewr`, `us/las`, `us/mci`.
+                    type: string
+                  logsEnabled:
+                    description: |-
+                      (Computed)[bool] Enable log collection for observability. If not set, the API default is used.
+                      Enables or disables log collection and reporting for observability.
+                    type: boolean
+                  maintenanceWindow:
+                    description: '[object] A weekly 4 hour-long window, during which
+                      maintenance might occur.'
+                    properties:
+                      dayOfTheWeek:
+                        description: |-
+                          [string] Day of the week: Sunday–Saturday.
+                          The name of the week day.
+                        type: string
+                      time:
+                        description: |-
+                          [string] Start time in UTC (HH:MM:SS).
+                          Start of the maintenance window in UTC time.
+                        type: string
+                    type: object
+                  metricsEnabled:
+                    description: |-
+                      (Computed)[bool] Enable metrics collection for observability. If not set, the API default is used.
+                      Enables or disables metrics collection and reporting for observability.
+                    type: boolean
+                  name:
+                    description: |-
+                      [string] Cluster name (2–63 alphanumeric chars with dashes, underscores, dots).
+                      The name of the In-Memory DB cluster.
+                    type: string
+                  persistenceMode:
+                    description: |-
+                      (Computed)[string] Data persistence mode: None, AOF, RDB, RDB_AOF. If not set, the API default is used.
+                      Specifies how and whether data is persisted to disk.
+                    type: string
+                  restoreFromSnapshot:
+                    description: '[object] Restore configuration from a snapshot.'
+                    properties:
+                      recoveryTargetDatetime:
+                        description: |-
+                          [string] ISO 8601 timestamp to restore from the most recent snapshot at or before that time. Optional for create-time restore; must be provided for in-place restore via update.
+                          ISO 8601 timestamp to restore from the most recent snapshot at or before that time.
+                        type: string
+                      sourceSnapshotId:
+                        description: |-
+                          [string] UUID of the snapshot to restore from. Must be provided when the block is used during cluster creation. Not applicable for in-place restore via update.
+                          The UUID of the snapshot to restore from.
+                        type: string
+                    type: object
+                  snapshot:
+                    description: '[object] Snapshot configuration.'
+                    properties:
+                      location:
+                        description: |-
+                          [string] The location of the cluster. Changing this forces a new resource. Available: de/fra, de/txl, es/vit, fr/par, gb/bhx, gb/lhr, us/ewr, us/las, us/mci.
+                          The Object Storage location where snapshots will be stored (e.g. eu-central-3). Changing this forces the re-creation of the cluster.
+                        type: string
+                      retentionDays:
+                        description: |-
+                          [int] Days to retain snapshots (1–365).
+                          Number of days snapshots are retained before automatic deletion.
+                        type: number
+                      snapshotHours:
+                        description: |-
+                          [list of int] UTC hours for scheduled snapshots (0–23). At least one hour must be specified.
+                          Hours of the day (UTC) at which snapshots are taken. At least one hour must be specified.
+                        items:
+                          type: number
+                        type: array
+                    type: object
+                  version:
+                    description: |-
+                      [string] The InMemoryDB version. Upgrades only (see /versions endpoint).
+                      The In-Memory DB version. Use GET /versions to see supported values. Upgrades only (no downgrades).
+                    type: string
+                type: object
+              initProvider:
+                description: |-
+                  THIS IS A BETA FIELD. It will be honored
+                  unless the Management Policies feature flag is disabled.
+                  InitProvider holds the same fields as ForProvider, with the exception
+                  of Identifier and other resource reference fields. The fields that are
+                  in InitProvider are merged into ForProvider when the resource is created.
+                  The same fields are also added to the terraform ignore_changes hook, to
+                  avoid updating them after creation. This is useful for fields that are
+                  required on creation, but we do not desire to update them after creation,
+                  for example because of an external controller is managing them, like an
+                  autoscaler.
+                properties:
+                  connections:
+                    description: '[object] The network connection for your cluster.
+                      Only one connection is allowed.'
+                    properties:
+                      datacenterId:
+                        description: |-
+                          [string] The Virtual Data Center ID to connect to.
+                          The ID of the Virtual Data Center to connect the cluster to.
+                        type: string
+                      datacenterIdRef:
+                        description: Reference to a Datacenter in compute to populate
+                          datacenterId.
+                        properties:
+                          name:
+                            description: Name of the referenced object.
+                            type: string
+                          policy:
+                            description: Policies for referencing.
+                            properties:
+                              resolution:
+                                default: Required
+                                description: |-
+                                  Resolution specifies whether resolution of this reference is required.
+                                  The default is 'Required', which means the reconcile will fail if the
+                                  reference cannot be resolved. 'Optional' means this reference will be
+                                  a no-op if it cannot be resolved.
+                                enum:
+                                - Required
+                                - Optional
+                                type: string
+                              resolve:
+                                description: |-
+                                  Resolve specifies when this reference should be resolved. The default
+                                  is 'IfNotPresent', which will attempt to resolve the reference only when
+                                  the corresponding field is not present. Use 'Always' to resolve the
+                                  reference on every reconcile.
+                                enum:
+                                - Always
+                                - IfNotPresent
+                                type: string
+                            type: object
+                        required:
+                        - name
+                        type: object
+                      datacenterIdSelector:
+                        description: Selector for a Datacenter in compute to populate
+                          datacenterId.
+                        properties:
+                          matchControllerRef:
+                            description: |-
+                              MatchControllerRef ensures an object with the same controller reference
+                              as the selecting object is selected.
+                            type: boolean
+                          matchLabels:
+                            additionalProperties:
+                              type: string
+                            description: MatchLabels ensures an object with matching
+                              labels is selected.
+                            type: object
+                          policy:
+                            description: Policies for selection.
+                            properties:
+                              resolution:
+                                default: Required
+                                description: |-
+                                  Resolution specifies whether resolution of this reference is required.
+                                  The default is 'Required', which means the reconcile will fail if the
+                                  reference cannot be resolved. 'Optional' means this reference will be
+                                  a no-op if it cannot be resolved.
+                                enum:
+                                - Required
+                                - Optional
+                                type: string
+                              resolve:
+                                description: |-
+                                  Resolve specifies when this reference should be resolved. The default
+                                  is 'IfNotPresent', which will attempt to resolve the reference only when
+                                  the corresponding field is not present. Use 'Always' to resolve the
+                                  reference on every reconcile.
+                                enum:
+                                - Always
+                                - IfNotPresent
+                                type: string
+                            type: object
+                        type: object
+                      lanId:
+                        description: |-
+                          [string] The numeric LAN ID within the data center.
+                          The numeric LAN ID within the data center.
+                        type: string
+                      lanIdRef:
+                        description: Reference to a Lan in compute to populate lanId.
+                        properties:
+                          name:
+                            description: Name of the referenced object.
+                            type: string
+                          policy:
+                            description: Policies for referencing.
+                            properties:
+                              resolution:
+                                default: Required
+                                description: |-
+                                  Resolution specifies whether resolution of this reference is required.
+                                  The default is 'Required', which means the reconcile will fail if the
+                                  reference cannot be resolved. 'Optional' means this reference will be
+                                  a no-op if it cannot be resolved.
+                                enum:
+                                - Required
+                                - Optional
+                                type: string
+                              resolve:
+                                description: |-
+                                  Resolve specifies when this reference should be resolved. The default
+                                  is 'IfNotPresent', which will attempt to resolve the reference only when
+                                  the corresponding field is not present. Use 'Always' to resolve the
+                                  reference on every reconcile.
+                                enum:
+                                - Always
+                                - IfNotPresent
+                                type: string
+                            type: object
+                        required:
+                        - name
+                        type: object
+                      lanIdSelector:
+                        description: Selector for a Lan in compute to populate lanId.
+                        properties:
+                          matchControllerRef:
+                            description: |-
+                              MatchControllerRef ensures an object with the same controller reference
+                              as the selecting object is selected.
+                            type: boolean
+                          matchLabels:
+                            additionalProperties:
+                              type: string
+                            description: MatchLabels ensures an object with matching
+                              labels is selected.
+                            type: object
+                          policy:
+                            description: Policies for selection.
+                            properties:
+                              resolution:
+                                default: Required
+                                description: |-
+                                  Resolution specifies whether resolution of this reference is required.
+                                  The default is 'Required', which means the reconcile will fail if the
+                                  reference cannot be resolved. 'Optional' means this reference will be
+                                  a no-op if it cannot be resolved.
+                                enum:
+                                - Required
+                                - Optional
+                                type: string
+                              resolve:
+                                description: |-
+                                  Resolve specifies when this reference should be resolved. The default
+                                  is 'IfNotPresent', which will attempt to resolve the reference only when
+                                  the corresponding field is not present. Use 'Always' to resolve the
+                                  reference on every reconcile.
+                                enum:
+                                - Always
+                                - IfNotPresent
+                                type: string
+                            type: object
+                        type: object
+                      primaryInstanceAddress:
+                        description: |-
+                          [string] Primary instance IP in CIDR notation.
+                          The IP address and subnet mask assigned to the primary instance in CIDR notation.
+                        type: string
+                    type: object
+                  credentials:
+                    description: '[object] Credentials for the InMemoryDB cluster
+                      user.'
+                    properties:
+                      password:
+                        description: '[object] Pre-hashed password.'
+                        properties:
+                          algorithm:
+                            description: |-
+                              [string] Hash algorithm (SHA-256).
+                              The hashing algorithm used.
+                            type: string
+                          hashSecretRef:
+                            description: |-
+                              [string] Sensitive. Hex-encoded SHA-256 hash (64 lowercase hex chars).
+                              The hex-encoded hash of the password.
+                            properties:
+                              key:
+                                description: The key to select.
+                                type: string
+                              name:
+                                description: Name of the secret.
+                                type: string
+                              namespace:
+                                description: Namespace of the secret.
+                                type: string
+                            required:
+                            - key
+                            - name
+                            - namespace
+                            type: object
+                        required:
+                        - hashSecretRef
+                        type: object
+                      username:
+                        description: |-
+                          [string] Username (2–16 alphanumeric + underscore).
+                          The username for the In-Memory DB user.
+                        type: string
+                    type: object
+                  description:
+                    description: |-
+                      [string] Human-readable description.
+                      Human-readable description for the cluster.
+                    type: string
+                  evictionPolicy:
+                    description: |-
+                      [string] Key eviction strategy: noeviction, allkeys-lru, allkeys-lfu, allkeys-random, volatile-lru, volatile-lfu, volatile-random, volatile-ttl.
+                      Defines the key eviction strategy when the memory limit is reached.
+                    type: string
+                  instances:
+                    description: '[object] The instance sizing configuration.'
+                    properties:
+                      cores:
+                        description: |-
+                          [int] CPU cores per instance (1–62).
+                          The number of dedicated CPU cores per instance.
+                        type: number
+                      count:
+                        description: |-
+                          [int] Number of instances (1–5).
+                          The total number of instances in the cluster.
+                        type: number
+                      ram:
+                        description: |-
+                          [int] RAM per instance in GB (4–240). The API does not support RAM downgrade. Storage is automatically derived from RAM and persistence mode.
+                          The amount of RAM per instance in gigabytes.
+                        type: number
+                    type: object
+                  location:
+                    description: |-
+                      [string] The location of the cluster. Changing this forces a new resource. Available: de/fra, de/txl, es/vit, fr/par, gb/bhx, gb/lhr, us/ewr, us/las, us/mci.
+                      The location of the cluster. Used to route to the correct regional API endpoint. Available locations: `de/fra`, `de/txl`, `es/vit`, `fr/par`, `gb/bhx`, `gb/lhr`, `us/ewr`, `us/las`, `us/mci`.
+                    type: string
+                  logsEnabled:
+                    description: |-
+                      (Computed)[bool] Enable log collection for observability. If not set, the API default is used.
+                      Enables or disables log collection and reporting for observability.
+                    type: boolean
+                  maintenanceWindow:
+                    description: '[object] A weekly 4 hour-long window, during which
+                      maintenance might occur.'
+                    properties:
+                      dayOfTheWeek:
+                        description: |-
+                          [string] Day of the week: Sunday–Saturday.
+                          The name of the week day.
+                        type: string
+                      time:
+                        description: |-
+                          [string] Start time in UTC (HH:MM:SS).
+                          Start of the maintenance window in UTC time.
+                        type: string
+                    type: object
+                  metricsEnabled:
+                    description: |-
+                      (Computed)[bool] Enable metrics collection for observability. If not set, the API default is used.
+                      Enables or disables metrics collection and reporting for observability.
+                    type: boolean
+                  name:
+                    description: |-
+                      [string] Cluster name (2–63 alphanumeric chars with dashes, underscores, dots).
+                      The name of the In-Memory DB cluster.
+                    type: string
+                  persistenceMode:
+                    description: |-
+                      (Computed)[string] Data persistence mode: None, AOF, RDB, RDB_AOF. If not set, the API default is used.
+                      Specifies how and whether data is persisted to disk.
+                    type: string
+                  restoreFromSnapshot:
+                    description: '[object] Restore configuration from a snapshot.'
+                    properties:
+                      recoveryTargetDatetime:
+                        description: |-
+                          [string] ISO 8601 timestamp to restore from the most recent snapshot at or before that time. Optional for create-time restore; must be provided for in-place restore via update.
+                          ISO 8601 timestamp to restore from the most recent snapshot at or before that time.
+                        type: string
+                      sourceSnapshotId:
+                        description: |-
+                          [string] UUID of the snapshot to restore from. Must be provided when the block is used during cluster creation. Not applicable for in-place restore via update.
+                          The UUID of the snapshot to restore from.
+                        type: string
+                    type: object
+                  snapshot:
+                    description: '[object] Snapshot configuration.'
+                    properties:
+                      location:
+                        description: |-
+                          [string] The location of the cluster. Changing this forces a new resource. Available: de/fra, de/txl, es/vit, fr/par, gb/bhx, gb/lhr, us/ewr, us/las, us/mci.
+                          The Object Storage location where snapshots will be stored (e.g. eu-central-3). Changing this forces the re-creation of the cluster.
+                        type: string
+                      retentionDays:
+                        description: |-
+                          [int] Days to retain snapshots (1–365).
+                          Number of days snapshots are retained before automatic deletion.
+                        type: number
+                      snapshotHours:
+                        description: |-
+                          [list of int] UTC hours for scheduled snapshots (0–23). At least one hour must be specified.
+                          Hours of the day (UTC) at which snapshots are taken. At least one hour must be specified.
+                        items:
+                          type: number
+                        type: array
+                    type: object
+                  version:
+                    description: |-
+                      [string] The InMemoryDB version. Upgrades only (see /versions endpoint).
+                      The In-Memory DB version. Use GET /versions to see supported values. Upgrades only (no downgrades).
+                    type: string
+                type: object
+              managementPolicies:
+                default:
+                - '*'
+                description: |-
+                  THIS IS A BETA FIELD. It is on by default but can be opted out
+                  through a Crossplane feature flag.
+                  ManagementPolicies specify the array of actions Crossplane is allowed to
+                  take on the managed and external resources.
+                  This field is planned to replace the DeletionPolicy field in a future
+                  release. Currently, both could be set independently and non-default
+                  values would be honored if the feature flag is enabled. If both are
+                  custom, the DeletionPolicy field will be ignored.
+                  See the design doc for more information: https://github.com/crossplane/crossplane/blob/499895a25d1a1a0ba1604944ef98ac7a1a71f197/design/design-doc-observe-only-resources.md?plain=1#L223
+                  and this one: https://github.com/crossplane/crossplane/blob/444267e84783136daa93568b364a5f01228cacbe/design/one-pager-ignore-changes.md
+                items:
+                  description: |-
+                    A ManagementAction represents an action that the Crossplane controllers
+                    can take on an external resource.
+                  enum:
+                  - Observe
+                  - Create
+                  - Update
+                  - Delete
+                  - LateInitialize
+                  - '*'
+                  type: string
+                type: array
+              providerConfigRef:
+                default:
+                  name: default
+                description: |-
+                  ProviderConfigReference specifies how the provider that will be used to
+                  create, observe, update, and delete this managed resource should be
+                  configured.
+                properties:
+                  name:
+                    description: Name of the referenced object.
+                    type: string
+                  policy:
+                    description: Policies for referencing.
+                    properties:
+                      resolution:
+                        default: Required
+                        description: |-
+                          Resolution specifies whether resolution of this reference is required.
+                          The default is 'Required', which means the reconcile will fail if the
+                          reference cannot be resolved. 'Optional' means this reference will be
+                          a no-op if it cannot be resolved.
+                        enum:
+                        - Required
+                        - Optional
+                        type: string
+                      resolve:
+                        description: |-
+                          Resolve specifies when this reference should be resolved. The default
+                          is 'IfNotPresent', which will attempt to resolve the reference only when
+                          the corresponding field is not present. Use 'Always' to resolve the
+                          reference on every reconcile.
+                        enum:
+                        - Always
+                        - IfNotPresent
+                        type: string
+                    type: object
+                required:
+                - name
+                type: object
+              writeConnectionSecretToRef:
+                description: |-
+                  WriteConnectionSecretToReference specifies the namespace and name of a
+                  Secret to which any connection details for this managed resource should
+                  be written. Connection details frequently include the endpoint, username,
+                  and password required to connect to the managed resource.
+                properties:
+                  name:
+                    description: Name of the secret.
+                    type: string
+                  namespace:
+                    description: Namespace of the secret.
+                    type: string
+                required:
+                - name
+                - namespace
+                type: object
+            required:
+            - forProvider
+            type: object
+            x-kubernetes-validations:
+            - message: spec.forProvider.connections is a required parameter
+              rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
+                || ''Update'' in self.managementPolicies) || has(self.forProvider.connections)
+                || (has(self.initProvider) && has(self.initProvider.connections))'
+            - message: spec.forProvider.credentials is a required parameter
+              rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
+                || ''Update'' in self.managementPolicies) || has(self.forProvider.credentials)
+                || (has(self.initProvider) && has(self.initProvider.credentials))'
+            - message: spec.forProvider.evictionPolicy is a required parameter
+              rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
+                || ''Update'' in self.managementPolicies) || has(self.forProvider.evictionPolicy)
+                || (has(self.initProvider) && has(self.initProvider.evictionPolicy))'
+            - message: spec.forProvider.instances is a required parameter
+              rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
+                || ''Update'' in self.managementPolicies) || has(self.forProvider.instances)
+                || (has(self.initProvider) && has(self.initProvider.instances))'
+            - message: spec.forProvider.location is a required parameter
+              rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
+                || ''Update'' in self.managementPolicies) || has(self.forProvider.location)
+                || (has(self.initProvider) && has(self.initProvider.location))'
+            - message: spec.forProvider.maintenanceWindow is a required parameter
+              rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
+                || ''Update'' in self.managementPolicies) || has(self.forProvider.maintenanceWindow)
+                || (has(self.initProvider) && has(self.initProvider.maintenanceWindow))'
+            - message: spec.forProvider.name is a required parameter
+              rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
+                || ''Update'' in self.managementPolicies) || has(self.forProvider.name)
+                || (has(self.initProvider) && has(self.initProvider.name))'
+            - message: spec.forProvider.snapshot is a required parameter
+              rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
+                || ''Update'' in self.managementPolicies) || has(self.forProvider.snapshot)
+                || (has(self.initProvider) && has(self.initProvider.snapshot))'
+            - message: spec.forProvider.version is a required parameter
+              rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
+                || ''Update'' in self.managementPolicies) || has(self.forProvider.version)
+                || (has(self.initProvider) && has(self.initProvider.version))'
+          status:
+            description: InMemoryDBClusterStatus defines the observed state of InMemoryDBCluster.
+            properties:
+              atProvider:
+                properties:
+                  connections:
+                    description: '[object] The network connection for your cluster.
+                      Only one connection is allowed.'
+                    properties:
+                      datacenterId:
+                        description: |-
+                          [string] The Virtual Data Center ID to connect to.
+                          The ID of the Virtual Data Center to connect the cluster to.
+                        type: string
+                      lanId:
+                        description: |-
+                          [string] The numeric LAN ID within the data center.
+                          The numeric LAN ID within the data center.
+                        type: string
+                      primaryInstanceAddress:
+                        description: |-
+                          [string] Primary instance IP in CIDR notation.
+                          The IP address and subnet mask assigned to the primary instance in CIDR notation.
+                        type: string
+                    type: object
+                  credentials:
+                    description: '[object] Credentials for the InMemoryDB cluster
+                      user.'
+                    properties:
+                      password:
+                        description: '[object] Pre-hashed password.'
+                        properties:
+                          algorithm:
+                            description: |-
+                              [string] Hash algorithm (SHA-256).
+                              The hashing algorithm used.
+                            type: string
+                        type: object
+                      username:
+                        description: |-
+                          [string] Username (2–16 alphanumeric + underscore).
+                          The username for the In-Memory DB user.
+                        type: string
+                    type: object
+                  description:
+                    description: |-
+                      [string] Human-readable description.
+                      Human-readable description for the cluster.
+                    type: string
+                  dnsName:
+                    description: |-
+                      The DNS name for connecting to the cluster's primary instance.
+                      The DNS name used to connect to the cluster's primary instance.
+                    type: string
+                  evictionPolicy:
+                    description: |-
+                      [string] Key eviction strategy: noeviction, allkeys-lru, allkeys-lfu, allkeys-random, volatile-lru, volatile-lfu, volatile-random, volatile-ttl.
+                      Defines the key eviction strategy when the memory limit is reached.
+                    type: string
+                  id:
+                    description: The UUID of the cluster.
+                    type: string
+                  instances:
+                    description: '[object] The instance sizing configuration.'
+                    properties:
+                      cores:
+                        description: |-
+                          [int] CPU cores per instance (1–62).
+                          The number of dedicated CPU cores per instance.
+                        type: number
+                      count:
+                        description: |-
+                          [int] Number of instances (1–5).
+                          The total number of instances in the cluster.
+                        type: number
+                      ram:
+                        description: |-
+                          [int] RAM per instance in GB (4–240). The API does not support RAM downgrade. Storage is automatically derived from RAM and persistence mode.
+                          The amount of RAM per instance in gigabytes.
+                        type: number
+                    type: object
+                  location:
+                    description: |-
+                      [string] The location of the cluster. Changing this forces a new resource. Available: de/fra, de/txl, es/vit, fr/par, gb/bhx, gb/lhr, us/ewr, us/las, us/mci.
+                      The location of the cluster. Used to route to the correct regional API endpoint. Available locations: `de/fra`, `de/txl`, `es/vit`, `fr/par`, `gb/bhx`, `gb/lhr`, `us/ewr`, `us/las`, `us/mci`.
+                    type: string
+                  logsEnabled:
+                    description: |-
+                      (Computed)[bool] Enable log collection for observability. If not set, the API default is used.
+                      Enables or disables log collection and reporting for observability.
+                    type: boolean
+                  maintenanceWindow:
+                    description: '[object] A weekly 4 hour-long window, during which
+                      maintenance might occur.'
+                    properties:
+                      dayOfTheWeek:
+                        description: |-
+                          [string] Day of the week: Sunday–Saturday.
+                          The name of the week day.
+                        type: string
+                      time:
+                        description: |-
+                          [string] Start time in UTC (HH:MM:SS).
+                          Start of the maintenance window in UTC time.
+                        type: string
+                    type: object
+                  metricsEnabled:
+                    description: |-
+                      (Computed)[bool] Enable metrics collection for observability. If not set, the API default is used.
+                      Enables or disables metrics collection and reporting for observability.
+                    type: boolean
+                  name:
+                    description: |-
+                      [string] Cluster name (2–63 alphanumeric chars with dashes, underscores, dots).
+                      The name of the In-Memory DB cluster.
+                    type: string
+                  persistenceMode:
+                    description: |-
+                      (Computed)[string] Data persistence mode: None, AOF, RDB, RDB_AOF. If not set, the API default is used.
+                      Specifies how and whether data is persisted to disk.
+                    type: string
+                  restoreFromSnapshot:
+                    description: '[object] Restore configuration from a snapshot.'
+                    properties:
+                      recoveryTargetDatetime:
+                        description: |-
+                          [string] ISO 8601 timestamp to restore from the most recent snapshot at or before that time. Optional for create-time restore; must be provided for in-place restore via update.
+                          ISO 8601 timestamp to restore from the most recent snapshot at or before that time.
+                        type: string
+                      sourceSnapshotId:
+                        description: |-
+                          [string] UUID of the snapshot to restore from. Must be provided when the block is used during cluster creation. Not applicable for in-place restore via update.
+                          The UUID of the snapshot to restore from.
+                        type: string
+                    type: object
+                  snapshot:
+                    description: '[object] Snapshot configuration.'
+                    properties:
+                      location:
+                        description: |-
+                          [string] The location of the cluster. Changing this forces a new resource. Available: de/fra, de/txl, es/vit, fr/par, gb/bhx, gb/lhr, us/ewr, us/las, us/mci.
+                          The Object Storage location where snapshots will be stored (e.g. eu-central-3). Changing this forces the re-creation of the cluster.
+                        type: string
+                      retentionDays:
+                        description: |-
+                          [int] Days to retain snapshots (1–365).
+                          Number of days snapshots are retained before automatic deletion.
+                        type: number
+                      snapshotHours:
+                        description: |-
+                          [list of int] UTC hours for scheduled snapshots (0–23). At least one hour must be specified.
+                          Hours of the day (UTC) at which snapshots are taken. At least one hour must be specified.
+                        items:
+                          type: number
+                        type: array
+                    type: object
+                  version:
+                    description: |-
+                      [string] The InMemoryDB version. Upgrades only (see /versions endpoint).
+                      The In-Memory DB version. Use GET /versions to see supported values. Upgrades only (no downgrades).
+                    type: string
+                type: object
+              conditions:
+                description: Conditions of the resource.
+                items:
+                  description: A Condition that may apply to a resource.
+                  properties:
+                    lastTransitionTime:
+                      description: |-
+                        LastTransitionTime is the last time this condition transitioned from one
+                        status to another.
+                      format: date-time
+                      type: string
+                    message:
+                      description: |-
+                        A Message containing details about this condition's last transition from
+                        one status to another, if any.
+                      type: string
+                    observedGeneration:
+                      description: |-
+                        ObservedGeneration represents the .metadata.generation that the condition was set based upon.
+                        For instance, if .metadata.generation is currently 12, but the .status.conditions[x].observedGeneration is 9, the condition is out of date
+                        with respect to the current state of the instance.
+                      format: int64
+                      type: integer
+                    reason:
+                      description: A Reason for this condition's last transition from
+                        one status to another.
+                      type: string
+                    status:
+                      description: Status of this condition; is it currently True,
+                        False, or Unknown?
+                      type: string
+                    type:
+                      description: |-
+                        Type of this condition. At most one of each condition type may apply to
+                        a resource at any point in time.
+                      type: string
+                  required:
+                  - lastTransitionTime
+                  - reason
+                  - status
+                  - type
+                  type: object
+                type: array
+                x-kubernetes-list-map-keys:
+                - type
+                x-kubernetes-list-type: map
+              observedGeneration:
+                description: |-
+                  ObservedGeneration is the latest metadata.generation
+                  which resulted in either a ready state, or stalled due to error
+                  it can not recover from without human intervention.
+                format: int64
+                type: integer
+            type: object
+        required:
+        - spec
+        type: object
+    served: true
+    storage: true
+    subresources:
+      status: {}

@@ -428,7 +428,7 @@ spec:
                   type:
                     description: |-
                       (Computed)[string] Server usages: * type - Server usages: ENTERPRISE now named dedicated core, CUBE or VCPU. This property is immutable.
-                      server usages: ENTERPRISE or CUBE
+                      server usages: ENTERPRISE, VCPU or CUBE
                     type: string
                   vmState:
                     description: |-
@@ -886,7 +886,7 @@ spec:
                   type:
                     description: |-
                       (Computed)[string] Server usages: * type - Server usages: ENTERPRISE now named dedicated core, CUBE or VCPU. This property is immutable.
-                      server usages: ENTERPRISE or CUBE
+                      server usages: ENTERPRISE, VCPU or CUBE
                     type: string
                   vmState:
                     description: |-
@@ -1256,7 +1256,7 @@ spec:
                   type:
                     description: |-
                       (Computed)[string] Server usages: * type - Server usages: ENTERPRISE now named dedicated core, CUBE or VCPU. This property is immutable.
-                      server usages: ENTERPRISE or CUBE
+                      server usages: ENTERPRISE, VCPU or CUBE
                     type: string
                   vmState:
                     description: |-
