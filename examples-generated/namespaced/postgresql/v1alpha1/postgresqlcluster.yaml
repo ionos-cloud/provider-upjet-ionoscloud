@@ -34,8 +34,8 @@ spec:
     maintenanceWindow:
     - dayOfTheWeek: Sunday
       time: "09:00:00"
-    postgresVersion: "16"
-    ram: 4096
+    postgresVersion: "12"
+    ram: 2048
     storageSize: 10240
     storageType: HDD
     synchronizationMode: ASYNCHRONOUS

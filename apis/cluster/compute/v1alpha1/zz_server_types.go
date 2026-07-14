@@ -125,7 +125,7 @@ type ServerInitParameters struct {
 	TemplateUUID *string `json:"templateUuid,omitempty" tf:"template_uuid,omitempty"`
 
 	// (Computed)[string] Server usages: * type - Server usages: ENTERPRISE now named dedicated core, CUBE or VCPU. This property is immutable.
-	// server usages: ENTERPRISE, VCPU or CUBE
+	// server usages: ENTERPRISE or CUBE
 	Type *string `json:"type,omitempty" tf:"type,omitempty"`
 
 	// [string] Sets the power state of the server. E.g: RUNNING, SHUTOFF or SUSPENDED. SUSPENDED state is only valid for cube. SHUTOFF state is only valid for enterprise(dedicated core).
@@ -468,7 +468,7 @@ type ServerObservation struct {
 	TemplateUUID *string `json:"templateUuid,omitempty" tf:"template_uuid,omitempty"`
 
 	// (Computed)[string] Server usages: * type - Server usages: ENTERPRISE now named dedicated core, CUBE or VCPU. This property is immutable.
-	// server usages: ENTERPRISE, VCPU or CUBE
+	// server usages: ENTERPRISE or CUBE
 	Type *string `json:"type,omitempty" tf:"type,omitempty"`
 
 	// [string] Sets the power state of the server. E.g: RUNNING, SHUTOFF or SUSPENDED. SUSPENDED state is only valid for cube. SHUTOFF state is only valid for enterprise(dedicated core).
@@ -583,7 +583,7 @@ type ServerParameters struct {
 	TemplateUUID *string `json:"templateUuid,omitempty" tf:"template_uuid,omitempty"`
 
 	// (Computed)[string] Server usages: * type - Server usages: ENTERPRISE now named dedicated core, CUBE or VCPU. This property is immutable.
-	// server usages: ENTERPRISE, VCPU or CUBE
+	// server usages: ENTERPRISE or CUBE
 	// +kubebuilder:validation:Optional
 	Type *string `json:"type,omitempty" tf:"type,omitempty"`
 
