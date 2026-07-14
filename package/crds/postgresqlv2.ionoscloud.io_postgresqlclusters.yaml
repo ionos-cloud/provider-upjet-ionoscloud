@@ -1072,6 +1072,7 @@ spec:
                       The DNS name used to access the cluster.
                     type: string
                   id:
+                    description: (String) The UUID of the cluster.
                     type: string
                   instances:
                     description: '[object] The instance configuration for the PostgreSQL

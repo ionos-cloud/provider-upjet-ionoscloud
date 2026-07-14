@@ -42,6 +42,7 @@ import (
 	dnsrecord "github.com/ionos-cloud/provider-upjet-ionoscloud/internal/controller/cluster/dns/dnsrecord"
 	dnszone "github.com/ionos-cloud/provider-upjet-ionoscloud/internal/controller/cluster/dns/dnszone"
 	inmemorydbreplicaset "github.com/ionos-cloud/provider-upjet-ionoscloud/internal/controller/cluster/inmemorydb/inmemorydbreplicaset"
+	inmemorydbcluster "github.com/ionos-cloud/provider-upjet-ionoscloud/internal/controller/cluster/inmemorydbv2/inmemorydbcluster"
 	cluster "github.com/ionos-cloud/provider-upjet-ionoscloud/internal/controller/cluster/k8s/cluster"
 	nodepool "github.com/ionos-cloud/provider-upjet-ionoscloud/internal/controller/cluster/k8s/nodepool"
 	kafka "github.com/ionos-cloud/provider-upjet-ionoscloud/internal/controller/cluster/kafka/kafka"
@@ -116,6 +117,7 @@ func Setup(mgr ctrl.Manager, o controller.Options) error {
 		dnsrecord.Setup,
 		dnszone.Setup,
 		inmemorydbreplicaset.Setup,
+		inmemorydbcluster.Setup,
 		cluster.Setup,
 		nodepool.Setup,
 		kafka.Setup,
@@ -196,6 +198,7 @@ func SetupGated(mgr ctrl.Manager, o controller.Options) error {
 		dnsrecord.SetupGated,
 		dnszone.SetupGated,
 		inmemorydbreplicaset.SetupGated,
+		inmemorydbcluster.SetupGated,
 		cluster.SetupGated,
 		nodepool.SetupGated,
 		kafka.SetupGated,
