@@ -89,8 +89,8 @@ spec:
         testing.upbound.io/example-name: example
     imageName: rocky:latest
     imagePasswordSecretRef:
-      key: attribute.result
-      name: example-password
+      key: example-key
+      name: example-secret
       namespace: upbound-system
     name: example
     nic:
