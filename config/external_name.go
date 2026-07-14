@@ -110,6 +110,7 @@ var TerraformPluginFrameworkExternalNameConfigs = map[string]config.ExternalName
 	"ionoscloud_s3_object_copy":                                 config.IdentifierFromProvider,
 	"ionoscloud_object_storage_accesskey":                       config.IdentifierFromProvider,
 	"ionoscloud_pg_cluster_v2":                                  config.IdentifierFromProvider,
+	"ionoscloud_inmemorydb_cluster_v2":                          config.IdentifierFromProvider,
 }
 
 // ResourceConfigurator applies all external name configs listed in

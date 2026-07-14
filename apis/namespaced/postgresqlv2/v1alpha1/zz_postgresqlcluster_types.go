@@ -372,6 +372,7 @@ type PostgresqlClusterObservation struct {
 	// Human-readable description for the cluster.
 	Description *string `json:"description,omitempty" tf:"description,omitempty"`
 
+	// (String) The UUID of the cluster.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
 	// [object] The instance configuration for the PostgreSQL cluster.

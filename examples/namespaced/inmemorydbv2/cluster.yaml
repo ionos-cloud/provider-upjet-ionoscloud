@@ -1,44 +1,52 @@
-apiVersion: postgresql.m.ionoscloud.io/v1alpha1
-kind: PostgresqlCluster
+apiVersion: inmemorydbv2.m.ionoscloud.io/v1alpha1
+kind: InMemoryDBCluster
 metadata:
   annotations:
-    meta.upbound.io/example-id: postgresql/v1alpha1/postgresqlcluster
+    meta.upbound.io/example-id: inmemorydbv2/v1alpha1/inmemorydbcluster
   labels:
     testing.upbound.io/example-name: example
   name: example
   namespace: upbound-system
 spec:
   forProvider:
-    connectionPooler:
-    - enabled: true
-      poolMode: session
     connections:
-    - cidr: 192.168.100.1/24
       datacenterIdSelector:
         matchLabels:
           testing.upbound.io/example-name: example
       lanIdSelector:
         matchLabels:
           testing.upbound.io/example-name: example
-    cores: 4
+      primaryInstanceAddress: 192.168.2.101/24
     credentials:
-    - passwordSecretRef:
-        key: example-key
-        name: example-secret
-      username: username
-    displayName: PostgreSQL_cluster
-    instances: 1
-    locationSelector:
-      matchLabels:
-        testing.upbound.io/example-name: example
+      password:
+        algorithm: SHA-256
+        hashSecretRef:
+          key: password
+          name: pwsecret
+      username: cacheuser
+    description: InMemoryDB cluster
+    evictionPolicy: allkeys-lru
+    instances:
+      cores: 1
+      count: 1
+      ram: 4
+    location: de/txl
+    logsEnabled: true
     maintenanceWindow:
-    - dayOfTheWeek: Sunday
+      dayOfTheWeek: Sunday
       time: "09:00:00"
-    postgresVersion: "16"
-    ram: 4096
-    storageSize: 10240
-    storageType: HDD
-    synchronizationMode: ASYNCHRONOUS
+    metricsEnabled: true
+    name: my-inmemorydb-cluster
+    persistenceMode: RDB
+    snapshot:
+      location: eu-central-3
+      retentionDays: 7
+      snapshotHours:
+      - 0
+      - 6
+      - 12
+      - 18
+    version: "9.0"
 
 ---
 
@@ -46,14 +54,13 @@ apiVersion: compute.m.ionoscloud.io/v1alpha1
 kind: Datacenter
 metadata:
   annotations:
-    meta.upbound.io/example-id: postgresql/v1alpha1/postgresqlcluster
+    meta.upbound.io/example-id: inmemorydbv2/v1alpha1/inmemorydbcluster
   labels:
     testing.upbound.io/example-name: example
   name: example
   namespace: upbound-system
 spec:
   forProvider:
-    description: Datacenter for testing psql cluster
     location: de/txl
     name: example
 
@@ -63,7 +70,7 @@ apiVersion: compute.m.ionoscloud.io/v1alpha1
 kind: Lan
 metadata:
   annotations:
-    meta.upbound.io/example-id: postgresql/v1alpha1/postgresqlcluster
+    meta.upbound.io/example-id: inmemorydbv2/v1alpha1/inmemorydbcluster
   labels:
     testing.upbound.io/example-name: example
   name: example
