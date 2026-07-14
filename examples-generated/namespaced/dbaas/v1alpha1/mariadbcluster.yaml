@@ -88,8 +88,8 @@ spec:
         testing.upbound.io/example-name: example
     imageName: rocky:latest
     imagePasswordSecretRef:
-      key: example-key
-      name: example-secret
+      key: attribute.result
+      name: example-password
     name: example
     nic:
     - dhcp: true
