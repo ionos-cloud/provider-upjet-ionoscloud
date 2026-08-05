@@ -2,6 +2,7 @@ package common
 
 import (
 	"errors"
+	"strings"
 
 	"github.com/crossplane/crossplane-runtime/v2/pkg/fieldpath"
 	"github.com/crossplane/crossplane-runtime/v2/pkg/reference"
@@ -124,6 +125,45 @@ func IgnoreDiffForFields(ignoreList []string) func(diff *terraform.InstanceDiff,
 
 		for _, key := range ignoreList {
 			delete(diff.Attributes, key)
+		}
+
+		return diff, nil
+	}
+}
+
+// IgnoreDiffForUnconfiguredComputedField ignores diff entries for a computed field (e.g. "ips")
+// only when that field was NOT explicitly set in the resource's configuration. Some computed
+// attributes reflect provider-managed state that the API can legitimately change on its own over
+// time (e.g. a DHCP-auto-assigned public IP) — once late-init copies the first observed value
+// into spec, continuous reconciliation treats it as a desired value and perpetually tries to
+// force reality back to that now-stale snapshot, which the API may not honor, causing an endless
+// update loop. When the field IS explicitly configured, its diff is left untouched so an
+// intentionally desired value (e.g. a genuinely reserved IP) is still enforced normally.
+func IgnoreDiffForUnconfiguredComputedField(field string) func(diff *terraform.InstanceDiff, state *terraform.InstanceState, config *terraform.ResourceConfig) (*terraform.InstanceDiff, error) {
+	return func(diff *terraform.InstanceDiff, state *terraform.InstanceState, config *terraform.ResourceConfig) (*terraform.InstanceDiff, error) {
+		// skip diff customization on create
+		if state == nil || state.Empty() {
+			return diff, nil
+		}
+		if config == nil {
+			return nil, errors.New("resource config cannot be nil")
+		}
+		// skip no diff or destroy diffs
+		if diff == nil || diff.Empty() || diff.Destroy || diff.Attributes == nil {
+			return diff, nil
+		}
+
+		// GetRaw only succeeds against the user-supplied configuration, never a computed
+		// placeholder, so this is false whenever the field was left entirely unset.
+		if _, configured := config.GetRaw(field); configured {
+			return diff, nil
+		}
+
+		prefix := field + "."
+		for key := range diff.Attributes {
+			if key == field || strings.HasPrefix(key, prefix) {
+				delete(diff.Attributes, key)
+			}
 		}
 
 		return diff, nil

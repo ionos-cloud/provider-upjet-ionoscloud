@@ -67,6 +67,15 @@ func Configure(p *config.Provider) {
 			TerraformName: "ionoscloud_datacenter",
 		}
 		r.UseAsync = true
+
+		// "ips" is optional+computed: when left unset, IONOS auto-assigns a DHCP public
+		// address that can legitimately change on its own over time (e.g. across a server
+		// power cycle). Once late-init copies the first observed address into spec, continuous
+		// reconciliation otherwise treats it as a desired value and perpetually tries to force
+		// reality back to that now-stale snapshot, which IONOS may not honor — causing an
+		// endless update loop (visible as repeated "UpdatedExternalResource" events). Ignore
+		// drift on "ips" unless the user explicitly configured it.
+		r.TerraformCustomDiff = common.IgnoreDiffForUnconfiguredComputedField("ips")
 	})
 
 	p.AddResourceConfigurator("ionoscloud_server", func(r *config.Resource) {
