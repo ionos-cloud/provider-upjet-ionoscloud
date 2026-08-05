@@ -91,7 +91,7 @@ spec:
     datacenterIdSelector:
       matchLabels:
         testing.upbound.io/example-name: example
-    imageName: Ubuntu-20.04
+    imageName: "ubuntu:latest"
     imagePasswordSecretRef:
       key: attribute.result
       name: example-password
