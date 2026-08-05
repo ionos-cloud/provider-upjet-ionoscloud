@@ -5,6 +5,12 @@ echo "Running setup.sh"
 echo "Creating cloud credential secret..."
 ${KUBECTL} -n upbound-system create secret generic provider-secret --from-literal=credentials="${UPTEST_CLOUD_CREDENTIALS}" --dry-run=client -o yaml | ${KUBECTL} apply -f -
 
+echo "Creating image password secret for compute examples..."
+# Referenced by compute examples via imagePasswordSecretRef (key: attribute.result).
+# Value comes from the UPTEST_IMAGE_PASSWORD env var (a GitHub Actions secret in CI).
+# Must satisfy IONOS image-password rules (>=8 chars, letters and digits).
+${KUBECTL} -n upbound-system create secret generic example-password --from-literal=attribute.result="${UPTEST_IMAGE_PASSWORD}" --dry-run=client -o yaml | ${KUBECTL} apply -f -
+
 echo "Waiting until provider is healthy..."
 ${KUBECTL} wait provider.pkg --all --for condition=Healthy --timeout 5m
 

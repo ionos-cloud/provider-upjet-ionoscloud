@@ -14,8 +14,8 @@ spec:
         testing.upbound.io/example-name: example
     imageName: "ubuntu:latest"
     imagePasswordSecretRef:
-      key: password
-      name: pwsecret
+      key: attribute.result
+      name: example-password
       namespace: upbound-system
     name: GPU Server Example 2
     nic:
