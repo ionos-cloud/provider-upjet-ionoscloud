@@ -84,8 +84,30 @@ func Configure(p *config.Provider) {
 		r.References["user_id"] = config.Reference{
 			TerraformName: "ionoscloud_user",
 		}
+		// Not marked sensitive upstream; without this the credential is
+		// published in plain text under status.atProvider.
+		r.TerraformResource.Schema["secret_key"].Sensitive = true
+		// The resource ID is the S3 access key; publish it with the secret.
+		r.Sensitive.AdditionalConnectionDetailsFn = func(attr map[string]any) (map[string][]byte, error) {
+			conn := map[string][]byte{}
+			if id, ok := attr["id"].(string); ok && id != "" {
+				conn["accesskey"] = []byte(id)
+			}
+			return conn, nil
+		}
 	})
 	p.AddResourceConfigurator("ionoscloud_object_storage_accesskey", func(r *config.Resource) {
 		r.ShortGroup = storage
+		// Not marked sensitive upstream; without this the credential is
+		// published in plain text under status.atProvider.
+		r.TerraformResource.Schema["secretkey"].Sensitive = true
+		// Publish the access key alongside the secret key.
+		r.Sensitive.AdditionalConnectionDetailsFn = func(attr map[string]any) (map[string][]byte, error) {
+			conn := map[string][]byte{}
+			if accesskey, ok := attr["accesskey"].(string); ok && accesskey != "" {
+				conn["accesskey"] = []byte(accesskey)
+			}
+			return conn, nil
+		}
 	})
 }

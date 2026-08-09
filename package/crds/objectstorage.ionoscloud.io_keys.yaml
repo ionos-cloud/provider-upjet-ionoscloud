@@ -354,11 +354,6 @@ spec:
                     type: boolean
                   id:
                     type: string
-                  secretKey:
-                    description: |-
-                      (Computed)  The IONOS Object Storage Secret key.
-                      The Object Storage Secret key.
-                    type: string
                   userId:
                     description: |-
                       [string] The UUID of the user owning the IONOS Object Storage Key.

@@ -2896,11 +2896,6 @@ func (in *KeyObservation) DeepCopyInto(out *KeyObservation) {
 		*out = new(string)
 		**out = **in
 	}
-	if in.SecretKey != nil {
-		in, out := &in.SecretKey, &out.SecretKey
-		*out = new(string)
-		**out = **in
-	}
 	if in.UserID != nil {
 		in, out := &in.UserID, &out.UserID
 		*out = new(string)
@@ -4877,11 +4872,6 @@ func (in *StorageAccesskeyObservation) DeepCopyInto(out *StorageAccesskeyObserva
 	}
 	if in.ID != nil {
 		in, out := &in.ID, &out.ID
-		*out = new(string)
-		**out = **in
-	}
-	if in.Secretkey != nil {
-		in, out := &in.Secretkey, &out.Secretkey
 		*out = new(string)
 		**out = **in
 	}
