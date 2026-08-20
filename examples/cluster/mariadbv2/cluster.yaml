@@ -22,8 +22,8 @@ spec:
     credentials:
       database: my_database
       passwordSecretRef:
-        key: password
-        name: pwsecret
+        key: attribute.result
+        name: example-password
         namespace: upbound-system
       username: dbadmin
     description: MariaDB cluster
@@ -73,12 +73,3 @@ spec:
         testing.upbound.io/example-name: example
     name: example
     public: false
-
----
-apiVersion: v1
-kind: Secret
-metadata:
-  name: pwsecret
-  namespace: upbound-system
-stringData:
-  password: "Upboundtest!"
