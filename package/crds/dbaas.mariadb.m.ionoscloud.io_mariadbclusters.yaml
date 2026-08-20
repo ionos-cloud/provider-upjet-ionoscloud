@@ -266,7 +266,7 @@ spec:
                       properties:
                         passwordSecretRef:
                           description: |-
-                            [string] The password for a MariaDB user.
+                            [string] The password for a MariaDB user. Length: 10-63 characters.
                             The password for a MariaDB user.
                           properties:
                             key:
@@ -280,14 +280,14 @@ spec:
                           type: object
                         username:
                           description: |-
-                            [string] The username for the initial MariaDB user. Some system usernames are restricted (e.g 'mariadb', 'admin', 'standby').
+                            [string] The username for the initial MariaDB user. Some system usernames are restricted (e.g 'mariadb', 'admin', 'standby'). Length: 1-16 characters. Must start with a letter, end with a letter or number, and contain only letters, numbers, or underscores (underscores only between alphanumeric groups).
                             The username for the initial MariaDB user. Some system usernames are restricted (e.g 'mariadb', 'admin', 'standby').
                           type: string
                       type: object
                     type: array
                   displayName:
                     description: |-
-                      [string] The friendly name of your cluster.
+                      [string] The friendly name of your cluster. Maximum length: 63 characters. Must contain only word characters (letters, numbers, underscores), colons, hyphens, spaces, or dots.
                       The friendly name of your cluster.
                     type: string
                   instances:
@@ -312,7 +312,7 @@ spec:
                         type: string
                       time:
                         description: |-
-                          [string] Start of the maintenance window in UTC time.
+                          [string] Start of the maintenance window in UTC time. Format: HH:MM:SS.
                           Start of the maintenance window in UTC time.
                         type: string
                     type: object
@@ -323,12 +323,12 @@ spec:
                     type: string
                   ram:
                     description: |-
-                      [int] The amount of memory per instance in gigabytes (GB).
+                      [int] The amount of memory per instance in gigabytes (GB). Minimum: 4.
                       The amount of memory per instance in gigabytes (GB).
                     type: number
                   storageSize:
                     description: |-
-                      [int] The amount of storage per instance in gigabytes (GB).
+                      [int] The amount of storage per instance in gigabytes (GB). Minimum: 10, Maximum: 2000.
                       The amount of storage per instance in gigabytes (GB).
                     type: number
                 type: object
@@ -552,7 +552,7 @@ spec:
                       properties:
                         passwordSecretRef:
                           description: |-
-                            [string] The password for a MariaDB user.
+                            [string] The password for a MariaDB user. Length: 10-63 characters.
                             The password for a MariaDB user.
                           properties:
                             key:
@@ -566,7 +566,7 @@ spec:
                           type: object
                         username:
                           description: |-
-                            [string] The username for the initial MariaDB user. Some system usernames are restricted (e.g 'mariadb', 'admin', 'standby').
+                            [string] The username for the initial MariaDB user. Some system usernames are restricted (e.g 'mariadb', 'admin', 'standby'). Length: 1-16 characters. Must start with a letter, end with a letter or number, and contain only letters, numbers, or underscores (underscores only between alphanumeric groups).
                             The username for the initial MariaDB user. Some system usernames are restricted (e.g 'mariadb', 'admin', 'standby').
                           type: string
                       required:
@@ -575,7 +575,7 @@ spec:
                     type: array
                   displayName:
                     description: |-
-                      [string] The friendly name of your cluster.
+                      [string] The friendly name of your cluster. Maximum length: 63 characters. Must contain only word characters (letters, numbers, underscores), colons, hyphens, spaces, or dots.
                       The friendly name of your cluster.
                     type: string
                   instances:
@@ -600,7 +600,7 @@ spec:
                         type: string
                       time:
                         description: |-
-                          [string] Start of the maintenance window in UTC time.
+                          [string] Start of the maintenance window in UTC time. Format: HH:MM:SS.
                           Start of the maintenance window in UTC time.
                         type: string
                     type: object
@@ -611,12 +611,12 @@ spec:
                     type: string
                   ram:
                     description: |-
-                      [int] The amount of memory per instance in gigabytes (GB).
+                      [int] The amount of memory per instance in gigabytes (GB). Minimum: 4.
                       The amount of memory per instance in gigabytes (GB).
                     type: number
                   storageSize:
                     description: |-
-                      [int] The amount of storage per instance in gigabytes (GB).
+                      [int] The amount of storage per instance in gigabytes (GB). Minimum: 10, Maximum: 2000.
                       The amount of storage per instance in gigabytes (GB).
                     type: number
                 type: object
@@ -761,14 +761,14 @@ spec:
                       properties:
                         username:
                           description: |-
-                            [string] The username for the initial MariaDB user. Some system usernames are restricted (e.g 'mariadb', 'admin', 'standby').
+                            [string] The username for the initial MariaDB user. Some system usernames are restricted (e.g 'mariadb', 'admin', 'standby'). Length: 1-16 characters. Must start with a letter, end with a letter or number, and contain only letters, numbers, or underscores (underscores only between alphanumeric groups).
                             The username for the initial MariaDB user. Some system usernames are restricted (e.g 'mariadb', 'admin', 'standby').
                           type: string
                       type: object
                     type: array
                   displayName:
                     description: |-
-                      [string] The friendly name of your cluster.
+                      [string] The friendly name of your cluster. Maximum length: 63 characters. Must contain only word characters (letters, numbers, underscores), colons, hyphens, spaces, or dots.
                       The friendly name of your cluster.
                     type: string
                   dnsName:
@@ -800,7 +800,7 @@ spec:
                         type: string
                       time:
                         description: |-
-                          [string] Start of the maintenance window in UTC time.
+                          [string] Start of the maintenance window in UTC time. Format: HH:MM:SS.
                           Start of the maintenance window in UTC time.
                         type: string
                     type: object
@@ -811,12 +811,12 @@ spec:
                     type: string
                   ram:
                     description: |-
-                      [int] The amount of memory per instance in gigabytes (GB).
+                      [int] The amount of memory per instance in gigabytes (GB). Minimum: 4.
                       The amount of memory per instance in gigabytes (GB).
                     type: number
                   storageSize:
                     description: |-
-                      [int] The amount of storage per instance in gigabytes (GB).
+                      [int] The amount of storage per instance in gigabytes (GB). Minimum: 10, Maximum: 2000.
                       The amount of storage per instance in gigabytes (GB).
                     type: number
                 type: object

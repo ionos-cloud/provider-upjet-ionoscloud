@@ -2202,20 +2202,107 @@ resources:
             credentials: '- (Required) Credentials for the database user to be created.'
             datacenter_id: '- (Required)[true] The datacenter to connect your cluster to.'
             day_of_the_week: '- (Required)[string] The name of the week day.'
-            display_name: '- (Required)[string] The friendly name of your cluster.'
+            display_name: '- (Required)[string] The friendly name of your cluster. Maximum length: 63 characters. Must contain only word characters (letters, numbers, underscores), colons, hyphens, spaces, or dots.'
             dns_name: '- (Computed)[string] The DNS name pointing to your cluster.'
             instances: '- (Required)[int] The total number of instances in the cluster (one primary and n-1 secondary).'
             lan_id: '- (Required)[true] The numeric LAN ID to connect your cluster to.'
             location: '- (Optional)[string] The location in which the cluster will be created. Different service endpoints are used based on location, possible options are: "de/fra", "de/txl", "es/vit", "fr/par", "gb/lhr", "us/ewr", "us/las", "us/mci". If not set, the endpoint will be the one corresponding to "de/txl".'
             maintenance_window: '- (Optional)(Computed) A weekly 4 hour-long window, during which maintenance might occur'
             mariadb_version: '- (Required)[string] The MariaDB version of your cluster. Cannot be downgraded.'
-            password: '- (Required)[string] The password for a MariaDB user.'
-            ram: '- (Required)[int] The amount of memory per instance in gigabytes (GB).'
-            storage_size: '- (Required)[int] The amount of storage per instance in gigabytes (GB).'
-            time: '- (Required)[string] Start of the maintenance window in UTC time.'
-            username: '- (Required)[string] The username for the initial MariaDB user. Some system usernames are restricted (e.g ''mariadb'', ''admin'', ''standby'').'
+            password: '- (Required)[string] The password for a MariaDB user. Length: 10-63 characters.'
+            ram: '- (Required)[int] The amount of memory per instance in gigabytes (GB). Minimum: 4.'
+            storage_size: '- (Required)[int] The amount of storage per instance in gigabytes (GB). Minimum: 10, Maximum: 2000.'
+            time: '- (Required)[string] Start of the maintenance window in UTC time. Format: HH:MM:SS.'
+            username: '- (Required)[string] The username for the initial MariaDB user. Some system usernames are restricted (e.g ''mariadb'', ''admin'', ''standby''). Length: 1-16 characters. Must start with a letter, end with a letter or number, and contain only letters, numbers, or underscores (underscores only between alphanumeric groups).'
         importStatements:
             - terraform import ionoscloud_mariadb_cluster.mycluster location:cluster uuid
+    ionoscloud_mariadb_cluster_v2:
+        subCategory: Database as a Service - MariaDB v2
+        description: Creates and manages an IONOS CLOUD MariaDB V2 Cluster.
+        name: ionoscloud_mariadb_cluster_v2
+        title: ionoscloud_mariadb_cluster_v2
+        examples:
+            - name: example
+              manifest: |-
+                {
+                  "backup": {
+                    "location": "eu-central-3",
+                    "retention_days": 7
+                  },
+                  "connections": {
+                    "datacenter_id": "${ionoscloud_datacenter.example.id}",
+                    "lan_id": "${ionoscloud_lan.example.id}",
+                    "primary_instance_address": "192.168.2.101/24"
+                  },
+                  "credentials": {
+                    "database": "my_database",
+                    "password": "P@ssw0rd123!",
+                    "username": "dbadmin"
+                  },
+                  "description": "MariaDB cluster",
+                  "instances": {
+                    "cores": 1,
+                    "count": 1,
+                    "ram": 4,
+                    "storage_size": 10
+                  },
+                  "location": "de/txl",
+                  "logs_enabled": true,
+                  "maintenance_window": {
+                    "day_of_the_week": "Sunday",
+                    "time": "09:00:00"
+                  },
+                  "metrics_enabled": true,
+                  "name": "my-mariadb-cluster",
+                  "version": "11.4"
+                }
+              dependencies:
+                ionoscloud_datacenter.example: |-
+                    {
+                      "location": "de/txl",
+                      "name": "example"
+                    }
+                ionoscloud_lan.example: |-
+                    {
+                      "datacenter_id": "${ionoscloud_datacenter.example.id}",
+                      "name": "example",
+                      "public": false
+                    }
+            - name: example
+              manifest: '{}'
+        argumentDocs:
+            backup: '- (Required)[object] Configures backup location and retention.'
+            connections: '- (Required)[object] Connection information of the MariaDB cluster. Only one connection is allowed.'
+            cores: '- (Required)[int] The number of CPU cores per instance.'
+            count: '- (Required)[int] The total number of instances in the cluster (one primary and n-1 secondary).'
+            credentials: '- (Required)[object] Credentials for the initial database user to be created.'
+            database: '- (Required)[string] The name of the initial database to be created.'
+            datacenter_id: '- (Required)[string] The datacenter to connect your instance to.'
+            day_of_the_week: '- (Required)[string] The name of the week day.'
+            description: '- (Optional)[string] Human-readable description for the cluster.'
+            dns_name: '- The DNS name used to access the cluster.'
+            id: '- The ID (UUID) of the cluster.'
+            instances: '- (Required)[object] Compute and storage configuration for each instance in the cluster.'
+            lan_id: '- (Required)[string] The numeric LAN ID to connect your instance to.'
+            location: '- (Required)[string] The location of the cluster. Changing this forces a new resource. Available: de/fra, de/txl, es/vit, fr/par, gb/bhx, gb/lhr, us/ewr, us/las, us/mci.'
+            logs_enabled: '- (Optional)(Computed)[bool] Allows or disallows the collection and reporting of logs for this cluster''s observability. If not set, the API default is used.'
+            maintenance_window: '- (Required)[object] A weekly 4 hour-long window, during which maintenance might occur.'
+            metrics_enabled: '- (Optional)(Computed)[bool] Allows or disallows the collection and reporting of metrics for this cluster''s observability. If not set, the API default is used.'
+            name: '- (Required)[string] The name of the MariaDB cluster.'
+            password: '- (Required)[string] Sensitive. The password for the initial MariaDB user. Not returned by the API — will be null in state after terraform import.'
+            primary_instance_address: '- (Required)[string] The IP address and netmask of the cluster''s primary instance, in CIDR notation.'
+            ram: '- (Required)[int] The amount of memory per instance in gigabytes (GB).'
+            recovery_target_datetime: '- (Optional)[string] ISO 8601 timestamp causing the system to replay backups up to the specified time. Optional for create-time restore; required for in-place restore during an update.'
+            restore_from_backup: '- (Optional)[object] Restores the cluster from a backup.'
+            retention_days: '- (Required)[int] Configures how many days cluster backups are retained.'
+            source_backup_id: '- (Optional)[string] UUID of the backup to restore from. Required when restore_from_backup is set during cluster creation; not valid for in-place restore during an update.'
+            storage_size: '- (Required)[int] The amount of storage per instance in gigabytes (GB).'
+            time: '- (Required)[string] Start of the maintenance window in UTC time (HH:MM:SS).'
+            timeouts: '- (Optional) Standard Terraform timeouts: create, update, delete.'
+            username: '- (Required)[string] The username of the initial MariaDB user.'
+            version: '- (Required)[string] The MariaDB version for the cluster. See the ionoscloud_mariadb_versions_v2 data source for the list of supported versions and their available upgrade paths.'
+        importStatements:
+            - terraform import ionoscloud_mariadb_cluster_v2.example de/txl:example-id
     ionoscloud_mongo_cluster:
         subCategory: Database as a Service - MongoDB
         description: Creates and manages DbaaS MongoDB Cluster objects.

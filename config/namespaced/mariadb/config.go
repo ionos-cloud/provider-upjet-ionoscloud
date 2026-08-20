@@ -17,4 +17,15 @@ func Configure(p *config.Provider) {
 		}
 		r.UseAsync = true
 	})
+	p.AddResourceConfigurator("ionoscloud_mariadb_cluster_v2", func(r *config.Resource) {
+		r.ShortGroup = "mariadbv2"
+		r.Kind = "MariadbCluster"
+		r.References["connections.datacenter_id"] = config.Reference{
+			TerraformName: "ionoscloud_datacenter",
+		}
+		r.References["connections.lan_id"] = config.Reference{
+			TerraformName: "ionoscloud_lan",
+		}
+		r.UseAsync = true
+	})
 }

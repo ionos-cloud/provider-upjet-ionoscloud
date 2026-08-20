@@ -2,6 +2,10 @@
 
 All notable changes to this project will be documented in this file.
 
+## [0.5.7]
+- Updated Terraform provider to v6.7.35
+- Added MariaDB V2 cluster (ionoscloud_mariadb_cluster_v2) as a new Crossplane managed resource
+
 ## [0.5.6]
 - Updated Terraform provider to v6.7.32
 - Added InMemoryDB V2 cluster (ionoscloud_inmemorydb_cluster_v2) as a new Crossplane managed resource
