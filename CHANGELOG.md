@@ -2,6 +2,15 @@
 
 All notable changes to this project will be documented in this file.
 
+## [0.5.8]
+- Updated Terraform provider to v6.7.35
+- Added MariaDB V2 cluster (ionoscloud_mariadb_cluster_v2) as a new Crossplane managed resource
+
+## [0.5.7]
+- Moved schema generation and the provider runtime from Terraform to OpenTofu v1.12.4
+- Fixed a perpetual update loop on NIC `ips`, where a DHCP-assigned address copied into spec by late-initialization was continuously re-applied as a desired value
+- Reworked the e2e image password: sourced from the `UPTEST_IMAGE_PASSWORD` GitHub secret and provisioned as the `example-password` secret, with compute examples referencing it via key `attribute.result`
+
 ## [0.5.6]
 - Updated Terraform provider to v6.7.32
 - Added InMemoryDB V2 cluster (ionoscloud_inmemorydb_cluster_v2) as a new Crossplane managed resource

@@ -48,6 +48,7 @@ import (
 	kafka "github.com/ionos-cloud/provider-upjet-ionoscloud/internal/controller/cluster/kafka/kafka"
 	kafkatopic "github.com/ionos-cloud/provider-upjet-ionoscloud/internal/controller/cluster/kafka/kafkatopic"
 	pipeline "github.com/ionos-cloud/provider-upjet-ionoscloud/internal/controller/cluster/log/pipeline"
+	mariadbclustermariadbv2 "github.com/ionos-cloud/provider-upjet-ionoscloud/internal/controller/cluster/mariadbv2/mariadbcluster"
 	mongodbcluster "github.com/ionos-cloud/provider-upjet-ionoscloud/internal/controller/cluster/mongodb/mongodbcluster"
 	mongodbuser "github.com/ionos-cloud/provider-upjet-ionoscloud/internal/controller/cluster/mongodb/mongodbuser"
 	natgateway "github.com/ionos-cloud/provider-upjet-ionoscloud/internal/controller/cluster/natgateway/natgateway"
@@ -123,6 +124,7 @@ func Setup(mgr ctrl.Manager, o controller.Options) error {
 		kafka.Setup,
 		kafkatopic.Setup,
 		pipeline.Setup,
+		mariadbclustermariadbv2.Setup,
 		mongodbcluster.Setup,
 		mongodbuser.Setup,
 		natgateway.Setup,
@@ -204,6 +206,7 @@ func SetupGated(mgr ctrl.Manager, o controller.Options) error {
 		kafka.SetupGated,
 		kafkatopic.SetupGated,
 		pipeline.SetupGated,
+		mariadbclustermariadbv2.SetupGated,
 		mongodbcluster.SetupGated,
 		mongodbuser.SetupGated,
 		natgateway.SetupGated,
