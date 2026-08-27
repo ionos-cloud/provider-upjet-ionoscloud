@@ -6,10 +6,35 @@ package config
 
 import (
 	"github.com/crossplane/upjet/v2/pkg/config"
+	"github.com/pkg/errors"
 )
 
 // Version is the version of the resources to be reconciled.
 const Version = "v1alpha1"
+
+// bucketAsExternalName uses the bucket name as the external name for framework
+// resources whose schema defines no "id" attribute and imports by bucket name.
+var bucketAsExternalName = config.NewExternalNameFrom(config.IdentifierFromProvider,
+	config.WithGetExternalNameFn(func(_ config.GetExternalNameFn, tfstate map[string]any) (string, error) {
+		if bucket, ok := tfstate["bucket"].(string); ok && bucket != "" {
+			return bucket, nil
+		}
+		return "", errors.New(`cannot find attribute "bucket" in tfstate`)
+	}),
+)
+
+// bucketKeyAsExternalName uses "{bucket}/{key}" as the external name, matching
+// the upstream import format of framework resources without an "id" attribute.
+var bucketKeyAsExternalName = config.NewExternalNameFrom(config.IdentifierFromProvider,
+	config.WithGetExternalNameFn(func(_ config.GetExternalNameFn, tfstate map[string]any) (string, error) {
+		bucket, _ := tfstate["bucket"].(string)
+		key, _ := tfstate["key"].(string)
+		if bucket == "" || key == "" {
+			return "", errors.New(`cannot find attributes "bucket" and "key" in tfstate`)
+		}
+		return bucket + "/" + key, nil
+	}),
+)
 
 // TerraformPluginSDKExternalNameConfigs contains all external name configurations
 // belonging to Terraform Plugin SDKv2 resources to be reconciled
@@ -98,16 +123,16 @@ var TerraformPluginSDKExternalNameConfigs = map[string]config.ExternalName{
 // TerraformPluginFrameworkExternalNameConfigs will be used for plugin configured resources. not used yet
 var TerraformPluginFrameworkExternalNameConfigs = map[string]config.ExternalName{
 	"ionoscloud_s3_bucket":                                      config.NameAsIdentifier,
-	"ionoscloud_s3_bucket_policy":                               config.IdentifierFromProvider,
-	"ionoscloud_s3_bucket_versioning":                           config.IdentifierFromProvider,
-	"ionoscloud_s3_bucket_cors_configuration":                   config.IdentifierFromProvider,
-	"ionoscloud_s3_bucket_lifecycle_configuration":              config.IdentifierFromProvider,
-	"ionoscloud_s3_bucket_public_access_block":                  config.IdentifierFromProvider,
-	"ionoscloud_s3_bucket_website_configuration":                config.IdentifierFromProvider,
-	"ionoscloud_s3_bucket_object_lock_configuration":            config.IdentifierFromProvider,
-	"ionoscloud_s3_bucket_server_side_encryption_configuration": config.IdentifierFromProvider,
-	"ionoscloud_s3_object":                                      config.IdentifierFromProvider,
-	"ionoscloud_s3_object_copy":                                 config.IdentifierFromProvider,
+	"ionoscloud_s3_bucket_policy":                               bucketAsExternalName,
+	"ionoscloud_s3_bucket_versioning":                           bucketAsExternalName,
+	"ionoscloud_s3_bucket_cors_configuration":                   bucketAsExternalName,
+	"ionoscloud_s3_bucket_lifecycle_configuration":              bucketAsExternalName,
+	"ionoscloud_s3_bucket_public_access_block":                  bucketAsExternalName,
+	"ionoscloud_s3_bucket_website_configuration":                bucketAsExternalName,
+	"ionoscloud_s3_bucket_object_lock_configuration":            bucketAsExternalName,
+	"ionoscloud_s3_bucket_server_side_encryption_configuration": bucketAsExternalName,
+	"ionoscloud_s3_object":                                      bucketKeyAsExternalName,
+	"ionoscloud_s3_object_copy":                                 bucketKeyAsExternalName,
 	"ionoscloud_object_storage_accesskey":                       config.IdentifierFromProvider,
 	"ionoscloud_pg_cluster_v2":                                  config.IdentifierFromProvider,
 	"ionoscloud_inmemorydb_cluster_v2":                          config.IdentifierFromProvider,
