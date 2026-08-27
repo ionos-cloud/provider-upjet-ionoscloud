@@ -292,7 +292,7 @@ type MariadbClusterInitParameters struct {
 	Instances *InstancesInitParameters `json:"instances,omitempty" tf:"instances,omitempty"`
 
 	// [string] The location of the cluster. Changing this forces a new resource. Available: de/fra, de/txl, es/vit, fr/par, gb/bhx, gb/lhr, us/ewr, us/las, us/mci.
-	// The location of the cluster. Changing this forces re-creation. Available locations: `de/fra`, `de/txl`, `es/vit`, `fr/par`, `gb/bhx`, `gb/lhr`, `us/ewr`, `us/las`, `us/mci`.
+	// The location of the cluster. Changing this forces re-creation. Available locations: `de/fra`, `de/fra/1`, `de/fra/2`, `de/txl`, `es/vit`, `fr/par`, `gb/bhx`, `gb/lhr`, `us/ewr`, `us/las`, `us/mci`.
 	Location *string `json:"location,omitempty" tf:"location,omitempty"`
 
 	// (Computed)[bool] Allows or disallows the collection and reporting of logs for this cluster's observability. If not set, the API default is used.
@@ -344,7 +344,7 @@ type MariadbClusterObservation struct {
 	Instances *InstancesObservation `json:"instances,omitempty" tf:"instances,omitempty"`
 
 	// [string] The location of the cluster. Changing this forces a new resource. Available: de/fra, de/txl, es/vit, fr/par, gb/bhx, gb/lhr, us/ewr, us/las, us/mci.
-	// The location of the cluster. Changing this forces re-creation. Available locations: `de/fra`, `de/txl`, `es/vit`, `fr/par`, `gb/bhx`, `gb/lhr`, `us/ewr`, `us/las`, `us/mci`.
+	// The location of the cluster. Changing this forces re-creation. Available locations: `de/fra`, `de/fra/1`, `de/fra/2`, `de/txl`, `es/vit`, `fr/par`, `gb/bhx`, `gb/lhr`, `us/ewr`, `us/las`, `us/mci`.
 	Location *string `json:"location,omitempty" tf:"location,omitempty"`
 
 	// (Computed)[bool] Allows or disallows the collection and reporting of logs for this cluster's observability. If not set, the API default is used.
@@ -394,7 +394,7 @@ type MariadbClusterParameters struct {
 	Instances *InstancesParameters `json:"instances,omitempty" tf:"instances,omitempty"`
 
 	// [string] The location of the cluster. Changing this forces a new resource. Available: de/fra, de/txl, es/vit, fr/par, gb/bhx, gb/lhr, us/ewr, us/las, us/mci.
-	// The location of the cluster. Changing this forces re-creation. Available locations: `de/fra`, `de/txl`, `es/vit`, `fr/par`, `gb/bhx`, `gb/lhr`, `us/ewr`, `us/las`, `us/mci`.
+	// The location of the cluster. Changing this forces re-creation. Available locations: `de/fra`, `de/fra/1`, `de/fra/2`, `de/txl`, `es/vit`, `fr/par`, `gb/bhx`, `gb/lhr`, `us/ewr`, `us/las`, `us/mci`.
 	// +kubebuilder:validation:Optional
 	Location *string `json:"location,omitempty" tf:"location,omitempty"`
 

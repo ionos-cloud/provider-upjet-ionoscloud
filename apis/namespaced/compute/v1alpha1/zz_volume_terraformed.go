@@ -21,7 +21,7 @@ func (mg *Volume) GetTerraformResourceType() string {
 
 // GetConnectionDetailsMapping for this Volume
 func (tr *Volume) GetConnectionDetailsMapping() map[string]string {
-	return nil
+	return map[string]string{"image_password": "imagePasswordSecretRef"}
 }
 
 // GetObservation of this Volume

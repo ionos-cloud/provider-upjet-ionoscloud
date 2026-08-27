@@ -21,7 +21,7 @@ func (mg *Object) GetTerraformResourceType() string {
 
 // GetConnectionDetailsMapping for this Object
 func (tr *Object) GetConnectionDetailsMapping() map[string]string {
-	return map[string]string{"server_side_encryption_context": "serverSideEncryptionContextSecretRef"}
+	return map[string]string{"server_side_encryption_context": "serverSideEncryptionContextSecretRef", "server_side_encryption_customer_key": "serverSideEncryptionCustomerKeySecretRef"}
 }
 
 // GetObservation of this Object

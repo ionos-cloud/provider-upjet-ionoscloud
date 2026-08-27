@@ -90,7 +90,7 @@ spec:
                   gatewayId:
                     description: |-
                       [string] The ID of the WireGuard Gateway that the Peer will connect to.
-                      The ID of the WireGuard Peer that the peer will connect to.
+                      The ID of the WireGuard Gateway that the peer will connect to.
                     type: string
                   gatewayIdRef:
                     description: Reference to a VpnWireguardGateway in vpnwireguard
@@ -177,7 +177,7 @@ spec:
                   location:
                     description: |-
                       [string] The location of the WireGuard Gateway. Supported locations: de/fra, de/fra/2, de/txl, es/vit, gb/bhx, gb/lhr, us/ewr, us/las, us/mci, fr/par.
-                      The location of the WireGuard Peer. Supported locations: de/fra, de/fra/2, de/txl, es/vit, gb/bhx, gb/lhr, us/ewr, us/las, us/mci, fr/par
+                      The location of the WireGuard Peer. Supported locations: de/fra, de/fra/1, de/fra/2, de/txl, es/vit, gb/bhx, gb/lhr, us/ewr, us/las, us/mci, fr/par
                     type: string
                   name:
                     description: |-
@@ -234,7 +234,7 @@ spec:
                   gatewayId:
                     description: |-
                       [string] The ID of the WireGuard Gateway that the Peer will connect to.
-                      The ID of the WireGuard Peer that the peer will connect to.
+                      The ID of the WireGuard Gateway that the peer will connect to.
                     type: string
                   gatewayIdRef:
                     description: Reference to a VpnWireguardGateway in vpnwireguard
@@ -321,7 +321,7 @@ spec:
                   location:
                     description: |-
                       [string] The location of the WireGuard Gateway. Supported locations: de/fra, de/fra/2, de/txl, es/vit, gb/bhx, gb/lhr, us/ewr, us/las, us/mci, fr/par.
-                      The location of the WireGuard Peer. Supported locations: de/fra, de/fra/2, de/txl, es/vit, gb/bhx, gb/lhr, us/ewr, us/las, us/mci, fr/par
+                      The location of the WireGuard Peer. Supported locations: de/fra, de/fra/1, de/fra/2, de/txl, es/vit, gb/bhx, gb/lhr, us/ewr, us/las, us/mci, fr/par
                     type: string
                   name:
                     description: |-
@@ -441,14 +441,14 @@ spec:
                   gatewayId:
                     description: |-
                       [string] The ID of the WireGuard Gateway that the Peer will connect to.
-                      The ID of the WireGuard Peer that the peer will connect to.
+                      The ID of the WireGuard Gateway that the peer will connect to.
                     type: string
                   id:
                     type: string
                   location:
                     description: |-
                       [string] The location of the WireGuard Gateway. Supported locations: de/fra, de/fra/2, de/txl, es/vit, gb/bhx, gb/lhr, us/ewr, us/las, us/mci, fr/par.
-                      The location of the WireGuard Peer. Supported locations: de/fra, de/fra/2, de/txl, es/vit, gb/bhx, gb/lhr, us/ewr, us/las, us/mci, fr/par
+                      The location of the WireGuard Peer. Supported locations: de/fra, de/fra/1, de/fra/2, de/txl, es/vit, gb/bhx, gb/lhr, us/ewr, us/las, us/mci, fr/par
                     type: string
                   name:
                     description: |-

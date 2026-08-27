@@ -308,7 +308,7 @@ type PostgresqlClusterInitParameters struct {
 	Instances *InstancesInitParameters `json:"instances,omitempty" tf:"instances,omitempty"`
 
 	// [string] The location of the PostgreSQL cluster. This is used for routing to the regional API endpoint. Changing this value will destroy the existing cluster and create a new one in the specified location. Available locations: de/fra, de/fra/2, de/txl, es/vit, fr/par, gb/bhx, gb/lhr, us/ewr, us/las, us/mci.
-	// The location of the PostgreSQL cluster. This is used for routing to the regional API endpoint. Available locations: `de/fra`, `de/fra/2`, `de/txl`, `es/vit`, `fr/par`, `gb/bhx`, `gb/lhr`, `us/ewr`, `us/las`, `us/mci`.
+	// The location of the PostgreSQL cluster. This is used for routing to the regional API endpoint. Available locations: `de/fra`, `de/fra/1`, `de/fra/2`, `de/txl`, `es/vit`, `fr/par`, `gb/bhx`, `gb/lhr`, `us/ewr`, `us/las`, `us/mci`.
 	// +crossplane:generate:reference:type=github.com/ionos-cloud/provider-upjet-ionoscloud/apis/cluster/compute/v1alpha1.Datacenter
 	// +crossplane:generate:reference:extractor=github.com/ionos-cloud/provider-upjet-ionoscloud/config/common.DatacenterLocation()
 	Location *string `json:"location,omitempty" tf:"location,omitempty"`
@@ -378,7 +378,7 @@ type PostgresqlClusterObservation struct {
 	Instances *InstancesObservation `json:"instances,omitempty" tf:"instances,omitempty"`
 
 	// [string] The location of the PostgreSQL cluster. This is used for routing to the regional API endpoint. Changing this value will destroy the existing cluster and create a new one in the specified location. Available locations: de/fra, de/fra/2, de/txl, es/vit, fr/par, gb/bhx, gb/lhr, us/ewr, us/las, us/mci.
-	// The location of the PostgreSQL cluster. This is used for routing to the regional API endpoint. Available locations: `de/fra`, `de/fra/2`, `de/txl`, `es/vit`, `fr/par`, `gb/bhx`, `gb/lhr`, `us/ewr`, `us/las`, `us/mci`.
+	// The location of the PostgreSQL cluster. This is used for routing to the regional API endpoint. Available locations: `de/fra`, `de/fra/1`, `de/fra/2`, `de/txl`, `es/vit`, `fr/par`, `gb/bhx`, `gb/lhr`, `us/ewr`, `us/las`, `us/mci`.
 	Location *string `json:"location,omitempty" tf:"location,omitempty"`
 
 	// (Computed)[bool] Enables or disables the collection and reporting of logs for observability of this cluster.
@@ -437,7 +437,7 @@ type PostgresqlClusterParameters struct {
 	Instances *InstancesParameters `json:"instances,omitempty" tf:"instances,omitempty"`
 
 	// [string] The location of the PostgreSQL cluster. This is used for routing to the regional API endpoint. Changing this value will destroy the existing cluster and create a new one in the specified location. Available locations: de/fra, de/fra/2, de/txl, es/vit, fr/par, gb/bhx, gb/lhr, us/ewr, us/las, us/mci.
-	// The location of the PostgreSQL cluster. This is used for routing to the regional API endpoint. Available locations: `de/fra`, `de/fra/2`, `de/txl`, `es/vit`, `fr/par`, `gb/bhx`, `gb/lhr`, `us/ewr`, `us/las`, `us/mci`.
+	// The location of the PostgreSQL cluster. This is used for routing to the regional API endpoint. Available locations: `de/fra`, `de/fra/1`, `de/fra/2`, `de/txl`, `es/vit`, `fr/par`, `gb/bhx`, `gb/lhr`, `us/ewr`, `us/las`, `us/mci`.
 	// +crossplane:generate:reference:type=github.com/ionos-cloud/provider-upjet-ionoscloud/apis/cluster/compute/v1alpha1.Datacenter
 	// +crossplane:generate:reference:extractor=github.com/ionos-cloud/provider-upjet-ionoscloud/config/common.DatacenterLocation()
 	// +kubebuilder:validation:Optional

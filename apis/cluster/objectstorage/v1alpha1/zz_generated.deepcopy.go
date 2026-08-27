@@ -2896,11 +2896,6 @@ func (in *KeyObservation) DeepCopyInto(out *KeyObservation) {
 		*out = new(string)
 		**out = **in
 	}
-	if in.SecretKey != nil {
-		in, out := &in.SecretKey, &out.SecretKey
-		*out = new(string)
-		**out = **in
-	}
 	if in.UserID != nil {
 		in, out := &in.UserID, &out.UserID
 		*out = new(string)
@@ -3226,14 +3221,14 @@ func (in *ObjectCopyInitParameters) DeepCopyInto(out *ObjectCopyInitParameters) 
 		*out = new(string)
 		**out = **in
 	}
-	if in.ServerSideEncryptionCustomerKey != nil {
-		in, out := &in.ServerSideEncryptionCustomerKey, &out.ServerSideEncryptionCustomerKey
-		*out = new(string)
-		**out = **in
-	}
 	if in.ServerSideEncryptionCustomerKeyMd5 != nil {
 		in, out := &in.ServerSideEncryptionCustomerKeyMd5, &out.ServerSideEncryptionCustomerKeyMd5
 		*out = new(string)
+		**out = **in
+	}
+	if in.ServerSideEncryptionCustomerKeySecretRef != nil {
+		in, out := &in.ServerSideEncryptionCustomerKeySecretRef, &out.ServerSideEncryptionCustomerKeySecretRef
+		*out = new(v1.SecretKeySelector)
 		**out = **in
 	}
 	if in.Source != nil {
@@ -3246,14 +3241,14 @@ func (in *ObjectCopyInitParameters) DeepCopyInto(out *ObjectCopyInitParameters) 
 		*out = new(string)
 		**out = **in
 	}
-	if in.SourceCustomerKey != nil {
-		in, out := &in.SourceCustomerKey, &out.SourceCustomerKey
-		*out = new(string)
-		**out = **in
-	}
 	if in.SourceCustomerKeyMd5 != nil {
 		in, out := &in.SourceCustomerKeyMd5, &out.SourceCustomerKeyMd5
 		*out = new(string)
+		**out = **in
+	}
+	if in.SourceCustomerKeySecretRef != nil {
+		in, out := &in.SourceCustomerKeySecretRef, &out.SourceCustomerKeySecretRef
+		*out = new(v1.SecretKeySelector)
 		**out = **in
 	}
 	if in.StorageClass != nil {
@@ -3460,11 +3455,6 @@ func (in *ObjectCopyObservation) DeepCopyInto(out *ObjectCopyObservation) {
 		*out = new(string)
 		**out = **in
 	}
-	if in.ServerSideEncryptionCustomerKey != nil {
-		in, out := &in.ServerSideEncryptionCustomerKey, &out.ServerSideEncryptionCustomerKey
-		*out = new(string)
-		**out = **in
-	}
 	if in.ServerSideEncryptionCustomerKeyMd5 != nil {
 		in, out := &in.ServerSideEncryptionCustomerKeyMd5, &out.ServerSideEncryptionCustomerKeyMd5
 		*out = new(string)
@@ -3477,11 +3467,6 @@ func (in *ObjectCopyObservation) DeepCopyInto(out *ObjectCopyObservation) {
 	}
 	if in.SourceCustomerAlgorithm != nil {
 		in, out := &in.SourceCustomerAlgorithm, &out.SourceCustomerAlgorithm
-		*out = new(string)
-		**out = **in
-	}
-	if in.SourceCustomerKey != nil {
-		in, out := &in.SourceCustomerKey, &out.SourceCustomerKey
 		*out = new(string)
 		**out = **in
 	}
@@ -3662,14 +3647,14 @@ func (in *ObjectCopyParameters) DeepCopyInto(out *ObjectCopyParameters) {
 		*out = new(string)
 		**out = **in
 	}
-	if in.ServerSideEncryptionCustomerKey != nil {
-		in, out := &in.ServerSideEncryptionCustomerKey, &out.ServerSideEncryptionCustomerKey
-		*out = new(string)
-		**out = **in
-	}
 	if in.ServerSideEncryptionCustomerKeyMd5 != nil {
 		in, out := &in.ServerSideEncryptionCustomerKeyMd5, &out.ServerSideEncryptionCustomerKeyMd5
 		*out = new(string)
+		**out = **in
+	}
+	if in.ServerSideEncryptionCustomerKeySecretRef != nil {
+		in, out := &in.ServerSideEncryptionCustomerKeySecretRef, &out.ServerSideEncryptionCustomerKeySecretRef
+		*out = new(v1.SecretKeySelector)
 		**out = **in
 	}
 	if in.Source != nil {
@@ -3682,14 +3667,14 @@ func (in *ObjectCopyParameters) DeepCopyInto(out *ObjectCopyParameters) {
 		*out = new(string)
 		**out = **in
 	}
-	if in.SourceCustomerKey != nil {
-		in, out := &in.SourceCustomerKey, &out.SourceCustomerKey
-		*out = new(string)
-		**out = **in
-	}
 	if in.SourceCustomerKeyMd5 != nil {
 		in, out := &in.SourceCustomerKeyMd5, &out.SourceCustomerKeyMd5
 		*out = new(string)
+		**out = **in
+	}
+	if in.SourceCustomerKeySecretRef != nil {
+		in, out := &in.SourceCustomerKeySecretRef, &out.SourceCustomerKeySecretRef
+		*out = new(v1.SecretKeySelector)
 		**out = **in
 	}
 	if in.StorageClass != nil {
@@ -3889,14 +3874,14 @@ func (in *ObjectInitParameters) DeepCopyInto(out *ObjectInitParameters) {
 		*out = new(string)
 		**out = **in
 	}
-	if in.ServerSideEncryptionCustomerKey != nil {
-		in, out := &in.ServerSideEncryptionCustomerKey, &out.ServerSideEncryptionCustomerKey
-		*out = new(string)
-		**out = **in
-	}
 	if in.ServerSideEncryptionCustomerKeyMd5 != nil {
 		in, out := &in.ServerSideEncryptionCustomerKeyMd5, &out.ServerSideEncryptionCustomerKeyMd5
 		*out = new(string)
+		**out = **in
+	}
+	if in.ServerSideEncryptionCustomerKeySecretRef != nil {
+		in, out := &in.ServerSideEncryptionCustomerKeySecretRef, &out.ServerSideEncryptionCustomerKeySecretRef
+		*out = new(v1.SecretKeySelector)
 		**out = **in
 	}
 	if in.Source != nil {
@@ -4088,11 +4073,6 @@ func (in *ObjectObservation) DeepCopyInto(out *ObjectObservation) {
 		*out = new(string)
 		**out = **in
 	}
-	if in.ServerSideEncryptionCustomerKey != nil {
-		in, out := &in.ServerSideEncryptionCustomerKey, &out.ServerSideEncryptionCustomerKey
-		*out = new(string)
-		**out = **in
-	}
 	if in.ServerSideEncryptionCustomerKeyMd5 != nil {
 		in, out := &in.ServerSideEncryptionCustomerKeyMd5, &out.ServerSideEncryptionCustomerKeyMd5
 		*out = new(string)
@@ -4265,14 +4245,14 @@ func (in *ObjectParameters) DeepCopyInto(out *ObjectParameters) {
 		*out = new(string)
 		**out = **in
 	}
-	if in.ServerSideEncryptionCustomerKey != nil {
-		in, out := &in.ServerSideEncryptionCustomerKey, &out.ServerSideEncryptionCustomerKey
-		*out = new(string)
-		**out = **in
-	}
 	if in.ServerSideEncryptionCustomerKeyMd5 != nil {
 		in, out := &in.ServerSideEncryptionCustomerKeyMd5, &out.ServerSideEncryptionCustomerKeyMd5
 		*out = new(string)
+		**out = **in
+	}
+	if in.ServerSideEncryptionCustomerKeySecretRef != nil {
+		in, out := &in.ServerSideEncryptionCustomerKeySecretRef, &out.ServerSideEncryptionCustomerKeySecretRef
+		*out = new(v1.SecretKeySelector)
 		**out = **in
 	}
 	if in.Source != nil {
@@ -4877,11 +4857,6 @@ func (in *StorageAccesskeyObservation) DeepCopyInto(out *StorageAccesskeyObserva
 	}
 	if in.ID != nil {
 		in, out := &in.ID, &out.ID
-		*out = new(string)
-		**out = **in
-	}
-	if in.Secretkey != nil {
-		in, out := &in.Secretkey, &out.Secretkey
 		*out = new(string)
 		**out = **in
 	}

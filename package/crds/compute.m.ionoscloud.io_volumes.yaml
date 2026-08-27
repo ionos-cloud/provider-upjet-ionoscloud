@@ -174,9 +174,18 @@ spec:
                       also be a snapshot ID. It is required if licence_type is not
                       provided. Attribute is immutable.'
                     type: string
-                  imagePassword:
+                  imagePasswordSecretRef:
                     description: '[string] Required if sshkey_path is not provided.'
-                    type: string
+                    properties:
+                      key:
+                        type: string
+                      name:
+                        description: Name of the secret.
+                        type: string
+                    required:
+                    - key
+                    - name
+                    type: object
                   licenceType:
                     description: '[string] Required if image_name is not provided.'
                     type: string
@@ -432,9 +441,18 @@ spec:
                       also be a snapshot ID. It is required if licence_type is not
                       provided. Attribute is immutable.'
                     type: string
-                  imagePassword:
+                  imagePasswordSecretRef:
                     description: '[string] Required if sshkey_path is not provided.'
-                    type: string
+                    properties:
+                      key:
+                        type: string
+                      name:
+                        description: Name of the secret.
+                        type: string
+                    required:
+                    - key
+                    - name
+                    type: object
                   licenceType:
                     description: '[string] Required if image_name is not provided.'
                     type: string
@@ -695,9 +713,6 @@ spec:
                     description: '[string] The name, ID or alias of the image. May
                       also be a snapshot ID. It is required if licence_type is not
                       provided. Attribute is immutable.'
-                    type: string
-                  imagePassword:
-                    description: '[string] Required if sshkey_path is not provided.'
                     type: string
                   licenceType:
                     description: '[string] Required if image_name is not provided.'

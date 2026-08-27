@@ -148,16 +148,13 @@ type HashedPasswordInitParameters struct {
 	Algorithm *string `json:"algorithm,omitempty" tf:"algorithm,omitempty"`
 
 	// [string] The hashed password.
-	Hash *string `json:"hash,omitempty" tf:"hash,omitempty"`
+	HashSecretRef v1.LocalSecretKeySelector `json:"hashSecretRef" tf:"-"`
 }
 
 type HashedPasswordObservation struct {
 
 	// [string] The value can be only: "SHA-256".
 	Algorithm *string `json:"algorithm,omitempty" tf:"algorithm,omitempty"`
-
-	// [string] The hashed password.
-	Hash *string `json:"hash,omitempty" tf:"hash,omitempty"`
 }
 
 type HashedPasswordParameters struct {
@@ -168,7 +165,7 @@ type HashedPasswordParameters struct {
 
 	// [string] The hashed password.
 	// +kubebuilder:validation:Optional
-	Hash *string `json:"hash" tf:"hash,omitempty"`
+	HashSecretRef v1.LocalSecretKeySelector `json:"hashSecretRef" tf:"-"`
 }
 
 type InMemoryDBReplicasetInitParameters struct {

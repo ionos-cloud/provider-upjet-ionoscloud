@@ -21,6 +21,9 @@ type CPUArchitectureObservation struct {
 	// A valid CPU family name
 	CPUFamily *string `json:"cpuFamily,omitempty" tf:"cpu_family,omitempty"`
 
+	// (Computed) List of features supported by the location this data center is part of
+	EnabledFeatures []*string `json:"enabledFeatures,omitempty" tf:"enabled_features,omitempty"`
+
 	// The maximum number of cores available
 	MaxCores *float64 `json:"maxCores,omitempty" tf:"max_cores,omitempty"`
 

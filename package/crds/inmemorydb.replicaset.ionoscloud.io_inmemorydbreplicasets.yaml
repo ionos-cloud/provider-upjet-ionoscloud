@@ -258,9 +258,23 @@ spec:
                             algorithm:
                               description: '[string] The value can be only: "SHA-256".'
                               type: string
-                            hash:
+                            hashSecretRef:
                               description: '[string] The hashed password.'
-                              type: string
+                              properties:
+                                key:
+                                  description: The key to select.
+                                  type: string
+                                name:
+                                  description: Name of the secret.
+                                  type: string
+                                namespace:
+                                  description: Namespace of the secret.
+                                  type: string
+                              required:
+                              - key
+                              - name
+                              - namespace
+                              type: object
                           type: object
                         plainTextPasswordSecretRef:
                           description: |-
@@ -630,9 +644,25 @@ spec:
                             algorithm:
                               description: '[string] The value can be only: "SHA-256".'
                               type: string
-                            hash:
+                            hashSecretRef:
                               description: '[string] The hashed password.'
-                              type: string
+                              properties:
+                                key:
+                                  description: The key to select.
+                                  type: string
+                                name:
+                                  description: Name of the secret.
+                                  type: string
+                                namespace:
+                                  description: Namespace of the secret.
+                                  type: string
+                              required:
+                              - key
+                              - name
+                              - namespace
+                              type: object
+                          required:
+                          - hashSecretRef
                           type: object
                         plainTextPasswordSecretRef:
                           description: |-
@@ -963,9 +993,6 @@ spec:
                           properties:
                             algorithm:
                               description: '[string] The value can be only: "SHA-256".'
-                              type: string
-                            hash:
-                              description: '[string] The hashed password.'
                               type: string
                           type: object
                         username:

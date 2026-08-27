@@ -232,6 +232,12 @@ spec:
                         cpuFamily:
                           description: A valid CPU family name
                           type: string
+                        enabledFeatures:
+                          description: (Computed) List of features supported by the
+                            location this data center is part of
+                          items:
+                            type: string
+                          type: array
                         maxCores:
                           description: The maximum number of cores available
                           type: number

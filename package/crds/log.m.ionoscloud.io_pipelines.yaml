@@ -62,7 +62,7 @@ spec:
                   location:
                     description: |-
                       [string] The location of the Logging pipeline. Default: de/txl, other available locations: de/fra, de/fra/2, de/txl, es/vit, gb/bhx, gb/lhr,  fr/par, us/mci. If this is not set and if no value is provided for the IONOS_API_URL env var, the default location will be: de/fra.
-                      The location of your logging pipeline. Default: de/txl. Supported locations: de/fra, de/fra/2, de/txl, es/vit, gb/lhr, fr/par
+                      The location of your logging pipeline. Default: de/txl. Supported locations: de/fra, de/fra/1, de/fra/2, de/txl, es/vit, gb/lhr, fr/par
                     type: string
                   log:
                     description: '[list] Pipeline logs, a list that contains elements
@@ -123,7 +123,7 @@ spec:
                   location:
                     description: |-
                       [string] The location of the Logging pipeline. Default: de/txl, other available locations: de/fra, de/fra/2, de/txl, es/vit, gb/bhx, gb/lhr,  fr/par, us/mci. If this is not set and if no value is provided for the IONOS_API_URL env var, the default location will be: de/fra.
-                      The location of your logging pipeline. Default: de/txl. Supported locations: de/fra, de/fra/2, de/txl, es/vit, gb/lhr, fr/par
+                      The location of your logging pipeline. Default: de/txl. Supported locations: de/fra, de/fra/1, de/fra/2, de/txl, es/vit, gb/lhr, fr/par
                     type: string
                   log:
                     description: '[list] Pipeline logs, a list that contains elements
@@ -255,7 +255,7 @@ spec:
                   location:
                     description: |-
                       [string] The location of the Logging pipeline. Default: de/txl, other available locations: de/fra, de/fra/2, de/txl, es/vit, gb/bhx, gb/lhr,  fr/par, us/mci. If this is not set and if no value is provided for the IONOS_API_URL env var, the default location will be: de/fra.
-                      The location of your logging pipeline. Default: de/txl. Supported locations: de/fra, de/fra/2, de/txl, es/vit, gb/lhr, fr/par
+                      The location of your logging pipeline. Default: de/txl. Supported locations: de/fra, de/fra/1, de/fra/2, de/txl, es/vit, gb/lhr, fr/par
                     type: string
                   log:
                     description: '[list] Pipeline logs, a list that contains elements

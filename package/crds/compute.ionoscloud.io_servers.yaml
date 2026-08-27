@@ -92,6 +92,13 @@ spec:
                       also be an image alias. It is required if licence_type is not
                       provided.'
                     type: string
+                  confidential:
+                    description: If set, creates a Confidential Computing (SEV-SNP)
+                      VM from a confidential boot image. Requires ENTERPRISE type.
+                      cores and cpu_family must not be set - both are derived from
+                      the image. Computed on read from the server's enabled features,
+                      so imported servers reflect their real state.
+                    type: boolean
                   cores:
                     description: (Computed)[integer] Number of server CPU cores.
                     type: number
@@ -472,9 +479,23 @@ spec:
                           Exposing the serial can influence licensed software (e.g.
                           Windows) behavior
                         type: boolean
-                      imagePassword:
+                      imagePasswordSecretRef:
                         description: '[string] Required if ssh_key_path is not provided.'
-                        type: string
+                        properties:
+                          key:
+                            description: The key to select.
+                            type: string
+                          name:
+                            description: Name of the secret.
+                            type: string
+                          namespace:
+                            description: Namespace of the secret.
+                            type: string
+                        required:
+                        - key
+                        - name
+                        - namespace
+                        type: object
                       licenceType:
                         description: '[string] Sets the OS type of the server.'
                         type: string
@@ -543,6 +564,13 @@ spec:
                       also be an image alias. It is required if licence_type is not
                       provided.'
                     type: string
+                  confidential:
+                    description: If set, creates a Confidential Computing (SEV-SNP)
+                      VM from a confidential boot image. Requires ENTERPRISE type.
+                      cores and cpu_family must not be set - both are derived from
+                      the image. Computed on read from the server's enabled features,
+                      so imported servers reflect their real state.
+                    type: boolean
                   cores:
                     description: (Computed)[integer] Number of server CPU cores.
                     type: number
@@ -923,9 +951,23 @@ spec:
                           Exposing the serial can influence licensed software (e.g.
                           Windows) behavior
                         type: boolean
-                      imagePassword:
+                      imagePasswordSecretRef:
                         description: '[string] Required if ssh_key_path is not provided.'
-                        type: string
+                        properties:
+                          key:
+                            description: The key to select.
+                            type: string
+                          name:
+                            description: Name of the secret.
+                            type: string
+                          namespace:
+                            description: Namespace of the secret.
+                            type: string
+                        required:
+                        - key
+                        - name
+                        - namespace
+                        type: object
                       licenceType:
                         description: '[string] Sets the OS type of the server.'
                         type: string
@@ -1080,6 +1122,13 @@ spec:
                   bootVolume:
                     description: (Computed) The associated boot volume.
                     type: string
+                  confidential:
+                    description: If set, creates a Confidential Computing (SEV-SNP)
+                      VM from a confidential boot image. Requires ENTERPRISE type.
+                      cores and cpu_family must not be set - both are derived from
+                      the image. Computed on read from the server's enabled features,
+                      so imported servers reflect their real state.
+                    type: boolean
                   cores:
                     description: (Computed)[integer] Number of server CPU cores.
                     type: number
@@ -1092,6 +1141,12 @@ spec:
                   datacenterId:
                     description: '[string] The ID of a Virtual Data Center.'
                     type: string
+                  enabledFeatures:
+                    description: Features enabled on the server, e.g. SEV-SNP for
+                      a Confidential Computing VM.
+                    items:
+                      type: string
+                    type: array
                   firewallruleId:
                     description: (Computed) The associated firewall rule.
                     type: string
@@ -1332,9 +1387,6 @@ spec:
                           Exposing the serial can influence licensed software (e.g.
                           Windows) behavior
                         type: boolean
-                      imagePassword:
-                        description: '[string] Required if ssh_key_path is not provided.'
-                        type: string
                       licenceType:
                         description: '[string] Sets the OS type of the server.'
                         type: string

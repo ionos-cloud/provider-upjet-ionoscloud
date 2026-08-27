@@ -105,7 +105,7 @@ type NFSClusterInitParameters struct {
 	Connections *ConnectionsInitParameters `json:"connections,omitempty" tf:"connections,omitempty"`
 
 	// The location where the Network File Storage cluster is located. If this is not set and if no value is provided for the IONOS_API_URL env var, the default location will be: de/fra. Other available locations are: de/fra/2, de/txl, fr/par, gb/lhr, es/vit, us/las, us/ewr, us/mci.
-	// The location of the Network File Storage Cluster. Available locations: 'de/fra, 'de/fra/2, 'de/txl, 'fr-par, 'gb-lhr, 'es/vit, 'us/las, 'us/ewr, 'us/mci'
+	// The location of the Network File Storage Cluster. Available locations: 'de/fra, 'de/fra/1, 'de/fra/2, 'de/txl, 'fr/par, 'gb/lhr, 'es/vit, 'us/las, 'us/ewr, 'us/mci'
 	Location *string `json:"location,omitempty" tf:"location,omitempty"`
 
 	// The NFS configuration for the Network File Storage cluster. Each NFS configuration supports the following:
@@ -133,7 +133,7 @@ type NFSClusterObservation struct {
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
 	// The location where the Network File Storage cluster is located. If this is not set and if no value is provided for the IONOS_API_URL env var, the default location will be: de/fra. Other available locations are: de/fra/2, de/txl, fr/par, gb/lhr, es/vit, us/las, us/ewr, us/mci.
-	// The location of the Network File Storage Cluster. Available locations: 'de/fra, 'de/fra/2, 'de/txl, 'fr-par, 'gb-lhr, 'es/vit, 'us/las, 'us/ewr, 'us/mci'
+	// The location of the Network File Storage Cluster. Available locations: 'de/fra, 'de/fra/1, 'de/fra/2, 'de/txl, 'fr/par, 'gb/lhr, 'es/vit, 'us/las, 'us/ewr, 'us/mci'
 	Location *string `json:"location,omitempty" tf:"location,omitempty"`
 
 	// The NFS configuration for the Network File Storage cluster. Each NFS configuration supports the following:
@@ -160,7 +160,7 @@ type NFSClusterParameters struct {
 	Connections *ConnectionsParameters `json:"connections,omitempty" tf:"connections,omitempty"`
 
 	// The location where the Network File Storage cluster is located. If this is not set and if no value is provided for the IONOS_API_URL env var, the default location will be: de/fra. Other available locations are: de/fra/2, de/txl, fr/par, gb/lhr, es/vit, us/las, us/ewr, us/mci.
-	// The location of the Network File Storage Cluster. Available locations: 'de/fra, 'de/fra/2, 'de/txl, 'fr-par, 'gb-lhr, 'es/vit, 'us/las, 'us/ewr, 'us/mci'
+	// The location of the Network File Storage Cluster. Available locations: 'de/fra, 'de/fra/1, 'de/fra/2, 'de/txl, 'fr/par, 'gb/lhr, 'es/vit, 'us/las, 'us/ewr, 'us/mci'
 	// +kubebuilder:validation:Optional
 	Location *string `json:"location,omitempty" tf:"location,omitempty"`
 

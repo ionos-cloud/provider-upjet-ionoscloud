@@ -63,7 +63,7 @@ type VpnWireguardPeerInitParameters struct {
 	Endpoint *EndpointInitParameters `json:"endpoint,omitempty" tf:"endpoint,omitempty"`
 
 	// [string] The ID of the WireGuard Gateway that the Peer will connect to.
-	// The ID of the WireGuard Peer that the peer will connect to.
+	// The ID of the WireGuard Gateway that the peer will connect to.
 	// +crossplane:generate:reference:type=github.com/ionos-cloud/provider-upjet-ionoscloud/apis/cluster/vpnwireguard/v1alpha1.VpnWireguardGateway
 	GatewayID *string `json:"gatewayId,omitempty" tf:"gateway_id,omitempty"`
 
@@ -76,7 +76,7 @@ type VpnWireguardPeerInitParameters struct {
 	GatewayIDSelector *v1.Selector `json:"gatewayIdSelector,omitempty" tf:"-"`
 
 	// [string] The location of the WireGuard Gateway. Supported locations: de/fra, de/fra/2, de/txl, es/vit, gb/bhx, gb/lhr, us/ewr, us/las, us/mci, fr/par.
-	// The location of the WireGuard Peer. Supported locations: de/fra, de/fra/2, de/txl, es/vit, gb/bhx, gb/lhr, us/ewr, us/las, us/mci, fr/par
+	// The location of the WireGuard Peer. Supported locations: de/fra, de/fra/1, de/fra/2, de/txl, es/vit, gb/bhx, gb/lhr, us/ewr, us/las, us/mci, fr/par
 	Location *string `json:"location,omitempty" tf:"location,omitempty"`
 
 	// [string] The human-readable name of the WireGuard Gateway.
@@ -103,13 +103,13 @@ type VpnWireguardPeerObservation struct {
 	Endpoint *EndpointObservation `json:"endpoint,omitempty" tf:"endpoint,omitempty"`
 
 	// [string] The ID of the WireGuard Gateway that the Peer will connect to.
-	// The ID of the WireGuard Peer that the peer will connect to.
+	// The ID of the WireGuard Gateway that the peer will connect to.
 	GatewayID *string `json:"gatewayId,omitempty" tf:"gateway_id,omitempty"`
 
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
 	// [string] The location of the WireGuard Gateway. Supported locations: de/fra, de/fra/2, de/txl, es/vit, gb/bhx, gb/lhr, us/ewr, us/las, us/mci, fr/par.
-	// The location of the WireGuard Peer. Supported locations: de/fra, de/fra/2, de/txl, es/vit, gb/bhx, gb/lhr, us/ewr, us/las, us/mci, fr/par
+	// The location of the WireGuard Peer. Supported locations: de/fra, de/fra/1, de/fra/2, de/txl, es/vit, gb/bhx, gb/lhr, us/ewr, us/las, us/mci, fr/par
 	Location *string `json:"location,omitempty" tf:"location,omitempty"`
 
 	// [string] The human-readable name of the WireGuard Gateway.
@@ -143,7 +143,7 @@ type VpnWireguardPeerParameters struct {
 	Endpoint *EndpointParameters `json:"endpoint,omitempty" tf:"endpoint,omitempty"`
 
 	// [string] The ID of the WireGuard Gateway that the Peer will connect to.
-	// The ID of the WireGuard Peer that the peer will connect to.
+	// The ID of the WireGuard Gateway that the peer will connect to.
 	// +crossplane:generate:reference:type=github.com/ionos-cloud/provider-upjet-ionoscloud/apis/cluster/vpnwireguard/v1alpha1.VpnWireguardGateway
 	// +kubebuilder:validation:Optional
 	GatewayID *string `json:"gatewayId,omitempty" tf:"gateway_id,omitempty"`
@@ -157,7 +157,7 @@ type VpnWireguardPeerParameters struct {
 	GatewayIDSelector *v1.Selector `json:"gatewayIdSelector,omitempty" tf:"-"`
 
 	// [string] The location of the WireGuard Gateway. Supported locations: de/fra, de/fra/2, de/txl, es/vit, gb/bhx, gb/lhr, us/ewr, us/las, us/mci, fr/par.
-	// The location of the WireGuard Peer. Supported locations: de/fra, de/fra/2, de/txl, es/vit, gb/bhx, gb/lhr, us/ewr, us/las, us/mci, fr/par
+	// The location of the WireGuard Peer. Supported locations: de/fra, de/fra/1, de/fra/2, de/txl, es/vit, gb/bhx, gb/lhr, us/ewr, us/las, us/mci, fr/par
 	// +kubebuilder:validation:Optional
 	Location *string `json:"location,omitempty" tf:"location,omitempty"`
 
