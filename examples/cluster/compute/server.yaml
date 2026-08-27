@@ -77,13 +77,3 @@ spec:
         testing.upbound.io/example-name: example
     name: Lan Example
     public: true
-
----
-
-  apiVersion: v1
-  kind: Secret
-  metadata:
-    name: pwsecret
-    namespace: upbound-system
-  stringData:
-    password: "Upboundtest1"
