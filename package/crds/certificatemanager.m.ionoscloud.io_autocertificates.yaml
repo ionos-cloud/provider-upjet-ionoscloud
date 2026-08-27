@@ -71,7 +71,7 @@ spec:
                     type: string
                   location:
                     description: |-
-                      [string] The location of the auto-certificate. Available locations: de/fra, de/fra/2.
+                      [string] The location of the auto-certificate. Available locations: de/fra, de/fra/1, de/fra/2.
                       The location of the auto-certificate
                     type: string
                   locationRef:
@@ -281,7 +281,7 @@ spec:
                     type: string
                   location:
                     description: |-
-                      [string] The location of the auto-certificate. Available locations: de/fra, de/fra/2.
+                      [string] The location of the auto-certificate. Available locations: de/fra, de/fra/1, de/fra/2.
                       The location of the auto-certificate
                     type: string
                   locationRef:
@@ -561,7 +561,7 @@ spec:
                     type: string
                   location:
                     description: |-
-                      [string] The location of the auto-certificate. Available locations: de/fra, de/fra/2.
+                      [string] The location of the auto-certificate. Available locations: de/fra, de/fra/1, de/fra/2.
                       The location of the auto-certificate
                     type: string
                   name:

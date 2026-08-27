@@ -305,7 +305,7 @@ spec:
                     type: object
                   location:
                     description: |-
-                      [string] The location of the cluster. Changing this forces a new resource. Available: de/fra, de/txl, es/vit, fr/par, gb/bhx, gb/lhr, us/ewr, us/las, us/mci.
+                      [string] The location of the cluster. Changing this forces a new resource. Available: de/fra, de/fra/1, de/fra/2, de/txl, es/vit, fr/par, gb/bhx, gb/lhr, us/ewr, us/las, us/mci.
                       The location of the cluster. Used to route to the correct regional API endpoint. Available locations: `de/fra`, `de/fra/1`, `de/fra/2`, `de/txl`, `es/vit`, `fr/par`, `gb/bhx`, `gb/lhr`, `us/ewr`, `us/las`, `us/mci`.
                     type: string
                   logsEnabled:
@@ -362,7 +362,7 @@ spec:
                     properties:
                       location:
                         description: |-
-                          [string] The location of the cluster. Changing this forces a new resource. Available: de/fra, de/txl, es/vit, fr/par, gb/bhx, gb/lhr, us/ewr, us/las, us/mci.
+                          [string] The location of the cluster. Changing this forces a new resource. Available: de/fra, de/fra/1, de/fra/2, de/txl, es/vit, fr/par, gb/bhx, gb/lhr, us/ewr, us/las, us/mci.
                           The Object Storage location where snapshots will be stored (e.g. eu-central-3). Changing this forces the re-creation of the cluster.
                         type: string
                       retentionDays:
@@ -645,7 +645,7 @@ spec:
                     type: object
                   location:
                     description: |-
-                      [string] The location of the cluster. Changing this forces a new resource. Available: de/fra, de/txl, es/vit, fr/par, gb/bhx, gb/lhr, us/ewr, us/las, us/mci.
+                      [string] The location of the cluster. Changing this forces a new resource. Available: de/fra, de/fra/1, de/fra/2, de/txl, es/vit, fr/par, gb/bhx, gb/lhr, us/ewr, us/las, us/mci.
                       The location of the cluster. Used to route to the correct regional API endpoint. Available locations: `de/fra`, `de/fra/1`, `de/fra/2`, `de/txl`, `es/vit`, `fr/par`, `gb/bhx`, `gb/lhr`, `us/ewr`, `us/las`, `us/mci`.
                     type: string
                   logsEnabled:
@@ -702,7 +702,7 @@ spec:
                     properties:
                       location:
                         description: |-
-                          [string] The location of the cluster. Changing this forces a new resource. Available: de/fra, de/txl, es/vit, fr/par, gb/bhx, gb/lhr, us/ewr, us/las, us/mci.
+                          [string] The location of the cluster. Changing this forces a new resource. Available: de/fra, de/fra/1, de/fra/2, de/txl, es/vit, fr/par, gb/bhx, gb/lhr, us/ewr, us/las, us/mci.
                           The Object Storage location where snapshots will be stored (e.g. eu-central-3). Changing this forces the re-creation of the cluster.
                         type: string
                       retentionDays:
@@ -902,7 +902,7 @@ spec:
                     type: object
                   location:
                     description: |-
-                      [string] The location of the cluster. Changing this forces a new resource. Available: de/fra, de/txl, es/vit, fr/par, gb/bhx, gb/lhr, us/ewr, us/las, us/mci.
+                      [string] The location of the cluster. Changing this forces a new resource. Available: de/fra, de/fra/1, de/fra/2, de/txl, es/vit, fr/par, gb/bhx, gb/lhr, us/ewr, us/las, us/mci.
                       The location of the cluster. Used to route to the correct regional API endpoint. Available locations: `de/fra`, `de/fra/1`, `de/fra/2`, `de/txl`, `es/vit`, `fr/par`, `gb/bhx`, `gb/lhr`, `us/ewr`, `us/las`, `us/mci`.
                     type: string
                   logsEnabled:
@@ -959,7 +959,7 @@ spec:
                     properties:
                       location:
                         description: |-
-                          [string] The location of the cluster. Changing this forces a new resource. Available: de/fra, de/txl, es/vit, fr/par, gb/bhx, gb/lhr, us/ewr, us/las, us/mci.
+                          [string] The location of the cluster. Changing this forces a new resource. Available: de/fra, de/fra/1, de/fra/2, de/txl, es/vit, fr/par, gb/bhx, gb/lhr, us/ewr, us/las, us/mci.
                           The Object Storage location where snapshots will be stored (e.g. eu-central-3). Changing this forces the re-creation of the cluster.
                         type: string
                       retentionDays:

@@ -75,7 +75,7 @@ type VpnWireguardPeerInitParameters struct {
 	// +kubebuilder:validation:Optional
 	GatewayIDSelector *v1.Selector `json:"gatewayIdSelector,omitempty" tf:"-"`
 
-	// [string] The location of the WireGuard Gateway. Supported locations: de/fra, de/fra/2, de/txl, es/vit, gb/bhx, gb/lhr, us/ewr, us/las, us/mci, fr/par.
+	// [string] The location of the WireGuard Gateway. Supported locations: de/fra, de/fra/1, de/fra/2, de/txl, es/vit, gb/bhx, gb/lhr, us/ewr, us/las, us/mci, fr/par.
 	// The location of the WireGuard Peer. Supported locations: de/fra, de/fra/1, de/fra/2, de/txl, es/vit, gb/bhx, gb/lhr, us/ewr, us/las, us/mci, fr/par
 	Location *string `json:"location,omitempty" tf:"location,omitempty"`
 
@@ -108,7 +108,7 @@ type VpnWireguardPeerObservation struct {
 
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
-	// [string] The location of the WireGuard Gateway. Supported locations: de/fra, de/fra/2, de/txl, es/vit, gb/bhx, gb/lhr, us/ewr, us/las, us/mci, fr/par.
+	// [string] The location of the WireGuard Gateway. Supported locations: de/fra, de/fra/1, de/fra/2, de/txl, es/vit, gb/bhx, gb/lhr, us/ewr, us/las, us/mci, fr/par.
 	// The location of the WireGuard Peer. Supported locations: de/fra, de/fra/1, de/fra/2, de/txl, es/vit, gb/bhx, gb/lhr, us/ewr, us/las, us/mci, fr/par
 	Location *string `json:"location,omitempty" tf:"location,omitempty"`
 
@@ -156,7 +156,7 @@ type VpnWireguardPeerParameters struct {
 	// +kubebuilder:validation:Optional
 	GatewayIDSelector *v1.Selector `json:"gatewayIdSelector,omitempty" tf:"-"`
 
-	// [string] The location of the WireGuard Gateway. Supported locations: de/fra, de/fra/2, de/txl, es/vit, gb/bhx, gb/lhr, us/ewr, us/las, us/mci, fr/par.
+	// [string] The location of the WireGuard Gateway. Supported locations: de/fra, de/fra/1, de/fra/2, de/txl, es/vit, gb/bhx, gb/lhr, us/ewr, us/las, us/mci, fr/par.
 	// The location of the WireGuard Peer. Supported locations: de/fra, de/fra/1, de/fra/2, de/txl, es/vit, gb/bhx, gb/lhr, us/ewr, us/las, us/mci, fr/par
 	// +kubebuilder:validation:Optional
 	Location *string `json:"location,omitempty" tf:"location,omitempty"`

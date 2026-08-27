@@ -92,7 +92,7 @@ spec:
                     type: array
                   location:
                     description: |-
-                      [string] The location of the provider. Available locations: de/fra, de/fra/2.
+                      [string] The location of the provider. Available locations: de/fra, de/fra/1, de/fra/2.
                       The location of the certificate provider
                     type: string
                   name:
@@ -153,7 +153,7 @@ spec:
                     type: array
                   location:
                     description: |-
-                      [string] The location of the provider. Available locations: de/fra, de/fra/2.
+                      [string] The location of the provider. Available locations: de/fra, de/fra/1, de/fra/2.
                       The location of the certificate provider
                     type: string
                   name:
@@ -264,7 +264,7 @@ spec:
                     type: string
                   location:
                     description: |-
-                      [string] The location of the provider. Available locations: de/fra, de/fra/2.
+                      [string] The location of the provider. Available locations: de/fra, de/fra/1, de/fra/2.
                       The location of the certificate provider
                     type: string
                   name:

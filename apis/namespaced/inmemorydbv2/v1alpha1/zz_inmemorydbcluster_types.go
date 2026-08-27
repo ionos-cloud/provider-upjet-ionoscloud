@@ -149,7 +149,7 @@ type InMemoryDBClusterInitParameters struct {
 	// [object] The instance sizing configuration.
 	Instances *InstancesInitParameters `json:"instances,omitempty" tf:"instances,omitempty"`
 
-	// [string] The location of the cluster. Changing this forces a new resource. Available: de/fra, de/txl, es/vit, fr/par, gb/bhx, gb/lhr, us/ewr, us/las, us/mci.
+	// [string] The location of the cluster. Changing this forces a new resource. Available: de/fra, de/fra/1, de/fra/2, de/txl, es/vit, fr/par, gb/bhx, gb/lhr, us/ewr, us/las, us/mci.
 	// The location of the cluster. Used to route to the correct regional API endpoint. Available locations: `de/fra`, `de/fra/1`, `de/fra/2`, `de/txl`, `es/vit`, `fr/par`, `gb/bhx`, `gb/lhr`, `us/ewr`, `us/las`, `us/mci`.
 	Location *string `json:"location,omitempty" tf:"location,omitempty"`
 
@@ -209,7 +209,7 @@ type InMemoryDBClusterObservation struct {
 	// [object] The instance sizing configuration.
 	Instances *InstancesObservation `json:"instances,omitempty" tf:"instances,omitempty"`
 
-	// [string] The location of the cluster. Changing this forces a new resource. Available: de/fra, de/txl, es/vit, fr/par, gb/bhx, gb/lhr, us/ewr, us/las, us/mci.
+	// [string] The location of the cluster. Changing this forces a new resource. Available: de/fra, de/fra/1, de/fra/2, de/txl, es/vit, fr/par, gb/bhx, gb/lhr, us/ewr, us/las, us/mci.
 	// The location of the cluster. Used to route to the correct regional API endpoint. Available locations: `de/fra`, `de/fra/1`, `de/fra/2`, `de/txl`, `es/vit`, `fr/par`, `gb/bhx`, `gb/lhr`, `us/ewr`, `us/las`, `us/mci`.
 	Location *string `json:"location,omitempty" tf:"location,omitempty"`
 
@@ -267,7 +267,7 @@ type InMemoryDBClusterParameters struct {
 	// +kubebuilder:validation:Optional
 	Instances *InstancesParameters `json:"instances,omitempty" tf:"instances,omitempty"`
 
-	// [string] The location of the cluster. Changing this forces a new resource. Available: de/fra, de/txl, es/vit, fr/par, gb/bhx, gb/lhr, us/ewr, us/las, us/mci.
+	// [string] The location of the cluster. Changing this forces a new resource. Available: de/fra, de/fra/1, de/fra/2, de/txl, es/vit, fr/par, gb/bhx, gb/lhr, us/ewr, us/las, us/mci.
 	// The location of the cluster. Used to route to the correct regional API endpoint. Available locations: `de/fra`, `de/fra/1`, `de/fra/2`, `de/txl`, `es/vit`, `fr/par`, `gb/bhx`, `gb/lhr`, `us/ewr`, `us/las`, `us/mci`.
 	// +kubebuilder:validation:Optional
 	Location *string `json:"location,omitempty" tf:"location,omitempty"`
@@ -461,7 +461,7 @@ type RestoreFromSnapshotParameters struct {
 
 type SnapshotInitParameters struct {
 
-	// [string] The location of the cluster. Changing this forces a new resource. Available: de/fra, de/txl, es/vit, fr/par, gb/bhx, gb/lhr, us/ewr, us/las, us/mci.
+	// [string] The location of the cluster. Changing this forces a new resource. Available: de/fra, de/fra/1, de/fra/2, de/txl, es/vit, fr/par, gb/bhx, gb/lhr, us/ewr, us/las, us/mci.
 	// The Object Storage location where snapshots will be stored (e.g. eu-central-3). Changing this forces the re-creation of the cluster.
 	Location *string `json:"location,omitempty" tf:"location,omitempty"`
 
@@ -476,7 +476,7 @@ type SnapshotInitParameters struct {
 
 type SnapshotObservation struct {
 
-	// [string] The location of the cluster. Changing this forces a new resource. Available: de/fra, de/txl, es/vit, fr/par, gb/bhx, gb/lhr, us/ewr, us/las, us/mci.
+	// [string] The location of the cluster. Changing this forces a new resource. Available: de/fra, de/fra/1, de/fra/2, de/txl, es/vit, fr/par, gb/bhx, gb/lhr, us/ewr, us/las, us/mci.
 	// The Object Storage location where snapshots will be stored (e.g. eu-central-3). Changing this forces the re-creation of the cluster.
 	Location *string `json:"location,omitempty" tf:"location,omitempty"`
 
@@ -491,7 +491,7 @@ type SnapshotObservation struct {
 
 type SnapshotParameters struct {
 
-	// [string] The location of the cluster. Changing this forces a new resource. Available: de/fra, de/txl, es/vit, fr/par, gb/bhx, gb/lhr, us/ewr, us/las, us/mci.
+	// [string] The location of the cluster. Changing this forces a new resource. Available: de/fra, de/fra/1, de/fra/2, de/txl, es/vit, fr/par, gb/bhx, gb/lhr, us/ewr, us/las, us/mci.
 	// The Object Storage location where snapshots will be stored (e.g. eu-central-3). Changing this forces the re-creation of the cluster.
 	// +kubebuilder:validation:Optional
 	Location *string `json:"location" tf:"location,omitempty"`
