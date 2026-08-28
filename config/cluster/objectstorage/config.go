@@ -84,8 +84,30 @@ func Configure(p *config.Provider) {
 		r.References["user_id"] = config.Reference{
 			TerraformName: "ionoscloud_user",
 		}
+		// The Key's own ID is its access key ID; publish it alongside the
+		// automatically-published secret_key so both halves of the credential
+		// pair are available from a single connection secret.
+		r.Sensitive.AdditionalConnectionDetailsFn = func(attr map[string]any) (map[string][]byte, error) {
+			conn := map[string][]byte{}
+			if id, ok := attr["id"].(string); ok && id != "" {
+				conn["accesskey"] = []byte(id)
+			}
+			return conn, nil
+		}
 	})
 	p.AddResourceConfigurator("ionoscloud_object_storage_accesskey", func(r *config.Resource) {
 		r.ShortGroup = storage
+		// "accesskey" (the usable access key string) is a separate schema
+		// attribute from "id" (the resource's internal UUID) on this
+		// resource; publish it alongside the automatically-published
+		// secretkey so both halves of the credential pair are available
+		// from a single connection secret.
+		r.Sensitive.AdditionalConnectionDetailsFn = func(attr map[string]any) (map[string][]byte, error) {
+			conn := map[string][]byte{}
+			if accesskey, ok := attr["accesskey"].(string); ok && accesskey != "" {
+				conn["accesskey"] = []byte(accesskey)
+			}
+			return conn, nil
+		}
 	})
 }

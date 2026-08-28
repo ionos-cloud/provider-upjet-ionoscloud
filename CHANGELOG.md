@@ -6,7 +6,7 @@ All notable changes to this project will be documented in this file.
 - Updated Terraform provider to v6.7.36
 - `image_password` (Volume, Server, CubeServer) and `hash` (InMemoryDBReplicaset `hashedPassword`) are now sourced from a Kubernetes `Secret` via a new `*SecretRef` field instead of a plaintext spec field, following the upstream provider marking these attributes `Sensitive`
 - `server_side_encryption_customer_key` (ObjectStorage Object) and `server_side_encryption_customer_key` / `source_customer_key` (ObjectStorage ObjectCopy) are now sourced via `*SecretRef` fields for the same reason
-- `secretKey` (ObjectStorage Key) and `secretkey` (ObjectStorage StorageAccesskey) are no longer exposed in `status.atProvider`, as these are now marked `Sensitive` upstream and have no safe way to be surfaced as plaintext status
+- `secretKey` (ObjectStorage Key) and `secretkey` (ObjectStorage StorageAccesskey) are no longer exposed in `status.atProvider`, as these are now marked `Sensitive` upstream; the value is instead published in the resource's connection secret (`writeConnectionSecretToRef`), alongside a new `accesskey` entry, so both halves of the credential pair are available from a single secret
 - Added `confidential` (Confidential Computing / SEV-SNP) and `enabledFeatures` fields to Server; added `enabledFeatures` to Datacenter
 - Fixed stale/mismatched example manifests for Server, Volume, and CubeServer (cluster and namespaced) to use the new `*SecretRef` fields
 
