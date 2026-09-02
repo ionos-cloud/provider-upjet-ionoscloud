@@ -21,7 +21,7 @@ func (mg *CubeServer) GetTerraformResourceType() string {
 
 // GetConnectionDetailsMapping for this CubeServer
 func (tr *CubeServer) GetConnectionDetailsMapping() map[string]string {
-	return map[string]string{"image_password": "imagePasswordSecretRef"}
+	return map[string]string{"image_password": "imagePasswordSecretRef", "volume[*].image_password": "volume.imagePasswordSecretRef"}
 }
 
 // GetObservation of this CubeServer

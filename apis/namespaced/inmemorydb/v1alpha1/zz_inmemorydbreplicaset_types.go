@@ -148,16 +148,13 @@ type HashedPasswordInitParameters struct {
 	Algorithm *string `json:"algorithm,omitempty" tf:"algorithm,omitempty"`
 
 	// [string] The hashed password.
-	Hash *string `json:"hash,omitempty" tf:"hash,omitempty"`
+	HashSecretRef v1.LocalSecretKeySelector `json:"hashSecretRef" tf:"-"`
 }
 
 type HashedPasswordObservation struct {
 
 	// [string] The value can be only: "SHA-256".
 	Algorithm *string `json:"algorithm,omitempty" tf:"algorithm,omitempty"`
-
-	// [string] The hashed password.
-	Hash *string `json:"hash,omitempty" tf:"hash,omitempty"`
 }
 
 type HashedPasswordParameters struct {
@@ -168,7 +165,7 @@ type HashedPasswordParameters struct {
 
 	// [string] The hashed password.
 	// +kubebuilder:validation:Optional
-	Hash *string `json:"hash" tf:"hash,omitempty"`
+	HashSecretRef v1.LocalSecretKeySelector `json:"hashSecretRef" tf:"-"`
 }
 
 type InMemoryDBReplicasetInitParameters struct {
@@ -193,7 +190,7 @@ type InMemoryDBReplicasetInitParameters struct {
 	// The ID of a snapshot to restore the replica set from. If set, the replica set will be created from the snapshot.
 	InitialSnapshotID *string `json:"initialSnapshotId,omitempty" tf:"initial_snapshot_id,omitempty"`
 
-	// [string] The location of your replica set. Updates to the value of the field force the replica set to be re-created. If this is not set and if no value is provided for the IONOS_API_URL env var, the default location will be: de/fra, other available locations are: de/fra/2, de/txl, es/vit, gb/bhx, gb/lhr, us/ewr, us/las, us/mci, fr/par
+	// [string] The location of your replica set. Updates to the value of the field force the replica set to be re-created. If this is not set and if no value is provided for the IONOS_API_URL env var, the default location will be: de/fra, other available locations are: de/fra/1, de/fra/2, de/txl, es/vit, gb/bhx, gb/lhr, us/ewr, us/las, us/mci, fr/par
 	// The replica set location
 	// +crossplane:generate:reference:type=github.com/ionos-cloud/provider-upjet-ionoscloud/apis/namespaced/compute/v1alpha1.Datacenter
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("location",false)
@@ -256,7 +253,7 @@ type InMemoryDBReplicasetObservation struct {
 	// The ID of a snapshot to restore the replica set from. If set, the replica set will be created from the snapshot.
 	InitialSnapshotID *string `json:"initialSnapshotId,omitempty" tf:"initial_snapshot_id,omitempty"`
 
-	// [string] The location of your replica set. Updates to the value of the field force the replica set to be re-created. If this is not set and if no value is provided for the IONOS_API_URL env var, the default location will be: de/fra, other available locations are: de/fra/2, de/txl, es/vit, gb/bhx, gb/lhr, us/ewr, us/las, us/mci, fr/par
+	// [string] The location of your replica set. Updates to the value of the field force the replica set to be re-created. If this is not set and if no value is provided for the IONOS_API_URL env var, the default location will be: de/fra, other available locations are: de/fra/1, de/fra/2, de/txl, es/vit, gb/bhx, gb/lhr, us/ewr, us/las, us/mci, fr/par
 	// The replica set location
 	Location *string `json:"location,omitempty" tf:"location,omitempty"`
 
@@ -308,7 +305,7 @@ type InMemoryDBReplicasetParameters struct {
 	// +kubebuilder:validation:Optional
 	InitialSnapshotID *string `json:"initialSnapshotId,omitempty" tf:"initial_snapshot_id,omitempty"`
 
-	// [string] The location of your replica set. Updates to the value of the field force the replica set to be re-created. If this is not set and if no value is provided for the IONOS_API_URL env var, the default location will be: de/fra, other available locations are: de/fra/2, de/txl, es/vit, gb/bhx, gb/lhr, us/ewr, us/las, us/mci, fr/par
+	// [string] The location of your replica set. Updates to the value of the field force the replica set to be re-created. If this is not set and if no value is provided for the IONOS_API_URL env var, the default location will be: de/fra, other available locations are: de/fra/1, de/fra/2, de/txl, es/vit, gb/bhx, gb/lhr, us/ewr, us/las, us/mci, fr/par
 	// The replica set location
 	// +crossplane:generate:reference:type=github.com/ionos-cloud/provider-upjet-ionoscloud/apis/namespaced/compute/v1alpha1.Datacenter
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("location",false)

@@ -16,7 +16,7 @@ import (
 
 type BackupInitParameters struct {
 
-	// [string] The location of the cluster. Changing this forces a new resource. Available: de/fra, de/txl, es/vit, fr/par, gb/bhx, gb/lhr, us/ewr, us/las, us/mci.
+	// [string] The location of the cluster. Changing this forces a new resource. Available: de/fra, de/fra/1, de/fra/2, de/txl, es/vit, fr/par, gb/bhx, gb/lhr, us/ewr, us/las, us/mci.
 	// The Object Storage location where the backup will be created. Changing this forces re-creation.
 	Location *string `json:"location,omitempty" tf:"location,omitempty"`
 
@@ -27,7 +27,7 @@ type BackupInitParameters struct {
 
 type BackupObservation struct {
 
-	// [string] The location of the cluster. Changing this forces a new resource. Available: de/fra, de/txl, es/vit, fr/par, gb/bhx, gb/lhr, us/ewr, us/las, us/mci.
+	// [string] The location of the cluster. Changing this forces a new resource. Available: de/fra, de/fra/1, de/fra/2, de/txl, es/vit, fr/par, gb/bhx, gb/lhr, us/ewr, us/las, us/mci.
 	// The Object Storage location where the backup will be created. Changing this forces re-creation.
 	Location *string `json:"location,omitempty" tf:"location,omitempty"`
 
@@ -38,7 +38,7 @@ type BackupObservation struct {
 
 type BackupParameters struct {
 
-	// [string] The location of the cluster. Changing this forces a new resource. Available: de/fra, de/txl, es/vit, fr/par, gb/bhx, gb/lhr, us/ewr, us/las, us/mci.
+	// [string] The location of the cluster. Changing this forces a new resource. Available: de/fra, de/fra/1, de/fra/2, de/txl, es/vit, fr/par, gb/bhx, gb/lhr, us/ewr, us/las, us/mci.
 	// The Object Storage location where the backup will be created. Changing this forces re-creation.
 	// +kubebuilder:validation:Optional
 	Location *string `json:"location" tf:"location,omitempty"`
@@ -291,8 +291,8 @@ type MariadbClusterInitParameters struct {
 	// [object] Compute and storage configuration for each instance in the cluster.
 	Instances *InstancesInitParameters `json:"instances,omitempty" tf:"instances,omitempty"`
 
-	// [string] The location of the cluster. Changing this forces a new resource. Available: de/fra, de/txl, es/vit, fr/par, gb/bhx, gb/lhr, us/ewr, us/las, us/mci.
-	// The location of the cluster. Changing this forces re-creation. Available locations: `de/fra`, `de/txl`, `es/vit`, `fr/par`, `gb/bhx`, `gb/lhr`, `us/ewr`, `us/las`, `us/mci`.
+	// [string] The location of the cluster. Changing this forces a new resource. Available: de/fra, de/fra/1, de/fra/2, de/txl, es/vit, fr/par, gb/bhx, gb/lhr, us/ewr, us/las, us/mci.
+	// The location of the cluster. Changing this forces re-creation. Available locations: `de/fra`, `de/fra/1`, `de/fra/2`, `de/txl`, `es/vit`, `fr/par`, `gb/bhx`, `gb/lhr`, `us/ewr`, `us/las`, `us/mci`.
 	Location *string `json:"location,omitempty" tf:"location,omitempty"`
 
 	// (Computed)[bool] Allows or disallows the collection and reporting of logs for this cluster's observability. If not set, the API default is used.
@@ -343,8 +343,8 @@ type MariadbClusterObservation struct {
 	// [object] Compute and storage configuration for each instance in the cluster.
 	Instances *InstancesObservation `json:"instances,omitempty" tf:"instances,omitempty"`
 
-	// [string] The location of the cluster. Changing this forces a new resource. Available: de/fra, de/txl, es/vit, fr/par, gb/bhx, gb/lhr, us/ewr, us/las, us/mci.
-	// The location of the cluster. Changing this forces re-creation. Available locations: `de/fra`, `de/txl`, `es/vit`, `fr/par`, `gb/bhx`, `gb/lhr`, `us/ewr`, `us/las`, `us/mci`.
+	// [string] The location of the cluster. Changing this forces a new resource. Available: de/fra, de/fra/1, de/fra/2, de/txl, es/vit, fr/par, gb/bhx, gb/lhr, us/ewr, us/las, us/mci.
+	// The location of the cluster. Changing this forces re-creation. Available locations: `de/fra`, `de/fra/1`, `de/fra/2`, `de/txl`, `es/vit`, `fr/par`, `gb/bhx`, `gb/lhr`, `us/ewr`, `us/las`, `us/mci`.
 	Location *string `json:"location,omitempty" tf:"location,omitempty"`
 
 	// (Computed)[bool] Allows or disallows the collection and reporting of logs for this cluster's observability. If not set, the API default is used.
@@ -393,8 +393,8 @@ type MariadbClusterParameters struct {
 	// +kubebuilder:validation:Optional
 	Instances *InstancesParameters `json:"instances,omitempty" tf:"instances,omitempty"`
 
-	// [string] The location of the cluster. Changing this forces a new resource. Available: de/fra, de/txl, es/vit, fr/par, gb/bhx, gb/lhr, us/ewr, us/las, us/mci.
-	// The location of the cluster. Changing this forces re-creation. Available locations: `de/fra`, `de/txl`, `es/vit`, `fr/par`, `gb/bhx`, `gb/lhr`, `us/ewr`, `us/las`, `us/mci`.
+	// [string] The location of the cluster. Changing this forces a new resource. Available: de/fra, de/fra/1, de/fra/2, de/txl, es/vit, fr/par, gb/bhx, gb/lhr, us/ewr, us/las, us/mci.
+	// The location of the cluster. Changing this forces re-creation. Available locations: `de/fra`, `de/fra/1`, `de/fra/2`, `de/txl`, `es/vit`, `fr/par`, `gb/bhx`, `gb/lhr`, `us/ewr`, `us/las`, `us/mci`.
 	// +kubebuilder:validation:Optional
 	Location *string `json:"location,omitempty" tf:"location,omitempty"`
 

@@ -107,8 +107,8 @@ type KafkaInitParameters struct {
 	// The network connection for your Kafka Cluster. Only one connection is allowed.
 	Connections *ConnectionsInitParameters `json:"connections,omitempty" tf:"connections,omitempty"`
 
-	// [string] The location of the Kafka Cluster. Possible values: de/fra, de/fra/2, de/txl, fr/par, es/vit, gb/lhr, gb/bhx, us/las, us/mci, us/ewr. If this is not set and if no value is provided for the IONOS_API_URL env var, the default location will be: de/fra.
-	// The location of your Kafka Cluster. Supported locations: de/fra, de/fra/2, de/txl, fr/par, es/vit, gb/lhr, gb/bhx, us/las, us/mci, us/ewr
+	// [string] The location of the Kafka Cluster. Possible values: de/fra, de/fra/1, de/fra/2, de/txl, fr/par, es/vit, gb/lhr, gb/bhx, us/las, us/mci, us/ewr. If this is not set and if no value is provided for the IONOS_API_URL env var, the default location will be: de/fra.
+	// The location of your Kafka Cluster. Supported locations: de/fra, de/fra/1, de/fra/2, de/txl, fr/par, es/vit, gb/lhr, gb/bhx, us/las, us/mci, us/ewr
 	// +crossplane:generate:reference:type=github.com/ionos-cloud/provider-upjet-ionoscloud/apis/namespaced/compute/v1alpha1.Datacenter
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("location",false)
 	Location *string `json:"location,omitempty" tf:"location,omitempty"`
@@ -148,8 +148,8 @@ type KafkaObservation struct {
 	// (Computed)[string] The UUID of the Kafka Cluster.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
-	// [string] The location of the Kafka Cluster. Possible values: de/fra, de/fra/2, de/txl, fr/par, es/vit, gb/lhr, gb/bhx, us/las, us/mci, us/ewr. If this is not set and if no value is provided for the IONOS_API_URL env var, the default location will be: de/fra.
-	// The location of your Kafka Cluster. Supported locations: de/fra, de/fra/2, de/txl, fr/par, es/vit, gb/lhr, gb/bhx, us/las, us/mci, us/ewr
+	// [string] The location of the Kafka Cluster. Possible values: de/fra, de/fra/1, de/fra/2, de/txl, fr/par, es/vit, gb/lhr, gb/bhx, us/las, us/mci, us/ewr. If this is not set and if no value is provided for the IONOS_API_URL env var, the default location will be: de/fra.
+	// The location of your Kafka Cluster. Supported locations: de/fra, de/fra/1, de/fra/2, de/txl, fr/par, es/vit, gb/lhr, gb/bhx, us/las, us/mci, us/ewr
 	Location *string `json:"location,omitempty" tf:"location,omitempty"`
 
 	// [string] Name of the Kafka Cluster.
@@ -172,8 +172,8 @@ type KafkaParameters struct {
 	// +kubebuilder:validation:Optional
 	Connections *ConnectionsParameters `json:"connections,omitempty" tf:"connections,omitempty"`
 
-	// [string] The location of the Kafka Cluster. Possible values: de/fra, de/fra/2, de/txl, fr/par, es/vit, gb/lhr, gb/bhx, us/las, us/mci, us/ewr. If this is not set and if no value is provided for the IONOS_API_URL env var, the default location will be: de/fra.
-	// The location of your Kafka Cluster. Supported locations: de/fra, de/fra/2, de/txl, fr/par, es/vit, gb/lhr, gb/bhx, us/las, us/mci, us/ewr
+	// [string] The location of the Kafka Cluster. Possible values: de/fra, de/fra/1, de/fra/2, de/txl, fr/par, es/vit, gb/lhr, gb/bhx, us/las, us/mci, us/ewr. If this is not set and if no value is provided for the IONOS_API_URL env var, the default location will be: de/fra.
+	// The location of your Kafka Cluster. Supported locations: de/fra, de/fra/1, de/fra/2, de/txl, fr/par, es/vit, gb/lhr, gb/bhx, us/las, us/mci, us/ewr
 	// +crossplane:generate:reference:type=github.com/ionos-cloud/provider-upjet-ionoscloud/apis/namespaced/compute/v1alpha1.Datacenter
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("location",false)
 	// +kubebuilder:validation:Optional

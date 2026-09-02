@@ -402,9 +402,18 @@ spec:
                           Exposing the serial can influence licensed software (e.g.
                           Windows) behavior
                         type: boolean
-                      imagePassword:
+                      imagePasswordSecretRef:
                         description: '[string] Required if ssh_key_path is not provided.'
-                        type: string
+                        properties:
+                          key:
+                            type: string
+                          name:
+                            description: Name of the secret.
+                            type: string
+                        required:
+                        - key
+                        - name
+                        type: object
                       licenceType:
                         description: '[string] Sets the OS type of the server.'
                         type: string
@@ -788,9 +797,18 @@ spec:
                           Exposing the serial can influence licensed software (e.g.
                           Windows) behavior
                         type: boolean
-                      imagePassword:
+                      imagePasswordSecretRef:
                         description: '[string] Required if ssh_key_path is not provided.'
-                        type: string
+                        properties:
+                          key:
+                            type: string
+                          name:
+                            description: Name of the secret.
+                            type: string
+                        required:
+                        - key
+                        - name
+                        type: object
                       licenceType:
                         description: '[string] Sets the OS type of the server.'
                         type: string
@@ -1106,9 +1124,6 @@ spec:
                           Exposing the serial can influence licensed software (e.g.
                           Windows) behavior
                         type: boolean
-                      imagePassword:
-                        description: '[string] Required if ssh_key_path is not provided.'
-                        type: string
                       licenceType:
                         description: '[string] Sets the OS type of the server.'
                         type: string

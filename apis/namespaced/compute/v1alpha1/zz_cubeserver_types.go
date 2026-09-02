@@ -476,7 +476,7 @@ type VolumeInitParameters struct {
 	ExposeSerial *bool `json:"exposeSerial,omitempty" tf:"expose_serial,omitempty"`
 
 	// [string] Required if ssh_key_path is not provided.
-	ImagePassword *string `json:"imagePassword,omitempty" tf:"image_password,omitempty"`
+	ImagePasswordSecretRef *v1.LocalSecretKeySelector `json:"imagePasswordSecretRef,omitempty" tf:"-"`
 
 	// [string] Sets the OS type of the server.
 	LicenceType *string `json:"licenceType,omitempty" tf:"licence_type,omitempty"`
@@ -519,9 +519,6 @@ type VolumeObservation struct {
 
 	// If set to `true` will expose the serial id of the disk attached to the server. If set to `false` will not expose the serial id. Some operating systems or software solutions require the serial id to be exposed to work properly. Exposing the serial can influence licensed software (e.g. Windows) behavior
 	ExposeSerial *bool `json:"exposeSerial,omitempty" tf:"expose_serial,omitempty"`
-
-	// [string] Required if ssh_key_path is not provided.
-	ImagePassword *string `json:"imagePassword,omitempty" tf:"image_password,omitempty"`
 
 	// [string] Sets the OS type of the server.
 	LicenceType *string `json:"licenceType,omitempty" tf:"licence_type,omitempty"`
@@ -569,7 +566,7 @@ type VolumeParameters struct {
 
 	// [string] Required if ssh_key_path is not provided.
 	// +kubebuilder:validation:Optional
-	ImagePassword *string `json:"imagePassword,omitempty" tf:"image_password,omitempty"`
+	ImagePasswordSecretRef *v1.LocalSecretKeySelector `json:"imagePasswordSecretRef,omitempty" tf:"-"`
 
 	// [string] Sets the OS type of the server.
 	// +kubebuilder:validation:Optional

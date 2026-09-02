@@ -61,6 +61,10 @@ type ServerInitParameters struct {
 	// [string] CPU architecture on which server gets provisioned; not all CPU architectures are available in all datacenter regions; available CPU architectures can be retrieved from the datacenter resource. E.g.: "INTEL_SKYLAKE" or "INTEL_XEON".
 	CPUFamily *string `json:"cpuFamily,omitempty" tf:"cpu_family,omitempty"`
 
+	// (Computed)[bool] If set, creates a Confidential Computing (SEV-SNP) VM from a confidential boot image. Requires type = "ENTERPRISE", a volume block, and a private SEV-SNP image_name. cores and cpu_family must not be set - both are derived from the image. This property is immutable (changing it re-creates the server; use allow_replace = true). It is computed on read from the server's enabled features, so imported servers reflect their real state instead of forcing a spurious re-creation. Only available in confidential-computing enabled locations.
+	// If set, creates a Confidential Computing (SEV-SNP) VM from a confidential boot image. Requires ENTERPRISE type. cores and cpu_family must not be set - both are derived from the image. Computed on read from the server's enabled features, so imported servers reflect their real state.
+	Confidential *bool `json:"confidential,omitempty" tf:"confidential,omitempty"`
+
 	// (Computed)[integer] Number of server CPU cores.
 	Cores *float64 `json:"cores,omitempty" tf:"cores,omitempty"`
 
@@ -400,11 +404,19 @@ type ServerObservation struct {
 	// [string] CPU architecture on which server gets provisioned; not all CPU architectures are available in all datacenter regions; available CPU architectures can be retrieved from the datacenter resource. E.g.: "INTEL_SKYLAKE" or "INTEL_XEON".
 	CPUFamily *string `json:"cpuFamily,omitempty" tf:"cpu_family,omitempty"`
 
+	// (Computed)[bool] If set, creates a Confidential Computing (SEV-SNP) VM from a confidential boot image. Requires type = "ENTERPRISE", a volume block, and a private SEV-SNP image_name. cores and cpu_family must not be set - both are derived from the image. This property is immutable (changing it re-creates the server; use allow_replace = true). It is computed on read from the server's enabled features, so imported servers reflect their real state instead of forcing a spurious re-creation. Only available in confidential-computing enabled locations.
+	// If set, creates a Confidential Computing (SEV-SNP) VM from a confidential boot image. Requires ENTERPRISE type. cores and cpu_family must not be set - both are derived from the image. Computed on read from the server's enabled features, so imported servers reflect their real state.
+	Confidential *bool `json:"confidential,omitempty" tf:"confidential,omitempty"`
+
 	// (Computed)[integer] Number of server CPU cores.
 	Cores *float64 `json:"cores,omitempty" tf:"cores,omitempty"`
 
 	// [string] The ID of a Virtual Data Center.
 	DatacenterID *string `json:"datacenterId,omitempty" tf:"datacenter_id,omitempty"`
+
+	// (Computed) Features enabled on the server, e.g. SEV-SNP for a Confidential Computing VM.
+	// Features enabled on the server, e.g. SEV-SNP for a Confidential Computing VM.
+	EnabledFeatures []*string `json:"enabledFeatures,omitempty" tf:"enabled_features,omitempty"`
 
 	// (Computed) The associated firewall rule.
 	FirewallruleID *string `json:"firewallruleId,omitempty" tf:"firewallrule_id,omitempty"`
@@ -502,6 +514,11 @@ type ServerParameters struct {
 	// [string] CPU architecture on which server gets provisioned; not all CPU architectures are available in all datacenter regions; available CPU architectures can be retrieved from the datacenter resource. E.g.: "INTEL_SKYLAKE" or "INTEL_XEON".
 	// +kubebuilder:validation:Optional
 	CPUFamily *string `json:"cpuFamily,omitempty" tf:"cpu_family,omitempty"`
+
+	// (Computed)[bool] If set, creates a Confidential Computing (SEV-SNP) VM from a confidential boot image. Requires type = "ENTERPRISE", a volume block, and a private SEV-SNP image_name. cores and cpu_family must not be set - both are derived from the image. This property is immutable (changing it re-creates the server; use allow_replace = true). It is computed on read from the server's enabled features, so imported servers reflect their real state instead of forcing a spurious re-creation. Only available in confidential-computing enabled locations.
+	// If set, creates a Confidential Computing (SEV-SNP) VM from a confidential boot image. Requires ENTERPRISE type. cores and cpu_family must not be set - both are derived from the image. Computed on read from the server's enabled features, so imported servers reflect their real state.
+	// +kubebuilder:validation:Optional
+	Confidential *bool `json:"confidential,omitempty" tf:"confidential,omitempty"`
 
 	// (Computed)[integer] Number of server CPU cores.
 	// +kubebuilder:validation:Optional
@@ -614,7 +631,7 @@ type ServerVolumeInitParameters struct {
 	ExposeSerial *bool `json:"exposeSerial,omitempty" tf:"expose_serial,omitempty"`
 
 	// [string] Required if ssh_key_path is not provided.
-	ImagePassword *string `json:"imagePassword,omitempty" tf:"image_password,omitempty"`
+	ImagePasswordSecretRef *v1.SecretKeySelector `json:"imagePasswordSecretRef,omitempty" tf:"-"`
 
 	// [string] Sets the OS type of the server.
 	LicenceType *string `json:"licenceType,omitempty" tf:"licence_type,omitempty"`
@@ -666,9 +683,6 @@ type ServerVolumeObservation struct {
 
 	// If set to `true` will expose the serial id of the disk attached to the server. If set to `false` will not expose the serial id. Some operating systems or software solutions require the serial id to be exposed to work properly. Exposing the serial can influence licensed software (e.g. Windows) behavior
 	ExposeSerial *bool `json:"exposeSerial,omitempty" tf:"expose_serial,omitempty"`
-
-	// [string] Required if ssh_key_path is not provided.
-	ImagePassword *string `json:"imagePassword,omitempty" tf:"image_password,omitempty"`
 
 	// [string] Sets the OS type of the server.
 	LicenceType *string `json:"licenceType,omitempty" tf:"licence_type,omitempty"`
@@ -725,7 +739,7 @@ type ServerVolumeParameters struct {
 
 	// [string] Required if ssh_key_path is not provided.
 	// +kubebuilder:validation:Optional
-	ImagePassword *string `json:"imagePassword,omitempty" tf:"image_password,omitempty"`
+	ImagePasswordSecretRef *v1.SecretKeySelector `json:"imagePasswordSecretRef,omitempty" tf:"-"`
 
 	// [string] Sets the OS type of the server.
 	// +kubebuilder:validation:Optional

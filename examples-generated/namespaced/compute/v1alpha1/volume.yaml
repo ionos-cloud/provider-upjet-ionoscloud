@@ -16,7 +16,9 @@ spec:
         testing.upbound.io/example-name: example
     diskType: SSD Standard
     imageName: ${data.ionoscloud_image.example.name}
-    imagePassword: ${random_password.volume_image_password.result}
+    imagePasswordSecretRef:
+      key: attribute.result
+      name: example-password
     name: Volume Example
     serverIdSelector:
       matchLabels:

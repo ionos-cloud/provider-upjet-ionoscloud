@@ -25,7 +25,7 @@ spec:
         matchLabels:
           testing.upbound.io/example-name: example
       name: Nic Example
-    templateUuid: 15c6dd2f-02d2-4987-b439-9a58dd59ecc3
+    templateUuid: 72e73b81-8551-4e74-b398-fc63b39994af
     volume:
       diskType: DAS
       licenceType: LINUX
@@ -63,12 +63,3 @@ spec:
         testing.upbound.io/example-name: example
     name: Lan Example
     public: true
-
----
-apiVersion: v1
-kind: Secret
-metadata:
-  name: example-password
-  namespace: upbound-system
-stringData:
-  password: "Upboundtest1"

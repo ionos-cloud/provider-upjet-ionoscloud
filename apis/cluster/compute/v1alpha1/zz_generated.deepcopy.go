@@ -305,6 +305,17 @@ func (in *CPUArchitectureObservation) DeepCopyInto(out *CPUArchitectureObservati
 		*out = new(string)
 		**out = **in
 	}
+	if in.EnabledFeatures != nil {
+		in, out := &in.EnabledFeatures, &out.EnabledFeatures
+		*out = make([]*string, len(*in))
+		for i := range *in {
+			if (*in)[i] != nil {
+				in, out := &(*in)[i], &(*out)[i]
+				*out = new(string)
+				**out = **in
+			}
+		}
+	}
 	if in.MaxCores != nil {
 		in, out := &in.MaxCores, &out.MaxCores
 		*out = new(float64)
@@ -6160,6 +6171,11 @@ func (in *ServerInitParameters) DeepCopyInto(out *ServerInitParameters) {
 		*out = new(string)
 		**out = **in
 	}
+	if in.Confidential != nil {
+		in, out := &in.Confidential, &out.Confidential
+		*out = new(bool)
+		**out = **in
+	}
 	if in.Cores != nil {
 		in, out := &in.Cores, &out.Cores
 		*out = new(float64)
@@ -6888,6 +6904,11 @@ func (in *ServerObservation) DeepCopyInto(out *ServerObservation) {
 		*out = new(string)
 		**out = **in
 	}
+	if in.Confidential != nil {
+		in, out := &in.Confidential, &out.Confidential
+		*out = new(bool)
+		**out = **in
+	}
 	if in.Cores != nil {
 		in, out := &in.Cores, &out.Cores
 		*out = new(float64)
@@ -6897,6 +6918,17 @@ func (in *ServerObservation) DeepCopyInto(out *ServerObservation) {
 		in, out := &in.DatacenterID, &out.DatacenterID
 		*out = new(string)
 		**out = **in
+	}
+	if in.EnabledFeatures != nil {
+		in, out := &in.EnabledFeatures, &out.EnabledFeatures
+		*out = make([]*string, len(*in))
+		for i := range *in {
+			if (*in)[i] != nil {
+				in, out := &(*in)[i], &(*out)[i]
+				*out = new(string)
+				**out = **in
+			}
+		}
 	}
 	if in.FirewallruleID != nil {
 		in, out := &in.FirewallruleID, &out.FirewallruleID
@@ -7073,6 +7105,11 @@ func (in *ServerParameters) DeepCopyInto(out *ServerParameters) {
 	if in.CPUFamily != nil {
 		in, out := &in.CPUFamily, &out.CPUFamily
 		*out = new(string)
+		**out = **in
+	}
+	if in.Confidential != nil {
+		in, out := &in.Confidential, &out.Confidential
+		*out = new(bool)
 		**out = **in
 	}
 	if in.Cores != nil {
@@ -7281,9 +7318,9 @@ func (in *ServerVolumeInitParameters) DeepCopyInto(out *ServerVolumeInitParamete
 		*out = new(bool)
 		**out = **in
 	}
-	if in.ImagePassword != nil {
-		in, out := &in.ImagePassword, &out.ImagePassword
-		*out = new(string)
+	if in.ImagePasswordSecretRef != nil {
+		in, out := &in.ImagePasswordSecretRef, &out.ImagePasswordSecretRef
+		*out = new(v1.SecretKeySelector)
 		**out = **in
 	}
 	if in.LicenceType != nil {
@@ -7398,11 +7435,6 @@ func (in *ServerVolumeObservation) DeepCopyInto(out *ServerVolumeObservation) {
 		*out = new(bool)
 		**out = **in
 	}
-	if in.ImagePassword != nil {
-		in, out := &in.ImagePassword, &out.ImagePassword
-		*out = new(string)
-		**out = **in
-	}
 	if in.LicenceType != nil {
 		in, out := &in.LicenceType, &out.LicenceType
 		*out = new(string)
@@ -7510,9 +7542,9 @@ func (in *ServerVolumeParameters) DeepCopyInto(out *ServerVolumeParameters) {
 		*out = new(bool)
 		**out = **in
 	}
-	if in.ImagePassword != nil {
-		in, out := &in.ImagePassword, &out.ImagePassword
-		*out = new(string)
+	if in.ImagePasswordSecretRef != nil {
+		in, out := &in.ImagePasswordSecretRef, &out.ImagePasswordSecretRef
+		*out = new(v1.SecretKeySelector)
 		**out = **in
 	}
 	if in.LicenceType != nil {
@@ -10264,9 +10296,9 @@ func (in *VolumeInitParameters) DeepCopyInto(out *VolumeInitParameters) {
 		*out = new(bool)
 		**out = **in
 	}
-	if in.ImagePassword != nil {
-		in, out := &in.ImagePassword, &out.ImagePassword
-		*out = new(string)
+	if in.ImagePasswordSecretRef != nil {
+		in, out := &in.ImagePasswordSecretRef, &out.ImagePasswordSecretRef
+		*out = new(v1.SecretKeySelector)
 		**out = **in
 	}
 	if in.LicenceType != nil {
@@ -10360,9 +10392,9 @@ func (in *VolumeInitParameters_2) DeepCopyInto(out *VolumeInitParameters_2) {
 		*out = new(string)
 		**out = **in
 	}
-	if in.ImagePassword != nil {
-		in, out := &in.ImagePassword, &out.ImagePassword
-		*out = new(string)
+	if in.ImagePasswordSecretRef != nil {
+		in, out := &in.ImagePasswordSecretRef, &out.ImagePasswordSecretRef
+		*out = new(v1.SecretKeySelector)
 		**out = **in
 	}
 	if in.LicenceType != nil {
@@ -10529,11 +10561,6 @@ func (in *VolumeObservation) DeepCopyInto(out *VolumeObservation) {
 		*out = new(bool)
 		**out = **in
 	}
-	if in.ImagePassword != nil {
-		in, out := &in.ImagePassword, &out.ImagePassword
-		*out = new(string)
-		**out = **in
-	}
 	if in.LicenceType != nil {
 		in, out := &in.LicenceType, &out.LicenceType
 		*out = new(string)
@@ -10675,11 +10702,6 @@ func (in *VolumeObservation_2) DeepCopyInto(out *VolumeObservation_2) {
 		*out = new(string)
 		**out = **in
 	}
-	if in.ImagePassword != nil {
-		in, out := &in.ImagePassword, &out.ImagePassword
-		*out = new(string)
-		**out = **in
-	}
 	if in.LicenceType != nil {
 		in, out := &in.LicenceType, &out.LicenceType
 		*out = new(string)
@@ -10802,9 +10824,9 @@ func (in *VolumeParameters) DeepCopyInto(out *VolumeParameters) {
 		*out = new(bool)
 		**out = **in
 	}
-	if in.ImagePassword != nil {
-		in, out := &in.ImagePassword, &out.ImagePassword
-		*out = new(string)
+	if in.ImagePasswordSecretRef != nil {
+		in, out := &in.ImagePasswordSecretRef, &out.ImagePasswordSecretRef
+		*out = new(v1.SecretKeySelector)
 		**out = **in
 	}
 	if in.LicenceType != nil {
@@ -10898,9 +10920,9 @@ func (in *VolumeParameters_2) DeepCopyInto(out *VolumeParameters_2) {
 		*out = new(string)
 		**out = **in
 	}
-	if in.ImagePassword != nil {
-		in, out := &in.ImagePassword, &out.ImagePassword
-		*out = new(string)
+	if in.ImagePasswordSecretRef != nil {
+		in, out := &in.ImagePasswordSecretRef, &out.ImagePasswordSecretRef
+		*out = new(v1.SecretKeySelector)
 		**out = **in
 	}
 	if in.LicenceType != nil {

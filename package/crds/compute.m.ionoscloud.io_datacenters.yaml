@@ -68,7 +68,7 @@ spec:
                     description: '[string] The regional location where the Virtual
                       Data Center will be created. This argument is immutable. Available
                       locations: de/fra, us/las, us/ewr, de/txl, gb/lhr, gb/bhx, es/vit,
-                      fr/par, us/mci, de/fra/2'
+                      fr/par, us/mci, de/fra/1, de/fra/2'
                     type: string
                   name:
                     description: '[string] The name of the Virtual Data Center.'
@@ -100,7 +100,7 @@ spec:
                     description: '[string] The regional location where the Virtual
                       Data Center will be created. This argument is immutable. Available
                       locations: de/fra, us/las, us/ewr, de/txl, gb/lhr, gb/bhx, es/vit,
-                      fr/par, us/mci, de/fra/2'
+                      fr/par, us/mci, de/fra/1, de/fra/2'
                     type: string
                   name:
                     description: '[string] The name of the Virtual Data Center.'
@@ -190,6 +190,12 @@ spec:
                         cpuFamily:
                           description: A valid CPU family name
                           type: string
+                        enabledFeatures:
+                          description: Features enabled for this CPU architecture,
+                            e.g. SEV-SNP for Confidential Computing
+                          items:
+                            type: string
+                          type: array
                         maxCores:
                           description: The maximum number of cores available
                           type: number
@@ -224,7 +230,7 @@ spec:
                     description: '[string] The regional location where the Virtual
                       Data Center will be created. This argument is immutable. Available
                       locations: de/fra, us/las, us/ewr, de/txl, gb/lhr, gb/bhx, es/vit,
-                      fr/par, us/mci, de/fra/2'
+                      fr/par, us/mci, de/fra/1, de/fra/2'
                     type: string
                   name:
                     description: '[string] The name of the Virtual Data Center.'

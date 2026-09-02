@@ -256,9 +256,18 @@ spec:
                             algorithm:
                               description: '[string] The value can be only: "SHA-256".'
                               type: string
-                            hash:
+                            hashSecretRef:
                               description: '[string] The hashed password.'
-                              type: string
+                              properties:
+                                key:
+                                  type: string
+                                name:
+                                  description: Name of the secret.
+                                  type: string
+                              required:
+                              - key
+                              - name
+                              type: object
                           type: object
                         plainTextPasswordSecretRef:
                           description: |-
@@ -298,7 +307,7 @@ spec:
                     type: string
                   location:
                     description: |-
-                      [string] The location of your replica set. Updates to the value of the field force the replica set to be re-created. If this is not set and if no value is provided for the IONOS_API_URL env var, the default location will be: de/fra, other available locations are: de/fra/2, de/txl, es/vit, gb/bhx, gb/lhr, us/ewr, us/las, us/mci, fr/par
+                      [string] The location of your replica set. Updates to the value of the field force the replica set to be re-created. If this is not set and if no value is provided for the IONOS_API_URL env var, the default location will be: de/fra, other available locations are: de/fra/1, de/fra/2, de/txl, es/vit, gb/bhx, gb/lhr, us/ewr, us/las, us/mci, fr/par
                       The replica set location
                     type: string
                   locationRef:
@@ -641,9 +650,20 @@ spec:
                             algorithm:
                               description: '[string] The value can be only: "SHA-256".'
                               type: string
-                            hash:
+                            hashSecretRef:
                               description: '[string] The hashed password.'
-                              type: string
+                              properties:
+                                key:
+                                  type: string
+                                name:
+                                  description: Name of the secret.
+                                  type: string
+                              required:
+                              - key
+                              - name
+                              type: object
+                          required:
+                          - hashSecretRef
                           type: object
                         plainTextPasswordSecretRef:
                           description: |-
@@ -683,7 +703,7 @@ spec:
                     type: string
                   location:
                     description: |-
-                      [string] The location of your replica set. Updates to the value of the field force the replica set to be re-created. If this is not set and if no value is provided for the IONOS_API_URL env var, the default location will be: de/fra, other available locations are: de/fra/2, de/txl, es/vit, gb/bhx, gb/lhr, us/ewr, us/las, us/mci, fr/par
+                      [string] The location of your replica set. Updates to the value of the field force the replica set to be re-created. If this is not set and if no value is provided for the IONOS_API_URL env var, the default location will be: de/fra, other available locations are: de/fra/1, de/fra/2, de/txl, es/vit, gb/bhx, gb/lhr, us/ewr, us/las, us/mci, fr/par
                       The replica set location
                     type: string
                   locationRef:
@@ -948,9 +968,6 @@ spec:
                             algorithm:
                               description: '[string] The value can be only: "SHA-256".'
                               type: string
-                            hash:
-                              description: '[string] The hashed password.'
-                              type: string
                           type: object
                         username:
                           description: |-
@@ -983,7 +1000,7 @@ spec:
                     type: string
                   location:
                     description: |-
-                      [string] The location of your replica set. Updates to the value of the field force the replica set to be re-created. If this is not set and if no value is provided for the IONOS_API_URL env var, the default location will be: de/fra, other available locations are: de/fra/2, de/txl, es/vit, gb/bhx, gb/lhr, us/ewr, us/las, us/mci, fr/par
+                      [string] The location of your replica set. Updates to the value of the field force the replica set to be re-created. If this is not set and if no value is provided for the IONOS_API_URL env var, the default location will be: de/fra, other available locations are: de/fra/1, de/fra/2, de/txl, es/vit, gb/bhx, gb/lhr, us/ewr, us/las, us/mci, fr/par
                       The replica set location
                     type: string
                   maintenanceWindow:

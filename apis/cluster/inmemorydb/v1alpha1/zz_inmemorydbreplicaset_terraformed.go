@@ -21,7 +21,7 @@ func (mg *InMemoryDBReplicaset) GetTerraformResourceType() string {
 
 // GetConnectionDetailsMapping for this InMemoryDBReplicaset
 func (tr *InMemoryDBReplicaset) GetConnectionDetailsMapping() map[string]string {
-	return map[string]string{"credentials[*].plain_text_password": "credentials[*].plainTextPasswordSecretRef"}
+	return map[string]string{"credentials[*].hashed_password[*].hash": "credentials[*].hashedPassword.hashSecretRef", "credentials[*].plain_text_password": "credentials[*].plainTextPasswordSecretRef"}
 }
 
 // GetObservation of this InMemoryDBReplicaset
