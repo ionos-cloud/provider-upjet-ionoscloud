@@ -157,6 +157,7 @@ func (mg *CubeServer) ResolveReferences(ctx context.Context, c client.Reader) er
 	r := reference.NewAPINamespacedResolver(c, mg)
 
 	var rsp reference.NamespacedResolutionResponse
+	var mrsp reference.MultiNamespacedResolutionResponse
 	var err error
 	{
 		m, l, err = apisresolver.GetManagedResource("compute.m.ionoscloud.io", "v1alpha1", "Datacenter", "DatacenterList")
@@ -201,11 +202,53 @@ func (mg *CubeServer) ResolveReferences(ctx context.Context, c client.Reader) er
 		mg.Spec.ForProvider.Nic.LanRef = rsp.ResolvedReference
 
 	}
+	if mg.Spec.ForProvider.Nic != nil {
+		{
+			m, l, err = apisresolver.GetManagedResource("compute.m.ionoscloud.io", "v1alpha1", "NSG", "NSGList")
+			if err != nil {
+				return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+			}
+			mrsp, err = r.ResolveMultiple(ctx, reference.MultiNamespacedResolutionRequest{
+				CurrentValues: reference.FromPtrValues(mg.Spec.ForProvider.Nic.SecurityGroupsIds),
+				Extract:       reference.ExternalName(),
+				Namespace:     mg.GetNamespace(),
+				References:    mg.Spec.ForProvider.Nic.SecurityGroupsIdsRefs,
+				Selector:      mg.Spec.ForProvider.Nic.SecurityGroupsIdsSelector,
+				To:            reference.To{List: l, Managed: m},
+			})
+		}
+		if err != nil {
+			return errors.Wrap(err, "mg.Spec.ForProvider.Nic.SecurityGroupsIds")
+		}
+		mg.Spec.ForProvider.Nic.SecurityGroupsIds = reference.ToPtrValues(mrsp.ResolvedValues)
+		mg.Spec.ForProvider.Nic.SecurityGroupsIdsRefs = mrsp.ResolvedReferences
+
+	}
+	{
+		m, l, err = apisresolver.GetManagedResource("compute.m.ionoscloud.io", "v1alpha1", "NSG", "NSGList")
+		if err != nil {
+			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+		}
+		mrsp, err = r.ResolveMultiple(ctx, reference.MultiNamespacedResolutionRequest{
+			CurrentValues: reference.FromPtrValues(mg.Spec.ForProvider.SecurityGroupsIds),
+			Extract:       reference.ExternalName(),
+			Namespace:     mg.GetNamespace(),
+			References:    mg.Spec.ForProvider.SecurityGroupsIdsRefs,
+			Selector:      mg.Spec.ForProvider.SecurityGroupsIdsSelector,
+			To:            reference.To{List: l, Managed: m},
+		})
+	}
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.ForProvider.SecurityGroupsIds")
+	}
+	mg.Spec.ForProvider.SecurityGroupsIds = reference.ToPtrValues(mrsp.ResolvedValues)
+	mg.Spec.ForProvider.SecurityGroupsIdsRefs = mrsp.ResolvedReferences
 	{
 		m, l, err = apisresolver.GetManagedResource("compute.m.ionoscloud.io", "v1alpha1", "Datacenter", "DatacenterList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
+
 		rsp, err = r.Resolve(ctx, reference.NamespacedResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.DatacenterID),
 			Extract:      reference.ExternalName(),
@@ -243,6 +286,139 @@ func (mg *CubeServer) ResolveReferences(ctx context.Context, c client.Reader) er
 		mg.Spec.InitProvider.Nic.LanRef = rsp.ResolvedReference
 
 	}
+	if mg.Spec.InitProvider.Nic != nil {
+		{
+			m, l, err = apisresolver.GetManagedResource("compute.m.ionoscloud.io", "v1alpha1", "NSG", "NSGList")
+			if err != nil {
+				return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+			}
+			mrsp, err = r.ResolveMultiple(ctx, reference.MultiNamespacedResolutionRequest{
+				CurrentValues: reference.FromPtrValues(mg.Spec.InitProvider.Nic.SecurityGroupsIds),
+				Extract:       reference.ExternalName(),
+				Namespace:     mg.GetNamespace(),
+				References:    mg.Spec.InitProvider.Nic.SecurityGroupsIdsRefs,
+				Selector:      mg.Spec.InitProvider.Nic.SecurityGroupsIdsSelector,
+				To:            reference.To{List: l, Managed: m},
+			})
+		}
+		if err != nil {
+			return errors.Wrap(err, "mg.Spec.InitProvider.Nic.SecurityGroupsIds")
+		}
+		mg.Spec.InitProvider.Nic.SecurityGroupsIds = reference.ToPtrValues(mrsp.ResolvedValues)
+		mg.Spec.InitProvider.Nic.SecurityGroupsIdsRefs = mrsp.ResolvedReferences
+
+	}
+	{
+		m, l, err = apisresolver.GetManagedResource("compute.m.ionoscloud.io", "v1alpha1", "NSG", "NSGList")
+		if err != nil {
+			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+		}
+		mrsp, err = r.ResolveMultiple(ctx, reference.MultiNamespacedResolutionRequest{
+			CurrentValues: reference.FromPtrValues(mg.Spec.InitProvider.SecurityGroupsIds),
+			Extract:       reference.ExternalName(),
+			Namespace:     mg.GetNamespace(),
+			References:    mg.Spec.InitProvider.SecurityGroupsIdsRefs,
+			Selector:      mg.Spec.InitProvider.SecurityGroupsIdsSelector,
+			To:            reference.To{List: l, Managed: m},
+		})
+	}
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.InitProvider.SecurityGroupsIds")
+	}
+	mg.Spec.InitProvider.SecurityGroupsIds = reference.ToPtrValues(mrsp.ResolvedValues)
+	mg.Spec.InitProvider.SecurityGroupsIdsRefs = mrsp.ResolvedReferences
+
+	return nil
+}
+
+// ResolveReferences of this DatacenterNSGSelection.
+func (mg *DatacenterNSGSelection) ResolveReferences(ctx context.Context, c client.Reader) error {
+	var m xpresource.Managed
+	var l xpresource.ManagedList
+	r := reference.NewAPINamespacedResolver(c, mg)
+
+	var rsp reference.NamespacedResolutionResponse
+	var err error
+	{
+		m, l, err = apisresolver.GetManagedResource("compute.m.ionoscloud.io", "v1alpha1", "Datacenter", "DatacenterList")
+		if err != nil {
+			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+		}
+
+		rsp, err = r.Resolve(ctx, reference.NamespacedResolutionRequest{
+			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.DatacenterID),
+			Extract:      reference.ExternalName(),
+			Namespace:    mg.GetNamespace(),
+			Reference:    mg.Spec.ForProvider.DatacenterIDRef,
+			Selector:     mg.Spec.ForProvider.DatacenterIDSelector,
+			To:           reference.To{List: l, Managed: m},
+		})
+	}
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.ForProvider.DatacenterID")
+	}
+	mg.Spec.ForProvider.DatacenterID = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.DatacenterIDRef = rsp.ResolvedReference
+	{
+		m, l, err = apisresolver.GetManagedResource("compute.m.ionoscloud.io", "v1alpha1", "NSG", "NSGList")
+		if err != nil {
+			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+		}
+
+		rsp, err = r.Resolve(ctx, reference.NamespacedResolutionRequest{
+			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.NsgID),
+			Extract:      reference.ExternalName(),
+			Namespace:    mg.GetNamespace(),
+			Reference:    mg.Spec.ForProvider.NsgIDRef,
+			Selector:     mg.Spec.ForProvider.NsgIDSelector,
+			To:           reference.To{List: l, Managed: m},
+		})
+	}
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.ForProvider.NsgID")
+	}
+	mg.Spec.ForProvider.NsgID = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.NsgIDRef = rsp.ResolvedReference
+	{
+		m, l, err = apisresolver.GetManagedResource("compute.m.ionoscloud.io", "v1alpha1", "Datacenter", "DatacenterList")
+		if err != nil {
+			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+		}
+
+		rsp, err = r.Resolve(ctx, reference.NamespacedResolutionRequest{
+			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.DatacenterID),
+			Extract:      reference.ExternalName(),
+			Namespace:    mg.GetNamespace(),
+			Reference:    mg.Spec.InitProvider.DatacenterIDRef,
+			Selector:     mg.Spec.InitProvider.DatacenterIDSelector,
+			To:           reference.To{List: l, Managed: m},
+		})
+	}
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.InitProvider.DatacenterID")
+	}
+	mg.Spec.InitProvider.DatacenterID = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.InitProvider.DatacenterIDRef = rsp.ResolvedReference
+	{
+		m, l, err = apisresolver.GetManagedResource("compute.m.ionoscloud.io", "v1alpha1", "NSG", "NSGList")
+		if err != nil {
+			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+		}
+
+		rsp, err = r.Resolve(ctx, reference.NamespacedResolutionRequest{
+			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.NsgID),
+			Extract:      reference.ExternalName(),
+			Namespace:    mg.GetNamespace(),
+			Reference:    mg.Spec.InitProvider.NsgIDRef,
+			Selector:     mg.Spec.InitProvider.NsgIDSelector,
+			To:           reference.To{List: l, Managed: m},
+		})
+	}
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.InitProvider.NsgID")
+	}
+	mg.Spec.InitProvider.NsgID = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.InitProvider.NsgIDRef = rsp.ResolvedReference
 
 	return nil
 }
@@ -466,6 +642,7 @@ func (mg *GPUServer) ResolveReferences(ctx context.Context, c client.Reader) err
 	r := reference.NewAPINamespacedResolver(c, mg)
 
 	var rsp reference.NamespacedResolutionResponse
+	var mrsp reference.MultiNamespacedResolutionResponse
 	var err error
 	{
 		m, l, err = apisresolver.GetManagedResource("compute.m.ionoscloud.io", "v1alpha1", "Datacenter", "DatacenterList")
@@ -510,11 +687,53 @@ func (mg *GPUServer) ResolveReferences(ctx context.Context, c client.Reader) err
 		mg.Spec.ForProvider.Nic.LanRef = rsp.ResolvedReference
 
 	}
+	if mg.Spec.ForProvider.Nic != nil {
+		{
+			m, l, err = apisresolver.GetManagedResource("compute.m.ionoscloud.io", "v1alpha1", "NSG", "NSGList")
+			if err != nil {
+				return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+			}
+			mrsp, err = r.ResolveMultiple(ctx, reference.MultiNamespacedResolutionRequest{
+				CurrentValues: reference.FromPtrValues(mg.Spec.ForProvider.Nic.SecurityGroupsIds),
+				Extract:       reference.ExternalName(),
+				Namespace:     mg.GetNamespace(),
+				References:    mg.Spec.ForProvider.Nic.SecurityGroupsIdsRefs,
+				Selector:      mg.Spec.ForProvider.Nic.SecurityGroupsIdsSelector,
+				To:            reference.To{List: l, Managed: m},
+			})
+		}
+		if err != nil {
+			return errors.Wrap(err, "mg.Spec.ForProvider.Nic.SecurityGroupsIds")
+		}
+		mg.Spec.ForProvider.Nic.SecurityGroupsIds = reference.ToPtrValues(mrsp.ResolvedValues)
+		mg.Spec.ForProvider.Nic.SecurityGroupsIdsRefs = mrsp.ResolvedReferences
+
+	}
+	{
+		m, l, err = apisresolver.GetManagedResource("compute.m.ionoscloud.io", "v1alpha1", "NSG", "NSGList")
+		if err != nil {
+			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+		}
+		mrsp, err = r.ResolveMultiple(ctx, reference.MultiNamespacedResolutionRequest{
+			CurrentValues: reference.FromPtrValues(mg.Spec.ForProvider.SecurityGroupsIds),
+			Extract:       reference.ExternalName(),
+			Namespace:     mg.GetNamespace(),
+			References:    mg.Spec.ForProvider.SecurityGroupsIdsRefs,
+			Selector:      mg.Spec.ForProvider.SecurityGroupsIdsSelector,
+			To:            reference.To{List: l, Managed: m},
+		})
+	}
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.ForProvider.SecurityGroupsIds")
+	}
+	mg.Spec.ForProvider.SecurityGroupsIds = reference.ToPtrValues(mrsp.ResolvedValues)
+	mg.Spec.ForProvider.SecurityGroupsIdsRefs = mrsp.ResolvedReferences
 	{
 		m, l, err = apisresolver.GetManagedResource("compute.m.ionoscloud.io", "v1alpha1", "Datacenter", "DatacenterList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
+
 		rsp, err = r.Resolve(ctx, reference.NamespacedResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.DatacenterID),
 			Extract:      reference.ExternalName(),
@@ -552,6 +771,47 @@ func (mg *GPUServer) ResolveReferences(ctx context.Context, c client.Reader) err
 		mg.Spec.InitProvider.Nic.LanRef = rsp.ResolvedReference
 
 	}
+	if mg.Spec.InitProvider.Nic != nil {
+		{
+			m, l, err = apisresolver.GetManagedResource("compute.m.ionoscloud.io", "v1alpha1", "NSG", "NSGList")
+			if err != nil {
+				return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+			}
+			mrsp, err = r.ResolveMultiple(ctx, reference.MultiNamespacedResolutionRequest{
+				CurrentValues: reference.FromPtrValues(mg.Spec.InitProvider.Nic.SecurityGroupsIds),
+				Extract:       reference.ExternalName(),
+				Namespace:     mg.GetNamespace(),
+				References:    mg.Spec.InitProvider.Nic.SecurityGroupsIdsRefs,
+				Selector:      mg.Spec.InitProvider.Nic.SecurityGroupsIdsSelector,
+				To:            reference.To{List: l, Managed: m},
+			})
+		}
+		if err != nil {
+			return errors.Wrap(err, "mg.Spec.InitProvider.Nic.SecurityGroupsIds")
+		}
+		mg.Spec.InitProvider.Nic.SecurityGroupsIds = reference.ToPtrValues(mrsp.ResolvedValues)
+		mg.Spec.InitProvider.Nic.SecurityGroupsIdsRefs = mrsp.ResolvedReferences
+
+	}
+	{
+		m, l, err = apisresolver.GetManagedResource("compute.m.ionoscloud.io", "v1alpha1", "NSG", "NSGList")
+		if err != nil {
+			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+		}
+		mrsp, err = r.ResolveMultiple(ctx, reference.MultiNamespacedResolutionRequest{
+			CurrentValues: reference.FromPtrValues(mg.Spec.InitProvider.SecurityGroupsIds),
+			Extract:       reference.ExternalName(),
+			Namespace:     mg.GetNamespace(),
+			References:    mg.Spec.InitProvider.SecurityGroupsIdsRefs,
+			Selector:      mg.Spec.InitProvider.SecurityGroupsIdsSelector,
+			To:            reference.To{List: l, Managed: m},
+		})
+	}
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.InitProvider.SecurityGroupsIds")
+	}
+	mg.Spec.InitProvider.SecurityGroupsIds = reference.ToPtrValues(mrsp.ResolvedValues)
+	mg.Spec.InitProvider.SecurityGroupsIdsRefs = mrsp.ResolvedReferences
 
 	return nil
 }
@@ -965,6 +1225,230 @@ func (mg *Loadbalancer) ResolveReferences(ctx context.Context, c client.Reader) 
 	return nil
 }
 
+// ResolveReferences of this NSG.
+func (mg *NSG) ResolveReferences(ctx context.Context, c client.Reader) error {
+	var m xpresource.Managed
+	var l xpresource.ManagedList
+	r := reference.NewAPINamespacedResolver(c, mg)
+
+	var rsp reference.NamespacedResolutionResponse
+	var err error
+	{
+		m, l, err = apisresolver.GetManagedResource("compute.m.ionoscloud.io", "v1alpha1", "Datacenter", "DatacenterList")
+		if err != nil {
+			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+		}
+
+		rsp, err = r.Resolve(ctx, reference.NamespacedResolutionRequest{
+			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.DatacenterID),
+			Extract:      reference.ExternalName(),
+			Namespace:    mg.GetNamespace(),
+			Reference:    mg.Spec.ForProvider.DatacenterIDRef,
+			Selector:     mg.Spec.ForProvider.DatacenterIDSelector,
+			To:           reference.To{List: l, Managed: m},
+		})
+	}
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.ForProvider.DatacenterID")
+	}
+	mg.Spec.ForProvider.DatacenterID = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.DatacenterIDRef = rsp.ResolvedReference
+	{
+		m, l, err = apisresolver.GetManagedResource("compute.m.ionoscloud.io", "v1alpha1", "Datacenter", "DatacenterList")
+		if err != nil {
+			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+		}
+
+		rsp, err = r.Resolve(ctx, reference.NamespacedResolutionRequest{
+			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.DatacenterID),
+			Extract:      reference.ExternalName(),
+			Namespace:    mg.GetNamespace(),
+			Reference:    mg.Spec.InitProvider.DatacenterIDRef,
+			Selector:     mg.Spec.InitProvider.DatacenterIDSelector,
+			To:           reference.To{List: l, Managed: m},
+		})
+	}
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.InitProvider.DatacenterID")
+	}
+	mg.Spec.InitProvider.DatacenterID = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.InitProvider.DatacenterIDRef = rsp.ResolvedReference
+
+	return nil
+}
+
+// ResolveReferences of this NSGFirewallRule.
+func (mg *NSGFirewallRule) ResolveReferences(ctx context.Context, c client.Reader) error {
+	var m xpresource.Managed
+	var l xpresource.ManagedList
+	r := reference.NewAPINamespacedResolver(c, mg)
+
+	var rsp reference.NamespacedResolutionResponse
+	var err error
+	{
+		m, l, err = apisresolver.GetManagedResource("compute.m.ionoscloud.io", "v1alpha1", "Datacenter", "DatacenterList")
+		if err != nil {
+			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+		}
+
+		rsp, err = r.Resolve(ctx, reference.NamespacedResolutionRequest{
+			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.DatacenterID),
+			Extract:      reference.ExternalName(),
+			Namespace:    mg.GetNamespace(),
+			Reference:    mg.Spec.ForProvider.DatacenterIDRef,
+			Selector:     mg.Spec.ForProvider.DatacenterIDSelector,
+			To:           reference.To{List: l, Managed: m},
+		})
+	}
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.ForProvider.DatacenterID")
+	}
+	mg.Spec.ForProvider.DatacenterID = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.DatacenterIDRef = rsp.ResolvedReference
+	{
+		m, l, err = apisresolver.GetManagedResource("compute.m.ionoscloud.io", "v1alpha1", "NSG", "NSGList")
+		if err != nil {
+			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+		}
+
+		rsp, err = r.Resolve(ctx, reference.NamespacedResolutionRequest{
+			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.NsgID),
+			Extract:      reference.ExternalName(),
+			Namespace:    mg.GetNamespace(),
+			Reference:    mg.Spec.ForProvider.NsgIDRef,
+			Selector:     mg.Spec.ForProvider.NsgIDSelector,
+			To:           reference.To{List: l, Managed: m},
+		})
+	}
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.ForProvider.NsgID")
+	}
+	mg.Spec.ForProvider.NsgID = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.NsgIDRef = rsp.ResolvedReference
+	{
+		m, l, err = apisresolver.GetManagedResource("compute.m.ionoscloud.io", "v1alpha1", "Ipblock", "IpblockList")
+		if err != nil {
+			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+		}
+
+		rsp, err = r.Resolve(ctx, reference.NamespacedResolutionRequest{
+			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.SourceIP),
+			Extract:      common.FirstIPBlockIP(),
+			Namespace:    mg.GetNamespace(),
+			Reference:    mg.Spec.ForProvider.SourceIPRef,
+			Selector:     mg.Spec.ForProvider.SourceIPSelector,
+			To:           reference.To{List: l, Managed: m},
+		})
+	}
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.ForProvider.SourceIP")
+	}
+	mg.Spec.ForProvider.SourceIP = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.SourceIPRef = rsp.ResolvedReference
+	{
+		m, l, err = apisresolver.GetManagedResource("compute.m.ionoscloud.io", "v1alpha1", "Ipblock", "IpblockList")
+		if err != nil {
+			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+		}
+
+		rsp, err = r.Resolve(ctx, reference.NamespacedResolutionRequest{
+			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.TargetIP),
+			Extract:      common.FirstIPBlockIP(),
+			Namespace:    mg.GetNamespace(),
+			Reference:    mg.Spec.ForProvider.TargetIPRef,
+			Selector:     mg.Spec.ForProvider.TargetIPSelector,
+			To:           reference.To{List: l, Managed: m},
+		})
+	}
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.ForProvider.TargetIP")
+	}
+	mg.Spec.ForProvider.TargetIP = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.TargetIPRef = rsp.ResolvedReference
+	{
+		m, l, err = apisresolver.GetManagedResource("compute.m.ionoscloud.io", "v1alpha1", "Datacenter", "DatacenterList")
+		if err != nil {
+			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+		}
+
+		rsp, err = r.Resolve(ctx, reference.NamespacedResolutionRequest{
+			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.DatacenterID),
+			Extract:      reference.ExternalName(),
+			Namespace:    mg.GetNamespace(),
+			Reference:    mg.Spec.InitProvider.DatacenterIDRef,
+			Selector:     mg.Spec.InitProvider.DatacenterIDSelector,
+			To:           reference.To{List: l, Managed: m},
+		})
+	}
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.InitProvider.DatacenterID")
+	}
+	mg.Spec.InitProvider.DatacenterID = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.InitProvider.DatacenterIDRef = rsp.ResolvedReference
+	{
+		m, l, err = apisresolver.GetManagedResource("compute.m.ionoscloud.io", "v1alpha1", "NSG", "NSGList")
+		if err != nil {
+			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+		}
+
+		rsp, err = r.Resolve(ctx, reference.NamespacedResolutionRequest{
+			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.NsgID),
+			Extract:      reference.ExternalName(),
+			Namespace:    mg.GetNamespace(),
+			Reference:    mg.Spec.InitProvider.NsgIDRef,
+			Selector:     mg.Spec.InitProvider.NsgIDSelector,
+			To:           reference.To{List: l, Managed: m},
+		})
+	}
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.InitProvider.NsgID")
+	}
+	mg.Spec.InitProvider.NsgID = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.InitProvider.NsgIDRef = rsp.ResolvedReference
+	{
+		m, l, err = apisresolver.GetManagedResource("compute.m.ionoscloud.io", "v1alpha1", "Ipblock", "IpblockList")
+		if err != nil {
+			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+		}
+
+		rsp, err = r.Resolve(ctx, reference.NamespacedResolutionRequest{
+			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.SourceIP),
+			Extract:      common.FirstIPBlockIP(),
+			Namespace:    mg.GetNamespace(),
+			Reference:    mg.Spec.InitProvider.SourceIPRef,
+			Selector:     mg.Spec.InitProvider.SourceIPSelector,
+			To:           reference.To{List: l, Managed: m},
+		})
+	}
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.InitProvider.SourceIP")
+	}
+	mg.Spec.InitProvider.SourceIP = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.InitProvider.SourceIPRef = rsp.ResolvedReference
+	{
+		m, l, err = apisresolver.GetManagedResource("compute.m.ionoscloud.io", "v1alpha1", "Ipblock", "IpblockList")
+		if err != nil {
+			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+		}
+
+		rsp, err = r.Resolve(ctx, reference.NamespacedResolutionRequest{
+			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.TargetIP),
+			Extract:      common.FirstIPBlockIP(),
+			Namespace:    mg.GetNamespace(),
+			Reference:    mg.Spec.InitProvider.TargetIPRef,
+			Selector:     mg.Spec.InitProvider.TargetIPSelector,
+			To:           reference.To{List: l, Managed: m},
+		})
+	}
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.InitProvider.TargetIP")
+	}
+	mg.Spec.InitProvider.TargetIP = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.InitProvider.TargetIPRef = rsp.ResolvedReference
+
+	return nil
+}
+
 // ResolveReferences of this Nic.
 func (mg *Nic) ResolveReferences(ctx context.Context, c client.Reader) error {
 	var m xpresource.Managed
@@ -972,6 +1456,7 @@ func (mg *Nic) ResolveReferences(ctx context.Context, c client.Reader) error {
 	r := reference.NewAPINamespacedResolver(c, mg)
 
 	var rsp reference.NamespacedResolutionResponse
+	var mrsp reference.MultiNamespacedResolutionResponse
 	var err error
 	{
 		m, l, err = apisresolver.GetManagedResource("compute.m.ionoscloud.io", "v1alpha1", "Datacenter", "DatacenterList")
@@ -1013,6 +1498,26 @@ func (mg *Nic) ResolveReferences(ctx context.Context, c client.Reader) error {
 	}
 	mg.Spec.ForProvider.Lan = reference.ToFloatPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.LanRef = rsp.ResolvedReference
+	{
+		m, l, err = apisresolver.GetManagedResource("compute.m.ionoscloud.io", "v1alpha1", "NSG", "NSGList")
+		if err != nil {
+			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+		}
+
+		mrsp, err = r.ResolveMultiple(ctx, reference.MultiNamespacedResolutionRequest{
+			CurrentValues: reference.FromPtrValues(mg.Spec.ForProvider.SecurityGroupsIds),
+			Extract:       reference.ExternalName(),
+			Namespace:     mg.GetNamespace(),
+			References:    mg.Spec.ForProvider.SecurityGroupsIdsRefs,
+			Selector:      mg.Spec.ForProvider.SecurityGroupsIdsSelector,
+			To:            reference.To{List: l, Managed: m},
+		})
+	}
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.ForProvider.SecurityGroupsIds")
+	}
+	mg.Spec.ForProvider.SecurityGroupsIds = reference.ToPtrValues(mrsp.ResolvedValues)
+	mg.Spec.ForProvider.SecurityGroupsIdsRefs = mrsp.ResolvedReferences
 	{
 		m, l, err = apisresolver.GetManagedResource("compute.m.ionoscloud.io", "v1alpha1", "Server", "ServerList")
 		if err != nil {
@@ -1074,6 +1579,26 @@ func (mg *Nic) ResolveReferences(ctx context.Context, c client.Reader) error {
 	mg.Spec.InitProvider.Lan = reference.ToFloatPtrValue(rsp.ResolvedValue)
 	mg.Spec.InitProvider.LanRef = rsp.ResolvedReference
 	{
+		m, l, err = apisresolver.GetManagedResource("compute.m.ionoscloud.io", "v1alpha1", "NSG", "NSGList")
+		if err != nil {
+			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+		}
+
+		mrsp, err = r.ResolveMultiple(ctx, reference.MultiNamespacedResolutionRequest{
+			CurrentValues: reference.FromPtrValues(mg.Spec.InitProvider.SecurityGroupsIds),
+			Extract:       reference.ExternalName(),
+			Namespace:     mg.GetNamespace(),
+			References:    mg.Spec.InitProvider.SecurityGroupsIdsRefs,
+			Selector:      mg.Spec.InitProvider.SecurityGroupsIdsSelector,
+			To:            reference.To{List: l, Managed: m},
+		})
+	}
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.InitProvider.SecurityGroupsIds")
+	}
+	mg.Spec.InitProvider.SecurityGroupsIds = reference.ToPtrValues(mrsp.ResolvedValues)
+	mg.Spec.InitProvider.SecurityGroupsIdsRefs = mrsp.ResolvedReferences
+	{
 		m, l, err = apisresolver.GetManagedResource("compute.m.ionoscloud.io", "v1alpha1", "Server", "ServerList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
@@ -1104,6 +1629,7 @@ func (mg *Server) ResolveReferences(ctx context.Context, c client.Reader) error 
 	r := reference.NewAPINamespacedResolver(c, mg)
 
 	var rsp reference.NamespacedResolutionResponse
+	var mrsp reference.MultiNamespacedResolutionResponse
 	var err error
 	{
 		m, l, err = apisresolver.GetManagedResource("compute.m.ionoscloud.io", "v1alpha1", "Datacenter", "DatacenterList")
@@ -1148,11 +1674,53 @@ func (mg *Server) ResolveReferences(ctx context.Context, c client.Reader) error 
 		mg.Spec.ForProvider.Nic.LanRef = rsp.ResolvedReference
 
 	}
+	if mg.Spec.ForProvider.Nic != nil {
+		{
+			m, l, err = apisresolver.GetManagedResource("compute.m.ionoscloud.io", "v1alpha1", "NSG", "NSGList")
+			if err != nil {
+				return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+			}
+			mrsp, err = r.ResolveMultiple(ctx, reference.MultiNamespacedResolutionRequest{
+				CurrentValues: reference.FromPtrValues(mg.Spec.ForProvider.Nic.SecurityGroupsIds),
+				Extract:       reference.ExternalName(),
+				Namespace:     mg.GetNamespace(),
+				References:    mg.Spec.ForProvider.Nic.SecurityGroupsIdsRefs,
+				Selector:      mg.Spec.ForProvider.Nic.SecurityGroupsIdsSelector,
+				To:            reference.To{List: l, Managed: m},
+			})
+		}
+		if err != nil {
+			return errors.Wrap(err, "mg.Spec.ForProvider.Nic.SecurityGroupsIds")
+		}
+		mg.Spec.ForProvider.Nic.SecurityGroupsIds = reference.ToPtrValues(mrsp.ResolvedValues)
+		mg.Spec.ForProvider.Nic.SecurityGroupsIdsRefs = mrsp.ResolvedReferences
+
+	}
+	{
+		m, l, err = apisresolver.GetManagedResource("compute.m.ionoscloud.io", "v1alpha1", "NSG", "NSGList")
+		if err != nil {
+			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+		}
+		mrsp, err = r.ResolveMultiple(ctx, reference.MultiNamespacedResolutionRequest{
+			CurrentValues: reference.FromPtrValues(mg.Spec.ForProvider.SecurityGroupsIds),
+			Extract:       reference.ExternalName(),
+			Namespace:     mg.GetNamespace(),
+			References:    mg.Spec.ForProvider.SecurityGroupsIdsRefs,
+			Selector:      mg.Spec.ForProvider.SecurityGroupsIdsSelector,
+			To:            reference.To{List: l, Managed: m},
+		})
+	}
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.ForProvider.SecurityGroupsIds")
+	}
+	mg.Spec.ForProvider.SecurityGroupsIds = reference.ToPtrValues(mrsp.ResolvedValues)
+	mg.Spec.ForProvider.SecurityGroupsIdsRefs = mrsp.ResolvedReferences
 	{
 		m, l, err = apisresolver.GetManagedResource("compute.m.ionoscloud.io", "v1alpha1", "Datacenter", "DatacenterList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
+
 		rsp, err = r.Resolve(ctx, reference.NamespacedResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.DatacenterID),
 			Extract:      reference.ExternalName(),
@@ -1190,6 +1758,47 @@ func (mg *Server) ResolveReferences(ctx context.Context, c client.Reader) error 
 		mg.Spec.InitProvider.Nic.LanRef = rsp.ResolvedReference
 
 	}
+	if mg.Spec.InitProvider.Nic != nil {
+		{
+			m, l, err = apisresolver.GetManagedResource("compute.m.ionoscloud.io", "v1alpha1", "NSG", "NSGList")
+			if err != nil {
+				return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+			}
+			mrsp, err = r.ResolveMultiple(ctx, reference.MultiNamespacedResolutionRequest{
+				CurrentValues: reference.FromPtrValues(mg.Spec.InitProvider.Nic.SecurityGroupsIds),
+				Extract:       reference.ExternalName(),
+				Namespace:     mg.GetNamespace(),
+				References:    mg.Spec.InitProvider.Nic.SecurityGroupsIdsRefs,
+				Selector:      mg.Spec.InitProvider.Nic.SecurityGroupsIdsSelector,
+				To:            reference.To{List: l, Managed: m},
+			})
+		}
+		if err != nil {
+			return errors.Wrap(err, "mg.Spec.InitProvider.Nic.SecurityGroupsIds")
+		}
+		mg.Spec.InitProvider.Nic.SecurityGroupsIds = reference.ToPtrValues(mrsp.ResolvedValues)
+		mg.Spec.InitProvider.Nic.SecurityGroupsIdsRefs = mrsp.ResolvedReferences
+
+	}
+	{
+		m, l, err = apisresolver.GetManagedResource("compute.m.ionoscloud.io", "v1alpha1", "NSG", "NSGList")
+		if err != nil {
+			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+		}
+		mrsp, err = r.ResolveMultiple(ctx, reference.MultiNamespacedResolutionRequest{
+			CurrentValues: reference.FromPtrValues(mg.Spec.InitProvider.SecurityGroupsIds),
+			Extract:       reference.ExternalName(),
+			Namespace:     mg.GetNamespace(),
+			References:    mg.Spec.InitProvider.SecurityGroupsIdsRefs,
+			Selector:      mg.Spec.InitProvider.SecurityGroupsIdsSelector,
+			To:            reference.To{List: l, Managed: m},
+		})
+	}
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.InitProvider.SecurityGroupsIds")
+	}
+	mg.Spec.InitProvider.SecurityGroupsIds = reference.ToPtrValues(mrsp.ResolvedValues)
+	mg.Spec.InitProvider.SecurityGroupsIdsRefs = mrsp.ResolvedReferences
 
 	return nil
 }
@@ -1437,6 +2046,7 @@ func (mg *VCPUServer) ResolveReferences(ctx context.Context, c client.Reader) er
 	r := reference.NewAPINamespacedResolver(c, mg)
 
 	var rsp reference.NamespacedResolutionResponse
+	var mrsp reference.MultiNamespacedResolutionResponse
 	var err error
 	{
 		m, l, err = apisresolver.GetManagedResource("compute.m.ionoscloud.io", "v1alpha1", "Datacenter", "DatacenterList")
@@ -1481,11 +2091,53 @@ func (mg *VCPUServer) ResolveReferences(ctx context.Context, c client.Reader) er
 		mg.Spec.ForProvider.Nic.LanRef = rsp.ResolvedReference
 
 	}
+	if mg.Spec.ForProvider.Nic != nil {
+		{
+			m, l, err = apisresolver.GetManagedResource("compute.m.ionoscloud.io", "v1alpha1", "NSG", "NSGList")
+			if err != nil {
+				return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+			}
+			mrsp, err = r.ResolveMultiple(ctx, reference.MultiNamespacedResolutionRequest{
+				CurrentValues: reference.FromPtrValues(mg.Spec.ForProvider.Nic.SecurityGroupsIds),
+				Extract:       reference.ExternalName(),
+				Namespace:     mg.GetNamespace(),
+				References:    mg.Spec.ForProvider.Nic.SecurityGroupsIdsRefs,
+				Selector:      mg.Spec.ForProvider.Nic.SecurityGroupsIdsSelector,
+				To:            reference.To{List: l, Managed: m},
+			})
+		}
+		if err != nil {
+			return errors.Wrap(err, "mg.Spec.ForProvider.Nic.SecurityGroupsIds")
+		}
+		mg.Spec.ForProvider.Nic.SecurityGroupsIds = reference.ToPtrValues(mrsp.ResolvedValues)
+		mg.Spec.ForProvider.Nic.SecurityGroupsIdsRefs = mrsp.ResolvedReferences
+
+	}
+	{
+		m, l, err = apisresolver.GetManagedResource("compute.m.ionoscloud.io", "v1alpha1", "NSG", "NSGList")
+		if err != nil {
+			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+		}
+		mrsp, err = r.ResolveMultiple(ctx, reference.MultiNamespacedResolutionRequest{
+			CurrentValues: reference.FromPtrValues(mg.Spec.ForProvider.SecurityGroupsIds),
+			Extract:       reference.ExternalName(),
+			Namespace:     mg.GetNamespace(),
+			References:    mg.Spec.ForProvider.SecurityGroupsIdsRefs,
+			Selector:      mg.Spec.ForProvider.SecurityGroupsIdsSelector,
+			To:            reference.To{List: l, Managed: m},
+		})
+	}
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.ForProvider.SecurityGroupsIds")
+	}
+	mg.Spec.ForProvider.SecurityGroupsIds = reference.ToPtrValues(mrsp.ResolvedValues)
+	mg.Spec.ForProvider.SecurityGroupsIdsRefs = mrsp.ResolvedReferences
 	{
 		m, l, err = apisresolver.GetManagedResource("compute.m.ionoscloud.io", "v1alpha1", "Datacenter", "DatacenterList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
+
 		rsp, err = r.Resolve(ctx, reference.NamespacedResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.DatacenterID),
 			Extract:      reference.ExternalName(),
@@ -1523,6 +2175,47 @@ func (mg *VCPUServer) ResolveReferences(ctx context.Context, c client.Reader) er
 		mg.Spec.InitProvider.Nic.LanRef = rsp.ResolvedReference
 
 	}
+	if mg.Spec.InitProvider.Nic != nil {
+		{
+			m, l, err = apisresolver.GetManagedResource("compute.m.ionoscloud.io", "v1alpha1", "NSG", "NSGList")
+			if err != nil {
+				return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+			}
+			mrsp, err = r.ResolveMultiple(ctx, reference.MultiNamespacedResolutionRequest{
+				CurrentValues: reference.FromPtrValues(mg.Spec.InitProvider.Nic.SecurityGroupsIds),
+				Extract:       reference.ExternalName(),
+				Namespace:     mg.GetNamespace(),
+				References:    mg.Spec.InitProvider.Nic.SecurityGroupsIdsRefs,
+				Selector:      mg.Spec.InitProvider.Nic.SecurityGroupsIdsSelector,
+				To:            reference.To{List: l, Managed: m},
+			})
+		}
+		if err != nil {
+			return errors.Wrap(err, "mg.Spec.InitProvider.Nic.SecurityGroupsIds")
+		}
+		mg.Spec.InitProvider.Nic.SecurityGroupsIds = reference.ToPtrValues(mrsp.ResolvedValues)
+		mg.Spec.InitProvider.Nic.SecurityGroupsIdsRefs = mrsp.ResolvedReferences
+
+	}
+	{
+		m, l, err = apisresolver.GetManagedResource("compute.m.ionoscloud.io", "v1alpha1", "NSG", "NSGList")
+		if err != nil {
+			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+		}
+		mrsp, err = r.ResolveMultiple(ctx, reference.MultiNamespacedResolutionRequest{
+			CurrentValues: reference.FromPtrValues(mg.Spec.InitProvider.SecurityGroupsIds),
+			Extract:       reference.ExternalName(),
+			Namespace:     mg.GetNamespace(),
+			References:    mg.Spec.InitProvider.SecurityGroupsIdsRefs,
+			Selector:      mg.Spec.InitProvider.SecurityGroupsIdsSelector,
+			To:            reference.To{List: l, Managed: m},
+		})
+	}
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.InitProvider.SecurityGroupsIds")
+	}
+	mg.Spec.InitProvider.SecurityGroupsIds = reference.ToPtrValues(mrsp.ResolvedValues)
+	mg.Spec.InitProvider.SecurityGroupsIdsRefs = mrsp.ResolvedReferences
 
 	return nil
 }

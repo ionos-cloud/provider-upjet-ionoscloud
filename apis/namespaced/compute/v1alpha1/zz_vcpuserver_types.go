@@ -79,8 +79,17 @@ type VCPUServerInitParameters struct {
 
 	// The list of Security Group IDs for the resource.
 	// The list of Security Group IDs for the server
+	// +crossplane:generate:reference:type=github.com/ionos-cloud/provider-upjet-ionoscloud/apis/namespaced/compute/v1alpha1.NSG
 	// +listType=set
 	SecurityGroupsIds []*string `json:"securityGroupsIds,omitempty" tf:"security_groups_ids,omitempty"`
+
+	// References to NSG in compute to populate securityGroupsIds.
+	// +kubebuilder:validation:Optional
+	SecurityGroupsIdsRefs []v1.NamespacedReference `json:"securityGroupsIdsRefs,omitempty" tf:"-"`
+
+	// Selector for a list of NSG in compute to populate securityGroupsIds.
+	// +kubebuilder:validation:Optional
+	SecurityGroupsIdsSelector *v1.NamespacedSelector `json:"securityGroupsIdsSelector,omitempty" tf:"-"`
 
 	// Sets the power state of the vcpu server. Possible values: `RUNNING` or `SHUTOFF`.
 	VMState *string `json:"vmState,omitempty" tf:"vm_state,omitempty"`
@@ -235,8 +244,17 @@ type VCPUServerNicInitParameters struct {
 
 	// The list of Security Group IDs for the resource.
 	// The list of Security Group IDs for the NIC
+	// +crossplane:generate:reference:type=github.com/ionos-cloud/provider-upjet-ionoscloud/apis/namespaced/compute/v1alpha1.NSG
 	// +listType=set
 	SecurityGroupsIds []*string `json:"securityGroupsIds,omitempty" tf:"security_groups_ids,omitempty"`
+
+	// References to NSG in compute to populate securityGroupsIds.
+	// +kubebuilder:validation:Optional
+	SecurityGroupsIdsRefs []v1.NamespacedReference `json:"securityGroupsIdsRefs,omitempty" tf:"-"`
+
+	// Selector for a list of NSG in compute to populate securityGroupsIds.
+	// +kubebuilder:validation:Optional
+	SecurityGroupsIdsSelector *v1.NamespacedSelector `json:"securityGroupsIdsSelector,omitempty" tf:"-"`
 }
 
 type VCPUServerNicObservation struct {
@@ -338,9 +356,18 @@ type VCPUServerNicParameters struct {
 
 	// The list of Security Group IDs for the resource.
 	// The list of Security Group IDs for the NIC
+	// +crossplane:generate:reference:type=github.com/ionos-cloud/provider-upjet-ionoscloud/apis/namespaced/compute/v1alpha1.NSG
 	// +kubebuilder:validation:Optional
 	// +listType=set
 	SecurityGroupsIds []*string `json:"securityGroupsIds,omitempty" tf:"security_groups_ids,omitempty"`
+
+	// References to NSG in compute to populate securityGroupsIds.
+	// +kubebuilder:validation:Optional
+	SecurityGroupsIdsRefs []v1.NamespacedReference `json:"securityGroupsIdsRefs,omitempty" tf:"-"`
+
+	// Selector for a list of NSG in compute to populate securityGroupsIds.
+	// +kubebuilder:validation:Optional
+	SecurityGroupsIdsSelector *v1.NamespacedSelector `json:"securityGroupsIdsSelector,omitempty" tf:"-"`
 }
 
 type VCPUServerObservation struct {
@@ -510,9 +537,18 @@ type VCPUServerParameters struct {
 
 	// The list of Security Group IDs for the resource.
 	// The list of Security Group IDs for the server
+	// +crossplane:generate:reference:type=github.com/ionos-cloud/provider-upjet-ionoscloud/apis/namespaced/compute/v1alpha1.NSG
 	// +kubebuilder:validation:Optional
 	// +listType=set
 	SecurityGroupsIds []*string `json:"securityGroupsIds,omitempty" tf:"security_groups_ids,omitempty"`
+
+	// References to NSG in compute to populate securityGroupsIds.
+	// +kubebuilder:validation:Optional
+	SecurityGroupsIdsRefs []v1.NamespacedReference `json:"securityGroupsIdsRefs,omitempty" tf:"-"`
+
+	// Selector for a list of NSG in compute to populate securityGroupsIds.
+	// +kubebuilder:validation:Optional
+	SecurityGroupsIdsSelector *v1.NamespacedSelector `json:"securityGroupsIdsSelector,omitempty" tf:"-"`
 
 	// Sets the power state of the vcpu server. Possible values: `RUNNING` or `SHUTOFF`.
 	// +kubebuilder:validation:Optional

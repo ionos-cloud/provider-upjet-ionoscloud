@@ -1,0 +1,59 @@
+apiVersion: compute.m.ionoscloud.io/v1alpha1
+kind: NSGFirewallRule
+metadata:
+  annotations:
+    meta.upbound.io/example-id: compute/v1alpha1/nsgfirewallrule
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+  namespace: upbound-system
+spec:
+  forProvider:
+    datacenterIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    name: NSG Rule Example
+    nsgIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    portRangeEnd: 22
+    portRangeStart: 22
+    protocol: TCP
+    type: INGRESS
+
+---
+
+apiVersion: compute.m.ionoscloud.io/v1alpha1
+kind: NSG
+metadata:
+  annotations:
+    meta.upbound.io/example-id: compute/v1alpha1/nsgfirewallrule
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+  namespace: upbound-system
+spec:
+  forProvider:
+    datacenterIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    description: Example NSG Description
+    name: Example NSG
+
+---
+
+apiVersion: compute.m.ionoscloud.io/v1alpha1
+kind: Datacenter
+metadata:
+  annotations:
+    meta.upbound.io/example-id: compute/v1alpha1/nsgfirewallrule
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+  namespace: upbound-system
+spec:
+  forProvider:
+    description: Datacenter Description
+    location: de/txl
+    name: Datacenter NSG Rule Example
+    secAuthProtection: false

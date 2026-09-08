@@ -150,8 +150,17 @@ type NicInitParameters_2 struct {
 
 	// The list of Security Group IDs for the resource.
 	// The list of Security Group IDs
+	// +crossplane:generate:reference:type=github.com/ionos-cloud/provider-upjet-ionoscloud/apis/namespaced/compute/v1alpha1.NSG
 	// +listType=set
 	SecurityGroupsIds []*string `json:"securityGroupsIds,omitempty" tf:"security_groups_ids,omitempty"`
+
+	// References to NSG in compute to populate securityGroupsIds.
+	// +kubebuilder:validation:Optional
+	SecurityGroupsIdsRefs []v1.NamespacedReference `json:"securityGroupsIdsRefs,omitempty" tf:"-"`
+
+	// Selector for a list of NSG in compute to populate securityGroupsIds.
+	// +kubebuilder:validation:Optional
+	SecurityGroupsIdsSelector *v1.NamespacedSelector `json:"securityGroupsIdsSelector,omitempty" tf:"-"`
 
 	// [string] The ID of a server.
 	// +crossplane:generate:reference:type=github.com/ionos-cloud/provider-upjet-ionoscloud/apis/namespaced/compute/v1alpha1.Server
@@ -319,9 +328,18 @@ type NicParameters_2 struct {
 
 	// The list of Security Group IDs for the resource.
 	// The list of Security Group IDs
+	// +crossplane:generate:reference:type=github.com/ionos-cloud/provider-upjet-ionoscloud/apis/namespaced/compute/v1alpha1.NSG
 	// +kubebuilder:validation:Optional
 	// +listType=set
 	SecurityGroupsIds []*string `json:"securityGroupsIds,omitempty" tf:"security_groups_ids,omitempty"`
+
+	// References to NSG in compute to populate securityGroupsIds.
+	// +kubebuilder:validation:Optional
+	SecurityGroupsIdsRefs []v1.NamespacedReference `json:"securityGroupsIdsRefs,omitempty" tf:"-"`
+
+	// Selector for a list of NSG in compute to populate securityGroupsIds.
+	// +kubebuilder:validation:Optional
+	SecurityGroupsIdsSelector *v1.NamespacedSelector `json:"securityGroupsIdsSelector,omitempty" tf:"-"`
 
 	// [string] The ID of a server.
 	// +crossplane:generate:reference:type=github.com/ionos-cloud/provider-upjet-ionoscloud/apis/namespaced/compute/v1alpha1.Server
