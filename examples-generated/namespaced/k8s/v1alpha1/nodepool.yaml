@@ -51,6 +51,10 @@ spec:
     serverType: DedicatedCore
     storageSize: 40
     storageType: SSD
+    taints:
+    - effect: NoSchedule
+      key: dedicated
+      value: gpu
 
 ---
 

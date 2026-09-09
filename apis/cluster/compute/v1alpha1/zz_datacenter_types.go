@@ -66,6 +66,7 @@ type DatacenterObservation struct {
 	// +listType=set
 	Features []*string `json:"features,omitempty" tf:"features,omitempty"`
 
+	// (String) The UUID of the datacenter.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
 	// (Computed) The automatically-assigned /56 IPv6 CIDR block if IPv6 is enabled on this virtual data center

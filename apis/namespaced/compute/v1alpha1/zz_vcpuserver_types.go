@@ -387,11 +387,19 @@ type VCPUServerObservation struct {
 
 	CPUFamily *string `json:"cpuFamily,omitempty" tf:"cpu_family,omitempty"`
 
+	// (Computed)[bool] Whether the server is a Confidential Computing (SEV-SNP) VM. Derived on read from the server's enabled features; normally false for VCPU servers, which are not Confidential Computing VMs.
+	// Whether the server is a Confidential Computing (SEV-SNP) VM. Derived on read from the server's enabled features; normally false for VCPU servers, which are not Confidential Computing VMs.
+	Confidential *bool `json:"confidential,omitempty" tf:"confidential,omitempty"`
+
 	// [integer] Number of server CPU cores.
 	Cores *float64 `json:"cores,omitempty" tf:"cores,omitempty"`
 
 	// [string] The ID of a Virtual Data Center.
 	DatacenterID *string `json:"datacenterId,omitempty" tf:"datacenter_id,omitempty"`
+
+	// (Computed)[list] Features enabled on the server, e.g. SEV-SNP for a Confidential Computing VM.
+	// Features enabled on the server, e.g. SEV-SNP for a Confidential Computing VM.
+	EnabledFeatures []*string `json:"enabledFeatures,omitempty" tf:"enabled_features,omitempty"`
 
 	// (Computed) The associated firewall rule.
 	FirewallruleID *string `json:"firewallruleId,omitempty" tf:"firewallrule_id,omitempty"`

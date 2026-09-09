@@ -1,14 +1,5 @@
 name: ionos-cloud/ionoscloud
 resources:
-    Datacenter NSG Selection:
-        subCategory: Compute Engine
-        description: Links a Network Security Group to a IONOS CLOUD datacenter.
-        name: Datacenter NSG Selection
-        title: Datacenter NSG Selection
-        argumentDocs:
-            datacenter_id: '- (Required)[string] The ID of a Virtual Data Center.'
-            nsg_id: '- (Required)[string] The ID of a Network Security Group.'
-        importStatements: []
     Server Boot Device Selection:
         subCategory: Compute Engine
         description: Manages the selection of boot devices for IONOS CLOUD Server objects.
@@ -687,12 +678,15 @@ resources:
                       "description": "Example NSG Description",
                       "name": "Example NSG"
                     }
+            - name: example
+              manifest: '{}'
         argumentDocs:
             cpu_architecture: '- (Computed) Array of features and CPU families available in a location'
             cpu_family: '- A valid CPU family name'
             description: '- (Optional)[string] Description for the Virtual Data Center.'
             enabled_features: '- Features enabled for this CPU architecture, e.g. SEV-SNP for Confidential Computing'
             features: '- (Computed) List of features supported by the location this data center is part of'
+            id: (String) The UUID of the datacenter.
             ipv6_cidr_block: '- (Computed) The automatically-assigned /56 IPv6 CIDR block if IPv6 is enabled on this virtual data center'
             location: '- (Required)[string] The regional location where the Virtual Data Center will be created. This argument is immutable. Available locations: de/fra, us/las, us/ewr, de/txl, gb/lhr, gb/bhx, es/vit, fr/par, us/mci, de/fra/1, de/fra/2'
             max_cores: '- The maximum number of cores available'
@@ -705,6 +699,37 @@ resources:
             - "import {\n  to = ionoscloud_datacenter.example\n  id = \"datacenter uuid\" \n}"
             - terraform plan -generate-config-out=dc.tf
             - terraform import ionoscloud_datacenter.mydc datacenter uuid
+    ionoscloud_datacenter_nsg_selection:
+        subCategory: Compute Engine
+        description: Links a Network Security Group to a IONOS CLOUD datacenter.
+        name: ionoscloud_datacenter_nsg_selection
+        title: ionoscloud_datacenter_nsg_selection
+        examples:
+            - name: example
+              manifest: |-
+                {
+                  "datacenter_id": "${ionoscloud_datacenter.example.id}",
+                  "nsg_id": "${ionoscloud_nsg.example.id}"
+                }
+              references:
+                datacenter_id: ionoscloud_datacenter.example.id
+                nsg_id: ionoscloud_nsg.example.id
+              dependencies:
+                ionoscloud_datacenter.example: |-
+                    {
+                      "location": "de/fra",
+                      "name": "Datacenter Default NSG Example"
+                    }
+                ionoscloud_nsg.example: |-
+                    {
+                      "datacenter_id": "${ionoscloud_datacenter.example.id}",
+                      "description": "NSG",
+                      "name": "NSG"
+                    }
+        argumentDocs:
+            datacenter_id: '- (Required)[string] The ID of a Virtual Data Center.'
+            nsg_id: '- (Required)[string] The ID of a Network Security Group.'
+        importStatements: []
     ionoscloud_dns_record:
         subCategory: Cloud DNS
         description: Creates and manages DNS Record objects.
@@ -1553,7 +1578,14 @@ resources:
                   "ram_size": 2048,
                   "server_type": "DedicatedCore",
                   "storage_size": 40,
-                  "storage_type": "SSD"
+                  "storage_type": "SSD",
+                  "taints": [
+                    {
+                      "effect": "NoSchedule",
+                      "key": "dedicated",
+                      "value": "gpu"
+                    }
+                  ]
                 }
               references:
                 datacenter_id: ionoscloud_datacenter.example.id
@@ -1615,10 +1647,12 @@ resources:
             datacenter_id: '- (Required)[string] A Datacenter''s UUID'
             day_of_the_week: '- (Required)[string] Day of the week when maintenance is allowed'
             dhcp: '- (Optional)[boolean] Indicates if the Kubernetes Node Pool LAN will reserve an IP using DHCP. Default value is true'
+            effect: '- (Required)[string] Taint effect determines how a taint repels pods. One of: NoSchedule, NoExecute, PreferNoSchedule.'
             gateway_ip: '- (Required)[string] IPv4 or IPv6 Gateway IP for the route'
             id: '- (Required)[int] The LAN ID of an existing LAN at the related datacenter'
             k8s_cluster_id: '- (Required)[string] A k8s cluster''s UUID'
             k8s_version: '- (Optional)[string] The desired Kubernetes Version. For supported values, please check the API documentation. Downgrades are not supported. The provider will ignore downgrades of patch level.'
+            key: '- (Required)[string] Taint key. Must be a valid Kubernetes label key format. May include an optional prefix (DNS subdomain) followed by a slash.'
             labels: '- (Optional)[map] A key/value map of labels'
             lans: '- (Optional)[list] A list of numeric LAN id''s you want this node pool to be part of. For more details, please check the API documentation, as well as the example above'
             maintenance_window: '- (Optional) See the maintenance_window section in the example above'
@@ -1633,7 +1667,9 @@ resources:
             server_type: '- (Optional)[string] The server type for the compute engine - See the API documentation for more information. Possible values: DedicatedCore, VCPU'
             storage_size: -(Required)[int] - The size of the volume in GB. The size should be greater than 10GB. This attribute is immutable.
             storage_type: -(Required)[string] - The desired storage type - SSD/HDD. This attribute is immutable.
+            taints: '- (Optional)[set] Taints applied to the nodes in this pool. A taint repels pods that do not have a matching toleration. Maximum 50 taints per node pool.'
             time: '- (Required)[string] A clock time in the day when maintenance is allowed'
+            value: '- (Optional)[string] Taint value. Must be a valid Kubernetes label value format.'
         importStatements:
             - terraform import ionoscloud_k8s_node_pool.demo k8s_cluster_uuid/k8s_nodepool_id
     ionoscloud_kafka_cluster:
@@ -3401,6 +3437,106 @@ resources:
             server_id: '- (Required)[string] The ID of a server.'
         importStatements:
             - terraform import ionoscloud_nic.mynic datacenter uuid/server uuid/nic uuid
+    ionoscloud_nsg:
+        subCategory: Compute Engine
+        description: Creates and manages IONOS CLOUD Network Security Group.
+        name: ionoscloud_nsg
+        title: ionoscloud_nsg
+        examples:
+            - name: example
+              manifest: |-
+                {
+                  "datacenter_id": "${ionoscloud_datacenter.example.id}",
+                  "description": "Example NSG Description",
+                  "name": "Example NSG"
+                }
+              references:
+                datacenter_id: ionoscloud_datacenter.example.id
+              dependencies:
+                ionoscloud_datacenter.example: |-
+                    {
+                      "location": "de/txl",
+                      "name": "Datacenter NSG Example"
+                    }
+            - name: imported_default
+              manifest: |-
+                {
+                  "datacenter_id": "${ionoscloud_datacenter.example.id}"
+                }
+              references:
+                datacenter_id: ionoscloud_datacenter.example.id
+              dependencies:
+                ionoscloud_datacenter.example: |-
+                    {
+                      "location": "de/txl",
+                      "name": "Datacenter NSG Example"
+                    }
+        argumentDocs:
+            datacenter_id: '- (Required)[string] The ID of a Virtual Data Center.'
+            description: '- (Optional)[string] Description for the Network Security Group.'
+            name: '- (Optional)[string] The name of the Network Security Group.'
+            rule_ids: '- (Computed) List of Firewall Rules that are part of the Network Security Group'
+        importStatements:
+            - terraform import ionoscloud_nsg.mynsg datacenter uuid/nsg uuid
+    ionoscloud_nsg_firewallrule:
+        subCategory: Compute Engine
+        description: Creates and manages IONOS CLOUD Network Security Group Firewall Rule.
+        name: ionoscloud_nsg_firewallrule
+        title: ionoscloud_nsg_firewallrule
+        examples:
+            - name: example
+              manifest: |-
+                {
+                  "datacenter_id": "${ionoscloud_datacenter.example.id}",
+                  "name": "SG Rule",
+                  "nsg_id": "${ionoscloud_nsg.example.id}",
+                  "protocol": "TCP",
+                  "source_ip": "22.231.113.11",
+                  "source_mac": "00:0a:95:9d:68:15",
+                  "target_ip": "22.231.113.75",
+                  "type": "EGRESS"
+                }
+              references:
+                datacenter_id: ionoscloud_datacenter.example.id
+                nsg_id: ionoscloud_nsg.example.id
+              dependencies:
+                ionoscloud_datacenter.example: |-
+                    {
+                      "location": "de/txl",
+                      "name": "Datacenter NSG Example"
+                    }
+                ionoscloud_nsg.example: |-
+                    {
+                      "datacenter_id": "${ionoscloud_datacenter.example.id}",
+                      "description": "Example NSG Description",
+                      "name": "Example NSG"
+                    }
+            - name: imported
+              manifest: |-
+                {
+                  "datacenter_id": "${ionoscloud_datacenter.example.id}",
+                  "nsg_id": "${ionoscloud_nsg.example.id}",
+                  "protocol": "${protocol}"
+                }
+              references:
+                datacenter_id: ionoscloud_datacenter.example.id
+                nsg_id: ionoscloud_nsg.example.id
+                protocol: protocol
+        argumentDocs:
+            datacenter_id: '- (Required)[string] The ID of a Virtual Data Center.'
+            icmp_code: '- (Optional)[int] Defines the allowed code (from 0 to 254) if protocol ICMP is chosen.'
+            icmp_type: '- (Optional)[string] Defines the allowed code (from 0 to 254) if protocol ICMP is chosen. Value null allows all codes.'
+            name: '- (Optional)[string] The name of the Network Security Group.'
+            nsg_id: '- (Required)[string] The ID of a Network Security Group.'
+            port_range_end: '- (Optional)[int] Defines the end range of the allowed port (from 1 to 65534) if the protocol TCP or UDP is chosen. Leave portRangeStart and portRangeEnd null to allow all ports.'
+            port_range_start: '- (Optional)[int] Defines the start range of the allowed port (from 1 to 65534) if protocol TCP or UDP is chosen. Leave portRangeStart and portRangeEnd null to allow all ports.'
+            protocol: '- (Required)[string] The protocol for the rule: TCP, UDP, ICMP, ANY. Property cannot be modified after creation (disallowed in update requests); changing it forces a new resource to be created.'
+            source_ip: '-  (Optional)(computed)[string] Only traffic originating from the respective IPv4 address is allowed. Value null allows all source IPs.'
+            source_mac: '- (Optional)[string] Only traffic originating from the respective MAC address is allowed. Valid format: aa:bb:cc:dd:ee:ff. Value null allows all source MAC address. Valid format: aa:bb:cc:dd:ee:ff.'
+            target_ip: '- (Optional)(Computed)[string] In case the target NIC has multiple IP addresses, only traffic directed to the respective IP address of the NIC is allowed. Value null allows all target IPs.'
+            type: '- (Optional)(Computed)[string] The type of firewall rule. If is not specified, it will take the default value INGRESS.'
+        importStatements:
+            - terraform import ionoscloud_nsg_firewallrule.mynsg_firewallrule datacenter_uuid/nsg_uuid/firewall_uuid
     ionoscloud_object_storage_accesskey:
         subCategory: Object storage management
         description: Creates and manages IONOS CLOUD Object Storage Accesskeys.
@@ -5183,8 +5319,10 @@ resources:
             boot_cdrom: '- DEPRECATED Please refer to ionoscloud_server_boot_device_selection (Optional)[string] The associated boot drive, if any. Must be the UUID of a bootable CDROM image that can be retrieved using the ionoscloud_image data source.'
             boot_image: '- (Optional)[string] The image or snapshot UUID / name. May also be an image alias. It is required if licence_type is not provided.'
             boot_volume: '- (Computed) The associated boot volume.'
+            confidential: '- (Computed)[bool] Whether the server is a Confidential Computing (SEV-SNP) VM. Derived on read from the server''s enabled features; normally false for VCPU servers, which are not Confidential Computing VMs.'
             cores: '- (Optional)[integer] Number of server CPU cores.'
             datacenter_id: '- (Required)[string] The ID of a Virtual Data Center.'
+            enabled_features: '- (Computed)[list] Features enabled on the server, e.g. SEV-SNP for a Confidential Computing VM.'
             firewall: '- (Optional) Allows to define firewall rules inline in the server. See the Firewall section.'
             firewallrule_id: '- (Computed) The associated firewall rule.'
             firewallrule_ids: '- (Computed) The associated firewall rules.'
@@ -5406,7 +5544,7 @@ resources:
             device_number: '- (Computed) The Logical Unit Number of the storage volume. Null for volumes not mounted to any VM.'
             disc_virtio_hot_plug: '- (Computed)[string] Is capable of Virt-IO drive hot plug (no reboot required)'
             disc_virtio_hot_unplug: '- (Computed)[string] Is capable of Virt-IO drive hot unplug (no reboot required). This works only for non-Windows virtual Machines.'
-            disk_type: '- (Required)[string] The volume type: HDD or SSD. This property is immutable.'
+            disk_type: '- (Required)[string] The volume type. Possible values: HDD, SSD, SSD Standard, SSD Premium, DAS, ISO, ESSENTIAL, BALANCED, PERFORMANCE. This property is immutable.'
             expose_serial: '- (Optional)(Computed) [boolean] Defaults to false if not previously set by the image used to create the volume. If set to true will expose the serial id of the disk attached to the server. If set to false will not expose the serial id. Some operating systems or software solutions require the serial id to be exposed to work properly. Exposing the serial can influence licensed software (e.g. Windows) behavior'
             image: '- (Computed) The image or snapshot UUID.'
             image_name: '- (Optional)[string] The name, ID or alias of the image. May also be a snapshot ID. It is required if licence_type is not provided. Attribute is immutable.'
@@ -5907,35 +6045,3 @@ resources:
             status: '- The current status of the WireGuard Gateway Peer.'
         importStatements:
             - terraform import ionoscloud_vpn_wireguard_peer.example gateway_id:peer_id
-    network security group:
-        subCategory: Compute Engine
-        description: Creates and manages IONOS CLOUD Network Security Group.
-        name: network security group
-        title: network security group
-        argumentDocs:
-            datacenter_id: '- (Required)[string] The ID of a Virtual Data Center.'
-            description: '- (Optional)[string] Description for the Network Security Group.'
-            name: '- (Optional)[string] The name of the Network Security Group.'
-            rule_ids: '- (Computed) List of Firewall Rules that are part of the Network Security Group'
-        importStatements:
-            - terraform import ionoscloud_nsg.mynsg datacenter uuid/nsg uuid
-    network security group rule:
-        subCategory: Compute Engine
-        description: Creates and manages IONOS CLOUD Network Security Group Firewall Rule.
-        name: network security group rule
-        title: network security group rule
-        argumentDocs:
-            datacenter_id: '- (Required)[string] The ID of a Virtual Data Center.'
-            icmp_code: '- (Optional)[int] Defines the allowed code (from 0 to 254) if protocol ICMP is chosen.'
-            icmp_type: '- (Optional)[string] Defines the allowed code (from 0 to 254) if protocol ICMP is chosen. Value null allows all codes.'
-            name: '- (Optional)[string] The name of the Network Security Group.'
-            nsg_id: '- (Required)[string] The ID of a Network Security Group.'
-            port_range_end: '- (Optional)[int] Defines the end range of the allowed port (from 1 to 65534) if the protocol TCP or UDP is chosen. Leave portRangeStart and portRangeEnd null to allow all ports.'
-            port_range_start: '- (Optional)[int] Defines the start range of the allowed port (from 1 to 65534) if protocol TCP or UDP is chosen. Leave portRangeStart and portRangeEnd null to allow all ports.'
-            protocol: '- (Required)[string] The protocol for the rule: TCP, UDP, ICMP, ANY. Property cannot be modified after creation (disallowed in update requests).'
-            source_ip: '-  (Optional)(computed)[string] Only traffic originating from the respective IPv4 address is allowed. Value null allows all source IPs.'
-            source_mac: '- (Optional)[string] Only traffic originating from the respective MAC address is allowed. Valid format: aa:bb:cc:dd:ee:ff. Value null allows all source MAC address. Valid format: aa:bb:cc:dd:ee:ff.'
-            target_ip: '- (Optional)(Computed)[string] In case the target NIC has multiple IP addresses, only traffic directed to the respective IP address of the NIC is allowed. Value null allows all target IPs.'
-            type: '- (Optional)(Computed)[string] The type of firewall rule. If is not specified, it will take the default value INGRESS.'
-        importStatements:
-            - terraform import ionoscloud_nsg_firewallrule.mynsg_firewallrule datacenter_uuid/nsg_uuid/firewall_uuid

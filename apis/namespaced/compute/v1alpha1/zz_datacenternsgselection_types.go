@@ -16,6 +16,7 @@ import (
 
 type DatacenterNSGSelectionInitParameters struct {
 
+	// [string] The ID of a Virtual Data Center.
 	// ID of the Datacenter to which the NSG will be attached.
 	// +crossplane:generate:reference:type=github.com/ionos-cloud/provider-upjet-ionoscloud/apis/namespaced/compute/v1alpha1.Datacenter
 	DatacenterID *string `json:"datacenterId,omitempty" tf:"datacenter_id,omitempty"`
@@ -31,6 +32,7 @@ type DatacenterNSGSelectionInitParameters struct {
 	// The location of the resource. This field should be used only if you are also using a file configuration and should not be configured otherwise.
 	Location *string `json:"location,omitempty" tf:"location,omitempty"`
 
+	// [string] The ID of a Network Security Group.
 	// ID of the NSG which will be attached to the datacenter. If an empty string is specified and a NSG was attached previously, it will be unset.
 	// +crossplane:generate:reference:type=github.com/ionos-cloud/provider-upjet-ionoscloud/apis/namespaced/compute/v1alpha1.NSG
 	NsgID *string `json:"nsgId,omitempty" tf:"nsg_id,omitempty"`
@@ -46,6 +48,7 @@ type DatacenterNSGSelectionInitParameters struct {
 
 type DatacenterNSGSelectionObservation struct {
 
+	// [string] The ID of a Virtual Data Center.
 	// ID of the Datacenter to which the NSG will be attached.
 	DatacenterID *string `json:"datacenterId,omitempty" tf:"datacenter_id,omitempty"`
 
@@ -54,12 +57,14 @@ type DatacenterNSGSelectionObservation struct {
 	// The location of the resource. This field should be used only if you are also using a file configuration and should not be configured otherwise.
 	Location *string `json:"location,omitempty" tf:"location,omitempty"`
 
+	// [string] The ID of a Network Security Group.
 	// ID of the NSG which will be attached to the datacenter. If an empty string is specified and a NSG was attached previously, it will be unset.
 	NsgID *string `json:"nsgId,omitempty" tf:"nsg_id,omitempty"`
 }
 
 type DatacenterNSGSelectionParameters struct {
 
+	// [string] The ID of a Virtual Data Center.
 	// ID of the Datacenter to which the NSG will be attached.
 	// +crossplane:generate:reference:type=github.com/ionos-cloud/provider-upjet-ionoscloud/apis/namespaced/compute/v1alpha1.Datacenter
 	// +kubebuilder:validation:Optional
@@ -77,6 +82,7 @@ type DatacenterNSGSelectionParameters struct {
 	// +kubebuilder:validation:Optional
 	Location *string `json:"location,omitempty" tf:"location,omitempty"`
 
+	// [string] The ID of a Network Security Group.
 	// ID of the NSG which will be attached to the datacenter. If an empty string is specified and a NSG was attached previously, it will be unset.
 	// +crossplane:generate:reference:type=github.com/ionos-cloud/provider-upjet-ionoscloud/apis/namespaced/compute/v1alpha1.NSG
 	// +kubebuilder:validation:Optional
@@ -118,7 +124,7 @@ type DatacenterNSGSelectionStatus struct {
 // +kubebuilder:subresource:status
 // +kubebuilder:storageversion
 
-// DatacenterNSGSelection is the Schema for the DatacenterNSGSelections API. <no value>
+// DatacenterNSGSelection is the Schema for the DatacenterNSGSelections API. Links a Network Security Group to a IONOS CLOUD datacenter.
 // +kubebuilder:printcolumn:name="SYNCED",type="string",JSONPath=".status.conditions[?(@.type=='Synced')].status"
 // +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"
 // +kubebuilder:printcolumn:name="EXTERNAL-NAME",type="string",JSONPath=".metadata.annotations.crossplane\\.io/external-name"

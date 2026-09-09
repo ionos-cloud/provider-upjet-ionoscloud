@@ -1275,6 +1275,11 @@ spec:
                   bootVolume:
                     description: (Computed) The associated boot volume.
                     type: string
+                  confidential:
+                    description: |-
+                      (Computed)[bool] Whether the server is a Confidential Computing (SEV-SNP) VM. Derived on read from the server's enabled features; normally false for VCPU servers, which are not Confidential Computing VMs.
+                      Whether the server is a Confidential Computing (SEV-SNP) VM. Derived on read from the server's enabled features; normally false for VCPU servers, which are not Confidential Computing VMs.
+                    type: boolean
                   cores:
                     description: '[integer] Number of server CPU cores.'
                     type: number
@@ -1283,6 +1288,13 @@ spec:
                   datacenterId:
                     description: '[string] The ID of a Virtual Data Center.'
                     type: string
+                  enabledFeatures:
+                    description: |-
+                      (Computed)[list] Features enabled on the server, e.g. SEV-SNP for a Confidential Computing VM.
+                      Features enabled on the server, e.g. SEV-SNP for a Confidential Computing VM.
+                    items:
+                      type: string
+                    type: array
                   firewallruleId:
                     description: (Computed) The associated firewall rule.
                     type: string

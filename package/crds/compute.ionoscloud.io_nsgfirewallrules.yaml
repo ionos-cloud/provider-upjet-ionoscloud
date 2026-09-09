@@ -34,8 +34,8 @@ spec:
     name: v1alpha1
     schema:
       openAPIV3Schema:
-        description: NSGFirewallRule is the Schema for the NSGFirewallRules API. <no
-          value>
+        description: NSGFirewallRule is the Schema for the NSGFirewallRules API. Creates
+          and manages IONOS CLOUD Network Security Group Firewall Rule.
         properties:
           apiVersion:
             description: |-
@@ -74,6 +74,7 @@ spec:
               forProvider:
                 properties:
                   datacenterId:
+                    description: '[string] The ID of a Virtual Data Center.'
                     type: string
                   datacenterIdRef:
                     description: Reference to a Datacenter in compute to populate
@@ -152,8 +153,12 @@ spec:
                         type: object
                     type: object
                   icmpCode:
+                    description: '[int] Defines the allowed code (from 0 to 254) if
+                      protocol ICMP is chosen.'
                     type: string
                   icmpType:
+                    description: '[string] Defines the allowed code (from 0 to 254)
+                      if protocol ICMP is chosen. Value null allows all codes.'
                     type: string
                   location:
                     description: The location of the resource. This field should be
@@ -161,8 +166,10 @@ spec:
                       not be configured otherwise.
                     type: string
                   name:
+                    description: '[string] The name of the Network Security Group.'
                     type: string
                   nsgId:
+                    description: '[string] The ID of a Network Security Group.'
                     type: string
                   nsgIdRef:
                     description: Reference to a NSG in compute to populate nsgId.
@@ -239,12 +246,25 @@ spec:
                         type: object
                     type: object
                   portRangeEnd:
+                    description: '[int] Defines the end range of the allowed port
+                      (from 1 to 65534) if the protocol TCP or UDP is chosen. Leave
+                      portRangeStart and portRangeEnd null to allow all ports.'
                     type: number
                   portRangeStart:
+                    description: '[int] Defines the start range of the allowed port
+                      (from 1 to 65534) if protocol TCP or UDP is chosen. Leave portRangeStart
+                      and portRangeEnd null to allow all ports.'
                     type: number
                   protocol:
+                    description: '[string] The protocol for the rule: TCP, UDP, ICMP,
+                      ANY. Property cannot be modified after creation (disallowed
+                      in update requests); changing it forces a new resource to be
+                      created.'
                     type: string
                   sourceIp:
+                    description: (computed)[string] Only traffic originating from
+                      the respective IPv4 address is allowed. Value null allows all
+                      source IPs.
                     type: string
                   sourceIpRef:
                     description: Reference to a Ipblock in compute to populate sourceIp.
@@ -321,8 +341,14 @@ spec:
                         type: object
                     type: object
                   sourceMac:
+                    description: '[string] Only traffic originating from the respective
+                      MAC address is allowed. Valid format: aa:bb:cc:dd:ee:ff. Value
+                      null allows all source MAC address. Valid format: aa:bb:cc:dd:ee:ff.'
                     type: string
                   targetIp:
+                    description: (Computed)[string] In case the target NIC has multiple
+                      IP addresses, only traffic directed to the respective IP address
+                      of the NIC is allowed. Value null allows all target IPs.
                     type: string
                   targetIpRef:
                     description: Reference to a Ipblock in compute to populate targetIp.
@@ -399,6 +425,8 @@ spec:
                         type: object
                     type: object
                   type:
+                    description: (Computed)[string] The type of firewall rule. If
+                      is not specified, it will take the default value INGRESS.
                     type: string
                 type: object
               initProvider:
@@ -415,6 +443,7 @@ spec:
                   autoscaler.
                 properties:
                   datacenterId:
+                    description: '[string] The ID of a Virtual Data Center.'
                     type: string
                   datacenterIdRef:
                     description: Reference to a Datacenter in compute to populate
@@ -493,8 +522,12 @@ spec:
                         type: object
                     type: object
                   icmpCode:
+                    description: '[int] Defines the allowed code (from 0 to 254) if
+                      protocol ICMP is chosen.'
                     type: string
                   icmpType:
+                    description: '[string] Defines the allowed code (from 0 to 254)
+                      if protocol ICMP is chosen. Value null allows all codes.'
                     type: string
                   location:
                     description: The location of the resource. This field should be
@@ -502,8 +535,10 @@ spec:
                       not be configured otherwise.
                     type: string
                   name:
+                    description: '[string] The name of the Network Security Group.'
                     type: string
                   nsgId:
+                    description: '[string] The ID of a Network Security Group.'
                     type: string
                   nsgIdRef:
                     description: Reference to a NSG in compute to populate nsgId.
@@ -580,12 +615,25 @@ spec:
                         type: object
                     type: object
                   portRangeEnd:
+                    description: '[int] Defines the end range of the allowed port
+                      (from 1 to 65534) if the protocol TCP or UDP is chosen. Leave
+                      portRangeStart and portRangeEnd null to allow all ports.'
                     type: number
                   portRangeStart:
+                    description: '[int] Defines the start range of the allowed port
+                      (from 1 to 65534) if protocol TCP or UDP is chosen. Leave portRangeStart
+                      and portRangeEnd null to allow all ports.'
                     type: number
                   protocol:
+                    description: '[string] The protocol for the rule: TCP, UDP, ICMP,
+                      ANY. Property cannot be modified after creation (disallowed
+                      in update requests); changing it forces a new resource to be
+                      created.'
                     type: string
                   sourceIp:
+                    description: (computed)[string] Only traffic originating from
+                      the respective IPv4 address is allowed. Value null allows all
+                      source IPs.
                     type: string
                   sourceIpRef:
                     description: Reference to a Ipblock in compute to populate sourceIp.
@@ -662,8 +710,14 @@ spec:
                         type: object
                     type: object
                   sourceMac:
+                    description: '[string] Only traffic originating from the respective
+                      MAC address is allowed. Valid format: aa:bb:cc:dd:ee:ff. Value
+                      null allows all source MAC address. Valid format: aa:bb:cc:dd:ee:ff.'
                     type: string
                   targetIp:
+                    description: (Computed)[string] In case the target NIC has multiple
+                      IP addresses, only traffic directed to the respective IP address
+                      of the NIC is allowed. Value null allows all target IPs.
                     type: string
                   targetIpRef:
                     description: Reference to a Ipblock in compute to populate targetIp.
@@ -740,6 +794,8 @@ spec:
                         type: object
                     type: object
                   type:
+                    description: (Computed)[string] The type of firewall rule. If
+                      is not specified, it will take the default value INGRESS.
                     type: string
                 type: object
               managementPolicies:
@@ -839,10 +895,15 @@ spec:
               atProvider:
                 properties:
                   datacenterId:
+                    description: '[string] The ID of a Virtual Data Center.'
                     type: string
                   icmpCode:
+                    description: '[int] Defines the allowed code (from 0 to 254) if
+                      protocol ICMP is chosen.'
                     type: string
                   icmpType:
+                    description: '[string] Defines the allowed code (from 0 to 254)
+                      if protocol ICMP is chosen. Value null allows all codes.'
                     type: string
                   id:
                     type: string
@@ -852,22 +913,45 @@ spec:
                       not be configured otherwise.
                     type: string
                   name:
+                    description: '[string] The name of the Network Security Group.'
                     type: string
                   nsgId:
+                    description: '[string] The ID of a Network Security Group.'
                     type: string
                   portRangeEnd:
+                    description: '[int] Defines the end range of the allowed port
+                      (from 1 to 65534) if the protocol TCP or UDP is chosen. Leave
+                      portRangeStart and portRangeEnd null to allow all ports.'
                     type: number
                   portRangeStart:
+                    description: '[int] Defines the start range of the allowed port
+                      (from 1 to 65534) if protocol TCP or UDP is chosen. Leave portRangeStart
+                      and portRangeEnd null to allow all ports.'
                     type: number
                   protocol:
+                    description: '[string] The protocol for the rule: TCP, UDP, ICMP,
+                      ANY. Property cannot be modified after creation (disallowed
+                      in update requests); changing it forces a new resource to be
+                      created.'
                     type: string
                   sourceIp:
+                    description: (computed)[string] Only traffic originating from
+                      the respective IPv4 address is allowed. Value null allows all
+                      source IPs.
                     type: string
                   sourceMac:
+                    description: '[string] Only traffic originating from the respective
+                      MAC address is allowed. Valid format: aa:bb:cc:dd:ee:ff. Value
+                      null allows all source MAC address. Valid format: aa:bb:cc:dd:ee:ff.'
                     type: string
                   targetIp:
+                    description: (Computed)[string] In case the target NIC has multiple
+                      IP addresses, only traffic directed to the respective IP address
+                      of the NIC is allowed. Value null allows all target IPs.
                     type: string
                   type:
+                    description: (Computed)[string] The type of firewall rule. If
+                      is not specified, it will take the default value INGRESS.
                     type: string
                 type: object
               conditions:

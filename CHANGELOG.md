@@ -3,6 +3,8 @@
 All notable changes to this project will be documented in this file.
 
 ## [Unreleased]
+- Updated Terraform provider to v6.7.37
+- Add nsg resources
 - Updated Terraform provider to v6.7.36
 - `image_password` (Volume, Server, CubeServer) and `hash` (InMemoryDBReplicaset `hashedPassword`) are now sourced from a Kubernetes `Secret` via a new `*SecretRef` field instead of a plaintext spec field, following the upstream provider marking these attributes `Sensitive`
 - `server_side_encryption_customer_key` (ObjectStorage Object) and `server_side_encryption_customer_key` / `source_customer_key` (ObjectStorage ObjectCopy) are now sourced via `*SecretRef` fields for the same reason
