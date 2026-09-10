@@ -102,13 +102,13 @@ type ObjectCopyInitParameters struct {
 	// Specifies the algorithm to use to when encrypting the object copy (e.g., AES256).
 	ServerSideEncryptionCustomerAlgorithm *string `json:"serverSideEncryptionCustomerAlgorithm,omitempty" tf:"server_side_encryption_customer_algorithm,omitempty"`
 
-	// [string] Specifies the 256-bit, base64-encoded encryption key to use to encrypt and decrypt your data.
-	// Specifies the 256-bit, base64-encoded encryption key to use to encrypt and decrypt your data
-	ServerSideEncryptionCustomerKey *string `json:"serverSideEncryptionCustomerKey,omitempty" tf:"server_side_encryption_customer_key,omitempty"`
-
 	// [string] Specifies the 128-bit MD5 digest of the encryption key.
 	// Specifies the 128-bit MD5 digest of the encryption key according to RFC 1321. IONOS Object Storage Object Copy Storage uses this header for a message integrity check  to ensure that the encryption key was transmitted without error
 	ServerSideEncryptionCustomerKeyMd5 *string `json:"serverSideEncryptionCustomerKeyMd5,omitempty" tf:"server_side_encryption_customer_key_md5,omitempty"`
+
+	// [string] Specifies the 256-bit, base64-encoded encryption key to use to encrypt and decrypt your data.
+	// Specifies the 256-bit, base64-encoded encryption key to use to encrypt and decrypt your data
+	ServerSideEncryptionCustomerKeySecretRef *v1.LocalSecretKeySelector `json:"serverSideEncryptionCustomerKeySecretRef,omitempty" tf:"-"`
 
 	// [string] The source of the object to be copied
 	// The key of the source object
@@ -118,13 +118,13 @@ type ObjectCopyInitParameters struct {
 	// Specifies the algorithm to use to when decrypting the source object (e.g., AES256).
 	SourceCustomerAlgorithm *string `json:"sourceCustomerAlgorithm,omitempty" tf:"source_customer_algorithm,omitempty"`
 
-	// [string] Specifies the 256-bit, base64-encoded encryption key for source object encryption.
-	// Specifies the 256-bit, base64-encoded encryption key to use to decrypt the source object
-	SourceCustomerKey *string `json:"sourceCustomerKey,omitempty" tf:"source_customer_key,omitempty"`
-
 	// [string] Specifies the 128-bit MD5 digest of the encryption key for source object encryption.
 	// Specifies the 128-bit MD5 digest of the encryption key according to RFC 1321. IONOS Object Storage Object Copy Storage uses this header for a message integrity check  to ensure that the encryption key was transmitted without error
 	SourceCustomerKeyMd5 *string `json:"sourceCustomerKeyMd5,omitempty" tf:"source_customer_key_md5,omitempty"`
+
+	// [string] Specifies the 256-bit, base64-encoded encryption key for source object encryption.
+	// Specifies the 256-bit, base64-encoded encryption key to use to decrypt the source object
+	SourceCustomerKeySecretRef *v1.LocalSecretKeySelector `json:"sourceCustomerKeySecretRef,omitempty" tf:"-"`
 
 	// [string] The storage class of the object. Valid value is STANDARD. Default is STANDARD.
 	// The storage class of the object copy. Valid value is 'STANDARD'.
@@ -233,10 +233,6 @@ type ObjectCopyObservation struct {
 	// Specifies the algorithm to use to when encrypting the object copy (e.g., AES256).
 	ServerSideEncryptionCustomerAlgorithm *string `json:"serverSideEncryptionCustomerAlgorithm,omitempty" tf:"server_side_encryption_customer_algorithm,omitempty"`
 
-	// [string] Specifies the 256-bit, base64-encoded encryption key to use to encrypt and decrypt your data.
-	// Specifies the 256-bit, base64-encoded encryption key to use to encrypt and decrypt your data
-	ServerSideEncryptionCustomerKey *string `json:"serverSideEncryptionCustomerKey,omitempty" tf:"server_side_encryption_customer_key,omitempty"`
-
 	// [string] Specifies the 128-bit MD5 digest of the encryption key.
 	// Specifies the 128-bit MD5 digest of the encryption key according to RFC 1321. IONOS Object Storage Object Copy Storage uses this header for a message integrity check  to ensure that the encryption key was transmitted without error
 	ServerSideEncryptionCustomerKeyMd5 *string `json:"serverSideEncryptionCustomerKeyMd5,omitempty" tf:"server_side_encryption_customer_key_md5,omitempty"`
@@ -248,10 +244,6 @@ type ObjectCopyObservation struct {
 	// [string] Specifies the algorithm used for source object encryption. Valid value is AES256.
 	// Specifies the algorithm to use to when decrypting the source object (e.g., AES256).
 	SourceCustomerAlgorithm *string `json:"sourceCustomerAlgorithm,omitempty" tf:"source_customer_algorithm,omitempty"`
-
-	// [string] Specifies the 256-bit, base64-encoded encryption key for source object encryption.
-	// Specifies the 256-bit, base64-encoded encryption key to use to decrypt the source object
-	SourceCustomerKey *string `json:"sourceCustomerKey,omitempty" tf:"source_customer_key,omitempty"`
 
 	// [string] Specifies the 128-bit MD5 digest of the encryption key for source object encryption.
 	// Specifies the 128-bit MD5 digest of the encryption key according to RFC 1321. IONOS Object Storage Object Copy Storage uses this header for a message integrity check  to ensure that the encryption key was transmitted without error
@@ -387,15 +379,15 @@ type ObjectCopyParameters struct {
 	// +kubebuilder:validation:Optional
 	ServerSideEncryptionCustomerAlgorithm *string `json:"serverSideEncryptionCustomerAlgorithm,omitempty" tf:"server_side_encryption_customer_algorithm,omitempty"`
 
-	// [string] Specifies the 256-bit, base64-encoded encryption key to use to encrypt and decrypt your data.
-	// Specifies the 256-bit, base64-encoded encryption key to use to encrypt and decrypt your data
-	// +kubebuilder:validation:Optional
-	ServerSideEncryptionCustomerKey *string `json:"serverSideEncryptionCustomerKey,omitempty" tf:"server_side_encryption_customer_key,omitempty"`
-
 	// [string] Specifies the 128-bit MD5 digest of the encryption key.
 	// Specifies the 128-bit MD5 digest of the encryption key according to RFC 1321. IONOS Object Storage Object Copy Storage uses this header for a message integrity check  to ensure that the encryption key was transmitted without error
 	// +kubebuilder:validation:Optional
 	ServerSideEncryptionCustomerKeyMd5 *string `json:"serverSideEncryptionCustomerKeyMd5,omitempty" tf:"server_side_encryption_customer_key_md5,omitempty"`
+
+	// [string] Specifies the 256-bit, base64-encoded encryption key to use to encrypt and decrypt your data.
+	// Specifies the 256-bit, base64-encoded encryption key to use to encrypt and decrypt your data
+	// +kubebuilder:validation:Optional
+	ServerSideEncryptionCustomerKeySecretRef *v1.LocalSecretKeySelector `json:"serverSideEncryptionCustomerKeySecretRef,omitempty" tf:"-"`
 
 	// [string] The source of the object to be copied
 	// The key of the source object
@@ -407,15 +399,15 @@ type ObjectCopyParameters struct {
 	// +kubebuilder:validation:Optional
 	SourceCustomerAlgorithm *string `json:"sourceCustomerAlgorithm,omitempty" tf:"source_customer_algorithm,omitempty"`
 
-	// [string] Specifies the 256-bit, base64-encoded encryption key for source object encryption.
-	// Specifies the 256-bit, base64-encoded encryption key to use to decrypt the source object
-	// +kubebuilder:validation:Optional
-	SourceCustomerKey *string `json:"sourceCustomerKey,omitempty" tf:"source_customer_key,omitempty"`
-
 	// [string] Specifies the 128-bit MD5 digest of the encryption key for source object encryption.
 	// Specifies the 128-bit MD5 digest of the encryption key according to RFC 1321. IONOS Object Storage Object Copy Storage uses this header for a message integrity check  to ensure that the encryption key was transmitted without error
 	// +kubebuilder:validation:Optional
 	SourceCustomerKeyMd5 *string `json:"sourceCustomerKeyMd5,omitempty" tf:"source_customer_key_md5,omitempty"`
+
+	// [string] Specifies the 256-bit, base64-encoded encryption key for source object encryption.
+	// Specifies the 256-bit, base64-encoded encryption key to use to decrypt the source object
+	// +kubebuilder:validation:Optional
+	SourceCustomerKeySecretRef *v1.LocalSecretKeySelector `json:"sourceCustomerKeySecretRef,omitempty" tf:"-"`
 
 	// [string] The storage class of the object. Valid value is STANDARD. Default is STANDARD.
 	// The storage class of the object copy. Valid value is 'STANDARD'.

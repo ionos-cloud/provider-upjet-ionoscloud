@@ -122,30 +122,30 @@ type ConnectionsParameters struct {
 
 type CredentialsInitParameters struct {
 
-	// [string] The password for a MariaDB user.
+	// [string] The password for a MariaDB user. Length: 10-63 characters.
 	// The password for a MariaDB user.
 	PasswordSecretRef v1.LocalSecretKeySelector `json:"passwordSecretRef" tf:"-"`
 
-	// [string] The username for the initial MariaDB user. Some system usernames are restricted (e.g 'mariadb', 'admin', 'standby').
+	// [string] The username for the initial MariaDB user. Some system usernames are restricted (e.g 'mariadb', 'admin', 'standby'). Length: 1-16 characters. Must start with a letter, end with a letter or number, and contain only letters, numbers, or underscores (underscores only between alphanumeric groups).
 	// The username for the initial MariaDB user. Some system usernames are restricted (e.g 'mariadb', 'admin', 'standby').
 	Username *string `json:"username,omitempty" tf:"username,omitempty"`
 }
 
 type CredentialsObservation struct {
 
-	// [string] The username for the initial MariaDB user. Some system usernames are restricted (e.g 'mariadb', 'admin', 'standby').
+	// [string] The username for the initial MariaDB user. Some system usernames are restricted (e.g 'mariadb', 'admin', 'standby'). Length: 1-16 characters. Must start with a letter, end with a letter or number, and contain only letters, numbers, or underscores (underscores only between alphanumeric groups).
 	// The username for the initial MariaDB user. Some system usernames are restricted (e.g 'mariadb', 'admin', 'standby').
 	Username *string `json:"username,omitempty" tf:"username,omitempty"`
 }
 
 type CredentialsParameters struct {
 
-	// [string] The password for a MariaDB user.
+	// [string] The password for a MariaDB user. Length: 10-63 characters.
 	// The password for a MariaDB user.
 	// +kubebuilder:validation:Optional
 	PasswordSecretRef v1.LocalSecretKeySelector `json:"passwordSecretRef" tf:"-"`
 
-	// [string] The username for the initial MariaDB user. Some system usernames are restricted (e.g 'mariadb', 'admin', 'standby').
+	// [string] The username for the initial MariaDB user. Some system usernames are restricted (e.g 'mariadb', 'admin', 'standby'). Length: 1-16 characters. Must start with a letter, end with a letter or number, and contain only letters, numbers, or underscores (underscores only between alphanumeric groups).
 	// The username for the initial MariaDB user. Some system usernames are restricted (e.g 'mariadb', 'admin', 'standby').
 	// +kubebuilder:validation:Optional
 	Username *string `json:"username" tf:"username,omitempty"`
@@ -157,7 +157,7 @@ type MaintenanceWindowInitParameters struct {
 	// The name of the week day.
 	DayOfTheWeek *string `json:"dayOfTheWeek,omitempty" tf:"day_of_the_week,omitempty"`
 
-	// [string] Start of the maintenance window in UTC time.
+	// [string] Start of the maintenance window in UTC time. Format: HH:MM:SS.
 	// Start of the maintenance window in UTC time.
 	Time *string `json:"time,omitempty" tf:"time,omitempty"`
 }
@@ -168,7 +168,7 @@ type MaintenanceWindowObservation struct {
 	// The name of the week day.
 	DayOfTheWeek *string `json:"dayOfTheWeek,omitempty" tf:"day_of_the_week,omitempty"`
 
-	// [string] Start of the maintenance window in UTC time.
+	// [string] Start of the maintenance window in UTC time. Format: HH:MM:SS.
 	// Start of the maintenance window in UTC time.
 	Time *string `json:"time,omitempty" tf:"time,omitempty"`
 }
@@ -180,7 +180,7 @@ type MaintenanceWindowParameters struct {
 	// +kubebuilder:validation:Optional
 	DayOfTheWeek *string `json:"dayOfTheWeek" tf:"day_of_the_week,omitempty"`
 
-	// [string] Start of the maintenance window in UTC time.
+	// [string] Start of the maintenance window in UTC time. Format: HH:MM:SS.
 	// Start of the maintenance window in UTC time.
 	// +kubebuilder:validation:Optional
 	Time *string `json:"time" tf:"time,omitempty"`
@@ -204,7 +204,7 @@ type MariadbClusterInitParameters struct {
 	// Credentials for the database user to be created.
 	Credentials []CredentialsInitParameters `json:"credentials,omitempty" tf:"credentials,omitempty"`
 
-	// [string] The friendly name of your cluster.
+	// [string] The friendly name of your cluster. Maximum length: 63 characters. Must contain only word characters (letters, numbers, underscores), colons, hyphens, spaces, or dots.
 	// The friendly name of your cluster.
 	DisplayName *string `json:"displayName,omitempty" tf:"display_name,omitempty"`
 
@@ -224,11 +224,11 @@ type MariadbClusterInitParameters struct {
 	// The MariaDB version of your cluster. Cannot be downgraded.
 	MariadbVersion *string `json:"mariadbVersion,omitempty" tf:"mariadb_version,omitempty"`
 
-	// [int] The amount of memory per instance in gigabytes (GB).
+	// [int] The amount of memory per instance in gigabytes (GB). Minimum: 4.
 	// The amount of memory per instance in gigabytes (GB).
 	RAM *float64 `json:"ram,omitempty" tf:"ram,omitempty"`
 
-	// [int] The amount of storage per instance in gigabytes (GB).
+	// [int] The amount of storage per instance in gigabytes (GB). Minimum: 10, Maximum: 2000.
 	// The amount of storage per instance in gigabytes (GB).
 	StorageSize *float64 `json:"storageSize,omitempty" tf:"storage_size,omitempty"`
 }
@@ -255,7 +255,7 @@ type MariadbClusterObservation struct {
 	// The DNS name pointing to your cluster.
 	DNSName *string `json:"dnsName,omitempty" tf:"dns_name,omitempty"`
 
-	// [string] The friendly name of your cluster.
+	// [string] The friendly name of your cluster. Maximum length: 63 characters. Must contain only word characters (letters, numbers, underscores), colons, hyphens, spaces, or dots.
 	// The friendly name of your cluster.
 	DisplayName *string `json:"displayName,omitempty" tf:"display_name,omitempty"`
 
@@ -277,11 +277,11 @@ type MariadbClusterObservation struct {
 	// The MariaDB version of your cluster. Cannot be downgraded.
 	MariadbVersion *string `json:"mariadbVersion,omitempty" tf:"mariadb_version,omitempty"`
 
-	// [int] The amount of memory per instance in gigabytes (GB).
+	// [int] The amount of memory per instance in gigabytes (GB). Minimum: 4.
 	// The amount of memory per instance in gigabytes (GB).
 	RAM *float64 `json:"ram,omitempty" tf:"ram,omitempty"`
 
-	// [int] The amount of storage per instance in gigabytes (GB).
+	// [int] The amount of storage per instance in gigabytes (GB). Minimum: 10, Maximum: 2000.
 	// The amount of storage per instance in gigabytes (GB).
 	StorageSize *float64 `json:"storageSize,omitempty" tf:"storage_size,omitempty"`
 }
@@ -308,7 +308,7 @@ type MariadbClusterParameters struct {
 	// +kubebuilder:validation:Optional
 	Credentials []CredentialsParameters `json:"credentials,omitempty" tf:"credentials,omitempty"`
 
-	// [string] The friendly name of your cluster.
+	// [string] The friendly name of your cluster. Maximum length: 63 characters. Must contain only word characters (letters, numbers, underscores), colons, hyphens, spaces, or dots.
 	// The friendly name of your cluster.
 	// +kubebuilder:validation:Optional
 	DisplayName *string `json:"displayName,omitempty" tf:"display_name,omitempty"`
@@ -333,12 +333,12 @@ type MariadbClusterParameters struct {
 	// +kubebuilder:validation:Optional
 	MariadbVersion *string `json:"mariadbVersion,omitempty" tf:"mariadb_version,omitempty"`
 
-	// [int] The amount of memory per instance in gigabytes (GB).
+	// [int] The amount of memory per instance in gigabytes (GB). Minimum: 4.
 	// The amount of memory per instance in gigabytes (GB).
 	// +kubebuilder:validation:Optional
 	RAM *float64 `json:"ram,omitempty" tf:"ram,omitempty"`
 
-	// [int] The amount of storage per instance in gigabytes (GB).
+	// [int] The amount of storage per instance in gigabytes (GB). Minimum: 10, Maximum: 2000.
 	// The amount of storage per instance in gigabytes (GB).
 	// +kubebuilder:validation:Optional
 	StorageSize *float64 `json:"storageSize,omitempty" tf:"storage_size,omitempty"`

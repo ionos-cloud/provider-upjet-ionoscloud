@@ -21,7 +21,7 @@ func (mg *StorageAccesskey) GetTerraformResourceType() string {
 
 // GetConnectionDetailsMapping for this StorageAccesskey
 func (tr *StorageAccesskey) GetConnectionDetailsMapping() map[string]string {
-	return nil
+	return map[string]string{"secretkey": "status.atProvider.secretkey"}
 }
 
 // GetObservation of this StorageAccesskey

@@ -21,7 +21,7 @@ func (mg *ObjectCopy) GetTerraformResourceType() string {
 
 // GetConnectionDetailsMapping for this ObjectCopy
 func (tr *ObjectCopy) GetConnectionDetailsMapping() map[string]string {
-	return nil
+	return map[string]string{"server_side_encryption_customer_key": "serverSideEncryptionCustomerKeySecretRef", "source_customer_key": "sourceCustomerKeySecretRef"}
 }
 
 // GetObservation of this ObjectCopy

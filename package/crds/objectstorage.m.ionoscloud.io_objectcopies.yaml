@@ -240,16 +240,25 @@ spec:
                       [string] Specifies the algorithm to use for encrypting the object. Valid value is AES256.
                       Specifies the algorithm to use to when encrypting the object copy (e.g., AES256).
                     type: string
-                  serverSideEncryptionCustomerKey:
-                    description: |-
-                      [string] Specifies the 256-bit, base64-encoded encryption key to use to encrypt and decrypt your data.
-                      Specifies the 256-bit, base64-encoded encryption key to use to encrypt and decrypt your data
-                    type: string
                   serverSideEncryptionCustomerKeyMd5:
                     description: |-
                       [string] Specifies the 128-bit MD5 digest of the encryption key.
                       Specifies the 128-bit MD5 digest of the encryption key according to RFC 1321. IONOS Object Storage Object Copy Storage uses this header for a message integrity check  to ensure that the encryption key was transmitted without error
                     type: string
+                  serverSideEncryptionCustomerKeySecretRef:
+                    description: |-
+                      [string] Specifies the 256-bit, base64-encoded encryption key to use to encrypt and decrypt your data.
+                      Specifies the 256-bit, base64-encoded encryption key to use to encrypt and decrypt your data
+                    properties:
+                      key:
+                        type: string
+                      name:
+                        description: Name of the secret.
+                        type: string
+                    required:
+                    - key
+                    - name
+                    type: object
                   source:
                     description: |-
                       [string] The source of the object to be copied
@@ -260,16 +269,25 @@ spec:
                       [string] Specifies the algorithm used for source object encryption. Valid value is AES256.
                       Specifies the algorithm to use to when decrypting the source object (e.g., AES256).
                     type: string
-                  sourceCustomerKey:
-                    description: |-
-                      [string] Specifies the 256-bit, base64-encoded encryption key for source object encryption.
-                      Specifies the 256-bit, base64-encoded encryption key to use to decrypt the source object
-                    type: string
                   sourceCustomerKeyMd5:
                     description: |-
                       [string] Specifies the 128-bit MD5 digest of the encryption key for source object encryption.
                       Specifies the 128-bit MD5 digest of the encryption key according to RFC 1321. IONOS Object Storage Object Copy Storage uses this header for a message integrity check  to ensure that the encryption key was transmitted without error
                     type: string
+                  sourceCustomerKeySecretRef:
+                    description: |-
+                      [string] Specifies the 256-bit, base64-encoded encryption key for source object encryption.
+                      Specifies the 256-bit, base64-encoded encryption key to use to decrypt the source object
+                    properties:
+                      key:
+                        type: string
+                      name:
+                        description: Name of the secret.
+                        type: string
+                    required:
+                    - key
+                    - name
+                    type: object
                   storageClass:
                     description: |-
                       [string] The storage class of the object. Valid value is STANDARD. Default is STANDARD.
@@ -488,16 +506,25 @@ spec:
                       [string] Specifies the algorithm to use for encrypting the object. Valid value is AES256.
                       Specifies the algorithm to use to when encrypting the object copy (e.g., AES256).
                     type: string
-                  serverSideEncryptionCustomerKey:
-                    description: |-
-                      [string] Specifies the 256-bit, base64-encoded encryption key to use to encrypt and decrypt your data.
-                      Specifies the 256-bit, base64-encoded encryption key to use to encrypt and decrypt your data
-                    type: string
                   serverSideEncryptionCustomerKeyMd5:
                     description: |-
                       [string] Specifies the 128-bit MD5 digest of the encryption key.
                       Specifies the 128-bit MD5 digest of the encryption key according to RFC 1321. IONOS Object Storage Object Copy Storage uses this header for a message integrity check  to ensure that the encryption key was transmitted without error
                     type: string
+                  serverSideEncryptionCustomerKeySecretRef:
+                    description: |-
+                      [string] Specifies the 256-bit, base64-encoded encryption key to use to encrypt and decrypt your data.
+                      Specifies the 256-bit, base64-encoded encryption key to use to encrypt and decrypt your data
+                    properties:
+                      key:
+                        type: string
+                      name:
+                        description: Name of the secret.
+                        type: string
+                    required:
+                    - key
+                    - name
+                    type: object
                   source:
                     description: |-
                       [string] The source of the object to be copied
@@ -508,16 +535,25 @@ spec:
                       [string] Specifies the algorithm used for source object encryption. Valid value is AES256.
                       Specifies the algorithm to use to when decrypting the source object (e.g., AES256).
                     type: string
-                  sourceCustomerKey:
-                    description: |-
-                      [string] Specifies the 256-bit, base64-encoded encryption key for source object encryption.
-                      Specifies the 256-bit, base64-encoded encryption key to use to decrypt the source object
-                    type: string
                   sourceCustomerKeyMd5:
                     description: |-
                       [string] Specifies the 128-bit MD5 digest of the encryption key for source object encryption.
                       Specifies the 128-bit MD5 digest of the encryption key according to RFC 1321. IONOS Object Storage Object Copy Storage uses this header for a message integrity check  to ensure that the encryption key was transmitted without error
                     type: string
+                  sourceCustomerKeySecretRef:
+                    description: |-
+                      [string] Specifies the 256-bit, base64-encoded encryption key for source object encryption.
+                      Specifies the 256-bit, base64-encoded encryption key to use to decrypt the source object
+                    properties:
+                      key:
+                        type: string
+                      name:
+                        description: Name of the secret.
+                        type: string
+                    required:
+                    - key
+                    - name
+                    type: object
                   storageClass:
                     description: |-
                       [string] The storage class of the object. Valid value is STANDARD. Default is STANDARD.
@@ -725,11 +761,6 @@ spec:
                       [string] Specifies the algorithm to use for encrypting the object. Valid value is AES256.
                       Specifies the algorithm to use to when encrypting the object copy (e.g., AES256).
                     type: string
-                  serverSideEncryptionCustomerKey:
-                    description: |-
-                      [string] Specifies the 256-bit, base64-encoded encryption key to use to encrypt and decrypt your data.
-                      Specifies the 256-bit, base64-encoded encryption key to use to encrypt and decrypt your data
-                    type: string
                   serverSideEncryptionCustomerKeyMd5:
                     description: |-
                       [string] Specifies the 128-bit MD5 digest of the encryption key.
@@ -744,11 +775,6 @@ spec:
                     description: |-
                       [string] Specifies the algorithm used for source object encryption. Valid value is AES256.
                       Specifies the algorithm to use to when decrypting the source object (e.g., AES256).
-                    type: string
-                  sourceCustomerKey:
-                    description: |-
-                      [string] Specifies the 256-bit, base64-encoded encryption key for source object encryption.
-                      Specifies the 256-bit, base64-encoded encryption key to use to decrypt the source object
                     type: string
                   sourceCustomerKeyMd5:
                     description: |-

@@ -47,7 +47,7 @@ type VolumeInitParameters_2 struct {
 	ImageName *string `json:"imageName,omitempty" tf:"image_name,omitempty"`
 
 	// [string] Required if sshkey_path is not provided.
-	ImagePassword *string `json:"imagePassword,omitempty" tf:"image_password,omitempty"`
+	ImagePasswordSecretRef *v1.SecretKeySelector `json:"imagePasswordSecretRef,omitempty" tf:"-"`
 
 	// [string] Required if image_name is not provided.
 	LicenceType *string `json:"licenceType,omitempty" tf:"licence_type,omitempty"`
@@ -133,9 +133,6 @@ type VolumeObservation_2 struct {
 
 	// [string] The name, ID or alias of the image. May also be a snapshot ID. It is required if licence_type is not provided. Attribute is immutable.
 	ImageName *string `json:"imageName,omitempty" tf:"image_name,omitempty"`
-
-	// [string] Required if sshkey_path is not provided.
-	ImagePassword *string `json:"imagePassword,omitempty" tf:"image_password,omitempty"`
 
 	// [string] Required if image_name is not provided.
 	LicenceType *string `json:"licenceType,omitempty" tf:"licence_type,omitempty"`
@@ -223,7 +220,7 @@ type VolumeParameters_2 struct {
 
 	// [string] Required if sshkey_path is not provided.
 	// +kubebuilder:validation:Optional
-	ImagePassword *string `json:"imagePassword,omitempty" tf:"image_password,omitempty"`
+	ImagePasswordSecretRef *v1.SecretKeySelector `json:"imagePasswordSecretRef,omitempty" tf:"-"`
 
 	// [string] Required if image_name is not provided.
 	// +kubebuilder:validation:Optional

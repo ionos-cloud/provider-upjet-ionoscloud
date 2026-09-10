@@ -40,10 +40,6 @@ type StorageAccesskeyObservation struct {
 
 	// (Computed)  The ID (UUID) of the AccessKey.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
-
-	// (Computed)  The secret key of the Access key.
-	// The secret key of the Access key.
-	Secretkey *string `json:"secretkey,omitempty" tf:"secretkey,omitempty"`
 }
 
 type StorageAccesskeyParameters struct {

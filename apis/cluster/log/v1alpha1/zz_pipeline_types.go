@@ -110,8 +110,8 @@ type LogParameters struct {
 
 type PipelineInitParameters struct {
 
-	// [string] The location of the Logging pipeline. Default: de/txl, other available locations: de/fra, de/fra/2, de/txl, es/vit, gb/bhx, gb/lhr,  fr/par, us/mci. If this is not set and if no value is provided for the IONOS_API_URL env var, the default location will be: de/fra.
-	// The location of your logging pipeline. Default: de/txl. Supported locations: de/fra, de/fra/2, de/txl, es/vit, gb/lhr, fr/par
+	// [string] The location of the Logging pipeline. Default: de/txl. Available locations: de/fra, de/fra/1, de/fra/2, de/txl, es/vit, gb/lhr, fr/par. If this is not set and if no value is provided for the IONOS_API_URL_LOGGING env var, the default location will be: de/txl.
+	// The location of your logging pipeline. Default: de/txl. Supported locations: de/fra, de/fra/1, de/fra/2, de/txl, es/vit, gb/lhr, fr/par
 	Location *string `json:"location,omitempty" tf:"location,omitempty"`
 
 	// [list] Pipeline logs, a list that contains elements with the following structure:
@@ -133,8 +133,8 @@ type PipelineObservation struct {
 
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
-	// [string] The location of the Logging pipeline. Default: de/txl, other available locations: de/fra, de/fra/2, de/txl, es/vit, gb/bhx, gb/lhr,  fr/par, us/mci. If this is not set and if no value is provided for the IONOS_API_URL env var, the default location will be: de/fra.
-	// The location of your logging pipeline. Default: de/txl. Supported locations: de/fra, de/fra/2, de/txl, es/vit, gb/lhr, fr/par
+	// [string] The location of the Logging pipeline. Default: de/txl. Available locations: de/fra, de/fra/1, de/fra/2, de/txl, es/vit, gb/lhr, fr/par. If this is not set and if no value is provided for the IONOS_API_URL_LOGGING env var, the default location will be: de/txl.
+	// The location of your logging pipeline. Default: de/txl. Supported locations: de/fra, de/fra/1, de/fra/2, de/txl, es/vit, gb/lhr, fr/par
 	Location *string `json:"location,omitempty" tf:"location,omitempty"`
 
 	// [list] Pipeline logs, a list that contains elements with the following structure:
@@ -150,8 +150,8 @@ type PipelineObservation struct {
 
 type PipelineParameters struct {
 
-	// [string] The location of the Logging pipeline. Default: de/txl, other available locations: de/fra, de/fra/2, de/txl, es/vit, gb/bhx, gb/lhr,  fr/par, us/mci. If this is not set and if no value is provided for the IONOS_API_URL env var, the default location will be: de/fra.
-	// The location of your logging pipeline. Default: de/txl. Supported locations: de/fra, de/fra/2, de/txl, es/vit, gb/lhr, fr/par
+	// [string] The location of the Logging pipeline. Default: de/txl. Available locations: de/fra, de/fra/1, de/fra/2, de/txl, es/vit, gb/lhr, fr/par. If this is not set and if no value is provided for the IONOS_API_URL_LOGGING env var, the default location will be: de/txl.
+	// The location of your logging pipeline. Default: de/txl. Supported locations: de/fra, de/fra/1, de/fra/2, de/txl, es/vit, gb/lhr, fr/par
 	// +kubebuilder:validation:Optional
 	Location *string `json:"location,omitempty" tf:"location,omitempty"`
 

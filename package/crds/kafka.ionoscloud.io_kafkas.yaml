@@ -249,8 +249,8 @@ spec:
                     type: object
                   location:
                     description: |-
-                      [string] The location of the Kafka Cluster. Possible values: de/fra, de/fra/2, de/txl, fr/par, es/vit, gb/lhr, gb/bhx, us/las, us/mci, us/ewr. If this is not set and if no value is provided for the IONOS_API_URL env var, the default location will be: de/fra.
-                      The location of your Kafka Cluster. Supported locations: de/fra, de/fra/2, de/txl, fr/par, es/vit, gb/lhr, gb/bhx, us/las, us/mci, us/ewr
+                      [string] The location of the Kafka Cluster. Possible values: de/fra, de/fra/1, de/fra/2, de/txl, fr/par, es/vit, gb/lhr, gb/bhx, us/las, us/mci, us/ewr. If this is not set and if no value is provided for the IONOS_API_URL env var, the default location will be: de/fra.
+                      The location of your Kafka Cluster. Supported locations: de/fra, de/fra/1, de/fra/2, de/txl, fr/par, es/vit, gb/lhr, gb/bhx, us/las, us/mci, us/ewr
                     type: string
                   locationRef:
                     description: Reference to a Datacenter in compute to populate
@@ -533,8 +533,8 @@ spec:
                     type: object
                   location:
                     description: |-
-                      [string] The location of the Kafka Cluster. Possible values: de/fra, de/fra/2, de/txl, fr/par, es/vit, gb/lhr, gb/bhx, us/las, us/mci, us/ewr. If this is not set and if no value is provided for the IONOS_API_URL env var, the default location will be: de/fra.
-                      The location of your Kafka Cluster. Supported locations: de/fra, de/fra/2, de/txl, fr/par, es/vit, gb/lhr, gb/bhx, us/las, us/mci, us/ewr
+                      [string] The location of the Kafka Cluster. Possible values: de/fra, de/fra/1, de/fra/2, de/txl, fr/par, es/vit, gb/lhr, gb/bhx, us/las, us/mci, us/ewr. If this is not set and if no value is provided for the IONOS_API_URL env var, the default location will be: de/fra.
+                      The location of your Kafka Cluster. Supported locations: de/fra, de/fra/1, de/fra/2, de/txl, fr/par, es/vit, gb/lhr, gb/bhx, us/las, us/mci, us/ewr
                     type: string
                   locationRef:
                     description: Reference to a Datacenter in compute to populate
@@ -773,8 +773,8 @@ spec:
                     type: string
                   location:
                     description: |-
-                      [string] The location of the Kafka Cluster. Possible values: de/fra, de/fra/2, de/txl, fr/par, es/vit, gb/lhr, gb/bhx, us/las, us/mci, us/ewr. If this is not set and if no value is provided for the IONOS_API_URL env var, the default location will be: de/fra.
-                      The location of your Kafka Cluster. Supported locations: de/fra, de/fra/2, de/txl, fr/par, es/vit, gb/lhr, gb/bhx, us/las, us/mci, us/ewr
+                      [string] The location of the Kafka Cluster. Possible values: de/fra, de/fra/1, de/fra/2, de/txl, fr/par, es/vit, gb/lhr, gb/bhx, us/las, us/mci, us/ewr. If this is not set and if no value is provided for the IONOS_API_URL env var, the default location will be: de/fra.
+                      The location of your Kafka Cluster. Supported locations: de/fra, de/fra/1, de/fra/2, de/txl, fr/par, es/vit, gb/lhr, gb/bhx, us/las, us/mci, us/ewr
                     type: string
                   name:
                     description: |-

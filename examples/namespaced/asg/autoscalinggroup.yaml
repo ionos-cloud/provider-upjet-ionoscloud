@@ -65,7 +65,7 @@ spec:
         - bootOrder: AUTO
           imageAlias: ubuntu:latest
           imagePasswordSecretRef:
-            key: password
+            key: attribute.result
             name: example-password
             namespace: upbound-system
           name: volume_example

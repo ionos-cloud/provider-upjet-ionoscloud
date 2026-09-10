@@ -98,8 +98,8 @@ spec:
         testing.upbound.io/example-name: example
     imageName: Ubuntu-20.04
     imagePasswordSecretRef:
-      key: password
-      name: pwsecret
+      key: attribute.result
+      name: example-password
       namespace: upbound-system
     name: Server Example
     nic:

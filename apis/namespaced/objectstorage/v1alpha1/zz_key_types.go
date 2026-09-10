@@ -42,10 +42,6 @@ type KeyObservation struct {
 
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
-	// (Computed)  The IONOS Object Storage Secret key.
-	// The Object Storage Secret key.
-	SecretKey *string `json:"secretKey,omitempty" tf:"secret_key,omitempty"`
-
 	// [string] The UUID of the user owning the IONOS Object Storage Key.
 	// The ID of the user that owns the key.
 	UserID *string `json:"userId,omitempty" tf:"user_id,omitempty"`

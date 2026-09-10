@@ -16,7 +16,9 @@ spec:
         testing.upbound.io/example-name: example
     diskType: SSD Standard
     imageName: "ubuntu:latest"
-    imagePassword: "Upboundtest1"
+    imagePasswordSecretRef:
+      key: attribute.result
+      name: example-password
     name: Volume Example
     serverIdSelector:
       matchLabels:
@@ -82,9 +84,8 @@ spec:
         testing.upbound.io/example-name: example
     imageName: "ubuntu:latest"
     imagePasswordSecretRef:
-      key: password
-      name: pwsecret
-      namespace: upbound-system
+      key: attribute.result
+      name: example-password
     name: Server Example
     nic:
       dhcp: true
@@ -110,12 +111,3 @@ spec:
       name: system
       size: 5
       userData: foo
----
-
-  apiVersion: v1
-  kind: Secret
-  metadata:
-    name: pwsecret
-    namespace: upbound-system
-  stringData:
-    password: "Upboundtest1"

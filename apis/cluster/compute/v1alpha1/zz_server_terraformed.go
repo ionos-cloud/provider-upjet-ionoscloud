@@ -21,7 +21,7 @@ func (mg *Server) GetTerraformResourceType() string {
 
 // GetConnectionDetailsMapping for this Server
 func (tr *Server) GetConnectionDetailsMapping() map[string]string {
-	return map[string]string{"image_password": "imagePasswordSecretRef"}
+	return map[string]string{"image_password": "imagePasswordSecretRef", "volume[*].image_password": "volume.imagePasswordSecretRef"}
 }
 
 // GetObservation of this Server

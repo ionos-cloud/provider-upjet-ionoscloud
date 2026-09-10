@@ -212,11 +212,6 @@ spec:
                   id:
                     description: (Computed)  The ID (UUID) of the AccessKey.
                     type: string
-                  secretkey:
-                    description: |-
-                      (Computed)  The secret key of the Access key.
-                      The secret key of the Access key.
-                    type: string
                 type: object
               conditions:
                 description: Conditions of the resource.

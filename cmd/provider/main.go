@@ -47,7 +47,7 @@ func main() {
 		leaderElection          = app.Flag("leader-election", "Use leader election for the controller manager.").Short('l').Default("false").OverrideDefaultFromEnvar("LEADER_ELECTION").Bool()
 		maxReconcileRate        = app.Flag("max-reconcile-rate", "The global maximum rate per second at which resources may be checked for drift from the desired state.").Default("10").Int()
 
-		terraformVersion = app.Flag("terraform-version", "Terraform version.").Envar("TERRAFORM_VERSION").Default("1.5.7").String()
+		terraformVersion = app.Flag("terraform-version", "OpenTofu version.").Envar("TERRAFORM_VERSION").Default("1.12.4").String()
 		providerSource   = app.Flag("terraform-provider-source", "Terraform provider source.").Envar("TERRAFORM_PROVIDER_SOURCE").Default("ionos-cloud/ionoscloud").String()
 		providerVersion  = app.Flag("terraform-provider-version", "Terraform provider version.").Envar("TERRAFORM_PROVIDER_VERSION").Default("6.7.12").String()
 

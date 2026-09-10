@@ -102,13 +102,13 @@ type ObjectInitParameters struct {
 	// Specifies the algorithm to use to when encrypting the object (e.g., AES256).
 	ServerSideEncryptionCustomerAlgorithm *string `json:"serverSideEncryptionCustomerAlgorithm,omitempty" tf:"server_side_encryption_customer_algorithm,omitempty"`
 
-	// [string] Specifies the 256-bit, base64-encoded encryption key to use to encrypt and decrypt your data.
-	// Specifies the 256-bit, base64-encoded encryption key to use to encrypt and decrypt your data
-	ServerSideEncryptionCustomerKey *string `json:"serverSideEncryptionCustomerKey,omitempty" tf:"server_side_encryption_customer_key,omitempty"`
-
 	// [string] Specifies the 128-bit MD5 digest of the encryption key.
 	// Specifies the 128-bit MD5 digest of the encryption key according to RFC 1321. IONOS Object Storage Object Storage uses this header for a message integrity check  to ensure that the encryption key was transmitted without error
 	ServerSideEncryptionCustomerKeyMd5 *string `json:"serverSideEncryptionCustomerKeyMd5,omitempty" tf:"server_side_encryption_customer_key_md5,omitempty"`
+
+	// [string] Specifies the 256-bit, base64-encoded encryption key to use to encrypt and decrypt your data.
+	// Specifies the 256-bit, base64-encoded encryption key to use to encrypt and decrypt your data
+	ServerSideEncryptionCustomerKeySecretRef *v1.LocalSecretKeySelector `json:"serverSideEncryptionCustomerKeySecretRef,omitempty" tf:"-"`
 
 	// [string] The path to the file to upload.
 	// The path to the file to upload
@@ -208,10 +208,6 @@ type ObjectObservation struct {
 	// [string] Specifies the algorithm to use for encrypting the object. Valid value is AES256.
 	// Specifies the algorithm to use to when encrypting the object (e.g., AES256).
 	ServerSideEncryptionCustomerAlgorithm *string `json:"serverSideEncryptionCustomerAlgorithm,omitempty" tf:"server_side_encryption_customer_algorithm,omitempty"`
-
-	// [string] Specifies the 256-bit, base64-encoded encryption key to use to encrypt and decrypt your data.
-	// Specifies the 256-bit, base64-encoded encryption key to use to encrypt and decrypt your data
-	ServerSideEncryptionCustomerKey *string `json:"serverSideEncryptionCustomerKey,omitempty" tf:"server_side_encryption_customer_key,omitempty"`
 
 	// [string] Specifies the 128-bit MD5 digest of the encryption key.
 	// Specifies the 128-bit MD5 digest of the encryption key according to RFC 1321. IONOS Object Storage Object Storage uses this header for a message integrity check  to ensure that the encryption key was transmitted without error
@@ -346,15 +342,15 @@ type ObjectParameters struct {
 	// +kubebuilder:validation:Optional
 	ServerSideEncryptionCustomerAlgorithm *string `json:"serverSideEncryptionCustomerAlgorithm,omitempty" tf:"server_side_encryption_customer_algorithm,omitempty"`
 
-	// [string] Specifies the 256-bit, base64-encoded encryption key to use to encrypt and decrypt your data.
-	// Specifies the 256-bit, base64-encoded encryption key to use to encrypt and decrypt your data
-	// +kubebuilder:validation:Optional
-	ServerSideEncryptionCustomerKey *string `json:"serverSideEncryptionCustomerKey,omitempty" tf:"server_side_encryption_customer_key,omitempty"`
-
 	// [string] Specifies the 128-bit MD5 digest of the encryption key.
 	// Specifies the 128-bit MD5 digest of the encryption key according to RFC 1321. IONOS Object Storage Object Storage uses this header for a message integrity check  to ensure that the encryption key was transmitted without error
 	// +kubebuilder:validation:Optional
 	ServerSideEncryptionCustomerKeyMd5 *string `json:"serverSideEncryptionCustomerKeyMd5,omitempty" tf:"server_side_encryption_customer_key_md5,omitempty"`
+
+	// [string] Specifies the 256-bit, base64-encoded encryption key to use to encrypt and decrypt your data.
+	// Specifies the 256-bit, base64-encoded encryption key to use to encrypt and decrypt your data
+	// +kubebuilder:validation:Optional
+	ServerSideEncryptionCustomerKeySecretRef *v1.LocalSecretKeySelector `json:"serverSideEncryptionCustomerKeySecretRef,omitempty" tf:"-"`
 
 	// [string] The path to the file to upload.
 	// The path to the file to upload

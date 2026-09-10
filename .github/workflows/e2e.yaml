@@ -134,6 +134,7 @@ jobs:
         id: run-uptest
         env:
           UPTEST_CLOUD_CREDENTIALS: ${{ secrets.UPTEST_CLOUD_CREDENTIALS }}
+          UPTEST_IMAGE_PASSWORD: ${{ secrets.UPTEST_IMAGE_PASSWORD }}
           UPTEST_EXAMPLE_LIST: ${{ needs.get-example-list.outputs.example_list }}
           UPTEST_TEST_DIR: ./_output/controlplane-dump
           UPTEST_DATASOURCE_PATH: .work/uptest-datasource.yaml

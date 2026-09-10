@@ -42,11 +42,13 @@ import (
 	dnsrecord "github.com/ionos-cloud/provider-upjet-ionoscloud/internal/controller/cluster/dns/dnsrecord"
 	dnszone "github.com/ionos-cloud/provider-upjet-ionoscloud/internal/controller/cluster/dns/dnszone"
 	inmemorydbreplicaset "github.com/ionos-cloud/provider-upjet-ionoscloud/internal/controller/cluster/inmemorydb/inmemorydbreplicaset"
+	inmemorydbcluster "github.com/ionos-cloud/provider-upjet-ionoscloud/internal/controller/cluster/inmemorydbv2/inmemorydbcluster"
 	cluster "github.com/ionos-cloud/provider-upjet-ionoscloud/internal/controller/cluster/k8s/cluster"
 	nodepool "github.com/ionos-cloud/provider-upjet-ionoscloud/internal/controller/cluster/k8s/nodepool"
 	kafka "github.com/ionos-cloud/provider-upjet-ionoscloud/internal/controller/cluster/kafka/kafka"
 	kafkatopic "github.com/ionos-cloud/provider-upjet-ionoscloud/internal/controller/cluster/kafka/kafkatopic"
 	pipeline "github.com/ionos-cloud/provider-upjet-ionoscloud/internal/controller/cluster/log/pipeline"
+	mariadbclustermariadbv2 "github.com/ionos-cloud/provider-upjet-ionoscloud/internal/controller/cluster/mariadbv2/mariadbcluster"
 	mongodbcluster "github.com/ionos-cloud/provider-upjet-ionoscloud/internal/controller/cluster/mongodb/mongodbcluster"
 	mongodbuser "github.com/ionos-cloud/provider-upjet-ionoscloud/internal/controller/cluster/mongodb/mongodbuser"
 	natgateway "github.com/ionos-cloud/provider-upjet-ionoscloud/internal/controller/cluster/natgateway/natgateway"
@@ -116,11 +118,13 @@ func Setup(mgr ctrl.Manager, o controller.Options) error {
 		dnsrecord.Setup,
 		dnszone.Setup,
 		inmemorydbreplicaset.Setup,
+		inmemorydbcluster.Setup,
 		cluster.Setup,
 		nodepool.Setup,
 		kafka.Setup,
 		kafkatopic.Setup,
 		pipeline.Setup,
+		mariadbclustermariadbv2.Setup,
 		mongodbcluster.Setup,
 		mongodbuser.Setup,
 		natgateway.Setup,
@@ -196,11 +200,13 @@ func SetupGated(mgr ctrl.Manager, o controller.Options) error {
 		dnsrecord.SetupGated,
 		dnszone.SetupGated,
 		inmemorydbreplicaset.SetupGated,
+		inmemorydbcluster.SetupGated,
 		cluster.SetupGated,
 		nodepool.SetupGated,
 		kafka.SetupGated,
 		kafkatopic.SetupGated,
 		pipeline.SetupGated,
+		mariadbclustermariadbv2.SetupGated,
 		mongodbcluster.SetupGated,
 		mongodbuser.SetupGated,
 		natgateway.SetupGated,
