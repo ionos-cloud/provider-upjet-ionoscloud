@@ -29,7 +29,13 @@ kubectl apply -f examples/install.yaml
 
 ### For more details on installation and configuration see the [Quickstart guide](docs/Quickstart.md)
 
-#### The API reference can be checked [here](https://doc.crds.dev/github.com/ionos-cloud/provider-upjet-ionoscloud).
+### Migration guides
+
+| Resource   | Guide                                             |
+|------------|---------------------------------------------------|
+| PostgreSQL | [v1 to v2](docs/Migration-PostgreSQL-v1-to-v2.md) |
+
+#### The API reference can be checked [here](https://marketplace.upbound.io/providers/ionos-cloud/provider-upjet-ionoscloud/latest).
 
 
 ## Developing
