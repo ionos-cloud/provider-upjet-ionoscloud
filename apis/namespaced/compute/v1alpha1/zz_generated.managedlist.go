@@ -44,6 +44,15 @@ func (l *DatacenterList) GetItems() []resource.Managed {
 	return items
 }
 
+// GetItems of this DatacenterNSGSelectionList.
+func (l *DatacenterNSGSelectionList) GetItems() []resource.Managed {
+	items := make([]resource.Managed, len(l.Items))
+	for i := range l.Items {
+		items[i] = &l.Items[i]
+	}
+	return items
+}
+
 // GetItems of this FirewallList.
 func (l *FirewallList) GetItems() []resource.Managed {
 	items := make([]resource.Managed, len(l.Items))
@@ -100,6 +109,24 @@ func (l *LanList) GetItems() []resource.Managed {
 
 // GetItems of this LoadbalancerList.
 func (l *LoadbalancerList) GetItems() []resource.Managed {
+	items := make([]resource.Managed, len(l.Items))
+	for i := range l.Items {
+		items[i] = &l.Items[i]
+	}
+	return items
+}
+
+// GetItems of this NSGFirewallRuleList.
+func (l *NSGFirewallRuleList) GetItems() []resource.Managed {
+	items := make([]resource.Managed, len(l.Items))
+	for i := range l.Items {
+		items[i] = &l.Items[i]
+	}
+	return items
+}
+
+// GetItems of this NSGList.
+func (l *NSGList) GetItems() []resource.Managed {
 	items := make([]resource.Managed, len(l.Items))
 	for i := range l.Items {
 		items[i] = &l.Items[i]

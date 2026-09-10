@@ -538,6 +538,29 @@ spec:
                       [string] - The desired storage type - SSD/HDD. This attribute is immutable.
                       Storage type to use
                     type: string
+                  taints:
+                    description: |-
+                      [set] Taints applied to the nodes in this pool. A taint repels pods that do not have a matching toleration. Maximum 50 taints per node pool.
+                      Taints applied to nodes in this pool. A taint repels pods that do not have a matching toleration. Maximum 50 taints per node pool.
+                    items:
+                      properties:
+                        effect:
+                          description: |-
+                            [string] Taint effect determines how a taint repels pods. One of: NoSchedule, NoExecute, PreferNoSchedule.
+                            Taint effect determines how a taint repels pods. One of: NoSchedule, NoExecute, PreferNoSchedule.
+                          type: string
+                        key:
+                          description: |-
+                            [string] Taint key. Must be a valid Kubernetes label key format. May include an optional prefix (DNS subdomain) followed by a slash.
+                            Taint key. Must be a valid Kubernetes label key format. May include an optional prefix (DNS subdomain) followed by a slash.
+                          type: string
+                        value:
+                          description: |-
+                            [string] Taint value. Must be a valid Kubernetes label value format.
+                            Optional taint value. Must be a valid Kubernetes label value format.
+                          type: string
+                      type: object
+                    type: array
                 type: object
               initProvider:
                 description: |-
@@ -1031,6 +1054,29 @@ spec:
                       [string] - The desired storage type - SSD/HDD. This attribute is immutable.
                       Storage type to use
                     type: string
+                  taints:
+                    description: |-
+                      [set] Taints applied to the nodes in this pool. A taint repels pods that do not have a matching toleration. Maximum 50 taints per node pool.
+                      Taints applied to nodes in this pool. A taint repels pods that do not have a matching toleration. Maximum 50 taints per node pool.
+                    items:
+                      properties:
+                        effect:
+                          description: |-
+                            [string] Taint effect determines how a taint repels pods. One of: NoSchedule, NoExecute, PreferNoSchedule.
+                            Taint effect determines how a taint repels pods. One of: NoSchedule, NoExecute, PreferNoSchedule.
+                          type: string
+                        key:
+                          description: |-
+                            [string] Taint key. Must be a valid Kubernetes label key format. May include an optional prefix (DNS subdomain) followed by a slash.
+                            Taint key. Must be a valid Kubernetes label key format. May include an optional prefix (DNS subdomain) followed by a slash.
+                          type: string
+                        value:
+                          description: |-
+                            [string] Taint value. Must be a valid Kubernetes label value format.
+                            Optional taint value. Must be a valid Kubernetes label value format.
+                          type: string
+                      type: object
+                    type: array
                 type: object
               managementPolicies:
                 default:
@@ -1285,6 +1331,29 @@ spec:
                       [string] - The desired storage type - SSD/HDD. This attribute is immutable.
                       Storage type to use
                     type: string
+                  taints:
+                    description: |-
+                      [set] Taints applied to the nodes in this pool. A taint repels pods that do not have a matching toleration. Maximum 50 taints per node pool.
+                      Taints applied to nodes in this pool. A taint repels pods that do not have a matching toleration. Maximum 50 taints per node pool.
+                    items:
+                      properties:
+                        effect:
+                          description: |-
+                            [string] Taint effect determines how a taint repels pods. One of: NoSchedule, NoExecute, PreferNoSchedule.
+                            Taint effect determines how a taint repels pods. One of: NoSchedule, NoExecute, PreferNoSchedule.
+                          type: string
+                        key:
+                          description: |-
+                            [string] Taint key. Must be a valid Kubernetes label key format. May include an optional prefix (DNS subdomain) followed by a slash.
+                            Taint key. Must be a valid Kubernetes label key format. May include an optional prefix (DNS subdomain) followed by a slash.
+                          type: string
+                        value:
+                          description: |-
+                            [string] Taint value. Must be a valid Kubernetes label value format.
+                            Optional taint value. Must be a valid Kubernetes label value format.
+                          type: string
+                      type: object
+                    type: array
                 type: object
               conditions:
                 description: Conditions of the resource.

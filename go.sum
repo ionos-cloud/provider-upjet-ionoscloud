@@ -281,8 +281,8 @@ github.com/ionos-cloud/sdk-go-bundle/shared v0.1.12 h1:fhhG7TmvQoSyPb1GCTN77IvXZ
 github.com/ionos-cloud/sdk-go-bundle/shared v0.1.12/go.mod h1:R/vPCwxsYxk4pcfA2Ew7Pf1fCkzmPaROxYKgnhh0wpg=
 github.com/ionos-cloud/sdk-go/v6 v6.3.11 h1:m4mX03vflm631znIPutojJxLZvxD5Mt3xv/soy0kLIc=
 github.com/ionos-cloud/sdk-go/v6 v6.3.11/go.mod h1:nUGHP4kZHAZngCVr4v6C8nuargFrtvt7GrzH/hqn7c4=
-github.com/ionos-cloud/terraform-provider-ionoscloud/v6 v6.7.36 h1:3ZeIC39KC3Rh1AF5/3nP94AFjMp2XBC34qK9AGUcZco=
-github.com/ionos-cloud/terraform-provider-ionoscloud/v6 v6.7.36/go.mod h1:cRaD6nhQ76ZbgLeWR4/hzQQXrExBB/NwQBxXlr3EyMU=
+github.com/ionos-cloud/terraform-provider-ionoscloud/v6 v6.7.37 h1:mOtpiCG12DjHVj2AFxMJMMlVGGN6g0NLTnkJVQI/a/s=
+github.com/ionos-cloud/terraform-provider-ionoscloud/v6 v6.7.37/go.mod h1:cRaD6nhQ76ZbgLeWR4/hzQQXrExBB/NwQBxXlr3EyMU=
 github.com/jbenet/go-context v0.0.0-20150711004518-d14ea06fba99 h1:BQSFePA1RWJOlocH6Fxy8MmwDt+yVQYULKfN0RoTN8A=
 github.com/jbenet/go-context v0.0.0-20150711004518-d14ea06fba99/go.mod h1:1lJo3i6rXxKeerYnT8Nvf0QmHCRC1n8sfWVwXF2Frvo=
 github.com/jhump/protoreflect v1.17.0 h1:qOEr613fac2lOuTgWN4tPAtLL7fUSbuJL5X5XumQh94=

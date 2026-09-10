@@ -1,0 +1,51 @@
+apiVersion: compute.ionoscloud.io/v1alpha1
+kind: DatacenterNSGSelection
+metadata:
+  annotations:
+    meta.upbound.io/example-id: compute/v1alpha1/datacenternsgselection
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    datacenterIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    nsgIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+
+---
+
+apiVersion: compute.ionoscloud.io/v1alpha1
+kind: NSG
+metadata:
+  annotations:
+    meta.upbound.io/example-id: compute/v1alpha1/datacenternsgselection
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    datacenterIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    description: Default NSG for the Datacenter
+    name: Default NSG
+
+---
+
+apiVersion: compute.ionoscloud.io/v1alpha1
+kind: Datacenter
+metadata:
+  annotations:
+    meta.upbound.io/example-id: compute/v1alpha1/datacenternsgselection
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    description: Datacenter Description
+    location: de/txl
+    name: Datacenter NSG Selection Example
+    secAuthProtection: false

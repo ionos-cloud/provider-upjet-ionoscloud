@@ -19,6 +19,9 @@ func (tr *CubeServer) Hub() {}
 func (tr *Datacenter) Hub() {}
 
 // Hub marks this type as a conversion hub.
+func (tr *DatacenterNSGSelection) Hub() {}
+
+// Hub marks this type as a conversion hub.
 func (tr *Firewall) Hub() {}
 
 // Hub marks this type as a conversion hub.
@@ -41,6 +44,12 @@ func (tr *Loadbalancer) Hub() {}
 
 // Hub marks this type as a conversion hub.
 func (tr *Nic) Hub() {}
+
+// Hub marks this type as a conversion hub.
+func (tr *NSG) Hub() {}
+
+// Hub marks this type as a conversion hub.
+func (tr *NSGFirewallRule) Hub() {}
 
 // Hub marks this type as a conversion hub.
 func (tr *Server) Hub() {}

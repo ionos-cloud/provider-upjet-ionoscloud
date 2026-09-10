@@ -21,6 +21,7 @@ import (
 	crossconnect "github.com/ionos-cloud/provider-upjet-ionoscloud/internal/controller/namespaced/compute/crossconnect"
 	cubeserver "github.com/ionos-cloud/provider-upjet-ionoscloud/internal/controller/namespaced/compute/cubeserver"
 	datacenter "github.com/ionos-cloud/provider-upjet-ionoscloud/internal/controller/namespaced/compute/datacenter"
+	datacenternsgselection "github.com/ionos-cloud/provider-upjet-ionoscloud/internal/controller/namespaced/compute/datacenternsgselection"
 	firewall "github.com/ionos-cloud/provider-upjet-ionoscloud/internal/controller/namespaced/compute/firewall"
 	gpuserver "github.com/ionos-cloud/provider-upjet-ionoscloud/internal/controller/namespaced/compute/gpuserver"
 	group "github.com/ionos-cloud/provider-upjet-ionoscloud/internal/controller/namespaced/compute/group"
@@ -29,6 +30,8 @@ import (
 	lan "github.com/ionos-cloud/provider-upjet-ionoscloud/internal/controller/namespaced/compute/lan"
 	loadbalancercompute "github.com/ionos-cloud/provider-upjet-ionoscloud/internal/controller/namespaced/compute/loadbalancer"
 	nic "github.com/ionos-cloud/provider-upjet-ionoscloud/internal/controller/namespaced/compute/nic"
+	nsg "github.com/ionos-cloud/provider-upjet-ionoscloud/internal/controller/namespaced/compute/nsg"
+	nsgfirewallrule "github.com/ionos-cloud/provider-upjet-ionoscloud/internal/controller/namespaced/compute/nsgfirewallrule"
 	server "github.com/ionos-cloud/provider-upjet-ionoscloud/internal/controller/namespaced/compute/server"
 	share "github.com/ionos-cloud/provider-upjet-ionoscloud/internal/controller/namespaced/compute/share"
 	snapshot "github.com/ionos-cloud/provider-upjet-ionoscloud/internal/controller/namespaced/compute/snapshot"
@@ -97,6 +100,7 @@ func Setup(mgr ctrl.Manager, o controller.Options) error {
 		crossconnect.Setup,
 		cubeserver.Setup,
 		datacenter.Setup,
+		datacenternsgselection.Setup,
 		firewall.Setup,
 		gpuserver.Setup,
 		group.Setup,
@@ -105,6 +109,8 @@ func Setup(mgr ctrl.Manager, o controller.Options) error {
 		lan.Setup,
 		loadbalancercompute.Setup,
 		nic.Setup,
+		nsg.Setup,
+		nsgfirewallrule.Setup,
 		server.Setup,
 		share.Setup,
 		snapshot.Setup,
@@ -179,6 +185,7 @@ func SetupGated(mgr ctrl.Manager, o controller.Options) error {
 		crossconnect.SetupGated,
 		cubeserver.SetupGated,
 		datacenter.SetupGated,
+		datacenternsgselection.SetupGated,
 		firewall.SetupGated,
 		gpuserver.SetupGated,
 		group.SetupGated,
@@ -187,6 +194,8 @@ func SetupGated(mgr ctrl.Manager, o controller.Options) error {
 		lan.SetupGated,
 		loadbalancercompute.SetupGated,
 		nic.SetupGated,
+		nsg.SetupGated,
+		nsgfirewallrule.SetupGated,
 		server.SetupGated,
 		share.SetupGated,
 		snapshot.SetupGated,

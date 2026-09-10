@@ -39,6 +39,44 @@ func Configure(p *config.Provider) {
 		}
 	})
 
+	p.AddResourceConfigurator("ionoscloud_nsg", func(r *config.Resource) {
+		r.ShortGroup = shortGroupName
+		r.Kind = "NSG"
+		r.References["datacenter_id"] = config.Reference{
+			TerraformName: "ionoscloud_datacenter",
+		}
+	})
+
+	p.AddResourceConfigurator("ionoscloud_nsg_firewallrule", func(r *config.Resource) {
+		r.ShortGroup = shortGroupName
+		r.Kind = "NSGFirewallRule"
+		r.References["datacenter_id"] = config.Reference{
+			TerraformName: "ionoscloud_datacenter",
+		}
+		r.References["nsg_id"] = config.Reference{
+			TerraformName: "ionoscloud_nsg",
+		}
+		r.References["source_ip"] = config.Reference{
+			TerraformName: "ionoscloud_ipblock",
+			Extractor:     "github.com/ionos-cloud/provider-upjet-ionoscloud/config/common.FirstIPBlockIP()",
+		}
+		r.References["target_ip"] = config.Reference{
+			TerraformName: "ionoscloud_ipblock",
+			Extractor:     "github.com/ionos-cloud/provider-upjet-ionoscloud/config/common.FirstIPBlockIP()",
+		}
+	})
+
+	p.AddResourceConfigurator("ionoscloud_datacenter_nsg_selection", func(r *config.Resource) {
+		r.ShortGroup = shortGroupName
+		r.Kind = "DatacenterNSGSelection"
+		r.References["datacenter_id"] = config.Reference{
+			TerraformName: "ionoscloud_datacenter",
+		}
+		r.References["nsg_id"] = config.Reference{
+			TerraformName: "ionoscloud_nsg",
+		}
+	})
+
 	p.AddResourceConfigurator("ionoscloud_backup_unit", func(r *config.Resource) {
 		r.ShortGroup = "compute"
 	})
@@ -66,6 +104,9 @@ func Configure(p *config.Provider) {
 		r.References["datacenter_id"] = config.Reference{
 			TerraformName: "ionoscloud_datacenter",
 		}
+		r.References["security_groups_ids"] = config.Reference{
+			TerraformName: "ionoscloud_nsg",
+		}
 		r.UseAsync = true
 
 		// "ips" is optional+computed: when left unset, IONOS auto-assigns a DHCP public
@@ -86,6 +127,12 @@ func Configure(p *config.Provider) {
 		r.References["nic.lan"] = config.Reference{
 			TerraformName: "ionoscloud_lan",
 		}
+		r.References["security_groups_ids"] = config.Reference{
+			TerraformName: "ionoscloud_nsg",
+		}
+		r.References["nic.security_groups_ids"] = config.Reference{
+			TerraformName: "ionoscloud_nsg",
+		}
 	})
 
 	p.AddResourceConfigurator("ionoscloud_gpu_server", func(r *config.Resource) {
@@ -97,6 +144,12 @@ func Configure(p *config.Provider) {
 		}
 		r.References["nic.lan"] = config.Reference{
 			TerraformName: "ionoscloud_lan",
+		}
+		r.References["security_groups_ids"] = config.Reference{
+			TerraformName: "ionoscloud_nsg",
+		}
+		r.References["nic.security_groups_ids"] = config.Reference{
+			TerraformName: "ionoscloud_nsg",
 		}
 
 		// The disk_type field is immutable and causes issues during updates (e.g. "volume.0.disk_type attribute is immutable").
@@ -179,6 +232,12 @@ func Configure(p *config.Provider) {
 		r.References["nic.lan"] = config.Reference{
 			TerraformName: "ionoscloud_lan",
 		}
+		r.References["security_groups_ids"] = config.Reference{
+			TerraformName: "ionoscloud_nsg",
+		}
+		r.References["nic.security_groups_ids"] = config.Reference{
+			TerraformName: "ionoscloud_nsg",
+		}
 		r.UseAsync = true
 	})
 
@@ -190,6 +249,12 @@ func Configure(p *config.Provider) {
 		}
 		r.References["nic.lan"] = config.Reference{
 			TerraformName: "ionoscloud_lan",
+		}
+		r.References["security_groups_ids"] = config.Reference{
+			TerraformName: "ionoscloud_nsg",
+		}
+		r.References["nic.security_groups_ids"] = config.Reference{
+			TerraformName: "ionoscloud_nsg",
 		}
 		r.UseAsync = true
 	})
