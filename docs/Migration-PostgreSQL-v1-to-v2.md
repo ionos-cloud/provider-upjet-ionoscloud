@@ -107,13 +107,17 @@ Record this ID — it's the actual IONOS Cloud cluster ID and will become the
 
 ### 2. Orphan the old v1 resource
 
-Set `spec.deletionPolicy: Orphan` on the v1 `PostgresqlCluster` so deleting
-the CR later does **not** delete the real cluster:
+Exclude `Delete` from `spec.managementPolicies` on the v1 `PostgresqlCluster`
+so deleting the CR later does **not** delete the real cluster:
 
 ```shell
 kubectl patch postgresqlcluster.postgresql.ionoscloud.io example \
-  --type=merge -p '{"spec":{"deletionPolicy":"Orphan"}}'
+  --type=merge -p '{"spec":{"managementPolicies":["Observe","Create","Update","LateInitialize"]}}'
 ```
+
+This is a full replacement of the list (a merge patch doesn't merge arrays
+element-by-element), so it includes every action from the schema default
+(`["*"]`) except `Delete`.
 
 ### 3. Author the new v2 resource
 
@@ -230,10 +234,10 @@ kubectl apply -f postgresqlcluster-v2.yaml
 #### Option B: Import with an Observe-only management policy (recommended)
 
 Instead of hand-translating every field, apply a v2 resource with an
-`Observe`-only management policy and an empty (or minimal)
-`spec.forProvider`. The provider will read the live cluster and populate
-`status.atProvider` for you — in the *v2* field shape — which you then copy
-into `spec.forProvider` verbatim.
+`Observe`-only management policy and a minimal `spec.forProvider`. The
+provider will read the live cluster and populate `status.atProvider` for you
+— in the *v2* field shape — which you then copy into `spec.forProvider`
+verbatim.
 
 1. Apply a minimal v2 resource, with `crossplane.io/external-name` set to the
    cluster ID from step 1 and `managementPolicies: ["Observe"]`:
@@ -247,11 +251,16 @@ into `spec.forProvider` verbatim.
        crossplane.io/external-name: "7cf6b0b3-3edb-4e78-a039-4c5cef3d81ac" # cluster ID from step 1
    spec:
      managementPolicies: ["Observe"]
-     forProvider: {}
+     forProvider: { location: de/txl } # location must match the cluster's actual location
    ```
 
-   `Observe` skips the usual required-field validation on `forProvider`, so
-   this applies cleanly even though `forProvider` is empty.
+   `Observe` skips the usual required-field validation on `forProvider` (e.g.
+   `backup`, `connections`, `credentials`), but `location` is still needed
+   even here — it's used client-side to pick the correct regional API
+   endpoint before the provider can make any call at all, so it can't be
+   left empty. Check the cluster's actual location in the IONOS Cloud
+   console, or from the v1 resource's `spec.forProvider.location`/
+   `locationSelector` if it's set directly rather than through a selector.
 
    ```shell
    kubectl apply -f postgresqlcluster-v2-observe.yaml
@@ -284,16 +293,22 @@ into `spec.forProvider` verbatim.
    observable and won't appear under `status.atProvider` regardless of the
    `jq` filter.
 
-4. Switch the resource back to full management by removing
-   `managementPolicies` (or setting it to `["*"]`) and apply again:
+4. Re-apply the manifest with the populated `spec.forProvider` from step 3,
+   still with `managementPolicies: ["Observe"]`. This has to happen *before*
+   removing `managementPolicies` since the required-field validation that
+   `Observe` skips comes back the moment the policy changes:
+
+   ```shell
+   kubectl apply -f postgresqlcluster-v2-observe.yaml
+   ```
+
+   Then switch the resource back to full management by removing
+   `managementPolicies` (or setting it to `["*"]`):
 
    ```shell
    kubectl patch postgresqlcluster.postgresqlv2.ionoscloud.io example \
      --type=merge -p '{"spec":{"managementPolicies":null}}'
    ```
-
-   Then re-apply the manifest with the populated `spec.forProvider` from
-   step 3.
 
 5. Confirm there's no drift: `SYNCED`/`READY` should stay `True` with no
    further update or replace triggered, since `spec.forProvider` now matches
@@ -315,9 +330,9 @@ example   True     True    7cf6b0b3-3edb-4e78-a039-4c5cef3d81ac   30s
 
 The `EXTERNAL-NAME` must match the cluster ID recorded in step 1. If it
 doesn't, Crossplane created a brand-new cluster instead of adopting the
-existing one — delete the new CR (with `deletionPolicy: Delete`, the
-default) before it provisions further, and check the
-`crossplane.io/external-name` annotation on the manifest you applied.
+existing one — delete the new CR (with the default `spec.managementPolicies`
+of `["*"]`, which includes `Delete`) before it provisions further, and check
+the `crossplane.io/external-name` annotation on the manifest you applied.
 
 Also check for a clean diff between the applied spec and
 `status.atProvider` — any drift here usually means a field was mistranslated
@@ -328,7 +343,8 @@ against the real cluster.
 
 Once the v2 resource is `SYNCED`/`READY` and matches the expected cluster:
 
-**DO NOT** run `kubectl delete` on the old v1 resource unless you set `spec.deletionPolicy: Orphan` in step 2. 
+**DO NOT** run `kubectl delete` on the old v1 resource unless you excluded
+`Delete` from `spec.managementPolicies` in step 2.
 If you delete the v1 resource without orphaning it first, Crossplane will delete the real cluster.
 
 ```shell
@@ -350,7 +366,7 @@ the underlying cluster keeps running, now managed solely by the v2 resource.
   `instances.storageSize`). Compare `status.atProvider` on the new resource
   against the old one's `status.atProvider` and correct the mismatched
   field.
-- **Old v1 resource deleted the real cluster**: this means
-  `deletionPolicy: Orphan` wasn't set (or wasn't applied) before deletion.
-  There is no way to recover a deleted cluster through Crossplane — restore
-  from a backup via `restoreFromBackup` if one exists.
+- **Old v1 resource deleted the real cluster**: this means `Delete` wasn't
+  excluded from `spec.managementPolicies` (or the patch wasn't applied)
+  before deletion. There is no way to recover a deleted cluster through
+  Crossplane — restore from a backup via `restoreFromBackup` if one exists.
