@@ -10770,6 +10770,11 @@ func (in *VCPUServerObservation) DeepCopyInto(out *VCPUServerObservation) {
 		*out = new(string)
 		**out = **in
 	}
+	if in.Confidential != nil {
+		in, out := &in.Confidential, &out.Confidential
+		*out = new(bool)
+		**out = **in
+	}
 	if in.Cores != nil {
 		in, out := &in.Cores, &out.Cores
 		*out = new(float64)
@@ -10779,6 +10784,17 @@ func (in *VCPUServerObservation) DeepCopyInto(out *VCPUServerObservation) {
 		in, out := &in.DatacenterID, &out.DatacenterID
 		*out = new(string)
 		**out = **in
+	}
+	if in.EnabledFeatures != nil {
+		in, out := &in.EnabledFeatures, &out.EnabledFeatures
+		*out = make([]*string, len(*in))
+		for i := range *in {
+			if (*in)[i] != nil {
+				in, out := &(*in)[i], &(*out)[i]
+				*out = new(string)
+				**out = **in
+			}
+		}
 	}
 	if in.FirewallruleID != nil {
 		in, out := &in.FirewallruleID, &out.FirewallruleID

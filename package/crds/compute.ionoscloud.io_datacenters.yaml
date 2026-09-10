@@ -262,6 +262,7 @@ spec:
                     type: array
                     x-kubernetes-list-type: set
                   id:
+                    description: (String) The UUID of the datacenter.
                     type: string
                   ipv6CidrBlock:
                     description: |-

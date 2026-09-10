@@ -15,6 +15,7 @@ import (
 
 type NSGInitParameters struct {
 
+	// [string] The ID of a Virtual Data Center.
 	// +crossplane:generate:reference:type=github.com/ionos-cloud/provider-upjet-ionoscloud/apis/cluster/compute/v1alpha1.Datacenter
 	DatacenterID *string `json:"datacenterId,omitempty" tf:"datacenter_id,omitempty"`
 
@@ -26,17 +27,22 @@ type NSGInitParameters struct {
 	// +kubebuilder:validation:Optional
 	DatacenterIDSelector *v1.Selector `json:"datacenterIdSelector,omitempty" tf:"-"`
 
+	// [string] Description for the Network Security Group.
 	Description *string `json:"description,omitempty" tf:"description,omitempty"`
 
 	// The location of the resource. This field should be used only if you are also using a file configuration and should not be configured otherwise.
 	Location *string `json:"location,omitempty" tf:"location,omitempty"`
 
+	// [string] The name of the Network Security Group.
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 }
 
 type NSGObservation struct {
+
+	// [string] The ID of a Virtual Data Center.
 	DatacenterID *string `json:"datacenterId,omitempty" tf:"datacenter_id,omitempty"`
 
+	// [string] Description for the Network Security Group.
 	Description *string `json:"description,omitempty" tf:"description,omitempty"`
 
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
@@ -44,13 +50,16 @@ type NSGObservation struct {
 	// The location of the resource. This field should be used only if you are also using a file configuration and should not be configured otherwise.
 	Location *string `json:"location,omitempty" tf:"location,omitempty"`
 
+	// [string] The name of the Network Security Group.
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
+	// (Computed) List of Firewall Rules that are part of the Network Security Group
 	RuleIds []*string `json:"ruleIds,omitempty" tf:"rule_ids,omitempty"`
 }
 
 type NSGParameters struct {
 
+	// [string] The ID of a Virtual Data Center.
 	// +crossplane:generate:reference:type=github.com/ionos-cloud/provider-upjet-ionoscloud/apis/cluster/compute/v1alpha1.Datacenter
 	// +kubebuilder:validation:Optional
 	DatacenterID *string `json:"datacenterId,omitempty" tf:"datacenter_id,omitempty"`
@@ -63,6 +72,7 @@ type NSGParameters struct {
 	// +kubebuilder:validation:Optional
 	DatacenterIDSelector *v1.Selector `json:"datacenterIdSelector,omitempty" tf:"-"`
 
+	// [string] Description for the Network Security Group.
 	// +kubebuilder:validation:Optional
 	Description *string `json:"description,omitempty" tf:"description,omitempty"`
 
@@ -70,6 +80,7 @@ type NSGParameters struct {
 	// +kubebuilder:validation:Optional
 	Location *string `json:"location,omitempty" tf:"location,omitempty"`
 
+	// [string] The name of the Network Security Group.
 	// +kubebuilder:validation:Optional
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 }
@@ -101,7 +112,7 @@ type NSGStatus struct {
 // +kubebuilder:subresource:status
 // +kubebuilder:storageversion
 
-// NSG is the Schema for the NSGs API. <no value>
+// NSG is the Schema for the NSGs API. Creates and manages IONOS CLOUD Network Security Group.
 // +kubebuilder:printcolumn:name="SYNCED",type="string",JSONPath=".status.conditions[?(@.type=='Synced')].status"
 // +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"
 // +kubebuilder:printcolumn:name="EXTERNAL-NAME",type="string",JSONPath=".metadata.annotations.crossplane\\.io/external-name"

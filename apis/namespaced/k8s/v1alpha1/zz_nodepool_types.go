@@ -223,6 +223,10 @@ type NodePoolInitParameters struct {
 	// [string] - The desired storage type - SSD/HDD. This attribute is immutable.
 	// Storage type to use
 	StorageType *string `json:"storageType,omitempty" tf:"storage_type,omitempty"`
+
+	// [set] Taints applied to the nodes in this pool. A taint repels pods that do not have a matching toleration. Maximum 50 taints per node pool.
+	// Taints applied to nodes in this pool. A taint repels pods that do not have a matching toleration. Maximum 50 taints per node pool.
+	Taints []TaintsInitParameters `json:"taints,omitempty" tf:"taints,omitempty"`
 }
 
 type NodePoolMaintenanceWindowInitParameters struct {
@@ -343,6 +347,10 @@ type NodePoolObservation struct {
 	// [string] - The desired storage type - SSD/HDD. This attribute is immutable.
 	// Storage type to use
 	StorageType *string `json:"storageType,omitempty" tf:"storage_type,omitempty"`
+
+	// [set] Taints applied to the nodes in this pool. A taint repels pods that do not have a matching toleration. Maximum 50 taints per node pool.
+	// Taints applied to nodes in this pool. A taint repels pods that do not have a matching toleration. Maximum 50 taints per node pool.
+	Taints []TaintsObservation `json:"taints,omitempty" tf:"taints,omitempty"`
 }
 
 type NodePoolParameters struct {
@@ -473,6 +481,11 @@ type NodePoolParameters struct {
 	// Storage type to use
 	// +kubebuilder:validation:Optional
 	StorageType *string `json:"storageType,omitempty" tf:"storage_type,omitempty"`
+
+	// [set] Taints applied to the nodes in this pool. A taint repels pods that do not have a matching toleration. Maximum 50 taints per node pool.
+	// Taints applied to nodes in this pool. A taint repels pods that do not have a matching toleration. Maximum 50 taints per node pool.
+	// +kubebuilder:validation:Optional
+	Taints []TaintsParameters `json:"taints,omitempty" tf:"taints,omitempty"`
 }
 
 type RoutesInitParameters struct {
@@ -508,6 +521,54 @@ type RoutesParameters struct {
 	// IPv4 or IPv6 CIDR to be routed via the interface
 	// +kubebuilder:validation:Optional
 	Network *string `json:"network" tf:"network,omitempty"`
+}
+
+type TaintsInitParameters struct {
+
+	// [string] Taint effect determines how a taint repels pods. One of: NoSchedule, NoExecute, PreferNoSchedule.
+	// Taint effect determines how a taint repels pods. One of: NoSchedule, NoExecute, PreferNoSchedule.
+	Effect *string `json:"effect,omitempty" tf:"effect,omitempty"`
+
+	// [string] Taint key. Must be a valid Kubernetes label key format. May include an optional prefix (DNS subdomain) followed by a slash.
+	// Taint key. Must be a valid Kubernetes label key format. May include an optional prefix (DNS subdomain) followed by a slash.
+	Key *string `json:"key,omitempty" tf:"key,omitempty"`
+
+	// [string] Taint value. Must be a valid Kubernetes label value format.
+	// Optional taint value. Must be a valid Kubernetes label value format.
+	Value *string `json:"value,omitempty" tf:"value,omitempty"`
+}
+
+type TaintsObservation struct {
+
+	// [string] Taint effect determines how a taint repels pods. One of: NoSchedule, NoExecute, PreferNoSchedule.
+	// Taint effect determines how a taint repels pods. One of: NoSchedule, NoExecute, PreferNoSchedule.
+	Effect *string `json:"effect,omitempty" tf:"effect,omitempty"`
+
+	// [string] Taint key. Must be a valid Kubernetes label key format. May include an optional prefix (DNS subdomain) followed by a slash.
+	// Taint key. Must be a valid Kubernetes label key format. May include an optional prefix (DNS subdomain) followed by a slash.
+	Key *string `json:"key,omitempty" tf:"key,omitempty"`
+
+	// [string] Taint value. Must be a valid Kubernetes label value format.
+	// Optional taint value. Must be a valid Kubernetes label value format.
+	Value *string `json:"value,omitempty" tf:"value,omitempty"`
+}
+
+type TaintsParameters struct {
+
+	// [string] Taint effect determines how a taint repels pods. One of: NoSchedule, NoExecute, PreferNoSchedule.
+	// Taint effect determines how a taint repels pods. One of: NoSchedule, NoExecute, PreferNoSchedule.
+	// +kubebuilder:validation:Optional
+	Effect *string `json:"effect" tf:"effect,omitempty"`
+
+	// [string] Taint key. Must be a valid Kubernetes label key format. May include an optional prefix (DNS subdomain) followed by a slash.
+	// Taint key. Must be a valid Kubernetes label key format. May include an optional prefix (DNS subdomain) followed by a slash.
+	// +kubebuilder:validation:Optional
+	Key *string `json:"key" tf:"key,omitempty"`
+
+	// [string] Taint value. Must be a valid Kubernetes label value format.
+	// Optional taint value. Must be a valid Kubernetes label value format.
+	// +kubebuilder:validation:Optional
+	Value *string `json:"value,omitempty" tf:"value,omitempty"`
 }
 
 // NodePoolSpec defines the desired state of NodePool

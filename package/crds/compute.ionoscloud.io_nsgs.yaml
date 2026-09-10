@@ -34,7 +34,8 @@ spec:
     name: v1alpha1
     schema:
       openAPIV3Schema:
-        description: NSG is the Schema for the NSGs API. <no value>
+        description: NSG is the Schema for the NSGs API. Creates and manages IONOS
+          CLOUD Network Security Group.
         properties:
           apiVersion:
             description: |-
@@ -73,6 +74,7 @@ spec:
               forProvider:
                 properties:
                   datacenterId:
+                    description: '[string] The ID of a Virtual Data Center.'
                     type: string
                   datacenterIdRef:
                     description: Reference to a Datacenter in compute to populate
@@ -151,6 +153,7 @@ spec:
                         type: object
                     type: object
                   description:
+                    description: '[string] Description for the Network Security Group.'
                     type: string
                   location:
                     description: The location of the resource. This field should be
@@ -158,6 +161,7 @@ spec:
                       not be configured otherwise.
                     type: string
                   name:
+                    description: '[string] The name of the Network Security Group.'
                     type: string
                 type: object
               initProvider:
@@ -174,6 +178,7 @@ spec:
                   autoscaler.
                 properties:
                   datacenterId:
+                    description: '[string] The ID of a Virtual Data Center.'
                     type: string
                   datacenterIdRef:
                     description: Reference to a Datacenter in compute to populate
@@ -252,6 +257,7 @@ spec:
                         type: object
                     type: object
                   description:
+                    description: '[string] Description for the Network Security Group.'
                     type: string
                   location:
                     description: The location of the resource. This field should be
@@ -259,6 +265,7 @@ spec:
                       not be configured otherwise.
                     type: string
                   name:
+                    description: '[string] The name of the Network Security Group.'
                     type: string
                 type: object
               managementPolicies:
@@ -362,8 +369,10 @@ spec:
               atProvider:
                 properties:
                   datacenterId:
+                    description: '[string] The ID of a Virtual Data Center.'
                     type: string
                   description:
+                    description: '[string] Description for the Network Security Group.'
                     type: string
                   id:
                     type: string
@@ -373,8 +382,11 @@ spec:
                       not be configured otherwise.
                     type: string
                   name:
+                    description: '[string] The name of the Network Security Group.'
                     type: string
                   ruleIds:
+                    description: (Computed) List of Firewall Rules that are part of
+                      the Network Security Group
                     items:
                       type: string
                     type: array

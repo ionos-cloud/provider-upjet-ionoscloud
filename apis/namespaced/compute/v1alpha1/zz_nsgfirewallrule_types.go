@@ -16,6 +16,7 @@ import (
 
 type NSGFirewallRuleInitParameters struct {
 
+	// [string] The ID of a Virtual Data Center.
 	// +crossplane:generate:reference:type=github.com/ionos-cloud/provider-upjet-ionoscloud/apis/namespaced/compute/v1alpha1.Datacenter
 	DatacenterID *string `json:"datacenterId,omitempty" tf:"datacenter_id,omitempty"`
 
@@ -27,15 +28,19 @@ type NSGFirewallRuleInitParameters struct {
 	// +kubebuilder:validation:Optional
 	DatacenterIDSelector *v1.NamespacedSelector `json:"datacenterIdSelector,omitempty" tf:"-"`
 
+	// [int] Defines the allowed code (from 0 to 254) if protocol ICMP is chosen.
 	IcmpCode *string `json:"icmpCode,omitempty" tf:"icmp_code,omitempty"`
 
+	// [string] Defines the allowed code (from 0 to 254) if protocol ICMP is chosen. Value null allows all codes.
 	IcmpType *string `json:"icmpType,omitempty" tf:"icmp_type,omitempty"`
 
 	// The location of the resource. This field should be used only if you are also using a file configuration and should not be configured otherwise.
 	Location *string `json:"location,omitempty" tf:"location,omitempty"`
 
+	// [string] The name of the Network Security Group.
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
+	// [string] The ID of a Network Security Group.
 	// +crossplane:generate:reference:type=github.com/ionos-cloud/provider-upjet-ionoscloud/apis/namespaced/compute/v1alpha1.NSG
 	NsgID *string `json:"nsgId,omitempty" tf:"nsg_id,omitempty"`
 
@@ -47,12 +52,16 @@ type NSGFirewallRuleInitParameters struct {
 	// +kubebuilder:validation:Optional
 	NsgIDSelector *v1.NamespacedSelector `json:"nsgIdSelector,omitempty" tf:"-"`
 
+	// [int] Defines the end range of the allowed port (from 1 to 65534) if the protocol TCP or UDP is chosen. Leave portRangeStart and portRangeEnd null to allow all ports.
 	PortRangeEnd *float64 `json:"portRangeEnd,omitempty" tf:"port_range_end,omitempty"`
 
+	// [int] Defines the start range of the allowed port (from 1 to 65534) if protocol TCP or UDP is chosen. Leave portRangeStart and portRangeEnd null to allow all ports.
 	PortRangeStart *float64 `json:"portRangeStart,omitempty" tf:"port_range_start,omitempty"`
 
+	// [string] The protocol for the rule: TCP, UDP, ICMP, ANY. Property cannot be modified after creation (disallowed in update requests); changing it forces a new resource to be created.
 	Protocol *string `json:"protocol,omitempty" tf:"protocol,omitempty"`
 
+	// (computed)[string] Only traffic originating from the respective IPv4 address is allowed. Value null allows all source IPs.
 	// +crossplane:generate:reference:type=github.com/ionos-cloud/provider-upjet-ionoscloud/apis/namespaced/compute/v1alpha1.Ipblock
 	// +crossplane:generate:reference:extractor=github.com/ionos-cloud/provider-upjet-ionoscloud/config/common.FirstIPBlockIP()
 	SourceIP *string `json:"sourceIp,omitempty" tf:"source_ip,omitempty"`
@@ -65,8 +74,10 @@ type NSGFirewallRuleInitParameters struct {
 	// +kubebuilder:validation:Optional
 	SourceIPSelector *v1.NamespacedSelector `json:"sourceIpSelector,omitempty" tf:"-"`
 
+	// [string] Only traffic originating from the respective MAC address is allowed. Valid format: aa:bb:cc:dd:ee:ff. Value null allows all source MAC address. Valid format: aa:bb:cc:dd:ee:ff.
 	SourceMac *string `json:"sourceMac,omitempty" tf:"source_mac,omitempty"`
 
+	// (Computed)[string] In case the target NIC has multiple IP addresses, only traffic directed to the respective IP address of the NIC is allowed. Value null allows all target IPs.
 	// +crossplane:generate:reference:type=github.com/ionos-cloud/provider-upjet-ionoscloud/apis/namespaced/compute/v1alpha1.Ipblock
 	// +crossplane:generate:reference:extractor=github.com/ionos-cloud/provider-upjet-ionoscloud/config/common.FirstIPBlockIP()
 	TargetIP *string `json:"targetIp,omitempty" tf:"target_ip,omitempty"`
@@ -79,42 +90,57 @@ type NSGFirewallRuleInitParameters struct {
 	// +kubebuilder:validation:Optional
 	TargetIPSelector *v1.NamespacedSelector `json:"targetIpSelector,omitempty" tf:"-"`
 
+	// (Computed)[string] The type of firewall rule. If is not specified, it will take the default value INGRESS.
 	Type *string `json:"type,omitempty" tf:"type,omitempty"`
 }
 
 type NSGFirewallRuleObservation struct {
+
+	// [string] The ID of a Virtual Data Center.
 	DatacenterID *string `json:"datacenterId,omitempty" tf:"datacenter_id,omitempty"`
 
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
+	// [int] Defines the allowed code (from 0 to 254) if protocol ICMP is chosen.
 	IcmpCode *string `json:"icmpCode,omitempty" tf:"icmp_code,omitempty"`
 
+	// [string] Defines the allowed code (from 0 to 254) if protocol ICMP is chosen. Value null allows all codes.
 	IcmpType *string `json:"icmpType,omitempty" tf:"icmp_type,omitempty"`
 
 	// The location of the resource. This field should be used only if you are also using a file configuration and should not be configured otherwise.
 	Location *string `json:"location,omitempty" tf:"location,omitempty"`
 
+	// [string] The name of the Network Security Group.
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
+	// [string] The ID of a Network Security Group.
 	NsgID *string `json:"nsgId,omitempty" tf:"nsg_id,omitempty"`
 
+	// [int] Defines the end range of the allowed port (from 1 to 65534) if the protocol TCP or UDP is chosen. Leave portRangeStart and portRangeEnd null to allow all ports.
 	PortRangeEnd *float64 `json:"portRangeEnd,omitempty" tf:"port_range_end,omitempty"`
 
+	// [int] Defines the start range of the allowed port (from 1 to 65534) if protocol TCP or UDP is chosen. Leave portRangeStart and portRangeEnd null to allow all ports.
 	PortRangeStart *float64 `json:"portRangeStart,omitempty" tf:"port_range_start,omitempty"`
 
+	// [string] The protocol for the rule: TCP, UDP, ICMP, ANY. Property cannot be modified after creation (disallowed in update requests); changing it forces a new resource to be created.
 	Protocol *string `json:"protocol,omitempty" tf:"protocol,omitempty"`
 
+	// (computed)[string] Only traffic originating from the respective IPv4 address is allowed. Value null allows all source IPs.
 	SourceIP *string `json:"sourceIp,omitempty" tf:"source_ip,omitempty"`
 
+	// [string] Only traffic originating from the respective MAC address is allowed. Valid format: aa:bb:cc:dd:ee:ff. Value null allows all source MAC address. Valid format: aa:bb:cc:dd:ee:ff.
 	SourceMac *string `json:"sourceMac,omitempty" tf:"source_mac,omitempty"`
 
+	// (Computed)[string] In case the target NIC has multiple IP addresses, only traffic directed to the respective IP address of the NIC is allowed. Value null allows all target IPs.
 	TargetIP *string `json:"targetIp,omitempty" tf:"target_ip,omitempty"`
 
+	// (Computed)[string] The type of firewall rule. If is not specified, it will take the default value INGRESS.
 	Type *string `json:"type,omitempty" tf:"type,omitempty"`
 }
 
 type NSGFirewallRuleParameters struct {
 
+	// [string] The ID of a Virtual Data Center.
 	// +crossplane:generate:reference:type=github.com/ionos-cloud/provider-upjet-ionoscloud/apis/namespaced/compute/v1alpha1.Datacenter
 	// +kubebuilder:validation:Optional
 	DatacenterID *string `json:"datacenterId,omitempty" tf:"datacenter_id,omitempty"`
@@ -127,9 +153,11 @@ type NSGFirewallRuleParameters struct {
 	// +kubebuilder:validation:Optional
 	DatacenterIDSelector *v1.NamespacedSelector `json:"datacenterIdSelector,omitempty" tf:"-"`
 
+	// [int] Defines the allowed code (from 0 to 254) if protocol ICMP is chosen.
 	// +kubebuilder:validation:Optional
 	IcmpCode *string `json:"icmpCode,omitempty" tf:"icmp_code,omitempty"`
 
+	// [string] Defines the allowed code (from 0 to 254) if protocol ICMP is chosen. Value null allows all codes.
 	// +kubebuilder:validation:Optional
 	IcmpType *string `json:"icmpType,omitempty" tf:"icmp_type,omitempty"`
 
@@ -137,9 +165,11 @@ type NSGFirewallRuleParameters struct {
 	// +kubebuilder:validation:Optional
 	Location *string `json:"location,omitempty" tf:"location,omitempty"`
 
+	// [string] The name of the Network Security Group.
 	// +kubebuilder:validation:Optional
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
+	// [string] The ID of a Network Security Group.
 	// +crossplane:generate:reference:type=github.com/ionos-cloud/provider-upjet-ionoscloud/apis/namespaced/compute/v1alpha1.NSG
 	// +kubebuilder:validation:Optional
 	NsgID *string `json:"nsgId,omitempty" tf:"nsg_id,omitempty"`
@@ -152,15 +182,19 @@ type NSGFirewallRuleParameters struct {
 	// +kubebuilder:validation:Optional
 	NsgIDSelector *v1.NamespacedSelector `json:"nsgIdSelector,omitempty" tf:"-"`
 
+	// [int] Defines the end range of the allowed port (from 1 to 65534) if the protocol TCP or UDP is chosen. Leave portRangeStart and portRangeEnd null to allow all ports.
 	// +kubebuilder:validation:Optional
 	PortRangeEnd *float64 `json:"portRangeEnd,omitempty" tf:"port_range_end,omitempty"`
 
+	// [int] Defines the start range of the allowed port (from 1 to 65534) if protocol TCP or UDP is chosen. Leave portRangeStart and portRangeEnd null to allow all ports.
 	// +kubebuilder:validation:Optional
 	PortRangeStart *float64 `json:"portRangeStart,omitempty" tf:"port_range_start,omitempty"`
 
+	// [string] The protocol for the rule: TCP, UDP, ICMP, ANY. Property cannot be modified after creation (disallowed in update requests); changing it forces a new resource to be created.
 	// +kubebuilder:validation:Optional
 	Protocol *string `json:"protocol,omitempty" tf:"protocol,omitempty"`
 
+	// (computed)[string] Only traffic originating from the respective IPv4 address is allowed. Value null allows all source IPs.
 	// +crossplane:generate:reference:type=github.com/ionos-cloud/provider-upjet-ionoscloud/apis/namespaced/compute/v1alpha1.Ipblock
 	// +crossplane:generate:reference:extractor=github.com/ionos-cloud/provider-upjet-ionoscloud/config/common.FirstIPBlockIP()
 	// +kubebuilder:validation:Optional
@@ -174,9 +208,11 @@ type NSGFirewallRuleParameters struct {
 	// +kubebuilder:validation:Optional
 	SourceIPSelector *v1.NamespacedSelector `json:"sourceIpSelector,omitempty" tf:"-"`
 
+	// [string] Only traffic originating from the respective MAC address is allowed. Valid format: aa:bb:cc:dd:ee:ff. Value null allows all source MAC address. Valid format: aa:bb:cc:dd:ee:ff.
 	// +kubebuilder:validation:Optional
 	SourceMac *string `json:"sourceMac,omitempty" tf:"source_mac,omitempty"`
 
+	// (Computed)[string] In case the target NIC has multiple IP addresses, only traffic directed to the respective IP address of the NIC is allowed. Value null allows all target IPs.
 	// +crossplane:generate:reference:type=github.com/ionos-cloud/provider-upjet-ionoscloud/apis/namespaced/compute/v1alpha1.Ipblock
 	// +crossplane:generate:reference:extractor=github.com/ionos-cloud/provider-upjet-ionoscloud/config/common.FirstIPBlockIP()
 	// +kubebuilder:validation:Optional
@@ -190,6 +226,7 @@ type NSGFirewallRuleParameters struct {
 	// +kubebuilder:validation:Optional
 	TargetIPSelector *v1.NamespacedSelector `json:"targetIpSelector,omitempty" tf:"-"`
 
+	// (Computed)[string] The type of firewall rule. If is not specified, it will take the default value INGRESS.
 	// +kubebuilder:validation:Optional
 	Type *string `json:"type,omitempty" tf:"type,omitempty"`
 }
@@ -221,7 +258,7 @@ type NSGFirewallRuleStatus struct {
 // +kubebuilder:subresource:status
 // +kubebuilder:storageversion
 
-// NSGFirewallRule is the Schema for the NSGFirewallRules API. <no value>
+// NSGFirewallRule is the Schema for the NSGFirewallRules API. Creates and manages IONOS CLOUD Network Security Group Firewall Rule.
 // +kubebuilder:printcolumn:name="SYNCED",type="string",JSONPath=".status.conditions[?(@.type=='Synced')].status"
 // +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"
 // +kubebuilder:printcolumn:name="EXTERNAL-NAME",type="string",JSONPath=".metadata.annotations.crossplane\\.io/external-name"

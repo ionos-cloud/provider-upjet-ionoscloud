@@ -161,8 +161,9 @@ spec:
                         type: object
                     type: object
                   diskType:
-                    description: '[string] The volume type: HDD or SSD. This property
-                      is immutable.'
+                    description: '[string] The volume type. Possible values: HDD,
+                      SSD, SSD Standard, SSD Premium, DAS, ISO, ESSENTIAL, BALANCED,
+                      PERFORMANCE. This property is immutable.'
                     type: string
                   exposeSerial:
                     description: |-
@@ -428,8 +429,9 @@ spec:
                         type: object
                     type: object
                   diskType:
-                    description: '[string] The volume type: HDD or SSD. This property
-                      is immutable.'
+                    description: '[string] The volume type. Possible values: HDD,
+                      SSD, SSD Standard, SSD Premium, DAS, ISO, ESSENTIAL, BALANCED,
+                      PERFORMANCE. This property is immutable.'
                     type: string
                   exposeSerial:
                     description: |-
@@ -694,8 +696,9 @@ spec:
                       virtual Machines.
                     type: boolean
                   diskType:
-                    description: '[string] The volume type: HDD or SSD. This property
-                      is immutable.'
+                    description: '[string] The volume type. Possible values: HDD,
+                      SSD, SSD Standard, SSD Premium, DAS, ISO, ESSENTIAL, BALANCED,
+                      PERFORMANCE. This property is immutable.'
                     type: string
                   exposeSerial:
                     description: |-
