@@ -3,6 +3,10 @@
 All notable changes to this project will be documented in this file.
 
 ## [Unreleased]
+
+- Fixed `ClusterProviderConfig` being deletable while namespaced managed resources still reference it: the namespaced provider-config controller now also runs the usage-accounting reconciler for `ClusterProviderConfig`, so the `in-use.crossplane.io` finalizer blocks deletion until all `ProviderConfigUsage`s are gone
+
+## [0.5.9]
 - Updated Terraform provider to v6.7.37
 - Add nsg resources
 - Updated Terraform provider to v6.7.36
