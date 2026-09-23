@@ -1,0 +1,17 @@
+{
+  "$schema": "https://docs.renovatebot.com/renovate-schema.json",
+  "extends": ["config:recommended"],
+  "docker": {
+    "enabled": true
+  },
+  "packageRules": [
+    {
+      "matchManagers": ["dockerfile"],
+      "matchFileNames": ["cluster/images/provider-upjet-ionoscloud/Dockerfile"],
+      "matchDatasources": ["docker"],
+      "matchPackageNames": ["harbor.infra.cluster.ionos.com/imagefactory-public/**"],
+      "groupName": "image factory base images",
+      "labels": ["security"]
+    }
+  ]
+}
