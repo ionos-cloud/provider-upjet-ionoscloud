@@ -1,0 +1,6 @@
+# Trivy vulnerability suppression file.
+# Add one CVE ID per line, with a comment explaining why it is accepted
+# (false positive, not exploitable in this context, fix pending upstream, etc).
+#
+# Example:
+# CVE-2024-12345 # not reachable: affected code path is not invoked by this provider
