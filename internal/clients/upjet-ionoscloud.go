@@ -13,7 +13,9 @@ import (
 	"github.com/hashicorp/terraform-plugin-framework/provider"
 	"github.com/ionos-cloud/sdk-go-bundle/shared"
 	"github.com/ionos-cloud/terraform-provider-ionoscloud/v6/services/bundleclient"
+	contractservice "github.com/ionos-cloud/terraform-provider-ionoscloud/v6/services/cloudapi/contract"
 	"github.com/ionos-cloud/terraform-provider-ionoscloud/v6/services/clientoptions"
+	diagutil "github.com/ionos-cloud/terraform-provider-ionoscloud/v6/utils/diags"
 	"github.com/pkg/errors"
 	"sigs.k8s.io/controller-runtime/pkg/client"
 
@@ -81,6 +83,19 @@ func TerraformSetupBuilder(version, providerSource, providerVersion string, fwPr
 			TerraformVersion: version,
 			Version:          providerVersion,
 		}, nil)
+
+		// Per-configuration error enricher for the SDKv2 path. upjet no-fork uses
+		// ts.Meta directly and never calls the provider's ConfigureContextFunc, so
+		// the contract number must be attached to the bundle here rather than in
+		// the TF provider's Configure (which upjet bypasses for SDKv2 resources).
+		// Resolution order matches the TF provider: explicit contract_number, then
+		// the JWT token claim, then a lazy contracts-API lookup for username/password
+		// credentials. The lookup context must be detached from the reconcile
+		// context: async operations enrich their errors after the reconcile (and
+		// its context) has ended. GetContractNumber bounds the call on its own.
+		fallbackCtx := context.WithoutCancel(ctx)
+		ionosSDKBundleClient.Diags = diagutil.NewEnricher(creds["contract_number"], creds["token"],
+			func() string { return contractservice.GetContractNumber(fallbackCtx, ionosSDKBundleClient) })
 
 		ps.Meta = *ionosSDKBundleClient
 
