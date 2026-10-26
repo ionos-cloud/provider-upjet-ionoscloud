@@ -68,7 +68,8 @@ type VolumeInitParameters_2 struct {
 	// [list] List of absolute paths to files containing a public SSH key that will be injected into IONOS CLOUD provided Linux images. Also accepts ssh keys directly. Required for IONOS CLOUD Linux images. Required if image_password is not provided. This property is immutable.
 	SSHKeys []*string `json:"sshKeys,omitempty" tf:"ssh_keys,omitempty"`
 
-	// [string] The ID of a server.
+	// [string] The ID of the server the volume is attached to. Leave it unset for a volume that is not attached to any server. Changing it attaches the volume to the new server, detaching it from the previous one first.
+	// The ID of the server the volume is attached to. Leave unset for a volume that is not attached to any server.
 	// +crossplane:generate:reference:type=github.com/ionos-cloud/provider-upjet-ionoscloud/apis/cluster/compute/v1alpha1.Server
 	ServerID *string `json:"serverId,omitempty" tf:"server_id,omitempty"`
 
@@ -165,7 +166,8 @@ type VolumeObservation_2 struct {
 	// [list] List of absolute paths to files containing a public SSH key that will be injected into IONOS CLOUD provided Linux images. Also accepts ssh keys directly. Required for IONOS CLOUD Linux images. Required if image_password is not provided. This property is immutable.
 	SSHKeys []*string `json:"sshKeys,omitempty" tf:"ssh_keys,omitempty"`
 
-	// [string] The ID of a server.
+	// [string] The ID of the server the volume is attached to. Leave it unset for a volume that is not attached to any server. Changing it attaches the volume to the new server, detaching it from the previous one first.
+	// The ID of the server the volume is attached to. Leave unset for a volume that is not attached to any server.
 	ServerID *string `json:"serverId,omitempty" tf:"server_id,omitempty"`
 
 	// [integer] The size of the volume in GB.
@@ -247,7 +249,8 @@ type VolumeParameters_2 struct {
 	// +kubebuilder:validation:Optional
 	SSHKeys []*string `json:"sshKeys,omitempty" tf:"ssh_keys,omitempty"`
 
-	// [string] The ID of a server.
+	// [string] The ID of the server the volume is attached to. Leave it unset for a volume that is not attached to any server. Changing it attaches the volume to the new server, detaching it from the previous one first.
+	// The ID of the server the volume is attached to. Leave unset for a volume that is not attached to any server.
 	// +crossplane:generate:reference:type=github.com/ionos-cloud/provider-upjet-ionoscloud/apis/cluster/compute/v1alpha1.Server
 	// +kubebuilder:validation:Optional
 	ServerID *string `json:"serverId,omitempty" tf:"server_id,omitempty"`

@@ -34,6 +34,7 @@ type DnsZoneObservation struct {
 	// [bool] Indicates if the DNS Zone is active or not. Default is true.
 	Enabled *bool `json:"enabled,omitempty" tf:"enabled,omitempty"`
 
+	// (String) The UUID of the DNS Zone.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
 	// [string] The name of the DNS Zone. This property is immutable.
