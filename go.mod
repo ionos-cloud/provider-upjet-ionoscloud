@@ -11,8 +11,8 @@ require (
 	github.com/hashicorp/terraform-json v0.27.2
 	github.com/hashicorp/terraform-plugin-framework v1.19.0
 	github.com/hashicorp/terraform-plugin-sdk/v2 v2.40.1
-	github.com/ionos-cloud/sdk-go-bundle/shared v0.1.13
-	github.com/ionos-cloud/terraform-provider-ionoscloud/v6 v6.7.39
+	github.com/ionos-cloud/sdk-go-bundle/shared v0.1.15
+	github.com/ionos-cloud/terraform-provider-ionoscloud/v6 v6.7.40
 	github.com/pkg/errors v0.9.1
 	gopkg.in/alecthomas/kingpin.v2 v2.2.6
 	k8s.io/apimachinery v0.35.3
@@ -107,6 +107,7 @@ require (
 	github.com/ionos-cloud/sdk-go-bundle/products/dbaas/mariadb/v2 v2.1.0 // indirect
 	github.com/ionos-cloud/sdk-go-bundle/products/dbaas/mariadb/v3 v3.0.0 // indirect
 	github.com/ionos-cloud/sdk-go-bundle/products/dbaas/mongo/v2 v2.1.1 // indirect
+	github.com/ionos-cloud/sdk-go-bundle/products/dbaas/mongo/v3 v3.0.1 // indirect
 	github.com/ionos-cloud/sdk-go-bundle/products/dbaas/psql/v2 v2.1.0 // indirect
 	github.com/ionos-cloud/sdk-go-bundle/products/dbaas/psql/v3 v3.1.0 // indirect
 	github.com/ionos-cloud/sdk-go-bundle/products/dns/v2 v2.2.2 // indirect

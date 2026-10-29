@@ -2564,6 +2564,148 @@ resources:
             type: '- (Optional)(Computed)[string]The cluster type, either replicaset or sharded-cluster.'
         importStatements:
             - terraform import ionoscloud_mongo_cluster.mycluser cluster uuid
+    ionoscloud_mongo_cluster_v2:
+        subCategory: Database as a Service - MongoDB v2
+        description: Creates and manages an IONOS CLOUD MongoDB V2 Cluster.
+        name: ionoscloud_mongo_cluster_v2
+        title: ionoscloud_mongo_cluster_v2
+        examples:
+            - name: example
+              manifest: |-
+                {
+                  "connections": {
+                    "datacenter_id": "${ionoscloud_datacenter.example.id}",
+                    "instance_addresses": [
+                      "192.168.1.100/24"
+                    ],
+                    "lan_id": "${ionoscloud_lan.example.id}"
+                  },
+                  "credentials": {
+                    "database": "my_database",
+                    "password": "${random_password.mongo.result}",
+                    "username": "dbadmin"
+                  },
+                  "description": "MongoDB cluster",
+                  "edition": "ENTERPRISE",
+                  "instances": {
+                    "cores": 1,
+                    "count": 1,
+                    "ram": 8,
+                    "storage_size": 10
+                  },
+                  "location": "gb/bhx",
+                  "logs_enabled": true,
+                  "maintenance_window": {
+                    "day_of_the_week": "Sunday",
+                    "time": "09:00:00"
+                  },
+                  "metrics_enabled": true,
+                  "name": "my-mongo-cluster",
+                  "snapshot": {
+                    "location": "eu-central-3",
+                    "retention_days": 7
+                  },
+                  "version": "7.0"
+                }
+              dependencies:
+                ionoscloud_datacenter.example: |-
+                    {
+                      "location": "gb/bhx",
+                      "name": "example"
+                    }
+                ionoscloud_lan.example: |-
+                    {
+                      "datacenter_id": "${ionoscloud_datacenter.example.id}",
+                      "name": "example",
+                      "public": false
+                    }
+                random_password.mongo: |-
+                    {
+                      "length": 16,
+                      "special": true
+                    }
+            - name: example
+              manifest: |-
+                {
+                  "connections": {
+                    "datacenter_id": "${ionoscloud_datacenter.example.id}",
+                    "instance_addresses": [
+                      "192.168.1.100/24"
+                    ],
+                    "lan_id": "${ionoscloud_lan.example.id}"
+                  },
+                  "credentials": {
+                    "database": "my_database",
+                    "password": "${random_password.mongo.result}",
+                    "username": "dbadmin"
+                  },
+                  "edition": "BUSINESS",
+                  "instance_count": 1,
+                  "instance_template_id": "${data.ionoscloud_mongo_templates_v2.business.items[0].id}",
+                  "location": "gb/bhx",
+                  "maintenance_window": {
+                    "day_of_the_week": "Sunday",
+                    "time": "09:00:00"
+                  },
+                  "name": "my-business-cluster",
+                  "snapshot": {
+                    "location": "eu-central-3",
+                    "retention_days": 7
+                  },
+                  "version": "7.0"
+                }
+              references:
+                instance_template_id: data.ionoscloud_mongo_templates_v2.business.items[0].id
+              dependencies:
+                random_password.mongo: |-
+                    {
+                      "length": 16,
+                      "special": true
+                    }
+            - name: example
+              manifest: '{}'
+        argumentDocs:
+            BUSINESS: — compute and storage come from a predefined template via instance_template_id, and the number of instances via instance_count.
+            ENTERPRISE: — compute and storage are set directly via the instances object; supports sharding and bi_connector_enabled.
+            bi_connector_enabled: '- (Optional)(Computed)[bool] Enables or disables the MongoDB BI Connector. Can only be enabled for the ENTERPRISE edition. Defaults to false.'
+            connection_uri: '- The connection string used to access the cluster.'
+            connections: '- (Required)[object] Connection information of the MongoDB cluster.'
+            cores: '- (Required)[int] The number of CPU cores per instance (between 1 and 62).'
+            count: '- (Required)[int] The total number of instances in the cluster, one primary and n-1 secondary (between 1 and 9).'
+            credentials: '- (Required)[object] Credentials for the initial database user to be created.'
+            database: '- (Required)[string] The name of the initial database to be created. Between 2 and 63 characters, alphanumeric and underscores only.'
+            datacenter_id: '- (Required)[string] The datacenter to connect your instance to. Immutable — changing it forces a new resource.'
+            day_of_the_week: '- (Required)[string] The name of the week day: Monday, Tuesday, Wednesday, Thursday, Friday, Saturday or Sunday.'
+            description: '- (Optional)[string] Human-readable description for the cluster.'
+            edition: '- (Required)[string] The edition of the MongoDB cluster: ENTERPRISE or BUSINESS. Changing this forces a new resource.'
+            enabled: '- (Required)[bool] Activates or deactivates sharding for this cluster.'
+            id: '- The ID (UUID) of the cluster.'
+            instance_addresses: '- (Required)[list of string] A list of IP addresses (with netmask, in CIDR notation) assigned to the cluster instances. The number of addresses must match the number of instances in the cluster. The range 10.208.0.0/12 is not available.'
+            instance_count: '- (Optional)[int] The total number of instances in the cluster, one primary and n-1 secondary (between 1 and 9). Required for the BUSINESS edition; not valid for ENTERPRISE.'
+            instance_template_id: '- (Optional)[string] The ID (UUID) of the instance template defining cores, RAM and storage (see the ionoscloud_mongo_templates_v2 data source). Required for the BUSINESS edition; not valid for ENTERPRISE. Immutable — changing it forces a new resource.'
+            instances: '- (Optional)[object] Compute and storage configuration for each instance. Required for the ENTERPRISE edition; not valid for BUSINESS.'
+            lan_id: '- (Required)[string] The numeric LAN ID to connect your instance to. Immutable — changing it forces a new resource.'
+            location: '- (Required)[string] The location of the cluster. Changing this forces a new resource. Available: gb/bhx, us/ewr.'
+            logs_enabled: '- (Optional)(Computed)[bool] Allows or disallows the collection and reporting of logs for this cluster''s observability. If the observability service is not activated on the contract, this setting is accepted but has no effect. Defaults to false.'
+            maintenance_window: '- (Required)[object] A weekly 4 hour-long window, during which maintenance might occur.'
+            metrics_enabled: '- (Optional)(Computed)[bool] Allows or disallows the collection and reporting of metrics for this cluster''s observability. If the observability service is not activated on the contract, this setting is accepted but has no effect. Defaults to false.'
+            name: '- (Required)[string] The name of the MongoDB cluster. Between 2 and 63 characters; must begin and end with an alphanumeric character, with dashes, underscores, dots and alphanumerics in between.'
+            password: '- (Required)[string] Sensitive. The password for the initial MongoDB user. Between 8 and 256 characters. Not returned by the API — will be null in state after terraform import.'
+            ram: '- (Required)[int] The amount of memory per instance in gigabytes (GB) (between 6 and 240).'
+            recovery_target_datetime: '- (Optional)[string] ISO 8601 timestamp causing the system to replay snapshots up to the specified time. Optional for create-time restore; required for in-place restore during an update.'
+            restore_from_snapshot: '- (Optional)[object] Restores the cluster from a snapshot.'
+            retention_days: '- (Required)[int] Configures how many days cluster snapshots are retained before being automatically deleted (between 1 and 365).'
+            sharding: '- (Optional)[object] Sharding properties. Can only be set for the ENTERPRISE edition.'
+            shards: '- (Optional)(Computed)[int] The number of shards to create in the cluster (between 2 and 5). When sharding is enabled, the instances count signifies the number of replicas per shard.'
+            snapshot: '- (Required)[object] Snapshot storage and retention configuration for the cluster.'
+            source_snapshot_id: '- (Optional)[string] UUID of the snapshot to restore from. Required when restore_from_snapshot is set during cluster creation; not valid for in-place restore during an update.'
+            storage_size: '- (Required)[int] The amount of storage per instance in gigabytes (GB) (between 10 and 4096).'
+            time: '- (Required)[string] Start of the maintenance window in UTC time (HH:MM:SS).'
+            timeouts: '- (Optional) Standard Terraform timeouts: create, update, delete.'
+            username: '- (Required)[string] The username of the initial MongoDB user. Between 2 and 16 characters, alphanumeric and underscores only. Some usernames are reserved for platform use.'
+            version: '- (Required)[string] The MongoDB version for the cluster, e.g. 6.0, 7.0, 8.0. See the ionoscloud_mongo_versions_v2 data source for the list of supported versions and their available upgrade paths.'
+        importStatements:
+            - terraform import ionoscloud_mongo_cluster_v2.example gb/bhx:example-id
     ionoscloud_mongo_user:
         subCategory: Database as a Service - MongoDB
         description: Creates and manages DbaaS MongoDB users.

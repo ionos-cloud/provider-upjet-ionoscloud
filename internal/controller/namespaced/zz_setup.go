@@ -54,6 +54,7 @@ import (
 	mariadbclustermariadbv2 "github.com/ionos-cloud/provider-upjet-ionoscloud/internal/controller/namespaced/mariadbv2/mariadbcluster"
 	mongodbcluster "github.com/ionos-cloud/provider-upjet-ionoscloud/internal/controller/namespaced/mongodb/mongodbcluster"
 	mongodbuser "github.com/ionos-cloud/provider-upjet-ionoscloud/internal/controller/namespaced/mongodb/mongodbuser"
+	mongodbclustermongodbv2 "github.com/ionos-cloud/provider-upjet-ionoscloud/internal/controller/namespaced/mongodbv2/mongodbcluster"
 	natgateway "github.com/ionos-cloud/provider-upjet-ionoscloud/internal/controller/namespaced/natgateway/natgateway"
 	rule "github.com/ionos-cloud/provider-upjet-ionoscloud/internal/controller/namespaced/natgateway/rule"
 	nfscluster "github.com/ionos-cloud/provider-upjet-ionoscloud/internal/controller/namespaced/nfs/nfscluster"
@@ -133,6 +134,7 @@ func Setup(mgr ctrl.Manager, o controller.Options) error {
 		mariadbclustermariadbv2.Setup,
 		mongodbcluster.Setup,
 		mongodbuser.Setup,
+		mongodbclustermongodbv2.Setup,
 		natgateway.Setup,
 		rule.Setup,
 		nfscluster.Setup,
@@ -218,6 +220,7 @@ func SetupGated(mgr ctrl.Manager, o controller.Options) error {
 		mariadbclustermariadbv2.SetupGated,
 		mongodbcluster.SetupGated,
 		mongodbuser.SetupGated,
+		mongodbclustermongodbv2.SetupGated,
 		natgateway.SetupGated,
 		rule.SetupGated,
 		nfscluster.SetupGated,
