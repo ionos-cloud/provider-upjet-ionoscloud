@@ -214,6 +214,7 @@ spec:
                       Default is true.'
                     type: boolean
                   id:
+                    description: (String) The UUID of the DNS Zone.
                     type: string
                   name:
                     description: '[string] The name of the DNS Zone. This property

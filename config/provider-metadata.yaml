@@ -813,12 +813,61 @@ resources:
                 }
             - name: example
               manifest: '{}'
+            - name: example
+              manifest: '{}'
         argumentDocs:
             description: '- (Optional)[string] The description for the DNS Zone.'
             enabled: '- (Optional)[bool] Indicates if the DNS Zone is active or not. Default is true.'
+            id: (String) The UUID of the DNS Zone.
             name: '- (Required)[string] The name of the DNS Zone. This property is immutable.'
         importStatements:
-            - terraform import ionoscloud_dns_zone.examplezone_id
+            - terraform import ionoscloud_dns_zone.example zone_id
+    ionoscloud_dns_zone_dnssec:
+        subCategory: Cloud DNS
+        description: Enables DNSSEC for a DNS Zone and exposes the DS record.
+        name: ionoscloud_dns_zone_dnssec
+        title: ionoscloud_dns_zone_dnssec
+        examples:
+            - name: example
+              manifest: |-
+                {
+                  "ksk_bits": 2048,
+                  "nsec3_iterations": 10,
+                  "nsec3_salt_bits": 64,
+                  "nsec_mode": "NSEC3",
+                  "validity": 120,
+                  "zone_id": "${ionoscloud_dns_zone.example.id}",
+                  "zsk_bits": 1024
+                }
+              references:
+                zone_id: ionoscloud_dns_zone.example.id
+              dependencies:
+                ionoscloud_dns_zone.example: |-
+                    {
+                      "name": "example.com"
+                    }
+        argumentDocs:
+            algorithm: '- The signing algorithm of the key. The API only supports RSASHA256.'
+            algorithm_number: '- The IANA DNS Security Algorithm Number (8 for RSASHA256).'
+            composed_key_data: '- The DNSKEY RDATA: flags, protocol, algorithm and public key.'
+            create: '- (Optional) How long to wait for the key to become available. Defaults to 60 minutes.'
+            digest: '- The digest of the DNSKEY.'
+            digest_algorithm_mnemonic: '- The mnemonic of the digest algorithm, e.g. SHA-256.'
+            digest_type: '- The IANA DS digest type number (e.g. 2 for SHA-256).'
+            ds_record: '- The DS record to hand over to the registrar, formatted as <key_tag> <algorithm_number> <digest_type> <digest>.'
+            flags: '- The flags of the DNSKEY record.'
+            id: '- The ID of the resource, equal to zone_id.'
+            key_tag: '- The key tag of the zone signing key.'
+            ksk_bits: '- (Required)[int] The size in bits of the key signing key. One of 1024, 2048, 4096.'
+            nsec_mode: '- (Required)[string] The authenticated denial of existence mode. One of NSEC, NSEC3.'
+            nsec3_iterations: '- (Optional)[int] The number of NSEC3 iterations. Defaults to 0.'
+            nsec3_salt_bits: '- (Optional)[int] The NSEC3 salt length in bits. Defaults to 64.'
+            public_key: '- The Base64 encoded public key of the DNSKEY record.'
+            validity: '- (Required)[int] The signature validity in days.'
+            zone_id: '- (Required)[string] The ID (UUID) of the DNS zone. Changing it recreates the resource.'
+            zsk_bits: '- (Required)[int] The size in bits of the zone signing key. One of 1024, 2048, 4096.'
+        importStatements:
+            - terraform import ionoscloud_dns_zone_dnssec.example zone_id
     ionoscloud_firewall:
         subCategory: Compute Engine
         description: Creates and manages Firewall Rules.
@@ -1351,14 +1400,17 @@ resources:
                   "name": "IP Block Example",
                   "size": 1
                 }
+            - name: example
+              manifest: '{}'
         argumentDocs:
+            id: (String) The UUID of the IP Block.
             ip_consumers: (Computed) Read-Only attribute. Lists consumption detail of an individual ip
             ips: '- (Computed)[integer] The list of IP addresses associated with this block.'
             location: '- (Required)[string] The regional location for this IP Block: us/las, us/ewr, de/fra, de/fkb.'
             name: '- (Optional)[string] The name of Ip Block'
             size: '- (Required)[integer] The number of IP addresses to reserve for this block.'
         importStatements:
-            - terraform import ionoscloud_ipblock.myipblock ipblock uuid
+            - terraform import ionoscloud_ipblock.myipblock ipblock_uuid
     ionoscloud_ipfailover:
         subCategory: Compute Engine
         description: Creates and manages ipfailover objects.
@@ -1977,10 +2029,46 @@ resources:
                       "name": "Datacenter Example",
                       "sec_auth_protection": false
                     }
+            - name: general
+              manifest: |-
+                {
+                  "datacenter_id": "${ionoscloud_datacenter.example.id}",
+                  "ipv4_cidr_block": "10.5.0.0/24",
+                  "name": "Lan /24 Example",
+                  "public": false
+                }
+              references:
+                datacenter_id: ionoscloud_datacenter.example.id
+              dependencies:
+                ionoscloud_datacenter.example: |-
+                    {
+                      "description": "Datacenter Description",
+                      "location": "de/txl",
+                      "name": "Datacenter Example",
+                      "sec_auth_protection": false
+                    }
+            - name: small
+              manifest: |-
+                {
+                  "datacenter_id": "${ionoscloud_datacenter.example.id}",
+                  "ipv4_cidr_block": "192.168.42.0/28",
+                  "name": "Lan /28 Example",
+                  "public": false
+                }
+              references:
+                datacenter_id: ionoscloud_datacenter.example.id
+              dependencies:
+                ionoscloud_datacenter.example: |-
+                    {
+                      "description": "Datacenter Description",
+                      "location": "de/txl",
+                      "name": "Datacenter Example",
+                      "sec_auth_protection": false
+                    }
         argumentDocs:
             datacenter_id: '- (Required)[string] The ID of a Virtual Data Center.'
             ip_failover: '- (Computed) IP failover configurations for lan'
-            ipv4_cidr_block: '- (Computed)[String] For public LANs this property is null, for private LANs it contains the private IPv4 CIDR range. This property is a read only property.'
+            ipv4_cidr_block: '- (Computed, Optional)[String] The IPv4 CIDR block of a private LAN, e.g. 10.5.0.0/24. If omitted, a /23 block from the 10.0.0.0/8 range is assigned automatically. A custom block must be within a private RFC 1918 range (10.0.0.0/8, 172.16.0.0/12 or 192.168.0.0/16), have a prefix length between /23 and /28, and be aligned to its prefix boundary (10.5.0.0/24, not 10.5.0.1/24). It can only be set on private LANs. Changing it updates the LAN in place; removing it from the configuration keeps the current block. If the API rejects a block, the error contains the API error code: 536 (not aligned to its prefix boundary), 602 (overlaps a block already in use), 654 (not a private range), 655 (larger than /23) or 656 (set on a public LAN).'
             ipv6_cidr_block: '- (Computed, Optional) Contains the LAN''s /64 IPv6 CIDR block if this LAN is IPv6 enabled. ''AUTO'' will result in enabling this LAN for IPv6 and automatically assign a /64 IPv6 CIDR block to this LAN. If you specify your own IPv6 CIDR block then you must provide a unique /64 block, which is inside the IPv6 CIDR block of the virtual datacenter and unique inside all LANs from this virtual datacenter.'
             name: '- (Optional)[string] The name of the LAN.'
             pcc: '- (Optional)[String] The unique id of a ionoscloud_private_crossconnect resource, in order. It needs to be ensured that IP addresses of the NICs of all LANs connected to a given Cross Connect is not duplicated and belongs to the same subnet range'
@@ -5556,7 +5644,7 @@ resources:
             pci_slot: '- (Computed) The PCI slot number of the storage volume. Null for volumes not mounted to any VM.'
             ram_hot_plug: '- (Computed)[string] Is capable of memory hot plug (no reboot required)'
             require_legacy_bios: '- (Optional)(Computed)[boolean] Indicates if the image requires the legacy BIOS for compatibility or specific needs. During creation, if an image is used, the value will be inherited from the image, regardless of the value set in the plan. Later on, the value can be updated.'
-            server_id: '- (Required)[string] The ID of a server.'
+            server_id: '- (Optional)[string] The ID of the server the volume is attached to. Leave it unset for a volume that is not attached to any server. Changing it attaches the volume to the new server, detaching it from the previous one first.'
             size: '-  (Required)[integer] The size of the volume in GB.'
             ssh_key_path: '-  (Optional)[list] List of absolute paths to files containing a public SSH key that will be injected into IONOS CLOUD provided Linux images. Also accepts ssh keys directly. Required for IONOS CLOUD Linux images. Required if image_password is not provided. This property is immutable.'
             ssh_keys: '-  (Optional)[list] List of absolute paths to files containing a public SSH key that will be injected into IONOS CLOUD provided Linux images. Also accepts ssh keys directly. Required for IONOS CLOUD Linux images. Required if image_password is not provided. This property is immutable.'
@@ -5564,6 +5652,7 @@ resources:
             user_data: '- (Optional)[string] The cloud-init configuration for the volume as base64 encoded string. The property is immutable and is only allowed to be set on a new volume creation. This option will work only with cloud-init compatible images.'
         importStatements:
             - terraform import ionoscloud_volume.myvolume datacenter uuid/server uuid/volume uuid
+            - terraform import ionoscloud_volume.myvolume datacenter uuid/volume uuid
     ionoscloud_vpn_ipsec_gateway:
         subCategory: VPN
         description: IPSec Gateway

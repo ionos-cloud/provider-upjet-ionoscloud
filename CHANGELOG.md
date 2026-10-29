@@ -4,6 +4,7 @@ All notable changes to this project will be documented in this file.
 
 ## [Unreleased]
 
+- Security: bumped Go to 1.26.10 (stdlib CVE-2026-78663, CVE-2026-56857), `golang.org/x/net` to v0.61.0 (CVE-2026-78663), OpenTofu to v1.13.2 and the bundled Terraform provider to v6.7.39 so every Go binary in the image is rebuilt with fixed toolchain/dependencies
 - Fixed `ClusterProviderConfig` being deletable while namespaced managed resources still reference it: the namespaced provider-config controller now also runs the usage-accounting reconciler for `ClusterProviderConfig`, so the `in-use.crossplane.io` finalizer blocks deletion until all `ProviderConfigUsage`s are gone
 
 ## [0.5.9]
