@@ -28,6 +28,10 @@ type BucketVersioningInitParameters struct {
 	// Selector for a Bucket in objectstorage to populate bucket.
 	// +kubebuilder:validation:Optional
 	BucketSelector *v1.NamespacedSelector `json:"bucketSelector,omitempty" tf:"-"`
+
+	// [block] A block of versioning_configuration as defined below.
+	// The versioning configuration of the bucket.
+	VersioningConfiguration *VersioningConfigurationInitParameters `json:"versioningConfiguration,omitempty" tf:"versioning_configuration,omitempty"`
 }
 
 type BucketVersioningObservation struct {
@@ -58,6 +62,11 @@ type BucketVersioningParameters struct {
 	// Selector for a Bucket in objectstorage to populate bucket.
 	// +kubebuilder:validation:Optional
 	BucketSelector *v1.NamespacedSelector `json:"bucketSelector,omitempty" tf:"-"`
+
+	// [block] A block of versioning_configuration as defined below.
+	// The versioning configuration of the bucket.
+	// +kubebuilder:validation:Optional
+	VersioningConfiguration *VersioningConfigurationParameters `json:"versioningConfiguration,omitempty" tf:"versioning_configuration,omitempty"`
 }
 
 type VersioningConfigurationInitParameters struct {
@@ -131,8 +140,9 @@ type BucketVersioningStatus struct {
 type BucketVersioning struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	Spec              BucketVersioningSpec   `json:"spec"`
-	Status            BucketVersioningStatus `json:"status,omitempty"`
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.versioningConfiguration) || (has(self.initProvider) && has(self.initProvider.versioningConfiguration))",message="spec.forProvider.versioningConfiguration is a required parameter"
+	Spec   BucketVersioningSpec   `json:"spec"`
+	Status BucketVersioningStatus `json:"status,omitempty"`
 }
 
 // +kubebuilder:object:root=true

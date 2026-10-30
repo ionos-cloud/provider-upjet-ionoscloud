@@ -11,6 +11,8 @@ spec:
     bucketSelector:
       matchLabels:
         testing.upbound.io/example-name: example
+    versioningConfiguration:
+    - status: Enabled
 
 ---
 

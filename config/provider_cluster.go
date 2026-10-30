@@ -55,6 +55,7 @@ func GetProvider(fwProvider fwprovider.Provider, sdkProvider *schema.Provider, g
 		configure(pc)
 	}
 	pc.ConfigureResources()
+	fixRequiredComputedFields(pc)
 	addTFSingletonConversion(pc)
 	return pc, nil
 }
