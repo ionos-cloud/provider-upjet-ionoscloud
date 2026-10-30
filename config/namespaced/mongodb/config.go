@@ -32,6 +32,20 @@ func Configure(p *config.Provider) {
 	)
 
 	p.AddResourceConfigurator(
+		"ionoscloud_mongo_cluster_v2", func(r *config.Resource) {
+			r.ShortGroup = "mongodbv2"
+			r.Kind = "MongodbCluster"
+			r.References["connections.datacenter_id"] = config.Reference{
+				TerraformName: "ionoscloud_datacenter",
+			}
+			r.References["connections.lan_id"] = config.Reference{
+				TerraformName: "ionoscloud_lan",
+			}
+			r.UseAsync = true
+		},
+	)
+
+	p.AddResourceConfigurator(
 		"ionoscloud_mongo_user", func(r *config.Resource) {
 			r.ShortGroup = "mongodb"
 			r.Kind = "MongodbUser"
