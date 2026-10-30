@@ -95,6 +95,7 @@ func GetProviderNamespaced(fwProvider fwprovider.Provider, sdkProvider *schema.P
 		configure(pc)
 	}
 	pc.ConfigureResources()
+	fixRequiredComputedFields(pc)
 	addTFSingletonConversion(pc)
 	return pc, nil
 }

@@ -153,6 +153,18 @@ spec:
                       [block] A block of rule as defined below.
                       Specifies the default server-side encryption configuration.
                     items:
+                      properties:
+                        applyServerSideEncryptionByDefault:
+                          description: |-
+                            [block] Defines the default encryption settings.
+                            Defines the default encryption settings.
+                          properties:
+                            sseAlgorithm:
+                              description: |-
+                                [string] Server-side encryption algorithm to use. Valid values are 'AES256'
+                                Server-side encryption algorithm to use. Valid values are 'AES256'
+                              type: string
+                          type: object
                       type: object
                     type: array
                 type: object
@@ -261,6 +273,18 @@ spec:
                       [block] A block of rule as defined below.
                       Specifies the default server-side encryption configuration.
                     items:
+                      properties:
+                        applyServerSideEncryptionByDefault:
+                          description: |-
+                            [block] Defines the default encryption settings.
+                            Defines the default encryption settings.
+                          properties:
+                            sseAlgorithm:
+                              description: |-
+                                [string] Server-side encryption algorithm to use. Valid values are 'AES256'
+                                Server-side encryption algorithm to use. Valid values are 'AES256'
+                              type: string
+                          type: object
                       type: object
                     type: array
                 type: object
