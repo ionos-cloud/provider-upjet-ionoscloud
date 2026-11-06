@@ -25,6 +25,7 @@ import (
 	v1alpha1log "github.com/ionos-cloud/provider-upjet-ionoscloud/apis/namespaced/log/v1alpha1"
 	v1alpha1mariadbv2 "github.com/ionos-cloud/provider-upjet-ionoscloud/apis/namespaced/mariadbv2/v1alpha1"
 	v1alpha1mongodb "github.com/ionos-cloud/provider-upjet-ionoscloud/apis/namespaced/mongodb/v1alpha1"
+	v1alpha1mongodbv2 "github.com/ionos-cloud/provider-upjet-ionoscloud/apis/namespaced/mongodbv2/v1alpha1"
 	v1alpha1natgateway "github.com/ionos-cloud/provider-upjet-ionoscloud/apis/namespaced/natgateway/v1alpha1"
 	v1alpha1nfs "github.com/ionos-cloud/provider-upjet-ionoscloud/apis/namespaced/nfs/v1alpha1"
 	v1alpha1nlb "github.com/ionos-cloud/provider-upjet-ionoscloud/apis/namespaced/nlb/v1alpha1"
@@ -55,6 +56,7 @@ func init() {
 		v1alpha1log.SchemeBuilder.AddToScheme,
 		v1alpha1mariadbv2.SchemeBuilder.AddToScheme,
 		v1alpha1mongodb.SchemeBuilder.AddToScheme,
+		v1alpha1mongodbv2.SchemeBuilder.AddToScheme,
 		v1alpha1natgateway.SchemeBuilder.AddToScheme,
 		v1alpha1nfs.SchemeBuilder.AddToScheme,
 		v1alpha1nlb.SchemeBuilder.AddToScheme,

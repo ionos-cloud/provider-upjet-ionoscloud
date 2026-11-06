@@ -17,6 +17,8 @@ type IPConsumersInitParameters struct {
 }
 
 type IPConsumersObservation struct {
+
+	// (String) The UUID of the IP Block.
 	DatacenterID *string `json:"datacenterId,omitempty" tf:"datacenter_id,omitempty"`
 
 	// [string] The name of Ip Block
@@ -24,14 +26,18 @@ type IPConsumersObservation struct {
 
 	IP *string `json:"ip,omitempty" tf:"ip,omitempty"`
 
+	// (String) The UUID of the IP Block.
 	K8SClusterUUID *string `json:"k8sClusterUuid,omitempty" tf:"k8s_cluster_uuid,omitempty"`
 
+	// (String) The UUID of the IP Block.
 	K8SNodepoolUUID *string `json:"k8sNodepoolUuid,omitempty" tf:"k8s_nodepool_uuid,omitempty"`
 
 	Mac *string `json:"mac,omitempty" tf:"mac,omitempty"`
 
+	// (String) The UUID of the IP Block.
 	NicID *string `json:"nicId,omitempty" tf:"nic_id,omitempty"`
 
+	// (String) The UUID of the IP Block.
 	ServerID *string `json:"serverId,omitempty" tf:"server_id,omitempty"`
 
 	// [string] The name of Ip Block
@@ -57,6 +63,8 @@ type IpblockInitParameters struct {
 }
 
 type IpblockObservation struct {
+
+	// (String) The UUID of the IP Block.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
 	// Only attribute. Lists consumption detail of an individual ip

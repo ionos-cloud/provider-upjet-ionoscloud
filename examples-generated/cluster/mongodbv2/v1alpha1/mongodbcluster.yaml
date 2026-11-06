@@ -1,0 +1,77 @@
+apiVersion: mongodbv2.ionoscloud.io/v1alpha1
+kind: MongodbCluster
+metadata:
+  annotations:
+    meta.upbound.io/example-id: mongodbv2/v1alpha1/mongodbcluster
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    connections:
+      datacenterIdSelector:
+        matchLabels:
+          testing.upbound.io/example-name: example
+      instanceAddresses:
+      - 192.168.1.100/24
+      lanIdSelector:
+        matchLabels:
+          testing.upbound.io/example-name: example
+    credentials:
+      database: my_database
+      passwordSecretRef:
+        key: attribute.result
+        name: example-password
+        namespace: upbound-system
+      username: dbadmin
+    description: MongoDB cluster
+    edition: ENTERPRISE
+    instances:
+      cores: 1
+      count: 1
+      ram: 8
+      storageSize: 10
+    location: gb/bhx
+    logsEnabled: true
+    maintenanceWindow:
+      dayOfTheWeek: Sunday
+      time: "09:00:00"
+    metricsEnabled: true
+    name: my-mongo-cluster
+    snapshot:
+      location: eu-central-3
+      retentionDays: 7
+    version: "7.0"
+
+---
+
+apiVersion: compute.ionoscloud.io/v1alpha1
+kind: Datacenter
+metadata:
+  annotations:
+    meta.upbound.io/example-id: mongodbv2/v1alpha1/mongodbcluster
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    location: gb/bhx
+    name: example
+
+---
+
+apiVersion: compute.ionoscloud.io/v1alpha1
+kind: Lan
+metadata:
+  annotations:
+    meta.upbound.io/example-id: mongodbv2/v1alpha1/mongodbcluster
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    datacenterIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    name: example
+    public: false

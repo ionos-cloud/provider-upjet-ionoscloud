@@ -204,7 +204,9 @@ spec:
                       Indicates if the image requires the legacy BIOS for compatibility or specific needs.
                     type: boolean
                   serverId:
-                    description: '[string] The ID of a server.'
+                    description: |-
+                      [string] The ID of the server the volume is attached to. Leave it unset for a volume that is not attached to any server. Changing it attaches the volume to the new server, detaching it from the previous one first.
+                      The ID of the server the volume is attached to. Leave unset for a volume that is not attached to any server.
                     type: string
                   serverIdRef:
                     description: Reference to a Server in compute to populate serverId.
@@ -472,7 +474,9 @@ spec:
                       Indicates if the image requires the legacy BIOS for compatibility or specific needs.
                     type: boolean
                   serverId:
-                    description: '[string] The ID of a server.'
+                    description: |-
+                      [string] The ID of the server the volume is attached to. Leave it unset for a volume that is not attached to any server. Changing it attaches the volume to the new server, detaching it from the previous one first.
+                      The ID of the server the volume is attached to. Leave unset for a volume that is not attached to any server.
                     type: string
                   serverIdRef:
                     description: Reference to a Server in compute to populate serverId.
@@ -750,7 +754,9 @@ spec:
                       Indicates if the image requires the legacy BIOS for compatibility or specific needs.
                     type: boolean
                   serverId:
-                    description: '[string] The ID of a server.'
+                    description: |-
+                      [string] The ID of the server the volume is attached to. Leave it unset for a volume that is not attached to any server. Changing it attaches the volume to the new server, detaching it from the previous one first.
+                      The ID of the server the volume is attached to. Leave unset for a volume that is not attached to any server.
                     type: string
                   size:
                     description: '[integer] The size of the volume in GB.'

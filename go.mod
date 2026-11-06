@@ -1,6 +1,6 @@
 module github.com/ionos-cloud/provider-upjet-ionoscloud
 
-go 1.26.3
+go 1.26.10
 
 require (
 	dario.cat/mergo v1.0.2
@@ -11,8 +11,8 @@ require (
 	github.com/hashicorp/terraform-json v0.27.2
 	github.com/hashicorp/terraform-plugin-framework v1.19.0
 	github.com/hashicorp/terraform-plugin-sdk/v2 v2.40.1
-	github.com/ionos-cloud/sdk-go-bundle/shared v0.1.12
-	github.com/ionos-cloud/terraform-provider-ionoscloud/v6 v6.7.37
+	github.com/ionos-cloud/sdk-go-bundle/shared v0.1.15
+	github.com/ionos-cloud/terraform-provider-ionoscloud/v6 v6.7.40
 	github.com/pkg/errors v0.9.1
 	gopkg.in/alecthomas/kingpin.v2 v2.2.6
 	k8s.io/apimachinery v0.35.3
@@ -100,12 +100,14 @@ require (
 	github.com/inconshreveable/mousetrap v1.1.0 // indirect
 	github.com/ionos-cloud/sdk-go-bundle/products/cdn/v2 v2.1.0 // indirect
 	github.com/ionos-cloud/sdk-go-bundle/products/cert/v2 v2.2.0 // indirect
+	github.com/ionos-cloud/sdk-go-bundle/products/compute/v2 v2.0.9 // indirect
 	github.com/ionos-cloud/sdk-go-bundle/products/containerregistry/v2 v2.1.0 // indirect
 	github.com/ionos-cloud/sdk-go-bundle/products/dbaas/inmemorydb/v2 v2.0.1 // indirect
 	github.com/ionos-cloud/sdk-go-bundle/products/dbaas/inmemorydb/v3 v3.0.0 // indirect
 	github.com/ionos-cloud/sdk-go-bundle/products/dbaas/mariadb/v2 v2.1.0 // indirect
 	github.com/ionos-cloud/sdk-go-bundle/products/dbaas/mariadb/v3 v3.0.0 // indirect
 	github.com/ionos-cloud/sdk-go-bundle/products/dbaas/mongo/v2 v2.1.1 // indirect
+	github.com/ionos-cloud/sdk-go-bundle/products/dbaas/mongo/v3 v3.0.1 // indirect
 	github.com/ionos-cloud/sdk-go-bundle/products/dbaas/psql/v2 v2.1.0 // indirect
 	github.com/ionos-cloud/sdk-go-bundle/products/dbaas/psql/v3 v3.1.0 // indirect
 	github.com/ionos-cloud/sdk-go-bundle/products/dns/v2 v2.2.2 // indirect
@@ -118,7 +120,6 @@ require (
 	github.com/ionos-cloud/sdk-go-bundle/products/userobjectstorage/v2 v2.0.5 // indirect
 	github.com/ionos-cloud/sdk-go-bundle/products/vmautoscaling/v2 v2.0.1 // indirect
 	github.com/ionos-cloud/sdk-go-bundle/products/vpn/v2 v2.0.2 // indirect
-	github.com/ionos-cloud/sdk-go/v6 v6.3.11 // indirect
 	github.com/jmespath/go-jmespath v0.4.0 // indirect
 	github.com/json-iterator/go v1.1.12 // indirect
 	github.com/mattn/go-colorable v0.1.14 // indirect
@@ -152,26 +153,26 @@ require (
 	github.com/yuin/goldmark v1.4.13 // indirect
 	github.com/zclconf/go-cty v1.18.1 // indirect
 	github.com/zclconf/go-cty-yaml v1.0.3 // indirect
-	go.opentelemetry.io/otel v1.40.0 // indirect
-	go.opentelemetry.io/otel/trace v1.40.0 // indirect
+	go.opentelemetry.io/otel v1.44.0 // indirect
+	go.opentelemetry.io/otel/trace v1.44.0 // indirect
 	go.uber.org/multierr v1.11.0 // indirect
 	go.uber.org/zap v1.27.1 // indirect
 	go.yaml.in/yaml/v2 v2.4.3 // indirect
 	go.yaml.in/yaml/v3 v3.0.4 // indirect
-	golang.org/x/crypto v0.53.0 // indirect
-	golang.org/x/mod v0.37.0 // indirect
-	golang.org/x/net v0.56.0 // indirect
-	golang.org/x/oauth2 v0.34.0 // indirect
-	golang.org/x/sync v0.21.0 // indirect
-	golang.org/x/sys v0.46.0 // indirect
-	golang.org/x/term v0.44.0 // indirect
-	golang.org/x/text v0.39.0 // indirect
+	golang.org/x/crypto v0.58.0 // indirect
+	golang.org/x/mod v0.41.0 // indirect
+	golang.org/x/net v0.61.0 // indirect
+	golang.org/x/oauth2 v0.36.0 // indirect
+	golang.org/x/sync v0.24.0 // indirect
+	golang.org/x/sys v0.49.0 // indirect
+	golang.org/x/term v0.47.0 // indirect
+	golang.org/x/text v0.43.0 // indirect
 	golang.org/x/time v0.14.0 // indirect
-	golang.org/x/tools v0.47.0 // indirect
+	golang.org/x/tools v0.51.0 // indirect
 	gomodules.xyz/jsonpatch/v2 v2.5.0 // indirect
 	google.golang.org/appengine v1.6.8 // indirect
-	google.golang.org/genproto/googleapis/rpc v0.0.0-20260203192932-546029d2fa20 // indirect
-	google.golang.org/grpc v1.79.3 // indirect
+	google.golang.org/genproto/googleapis/rpc v0.0.0-20260706201446-f0a921348800 // indirect
+	google.golang.org/grpc v1.84.0 // indirect
 	google.golang.org/protobuf v1.36.11 // indirect
 	gopkg.in/evanphx/json-patch.v4 v4.13.0 // indirect
 	gopkg.in/inf.v0 v0.9.1 // indirect

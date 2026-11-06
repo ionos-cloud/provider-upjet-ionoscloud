@@ -4798,6 +4798,11 @@ func (in *LanInitParameters) DeepCopyInto(out *LanInitParameters) {
 		*out = make([]IPFailoverInitParameters, len(*in))
 		copy(*out, *in)
 	}
+	if in.IPv4CidrBlock != nil {
+		in, out := &in.IPv4CidrBlock, &out.IPv4CidrBlock
+		*out = new(string)
+		**out = **in
+	}
 	if in.IPv6CidrBlock != nil {
 		in, out := &in.IPv6CidrBlock, &out.IPv6CidrBlock
 		*out = new(string)
@@ -4961,6 +4966,11 @@ func (in *LanParameters) DeepCopyInto(out *LanParameters) {
 		in, out := &in.IPFailover, &out.IPFailover
 		*out = make([]IPFailoverParameters, len(*in))
 		copy(*out, *in)
+	}
+	if in.IPv4CidrBlock != nil {
+		in, out := &in.IPv4CidrBlock, &out.IPv4CidrBlock
+		*out = new(string)
+		**out = **in
 	}
 	if in.IPv6CidrBlock != nil {
 		in, out := &in.IPv6CidrBlock, &out.IPv6CidrBlock

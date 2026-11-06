@@ -813,12 +813,61 @@ resources:
                 }
             - name: example
               manifest: '{}'
+            - name: example
+              manifest: '{}'
         argumentDocs:
             description: '- (Optional)[string] The description for the DNS Zone.'
             enabled: '- (Optional)[bool] Indicates if the DNS Zone is active or not. Default is true.'
+            id: (String) The UUID of the DNS Zone.
             name: '- (Required)[string] The name of the DNS Zone. This property is immutable.'
         importStatements:
-            - terraform import ionoscloud_dns_zone.examplezone_id
+            - terraform import ionoscloud_dns_zone.example zone_id
+    ionoscloud_dns_zone_dnssec:
+        subCategory: Cloud DNS
+        description: Enables DNSSEC for a DNS Zone and exposes the DS record.
+        name: ionoscloud_dns_zone_dnssec
+        title: ionoscloud_dns_zone_dnssec
+        examples:
+            - name: example
+              manifest: |-
+                {
+                  "ksk_bits": 2048,
+                  "nsec3_iterations": 10,
+                  "nsec3_salt_bits": 64,
+                  "nsec_mode": "NSEC3",
+                  "validity": 120,
+                  "zone_id": "${ionoscloud_dns_zone.example.id}",
+                  "zsk_bits": 1024
+                }
+              references:
+                zone_id: ionoscloud_dns_zone.example.id
+              dependencies:
+                ionoscloud_dns_zone.example: |-
+                    {
+                      "name": "example.com"
+                    }
+        argumentDocs:
+            algorithm: '- The signing algorithm of the key. The API only supports RSASHA256.'
+            algorithm_number: '- The IANA DNS Security Algorithm Number (8 for RSASHA256).'
+            composed_key_data: '- The DNSKEY RDATA: flags, protocol, algorithm and public key.'
+            create: '- (Optional) How long to wait for the key to become available. Defaults to 60 minutes.'
+            digest: '- The digest of the DNSKEY.'
+            digest_algorithm_mnemonic: '- The mnemonic of the digest algorithm, e.g. SHA-256.'
+            digest_type: '- The IANA DS digest type number (e.g. 2 for SHA-256).'
+            ds_record: '- The DS record to hand over to the registrar, formatted as <key_tag> <algorithm_number> <digest_type> <digest>.'
+            flags: '- The flags of the DNSKEY record.'
+            id: '- The ID of the resource, equal to zone_id.'
+            key_tag: '- The key tag of the zone signing key.'
+            ksk_bits: '- (Required)[int] The size in bits of the key signing key. One of 1024, 2048, 4096.'
+            nsec_mode: '- (Required)[string] The authenticated denial of existence mode. One of NSEC, NSEC3.'
+            nsec3_iterations: '- (Optional)[int] The number of NSEC3 iterations. Defaults to 0.'
+            nsec3_salt_bits: '- (Optional)[int] The NSEC3 salt length in bits. Defaults to 64.'
+            public_key: '- The Base64 encoded public key of the DNSKEY record.'
+            validity: '- (Required)[int] The signature validity in days.'
+            zone_id: '- (Required)[string] The ID (UUID) of the DNS zone. Changing it recreates the resource.'
+            zsk_bits: '- (Required)[int] The size in bits of the zone signing key. One of 1024, 2048, 4096.'
+        importStatements:
+            - terraform import ionoscloud_dns_zone_dnssec.example zone_id
     ionoscloud_firewall:
         subCategory: Compute Engine
         description: Creates and manages Firewall Rules.
@@ -1351,14 +1400,17 @@ resources:
                   "name": "IP Block Example",
                   "size": 1
                 }
+            - name: example
+              manifest: '{}'
         argumentDocs:
+            id: (String) The UUID of the IP Block.
             ip_consumers: (Computed) Read-Only attribute. Lists consumption detail of an individual ip
             ips: '- (Computed)[integer] The list of IP addresses associated with this block.'
             location: '- (Required)[string] The regional location for this IP Block: us/las, us/ewr, de/fra, de/fkb.'
             name: '- (Optional)[string] The name of Ip Block'
             size: '- (Required)[integer] The number of IP addresses to reserve for this block.'
         importStatements:
-            - terraform import ionoscloud_ipblock.myipblock ipblock uuid
+            - terraform import ionoscloud_ipblock.myipblock ipblock_uuid
     ionoscloud_ipfailover:
         subCategory: Compute Engine
         description: Creates and manages ipfailover objects.
@@ -1977,10 +2029,46 @@ resources:
                       "name": "Datacenter Example",
                       "sec_auth_protection": false
                     }
+            - name: general
+              manifest: |-
+                {
+                  "datacenter_id": "${ionoscloud_datacenter.example.id}",
+                  "ipv4_cidr_block": "10.5.0.0/24",
+                  "name": "Lan /24 Example",
+                  "public": false
+                }
+              references:
+                datacenter_id: ionoscloud_datacenter.example.id
+              dependencies:
+                ionoscloud_datacenter.example: |-
+                    {
+                      "description": "Datacenter Description",
+                      "location": "de/txl",
+                      "name": "Datacenter Example",
+                      "sec_auth_protection": false
+                    }
+            - name: small
+              manifest: |-
+                {
+                  "datacenter_id": "${ionoscloud_datacenter.example.id}",
+                  "ipv4_cidr_block": "192.168.42.0/28",
+                  "name": "Lan /28 Example",
+                  "public": false
+                }
+              references:
+                datacenter_id: ionoscloud_datacenter.example.id
+              dependencies:
+                ionoscloud_datacenter.example: |-
+                    {
+                      "description": "Datacenter Description",
+                      "location": "de/txl",
+                      "name": "Datacenter Example",
+                      "sec_auth_protection": false
+                    }
         argumentDocs:
             datacenter_id: '- (Required)[string] The ID of a Virtual Data Center.'
             ip_failover: '- (Computed) IP failover configurations for lan'
-            ipv4_cidr_block: '- (Computed)[String] For public LANs this property is null, for private LANs it contains the private IPv4 CIDR range. This property is a read only property.'
+            ipv4_cidr_block: '- (Computed, Optional)[String] The IPv4 CIDR block of a private LAN, e.g. 10.5.0.0/24. If omitted, a /23 block from the 10.0.0.0/8 range is assigned automatically. A custom block must be within a private RFC 1918 range (10.0.0.0/8, 172.16.0.0/12 or 192.168.0.0/16), have a prefix length between /23 and /28, and be aligned to its prefix boundary (10.5.0.0/24, not 10.5.0.1/24). It can only be set on private LANs. Changing it updates the LAN in place; removing it from the configuration keeps the current block. If the API rejects a block, the error contains the API error code: 536 (not aligned to its prefix boundary), 602 (overlaps a block already in use), 654 (not a private range), 655 (larger than /23) or 656 (set on a public LAN).'
             ipv6_cidr_block: '- (Computed, Optional) Contains the LAN''s /64 IPv6 CIDR block if this LAN is IPv6 enabled. ''AUTO'' will result in enabling this LAN for IPv6 and automatically assign a /64 IPv6 CIDR block to this LAN. If you specify your own IPv6 CIDR block then you must provide a unique /64 block, which is inside the IPv6 CIDR block of the virtual datacenter and unique inside all LANs from this virtual datacenter.'
             name: '- (Optional)[string] The name of the LAN.'
             pcc: '- (Optional)[String] The unique id of a ionoscloud_private_crossconnect resource, in order. It needs to be ensured that IP addresses of the NICs of all LANs connected to a given Cross Connect is not duplicated and belongs to the same subnet range'
@@ -2476,6 +2564,148 @@ resources:
             type: '- (Optional)(Computed)[string]The cluster type, either replicaset or sharded-cluster.'
         importStatements:
             - terraform import ionoscloud_mongo_cluster.mycluser cluster uuid
+    ionoscloud_mongo_cluster_v2:
+        subCategory: Database as a Service - MongoDB v2
+        description: Creates and manages an IONOS CLOUD MongoDB V2 Cluster.
+        name: ionoscloud_mongo_cluster_v2
+        title: ionoscloud_mongo_cluster_v2
+        examples:
+            - name: example
+              manifest: |-
+                {
+                  "connections": {
+                    "datacenter_id": "${ionoscloud_datacenter.example.id}",
+                    "instance_addresses": [
+                      "192.168.1.100/24"
+                    ],
+                    "lan_id": "${ionoscloud_lan.example.id}"
+                  },
+                  "credentials": {
+                    "database": "my_database",
+                    "password": "${random_password.mongo.result}",
+                    "username": "dbadmin"
+                  },
+                  "description": "MongoDB cluster",
+                  "edition": "ENTERPRISE",
+                  "instances": {
+                    "cores": 1,
+                    "count": 1,
+                    "ram": 8,
+                    "storage_size": 10
+                  },
+                  "location": "gb/bhx",
+                  "logs_enabled": true,
+                  "maintenance_window": {
+                    "day_of_the_week": "Sunday",
+                    "time": "09:00:00"
+                  },
+                  "metrics_enabled": true,
+                  "name": "my-mongo-cluster",
+                  "snapshot": {
+                    "location": "eu-central-3",
+                    "retention_days": 7
+                  },
+                  "version": "7.0"
+                }
+              dependencies:
+                ionoscloud_datacenter.example: |-
+                    {
+                      "location": "gb/bhx",
+                      "name": "example"
+                    }
+                ionoscloud_lan.example: |-
+                    {
+                      "datacenter_id": "${ionoscloud_datacenter.example.id}",
+                      "name": "example",
+                      "public": false
+                    }
+                random_password.mongo: |-
+                    {
+                      "length": 16,
+                      "special": true
+                    }
+            - name: example
+              manifest: |-
+                {
+                  "connections": {
+                    "datacenter_id": "${ionoscloud_datacenter.example.id}",
+                    "instance_addresses": [
+                      "192.168.1.100/24"
+                    ],
+                    "lan_id": "${ionoscloud_lan.example.id}"
+                  },
+                  "credentials": {
+                    "database": "my_database",
+                    "password": "${random_password.mongo.result}",
+                    "username": "dbadmin"
+                  },
+                  "edition": "BUSINESS",
+                  "instance_count": 1,
+                  "instance_template_id": "${data.ionoscloud_mongo_templates_v2.business.items[0].id}",
+                  "location": "gb/bhx",
+                  "maintenance_window": {
+                    "day_of_the_week": "Sunday",
+                    "time": "09:00:00"
+                  },
+                  "name": "my-business-cluster",
+                  "snapshot": {
+                    "location": "eu-central-3",
+                    "retention_days": 7
+                  },
+                  "version": "7.0"
+                }
+              references:
+                instance_template_id: data.ionoscloud_mongo_templates_v2.business.items[0].id
+              dependencies:
+                random_password.mongo: |-
+                    {
+                      "length": 16,
+                      "special": true
+                    }
+            - name: example
+              manifest: '{}'
+        argumentDocs:
+            BUSINESS: — compute and storage come from a predefined template via instance_template_id, and the number of instances via instance_count.
+            ENTERPRISE: — compute and storage are set directly via the instances object; supports sharding and bi_connector_enabled.
+            bi_connector_enabled: '- (Optional)(Computed)[bool] Enables or disables the MongoDB BI Connector. Can only be enabled for the ENTERPRISE edition. Defaults to false.'
+            connection_uri: '- The connection string used to access the cluster.'
+            connections: '- (Required)[object] Connection information of the MongoDB cluster.'
+            cores: '- (Required)[int] The number of CPU cores per instance (between 1 and 62).'
+            count: '- (Required)[int] The total number of instances in the cluster, one primary and n-1 secondary (between 1 and 9).'
+            credentials: '- (Required)[object] Credentials for the initial database user to be created.'
+            database: '- (Required)[string] The name of the initial database to be created. Between 2 and 63 characters, alphanumeric and underscores only.'
+            datacenter_id: '- (Required)[string] The datacenter to connect your instance to. Immutable — changing it forces a new resource.'
+            day_of_the_week: '- (Required)[string] The name of the week day: Monday, Tuesday, Wednesday, Thursday, Friday, Saturday or Sunday.'
+            description: '- (Optional)[string] Human-readable description for the cluster.'
+            edition: '- (Required)[string] The edition of the MongoDB cluster: ENTERPRISE or BUSINESS. Changing this forces a new resource.'
+            enabled: '- (Required)[bool] Activates or deactivates sharding for this cluster.'
+            id: '- The ID (UUID) of the cluster.'
+            instance_addresses: '- (Required)[list of string] A list of IP addresses (with netmask, in CIDR notation) assigned to the cluster instances. The number of addresses must match the number of instances in the cluster. The range 10.208.0.0/12 is not available.'
+            instance_count: '- (Optional)[int] The total number of instances in the cluster, one primary and n-1 secondary (between 1 and 9). Required for the BUSINESS edition; not valid for ENTERPRISE.'
+            instance_template_id: '- (Optional)[string] The ID (UUID) of the instance template defining cores, RAM and storage (see the ionoscloud_mongo_templates_v2 data source). Required for the BUSINESS edition; not valid for ENTERPRISE. Immutable — changing it forces a new resource.'
+            instances: '- (Optional)[object] Compute and storage configuration for each instance. Required for the ENTERPRISE edition; not valid for BUSINESS.'
+            lan_id: '- (Required)[string] The numeric LAN ID to connect your instance to. Immutable — changing it forces a new resource.'
+            location: '- (Required)[string] The location of the cluster. Changing this forces a new resource. Available: gb/bhx, us/ewr.'
+            logs_enabled: '- (Optional)(Computed)[bool] Allows or disallows the collection and reporting of logs for this cluster''s observability. If the observability service is not activated on the contract, this setting is accepted but has no effect. Defaults to false.'
+            maintenance_window: '- (Required)[object] A weekly 4 hour-long window, during which maintenance might occur.'
+            metrics_enabled: '- (Optional)(Computed)[bool] Allows or disallows the collection and reporting of metrics for this cluster''s observability. If the observability service is not activated on the contract, this setting is accepted but has no effect. Defaults to false.'
+            name: '- (Required)[string] The name of the MongoDB cluster. Between 2 and 63 characters; must begin and end with an alphanumeric character, with dashes, underscores, dots and alphanumerics in between.'
+            password: '- (Required)[string] Sensitive. The password for the initial MongoDB user. Between 8 and 256 characters. Not returned by the API — will be null in state after terraform import.'
+            ram: '- (Required)[int] The amount of memory per instance in gigabytes (GB) (between 6 and 240).'
+            recovery_target_datetime: '- (Optional)[string] ISO 8601 timestamp causing the system to replay snapshots up to the specified time. Optional for create-time restore; required for in-place restore during an update.'
+            restore_from_snapshot: '- (Optional)[object] Restores the cluster from a snapshot.'
+            retention_days: '- (Required)[int] Configures how many days cluster snapshots are retained before being automatically deleted (between 1 and 365).'
+            sharding: '- (Optional)[object] Sharding properties. Can only be set for the ENTERPRISE edition.'
+            shards: '- (Optional)(Computed)[int] The number of shards to create in the cluster (between 2 and 5). When sharding is enabled, the instances count signifies the number of replicas per shard.'
+            snapshot: '- (Required)[object] Snapshot storage and retention configuration for the cluster.'
+            source_snapshot_id: '- (Optional)[string] UUID of the snapshot to restore from. Required when restore_from_snapshot is set during cluster creation; not valid for in-place restore during an update.'
+            storage_size: '- (Required)[int] The amount of storage per instance in gigabytes (GB) (between 10 and 4096).'
+            time: '- (Required)[string] Start of the maintenance window in UTC time (HH:MM:SS).'
+            timeouts: '- (Optional) Standard Terraform timeouts: create, update, delete.'
+            username: '- (Required)[string] The username of the initial MongoDB user. Between 2 and 16 characters, alphanumeric and underscores only. Some usernames are reserved for platform use.'
+            version: '- (Required)[string] The MongoDB version for the cluster, e.g. 6.0, 7.0, 8.0. See the ionoscloud_mongo_versions_v2 data source for the list of supported versions and their available upgrade paths.'
+        importStatements:
+            - terraform import ionoscloud_mongo_cluster_v2.example gb/bhx:example-id
     ionoscloud_mongo_user:
         subCategory: Database as a Service - MongoDB
         description: Creates and manages DbaaS MongoDB users.
@@ -5556,7 +5786,7 @@ resources:
             pci_slot: '- (Computed) The PCI slot number of the storage volume. Null for volumes not mounted to any VM.'
             ram_hot_plug: '- (Computed)[string] Is capable of memory hot plug (no reboot required)'
             require_legacy_bios: '- (Optional)(Computed)[boolean] Indicates if the image requires the legacy BIOS for compatibility or specific needs. During creation, if an image is used, the value will be inherited from the image, regardless of the value set in the plan. Later on, the value can be updated.'
-            server_id: '- (Required)[string] The ID of a server.'
+            server_id: '- (Optional)[string] The ID of the server the volume is attached to. Leave it unset for a volume that is not attached to any server. Changing it attaches the volume to the new server, detaching it from the previous one first.'
             size: '-  (Required)[integer] The size of the volume in GB.'
             ssh_key_path: '-  (Optional)[list] List of absolute paths to files containing a public SSH key that will be injected into IONOS CLOUD provided Linux images. Also accepts ssh keys directly. Required for IONOS CLOUD Linux images. Required if image_password is not provided. This property is immutable.'
             ssh_keys: '-  (Optional)[list] List of absolute paths to files containing a public SSH key that will be injected into IONOS CLOUD provided Linux images. Also accepts ssh keys directly. Required for IONOS CLOUD Linux images. Required if image_password is not provided. This property is immutable.'
@@ -5564,6 +5794,7 @@ resources:
             user_data: '- (Optional)[string] The cloud-init configuration for the volume as base64 encoded string. The property is immutable and is only allowed to be set on a new volume creation. This option will work only with cloud-init compatible images.'
         importStatements:
             - terraform import ionoscloud_volume.myvolume datacenter uuid/server uuid/volume uuid
+            - terraform import ionoscloud_volume.myvolume datacenter uuid/volume uuid
     ionoscloud_vpn_ipsec_gateway:
         subCategory: VPN
         description: IPSec Gateway

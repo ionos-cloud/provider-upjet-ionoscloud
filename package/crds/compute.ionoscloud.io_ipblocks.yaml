@@ -223,6 +223,7 @@ spec:
               atProvider:
                 properties:
                   id:
+                    description: (String) The UUID of the IP Block.
                     type: string
                   ipConsumers:
                     description: Only attribute. Lists consumption detail of an individual
@@ -230,6 +231,7 @@ spec:
                     items:
                       properties:
                         datacenterId:
+                          description: (String) The UUID of the IP Block.
                           type: string
                         datacenterName:
                           description: '[string] The name of Ip Block'
@@ -237,14 +239,18 @@ spec:
                         ip:
                           type: string
                         k8sClusterUuid:
+                          description: (String) The UUID of the IP Block.
                           type: string
                         k8sNodepoolUuid:
+                          description: (String) The UUID of the IP Block.
                           type: string
                         mac:
                           type: string
                         nicId:
+                          description: (String) The UUID of the IP Block.
                           type: string
                         serverId:
+                          description: (String) The UUID of the IP Block.
                           type: string
                         serverName:
                           description: '[string] The name of Ip Block'
