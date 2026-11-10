@@ -78,6 +78,9 @@ spec:
       dayOfTheWeek: Sunday
       time: 09:00:00Z
     name: k8sClusterExample
+  writeConnectionSecretToRef:
+    name: k8s-cluster-example-kubeconfig
+    namespace: upbound-system
 
 ---
 
