@@ -6,124 +6,124 @@
 
 package v1alpha1
 
-import xpv1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
+import xpv2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 
 // GetCondition of this PostgresqlCluster.
-func (mg *PostgresqlCluster) GetCondition(ct xpv1.ConditionType) xpv1.Condition {
+func (mg *PostgresqlCluster) GetCondition(ct xpv2.ConditionType) xpv2.Condition {
 	return mg.Status.GetCondition(ct)
 }
 
 // GetManagementPolicies of this PostgresqlCluster.
-func (mg *PostgresqlCluster) GetManagementPolicies() xpv1.ManagementPolicies {
+func (mg *PostgresqlCluster) GetManagementPolicies() xpv2.ManagementPolicies {
 	return mg.Spec.ManagementPolicies
 }
 
 // GetProviderConfigReference of this PostgresqlCluster.
-func (mg *PostgresqlCluster) GetProviderConfigReference() *xpv1.ProviderConfigReference {
+func (mg *PostgresqlCluster) GetProviderConfigReference() *xpv2.ProviderConfigReference {
 	return mg.Spec.ProviderConfigReference
 }
 
 // GetWriteConnectionSecretToReference of this PostgresqlCluster.
-func (mg *PostgresqlCluster) GetWriteConnectionSecretToReference() *xpv1.LocalSecretReference {
+func (mg *PostgresqlCluster) GetWriteConnectionSecretToReference() *xpv2.LocalSecretReference {
 	return mg.Spec.WriteConnectionSecretToReference
 }
 
 // SetConditions of this PostgresqlCluster.
-func (mg *PostgresqlCluster) SetConditions(c ...xpv1.Condition) {
+func (mg *PostgresqlCluster) SetConditions(c ...xpv2.Condition) {
 	mg.Status.SetConditions(c...)
 }
 
 // SetManagementPolicies of this PostgresqlCluster.
-func (mg *PostgresqlCluster) SetManagementPolicies(r xpv1.ManagementPolicies) {
+func (mg *PostgresqlCluster) SetManagementPolicies(r xpv2.ManagementPolicies) {
 	mg.Spec.ManagementPolicies = r
 }
 
 // SetProviderConfigReference of this PostgresqlCluster.
-func (mg *PostgresqlCluster) SetProviderConfigReference(r *xpv1.ProviderConfigReference) {
+func (mg *PostgresqlCluster) SetProviderConfigReference(r *xpv2.ProviderConfigReference) {
 	mg.Spec.ProviderConfigReference = r
 }
 
 // SetWriteConnectionSecretToReference of this PostgresqlCluster.
-func (mg *PostgresqlCluster) SetWriteConnectionSecretToReference(r *xpv1.LocalSecretReference) {
+func (mg *PostgresqlCluster) SetWriteConnectionSecretToReference(r *xpv2.LocalSecretReference) {
 	mg.Spec.WriteConnectionSecretToReference = r
 }
 
 // GetCondition of this PostgresqlDatabase.
-func (mg *PostgresqlDatabase) GetCondition(ct xpv1.ConditionType) xpv1.Condition {
+func (mg *PostgresqlDatabase) GetCondition(ct xpv2.ConditionType) xpv2.Condition {
 	return mg.Status.GetCondition(ct)
 }
 
 // GetManagementPolicies of this PostgresqlDatabase.
-func (mg *PostgresqlDatabase) GetManagementPolicies() xpv1.ManagementPolicies {
+func (mg *PostgresqlDatabase) GetManagementPolicies() xpv2.ManagementPolicies {
 	return mg.Spec.ManagementPolicies
 }
 
 // GetProviderConfigReference of this PostgresqlDatabase.
-func (mg *PostgresqlDatabase) GetProviderConfigReference() *xpv1.ProviderConfigReference {
+func (mg *PostgresqlDatabase) GetProviderConfigReference() *xpv2.ProviderConfigReference {
 	return mg.Spec.ProviderConfigReference
 }
 
 // GetWriteConnectionSecretToReference of this PostgresqlDatabase.
-func (mg *PostgresqlDatabase) GetWriteConnectionSecretToReference() *xpv1.LocalSecretReference {
+func (mg *PostgresqlDatabase) GetWriteConnectionSecretToReference() *xpv2.LocalSecretReference {
 	return mg.Spec.WriteConnectionSecretToReference
 }
 
 // SetConditions of this PostgresqlDatabase.
-func (mg *PostgresqlDatabase) SetConditions(c ...xpv1.Condition) {
+func (mg *PostgresqlDatabase) SetConditions(c ...xpv2.Condition) {
 	mg.Status.SetConditions(c...)
 }
 
 // SetManagementPolicies of this PostgresqlDatabase.
-func (mg *PostgresqlDatabase) SetManagementPolicies(r xpv1.ManagementPolicies) {
+func (mg *PostgresqlDatabase) SetManagementPolicies(r xpv2.ManagementPolicies) {
 	mg.Spec.ManagementPolicies = r
 }
 
 // SetProviderConfigReference of this PostgresqlDatabase.
-func (mg *PostgresqlDatabase) SetProviderConfigReference(r *xpv1.ProviderConfigReference) {
+func (mg *PostgresqlDatabase) SetProviderConfigReference(r *xpv2.ProviderConfigReference) {
 	mg.Spec.ProviderConfigReference = r
 }
 
 // SetWriteConnectionSecretToReference of this PostgresqlDatabase.
-func (mg *PostgresqlDatabase) SetWriteConnectionSecretToReference(r *xpv1.LocalSecretReference) {
+func (mg *PostgresqlDatabase) SetWriteConnectionSecretToReference(r *xpv2.LocalSecretReference) {
 	mg.Spec.WriteConnectionSecretToReference = r
 }
 
 // GetCondition of this PostgresqlUser.
-func (mg *PostgresqlUser) GetCondition(ct xpv1.ConditionType) xpv1.Condition {
+func (mg *PostgresqlUser) GetCondition(ct xpv2.ConditionType) xpv2.Condition {
 	return mg.Status.GetCondition(ct)
 }
 
 // GetManagementPolicies of this PostgresqlUser.
-func (mg *PostgresqlUser) GetManagementPolicies() xpv1.ManagementPolicies {
+func (mg *PostgresqlUser) GetManagementPolicies() xpv2.ManagementPolicies {
 	return mg.Spec.ManagementPolicies
 }
 
 // GetProviderConfigReference of this PostgresqlUser.
-func (mg *PostgresqlUser) GetProviderConfigReference() *xpv1.ProviderConfigReference {
+func (mg *PostgresqlUser) GetProviderConfigReference() *xpv2.ProviderConfigReference {
 	return mg.Spec.ProviderConfigReference
 }
 
 // GetWriteConnectionSecretToReference of this PostgresqlUser.
-func (mg *PostgresqlUser) GetWriteConnectionSecretToReference() *xpv1.LocalSecretReference {
+func (mg *PostgresqlUser) GetWriteConnectionSecretToReference() *xpv2.LocalSecretReference {
 	return mg.Spec.WriteConnectionSecretToReference
 }
 
 // SetConditions of this PostgresqlUser.
-func (mg *PostgresqlUser) SetConditions(c ...xpv1.Condition) {
+func (mg *PostgresqlUser) SetConditions(c ...xpv2.Condition) {
 	mg.Status.SetConditions(c...)
 }
 
 // SetManagementPolicies of this PostgresqlUser.
-func (mg *PostgresqlUser) SetManagementPolicies(r xpv1.ManagementPolicies) {
+func (mg *PostgresqlUser) SetManagementPolicies(r xpv2.ManagementPolicies) {
 	mg.Spec.ManagementPolicies = r
 }
 
 // SetProviderConfigReference of this PostgresqlUser.
-func (mg *PostgresqlUser) SetProviderConfigReference(r *xpv1.ProviderConfigReference) {
+func (mg *PostgresqlUser) SetProviderConfigReference(r *xpv2.ProviderConfigReference) {
 	mg.Spec.ProviderConfigReference = r
 }
 
 // SetWriteConnectionSecretToReference of this PostgresqlUser.
-func (mg *PostgresqlUser) SetWriteConnectionSecretToReference(r *xpv1.LocalSecretReference) {
+func (mg *PostgresqlUser) SetWriteConnectionSecretToReference(r *xpv2.LocalSecretReference) {
 	mg.Spec.WriteConnectionSecretToReference = r
 }

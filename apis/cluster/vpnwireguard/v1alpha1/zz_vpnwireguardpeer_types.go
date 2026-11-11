@@ -10,7 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
+	v2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 )
 
 type EndpointInitParameters struct {
@@ -69,11 +69,11 @@ type VpnWireguardPeerInitParameters struct {
 
 	// Reference to a VpnWireguardGateway in vpnwireguard to populate gatewayId.
 	// +kubebuilder:validation:Optional
-	GatewayIDRef *v1.Reference `json:"gatewayIdRef,omitempty" tf:"-"`
+	GatewayIDRef *v2.Reference `json:"gatewayIdRef,omitempty" tf:"-"`
 
 	// Selector for a VpnWireguardGateway in vpnwireguard to populate gatewayId.
 	// +kubebuilder:validation:Optional
-	GatewayIDSelector *v1.Selector `json:"gatewayIdSelector,omitempty" tf:"-"`
+	GatewayIDSelector *v2.Selector `json:"gatewayIdSelector,omitempty" tf:"-"`
 
 	// [string] The location of the WireGuard Gateway. Supported locations: de/fra, de/fra/1, de/fra/2, de/txl, es/vit, gb/bhx, gb/lhr, us/ewr, us/las, us/mci, fr/par.
 	// The location of the WireGuard Peer. Supported locations: de/fra, de/fra/1, de/fra/2, de/txl, es/vit, gb/bhx, gb/lhr, us/ewr, us/las, us/mci, fr/par
@@ -150,11 +150,11 @@ type VpnWireguardPeerParameters struct {
 
 	// Reference to a VpnWireguardGateway in vpnwireguard to populate gatewayId.
 	// +kubebuilder:validation:Optional
-	GatewayIDRef *v1.Reference `json:"gatewayIdRef,omitempty" tf:"-"`
+	GatewayIDRef *v2.Reference `json:"gatewayIdRef,omitempty" tf:"-"`
 
 	// Selector for a VpnWireguardGateway in vpnwireguard to populate gatewayId.
 	// +kubebuilder:validation:Optional
-	GatewayIDSelector *v1.Selector `json:"gatewayIdSelector,omitempty" tf:"-"`
+	GatewayIDSelector *v2.Selector `json:"gatewayIdSelector,omitempty" tf:"-"`
 
 	// [string] The location of the WireGuard Gateway. Supported locations: de/fra, de/fra/1, de/fra/2, de/txl, es/vit, gb/bhx, gb/lhr, us/ewr, us/las, us/mci, fr/par.
 	// The location of the WireGuard Peer. Supported locations: de/fra, de/fra/1, de/fra/2, de/txl, es/vit, gb/bhx, gb/lhr, us/ewr, us/las, us/mci, fr/par
@@ -174,8 +174,8 @@ type VpnWireguardPeerParameters struct {
 
 // VpnWireguardPeerSpec defines the desired state of VpnWireguardPeer
 type VpnWireguardPeerSpec struct {
-	v1.ResourceSpec `json:",inline"`
-	ForProvider     VpnWireguardPeerParameters `json:"forProvider"`
+	v2.ClusterManagedResourceSpec `json:",inline"`
+	ForProvider                   VpnWireguardPeerParameters `json:"forProvider"`
 	// THIS IS A BETA FIELD. It will be honored
 	// unless the Management Policies feature flag is disabled.
 	// InitProvider holds the same fields as ForProvider, with the exception
@@ -191,8 +191,8 @@ type VpnWireguardPeerSpec struct {
 
 // VpnWireguardPeerStatus defines the observed state of VpnWireguardPeer.
 type VpnWireguardPeerStatus struct {
-	v1.ResourceStatus `json:",inline"`
-	AtProvider        VpnWireguardPeerObservation `json:"atProvider,omitempty"`
+	v2.ManagedResourceStatus `json:",inline"`
+	AtProvider               VpnWireguardPeerObservation `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true

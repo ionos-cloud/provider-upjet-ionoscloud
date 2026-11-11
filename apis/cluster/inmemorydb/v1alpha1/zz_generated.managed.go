@@ -6,54 +6,54 @@
 
 package v1alpha1
 
-import xpv1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
+import xpv2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 
 // GetCondition of this InMemoryDBReplicaset.
-func (mg *InMemoryDBReplicaset) GetCondition(ct xpv1.ConditionType) xpv1.Condition {
+func (mg *InMemoryDBReplicaset) GetCondition(ct xpv2.ConditionType) xpv2.Condition {
 	return mg.Status.GetCondition(ct)
 }
 
 // GetDeletionPolicy of this InMemoryDBReplicaset.
-func (mg *InMemoryDBReplicaset) GetDeletionPolicy() xpv1.DeletionPolicy {
+func (mg *InMemoryDBReplicaset) GetDeletionPolicy() xpv2.DeletionPolicy {
 	return mg.Spec.DeletionPolicy
 }
 
 // GetManagementPolicies of this InMemoryDBReplicaset.
-func (mg *InMemoryDBReplicaset) GetManagementPolicies() xpv1.ManagementPolicies {
+func (mg *InMemoryDBReplicaset) GetManagementPolicies() xpv2.ManagementPolicies {
 	return mg.Spec.ManagementPolicies
 }
 
 // GetProviderConfigReference of this InMemoryDBReplicaset.
-func (mg *InMemoryDBReplicaset) GetProviderConfigReference() *xpv1.Reference {
+func (mg *InMemoryDBReplicaset) GetProviderConfigReference() *xpv2.Reference {
 	return mg.Spec.ProviderConfigReference
 }
 
 // GetWriteConnectionSecretToReference of this InMemoryDBReplicaset.
-func (mg *InMemoryDBReplicaset) GetWriteConnectionSecretToReference() *xpv1.SecretReference {
+func (mg *InMemoryDBReplicaset) GetWriteConnectionSecretToReference() *xpv2.SecretReference {
 	return mg.Spec.WriteConnectionSecretToReference
 }
 
 // SetConditions of this InMemoryDBReplicaset.
-func (mg *InMemoryDBReplicaset) SetConditions(c ...xpv1.Condition) {
+func (mg *InMemoryDBReplicaset) SetConditions(c ...xpv2.Condition) {
 	mg.Status.SetConditions(c...)
 }
 
 // SetDeletionPolicy of this InMemoryDBReplicaset.
-func (mg *InMemoryDBReplicaset) SetDeletionPolicy(r xpv1.DeletionPolicy) {
+func (mg *InMemoryDBReplicaset) SetDeletionPolicy(r xpv2.DeletionPolicy) {
 	mg.Spec.DeletionPolicy = r
 }
 
 // SetManagementPolicies of this InMemoryDBReplicaset.
-func (mg *InMemoryDBReplicaset) SetManagementPolicies(r xpv1.ManagementPolicies) {
+func (mg *InMemoryDBReplicaset) SetManagementPolicies(r xpv2.ManagementPolicies) {
 	mg.Spec.ManagementPolicies = r
 }
 
 // SetProviderConfigReference of this InMemoryDBReplicaset.
-func (mg *InMemoryDBReplicaset) SetProviderConfigReference(r *xpv1.Reference) {
+func (mg *InMemoryDBReplicaset) SetProviderConfigReference(r *xpv2.Reference) {
 	mg.Spec.ProviderConfigReference = r
 }
 
 // SetWriteConnectionSecretToReference of this InMemoryDBReplicaset.
-func (mg *InMemoryDBReplicaset) SetWriteConnectionSecretToReference(r *xpv1.SecretReference) {
+func (mg *InMemoryDBReplicaset) SetWriteConnectionSecretToReference(r *xpv2.SecretReference) {
 	mg.Spec.WriteConnectionSecretToReference = r
 }

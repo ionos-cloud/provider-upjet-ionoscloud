@@ -10,7 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
+	v2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 )
 
 type ConnectionsInitParameters struct {
@@ -22,11 +22,11 @@ type ConnectionsInitParameters struct {
 
 	// Reference to a Datacenter in compute to populate datacenterId.
 	// +kubebuilder:validation:Optional
-	DatacenterIDRef *v1.Reference `json:"datacenterIdRef,omitempty" tf:"-"`
+	DatacenterIDRef *v2.Reference `json:"datacenterIdRef,omitempty" tf:"-"`
 
 	// Selector for a Datacenter in compute to populate datacenterId.
 	// +kubebuilder:validation:Optional
-	DatacenterIDSelector *v1.Selector `json:"datacenterIdSelector,omitempty" tf:"-"`
+	DatacenterIDSelector *v2.Selector `json:"datacenterIdSelector,omitempty" tf:"-"`
 
 	// [string] A LAN IPv4 address in CIDR notation that will be assigned to the VPN Gateway. This will be the private gateway address for LAN clients to route traffic over the VPN Gateway, this should be within the subnet already assigned to the LAN.
 	// A LAN IPv4 address in CIDR notation that will be assigned to the VPN Gateway. This will be the private gateway address for LAN clients to route traffic over the VPN Gateway, this should be within the subnet already assigned to the LAN.
@@ -43,11 +43,11 @@ type ConnectionsInitParameters struct {
 
 	// Reference to a Lan in compute to populate lanId.
 	// +kubebuilder:validation:Optional
-	LanIDRef *v1.Reference `json:"lanIdRef,omitempty" tf:"-"`
+	LanIDRef *v2.Reference `json:"lanIdRef,omitempty" tf:"-"`
 
 	// Selector for a Lan in compute to populate lanId.
 	// +kubebuilder:validation:Optional
-	LanIDSelector *v1.Selector `json:"lanIdSelector,omitempty" tf:"-"`
+	LanIDSelector *v2.Selector `json:"lanIdSelector,omitempty" tf:"-"`
 }
 
 type ConnectionsObservation struct {
@@ -79,11 +79,11 @@ type ConnectionsParameters struct {
 
 	// Reference to a Datacenter in compute to populate datacenterId.
 	// +kubebuilder:validation:Optional
-	DatacenterIDRef *v1.Reference `json:"datacenterIdRef,omitempty" tf:"-"`
+	DatacenterIDRef *v2.Reference `json:"datacenterIdRef,omitempty" tf:"-"`
 
 	// Selector for a Datacenter in compute to populate datacenterId.
 	// +kubebuilder:validation:Optional
-	DatacenterIDSelector *v1.Selector `json:"datacenterIdSelector,omitempty" tf:"-"`
+	DatacenterIDSelector *v2.Selector `json:"datacenterIdSelector,omitempty" tf:"-"`
 
 	// [string] A LAN IPv4 address in CIDR notation that will be assigned to the VPN Gateway. This will be the private gateway address for LAN clients to route traffic over the VPN Gateway, this should be within the subnet already assigned to the LAN.
 	// A LAN IPv4 address in CIDR notation that will be assigned to the VPN Gateway. This will be the private gateway address for LAN clients to route traffic over the VPN Gateway, this should be within the subnet already assigned to the LAN.
@@ -103,11 +103,11 @@ type ConnectionsParameters struct {
 
 	// Reference to a Lan in compute to populate lanId.
 	// +kubebuilder:validation:Optional
-	LanIDRef *v1.Reference `json:"lanIdRef,omitempty" tf:"-"`
+	LanIDRef *v2.Reference `json:"lanIdRef,omitempty" tf:"-"`
 
 	// Selector for a Lan in compute to populate lanId.
 	// +kubebuilder:validation:Optional
-	LanIDSelector *v1.Selector `json:"lanIdSelector,omitempty" tf:"-"`
+	LanIDSelector *v2.Selector `json:"lanIdSelector,omitempty" tf:"-"`
 }
 
 type MaintenanceWindowInitParameters struct {
@@ -165,11 +165,11 @@ type VpnIpsecGatewayInitParameters struct {
 
 	// Reference to a Ipblock in compute to populate gatewayIp.
 	// +kubebuilder:validation:Optional
-	GatewayIPRef *v1.Reference `json:"gatewayIpRef,omitempty" tf:"-"`
+	GatewayIPRef *v2.Reference `json:"gatewayIpRef,omitempty" tf:"-"`
 
 	// Selector for a Ipblock in compute to populate gatewayIp.
 	// +kubebuilder:validation:Optional
-	GatewayIPSelector *v1.Selector `json:"gatewayIpSelector,omitempty" tf:"-"`
+	GatewayIPSelector *v2.Selector `json:"gatewayIpSelector,omitempty" tf:"-"`
 
 	// [string] The location of the IPSec Gateway. Supported locations: de/fra, de/fra/1, de/fra/2, de/txl, es/vit, gb/bhx, gb/lhr, us/ewr, us/las, us/mci, fr/par.
 	// The location of the IPSec Gateway. Supported locations: de/fra, de/fra/1, de/fra/2, de/txl, es/vit, gb/bhx, gb/lhr, us/ewr, us/las, us/mci, fr/par
@@ -256,11 +256,11 @@ type VpnIpsecGatewayParameters struct {
 
 	// Reference to a Ipblock in compute to populate gatewayIp.
 	// +kubebuilder:validation:Optional
-	GatewayIPRef *v1.Reference `json:"gatewayIpRef,omitempty" tf:"-"`
+	GatewayIPRef *v2.Reference `json:"gatewayIpRef,omitempty" tf:"-"`
 
 	// Selector for a Ipblock in compute to populate gatewayIp.
 	// +kubebuilder:validation:Optional
-	GatewayIPSelector *v1.Selector `json:"gatewayIpSelector,omitempty" tf:"-"`
+	GatewayIPSelector *v2.Selector `json:"gatewayIpSelector,omitempty" tf:"-"`
 
 	// [string] The location of the IPSec Gateway. Supported locations: de/fra, de/fra/1, de/fra/2, de/txl, es/vit, gb/bhx, gb/lhr, us/ewr, us/las, us/mci, fr/par.
 	// The location of the IPSec Gateway. Supported locations: de/fra, de/fra/1, de/fra/2, de/txl, es/vit, gb/bhx, gb/lhr, us/ewr, us/las, us/mci, fr/par
@@ -291,8 +291,8 @@ type VpnIpsecGatewayParameters struct {
 
 // VpnIpsecGatewaySpec defines the desired state of VpnIpsecGateway
 type VpnIpsecGatewaySpec struct {
-	v1.ResourceSpec `json:",inline"`
-	ForProvider     VpnIpsecGatewayParameters `json:"forProvider"`
+	v2.ClusterManagedResourceSpec `json:",inline"`
+	ForProvider                   VpnIpsecGatewayParameters `json:"forProvider"`
 	// THIS IS A BETA FIELD. It will be honored
 	// unless the Management Policies feature flag is disabled.
 	// InitProvider holds the same fields as ForProvider, with the exception
@@ -308,8 +308,8 @@ type VpnIpsecGatewaySpec struct {
 
 // VpnIpsecGatewayStatus defines the observed state of VpnIpsecGateway.
 type VpnIpsecGatewayStatus struct {
-	v1.ResourceStatus `json:",inline"`
-	AtProvider        VpnIpsecGatewayObservation `json:"atProvider,omitempty"`
+	v2.ManagedResourceStatus `json:",inline"`
+	AtProvider               VpnIpsecGatewayObservation `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true

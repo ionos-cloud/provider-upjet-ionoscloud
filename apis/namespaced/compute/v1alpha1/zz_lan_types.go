@@ -10,8 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
-	v2 "github.com/crossplane/crossplane-runtime/v2/apis/common/v2"
+	v2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 )
 
 type IPFailoverInitParameters struct {
@@ -34,11 +33,11 @@ type LanInitParameters struct {
 
 	// Reference to a Datacenter in compute to populate datacenterId.
 	// +kubebuilder:validation:Optional
-	DatacenterIDRef *v1.NamespacedReference `json:"datacenterIdRef,omitempty" tf:"-"`
+	DatacenterIDRef *v2.NamespacedReference `json:"datacenterIdRef,omitempty" tf:"-"`
 
 	// Selector for a Datacenter in compute to populate datacenterId.
 	// +kubebuilder:validation:Optional
-	DatacenterIDSelector *v1.NamespacedSelector `json:"datacenterIdSelector,omitempty" tf:"-"`
+	DatacenterIDSelector *v2.NamespacedSelector `json:"datacenterIdSelector,omitempty" tf:"-"`
 
 	// (Computed) IP failover configurations for lan
 	IPFailover []IPFailoverInitParameters `json:"ipFailover,omitempty" tf:"ip_failover,omitempty"`
@@ -63,11 +62,11 @@ type LanInitParameters struct {
 
 	// Reference to a Crossconnect in compute to populate pcc.
 	// +kubebuilder:validation:Optional
-	PccRef *v1.NamespacedReference `json:"pccRef,omitempty" tf:"-"`
+	PccRef *v2.NamespacedReference `json:"pccRef,omitempty" tf:"-"`
 
 	// Selector for a Crossconnect in compute to populate pcc.
 	// +kubebuilder:validation:Optional
-	PccSelector *v1.NamespacedSelector `json:"pccSelector,omitempty" tf:"-"`
+	PccSelector *v2.NamespacedSelector `json:"pccSelector,omitempty" tf:"-"`
 
 	// [Boolean] Indicates if the LAN faces the public Internet (true) or not (false).
 	Public *bool `json:"public,omitempty" tf:"public,omitempty"`
@@ -113,11 +112,11 @@ type LanParameters struct {
 
 	// Reference to a Datacenter in compute to populate datacenterId.
 	// +kubebuilder:validation:Optional
-	DatacenterIDRef *v1.NamespacedReference `json:"datacenterIdRef,omitempty" tf:"-"`
+	DatacenterIDRef *v2.NamespacedReference `json:"datacenterIdRef,omitempty" tf:"-"`
 
 	// Selector for a Datacenter in compute to populate datacenterId.
 	// +kubebuilder:validation:Optional
-	DatacenterIDSelector *v1.NamespacedSelector `json:"datacenterIdSelector,omitempty" tf:"-"`
+	DatacenterIDSelector *v2.NamespacedSelector `json:"datacenterIdSelector,omitempty" tf:"-"`
 
 	// (Computed) IP failover configurations for lan
 	// +kubebuilder:validation:Optional
@@ -148,11 +147,11 @@ type LanParameters struct {
 
 	// Reference to a Crossconnect in compute to populate pcc.
 	// +kubebuilder:validation:Optional
-	PccRef *v1.NamespacedReference `json:"pccRef,omitempty" tf:"-"`
+	PccRef *v2.NamespacedReference `json:"pccRef,omitempty" tf:"-"`
 
 	// Selector for a Crossconnect in compute to populate pcc.
 	// +kubebuilder:validation:Optional
-	PccSelector *v1.NamespacedSelector `json:"pccSelector,omitempty" tf:"-"`
+	PccSelector *v2.NamespacedSelector `json:"pccSelector,omitempty" tf:"-"`
 
 	// [Boolean] Indicates if the LAN faces the public Internet (true) or not (false).
 	// +kubebuilder:validation:Optional
@@ -178,8 +177,8 @@ type LanSpec struct {
 
 // LanStatus defines the observed state of Lan.
 type LanStatus struct {
-	v1.ResourceStatus `json:",inline"`
-	AtProvider        LanObservation `json:"atProvider,omitempty"`
+	v2.ManagedResourceStatus `json:",inline"`
+	AtProvider               LanObservation `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true

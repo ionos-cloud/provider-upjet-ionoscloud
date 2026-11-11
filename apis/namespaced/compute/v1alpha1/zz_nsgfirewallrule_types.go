@@ -10,8 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
-	v2 "github.com/crossplane/crossplane-runtime/v2/apis/common/v2"
+	v2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 )
 
 type NSGFirewallRuleInitParameters struct {
@@ -22,11 +21,11 @@ type NSGFirewallRuleInitParameters struct {
 
 	// Reference to a Datacenter in compute to populate datacenterId.
 	// +kubebuilder:validation:Optional
-	DatacenterIDRef *v1.NamespacedReference `json:"datacenterIdRef,omitempty" tf:"-"`
+	DatacenterIDRef *v2.NamespacedReference `json:"datacenterIdRef,omitempty" tf:"-"`
 
 	// Selector for a Datacenter in compute to populate datacenterId.
 	// +kubebuilder:validation:Optional
-	DatacenterIDSelector *v1.NamespacedSelector `json:"datacenterIdSelector,omitempty" tf:"-"`
+	DatacenterIDSelector *v2.NamespacedSelector `json:"datacenterIdSelector,omitempty" tf:"-"`
 
 	// [int] Defines the allowed code (from 0 to 254) if protocol ICMP is chosen.
 	IcmpCode *string `json:"icmpCode,omitempty" tf:"icmp_code,omitempty"`
@@ -46,11 +45,11 @@ type NSGFirewallRuleInitParameters struct {
 
 	// Reference to a NSG in compute to populate nsgId.
 	// +kubebuilder:validation:Optional
-	NsgIDRef *v1.NamespacedReference `json:"nsgIdRef,omitempty" tf:"-"`
+	NsgIDRef *v2.NamespacedReference `json:"nsgIdRef,omitempty" tf:"-"`
 
 	// Selector for a NSG in compute to populate nsgId.
 	// +kubebuilder:validation:Optional
-	NsgIDSelector *v1.NamespacedSelector `json:"nsgIdSelector,omitempty" tf:"-"`
+	NsgIDSelector *v2.NamespacedSelector `json:"nsgIdSelector,omitempty" tf:"-"`
 
 	// [int] Defines the end range of the allowed port (from 1 to 65534) if the protocol TCP or UDP is chosen. Leave portRangeStart and portRangeEnd null to allow all ports.
 	PortRangeEnd *float64 `json:"portRangeEnd,omitempty" tf:"port_range_end,omitempty"`
@@ -68,11 +67,11 @@ type NSGFirewallRuleInitParameters struct {
 
 	// Reference to a Ipblock in compute to populate sourceIp.
 	// +kubebuilder:validation:Optional
-	SourceIPRef *v1.NamespacedReference `json:"sourceIpRef,omitempty" tf:"-"`
+	SourceIPRef *v2.NamespacedReference `json:"sourceIpRef,omitempty" tf:"-"`
 
 	// Selector for a Ipblock in compute to populate sourceIp.
 	// +kubebuilder:validation:Optional
-	SourceIPSelector *v1.NamespacedSelector `json:"sourceIpSelector,omitempty" tf:"-"`
+	SourceIPSelector *v2.NamespacedSelector `json:"sourceIpSelector,omitempty" tf:"-"`
 
 	// [string] Only traffic originating from the respective MAC address is allowed. Valid format: aa:bb:cc:dd:ee:ff. Value null allows all source MAC address. Valid format: aa:bb:cc:dd:ee:ff.
 	SourceMac *string `json:"sourceMac,omitempty" tf:"source_mac,omitempty"`
@@ -84,11 +83,11 @@ type NSGFirewallRuleInitParameters struct {
 
 	// Reference to a Ipblock in compute to populate targetIp.
 	// +kubebuilder:validation:Optional
-	TargetIPRef *v1.NamespacedReference `json:"targetIpRef,omitempty" tf:"-"`
+	TargetIPRef *v2.NamespacedReference `json:"targetIpRef,omitempty" tf:"-"`
 
 	// Selector for a Ipblock in compute to populate targetIp.
 	// +kubebuilder:validation:Optional
-	TargetIPSelector *v1.NamespacedSelector `json:"targetIpSelector,omitempty" tf:"-"`
+	TargetIPSelector *v2.NamespacedSelector `json:"targetIpSelector,omitempty" tf:"-"`
 
 	// (Computed)[string] The type of firewall rule. If is not specified, it will take the default value INGRESS.
 	Type *string `json:"type,omitempty" tf:"type,omitempty"`
@@ -147,11 +146,11 @@ type NSGFirewallRuleParameters struct {
 
 	// Reference to a Datacenter in compute to populate datacenterId.
 	// +kubebuilder:validation:Optional
-	DatacenterIDRef *v1.NamespacedReference `json:"datacenterIdRef,omitempty" tf:"-"`
+	DatacenterIDRef *v2.NamespacedReference `json:"datacenterIdRef,omitempty" tf:"-"`
 
 	// Selector for a Datacenter in compute to populate datacenterId.
 	// +kubebuilder:validation:Optional
-	DatacenterIDSelector *v1.NamespacedSelector `json:"datacenterIdSelector,omitempty" tf:"-"`
+	DatacenterIDSelector *v2.NamespacedSelector `json:"datacenterIdSelector,omitempty" tf:"-"`
 
 	// [int] Defines the allowed code (from 0 to 254) if protocol ICMP is chosen.
 	// +kubebuilder:validation:Optional
@@ -176,11 +175,11 @@ type NSGFirewallRuleParameters struct {
 
 	// Reference to a NSG in compute to populate nsgId.
 	// +kubebuilder:validation:Optional
-	NsgIDRef *v1.NamespacedReference `json:"nsgIdRef,omitempty" tf:"-"`
+	NsgIDRef *v2.NamespacedReference `json:"nsgIdRef,omitempty" tf:"-"`
 
 	// Selector for a NSG in compute to populate nsgId.
 	// +kubebuilder:validation:Optional
-	NsgIDSelector *v1.NamespacedSelector `json:"nsgIdSelector,omitempty" tf:"-"`
+	NsgIDSelector *v2.NamespacedSelector `json:"nsgIdSelector,omitempty" tf:"-"`
 
 	// [int] Defines the end range of the allowed port (from 1 to 65534) if the protocol TCP or UDP is chosen. Leave portRangeStart and portRangeEnd null to allow all ports.
 	// +kubebuilder:validation:Optional
@@ -202,11 +201,11 @@ type NSGFirewallRuleParameters struct {
 
 	// Reference to a Ipblock in compute to populate sourceIp.
 	// +kubebuilder:validation:Optional
-	SourceIPRef *v1.NamespacedReference `json:"sourceIpRef,omitempty" tf:"-"`
+	SourceIPRef *v2.NamespacedReference `json:"sourceIpRef,omitempty" tf:"-"`
 
 	// Selector for a Ipblock in compute to populate sourceIp.
 	// +kubebuilder:validation:Optional
-	SourceIPSelector *v1.NamespacedSelector `json:"sourceIpSelector,omitempty" tf:"-"`
+	SourceIPSelector *v2.NamespacedSelector `json:"sourceIpSelector,omitempty" tf:"-"`
 
 	// [string] Only traffic originating from the respective MAC address is allowed. Valid format: aa:bb:cc:dd:ee:ff. Value null allows all source MAC address. Valid format: aa:bb:cc:dd:ee:ff.
 	// +kubebuilder:validation:Optional
@@ -220,11 +219,11 @@ type NSGFirewallRuleParameters struct {
 
 	// Reference to a Ipblock in compute to populate targetIp.
 	// +kubebuilder:validation:Optional
-	TargetIPRef *v1.NamespacedReference `json:"targetIpRef,omitempty" tf:"-"`
+	TargetIPRef *v2.NamespacedReference `json:"targetIpRef,omitempty" tf:"-"`
 
 	// Selector for a Ipblock in compute to populate targetIp.
 	// +kubebuilder:validation:Optional
-	TargetIPSelector *v1.NamespacedSelector `json:"targetIpSelector,omitempty" tf:"-"`
+	TargetIPSelector *v2.NamespacedSelector `json:"targetIpSelector,omitempty" tf:"-"`
 
 	// (Computed)[string] The type of firewall rule. If is not specified, it will take the default value INGRESS.
 	// +kubebuilder:validation:Optional
@@ -250,8 +249,8 @@ type NSGFirewallRuleSpec struct {
 
 // NSGFirewallRuleStatus defines the observed state of NSGFirewallRule.
 type NSGFirewallRuleStatus struct {
-	v1.ResourceStatus `json:",inline"`
-	AtProvider        NSGFirewallRuleObservation `json:"atProvider,omitempty"`
+	v2.ManagedResourceStatus `json:",inline"`
+	AtProvider               NSGFirewallRuleObservation `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true

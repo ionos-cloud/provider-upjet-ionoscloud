@@ -10,7 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
+	v2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 )
 
 type ConnectionsInitParameters struct {
@@ -22,11 +22,11 @@ type ConnectionsInitParameters struct {
 
 	// Reference to a Datacenter in compute to populate datacenterId.
 	// +kubebuilder:validation:Optional
-	DatacenterIDRef *v1.Reference `json:"datacenterIdRef,omitempty" tf:"-"`
+	DatacenterIDRef *v2.Reference `json:"datacenterIdRef,omitempty" tf:"-"`
 
 	// Selector for a Datacenter in compute to populate datacenterId.
 	// +kubebuilder:validation:Optional
-	DatacenterIDSelector *v1.Selector `json:"datacenterIdSelector,omitempty" tf:"-"`
+	DatacenterIDSelector *v2.Selector `json:"datacenterIdSelector,omitempty" tf:"-"`
 
 	// [string] The numeric LAN ID within the data center.
 	// The numeric LAN ID within the data center.
@@ -35,11 +35,11 @@ type ConnectionsInitParameters struct {
 
 	// Reference to a Lan in compute to populate lanId.
 	// +kubebuilder:validation:Optional
-	LanIDRef *v1.Reference `json:"lanIdRef,omitempty" tf:"-"`
+	LanIDRef *v2.Reference `json:"lanIdRef,omitempty" tf:"-"`
 
 	// Selector for a Lan in compute to populate lanId.
 	// +kubebuilder:validation:Optional
-	LanIDSelector *v1.Selector `json:"lanIdSelector,omitempty" tf:"-"`
+	LanIDSelector *v2.Selector `json:"lanIdSelector,omitempty" tf:"-"`
 
 	// [string] Primary instance IP in CIDR notation.
 	// The IP address and subnet mask assigned to the primary instance in CIDR notation.
@@ -71,11 +71,11 @@ type ConnectionsParameters struct {
 
 	// Reference to a Datacenter in compute to populate datacenterId.
 	// +kubebuilder:validation:Optional
-	DatacenterIDRef *v1.Reference `json:"datacenterIdRef,omitempty" tf:"-"`
+	DatacenterIDRef *v2.Reference `json:"datacenterIdRef,omitempty" tf:"-"`
 
 	// Selector for a Datacenter in compute to populate datacenterId.
 	// +kubebuilder:validation:Optional
-	DatacenterIDSelector *v1.Selector `json:"datacenterIdSelector,omitempty" tf:"-"`
+	DatacenterIDSelector *v2.Selector `json:"datacenterIdSelector,omitempty" tf:"-"`
 
 	// [string] The numeric LAN ID within the data center.
 	// The numeric LAN ID within the data center.
@@ -85,11 +85,11 @@ type ConnectionsParameters struct {
 
 	// Reference to a Lan in compute to populate lanId.
 	// +kubebuilder:validation:Optional
-	LanIDRef *v1.Reference `json:"lanIdRef,omitempty" tf:"-"`
+	LanIDRef *v2.Reference `json:"lanIdRef,omitempty" tf:"-"`
 
 	// Selector for a Lan in compute to populate lanId.
 	// +kubebuilder:validation:Optional
-	LanIDSelector *v1.Selector `json:"lanIdSelector,omitempty" tf:"-"`
+	LanIDSelector *v2.Selector `json:"lanIdSelector,omitempty" tf:"-"`
 
 	// [string] Primary instance IP in CIDR notation.
 	// The IP address and subnet mask assigned to the primary instance in CIDR notation.
@@ -400,7 +400,7 @@ type PasswordInitParameters struct {
 
 	// [string] Sensitive. Hex-encoded SHA-256 hash (64 lowercase hex chars).
 	// The hex-encoded hash of the password.
-	HashSecretRef v1.SecretKeySelector `json:"hashSecretRef" tf:"-"`
+	HashSecretRef v2.SecretKeySelector `json:"hashSecretRef" tf:"-"`
 }
 
 type PasswordObservation struct {
@@ -420,7 +420,7 @@ type PasswordParameters struct {
 	// [string] Sensitive. Hex-encoded SHA-256 hash (64 lowercase hex chars).
 	// The hex-encoded hash of the password.
 	// +kubebuilder:validation:Optional
-	HashSecretRef v1.SecretKeySelector `json:"hashSecretRef" tf:"-"`
+	HashSecretRef v2.SecretKeySelector `json:"hashSecretRef" tf:"-"`
 }
 
 type RestoreFromSnapshotInitParameters struct {
@@ -508,8 +508,8 @@ type SnapshotParameters struct {
 
 // InMemoryDBClusterSpec defines the desired state of InMemoryDBCluster
 type InMemoryDBClusterSpec struct {
-	v1.ResourceSpec `json:",inline"`
-	ForProvider     InMemoryDBClusterParameters `json:"forProvider"`
+	v2.ClusterManagedResourceSpec `json:",inline"`
+	ForProvider                   InMemoryDBClusterParameters `json:"forProvider"`
 	// THIS IS A BETA FIELD. It will be honored
 	// unless the Management Policies feature flag is disabled.
 	// InitProvider holds the same fields as ForProvider, with the exception
@@ -525,8 +525,8 @@ type InMemoryDBClusterSpec struct {
 
 // InMemoryDBClusterStatus defines the observed state of InMemoryDBCluster.
 type InMemoryDBClusterStatus struct {
-	v1.ResourceStatus `json:",inline"`
-	AtProvider        InMemoryDBClusterObservation `json:"atProvider,omitempty"`
+	v2.ManagedResourceStatus `json:",inline"`
+	AtProvider               InMemoryDBClusterObservation `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true

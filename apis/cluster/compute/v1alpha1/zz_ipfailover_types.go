@@ -10,7 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
+	v2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 )
 
 type IpfailoverInitParameters struct {
@@ -21,11 +21,11 @@ type IpfailoverInitParameters struct {
 
 	// Reference to a Datacenter in compute to populate datacenterId.
 	// +kubebuilder:validation:Optional
-	DatacenterIDRef *v1.Reference `json:"datacenterIdRef,omitempty" tf:"-"`
+	DatacenterIDRef *v2.Reference `json:"datacenterIdRef,omitempty" tf:"-"`
 
 	// Selector for a Datacenter in compute to populate datacenterId.
 	// +kubebuilder:validation:Optional
-	DatacenterIDSelector *v1.Selector `json:"datacenterIdSelector,omitempty" tf:"-"`
+	DatacenterIDSelector *v2.Selector `json:"datacenterIdSelector,omitempty" tf:"-"`
 
 	// [string] The reserved IP address to be used in the IP failover group.
 	// Failover IP
@@ -35,11 +35,11 @@ type IpfailoverInitParameters struct {
 
 	// Reference to a Ipblock in compute to populate ip.
 	// +kubebuilder:validation:Optional
-	IPRef *v1.Reference `json:"ipRef,omitempty" tf:"-"`
+	IPRef *v2.Reference `json:"ipRef,omitempty" tf:"-"`
 
 	// Selector for a Ipblock in compute to populate ip.
 	// +kubebuilder:validation:Optional
-	IPSelector *v1.Selector `json:"ipSelector,omitempty" tf:"-"`
+	IPSelector *v2.Selector `json:"ipSelector,omitempty" tf:"-"`
 
 	// [string] The ID of a LAN.
 	// +crossplane:generate:reference:type=github.com/ionos-cloud/provider-upjet-ionoscloud/apis/cluster/compute/v1alpha1.Lan
@@ -48,11 +48,11 @@ type IpfailoverInitParameters struct {
 
 	// Reference to a Lan in compute to populate lanId.
 	// +kubebuilder:validation:Optional
-	LanIDRef *v1.Reference `json:"lanIdRef,omitempty" tf:"-"`
+	LanIDRef *v2.Reference `json:"lanIdRef,omitempty" tf:"-"`
 
 	// Selector for a Lan in compute to populate lanId.
 	// +kubebuilder:validation:Optional
-	LanIDSelector *v1.Selector `json:"lanIdSelector,omitempty" tf:"-"`
+	LanIDSelector *v2.Selector `json:"lanIdSelector,omitempty" tf:"-"`
 
 	Location *string `json:"location,omitempty" tf:"location,omitempty"`
 
@@ -64,11 +64,11 @@ type IpfailoverInitParameters struct {
 
 	// Reference to a Server in compute to populate nicuuid.
 	// +kubebuilder:validation:Optional
-	NicuuidRef *v1.Reference `json:"nicuuidRef,omitempty" tf:"-"`
+	NicuuidRef *v2.Reference `json:"nicuuidRef,omitempty" tf:"-"`
 
 	// Selector for a Server in compute to populate nicuuid.
 	// +kubebuilder:validation:Optional
-	NicuuidSelector *v1.Selector `json:"nicuuidSelector,omitempty" tf:"-"`
+	NicuuidSelector *v2.Selector `json:"nicuuidSelector,omitempty" tf:"-"`
 }
 
 type IpfailoverObservation struct {
@@ -101,11 +101,11 @@ type IpfailoverParameters struct {
 
 	// Reference to a Datacenter in compute to populate datacenterId.
 	// +kubebuilder:validation:Optional
-	DatacenterIDRef *v1.Reference `json:"datacenterIdRef,omitempty" tf:"-"`
+	DatacenterIDRef *v2.Reference `json:"datacenterIdRef,omitempty" tf:"-"`
 
 	// Selector for a Datacenter in compute to populate datacenterId.
 	// +kubebuilder:validation:Optional
-	DatacenterIDSelector *v1.Selector `json:"datacenterIdSelector,omitempty" tf:"-"`
+	DatacenterIDSelector *v2.Selector `json:"datacenterIdSelector,omitempty" tf:"-"`
 
 	// [string] The reserved IP address to be used in the IP failover group.
 	// Failover IP
@@ -116,11 +116,11 @@ type IpfailoverParameters struct {
 
 	// Reference to a Ipblock in compute to populate ip.
 	// +kubebuilder:validation:Optional
-	IPRef *v1.Reference `json:"ipRef,omitempty" tf:"-"`
+	IPRef *v2.Reference `json:"ipRef,omitempty" tf:"-"`
 
 	// Selector for a Ipblock in compute to populate ip.
 	// +kubebuilder:validation:Optional
-	IPSelector *v1.Selector `json:"ipSelector,omitempty" tf:"-"`
+	IPSelector *v2.Selector `json:"ipSelector,omitempty" tf:"-"`
 
 	// [string] The ID of a LAN.
 	// +crossplane:generate:reference:type=github.com/ionos-cloud/provider-upjet-ionoscloud/apis/cluster/compute/v1alpha1.Lan
@@ -130,11 +130,11 @@ type IpfailoverParameters struct {
 
 	// Reference to a Lan in compute to populate lanId.
 	// +kubebuilder:validation:Optional
-	LanIDRef *v1.Reference `json:"lanIdRef,omitempty" tf:"-"`
+	LanIDRef *v2.Reference `json:"lanIdRef,omitempty" tf:"-"`
 
 	// Selector for a Lan in compute to populate lanId.
 	// +kubebuilder:validation:Optional
-	LanIDSelector *v1.Selector `json:"lanIdSelector,omitempty" tf:"-"`
+	LanIDSelector *v2.Selector `json:"lanIdSelector,omitempty" tf:"-"`
 
 	// +kubebuilder:validation:Optional
 	Location *string `json:"location,omitempty" tf:"location,omitempty"`
@@ -148,17 +148,17 @@ type IpfailoverParameters struct {
 
 	// Reference to a Server in compute to populate nicuuid.
 	// +kubebuilder:validation:Optional
-	NicuuidRef *v1.Reference `json:"nicuuidRef,omitempty" tf:"-"`
+	NicuuidRef *v2.Reference `json:"nicuuidRef,omitempty" tf:"-"`
 
 	// Selector for a Server in compute to populate nicuuid.
 	// +kubebuilder:validation:Optional
-	NicuuidSelector *v1.Selector `json:"nicuuidSelector,omitempty" tf:"-"`
+	NicuuidSelector *v2.Selector `json:"nicuuidSelector,omitempty" tf:"-"`
 }
 
 // IpfailoverSpec defines the desired state of Ipfailover
 type IpfailoverSpec struct {
-	v1.ResourceSpec `json:",inline"`
-	ForProvider     IpfailoverParameters `json:"forProvider"`
+	v2.ClusterManagedResourceSpec `json:",inline"`
+	ForProvider                   IpfailoverParameters `json:"forProvider"`
 	// THIS IS A BETA FIELD. It will be honored
 	// unless the Management Policies feature flag is disabled.
 	// InitProvider holds the same fields as ForProvider, with the exception
@@ -174,8 +174,8 @@ type IpfailoverSpec struct {
 
 // IpfailoverStatus defines the observed state of Ipfailover.
 type IpfailoverStatus struct {
-	v1.ResourceStatus `json:",inline"`
-	AtProvider        IpfailoverObservation `json:"atProvider,omitempty"`
+	v2.ManagedResourceStatus `json:",inline"`
+	AtProvider               IpfailoverObservation `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true

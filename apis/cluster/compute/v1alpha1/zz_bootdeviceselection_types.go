@@ -10,7 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
+	v2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 )
 
 type BootDeviceSelectionInitParameters struct {
@@ -21,11 +21,11 @@ type BootDeviceSelectionInitParameters struct {
 
 	// Reference to a Volume in compute to populate bootDeviceId.
 	// +kubebuilder:validation:Optional
-	BootDeviceIDRef *v1.Reference `json:"bootDeviceIdRef,omitempty" tf:"-"`
+	BootDeviceIDRef *v2.Reference `json:"bootDeviceIdRef,omitempty" tf:"-"`
 
 	// Selector for a Volume in compute to populate bootDeviceId.
 	// +kubebuilder:validation:Optional
-	BootDeviceIDSelector *v1.Selector `json:"bootDeviceIdSelector,omitempty" tf:"-"`
+	BootDeviceIDSelector *v2.Selector `json:"bootDeviceIdSelector,omitempty" tf:"-"`
 
 	// ID of the Datacenter that holds the server for which the boot volume is selected
 	// +crossplane:generate:reference:type=github.com/ionos-cloud/provider-upjet-ionoscloud/apis/cluster/compute/v1alpha1.Datacenter
@@ -33,11 +33,11 @@ type BootDeviceSelectionInitParameters struct {
 
 	// Reference to a Datacenter in compute to populate datacenterId.
 	// +kubebuilder:validation:Optional
-	DatacenterIDRef *v1.Reference `json:"datacenterIdRef,omitempty" tf:"-"`
+	DatacenterIDRef *v2.Reference `json:"datacenterIdRef,omitempty" tf:"-"`
 
 	// Selector for a Datacenter in compute to populate datacenterId.
 	// +kubebuilder:validation:Optional
-	DatacenterIDSelector *v1.Selector `json:"datacenterIdSelector,omitempty" tf:"-"`
+	DatacenterIDSelector *v2.Selector `json:"datacenterIdSelector,omitempty" tf:"-"`
 
 	// The location of the resource. This field should be used only if you are also using a file configuration and should not be configured otherwise.
 	Location *string `json:"location,omitempty" tf:"location,omitempty"`
@@ -48,11 +48,11 @@ type BootDeviceSelectionInitParameters struct {
 
 	// Reference to a Server in compute to populate serverId.
 	// +kubebuilder:validation:Optional
-	ServerIDRef *v1.Reference `json:"serverIdRef,omitempty" tf:"-"`
+	ServerIDRef *v2.Reference `json:"serverIdRef,omitempty" tf:"-"`
 
 	// Selector for a Server in compute to populate serverId.
 	// +kubebuilder:validation:Optional
-	ServerIDSelector *v1.Selector `json:"serverIdSelector,omitempty" tf:"-"`
+	ServerIDSelector *v2.Selector `json:"serverIdSelector,omitempty" tf:"-"`
 }
 
 type BootDeviceSelectionObservation struct {
@@ -84,11 +84,11 @@ type BootDeviceSelectionParameters struct {
 
 	// Reference to a Volume in compute to populate bootDeviceId.
 	// +kubebuilder:validation:Optional
-	BootDeviceIDRef *v1.Reference `json:"bootDeviceIdRef,omitempty" tf:"-"`
+	BootDeviceIDRef *v2.Reference `json:"bootDeviceIdRef,omitempty" tf:"-"`
 
 	// Selector for a Volume in compute to populate bootDeviceId.
 	// +kubebuilder:validation:Optional
-	BootDeviceIDSelector *v1.Selector `json:"bootDeviceIdSelector,omitempty" tf:"-"`
+	BootDeviceIDSelector *v2.Selector `json:"bootDeviceIdSelector,omitempty" tf:"-"`
 
 	// ID of the Datacenter that holds the server for which the boot volume is selected
 	// +crossplane:generate:reference:type=github.com/ionos-cloud/provider-upjet-ionoscloud/apis/cluster/compute/v1alpha1.Datacenter
@@ -97,11 +97,11 @@ type BootDeviceSelectionParameters struct {
 
 	// Reference to a Datacenter in compute to populate datacenterId.
 	// +kubebuilder:validation:Optional
-	DatacenterIDRef *v1.Reference `json:"datacenterIdRef,omitempty" tf:"-"`
+	DatacenterIDRef *v2.Reference `json:"datacenterIdRef,omitempty" tf:"-"`
 
 	// Selector for a Datacenter in compute to populate datacenterId.
 	// +kubebuilder:validation:Optional
-	DatacenterIDSelector *v1.Selector `json:"datacenterIdSelector,omitempty" tf:"-"`
+	DatacenterIDSelector *v2.Selector `json:"datacenterIdSelector,omitempty" tf:"-"`
 
 	// The location of the resource. This field should be used only if you are also using a file configuration and should not be configured otherwise.
 	// +kubebuilder:validation:Optional
@@ -114,17 +114,17 @@ type BootDeviceSelectionParameters struct {
 
 	// Reference to a Server in compute to populate serverId.
 	// +kubebuilder:validation:Optional
-	ServerIDRef *v1.Reference `json:"serverIdRef,omitempty" tf:"-"`
+	ServerIDRef *v2.Reference `json:"serverIdRef,omitempty" tf:"-"`
 
 	// Selector for a Server in compute to populate serverId.
 	// +kubebuilder:validation:Optional
-	ServerIDSelector *v1.Selector `json:"serverIdSelector,omitempty" tf:"-"`
+	ServerIDSelector *v2.Selector `json:"serverIdSelector,omitempty" tf:"-"`
 }
 
 // BootDeviceSelectionSpec defines the desired state of BootDeviceSelection
 type BootDeviceSelectionSpec struct {
-	v1.ResourceSpec `json:",inline"`
-	ForProvider     BootDeviceSelectionParameters `json:"forProvider"`
+	v2.ClusterManagedResourceSpec `json:",inline"`
+	ForProvider                   BootDeviceSelectionParameters `json:"forProvider"`
 	// THIS IS A BETA FIELD. It will be honored
 	// unless the Management Policies feature flag is disabled.
 	// InitProvider holds the same fields as ForProvider, with the exception
@@ -140,8 +140,8 @@ type BootDeviceSelectionSpec struct {
 
 // BootDeviceSelectionStatus defines the observed state of BootDeviceSelection.
 type BootDeviceSelectionStatus struct {
-	v1.ResourceStatus `json:",inline"`
-	AtProvider        BootDeviceSelectionObservation `json:"atProvider,omitempty"`
+	v2.ManagedResourceStatus `json:",inline"`
+	AtProvider               BootDeviceSelectionObservation `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true

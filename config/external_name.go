@@ -62,12 +62,6 @@ var TerraformPluginSDKExternalNameConfigs = map[string]config.ExternalName{
 	"ionoscloud_nsg":                          config.IdentifierFromProvider,
 	"ionoscloud_nsg_firewallrule":             config.IdentifierFromProvider,
 	"ionoscloud_datacenter_nsg_selection":     config.IdentifierFromProvider,
-	// api gateway
-	"ionoscloud_apigateway":       config.IdentifierFromProvider,
-	"ionoscloud_apigateway_route": config.IdentifierFromProvider,
-	// data platform
-	"ionoscloud_dataplatform_cluster":   config.IdentifierFromProvider,
-	"ionoscloud_dataplatform_node_pool": config.IdentifierFromProvider,
 	// nat gateway
 	"ionoscloud_natgateway":      config.IdentifierFromProvider,
 	"ionoscloud_natgateway_rule": config.IdentifierFromProvider,

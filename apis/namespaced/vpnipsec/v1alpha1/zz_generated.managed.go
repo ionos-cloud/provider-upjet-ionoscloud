@@ -6,84 +6,84 @@
 
 package v1alpha1
 
-import xpv1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
+import xpv2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 
 // GetCondition of this VpnIpsecGateway.
-func (mg *VpnIpsecGateway) GetCondition(ct xpv1.ConditionType) xpv1.Condition {
+func (mg *VpnIpsecGateway) GetCondition(ct xpv2.ConditionType) xpv2.Condition {
 	return mg.Status.GetCondition(ct)
 }
 
 // GetManagementPolicies of this VpnIpsecGateway.
-func (mg *VpnIpsecGateway) GetManagementPolicies() xpv1.ManagementPolicies {
+func (mg *VpnIpsecGateway) GetManagementPolicies() xpv2.ManagementPolicies {
 	return mg.Spec.ManagementPolicies
 }
 
 // GetProviderConfigReference of this VpnIpsecGateway.
-func (mg *VpnIpsecGateway) GetProviderConfigReference() *xpv1.ProviderConfigReference {
+func (mg *VpnIpsecGateway) GetProviderConfigReference() *xpv2.ProviderConfigReference {
 	return mg.Spec.ProviderConfigReference
 }
 
 // GetWriteConnectionSecretToReference of this VpnIpsecGateway.
-func (mg *VpnIpsecGateway) GetWriteConnectionSecretToReference() *xpv1.LocalSecretReference {
+func (mg *VpnIpsecGateway) GetWriteConnectionSecretToReference() *xpv2.LocalSecretReference {
 	return mg.Spec.WriteConnectionSecretToReference
 }
 
 // SetConditions of this VpnIpsecGateway.
-func (mg *VpnIpsecGateway) SetConditions(c ...xpv1.Condition) {
+func (mg *VpnIpsecGateway) SetConditions(c ...xpv2.Condition) {
 	mg.Status.SetConditions(c...)
 }
 
 // SetManagementPolicies of this VpnIpsecGateway.
-func (mg *VpnIpsecGateway) SetManagementPolicies(r xpv1.ManagementPolicies) {
+func (mg *VpnIpsecGateway) SetManagementPolicies(r xpv2.ManagementPolicies) {
 	mg.Spec.ManagementPolicies = r
 }
 
 // SetProviderConfigReference of this VpnIpsecGateway.
-func (mg *VpnIpsecGateway) SetProviderConfigReference(r *xpv1.ProviderConfigReference) {
+func (mg *VpnIpsecGateway) SetProviderConfigReference(r *xpv2.ProviderConfigReference) {
 	mg.Spec.ProviderConfigReference = r
 }
 
 // SetWriteConnectionSecretToReference of this VpnIpsecGateway.
-func (mg *VpnIpsecGateway) SetWriteConnectionSecretToReference(r *xpv1.LocalSecretReference) {
+func (mg *VpnIpsecGateway) SetWriteConnectionSecretToReference(r *xpv2.LocalSecretReference) {
 	mg.Spec.WriteConnectionSecretToReference = r
 }
 
 // GetCondition of this VpnIpsecTunnel.
-func (mg *VpnIpsecTunnel) GetCondition(ct xpv1.ConditionType) xpv1.Condition {
+func (mg *VpnIpsecTunnel) GetCondition(ct xpv2.ConditionType) xpv2.Condition {
 	return mg.Status.GetCondition(ct)
 }
 
 // GetManagementPolicies of this VpnIpsecTunnel.
-func (mg *VpnIpsecTunnel) GetManagementPolicies() xpv1.ManagementPolicies {
+func (mg *VpnIpsecTunnel) GetManagementPolicies() xpv2.ManagementPolicies {
 	return mg.Spec.ManagementPolicies
 }
 
 // GetProviderConfigReference of this VpnIpsecTunnel.
-func (mg *VpnIpsecTunnel) GetProviderConfigReference() *xpv1.ProviderConfigReference {
+func (mg *VpnIpsecTunnel) GetProviderConfigReference() *xpv2.ProviderConfigReference {
 	return mg.Spec.ProviderConfigReference
 }
 
 // GetWriteConnectionSecretToReference of this VpnIpsecTunnel.
-func (mg *VpnIpsecTunnel) GetWriteConnectionSecretToReference() *xpv1.LocalSecretReference {
+func (mg *VpnIpsecTunnel) GetWriteConnectionSecretToReference() *xpv2.LocalSecretReference {
 	return mg.Spec.WriteConnectionSecretToReference
 }
 
 // SetConditions of this VpnIpsecTunnel.
-func (mg *VpnIpsecTunnel) SetConditions(c ...xpv1.Condition) {
+func (mg *VpnIpsecTunnel) SetConditions(c ...xpv2.Condition) {
 	mg.Status.SetConditions(c...)
 }
 
 // SetManagementPolicies of this VpnIpsecTunnel.
-func (mg *VpnIpsecTunnel) SetManagementPolicies(r xpv1.ManagementPolicies) {
+func (mg *VpnIpsecTunnel) SetManagementPolicies(r xpv2.ManagementPolicies) {
 	mg.Spec.ManagementPolicies = r
 }
 
 // SetProviderConfigReference of this VpnIpsecTunnel.
-func (mg *VpnIpsecTunnel) SetProviderConfigReference(r *xpv1.ProviderConfigReference) {
+func (mg *VpnIpsecTunnel) SetProviderConfigReference(r *xpv2.ProviderConfigReference) {
 	mg.Spec.ProviderConfigReference = r
 }
 
 // SetWriteConnectionSecretToReference of this VpnIpsecTunnel.
-func (mg *VpnIpsecTunnel) SetWriteConnectionSecretToReference(r *xpv1.LocalSecretReference) {
+func (mg *VpnIpsecTunnel) SetWriteConnectionSecretToReference(r *xpv2.LocalSecretReference) {
 	mg.Spec.WriteConnectionSecretToReference = r
 }

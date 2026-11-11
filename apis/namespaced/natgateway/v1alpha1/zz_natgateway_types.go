@@ -10,8 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
-	v2 "github.com/crossplane/crossplane-runtime/v2/apis/common/v2"
+	v2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 )
 
 type LansInitParameters struct {
@@ -28,11 +27,11 @@ type LansInitParameters struct {
 
 	// Reference to a Lan in compute to populate id.
 	// +kubebuilder:validation:Optional
-	IDRef *v1.NamespacedReference `json:"idRef,omitempty" tf:"-"`
+	IDRef *v2.NamespacedReference `json:"idRef,omitempty" tf:"-"`
 
 	// Selector for a Lan in compute to populate id.
 	// +kubebuilder:validation:Optional
-	IDSelector *v1.NamespacedSelector `json:"idSelector,omitempty" tf:"-"`
+	IDSelector *v2.NamespacedSelector `json:"idSelector,omitempty" tf:"-"`
 }
 
 type LansObservation struct {
@@ -62,11 +61,11 @@ type LansParameters struct {
 
 	// Reference to a Lan in compute to populate id.
 	// +kubebuilder:validation:Optional
-	IDRef *v1.NamespacedReference `json:"idRef,omitempty" tf:"-"`
+	IDRef *v2.NamespacedReference `json:"idRef,omitempty" tf:"-"`
 
 	// Selector for a Lan in compute to populate id.
 	// +kubebuilder:validation:Optional
-	IDSelector *v1.NamespacedSelector `json:"idSelector,omitempty" tf:"-"`
+	IDSelector *v2.NamespacedSelector `json:"idSelector,omitempty" tf:"-"`
 }
 
 type NatgatewayInitParameters struct {
@@ -77,11 +76,11 @@ type NatgatewayInitParameters struct {
 
 	// Reference to a Datacenter in compute to populate datacenterId.
 	// +kubebuilder:validation:Optional
-	DatacenterIDRef *v1.NamespacedReference `json:"datacenterIdRef,omitempty" tf:"-"`
+	DatacenterIDRef *v2.NamespacedReference `json:"datacenterIdRef,omitempty" tf:"-"`
 
 	// Selector for a Datacenter in compute to populate datacenterId.
 	// +kubebuilder:validation:Optional
-	DatacenterIDSelector *v1.NamespacedSelector `json:"datacenterIdSelector,omitempty" tf:"-"`
+	DatacenterIDSelector *v2.NamespacedSelector `json:"datacenterIdSelector,omitempty" tf:"-"`
 
 	// [list] A list of Local Area Networks the node pool should be part of.
 	// A list of Local Area Networks the node pool should be part of
@@ -134,11 +133,11 @@ type NatgatewayParameters struct {
 
 	// Reference to a Datacenter in compute to populate datacenterId.
 	// +kubebuilder:validation:Optional
-	DatacenterIDRef *v1.NamespacedReference `json:"datacenterIdRef,omitempty" tf:"-"`
+	DatacenterIDRef *v2.NamespacedReference `json:"datacenterIdRef,omitempty" tf:"-"`
 
 	// Selector for a Datacenter in compute to populate datacenterId.
 	// +kubebuilder:validation:Optional
-	DatacenterIDSelector *v1.NamespacedSelector `json:"datacenterIdSelector,omitempty" tf:"-"`
+	DatacenterIDSelector *v2.NamespacedSelector `json:"datacenterIdSelector,omitempty" tf:"-"`
 
 	// [list] A list of Local Area Networks the node pool should be part of.
 	// A list of Local Area Networks the node pool should be part of
@@ -180,8 +179,8 @@ type NatgatewaySpec struct {
 
 // NatgatewayStatus defines the observed state of Natgateway.
 type NatgatewayStatus struct {
-	v1.ResourceStatus `json:",inline"`
-	AtProvider        NatgatewayObservation `json:"atProvider,omitempty"`
+	v2.ManagedResourceStatus `json:",inline"`
+	AtProvider               NatgatewayObservation `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true

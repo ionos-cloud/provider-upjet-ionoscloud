@@ -10,8 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
-	v2 "github.com/crossplane/crossplane-runtime/v2/apis/common/v2"
+	v2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 )
 
 type BucketPolicyInitParameters struct {
@@ -23,11 +22,11 @@ type BucketPolicyInitParameters struct {
 
 	// Reference to a Bucket in objectstorage to populate bucket.
 	// +kubebuilder:validation:Optional
-	BucketRef *v1.NamespacedReference `json:"bucketRef,omitempty" tf:"-"`
+	BucketRef *v2.NamespacedReference `json:"bucketRef,omitempty" tf:"-"`
 
 	// Selector for a Bucket in objectstorage to populate bucket.
 	// +kubebuilder:validation:Optional
-	BucketSelector *v1.NamespacedSelector `json:"bucketSelector,omitempty" tf:"-"`
+	BucketSelector *v2.NamespacedSelector `json:"bucketSelector,omitempty" tf:"-"`
 
 	// [string] The policy document. This is a JSON formatted string.
 	// Text of the policy
@@ -57,11 +56,11 @@ type BucketPolicyParameters struct {
 
 	// Reference to a Bucket in objectstorage to populate bucket.
 	// +kubebuilder:validation:Optional
-	BucketRef *v1.NamespacedReference `json:"bucketRef,omitempty" tf:"-"`
+	BucketRef *v2.NamespacedReference `json:"bucketRef,omitempty" tf:"-"`
 
 	// Selector for a Bucket in objectstorage to populate bucket.
 	// +kubebuilder:validation:Optional
-	BucketSelector *v1.NamespacedSelector `json:"bucketSelector,omitempty" tf:"-"`
+	BucketSelector *v2.NamespacedSelector `json:"bucketSelector,omitempty" tf:"-"`
 
 	// [string] The policy document. This is a JSON formatted string.
 	// Text of the policy
@@ -88,8 +87,8 @@ type BucketPolicySpec struct {
 
 // BucketPolicyStatus defines the observed state of BucketPolicy.
 type BucketPolicyStatus struct {
-	v1.ResourceStatus `json:",inline"`
-	AtProvider        BucketPolicyObservation `json:"atProvider,omitempty"`
+	v2.ManagedResourceStatus `json:",inline"`
+	AtProvider               BucketPolicyObservation `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true

@@ -10,8 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
-	v2 "github.com/crossplane/crossplane-runtime/v2/apis/common/v2"
+	v2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 )
 
 type ObjectInitParameters struct {
@@ -23,11 +22,11 @@ type ObjectInitParameters struct {
 
 	// Reference to a Bucket in objectstorage to populate bucket.
 	// +kubebuilder:validation:Optional
-	BucketRef *v1.NamespacedReference `json:"bucketRef,omitempty" tf:"-"`
+	BucketRef *v2.NamespacedReference `json:"bucketRef,omitempty" tf:"-"`
 
 	// Selector for a Bucket in objectstorage to populate bucket.
 	// +kubebuilder:validation:Optional
-	BucketSelector *v1.NamespacedSelector `json:"bucketSelector,omitempty" tf:"-"`
+	BucketSelector *v2.NamespacedSelector `json:"bucketSelector,omitempty" tf:"-"`
 
 	// [string] Specifies caching behavior along the request/reply chain.
 	// Can be used to specify caching behavior along the request/reply chain
@@ -96,7 +95,7 @@ type ObjectInitParameters struct {
 
 	// [string] Specifies the IONOS Object Storage Encryption Context for object encryption.
 	// Specifies the IONOS Object Storage Object Storage Encryption Context to use for object encryption. The value of this header is a base64-encoded UTF-8 string holding JSON with the encryption context key-value pairs.
-	ServerSideEncryptionContextSecretRef *v1.LocalSecretKeySelector `json:"serverSideEncryptionContextSecretRef,omitempty" tf:"-"`
+	ServerSideEncryptionContextSecretRef *v2.LocalSecretKeySelector `json:"serverSideEncryptionContextSecretRef,omitempty" tf:"-"`
 
 	// [string] Specifies the algorithm to use for encrypting the object. Valid value is AES256.
 	// Specifies the algorithm to use to when encrypting the object (e.g., AES256).
@@ -108,7 +107,7 @@ type ObjectInitParameters struct {
 
 	// [string] Specifies the 256-bit, base64-encoded encryption key to use to encrypt and decrypt your data.
 	// Specifies the 256-bit, base64-encoded encryption key to use to encrypt and decrypt your data
-	ServerSideEncryptionCustomerKeySecretRef *v1.LocalSecretKeySelector `json:"serverSideEncryptionCustomerKeySecretRef,omitempty" tf:"-"`
+	ServerSideEncryptionCustomerKeySecretRef *v2.LocalSecretKeySelector `json:"serverSideEncryptionCustomerKeySecretRef,omitempty" tf:"-"`
 
 	// [string] The path to the file to upload.
 	// The path to the file to upload
@@ -245,11 +244,11 @@ type ObjectParameters struct {
 
 	// Reference to a Bucket in objectstorage to populate bucket.
 	// +kubebuilder:validation:Optional
-	BucketRef *v1.NamespacedReference `json:"bucketRef,omitempty" tf:"-"`
+	BucketRef *v2.NamespacedReference `json:"bucketRef,omitempty" tf:"-"`
 
 	// Selector for a Bucket in objectstorage to populate bucket.
 	// +kubebuilder:validation:Optional
-	BucketSelector *v1.NamespacedSelector `json:"bucketSelector,omitempty" tf:"-"`
+	BucketSelector *v2.NamespacedSelector `json:"bucketSelector,omitempty" tf:"-"`
 
 	// [string] Specifies caching behavior along the request/reply chain.
 	// Can be used to specify caching behavior along the request/reply chain
@@ -335,7 +334,7 @@ type ObjectParameters struct {
 	// [string] Specifies the IONOS Object Storage Encryption Context for object encryption.
 	// Specifies the IONOS Object Storage Object Storage Encryption Context to use for object encryption. The value of this header is a base64-encoded UTF-8 string holding JSON with the encryption context key-value pairs.
 	// +kubebuilder:validation:Optional
-	ServerSideEncryptionContextSecretRef *v1.LocalSecretKeySelector `json:"serverSideEncryptionContextSecretRef,omitempty" tf:"-"`
+	ServerSideEncryptionContextSecretRef *v2.LocalSecretKeySelector `json:"serverSideEncryptionContextSecretRef,omitempty" tf:"-"`
 
 	// [string] Specifies the algorithm to use for encrypting the object. Valid value is AES256.
 	// Specifies the algorithm to use to when encrypting the object (e.g., AES256).
@@ -350,7 +349,7 @@ type ObjectParameters struct {
 	// [string] Specifies the 256-bit, base64-encoded encryption key to use to encrypt and decrypt your data.
 	// Specifies the 256-bit, base64-encoded encryption key to use to encrypt and decrypt your data
 	// +kubebuilder:validation:Optional
-	ServerSideEncryptionCustomerKeySecretRef *v1.LocalSecretKeySelector `json:"serverSideEncryptionCustomerKeySecretRef,omitempty" tf:"-"`
+	ServerSideEncryptionCustomerKeySecretRef *v2.LocalSecretKeySelector `json:"serverSideEncryptionCustomerKeySecretRef,omitempty" tf:"-"`
 
 	// [string] The path to the file to upload.
 	// The path to the file to upload
@@ -393,8 +392,8 @@ type ObjectSpec struct {
 
 // ObjectStatus defines the observed state of Object.
 type ObjectStatus struct {
-	v1.ResourceStatus `json:",inline"`
-	AtProvider        ObjectObservation `json:"atProvider,omitempty"`
+	v2.ManagedResourceStatus `json:",inline"`
+	AtProvider               ObjectObservation `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true

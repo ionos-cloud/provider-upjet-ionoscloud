@@ -10,8 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
-	v2 "github.com/crossplane/crossplane-runtime/v2/apis/common/v2"
+	v2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 )
 
 type AuthInitParameters struct {
@@ -24,7 +23,7 @@ type AuthInitParameters struct {
 	// [string] The pre-shared key to use for IPSec Authentication. Note: Required if method is
 	// PSK.
 	// The Pre-Shared Key to use for IPSec Authentication. Note: Required if method is PSK.
-	PskKeySecretRef *v1.LocalSecretKeySelector `json:"pskKeySecretRef,omitempty" tf:"-"`
+	PskKeySecretRef *v2.LocalSecretKeySelector `json:"pskKeySecretRef,omitempty" tf:"-"`
 }
 
 type AuthObservation struct {
@@ -47,7 +46,7 @@ type AuthParameters struct {
 	// PSK.
 	// The Pre-Shared Key to use for IPSec Authentication. Note: Required if method is PSK.
 	// +kubebuilder:validation:Optional
-	PskKeySecretRef *v1.LocalSecretKeySelector `json:"pskKeySecretRef,omitempty" tf:"-"`
+	PskKeySecretRef *v2.LocalSecretKeySelector `json:"pskKeySecretRef,omitempty" tf:"-"`
 }
 
 type EspInitParameters struct {
@@ -236,11 +235,11 @@ type VpnIpsecTunnelInitParameters struct {
 
 	// Reference to a VpnIpsecGateway in vpnipsec to populate gatewayId.
 	// +kubebuilder:validation:Optional
-	GatewayIDRef *v1.NamespacedReference `json:"gatewayIdRef,omitempty" tf:"-"`
+	GatewayIDRef *v2.NamespacedReference `json:"gatewayIdRef,omitempty" tf:"-"`
 
 	// Selector for a VpnIpsecGateway in vpnipsec to populate gatewayId.
 	// +kubebuilder:validation:Optional
-	GatewayIDSelector *v1.NamespacedSelector `json:"gatewayIdSelector,omitempty" tf:"-"`
+	GatewayIDSelector *v2.NamespacedSelector `json:"gatewayIdSelector,omitempty" tf:"-"`
 
 	// [list] Settings for the initial security exchange phase. Minimum items: 1. Maximum items: 1.
 	// Settings for the initial security exchange phase.
@@ -346,11 +345,11 @@ type VpnIpsecTunnelParameters struct {
 
 	// Reference to a VpnIpsecGateway in vpnipsec to populate gatewayId.
 	// +kubebuilder:validation:Optional
-	GatewayIDRef *v1.NamespacedReference `json:"gatewayIdRef,omitempty" tf:"-"`
+	GatewayIDRef *v2.NamespacedReference `json:"gatewayIdRef,omitempty" tf:"-"`
 
 	// Selector for a VpnIpsecGateway in vpnipsec to populate gatewayId.
 	// +kubebuilder:validation:Optional
-	GatewayIDSelector *v1.NamespacedSelector `json:"gatewayIdSelector,omitempty" tf:"-"`
+	GatewayIDSelector *v2.NamespacedSelector `json:"gatewayIdSelector,omitempty" tf:"-"`
 
 	// [list] Settings for the initial security exchange phase. Minimum items: 1. Maximum items: 1.
 	// Settings for the initial security exchange phase.
@@ -398,8 +397,8 @@ type VpnIpsecTunnelSpec struct {
 
 // VpnIpsecTunnelStatus defines the observed state of VpnIpsecTunnel.
 type VpnIpsecTunnelStatus struct {
-	v1.ResourceStatus `json:",inline"`
-	AtProvider        VpnIpsecTunnelObservation `json:"atProvider,omitempty"`
+	v2.ManagedResourceStatus `json:",inline"`
+	AtProvider               VpnIpsecTunnelObservation `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true

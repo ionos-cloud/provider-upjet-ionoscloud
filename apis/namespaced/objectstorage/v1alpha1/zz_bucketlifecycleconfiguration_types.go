@@ -10,8 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
-	v2 "github.com/crossplane/crossplane-runtime/v2/apis/common/v2"
+	v2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 )
 
 type AbortIncompleteMultipartUploadInitParameters struct {
@@ -45,11 +44,11 @@ type BucketLifecycleConfigurationInitParameters struct {
 
 	// Reference to a Bucket in objectstorage to populate bucket.
 	// +kubebuilder:validation:Optional
-	BucketRef *v1.NamespacedReference `json:"bucketRef,omitempty" tf:"-"`
+	BucketRef *v2.NamespacedReference `json:"bucketRef,omitempty" tf:"-"`
 
 	// Selector for a Bucket in objectstorage to populate bucket.
 	// +kubebuilder:validation:Optional
-	BucketSelector *v1.NamespacedSelector `json:"bucketSelector,omitempty" tf:"-"`
+	BucketSelector *v2.NamespacedSelector `json:"bucketSelector,omitempty" tf:"-"`
 
 	// A list of lifecycle rules for objects in the bucket.
 	Rule []RuleInitParameters `json:"rule,omitempty" tf:"rule,omitempty"`
@@ -78,11 +77,11 @@ type BucketLifecycleConfigurationParameters struct {
 
 	// Reference to a Bucket in objectstorage to populate bucket.
 	// +kubebuilder:validation:Optional
-	BucketRef *v1.NamespacedReference `json:"bucketRef,omitempty" tf:"-"`
+	BucketRef *v2.NamespacedReference `json:"bucketRef,omitempty" tf:"-"`
 
 	// Selector for a Bucket in objectstorage to populate bucket.
 	// +kubebuilder:validation:Optional
-	BucketSelector *v1.NamespacedSelector `json:"bucketSelector,omitempty" tf:"-"`
+	BucketSelector *v2.NamespacedSelector `json:"bucketSelector,omitempty" tf:"-"`
 
 	// A list of lifecycle rules for objects in the bucket.
 	// +kubebuilder:validation:Optional
@@ -297,8 +296,8 @@ type BucketLifecycleConfigurationSpec struct {
 
 // BucketLifecycleConfigurationStatus defines the observed state of BucketLifecycleConfiguration.
 type BucketLifecycleConfigurationStatus struct {
-	v1.ResourceStatus `json:",inline"`
-	AtProvider        BucketLifecycleConfigurationObservation `json:"atProvider,omitempty"`
+	v2.ManagedResourceStatus `json:",inline"`
+	AtProvider               BucketLifecycleConfigurationObservation `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true

@@ -10,8 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
-	v2 "github.com/crossplane/crossplane-runtime/v2/apis/common/v2"
+	v2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 )
 
 type KeyInitParameters struct {
@@ -27,11 +26,11 @@ type KeyInitParameters struct {
 
 	// Reference to a User in compute to populate userId.
 	// +kubebuilder:validation:Optional
-	UserIDRef *v1.NamespacedReference `json:"userIdRef,omitempty" tf:"-"`
+	UserIDRef *v2.NamespacedReference `json:"userIdRef,omitempty" tf:"-"`
 
 	// Selector for a User in compute to populate userId.
 	// +kubebuilder:validation:Optional
-	UserIDSelector *v1.NamespacedSelector `json:"userIdSelector,omitempty" tf:"-"`
+	UserIDSelector *v2.NamespacedSelector `json:"userIdSelector,omitempty" tf:"-"`
 }
 
 type KeyObservation struct {
@@ -62,11 +61,11 @@ type KeyParameters struct {
 
 	// Reference to a User in compute to populate userId.
 	// +kubebuilder:validation:Optional
-	UserIDRef *v1.NamespacedReference `json:"userIdRef,omitempty" tf:"-"`
+	UserIDRef *v2.NamespacedReference `json:"userIdRef,omitempty" tf:"-"`
 
 	// Selector for a User in compute to populate userId.
 	// +kubebuilder:validation:Optional
-	UserIDSelector *v1.NamespacedSelector `json:"userIdSelector,omitempty" tf:"-"`
+	UserIDSelector *v2.NamespacedSelector `json:"userIdSelector,omitempty" tf:"-"`
 }
 
 // KeySpec defines the desired state of Key
@@ -88,8 +87,8 @@ type KeySpec struct {
 
 // KeyStatus defines the observed state of Key.
 type KeyStatus struct {
-	v1.ResourceStatus `json:",inline"`
-	AtProvider        KeyObservation `json:"atProvider,omitempty"`
+	v2.ManagedResourceStatus `json:",inline"`
+	AtProvider               KeyObservation `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true

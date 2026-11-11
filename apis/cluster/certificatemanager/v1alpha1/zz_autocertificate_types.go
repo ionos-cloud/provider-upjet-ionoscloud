@@ -10,7 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
+	v2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 )
 
 type AutoCertificateInitParameters struct {
@@ -31,11 +31,11 @@ type AutoCertificateInitParameters struct {
 
 	// Reference to a AutoCertificateProvider in certificatemanager to populate location.
 	// +kubebuilder:validation:Optional
-	LocationRef *v1.Reference `json:"locationRef,omitempty" tf:"-"`
+	LocationRef *v2.Reference `json:"locationRef,omitempty" tf:"-"`
 
 	// Selector for a AutoCertificateProvider in certificatemanager to populate location.
 	// +kubebuilder:validation:Optional
-	LocationSelector *v1.Selector `json:"locationSelector,omitempty" tf:"-"`
+	LocationSelector *v2.Selector `json:"locationSelector,omitempty" tf:"-"`
 
 	// [string] A certificate name used for management purposes.
 	// A certificate name used for management purposes
@@ -48,11 +48,11 @@ type AutoCertificateInitParameters struct {
 
 	// Reference to a AutoCertificateProvider in certificatemanager to populate providerId.
 	// +kubebuilder:validation:Optional
-	ProviderIDRef *v1.Reference `json:"providerIdRef,omitempty" tf:"-"`
+	ProviderIDRef *v2.Reference `json:"providerIdRef,omitempty" tf:"-"`
 
 	// Selector for a AutoCertificateProvider in certificatemanager to populate providerId.
 	// +kubebuilder:validation:Optional
-	ProviderIDSelector *v1.Selector `json:"providerIdSelector,omitempty" tf:"-"`
+	ProviderIDSelector *v2.Selector `json:"providerIdSelector,omitempty" tf:"-"`
 
 	// [list][string] Optional additional names to be added to the issued certificate. The additional names needs to be part of a zone in IONOS CLOUD DNS.
 	// Optional additional names to be added to the issued certificate. The additional names needs to be part of a zone in IONOS CLOUD DNS
@@ -113,11 +113,11 @@ type AutoCertificateParameters struct {
 
 	// Reference to a AutoCertificateProvider in certificatemanager to populate location.
 	// +kubebuilder:validation:Optional
-	LocationRef *v1.Reference `json:"locationRef,omitempty" tf:"-"`
+	LocationRef *v2.Reference `json:"locationRef,omitempty" tf:"-"`
 
 	// Selector for a AutoCertificateProvider in certificatemanager to populate location.
 	// +kubebuilder:validation:Optional
-	LocationSelector *v1.Selector `json:"locationSelector,omitempty" tf:"-"`
+	LocationSelector *v2.Selector `json:"locationSelector,omitempty" tf:"-"`
 
 	// [string] A certificate name used for management purposes.
 	// A certificate name used for management purposes
@@ -132,11 +132,11 @@ type AutoCertificateParameters struct {
 
 	// Reference to a AutoCertificateProvider in certificatemanager to populate providerId.
 	// +kubebuilder:validation:Optional
-	ProviderIDRef *v1.Reference `json:"providerIdRef,omitempty" tf:"-"`
+	ProviderIDRef *v2.Reference `json:"providerIdRef,omitempty" tf:"-"`
 
 	// Selector for a AutoCertificateProvider in certificatemanager to populate providerId.
 	// +kubebuilder:validation:Optional
-	ProviderIDSelector *v1.Selector `json:"providerIdSelector,omitempty" tf:"-"`
+	ProviderIDSelector *v2.Selector `json:"providerIdSelector,omitempty" tf:"-"`
 
 	// [list][string] Optional additional names to be added to the issued certificate. The additional names needs to be part of a zone in IONOS CLOUD DNS.
 	// Optional additional names to be added to the issued certificate. The additional names needs to be part of a zone in IONOS CLOUD DNS
@@ -146,8 +146,8 @@ type AutoCertificateParameters struct {
 
 // AutoCertificateSpec defines the desired state of AutoCertificate
 type AutoCertificateSpec struct {
-	v1.ResourceSpec `json:",inline"`
-	ForProvider     AutoCertificateParameters `json:"forProvider"`
+	v2.ClusterManagedResourceSpec `json:",inline"`
+	ForProvider                   AutoCertificateParameters `json:"forProvider"`
 	// THIS IS A BETA FIELD. It will be honored
 	// unless the Management Policies feature flag is disabled.
 	// InitProvider holds the same fields as ForProvider, with the exception
@@ -163,8 +163,8 @@ type AutoCertificateSpec struct {
 
 // AutoCertificateStatus defines the observed state of AutoCertificate.
 type AutoCertificateStatus struct {
-	v1.ResourceStatus `json:",inline"`
-	AtProvider        AutoCertificateObservation `json:"atProvider,omitempty"`
+	v2.ManagedResourceStatus `json:",inline"`
+	AtProvider               AutoCertificateObservation `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true

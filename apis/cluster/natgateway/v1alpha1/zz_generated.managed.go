@@ -6,104 +6,104 @@
 
 package v1alpha1
 
-import xpv1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
+import xpv2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 
 // GetCondition of this Natgateway.
-func (mg *Natgateway) GetCondition(ct xpv1.ConditionType) xpv1.Condition {
+func (mg *Natgateway) GetCondition(ct xpv2.ConditionType) xpv2.Condition {
 	return mg.Status.GetCondition(ct)
 }
 
 // GetDeletionPolicy of this Natgateway.
-func (mg *Natgateway) GetDeletionPolicy() xpv1.DeletionPolicy {
+func (mg *Natgateway) GetDeletionPolicy() xpv2.DeletionPolicy {
 	return mg.Spec.DeletionPolicy
 }
 
 // GetManagementPolicies of this Natgateway.
-func (mg *Natgateway) GetManagementPolicies() xpv1.ManagementPolicies {
+func (mg *Natgateway) GetManagementPolicies() xpv2.ManagementPolicies {
 	return mg.Spec.ManagementPolicies
 }
 
 // GetProviderConfigReference of this Natgateway.
-func (mg *Natgateway) GetProviderConfigReference() *xpv1.Reference {
+func (mg *Natgateway) GetProviderConfigReference() *xpv2.Reference {
 	return mg.Spec.ProviderConfigReference
 }
 
 // GetWriteConnectionSecretToReference of this Natgateway.
-func (mg *Natgateway) GetWriteConnectionSecretToReference() *xpv1.SecretReference {
+func (mg *Natgateway) GetWriteConnectionSecretToReference() *xpv2.SecretReference {
 	return mg.Spec.WriteConnectionSecretToReference
 }
 
 // SetConditions of this Natgateway.
-func (mg *Natgateway) SetConditions(c ...xpv1.Condition) {
+func (mg *Natgateway) SetConditions(c ...xpv2.Condition) {
 	mg.Status.SetConditions(c...)
 }
 
 // SetDeletionPolicy of this Natgateway.
-func (mg *Natgateway) SetDeletionPolicy(r xpv1.DeletionPolicy) {
+func (mg *Natgateway) SetDeletionPolicy(r xpv2.DeletionPolicy) {
 	mg.Spec.DeletionPolicy = r
 }
 
 // SetManagementPolicies of this Natgateway.
-func (mg *Natgateway) SetManagementPolicies(r xpv1.ManagementPolicies) {
+func (mg *Natgateway) SetManagementPolicies(r xpv2.ManagementPolicies) {
 	mg.Spec.ManagementPolicies = r
 }
 
 // SetProviderConfigReference of this Natgateway.
-func (mg *Natgateway) SetProviderConfigReference(r *xpv1.Reference) {
+func (mg *Natgateway) SetProviderConfigReference(r *xpv2.Reference) {
 	mg.Spec.ProviderConfigReference = r
 }
 
 // SetWriteConnectionSecretToReference of this Natgateway.
-func (mg *Natgateway) SetWriteConnectionSecretToReference(r *xpv1.SecretReference) {
+func (mg *Natgateway) SetWriteConnectionSecretToReference(r *xpv2.SecretReference) {
 	mg.Spec.WriteConnectionSecretToReference = r
 }
 
 // GetCondition of this Rule.
-func (mg *Rule) GetCondition(ct xpv1.ConditionType) xpv1.Condition {
+func (mg *Rule) GetCondition(ct xpv2.ConditionType) xpv2.Condition {
 	return mg.Status.GetCondition(ct)
 }
 
 // GetDeletionPolicy of this Rule.
-func (mg *Rule) GetDeletionPolicy() xpv1.DeletionPolicy {
+func (mg *Rule) GetDeletionPolicy() xpv2.DeletionPolicy {
 	return mg.Spec.DeletionPolicy
 }
 
 // GetManagementPolicies of this Rule.
-func (mg *Rule) GetManagementPolicies() xpv1.ManagementPolicies {
+func (mg *Rule) GetManagementPolicies() xpv2.ManagementPolicies {
 	return mg.Spec.ManagementPolicies
 }
 
 // GetProviderConfigReference of this Rule.
-func (mg *Rule) GetProviderConfigReference() *xpv1.Reference {
+func (mg *Rule) GetProviderConfigReference() *xpv2.Reference {
 	return mg.Spec.ProviderConfigReference
 }
 
 // GetWriteConnectionSecretToReference of this Rule.
-func (mg *Rule) GetWriteConnectionSecretToReference() *xpv1.SecretReference {
+func (mg *Rule) GetWriteConnectionSecretToReference() *xpv2.SecretReference {
 	return mg.Spec.WriteConnectionSecretToReference
 }
 
 // SetConditions of this Rule.
-func (mg *Rule) SetConditions(c ...xpv1.Condition) {
+func (mg *Rule) SetConditions(c ...xpv2.Condition) {
 	mg.Status.SetConditions(c...)
 }
 
 // SetDeletionPolicy of this Rule.
-func (mg *Rule) SetDeletionPolicy(r xpv1.DeletionPolicy) {
+func (mg *Rule) SetDeletionPolicy(r xpv2.DeletionPolicy) {
 	mg.Spec.DeletionPolicy = r
 }
 
 // SetManagementPolicies of this Rule.
-func (mg *Rule) SetManagementPolicies(r xpv1.ManagementPolicies) {
+func (mg *Rule) SetManagementPolicies(r xpv2.ManagementPolicies) {
 	mg.Spec.ManagementPolicies = r
 }
 
 // SetProviderConfigReference of this Rule.
-func (mg *Rule) SetProviderConfigReference(r *xpv1.Reference) {
+func (mg *Rule) SetProviderConfigReference(r *xpv2.Reference) {
 	mg.Spec.ProviderConfigReference = r
 }
 
 // SetWriteConnectionSecretToReference of this Rule.
-func (mg *Rule) SetWriteConnectionSecretToReference(r *xpv1.SecretReference) {
+func (mg *Rule) SetWriteConnectionSecretToReference(r *xpv2.SecretReference) {
 	mg.Spec.WriteConnectionSecretToReference = r
 }

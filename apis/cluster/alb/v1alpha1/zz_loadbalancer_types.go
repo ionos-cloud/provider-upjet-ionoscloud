@@ -10,7 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
+	v2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 )
 
 type FlowlogInitParameters struct {
@@ -89,11 +89,11 @@ type LoadbalancerInitParameters struct {
 
 	// Reference to a Datacenter in compute to populate datacenterId.
 	// +kubebuilder:validation:Optional
-	DatacenterIDRef *v1.Reference `json:"datacenterIdRef,omitempty" tf:"-"`
+	DatacenterIDRef *v2.Reference `json:"datacenterIdRef,omitempty" tf:"-"`
 
 	// Selector for a Datacenter in compute to populate datacenterId.
 	// +kubebuilder:validation:Optional
-	DatacenterIDSelector *v1.Selector `json:"datacenterIdSelector,omitempty" tf:"-"`
+	DatacenterIDSelector *v2.Selector `json:"datacenterIdSelector,omitempty" tf:"-"`
 
 	// [list] Only 1 flow log can be configured. Only the name field can change as part of an update. Flow logs holistically capture network information such as source and destination IP addresses, source and destination ports, number of packets, amount of bytes, the start and end time of the recording, and the type of protocol – and log the extent to which your instances are being accessed.
 	// Only 1 flow log can be configured. Only the name field can change as part of an update. Flow logs holistically capture network information such as source and destination
@@ -119,11 +119,11 @@ type LoadbalancerInitParameters struct {
 
 	// Reference to a Lan in compute to populate listenerLan.
 	// +kubebuilder:validation:Optional
-	ListenerLanRef *v1.Reference `json:"listenerLanRef,omitempty" tf:"-"`
+	ListenerLanRef *v2.Reference `json:"listenerLanRef,omitempty" tf:"-"`
 
 	// Selector for a Lan in compute to populate listenerLan.
 	// +kubebuilder:validation:Optional
-	ListenerLanSelector *v1.Selector `json:"listenerLanSelector,omitempty" tf:"-"`
+	ListenerLanSelector *v2.Selector `json:"listenerLanSelector,omitempty" tf:"-"`
 
 	Location *string `json:"location,omitempty" tf:"location,omitempty"`
 
@@ -141,11 +141,11 @@ type LoadbalancerInitParameters struct {
 
 	// Reference to a Lan in compute to populate targetLan.
 	// +kubebuilder:validation:Optional
-	TargetLanRef *v1.Reference `json:"targetLanRef,omitempty" tf:"-"`
+	TargetLanRef *v2.Reference `json:"targetLanRef,omitempty" tf:"-"`
 
 	// Selector for a Lan in compute to populate targetLan.
 	// +kubebuilder:validation:Optional
-	TargetLanSelector *v1.Selector `json:"targetLanSelector,omitempty" tf:"-"`
+	TargetLanSelector *v2.Selector `json:"targetLanSelector,omitempty" tf:"-"`
 }
 
 type LoadbalancerObservation struct {
@@ -208,11 +208,11 @@ type LoadbalancerParameters struct {
 
 	// Reference to a Datacenter in compute to populate datacenterId.
 	// +kubebuilder:validation:Optional
-	DatacenterIDRef *v1.Reference `json:"datacenterIdRef,omitempty" tf:"-"`
+	DatacenterIDRef *v2.Reference `json:"datacenterIdRef,omitempty" tf:"-"`
 
 	// Selector for a Datacenter in compute to populate datacenterId.
 	// +kubebuilder:validation:Optional
-	DatacenterIDSelector *v1.Selector `json:"datacenterIdSelector,omitempty" tf:"-"`
+	DatacenterIDSelector *v2.Selector `json:"datacenterIdSelector,omitempty" tf:"-"`
 
 	// [list] Only 1 flow log can be configured. Only the name field can change as part of an update. Flow logs holistically capture network information such as source and destination IP addresses, source and destination ports, number of packets, amount of bytes, the start and end time of the recording, and the type of protocol – and log the extent to which your instances are being accessed.
 	// Only 1 flow log can be configured. Only the name field can change as part of an update. Flow logs holistically capture network information such as source and destination
@@ -242,11 +242,11 @@ type LoadbalancerParameters struct {
 
 	// Reference to a Lan in compute to populate listenerLan.
 	// +kubebuilder:validation:Optional
-	ListenerLanRef *v1.Reference `json:"listenerLanRef,omitempty" tf:"-"`
+	ListenerLanRef *v2.Reference `json:"listenerLanRef,omitempty" tf:"-"`
 
 	// Selector for a Lan in compute to populate listenerLan.
 	// +kubebuilder:validation:Optional
-	ListenerLanSelector *v1.Selector `json:"listenerLanSelector,omitempty" tf:"-"`
+	ListenerLanSelector *v2.Selector `json:"listenerLanSelector,omitempty" tf:"-"`
 
 	// +kubebuilder:validation:Optional
 	Location *string `json:"location,omitempty" tf:"location,omitempty"`
@@ -268,17 +268,17 @@ type LoadbalancerParameters struct {
 
 	// Reference to a Lan in compute to populate targetLan.
 	// +kubebuilder:validation:Optional
-	TargetLanRef *v1.Reference `json:"targetLanRef,omitempty" tf:"-"`
+	TargetLanRef *v2.Reference `json:"targetLanRef,omitempty" tf:"-"`
 
 	// Selector for a Lan in compute to populate targetLan.
 	// +kubebuilder:validation:Optional
-	TargetLanSelector *v1.Selector `json:"targetLanSelector,omitempty" tf:"-"`
+	TargetLanSelector *v2.Selector `json:"targetLanSelector,omitempty" tf:"-"`
 }
 
 // LoadbalancerSpec defines the desired state of Loadbalancer
 type LoadbalancerSpec struct {
-	v1.ResourceSpec `json:",inline"`
-	ForProvider     LoadbalancerParameters `json:"forProvider"`
+	v2.ClusterManagedResourceSpec `json:",inline"`
+	ForProvider                   LoadbalancerParameters `json:"forProvider"`
 	// THIS IS A BETA FIELD. It will be honored
 	// unless the Management Policies feature flag is disabled.
 	// InitProvider holds the same fields as ForProvider, with the exception
@@ -294,8 +294,8 @@ type LoadbalancerSpec struct {
 
 // LoadbalancerStatus defines the observed state of Loadbalancer.
 type LoadbalancerStatus struct {
-	v1.ResourceStatus `json:",inline"`
-	AtProvider        LoadbalancerObservation `json:"atProvider,omitempty"`
+	v2.ManagedResourceStatus `json:",inline"`
+	AtProvider               LoadbalancerObservation `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true

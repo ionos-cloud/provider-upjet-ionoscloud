@@ -10,8 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
-	v2 "github.com/crossplane/crossplane-runtime/v2/apis/common/v2"
+	v2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 )
 
 type CredentialsInitParameters struct {
@@ -44,11 +43,11 @@ type RegistryTokenInitParameters struct {
 
 	// Reference to a Registry in containerregistry to populate registryId.
 	// +kubebuilder:validation:Optional
-	RegistryIDRef *v1.NamespacedReference `json:"registryIdRef,omitempty" tf:"-"`
+	RegistryIDRef *v2.NamespacedReference `json:"registryIdRef,omitempty" tf:"-"`
 
 	// Selector for a Registry in containerregistry to populate registryId.
 	// +kubebuilder:validation:Optional
-	RegistryIDSelector *v1.NamespacedSelector `json:"registryIdSelector,omitempty" tf:"-"`
+	RegistryIDSelector *v2.NamespacedSelector `json:"registryIdSelector,omitempty" tf:"-"`
 
 	// [string] Saves token password to file. Only works on create. Takes as argument a file name, or a file path
 	// Saves password to file. Only works on create. Takes as argument a file name, or a file path
@@ -112,11 +111,11 @@ type RegistryTokenParameters struct {
 
 	// Reference to a Registry in containerregistry to populate registryId.
 	// +kubebuilder:validation:Optional
-	RegistryIDRef *v1.NamespacedReference `json:"registryIdRef,omitempty" tf:"-"`
+	RegistryIDRef *v2.NamespacedReference `json:"registryIdRef,omitempty" tf:"-"`
 
 	// Selector for a Registry in containerregistry to populate registryId.
 	// +kubebuilder:validation:Optional
-	RegistryIDSelector *v1.NamespacedSelector `json:"registryIdSelector,omitempty" tf:"-"`
+	RegistryIDSelector *v2.NamespacedSelector `json:"registryIdSelector,omitempty" tf:"-"`
 
 	// [string] Saves token password to file. Only works on create. Takes as argument a file name, or a file path
 	// Saves password to file. Only works on create. Takes as argument a file name, or a file path
@@ -194,8 +193,8 @@ type RegistryTokenSpec struct {
 
 // RegistryTokenStatus defines the observed state of RegistryToken.
 type RegistryTokenStatus struct {
-	v1.ResourceStatus `json:",inline"`
-	AtProvider        RegistryTokenObservation `json:"atProvider,omitempty"`
+	v2.ManagedResourceStatus `json:",inline"`
+	AtProvider               RegistryTokenObservation `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true

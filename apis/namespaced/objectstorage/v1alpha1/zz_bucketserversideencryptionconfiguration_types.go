@@ -10,8 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
-	v2 "github.com/crossplane/crossplane-runtime/v2/apis/common/v2"
+	v2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 )
 
 type ApplyServerSideEncryptionByDefaultInitParameters struct {
@@ -45,11 +44,11 @@ type BucketServerSideEncryptionConfigurationInitParameters struct {
 
 	// Reference to a Bucket in objectstorage to populate bucket.
 	// +kubebuilder:validation:Optional
-	BucketRef *v1.NamespacedReference `json:"bucketRef,omitempty" tf:"-"`
+	BucketRef *v2.NamespacedReference `json:"bucketRef,omitempty" tf:"-"`
 
 	// Selector for a Bucket in objectstorage to populate bucket.
 	// +kubebuilder:validation:Optional
-	BucketSelector *v1.NamespacedSelector `json:"bucketSelector,omitempty" tf:"-"`
+	BucketSelector *v2.NamespacedSelector `json:"bucketSelector,omitempty" tf:"-"`
 
 	// [block] A block of rule as defined below.
 	// Specifies the default server-side encryption configuration.
@@ -79,11 +78,11 @@ type BucketServerSideEncryptionConfigurationParameters struct {
 
 	// Reference to a Bucket in objectstorage to populate bucket.
 	// +kubebuilder:validation:Optional
-	BucketRef *v1.NamespacedReference `json:"bucketRef,omitempty" tf:"-"`
+	BucketRef *v2.NamespacedReference `json:"bucketRef,omitempty" tf:"-"`
 
 	// Selector for a Bucket in objectstorage to populate bucket.
 	// +kubebuilder:validation:Optional
-	BucketSelector *v1.NamespacedSelector `json:"bucketSelector,omitempty" tf:"-"`
+	BucketSelector *v2.NamespacedSelector `json:"bucketSelector,omitempty" tf:"-"`
 
 	// [block] A block of rule as defined below.
 	// Specifies the default server-side encryption configuration.
@@ -92,6 +91,10 @@ type BucketServerSideEncryptionConfigurationParameters struct {
 }
 
 type BucketServerSideEncryptionConfigurationRuleInitParameters struct {
+
+	// [block] Defines the default encryption settings.
+	// Defines the default encryption settings.
+	ApplyServerSideEncryptionByDefault *ApplyServerSideEncryptionByDefaultInitParameters `json:"applyServerSideEncryptionByDefault,omitempty" tf:"apply_server_side_encryption_by_default,omitempty"`
 }
 
 type BucketServerSideEncryptionConfigurationRuleObservation struct {
@@ -102,6 +105,11 @@ type BucketServerSideEncryptionConfigurationRuleObservation struct {
 }
 
 type BucketServerSideEncryptionConfigurationRuleParameters struct {
+
+	// [block] Defines the default encryption settings.
+	// Defines the default encryption settings.
+	// +kubebuilder:validation:Optional
+	ApplyServerSideEncryptionByDefault *ApplyServerSideEncryptionByDefaultParameters `json:"applyServerSideEncryptionByDefault,omitempty" tf:"apply_server_side_encryption_by_default,omitempty"`
 }
 
 // BucketServerSideEncryptionConfigurationSpec defines the desired state of BucketServerSideEncryptionConfiguration
@@ -123,8 +131,8 @@ type BucketServerSideEncryptionConfigurationSpec struct {
 
 // BucketServerSideEncryptionConfigurationStatus defines the observed state of BucketServerSideEncryptionConfiguration.
 type BucketServerSideEncryptionConfigurationStatus struct {
-	v1.ResourceStatus `json:",inline"`
-	AtProvider        BucketServerSideEncryptionConfigurationObservation `json:"atProvider,omitempty"`
+	v2.ManagedResourceStatus `json:",inline"`
+	AtProvider               BucketServerSideEncryptionConfigurationObservation `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true

@@ -10,8 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
-	v2 "github.com/crossplane/crossplane-runtime/v2/apis/common/v2"
+	v2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 )
 
 type GPUServerInitParameters struct {
@@ -32,11 +31,11 @@ type GPUServerInitParameters struct {
 
 	// Reference to a Datacenter in compute to populate datacenterId.
 	// +kubebuilder:validation:Optional
-	DatacenterIDRef *v1.NamespacedReference `json:"datacenterIdRef,omitempty" tf:"-"`
+	DatacenterIDRef *v2.NamespacedReference `json:"datacenterIdRef,omitempty" tf:"-"`
 
 	// Selector for a Datacenter in compute to populate datacenterId.
 	// +kubebuilder:validation:Optional
-	DatacenterIDSelector *v1.NamespacedSelector `json:"datacenterIdSelector,omitempty" tf:"-"`
+	DatacenterIDSelector *v2.NamespacedSelector `json:"datacenterIdSelector,omitempty" tf:"-"`
 
 	// (Computed) The hostname of the resource. Allowed characters are a-z, 0-9 and - (minus). Hostname should not start with minus and should not be longer than 63 characters. If no value provided explicitly, it will be populated with the name of the server.
 	// The hostname of the resource. Allowed characters are a-z, 0-9 and - (minus). Hostname should not start with minus and should not be longer than 63 characters. If no value provided explicitly, it will be populated with the name of the server
@@ -46,7 +45,7 @@ type GPUServerInitParameters struct {
 	ImageName *string `json:"imageName,omitempty" tf:"image_name,omitempty"`
 
 	// [string] Required if ssh_key_path is not provided.
-	ImagePasswordSecretRef *v1.LocalSecretKeySelector `json:"imagePasswordSecretRef,omitempty" tf:"-"`
+	ImagePasswordSecretRef *v2.LocalSecretKeySelector `json:"imagePasswordSecretRef,omitempty" tf:"-"`
 
 	// The location of the resource. This field should be used only if you are also using a file configuration and should not be configured otherwise.
 	Location *string `json:"location,omitempty" tf:"location,omitempty"`
@@ -68,11 +67,11 @@ type GPUServerInitParameters struct {
 
 	// References to NSG in compute to populate securityGroupsIds.
 	// +kubebuilder:validation:Optional
-	SecurityGroupsIdsRefs []v1.NamespacedReference `json:"securityGroupsIdsRefs,omitempty" tf:"-"`
+	SecurityGroupsIdsRefs []v2.NamespacedReference `json:"securityGroupsIdsRefs,omitempty" tf:"-"`
 
 	// Selector for a list of NSG in compute to populate securityGroupsIds.
 	// +kubebuilder:validation:Optional
-	SecurityGroupsIdsSelector *v1.NamespacedSelector `json:"securityGroupsIdsSelector,omitempty" tf:"-"`
+	SecurityGroupsIdsSelector *v2.NamespacedSelector `json:"securityGroupsIdsSelector,omitempty" tf:"-"`
 
 	// [string] The UUID of the template used for creating a GPU server.
 	TemplateUUID *string `json:"templateUuid,omitempty" tf:"template_uuid,omitempty"`
@@ -114,11 +113,11 @@ type GPUServerNicInitParameters struct {
 
 	// Reference to a Lan in compute to populate lan.
 	// +kubebuilder:validation:Optional
-	LanRef *v1.NamespacedReference `json:"lanRef,omitempty" tf:"-"`
+	LanRef *v2.NamespacedReference `json:"lanRef,omitempty" tf:"-"`
 
 	// Selector for a Lan in compute to populate lan.
 	// +kubebuilder:validation:Optional
-	LanSelector *v1.NamespacedSelector `json:"lanSelector,omitempty" tf:"-"`
+	LanSelector *v2.NamespacedSelector `json:"lanSelector,omitempty" tf:"-"`
 
 	Mac *string `json:"mac,omitempty" tf:"mac,omitempty"`
 
@@ -133,11 +132,11 @@ type GPUServerNicInitParameters struct {
 
 	// References to NSG in compute to populate securityGroupsIds.
 	// +kubebuilder:validation:Optional
-	SecurityGroupsIdsRefs []v1.NamespacedReference `json:"securityGroupsIdsRefs,omitempty" tf:"-"`
+	SecurityGroupsIdsRefs []v2.NamespacedReference `json:"securityGroupsIdsRefs,omitempty" tf:"-"`
 
 	// Selector for a list of NSG in compute to populate securityGroupsIds.
 	// +kubebuilder:validation:Optional
-	SecurityGroupsIdsSelector *v1.NamespacedSelector `json:"securityGroupsIdsSelector,omitempty" tf:"-"`
+	SecurityGroupsIdsSelector *v2.NamespacedSelector `json:"securityGroupsIdsSelector,omitempty" tf:"-"`
 }
 
 type GPUServerNicObservation struct {
@@ -222,11 +221,11 @@ type GPUServerNicParameters struct {
 
 	// Reference to a Lan in compute to populate lan.
 	// +kubebuilder:validation:Optional
-	LanRef *v1.NamespacedReference `json:"lanRef,omitempty" tf:"-"`
+	LanRef *v2.NamespacedReference `json:"lanRef,omitempty" tf:"-"`
 
 	// Selector for a Lan in compute to populate lan.
 	// +kubebuilder:validation:Optional
-	LanSelector *v1.NamespacedSelector `json:"lanSelector,omitempty" tf:"-"`
+	LanSelector *v2.NamespacedSelector `json:"lanSelector,omitempty" tf:"-"`
 
 	// +kubebuilder:validation:Optional
 	Mac *string `json:"mac,omitempty" tf:"mac,omitempty"`
@@ -244,11 +243,11 @@ type GPUServerNicParameters struct {
 
 	// References to NSG in compute to populate securityGroupsIds.
 	// +kubebuilder:validation:Optional
-	SecurityGroupsIdsRefs []v1.NamespacedReference `json:"securityGroupsIdsRefs,omitempty" tf:"-"`
+	SecurityGroupsIdsRefs []v2.NamespacedReference `json:"securityGroupsIdsRefs,omitempty" tf:"-"`
 
 	// Selector for a list of NSG in compute to populate securityGroupsIds.
 	// +kubebuilder:validation:Optional
-	SecurityGroupsIdsSelector *v1.NamespacedSelector `json:"securityGroupsIdsSelector,omitempty" tf:"-"`
+	SecurityGroupsIdsSelector *v2.NamespacedSelector `json:"securityGroupsIdsSelector,omitempty" tf:"-"`
 }
 
 type GPUServerObservation struct {
@@ -340,11 +339,11 @@ type GPUServerParameters struct {
 
 	// Reference to a Datacenter in compute to populate datacenterId.
 	// +kubebuilder:validation:Optional
-	DatacenterIDRef *v1.NamespacedReference `json:"datacenterIdRef,omitempty" tf:"-"`
+	DatacenterIDRef *v2.NamespacedReference `json:"datacenterIdRef,omitempty" tf:"-"`
 
 	// Selector for a Datacenter in compute to populate datacenterId.
 	// +kubebuilder:validation:Optional
-	DatacenterIDSelector *v1.NamespacedSelector `json:"datacenterIdSelector,omitempty" tf:"-"`
+	DatacenterIDSelector *v2.NamespacedSelector `json:"datacenterIdSelector,omitempty" tf:"-"`
 
 	// (Computed) The hostname of the resource. Allowed characters are a-z, 0-9 and - (minus). Hostname should not start with minus and should not be longer than 63 characters. If no value provided explicitly, it will be populated with the name of the server.
 	// The hostname of the resource. Allowed characters are a-z, 0-9 and - (minus). Hostname should not start with minus and should not be longer than 63 characters. If no value provided explicitly, it will be populated with the name of the server
@@ -357,7 +356,7 @@ type GPUServerParameters struct {
 
 	// [string] Required if ssh_key_path is not provided.
 	// +kubebuilder:validation:Optional
-	ImagePasswordSecretRef *v1.LocalSecretKeySelector `json:"imagePasswordSecretRef,omitempty" tf:"-"`
+	ImagePasswordSecretRef *v2.LocalSecretKeySelector `json:"imagePasswordSecretRef,omitempty" tf:"-"`
 
 	// The location of the resource. This field should be used only if you are also using a file configuration and should not be configured otherwise.
 	// +kubebuilder:validation:Optional
@@ -384,11 +383,11 @@ type GPUServerParameters struct {
 
 	// References to NSG in compute to populate securityGroupsIds.
 	// +kubebuilder:validation:Optional
-	SecurityGroupsIdsRefs []v1.NamespacedReference `json:"securityGroupsIdsRefs,omitempty" tf:"-"`
+	SecurityGroupsIdsRefs []v2.NamespacedReference `json:"securityGroupsIdsRefs,omitempty" tf:"-"`
 
 	// Selector for a list of NSG in compute to populate securityGroupsIds.
 	// +kubebuilder:validation:Optional
-	SecurityGroupsIdsSelector *v1.NamespacedSelector `json:"securityGroupsIdsSelector,omitempty" tf:"-"`
+	SecurityGroupsIdsSelector *v2.NamespacedSelector `json:"securityGroupsIdsSelector,omitempty" tf:"-"`
 
 	// [string] The UUID of the template used for creating a GPU server.
 	// +kubebuilder:validation:Optional
@@ -612,8 +611,8 @@ type GPUServerSpec struct {
 
 // GPUServerStatus defines the observed state of GPUServer.
 type GPUServerStatus struct {
-	v1.ResourceStatus `json:",inline"`
-	AtProvider        GPUServerObservation `json:"atProvider,omitempty"`
+	v2.ManagedResourceStatus `json:",inline"`
+	AtProvider               GPUServerObservation `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true

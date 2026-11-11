@@ -13,7 +13,8 @@ spec:
       matchLabels:
         testing.upbound.io/example-name: example
     rule:
-    - {}
+    - applyServerSideEncryptionByDefault:
+      - sseAlgorithm: AES256
 
 ---
 

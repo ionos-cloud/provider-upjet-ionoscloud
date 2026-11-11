@@ -6,84 +6,84 @@
 
 package v1alpha1
 
-import xpv1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
+import xpv2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 
 // GetCondition of this DnsRecord.
-func (mg *DnsRecord) GetCondition(ct xpv1.ConditionType) xpv1.Condition {
+func (mg *DnsRecord) GetCondition(ct xpv2.ConditionType) xpv2.Condition {
 	return mg.Status.GetCondition(ct)
 }
 
 // GetManagementPolicies of this DnsRecord.
-func (mg *DnsRecord) GetManagementPolicies() xpv1.ManagementPolicies {
+func (mg *DnsRecord) GetManagementPolicies() xpv2.ManagementPolicies {
 	return mg.Spec.ManagementPolicies
 }
 
 // GetProviderConfigReference of this DnsRecord.
-func (mg *DnsRecord) GetProviderConfigReference() *xpv1.ProviderConfigReference {
+func (mg *DnsRecord) GetProviderConfigReference() *xpv2.ProviderConfigReference {
 	return mg.Spec.ProviderConfigReference
 }
 
 // GetWriteConnectionSecretToReference of this DnsRecord.
-func (mg *DnsRecord) GetWriteConnectionSecretToReference() *xpv1.LocalSecretReference {
+func (mg *DnsRecord) GetWriteConnectionSecretToReference() *xpv2.LocalSecretReference {
 	return mg.Spec.WriteConnectionSecretToReference
 }
 
 // SetConditions of this DnsRecord.
-func (mg *DnsRecord) SetConditions(c ...xpv1.Condition) {
+func (mg *DnsRecord) SetConditions(c ...xpv2.Condition) {
 	mg.Status.SetConditions(c...)
 }
 
 // SetManagementPolicies of this DnsRecord.
-func (mg *DnsRecord) SetManagementPolicies(r xpv1.ManagementPolicies) {
+func (mg *DnsRecord) SetManagementPolicies(r xpv2.ManagementPolicies) {
 	mg.Spec.ManagementPolicies = r
 }
 
 // SetProviderConfigReference of this DnsRecord.
-func (mg *DnsRecord) SetProviderConfigReference(r *xpv1.ProviderConfigReference) {
+func (mg *DnsRecord) SetProviderConfigReference(r *xpv2.ProviderConfigReference) {
 	mg.Spec.ProviderConfigReference = r
 }
 
 // SetWriteConnectionSecretToReference of this DnsRecord.
-func (mg *DnsRecord) SetWriteConnectionSecretToReference(r *xpv1.LocalSecretReference) {
+func (mg *DnsRecord) SetWriteConnectionSecretToReference(r *xpv2.LocalSecretReference) {
 	mg.Spec.WriteConnectionSecretToReference = r
 }
 
 // GetCondition of this DnsZone.
-func (mg *DnsZone) GetCondition(ct xpv1.ConditionType) xpv1.Condition {
+func (mg *DnsZone) GetCondition(ct xpv2.ConditionType) xpv2.Condition {
 	return mg.Status.GetCondition(ct)
 }
 
 // GetManagementPolicies of this DnsZone.
-func (mg *DnsZone) GetManagementPolicies() xpv1.ManagementPolicies {
+func (mg *DnsZone) GetManagementPolicies() xpv2.ManagementPolicies {
 	return mg.Spec.ManagementPolicies
 }
 
 // GetProviderConfigReference of this DnsZone.
-func (mg *DnsZone) GetProviderConfigReference() *xpv1.ProviderConfigReference {
+func (mg *DnsZone) GetProviderConfigReference() *xpv2.ProviderConfigReference {
 	return mg.Spec.ProviderConfigReference
 }
 
 // GetWriteConnectionSecretToReference of this DnsZone.
-func (mg *DnsZone) GetWriteConnectionSecretToReference() *xpv1.LocalSecretReference {
+func (mg *DnsZone) GetWriteConnectionSecretToReference() *xpv2.LocalSecretReference {
 	return mg.Spec.WriteConnectionSecretToReference
 }
 
 // SetConditions of this DnsZone.
-func (mg *DnsZone) SetConditions(c ...xpv1.Condition) {
+func (mg *DnsZone) SetConditions(c ...xpv2.Condition) {
 	mg.Status.SetConditions(c...)
 }
 
 // SetManagementPolicies of this DnsZone.
-func (mg *DnsZone) SetManagementPolicies(r xpv1.ManagementPolicies) {
+func (mg *DnsZone) SetManagementPolicies(r xpv2.ManagementPolicies) {
 	mg.Spec.ManagementPolicies = r
 }
 
 // SetProviderConfigReference of this DnsZone.
-func (mg *DnsZone) SetProviderConfigReference(r *xpv1.ProviderConfigReference) {
+func (mg *DnsZone) SetProviderConfigReference(r *xpv2.ProviderConfigReference) {
 	mg.Spec.ProviderConfigReference = r
 }
 
 // SetWriteConnectionSecretToReference of this DnsZone.
-func (mg *DnsZone) SetWriteConnectionSecretToReference(r *xpv1.LocalSecretReference) {
+func (mg *DnsZone) SetWriteConnectionSecretToReference(r *xpv2.LocalSecretReference) {
 	mg.Spec.WriteConnectionSecretToReference = r
 }

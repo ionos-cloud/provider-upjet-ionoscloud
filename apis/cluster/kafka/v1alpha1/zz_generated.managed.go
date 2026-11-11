@@ -6,104 +6,104 @@
 
 package v1alpha1
 
-import xpv1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
+import xpv2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 
 // GetCondition of this Kafka.
-func (mg *Kafka) GetCondition(ct xpv1.ConditionType) xpv1.Condition {
+func (mg *Kafka) GetCondition(ct xpv2.ConditionType) xpv2.Condition {
 	return mg.Status.GetCondition(ct)
 }
 
 // GetDeletionPolicy of this Kafka.
-func (mg *Kafka) GetDeletionPolicy() xpv1.DeletionPolicy {
+func (mg *Kafka) GetDeletionPolicy() xpv2.DeletionPolicy {
 	return mg.Spec.DeletionPolicy
 }
 
 // GetManagementPolicies of this Kafka.
-func (mg *Kafka) GetManagementPolicies() xpv1.ManagementPolicies {
+func (mg *Kafka) GetManagementPolicies() xpv2.ManagementPolicies {
 	return mg.Spec.ManagementPolicies
 }
 
 // GetProviderConfigReference of this Kafka.
-func (mg *Kafka) GetProviderConfigReference() *xpv1.Reference {
+func (mg *Kafka) GetProviderConfigReference() *xpv2.Reference {
 	return mg.Spec.ProviderConfigReference
 }
 
 // GetWriteConnectionSecretToReference of this Kafka.
-func (mg *Kafka) GetWriteConnectionSecretToReference() *xpv1.SecretReference {
+func (mg *Kafka) GetWriteConnectionSecretToReference() *xpv2.SecretReference {
 	return mg.Spec.WriteConnectionSecretToReference
 }
 
 // SetConditions of this Kafka.
-func (mg *Kafka) SetConditions(c ...xpv1.Condition) {
+func (mg *Kafka) SetConditions(c ...xpv2.Condition) {
 	mg.Status.SetConditions(c...)
 }
 
 // SetDeletionPolicy of this Kafka.
-func (mg *Kafka) SetDeletionPolicy(r xpv1.DeletionPolicy) {
+func (mg *Kafka) SetDeletionPolicy(r xpv2.DeletionPolicy) {
 	mg.Spec.DeletionPolicy = r
 }
 
 // SetManagementPolicies of this Kafka.
-func (mg *Kafka) SetManagementPolicies(r xpv1.ManagementPolicies) {
+func (mg *Kafka) SetManagementPolicies(r xpv2.ManagementPolicies) {
 	mg.Spec.ManagementPolicies = r
 }
 
 // SetProviderConfigReference of this Kafka.
-func (mg *Kafka) SetProviderConfigReference(r *xpv1.Reference) {
+func (mg *Kafka) SetProviderConfigReference(r *xpv2.Reference) {
 	mg.Spec.ProviderConfigReference = r
 }
 
 // SetWriteConnectionSecretToReference of this Kafka.
-func (mg *Kafka) SetWriteConnectionSecretToReference(r *xpv1.SecretReference) {
+func (mg *Kafka) SetWriteConnectionSecretToReference(r *xpv2.SecretReference) {
 	mg.Spec.WriteConnectionSecretToReference = r
 }
 
 // GetCondition of this KafkaTopic.
-func (mg *KafkaTopic) GetCondition(ct xpv1.ConditionType) xpv1.Condition {
+func (mg *KafkaTopic) GetCondition(ct xpv2.ConditionType) xpv2.Condition {
 	return mg.Status.GetCondition(ct)
 }
 
 // GetDeletionPolicy of this KafkaTopic.
-func (mg *KafkaTopic) GetDeletionPolicy() xpv1.DeletionPolicy {
+func (mg *KafkaTopic) GetDeletionPolicy() xpv2.DeletionPolicy {
 	return mg.Spec.DeletionPolicy
 }
 
 // GetManagementPolicies of this KafkaTopic.
-func (mg *KafkaTopic) GetManagementPolicies() xpv1.ManagementPolicies {
+func (mg *KafkaTopic) GetManagementPolicies() xpv2.ManagementPolicies {
 	return mg.Spec.ManagementPolicies
 }
 
 // GetProviderConfigReference of this KafkaTopic.
-func (mg *KafkaTopic) GetProviderConfigReference() *xpv1.Reference {
+func (mg *KafkaTopic) GetProviderConfigReference() *xpv2.Reference {
 	return mg.Spec.ProviderConfigReference
 }
 
 // GetWriteConnectionSecretToReference of this KafkaTopic.
-func (mg *KafkaTopic) GetWriteConnectionSecretToReference() *xpv1.SecretReference {
+func (mg *KafkaTopic) GetWriteConnectionSecretToReference() *xpv2.SecretReference {
 	return mg.Spec.WriteConnectionSecretToReference
 }
 
 // SetConditions of this KafkaTopic.
-func (mg *KafkaTopic) SetConditions(c ...xpv1.Condition) {
+func (mg *KafkaTopic) SetConditions(c ...xpv2.Condition) {
 	mg.Status.SetConditions(c...)
 }
 
 // SetDeletionPolicy of this KafkaTopic.
-func (mg *KafkaTopic) SetDeletionPolicy(r xpv1.DeletionPolicy) {
+func (mg *KafkaTopic) SetDeletionPolicy(r xpv2.DeletionPolicy) {
 	mg.Spec.DeletionPolicy = r
 }
 
 // SetManagementPolicies of this KafkaTopic.
-func (mg *KafkaTopic) SetManagementPolicies(r xpv1.ManagementPolicies) {
+func (mg *KafkaTopic) SetManagementPolicies(r xpv2.ManagementPolicies) {
 	mg.Spec.ManagementPolicies = r
 }
 
 // SetProviderConfigReference of this KafkaTopic.
-func (mg *KafkaTopic) SetProviderConfigReference(r *xpv1.Reference) {
+func (mg *KafkaTopic) SetProviderConfigReference(r *xpv2.Reference) {
 	mg.Spec.ProviderConfigReference = r
 }
 
 // SetWriteConnectionSecretToReference of this KafkaTopic.
-func (mg *KafkaTopic) SetWriteConnectionSecretToReference(r *xpv1.SecretReference) {
+func (mg *KafkaTopic) SetWriteConnectionSecretToReference(r *xpv2.SecretReference) {
 	mg.Spec.WriteConnectionSecretToReference = r
 }

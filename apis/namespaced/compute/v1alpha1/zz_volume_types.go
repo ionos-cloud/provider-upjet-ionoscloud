@@ -10,8 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
-	v2 "github.com/crossplane/crossplane-runtime/v2/apis/common/v2"
+	v2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 )
 
 type VolumeInitParameters_2 struct {
@@ -31,11 +30,11 @@ type VolumeInitParameters_2 struct {
 
 	// Reference to a Datacenter in compute to populate datacenterId.
 	// +kubebuilder:validation:Optional
-	DatacenterIDRef *v1.NamespacedReference `json:"datacenterIdRef,omitempty" tf:"-"`
+	DatacenterIDRef *v2.NamespacedReference `json:"datacenterIdRef,omitempty" tf:"-"`
 
 	// Selector for a Datacenter in compute to populate datacenterId.
 	// +kubebuilder:validation:Optional
-	DatacenterIDSelector *v1.NamespacedSelector `json:"datacenterIdSelector,omitempty" tf:"-"`
+	DatacenterIDSelector *v2.NamespacedSelector `json:"datacenterIdSelector,omitempty" tf:"-"`
 
 	// [string] The volume type. Possible values: HDD, SSD, SSD Standard, SSD Premium, DAS, ISO, ESSENTIAL, BALANCED, PERFORMANCE. This property is immutable.
 	DiskType *string `json:"diskType,omitempty" tf:"disk_type,omitempty"`
@@ -48,7 +47,7 @@ type VolumeInitParameters_2 struct {
 	ImageName *string `json:"imageName,omitempty" tf:"image_name,omitempty"`
 
 	// [string] Required if sshkey_path is not provided.
-	ImagePasswordSecretRef *v1.LocalSecretKeySelector `json:"imagePasswordSecretRef,omitempty" tf:"-"`
+	ImagePasswordSecretRef *v2.LocalSecretKeySelector `json:"imagePasswordSecretRef,omitempty" tf:"-"`
 
 	// [string] Required if image_name is not provided.
 	LicenceType *string `json:"licenceType,omitempty" tf:"licence_type,omitempty"`
@@ -76,11 +75,11 @@ type VolumeInitParameters_2 struct {
 
 	// Reference to a Server in compute to populate serverId.
 	// +kubebuilder:validation:Optional
-	ServerIDRef *v1.NamespacedReference `json:"serverIdRef,omitempty" tf:"-"`
+	ServerIDRef *v2.NamespacedReference `json:"serverIdRef,omitempty" tf:"-"`
 
 	// Selector for a Server in compute to populate serverId.
 	// +kubebuilder:validation:Optional
-	ServerIDSelector *v1.NamespacedSelector `json:"serverIdSelector,omitempty" tf:"-"`
+	ServerIDSelector *v2.NamespacedSelector `json:"serverIdSelector,omitempty" tf:"-"`
 
 	// [integer] The size of the volume in GB.
 	Size *float64 `json:"size,omitempty" tf:"size,omitempty"`
@@ -202,11 +201,11 @@ type VolumeParameters_2 struct {
 
 	// Reference to a Datacenter in compute to populate datacenterId.
 	// +kubebuilder:validation:Optional
-	DatacenterIDRef *v1.NamespacedReference `json:"datacenterIdRef,omitempty" tf:"-"`
+	DatacenterIDRef *v2.NamespacedReference `json:"datacenterIdRef,omitempty" tf:"-"`
 
 	// Selector for a Datacenter in compute to populate datacenterId.
 	// +kubebuilder:validation:Optional
-	DatacenterIDSelector *v1.NamespacedSelector `json:"datacenterIdSelector,omitempty" tf:"-"`
+	DatacenterIDSelector *v2.NamespacedSelector `json:"datacenterIdSelector,omitempty" tf:"-"`
 
 	// [string] The volume type. Possible values: HDD, SSD, SSD Standard, SSD Premium, DAS, ISO, ESSENTIAL, BALANCED, PERFORMANCE. This property is immutable.
 	// +kubebuilder:validation:Optional
@@ -223,7 +222,7 @@ type VolumeParameters_2 struct {
 
 	// [string] Required if sshkey_path is not provided.
 	// +kubebuilder:validation:Optional
-	ImagePasswordSecretRef *v1.LocalSecretKeySelector `json:"imagePasswordSecretRef,omitempty" tf:"-"`
+	ImagePasswordSecretRef *v2.LocalSecretKeySelector `json:"imagePasswordSecretRef,omitempty" tf:"-"`
 
 	// [string] Required if image_name is not provided.
 	// +kubebuilder:validation:Optional
@@ -258,11 +257,11 @@ type VolumeParameters_2 struct {
 
 	// Reference to a Server in compute to populate serverId.
 	// +kubebuilder:validation:Optional
-	ServerIDRef *v1.NamespacedReference `json:"serverIdRef,omitempty" tf:"-"`
+	ServerIDRef *v2.NamespacedReference `json:"serverIdRef,omitempty" tf:"-"`
 
 	// Selector for a Server in compute to populate serverId.
 	// +kubebuilder:validation:Optional
-	ServerIDSelector *v1.NamespacedSelector `json:"serverIdSelector,omitempty" tf:"-"`
+	ServerIDSelector *v2.NamespacedSelector `json:"serverIdSelector,omitempty" tf:"-"`
 
 	// [integer] The size of the volume in GB.
 	// +kubebuilder:validation:Optional
@@ -292,8 +291,8 @@ type VolumeSpec struct {
 
 // VolumeStatus defines the observed state of Volume.
 type VolumeStatus struct {
-	v1.ResourceStatus `json:",inline"`
-	AtProvider        VolumeObservation_2 `json:"atProvider,omitempty"`
+	v2.ManagedResourceStatus `json:",inline"`
+	AtProvider               VolumeObservation_2 `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true

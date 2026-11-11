@@ -10,8 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
-	v2 "github.com/crossplane/crossplane-runtime/v2/apis/common/v2"
+	v2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 )
 
 type FirewallInitParameters_2 struct {
@@ -22,11 +21,11 @@ type FirewallInitParameters_2 struct {
 
 	// Reference to a Datacenter in compute to populate datacenterId.
 	// +kubebuilder:validation:Optional
-	DatacenterIDRef *v1.NamespacedReference `json:"datacenterIdRef,omitempty" tf:"-"`
+	DatacenterIDRef *v2.NamespacedReference `json:"datacenterIdRef,omitempty" tf:"-"`
 
 	// Selector for a Datacenter in compute to populate datacenterId.
 	// +kubebuilder:validation:Optional
-	DatacenterIDSelector *v1.NamespacedSelector `json:"datacenterIdSelector,omitempty" tf:"-"`
+	DatacenterIDSelector *v2.NamespacedSelector `json:"datacenterIdSelector,omitempty" tf:"-"`
 
 	// [int] Defines the allowed code (from 0 to 254) if protocol ICMP is chosen.
 	IcmpCode *string `json:"icmpCode,omitempty" tf:"icmp_code,omitempty"`
@@ -46,11 +45,11 @@ type FirewallInitParameters_2 struct {
 
 	// Reference to a Nic in compute to populate nicId.
 	// +kubebuilder:validation:Optional
-	NicIDRef *v1.NamespacedReference `json:"nicIdRef,omitempty" tf:"-"`
+	NicIDRef *v2.NamespacedReference `json:"nicIdRef,omitempty" tf:"-"`
 
 	// Selector for a Nic in compute to populate nicId.
 	// +kubebuilder:validation:Optional
-	NicIDSelector *v1.NamespacedSelector `json:"nicIdSelector,omitempty" tf:"-"`
+	NicIDSelector *v2.NamespacedSelector `json:"nicIdSelector,omitempty" tf:"-"`
 
 	// [int] Defines the end range of the allowed port (from 1 to 65534) if the protocol TCP or UDP is chosen. Leave portRangeStart and portRangeEnd null to allow all ports.
 	PortRangeEnd *float64 `json:"portRangeEnd,omitempty" tf:"port_range_end,omitempty"`
@@ -67,11 +66,11 @@ type FirewallInitParameters_2 struct {
 
 	// Reference to a Server in compute to populate serverId.
 	// +kubebuilder:validation:Optional
-	ServerIDRef *v1.NamespacedReference `json:"serverIdRef,omitempty" tf:"-"`
+	ServerIDRef *v2.NamespacedReference `json:"serverIdRef,omitempty" tf:"-"`
 
 	// Selector for a Server in compute to populate serverId.
 	// +kubebuilder:validation:Optional
-	ServerIDSelector *v1.NamespacedSelector `json:"serverIdSelector,omitempty" tf:"-"`
+	ServerIDSelector *v2.NamespacedSelector `json:"serverIdSelector,omitempty" tf:"-"`
 
 	// [string] Only traffic originating from the respective IPv4 address is allowed. Value null allows all source IPs.
 	// +crossplane:generate:reference:type=github.com/ionos-cloud/provider-upjet-ionoscloud/apis/namespaced/compute/v1alpha1.Ipblock
@@ -80,11 +79,11 @@ type FirewallInitParameters_2 struct {
 
 	// Reference to a Ipblock in compute to populate sourceIp.
 	// +kubebuilder:validation:Optional
-	SourceIPRef *v1.NamespacedReference `json:"sourceIpRef,omitempty" tf:"-"`
+	SourceIPRef *v2.NamespacedReference `json:"sourceIpRef,omitempty" tf:"-"`
 
 	// Selector for a Ipblock in compute to populate sourceIp.
 	// +kubebuilder:validation:Optional
-	SourceIPSelector *v1.NamespacedSelector `json:"sourceIpSelector,omitempty" tf:"-"`
+	SourceIPSelector *v2.NamespacedSelector `json:"sourceIpSelector,omitempty" tf:"-"`
 
 	// [string] Only traffic originating from the respective MAC address is allowed. Valid format: aa:bb:cc:dd:ee:ff. Value null allows all source MAC address. Valid format: aa:bb:cc:dd:ee:ff.
 	SourceMac *string `json:"sourceMac,omitempty" tf:"source_mac,omitempty"`
@@ -96,11 +95,11 @@ type FirewallInitParameters_2 struct {
 
 	// Reference to a Ipblock in compute to populate targetIp.
 	// +kubebuilder:validation:Optional
-	TargetIPRef *v1.NamespacedReference `json:"targetIpRef,omitempty" tf:"-"`
+	TargetIPRef *v2.NamespacedReference `json:"targetIpRef,omitempty" tf:"-"`
 
 	// Selector for a Ipblock in compute to populate targetIp.
 	// +kubebuilder:validation:Optional
-	TargetIPSelector *v1.NamespacedSelector `json:"targetIpSelector,omitempty" tf:"-"`
+	TargetIPSelector *v2.NamespacedSelector `json:"targetIpSelector,omitempty" tf:"-"`
 
 	// [string] The type of firewall rule. If is not specified, it will take the default value INGRESS.
 	Type *string `json:"type,omitempty" tf:"type,omitempty"`
@@ -162,11 +161,11 @@ type FirewallParameters_2 struct {
 
 	// Reference to a Datacenter in compute to populate datacenterId.
 	// +kubebuilder:validation:Optional
-	DatacenterIDRef *v1.NamespacedReference `json:"datacenterIdRef,omitempty" tf:"-"`
+	DatacenterIDRef *v2.NamespacedReference `json:"datacenterIdRef,omitempty" tf:"-"`
 
 	// Selector for a Datacenter in compute to populate datacenterId.
 	// +kubebuilder:validation:Optional
-	DatacenterIDSelector *v1.NamespacedSelector `json:"datacenterIdSelector,omitempty" tf:"-"`
+	DatacenterIDSelector *v2.NamespacedSelector `json:"datacenterIdSelector,omitempty" tf:"-"`
 
 	// [int] Defines the allowed code (from 0 to 254) if protocol ICMP is chosen.
 	// +kubebuilder:validation:Optional
@@ -191,11 +190,11 @@ type FirewallParameters_2 struct {
 
 	// Reference to a Nic in compute to populate nicId.
 	// +kubebuilder:validation:Optional
-	NicIDRef *v1.NamespacedReference `json:"nicIdRef,omitempty" tf:"-"`
+	NicIDRef *v2.NamespacedReference `json:"nicIdRef,omitempty" tf:"-"`
 
 	// Selector for a Nic in compute to populate nicId.
 	// +kubebuilder:validation:Optional
-	NicIDSelector *v1.NamespacedSelector `json:"nicIdSelector,omitempty" tf:"-"`
+	NicIDSelector *v2.NamespacedSelector `json:"nicIdSelector,omitempty" tf:"-"`
 
 	// [int] Defines the end range of the allowed port (from 1 to 65534) if the protocol TCP or UDP is chosen. Leave portRangeStart and portRangeEnd null to allow all ports.
 	// +kubebuilder:validation:Optional
@@ -216,11 +215,11 @@ type FirewallParameters_2 struct {
 
 	// Reference to a Server in compute to populate serverId.
 	// +kubebuilder:validation:Optional
-	ServerIDRef *v1.NamespacedReference `json:"serverIdRef,omitempty" tf:"-"`
+	ServerIDRef *v2.NamespacedReference `json:"serverIdRef,omitempty" tf:"-"`
 
 	// Selector for a Server in compute to populate serverId.
 	// +kubebuilder:validation:Optional
-	ServerIDSelector *v1.NamespacedSelector `json:"serverIdSelector,omitempty" tf:"-"`
+	ServerIDSelector *v2.NamespacedSelector `json:"serverIdSelector,omitempty" tf:"-"`
 
 	// [string] Only traffic originating from the respective IPv4 address is allowed. Value null allows all source IPs.
 	// +crossplane:generate:reference:type=github.com/ionos-cloud/provider-upjet-ionoscloud/apis/namespaced/compute/v1alpha1.Ipblock
@@ -230,11 +229,11 @@ type FirewallParameters_2 struct {
 
 	// Reference to a Ipblock in compute to populate sourceIp.
 	// +kubebuilder:validation:Optional
-	SourceIPRef *v1.NamespacedReference `json:"sourceIpRef,omitempty" tf:"-"`
+	SourceIPRef *v2.NamespacedReference `json:"sourceIpRef,omitempty" tf:"-"`
 
 	// Selector for a Ipblock in compute to populate sourceIp.
 	// +kubebuilder:validation:Optional
-	SourceIPSelector *v1.NamespacedSelector `json:"sourceIpSelector,omitempty" tf:"-"`
+	SourceIPSelector *v2.NamespacedSelector `json:"sourceIpSelector,omitempty" tf:"-"`
 
 	// [string] Only traffic originating from the respective MAC address is allowed. Valid format: aa:bb:cc:dd:ee:ff. Value null allows all source MAC address. Valid format: aa:bb:cc:dd:ee:ff.
 	// +kubebuilder:validation:Optional
@@ -248,11 +247,11 @@ type FirewallParameters_2 struct {
 
 	// Reference to a Ipblock in compute to populate targetIp.
 	// +kubebuilder:validation:Optional
-	TargetIPRef *v1.NamespacedReference `json:"targetIpRef,omitempty" tf:"-"`
+	TargetIPRef *v2.NamespacedReference `json:"targetIpRef,omitempty" tf:"-"`
 
 	// Selector for a Ipblock in compute to populate targetIp.
 	// +kubebuilder:validation:Optional
-	TargetIPSelector *v1.NamespacedSelector `json:"targetIpSelector,omitempty" tf:"-"`
+	TargetIPSelector *v2.NamespacedSelector `json:"targetIpSelector,omitempty" tf:"-"`
 
 	// [string] The type of firewall rule. If is not specified, it will take the default value INGRESS.
 	// +kubebuilder:validation:Optional
@@ -278,8 +277,8 @@ type FirewallSpec struct {
 
 // FirewallStatus defines the observed state of Firewall.
 type FirewallStatus struct {
-	v1.ResourceStatus `json:",inline"`
-	AtProvider        FirewallObservation_2 `json:"atProvider,omitempty"`
+	v2.ManagedResourceStatus `json:",inline"`
+	AtProvider               FirewallObservation_2 `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true

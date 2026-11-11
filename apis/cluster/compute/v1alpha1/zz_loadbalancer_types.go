@@ -10,7 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
+	v2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 )
 
 type LoadbalancerInitParameters struct {
@@ -24,11 +24,11 @@ type LoadbalancerInitParameters struct {
 
 	// Reference to a Datacenter in compute to populate datacenterId.
 	// +kubebuilder:validation:Optional
-	DatacenterIDRef *v1.Reference `json:"datacenterIdRef,omitempty" tf:"-"`
+	DatacenterIDRef *v2.Reference `json:"datacenterIdRef,omitempty" tf:"-"`
 
 	// Selector for a Datacenter in compute to populate datacenterId.
 	// +kubebuilder:validation:Optional
-	DatacenterIDSelector *v1.Selector `json:"datacenterIdSelector,omitempty" tf:"-"`
+	DatacenterIDSelector *v2.Selector `json:"datacenterIdSelector,omitempty" tf:"-"`
 
 	// [string] IPv4 address of the load balancer.
 	IP *string `json:"ip,omitempty" tf:"ip,omitempty"`
@@ -46,11 +46,11 @@ type LoadbalancerInitParameters struct {
 
 	// References to Server in compute to populate nicIds.
 	// +kubebuilder:validation:Optional
-	NicIdsRefs []v1.Reference `json:"nicIdsRefs,omitempty" tf:"-"`
+	NicIdsRefs []v2.Reference `json:"nicIdsRefs,omitempty" tf:"-"`
 
 	// Selector for a list of Server in compute to populate nicIds.
 	// +kubebuilder:validation:Optional
-	NicIdsSelector *v1.Selector `json:"nicIdsSelector,omitempty" tf:"-"`
+	NicIdsSelector *v2.Selector `json:"nicIdsSelector,omitempty" tf:"-"`
 }
 
 type LoadbalancerObservation struct {
@@ -89,11 +89,11 @@ type LoadbalancerParameters struct {
 
 	// Reference to a Datacenter in compute to populate datacenterId.
 	// +kubebuilder:validation:Optional
-	DatacenterIDRef *v1.Reference `json:"datacenterIdRef,omitempty" tf:"-"`
+	DatacenterIDRef *v2.Reference `json:"datacenterIdRef,omitempty" tf:"-"`
 
 	// Selector for a Datacenter in compute to populate datacenterId.
 	// +kubebuilder:validation:Optional
-	DatacenterIDSelector *v1.Selector `json:"datacenterIdSelector,omitempty" tf:"-"`
+	DatacenterIDSelector *v2.Selector `json:"datacenterIdSelector,omitempty" tf:"-"`
 
 	// [string] IPv4 address of the load balancer.
 	// +kubebuilder:validation:Optional
@@ -115,17 +115,17 @@ type LoadbalancerParameters struct {
 
 	// References to Server in compute to populate nicIds.
 	// +kubebuilder:validation:Optional
-	NicIdsRefs []v1.Reference `json:"nicIdsRefs,omitempty" tf:"-"`
+	NicIdsRefs []v2.Reference `json:"nicIdsRefs,omitempty" tf:"-"`
 
 	// Selector for a list of Server in compute to populate nicIds.
 	// +kubebuilder:validation:Optional
-	NicIdsSelector *v1.Selector `json:"nicIdsSelector,omitempty" tf:"-"`
+	NicIdsSelector *v2.Selector `json:"nicIdsSelector,omitempty" tf:"-"`
 }
 
 // LoadbalancerSpec defines the desired state of Loadbalancer
 type LoadbalancerSpec struct {
-	v1.ResourceSpec `json:",inline"`
-	ForProvider     LoadbalancerParameters `json:"forProvider"`
+	v2.ClusterManagedResourceSpec `json:",inline"`
+	ForProvider                   LoadbalancerParameters `json:"forProvider"`
 	// THIS IS A BETA FIELD. It will be honored
 	// unless the Management Policies feature flag is disabled.
 	// InitProvider holds the same fields as ForProvider, with the exception
@@ -141,8 +141,8 @@ type LoadbalancerSpec struct {
 
 // LoadbalancerStatus defines the observed state of Loadbalancer.
 type LoadbalancerStatus struct {
-	v1.ResourceStatus `json:",inline"`
-	AtProvider        LoadbalancerObservation `json:"atProvider,omitempty"`
+	v2.ManagedResourceStatus `json:",inline"`
+	AtProvider               LoadbalancerObservation `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true

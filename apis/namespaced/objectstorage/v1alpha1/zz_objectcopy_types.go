@@ -10,8 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
-	v2 "github.com/crossplane/crossplane-runtime/v2/apis/common/v2"
+	v2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 )
 
 type ObjectCopyInitParameters struct {
@@ -23,11 +22,11 @@ type ObjectCopyInitParameters struct {
 
 	// Reference to a Bucket in objectstorage to populate bucket.
 	// +kubebuilder:validation:Optional
-	BucketRef *v1.NamespacedReference `json:"bucketRef,omitempty" tf:"-"`
+	BucketRef *v2.NamespacedReference `json:"bucketRef,omitempty" tf:"-"`
 
 	// Selector for a Bucket in objectstorage to populate bucket.
 	// +kubebuilder:validation:Optional
-	BucketSelector *v1.NamespacedSelector `json:"bucketSelector,omitempty" tf:"-"`
+	BucketSelector *v2.NamespacedSelector `json:"bucketSelector,omitempty" tf:"-"`
 
 	// [string] Specifies caching behavior along the request/reply chain.
 	// Can be used to specify caching behavior along the request/reply chain
@@ -108,7 +107,7 @@ type ObjectCopyInitParameters struct {
 
 	// [string] Specifies the 256-bit, base64-encoded encryption key to use to encrypt and decrypt your data.
 	// Specifies the 256-bit, base64-encoded encryption key to use to encrypt and decrypt your data
-	ServerSideEncryptionCustomerKeySecretRef *v1.LocalSecretKeySelector `json:"serverSideEncryptionCustomerKeySecretRef,omitempty" tf:"-"`
+	ServerSideEncryptionCustomerKeySecretRef *v2.LocalSecretKeySelector `json:"serverSideEncryptionCustomerKeySecretRef,omitempty" tf:"-"`
 
 	// [string] The source of the object to be copied
 	// The key of the source object
@@ -124,7 +123,7 @@ type ObjectCopyInitParameters struct {
 
 	// [string] Specifies the 256-bit, base64-encoded encryption key for source object encryption.
 	// Specifies the 256-bit, base64-encoded encryption key to use to decrypt the source object
-	SourceCustomerKeySecretRef *v1.LocalSecretKeySelector `json:"sourceCustomerKeySecretRef,omitempty" tf:"-"`
+	SourceCustomerKeySecretRef *v2.LocalSecretKeySelector `json:"sourceCustomerKeySecretRef,omitempty" tf:"-"`
 
 	// [string] The storage class of the object. Valid value is STANDARD. Default is STANDARD.
 	// The storage class of the object copy. Valid value is 'STANDARD'.
@@ -281,11 +280,11 @@ type ObjectCopyParameters struct {
 
 	// Reference to a Bucket in objectstorage to populate bucket.
 	// +kubebuilder:validation:Optional
-	BucketRef *v1.NamespacedReference `json:"bucketRef,omitempty" tf:"-"`
+	BucketRef *v2.NamespacedReference `json:"bucketRef,omitempty" tf:"-"`
 
 	// Selector for a Bucket in objectstorage to populate bucket.
 	// +kubebuilder:validation:Optional
-	BucketSelector *v1.NamespacedSelector `json:"bucketSelector,omitempty" tf:"-"`
+	BucketSelector *v2.NamespacedSelector `json:"bucketSelector,omitempty" tf:"-"`
 
 	// [string] Specifies caching behavior along the request/reply chain.
 	// Can be used to specify caching behavior along the request/reply chain
@@ -387,7 +386,7 @@ type ObjectCopyParameters struct {
 	// [string] Specifies the 256-bit, base64-encoded encryption key to use to encrypt and decrypt your data.
 	// Specifies the 256-bit, base64-encoded encryption key to use to encrypt and decrypt your data
 	// +kubebuilder:validation:Optional
-	ServerSideEncryptionCustomerKeySecretRef *v1.LocalSecretKeySelector `json:"serverSideEncryptionCustomerKeySecretRef,omitempty" tf:"-"`
+	ServerSideEncryptionCustomerKeySecretRef *v2.LocalSecretKeySelector `json:"serverSideEncryptionCustomerKeySecretRef,omitempty" tf:"-"`
 
 	// [string] The source of the object to be copied
 	// The key of the source object
@@ -407,7 +406,7 @@ type ObjectCopyParameters struct {
 	// [string] Specifies the 256-bit, base64-encoded encryption key for source object encryption.
 	// Specifies the 256-bit, base64-encoded encryption key to use to decrypt the source object
 	// +kubebuilder:validation:Optional
-	SourceCustomerKeySecretRef *v1.LocalSecretKeySelector `json:"sourceCustomerKeySecretRef,omitempty" tf:"-"`
+	SourceCustomerKeySecretRef *v2.LocalSecretKeySelector `json:"sourceCustomerKeySecretRef,omitempty" tf:"-"`
 
 	// [string] The storage class of the object. Valid value is STANDARD. Default is STANDARD.
 	// The storage class of the object copy. Valid value is 'STANDARD'.
@@ -450,8 +449,8 @@ type ObjectCopySpec struct {
 
 // ObjectCopyStatus defines the observed state of ObjectCopy.
 type ObjectCopyStatus struct {
-	v1.ResourceStatus `json:",inline"`
-	AtProvider        ObjectCopyObservation `json:"atProvider,omitempty"`
+	v2.ManagedResourceStatus `json:",inline"`
+	AtProvider               ObjectCopyObservation `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true
