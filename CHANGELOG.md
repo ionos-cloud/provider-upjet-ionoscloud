@@ -3,7 +3,9 @@
 All notable changes to this project will be documented in this file.
 
 ## [Unreleased]
+- Bumped upjet to v2.5.1 (crossplane-runtime v2.4.0): `BucketVersioning` `versioningConfiguration` and `BucketServerSideEncryptionConfiguration` `rule[].applyServerSideEncryptionByDefault` can now be set in `spec.forProvider` (they were generated into `status.atProvider` only); removed the API Gateway and Data Platform CRDs, which had no controllers since the Terraform provider dropped these resources; bumped Go to 1.26.11, `github.com/getkin/kin-openapi` to v0.149.0 and `golang.org/x/net` to v0.62.0 to fix CVEs (GO-2026-6859, GO-2026-6795)
 
+## [0.6.2]
 - Updated Terraform provider to v6.7.40
 - Added MongoDB V2 cluster (ionoscloud_mongo_cluster_v2) as a new Crossplane managed resource
 
