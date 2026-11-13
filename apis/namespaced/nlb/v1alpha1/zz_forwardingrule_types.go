@@ -50,6 +50,7 @@ type ForwardingruleInitParameters struct {
 	// A name of that Network Load Balancer forwarding rule
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
+	// [string] Network Load Balancer's UUID.
 	// +crossplane:generate:reference:type=github.com/ionos-cloud/provider-upjet-ionoscloud/apis/namespaced/nlb/v1alpha1.Networkloadbalancer
 	NetworkloadbalancerID *string `json:"networkloadbalancerId,omitempty" tf:"networkloadbalancer_id,omitempty"`
 
@@ -100,6 +101,7 @@ type ForwardingruleObservation struct {
 	// A name of that Network Load Balancer forwarding rule
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
+	// [string] Network Load Balancer's UUID.
 	NetworkloadbalancerID *string `json:"networkloadbalancerId,omitempty" tf:"networkloadbalancer_id,omitempty"`
 
 	// [string] Protocol of the balancing.
@@ -155,6 +157,7 @@ type ForwardingruleParameters struct {
 	// +kubebuilder:validation:Optional
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
+	// [string] Network Load Balancer's UUID.
 	// +crossplane:generate:reference:type=github.com/ionos-cloud/provider-upjet-ionoscloud/apis/namespaced/nlb/v1alpha1.Networkloadbalancer
 	// +kubebuilder:validation:Optional
 	NetworkloadbalancerID *string `json:"networkloadbalancerId,omitempty" tf:"networkloadbalancer_id,omitempty"`

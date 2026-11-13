@@ -24,6 +24,10 @@ type VolumeInitParameters_2 struct {
 	// [Boolean] The bus type of the volume: VIRTIO or IDE.
 	Bus *string `json:"bus,omitempty" tf:"bus,omitempty"`
 
+	// (Computed)[boolean] Is capable of CPU hot plug (no reboot required)
+	// Is capable of CPU hot plug (no reboot required)
+	CPUHotPlug *bool `json:"cpuHotPlug,omitempty" tf:"cpu_hot_plug,omitempty"`
+
 	// [string] The ID of a Virtual Data Center.
 	// +crossplane:generate:reference:type=github.com/ionos-cloud/provider-upjet-ionoscloud/apis/cluster/compute/v1alpha1.Datacenter
 	DatacenterID *string `json:"datacenterId,omitempty" tf:"datacenter_id,omitempty"`
@@ -35,6 +39,14 @@ type VolumeInitParameters_2 struct {
 	// Selector for a Datacenter in compute to populate datacenterId.
 	// +kubebuilder:validation:Optional
 	DatacenterIDSelector *v2.Selector `json:"datacenterIdSelector,omitempty" tf:"-"`
+
+	// (Computed)[boolean] Is capable of Virt-IO drive hot plug (no reboot required)
+	// Is capable of Virt-IO drive hot plug (no reboot required)
+	DiscVirtioHotPlug *bool `json:"discVirtioHotPlug,omitempty" tf:"disc_virtio_hot_plug,omitempty"`
+
+	// (Computed)[boolean] Is capable of Virt-IO drive hot unplug (no reboot required). This works only for non-Windows virtual Machines.
+	// Is capable of Virt-IO drive hot unplug (no reboot required). This works only for non-Windows virtual Machines.
+	DiscVirtioHotUnplug *bool `json:"discVirtioHotUnplug,omitempty" tf:"disc_virtio_hot_unplug,omitempty"`
 
 	// [string] The volume type. Possible values: HDD, SSD, SSD Standard, SSD Premium, DAS, ISO, ESSENTIAL, BALANCED, PERFORMANCE. This property is immutable.
 	DiskType *string `json:"diskType,omitempty" tf:"disk_type,omitempty"`
@@ -57,6 +69,18 @@ type VolumeInitParameters_2 struct {
 
 	// [string] The name of the volume.
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+
+	// (Computed)[boolean] Is capable of nic hot plug (no reboot required)
+	// Is capable of nic hot plug (no reboot required)
+	NicHotPlug *bool `json:"nicHotPlug,omitempty" tf:"nic_hot_plug,omitempty"`
+
+	// (Computed)[boolean] Is capable of nic hot unplug (no reboot required)
+	// Is capable of nic hot unplug (no reboot required)
+	NicHotUnplug *bool `json:"nicHotUnplug,omitempty" tf:"nic_hot_unplug,omitempty"`
+
+	// (Computed)[boolean] Is capable of memory hot plug (no reboot required)
+	// Is capable of memory hot plug (no reboot required)
+	RAMHotPlug *bool `json:"ramHotPlug,omitempty" tf:"ram_hot_plug,omitempty"`
 
 	// (Computed)[boolean] Indicates if the image requires the legacy BIOS for compatibility or specific needs. During creation, if an image is used, the value will be inherited from the image, regardless of the value set in the plan. Later on, the value can be updated.
 	// Indicates if the image requires the legacy BIOS for compatibility or specific needs.
@@ -103,7 +127,8 @@ type VolumeObservation_2 struct {
 	// [Boolean] The bus type of the volume: VIRTIO or IDE.
 	Bus *string `json:"bus,omitempty" tf:"bus,omitempty"`
 
-	// (Computed)[string] Is capable of CPU hot plug (no reboot required)
+	// (Computed)[boolean] Is capable of CPU hot plug (no reboot required)
+	// Is capable of CPU hot plug (no reboot required)
 	CPUHotPlug *bool `json:"cpuHotPlug,omitempty" tf:"cpu_hot_plug,omitempty"`
 
 	// [string] The ID of a Virtual Data Center.
@@ -112,10 +137,12 @@ type VolumeObservation_2 struct {
 	// (Computed) The Logical Unit Number of the storage volume. Null for volumes not mounted to any VM.
 	DeviceNumber *float64 `json:"deviceNumber,omitempty" tf:"device_number,omitempty"`
 
-	// (Computed)[string] Is capable of Virt-IO drive hot plug (no reboot required)
+	// (Computed)[boolean] Is capable of Virt-IO drive hot plug (no reboot required)
+	// Is capable of Virt-IO drive hot plug (no reboot required)
 	DiscVirtioHotPlug *bool `json:"discVirtioHotPlug,omitempty" tf:"disc_virtio_hot_plug,omitempty"`
 
-	// (Computed)[string] Is capable of Virt-IO drive hot unplug (no reboot required). This works only for non-Windows virtual Machines.
+	// (Computed)[boolean] Is capable of Virt-IO drive hot unplug (no reboot required). This works only for non-Windows virtual Machines.
+	// Is capable of Virt-IO drive hot unplug (no reboot required). This works only for non-Windows virtual Machines.
 	DiscVirtioHotUnplug *bool `json:"discVirtioHotUnplug,omitempty" tf:"disc_virtio_hot_unplug,omitempty"`
 
 	// [string] The volume type. Possible values: HDD, SSD, SSD Standard, SSD Premium, DAS, ISO, ESSENTIAL, BALANCED, PERFORMANCE. This property is immutable.
@@ -144,16 +171,19 @@ type VolumeObservation_2 struct {
 	// [string] The name of the volume.
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
-	// (Computed)[string] Is capable of nic hot plug (no reboot required)
+	// (Computed)[boolean] Is capable of nic hot plug (no reboot required)
+	// Is capable of nic hot plug (no reboot required)
 	NicHotPlug *bool `json:"nicHotPlug,omitempty" tf:"nic_hot_plug,omitempty"`
 
-	// (Computed)[string] Is capable of nic hot unplug (no reboot required)
+	// (Computed)[boolean] Is capable of nic hot unplug (no reboot required)
+	// Is capable of nic hot unplug (no reboot required)
 	NicHotUnplug *bool `json:"nicHotUnplug,omitempty" tf:"nic_hot_unplug,omitempty"`
 
 	// (Computed) The PCI slot number of the storage volume. Null for volumes not mounted to any VM.
 	PciSlot *float64 `json:"pciSlot,omitempty" tf:"pci_slot,omitempty"`
 
-	// (Computed)[string] Is capable of memory hot plug (no reboot required)
+	// (Computed)[boolean] Is capable of memory hot plug (no reboot required)
+	// Is capable of memory hot plug (no reboot required)
 	RAMHotPlug *bool `json:"ramHotPlug,omitempty" tf:"ram_hot_plug,omitempty"`
 
 	// (Computed)[boolean] Indicates if the image requires the legacy BIOS for compatibility or specific needs. During creation, if an image is used, the value will be inherited from the image, regardless of the value set in the plan. Later on, the value can be updated.
@@ -194,6 +224,11 @@ type VolumeParameters_2 struct {
 	// +kubebuilder:validation:Optional
 	Bus *string `json:"bus,omitempty" tf:"bus,omitempty"`
 
+	// (Computed)[boolean] Is capable of CPU hot plug (no reboot required)
+	// Is capable of CPU hot plug (no reboot required)
+	// +kubebuilder:validation:Optional
+	CPUHotPlug *bool `json:"cpuHotPlug,omitempty" tf:"cpu_hot_plug,omitempty"`
+
 	// [string] The ID of a Virtual Data Center.
 	// +crossplane:generate:reference:type=github.com/ionos-cloud/provider-upjet-ionoscloud/apis/cluster/compute/v1alpha1.Datacenter
 	// +kubebuilder:validation:Optional
@@ -206,6 +241,16 @@ type VolumeParameters_2 struct {
 	// Selector for a Datacenter in compute to populate datacenterId.
 	// +kubebuilder:validation:Optional
 	DatacenterIDSelector *v2.Selector `json:"datacenterIdSelector,omitempty" tf:"-"`
+
+	// (Computed)[boolean] Is capable of Virt-IO drive hot plug (no reboot required)
+	// Is capable of Virt-IO drive hot plug (no reboot required)
+	// +kubebuilder:validation:Optional
+	DiscVirtioHotPlug *bool `json:"discVirtioHotPlug,omitempty" tf:"disc_virtio_hot_plug,omitempty"`
+
+	// (Computed)[boolean] Is capable of Virt-IO drive hot unplug (no reboot required). This works only for non-Windows virtual Machines.
+	// Is capable of Virt-IO drive hot unplug (no reboot required). This works only for non-Windows virtual Machines.
+	// +kubebuilder:validation:Optional
+	DiscVirtioHotUnplug *bool `json:"discVirtioHotUnplug,omitempty" tf:"disc_virtio_hot_unplug,omitempty"`
 
 	// [string] The volume type. Possible values: HDD, SSD, SSD Standard, SSD Premium, DAS, ISO, ESSENTIAL, BALANCED, PERFORMANCE. This property is immutable.
 	// +kubebuilder:validation:Optional
@@ -235,6 +280,21 @@ type VolumeParameters_2 struct {
 	// [string] The name of the volume.
 	// +kubebuilder:validation:Optional
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+
+	// (Computed)[boolean] Is capable of nic hot plug (no reboot required)
+	// Is capable of nic hot plug (no reboot required)
+	// +kubebuilder:validation:Optional
+	NicHotPlug *bool `json:"nicHotPlug,omitempty" tf:"nic_hot_plug,omitempty"`
+
+	// (Computed)[boolean] Is capable of nic hot unplug (no reboot required)
+	// Is capable of nic hot unplug (no reboot required)
+	// +kubebuilder:validation:Optional
+	NicHotUnplug *bool `json:"nicHotUnplug,omitempty" tf:"nic_hot_unplug,omitempty"`
+
+	// (Computed)[boolean] Is capable of memory hot plug (no reboot required)
+	// Is capable of memory hot plug (no reboot required)
+	// +kubebuilder:validation:Optional
+	RAMHotPlug *bool `json:"ramHotPlug,omitempty" tf:"ram_hot_plug,omitempty"`
 
 	// (Computed)[boolean] Indicates if the image requires the legacy BIOS for compatibility or specific needs. During creation, if an image is used, the value will be inherited from the image, regardless of the value set in the plan. Later on, the value can be updated.
 	// Indicates if the image requires the legacy BIOS for compatibility or specific needs.

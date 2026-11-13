@@ -13,7 +13,7 @@ require (
 	github.com/hashicorp/terraform-plugin-framework v1.19.0
 	github.com/hashicorp/terraform-plugin-sdk/v2 v2.40.1
 	github.com/ionos-cloud/sdk-go-bundle/shared v0.1.15
-	github.com/ionos-cloud/terraform-provider-ionoscloud/v6 v6.7.40
+	github.com/ionos-cloud/terraform-provider-ionoscloud/v6 v6.7.41
 	github.com/pkg/errors v0.9.1
 	gopkg.in/alecthomas/kingpin.v2 v2.2.6
 	k8s.io/apimachinery v0.35.3

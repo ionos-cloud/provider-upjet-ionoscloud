@@ -660,6 +660,15 @@ type ServerVolumeInitParameters struct {
 
 	Bus *string `json:"bus,omitempty" tf:"bus,omitempty"`
 
+	// Is capable of CPU hot plug (no reboot required)
+	CPUHotPlug *bool `json:"cpuHotPlug,omitempty" tf:"cpu_hot_plug,omitempty"`
+
+	// Is capable of Virt-IO drive hot plug (no reboot required)
+	DiscVirtioHotPlug *bool `json:"discVirtioHotPlug,omitempty" tf:"disc_virtio_hot_plug,omitempty"`
+
+	// Is capable of Virt-IO drive hot unplug (no reboot required). This works only for non-Windows virtual Machines.
+	DiscVirtioHotUnplug *bool `json:"discVirtioHotUnplug,omitempty" tf:"disc_virtio_hot_unplug,omitempty"`
+
 	// (Computed)[string] Server usages: * type - Server usages: ENTERPRISE now named dedicated core, CUBE or VCPU. This property is immutable.
 	DiskType *string `json:"diskType,omitempty" tf:"disk_type,omitempty"`
 
@@ -674,6 +683,15 @@ type ServerVolumeInitParameters struct {
 
 	// [string] The name of the server.
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+
+	// Is capable of nic hot plug (no reboot required)
+	NicHotPlug *bool `json:"nicHotPlug,omitempty" tf:"nic_hot_plug,omitempty"`
+
+	// Is capable of nic hot unplug (no reboot required)
+	NicHotUnplug *bool `json:"nicHotUnplug,omitempty" tf:"nic_hot_unplug,omitempty"`
+
+	// Is capable of memory hot plug (no reboot required)
+	RAMHotPlug *bool `json:"ramHotPlug,omitempty" tf:"ram_hot_plug,omitempty"`
 
 	// Indicates if the image requires the legacy BIOS for compatibility or specific needs.
 	RequireLegacyBios *bool `json:"requireLegacyBios,omitempty" tf:"require_legacy_bios,omitempty"`
@@ -706,12 +724,15 @@ type ServerVolumeObservation struct {
 
 	Bus *string `json:"bus,omitempty" tf:"bus,omitempty"`
 
+	// Is capable of CPU hot plug (no reboot required)
 	CPUHotPlug *bool `json:"cpuHotPlug,omitempty" tf:"cpu_hot_plug,omitempty"`
 
 	DeviceNumber *float64 `json:"deviceNumber,omitempty" tf:"device_number,omitempty"`
 
+	// Is capable of Virt-IO drive hot plug (no reboot required)
 	DiscVirtioHotPlug *bool `json:"discVirtioHotPlug,omitempty" tf:"disc_virtio_hot_plug,omitempty"`
 
+	// Is capable of Virt-IO drive hot unplug (no reboot required). This works only for non-Windows virtual Machines.
 	DiscVirtioHotUnplug *bool `json:"discVirtioHotUnplug,omitempty" tf:"disc_virtio_hot_unplug,omitempty"`
 
 	// (Computed)[string] Server usages: * type - Server usages: ENTERPRISE now named dedicated core, CUBE or VCPU. This property is immutable.
@@ -726,12 +747,15 @@ type ServerVolumeObservation struct {
 	// [string] The name of the server.
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
+	// Is capable of nic hot plug (no reboot required)
 	NicHotPlug *bool `json:"nicHotPlug,omitempty" tf:"nic_hot_plug,omitempty"`
 
+	// Is capable of nic hot unplug (no reboot required)
 	NicHotUnplug *bool `json:"nicHotUnplug,omitempty" tf:"nic_hot_unplug,omitempty"`
 
 	PciSlot *float64 `json:"pciSlot,omitempty" tf:"pci_slot,omitempty"`
 
+	// Is capable of memory hot plug (no reboot required)
 	RAMHotPlug *bool `json:"ramHotPlug,omitempty" tf:"ram_hot_plug,omitempty"`
 
 	// Indicates if the image requires the legacy BIOS for compatibility or specific needs.
@@ -765,6 +789,18 @@ type ServerVolumeParameters struct {
 	// +kubebuilder:validation:Optional
 	Bus *string `json:"bus,omitempty" tf:"bus,omitempty"`
 
+	// Is capable of CPU hot plug (no reboot required)
+	// +kubebuilder:validation:Optional
+	CPUHotPlug *bool `json:"cpuHotPlug,omitempty" tf:"cpu_hot_plug,omitempty"`
+
+	// Is capable of Virt-IO drive hot plug (no reboot required)
+	// +kubebuilder:validation:Optional
+	DiscVirtioHotPlug *bool `json:"discVirtioHotPlug,omitempty" tf:"disc_virtio_hot_plug,omitempty"`
+
+	// Is capable of Virt-IO drive hot unplug (no reboot required). This works only for non-Windows virtual Machines.
+	// +kubebuilder:validation:Optional
+	DiscVirtioHotUnplug *bool `json:"discVirtioHotUnplug,omitempty" tf:"disc_virtio_hot_unplug,omitempty"`
+
 	// (Computed)[string] Server usages: * type - Server usages: ENTERPRISE now named dedicated core, CUBE or VCPU. This property is immutable.
 	// +kubebuilder:validation:Optional
 	DiskType *string `json:"diskType" tf:"disk_type,omitempty"`
@@ -784,6 +820,18 @@ type ServerVolumeParameters struct {
 	// [string] The name of the server.
 	// +kubebuilder:validation:Optional
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+
+	// Is capable of nic hot plug (no reboot required)
+	// +kubebuilder:validation:Optional
+	NicHotPlug *bool `json:"nicHotPlug,omitempty" tf:"nic_hot_plug,omitempty"`
+
+	// Is capable of nic hot unplug (no reboot required)
+	// +kubebuilder:validation:Optional
+	NicHotUnplug *bool `json:"nicHotUnplug,omitempty" tf:"nic_hot_unplug,omitempty"`
+
+	// Is capable of memory hot plug (no reboot required)
+	// +kubebuilder:validation:Optional
+	RAMHotPlug *bool `json:"ramHotPlug,omitempty" tf:"ram_hot_plug,omitempty"`
 
 	// Indicates if the image requires the legacy BIOS for compatibility or specific needs.
 	// +kubebuilder:validation:Optional

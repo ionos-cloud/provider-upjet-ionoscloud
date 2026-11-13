@@ -89,6 +89,11 @@ spec:
                     description: '[Boolean] The bus type of the volume: VIRTIO or
                       IDE.'
                     type: string
+                  cpuHotPlug:
+                    description: |-
+                      (Computed)[boolean] Is capable of CPU hot plug (no reboot required)
+                      Is capable of CPU hot plug (no reboot required)
+                    type: boolean
                   datacenterId:
                     description: '[string] The ID of a Virtual Data Center.'
                     type: string
@@ -168,6 +173,16 @@ spec:
                             type: string
                         type: object
                     type: object
+                  discVirtioHotPlug:
+                    description: |-
+                      (Computed)[boolean] Is capable of Virt-IO drive hot plug (no reboot required)
+                      Is capable of Virt-IO drive hot plug (no reboot required)
+                    type: boolean
+                  discVirtioHotUnplug:
+                    description: |-
+                      (Computed)[boolean] Is capable of Virt-IO drive hot unplug (no reboot required). This works only for non-Windows virtual Machines.
+                      Is capable of Virt-IO drive hot unplug (no reboot required). This works only for non-Windows virtual Machines.
+                    type: boolean
                   diskType:
                     description: '[string] The volume type. Possible values: HDD,
                       SSD, SSD Standard, SSD Premium, DAS, ISO, ESSENTIAL, BALANCED,
@@ -211,6 +226,21 @@ spec:
                   name:
                     description: '[string] The name of the volume.'
                     type: string
+                  nicHotPlug:
+                    description: |-
+                      (Computed)[boolean] Is capable of nic hot plug (no reboot required)
+                      Is capable of nic hot plug (no reboot required)
+                    type: boolean
+                  nicHotUnplug:
+                    description: |-
+                      (Computed)[boolean] Is capable of nic hot unplug (no reboot required)
+                      Is capable of nic hot unplug (no reboot required)
+                    type: boolean
+                  ramHotPlug:
+                    description: |-
+                      (Computed)[boolean] Is capable of memory hot plug (no reboot required)
+                      Is capable of memory hot plug (no reboot required)
+                    type: boolean
                   requireLegacyBios:
                     description: |-
                       (Computed)[boolean] Indicates if the image requires the legacy BIOS for compatibility or specific needs. During creation, if an image is used, the value will be inherited from the image, regardless of the value set in the plan. Later on, the value can be updated.
@@ -352,6 +382,11 @@ spec:
                     description: '[Boolean] The bus type of the volume: VIRTIO or
                       IDE.'
                     type: string
+                  cpuHotPlug:
+                    description: |-
+                      (Computed)[boolean] Is capable of CPU hot plug (no reboot required)
+                      Is capable of CPU hot plug (no reboot required)
+                    type: boolean
                   datacenterId:
                     description: '[string] The ID of a Virtual Data Center.'
                     type: string
@@ -431,6 +466,16 @@ spec:
                             type: string
                         type: object
                     type: object
+                  discVirtioHotPlug:
+                    description: |-
+                      (Computed)[boolean] Is capable of Virt-IO drive hot plug (no reboot required)
+                      Is capable of Virt-IO drive hot plug (no reboot required)
+                    type: boolean
+                  discVirtioHotUnplug:
+                    description: |-
+                      (Computed)[boolean] Is capable of Virt-IO drive hot unplug (no reboot required). This works only for non-Windows virtual Machines.
+                      Is capable of Virt-IO drive hot unplug (no reboot required). This works only for non-Windows virtual Machines.
+                    type: boolean
                   diskType:
                     description: '[string] The volume type. Possible values: HDD,
                       SSD, SSD Standard, SSD Premium, DAS, ISO, ESSENTIAL, BALANCED,
@@ -474,6 +519,21 @@ spec:
                   name:
                     description: '[string] The name of the volume.'
                     type: string
+                  nicHotPlug:
+                    description: |-
+                      (Computed)[boolean] Is capable of nic hot plug (no reboot required)
+                      Is capable of nic hot plug (no reboot required)
+                    type: boolean
+                  nicHotUnplug:
+                    description: |-
+                      (Computed)[boolean] Is capable of nic hot unplug (no reboot required)
+                      Is capable of nic hot unplug (no reboot required)
+                    type: boolean
+                  ramHotPlug:
+                    description: |-
+                      (Computed)[boolean] Is capable of memory hot plug (no reboot required)
+                      Is capable of memory hot plug (no reboot required)
+                    type: boolean
                   requireLegacyBios:
                     description: |-
                       (Computed)[boolean] Indicates if the image requires the legacy BIOS for compatibility or specific needs. During creation, if an image is used, the value will be inherited from the image, regardless of the value set in the plan. Later on, the value can be updated.
@@ -708,8 +768,9 @@ spec:
                       IDE.'
                     type: string
                   cpuHotPlug:
-                    description: (Computed)[string] Is capable of CPU hot plug (no
-                      reboot required)
+                    description: |-
+                      (Computed)[boolean] Is capable of CPU hot plug (no reboot required)
+                      Is capable of CPU hot plug (no reboot required)
                     type: boolean
                   datacenterId:
                     description: '[string] The ID of a Virtual Data Center.'
@@ -719,13 +780,14 @@ spec:
                       volume. Null for volumes not mounted to any VM.
                     type: number
                   discVirtioHotPlug:
-                    description: (Computed)[string] Is capable of Virt-IO drive hot
-                      plug (no reboot required)
+                    description: |-
+                      (Computed)[boolean] Is capable of Virt-IO drive hot plug (no reboot required)
+                      Is capable of Virt-IO drive hot plug (no reboot required)
                     type: boolean
                   discVirtioHotUnplug:
-                    description: (Computed)[string] Is capable of Virt-IO drive hot
-                      unplug (no reboot required). This works only for non-Windows
-                      virtual Machines.
+                    description: |-
+                      (Computed)[boolean] Is capable of Virt-IO drive hot unplug (no reboot required). This works only for non-Windows virtual Machines.
+                      Is capable of Virt-IO drive hot unplug (no reboot required). This works only for non-Windows virtual Machines.
                     type: boolean
                   diskType:
                     description: '[string] The volume type. Possible values: HDD,
@@ -761,20 +823,23 @@ spec:
                     description: '[string] The name of the volume.'
                     type: string
                   nicHotPlug:
-                    description: (Computed)[string] Is capable of nic hot plug (no
-                      reboot required)
+                    description: |-
+                      (Computed)[boolean] Is capable of nic hot plug (no reboot required)
+                      Is capable of nic hot plug (no reboot required)
                     type: boolean
                   nicHotUnplug:
-                    description: (Computed)[string] Is capable of nic hot unplug (no
-                      reboot required)
+                    description: |-
+                      (Computed)[boolean] Is capable of nic hot unplug (no reboot required)
+                      Is capable of nic hot unplug (no reboot required)
                     type: boolean
                   pciSlot:
                     description: (Computed) The PCI slot number of the storage volume.
                       Null for volumes not mounted to any VM.
                     type: number
                   ramHotPlug:
-                    description: (Computed)[string] Is capable of memory hot plug
-                      (no reboot required)
+                    description: |-
+                      (Computed)[boolean] Is capable of memory hot plug (no reboot required)
+                      Is capable of memory hot plug (no reboot required)
                     type: boolean
                   requireLegacyBios:
                     description: |-
