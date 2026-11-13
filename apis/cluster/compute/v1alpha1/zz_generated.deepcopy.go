@@ -3187,6 +3187,21 @@ func (in *GPUServerVolumeInitParameters) DeepCopyInto(out *GPUServerVolumeInitPa
 		*out = new(string)
 		**out = **in
 	}
+	if in.CPUHotPlug != nil {
+		in, out := &in.CPUHotPlug, &out.CPUHotPlug
+		*out = new(bool)
+		**out = **in
+	}
+	if in.DiscVirtioHotPlug != nil {
+		in, out := &in.DiscVirtioHotPlug, &out.DiscVirtioHotPlug
+		*out = new(bool)
+		**out = **in
+	}
+	if in.DiscVirtioHotUnplug != nil {
+		in, out := &in.DiscVirtioHotUnplug, &out.DiscVirtioHotUnplug
+		*out = new(bool)
+		**out = **in
+	}
 	if in.ExposeSerial != nil {
 		in, out := &in.ExposeSerial, &out.ExposeSerial
 		*out = new(bool)
@@ -3200,6 +3215,21 @@ func (in *GPUServerVolumeInitParameters) DeepCopyInto(out *GPUServerVolumeInitPa
 	if in.Name != nil {
 		in, out := &in.Name, &out.Name
 		*out = new(string)
+		**out = **in
+	}
+	if in.NicHotPlug != nil {
+		in, out := &in.NicHotPlug, &out.NicHotPlug
+		*out = new(bool)
+		**out = **in
+	}
+	if in.NicHotUnplug != nil {
+		in, out := &in.NicHotUnplug, &out.NicHotUnplug
+		*out = new(bool)
+		**out = **in
+	}
+	if in.RAMHotPlug != nil {
+		in, out := &in.RAMHotPlug, &out.RAMHotPlug
+		*out = new(bool)
 		**out = **in
 	}
 	if in.RequireLegacyBios != nil {
@@ -3347,6 +3377,21 @@ func (in *GPUServerVolumeParameters) DeepCopyInto(out *GPUServerVolumeParameters
 		*out = new(string)
 		**out = **in
 	}
+	if in.CPUHotPlug != nil {
+		in, out := &in.CPUHotPlug, &out.CPUHotPlug
+		*out = new(bool)
+		**out = **in
+	}
+	if in.DiscVirtioHotPlug != nil {
+		in, out := &in.DiscVirtioHotPlug, &out.DiscVirtioHotPlug
+		*out = new(bool)
+		**out = **in
+	}
+	if in.DiscVirtioHotUnplug != nil {
+		in, out := &in.DiscVirtioHotUnplug, &out.DiscVirtioHotUnplug
+		*out = new(bool)
+		**out = **in
+	}
 	if in.ExposeSerial != nil {
 		in, out := &in.ExposeSerial, &out.ExposeSerial
 		*out = new(bool)
@@ -3360,6 +3405,21 @@ func (in *GPUServerVolumeParameters) DeepCopyInto(out *GPUServerVolumeParameters
 	if in.Name != nil {
 		in, out := &in.Name, &out.Name
 		*out = new(string)
+		**out = **in
+	}
+	if in.NicHotPlug != nil {
+		in, out := &in.NicHotPlug, &out.NicHotPlug
+		*out = new(bool)
+		**out = **in
+	}
+	if in.NicHotUnplug != nil {
+		in, out := &in.NicHotUnplug, &out.NicHotUnplug
+		*out = new(bool)
+		**out = **in
+	}
+	if in.RAMHotPlug != nil {
+		in, out := &in.RAMHotPlug, &out.RAMHotPlug
+		*out = new(bool)
 		**out = **in
 	}
 	if in.RequireLegacyBios != nil {
@@ -8369,6 +8429,21 @@ func (in *ServerVolumeInitParameters) DeepCopyInto(out *ServerVolumeInitParamete
 		*out = new(string)
 		**out = **in
 	}
+	if in.CPUHotPlug != nil {
+		in, out := &in.CPUHotPlug, &out.CPUHotPlug
+		*out = new(bool)
+		**out = **in
+	}
+	if in.DiscVirtioHotPlug != nil {
+		in, out := &in.DiscVirtioHotPlug, &out.DiscVirtioHotPlug
+		*out = new(bool)
+		**out = **in
+	}
+	if in.DiscVirtioHotUnplug != nil {
+		in, out := &in.DiscVirtioHotUnplug, &out.DiscVirtioHotUnplug
+		*out = new(bool)
+		**out = **in
+	}
 	if in.DiskType != nil {
 		in, out := &in.DiskType, &out.DiskType
 		*out = new(string)
@@ -8392,6 +8467,21 @@ func (in *ServerVolumeInitParameters) DeepCopyInto(out *ServerVolumeInitParamete
 	if in.Name != nil {
 		in, out := &in.Name, &out.Name
 		*out = new(string)
+		**out = **in
+	}
+	if in.NicHotPlug != nil {
+		in, out := &in.NicHotPlug, &out.NicHotPlug
+		*out = new(bool)
+		**out = **in
+	}
+	if in.NicHotUnplug != nil {
+		in, out := &in.NicHotUnplug, &out.NicHotUnplug
+		*out = new(bool)
+		**out = **in
+	}
+	if in.RAMHotPlug != nil {
+		in, out := &in.RAMHotPlug, &out.RAMHotPlug
+		*out = new(bool)
 		**out = **in
 	}
 	if in.RequireLegacyBios != nil {
@@ -8593,6 +8683,21 @@ func (in *ServerVolumeParameters) DeepCopyInto(out *ServerVolumeParameters) {
 		*out = new(string)
 		**out = **in
 	}
+	if in.CPUHotPlug != nil {
+		in, out := &in.CPUHotPlug, &out.CPUHotPlug
+		*out = new(bool)
+		**out = **in
+	}
+	if in.DiscVirtioHotPlug != nil {
+		in, out := &in.DiscVirtioHotPlug, &out.DiscVirtioHotPlug
+		*out = new(bool)
+		**out = **in
+	}
+	if in.DiscVirtioHotUnplug != nil {
+		in, out := &in.DiscVirtioHotUnplug, &out.DiscVirtioHotUnplug
+		*out = new(bool)
+		**out = **in
+	}
 	if in.DiskType != nil {
 		in, out := &in.DiskType, &out.DiskType
 		*out = new(string)
@@ -8616,6 +8721,21 @@ func (in *ServerVolumeParameters) DeepCopyInto(out *ServerVolumeParameters) {
 	if in.Name != nil {
 		in, out := &in.Name, &out.Name
 		*out = new(string)
+		**out = **in
+	}
+	if in.NicHotPlug != nil {
+		in, out := &in.NicHotPlug, &out.NicHotPlug
+		*out = new(bool)
+		**out = **in
+	}
+	if in.NicHotUnplug != nil {
+		in, out := &in.NicHotUnplug, &out.NicHotUnplug
+		*out = new(bool)
+		**out = **in
+	}
+	if in.RAMHotPlug != nil {
+		in, out := &in.RAMHotPlug, &out.RAMHotPlug
+		*out = new(bool)
 		**out = **in
 	}
 	if in.RequireLegacyBios != nil {
@@ -11144,6 +11264,21 @@ func (in *VCPUServerVolumeInitParameters) DeepCopyInto(out *VCPUServerVolumeInit
 		*out = new(string)
 		**out = **in
 	}
+	if in.CPUHotPlug != nil {
+		in, out := &in.CPUHotPlug, &out.CPUHotPlug
+		*out = new(bool)
+		**out = **in
+	}
+	if in.DiscVirtioHotPlug != nil {
+		in, out := &in.DiscVirtioHotPlug, &out.DiscVirtioHotPlug
+		*out = new(bool)
+		**out = **in
+	}
+	if in.DiscVirtioHotUnplug != nil {
+		in, out := &in.DiscVirtioHotUnplug, &out.DiscVirtioHotUnplug
+		*out = new(bool)
+		**out = **in
+	}
 	if in.DiskType != nil {
 		in, out := &in.DiskType, &out.DiskType
 		*out = new(string)
@@ -11162,6 +11297,21 @@ func (in *VCPUServerVolumeInitParameters) DeepCopyInto(out *VCPUServerVolumeInit
 	if in.Name != nil {
 		in, out := &in.Name, &out.Name
 		*out = new(string)
+		**out = **in
+	}
+	if in.NicHotPlug != nil {
+		in, out := &in.NicHotPlug, &out.NicHotPlug
+		*out = new(bool)
+		**out = **in
+	}
+	if in.NicHotUnplug != nil {
+		in, out := &in.NicHotUnplug, &out.NicHotUnplug
+		*out = new(bool)
+		**out = **in
+	}
+	if in.RAMHotPlug != nil {
+		in, out := &in.RAMHotPlug, &out.RAMHotPlug
+		*out = new(bool)
 		**out = **in
 	}
 	if in.RequireLegacyBios != nil {
@@ -11319,6 +11469,21 @@ func (in *VCPUServerVolumeParameters) DeepCopyInto(out *VCPUServerVolumeParamete
 		*out = new(string)
 		**out = **in
 	}
+	if in.CPUHotPlug != nil {
+		in, out := &in.CPUHotPlug, &out.CPUHotPlug
+		*out = new(bool)
+		**out = **in
+	}
+	if in.DiscVirtioHotPlug != nil {
+		in, out := &in.DiscVirtioHotPlug, &out.DiscVirtioHotPlug
+		*out = new(bool)
+		**out = **in
+	}
+	if in.DiscVirtioHotUnplug != nil {
+		in, out := &in.DiscVirtioHotUnplug, &out.DiscVirtioHotUnplug
+		*out = new(bool)
+		**out = **in
+	}
 	if in.DiskType != nil {
 		in, out := &in.DiskType, &out.DiskType
 		*out = new(string)
@@ -11337,6 +11502,21 @@ func (in *VCPUServerVolumeParameters) DeepCopyInto(out *VCPUServerVolumeParamete
 	if in.Name != nil {
 		in, out := &in.Name, &out.Name
 		*out = new(string)
+		**out = **in
+	}
+	if in.NicHotPlug != nil {
+		in, out := &in.NicHotPlug, &out.NicHotPlug
+		*out = new(bool)
+		**out = **in
+	}
+	if in.NicHotUnplug != nil {
+		in, out := &in.NicHotUnplug, &out.NicHotUnplug
+		*out = new(bool)
+		**out = **in
+	}
+	if in.RAMHotPlug != nil {
+		in, out := &in.RAMHotPlug, &out.RAMHotPlug
+		*out = new(bool)
 		**out = **in
 	}
 	if in.RequireLegacyBios != nil {
@@ -11411,6 +11591,21 @@ func (in *VolumeInitParameters) DeepCopyInto(out *VolumeInitParameters) {
 		*out = new(string)
 		**out = **in
 	}
+	if in.CPUHotPlug != nil {
+		in, out := &in.CPUHotPlug, &out.CPUHotPlug
+		*out = new(bool)
+		**out = **in
+	}
+	if in.DiscVirtioHotPlug != nil {
+		in, out := &in.DiscVirtioHotPlug, &out.DiscVirtioHotPlug
+		*out = new(bool)
+		**out = **in
+	}
+	if in.DiscVirtioHotUnplug != nil {
+		in, out := &in.DiscVirtioHotUnplug, &out.DiscVirtioHotUnplug
+		*out = new(bool)
+		**out = **in
+	}
 	if in.DiskType != nil {
 		in, out := &in.DiskType, &out.DiskType
 		*out = new(string)
@@ -11434,6 +11629,21 @@ func (in *VolumeInitParameters) DeepCopyInto(out *VolumeInitParameters) {
 	if in.Name != nil {
 		in, out := &in.Name, &out.Name
 		*out = new(string)
+		**out = **in
+	}
+	if in.NicHotPlug != nil {
+		in, out := &in.NicHotPlug, &out.NicHotPlug
+		*out = new(bool)
+		**out = **in
+	}
+	if in.NicHotUnplug != nil {
+		in, out := &in.NicHotUnplug, &out.NicHotUnplug
+		*out = new(bool)
+		**out = **in
+	}
+	if in.RAMHotPlug != nil {
+		in, out := &in.RAMHotPlug, &out.RAMHotPlug
+		*out = new(bool)
 		**out = **in
 	}
 	if in.RequireLegacyBios != nil {
@@ -11487,6 +11697,11 @@ func (in *VolumeInitParameters_2) DeepCopyInto(out *VolumeInitParameters_2) {
 		*out = new(string)
 		**out = **in
 	}
+	if in.CPUHotPlug != nil {
+		in, out := &in.CPUHotPlug, &out.CPUHotPlug
+		*out = new(bool)
+		**out = **in
+	}
 	if in.DatacenterID != nil {
 		in, out := &in.DatacenterID, &out.DatacenterID
 		*out = new(string)
@@ -11501,6 +11716,16 @@ func (in *VolumeInitParameters_2) DeepCopyInto(out *VolumeInitParameters_2) {
 		in, out := &in.DatacenterIDSelector, &out.DatacenterIDSelector
 		*out = new(v2.Selector)
 		(*in).DeepCopyInto(*out)
+	}
+	if in.DiscVirtioHotPlug != nil {
+		in, out := &in.DiscVirtioHotPlug, &out.DiscVirtioHotPlug
+		*out = new(bool)
+		**out = **in
+	}
+	if in.DiscVirtioHotUnplug != nil {
+		in, out := &in.DiscVirtioHotUnplug, &out.DiscVirtioHotUnplug
+		*out = new(bool)
+		**out = **in
 	}
 	if in.DiskType != nil {
 		in, out := &in.DiskType, &out.DiskType
@@ -11535,6 +11760,21 @@ func (in *VolumeInitParameters_2) DeepCopyInto(out *VolumeInitParameters_2) {
 	if in.Name != nil {
 		in, out := &in.Name, &out.Name
 		*out = new(string)
+		**out = **in
+	}
+	if in.NicHotPlug != nil {
+		in, out := &in.NicHotPlug, &out.NicHotPlug
+		*out = new(bool)
+		**out = **in
+	}
+	if in.NicHotUnplug != nil {
+		in, out := &in.NicHotUnplug, &out.NicHotUnplug
+		*out = new(bool)
+		**out = **in
+	}
+	if in.RAMHotPlug != nil {
+		in, out := &in.RAMHotPlug, &out.RAMHotPlug
+		*out = new(bool)
 		**out = **in
 	}
 	if in.RequireLegacyBios != nil {
@@ -11939,6 +12179,21 @@ func (in *VolumeParameters) DeepCopyInto(out *VolumeParameters) {
 		*out = new(string)
 		**out = **in
 	}
+	if in.CPUHotPlug != nil {
+		in, out := &in.CPUHotPlug, &out.CPUHotPlug
+		*out = new(bool)
+		**out = **in
+	}
+	if in.DiscVirtioHotPlug != nil {
+		in, out := &in.DiscVirtioHotPlug, &out.DiscVirtioHotPlug
+		*out = new(bool)
+		**out = **in
+	}
+	if in.DiscVirtioHotUnplug != nil {
+		in, out := &in.DiscVirtioHotUnplug, &out.DiscVirtioHotUnplug
+		*out = new(bool)
+		**out = **in
+	}
 	if in.DiskType != nil {
 		in, out := &in.DiskType, &out.DiskType
 		*out = new(string)
@@ -11962,6 +12217,21 @@ func (in *VolumeParameters) DeepCopyInto(out *VolumeParameters) {
 	if in.Name != nil {
 		in, out := &in.Name, &out.Name
 		*out = new(string)
+		**out = **in
+	}
+	if in.NicHotPlug != nil {
+		in, out := &in.NicHotPlug, &out.NicHotPlug
+		*out = new(bool)
+		**out = **in
+	}
+	if in.NicHotUnplug != nil {
+		in, out := &in.NicHotUnplug, &out.NicHotUnplug
+		*out = new(bool)
+		**out = **in
+	}
+	if in.RAMHotPlug != nil {
+		in, out := &in.RAMHotPlug, &out.RAMHotPlug
+		*out = new(bool)
 		**out = **in
 	}
 	if in.RequireLegacyBios != nil {
@@ -12015,6 +12285,11 @@ func (in *VolumeParameters_2) DeepCopyInto(out *VolumeParameters_2) {
 		*out = new(string)
 		**out = **in
 	}
+	if in.CPUHotPlug != nil {
+		in, out := &in.CPUHotPlug, &out.CPUHotPlug
+		*out = new(bool)
+		**out = **in
+	}
 	if in.DatacenterID != nil {
 		in, out := &in.DatacenterID, &out.DatacenterID
 		*out = new(string)
@@ -12029,6 +12304,16 @@ func (in *VolumeParameters_2) DeepCopyInto(out *VolumeParameters_2) {
 		in, out := &in.DatacenterIDSelector, &out.DatacenterIDSelector
 		*out = new(v2.Selector)
 		(*in).DeepCopyInto(*out)
+	}
+	if in.DiscVirtioHotPlug != nil {
+		in, out := &in.DiscVirtioHotPlug, &out.DiscVirtioHotPlug
+		*out = new(bool)
+		**out = **in
+	}
+	if in.DiscVirtioHotUnplug != nil {
+		in, out := &in.DiscVirtioHotUnplug, &out.DiscVirtioHotUnplug
+		*out = new(bool)
+		**out = **in
 	}
 	if in.DiskType != nil {
 		in, out := &in.DiskType, &out.DiskType
@@ -12063,6 +12348,21 @@ func (in *VolumeParameters_2) DeepCopyInto(out *VolumeParameters_2) {
 	if in.Name != nil {
 		in, out := &in.Name, &out.Name
 		*out = new(string)
+		**out = **in
+	}
+	if in.NicHotPlug != nil {
+		in, out := &in.NicHotPlug, &out.NicHotPlug
+		*out = new(bool)
+		**out = **in
+	}
+	if in.NicHotUnplug != nil {
+		in, out := &in.NicHotUnplug, &out.NicHotUnplug
+		*out = new(bool)
+		**out = **in
+	}
+	if in.RAMHotPlug != nil {
+		in, out := &in.RAMHotPlug, &out.RAMHotPlug
+		*out = new(bool)
 		**out = **in
 	}
 	if in.RequireLegacyBios != nil {

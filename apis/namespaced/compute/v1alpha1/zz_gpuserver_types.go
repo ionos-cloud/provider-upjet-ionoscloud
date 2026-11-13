@@ -413,6 +413,15 @@ type GPUServerVolumeInitParameters struct {
 
 	Bus *string `json:"bus,omitempty" tf:"bus,omitempty"`
 
+	// Is capable of CPU hot plug (no reboot required)
+	CPUHotPlug *bool `json:"cpuHotPlug,omitempty" tf:"cpu_hot_plug,omitempty"`
+
+	// Is capable of Virt-IO drive hot plug (no reboot required)
+	DiscVirtioHotPlug *bool `json:"discVirtioHotPlug,omitempty" tf:"disc_virtio_hot_plug,omitempty"`
+
+	// Is capable of Virt-IO drive hot unplug (no reboot required). This works only for non-Windows virtual Machines.
+	DiscVirtioHotUnplug *bool `json:"discVirtioHotUnplug,omitempty" tf:"disc_virtio_hot_unplug,omitempty"`
+
 	// If set to `true` will expose the serial id of the disk attached to the server. If set to `false` will not expose the serial id. Some operating systems or software solutions require the serial id to be exposed to work properly. Exposing the serial can influence licensed software (e.g. Windows) behavior
 	ExposeSerial *bool `json:"exposeSerial,omitempty" tf:"expose_serial,omitempty"`
 
@@ -421,6 +430,15 @@ type GPUServerVolumeInitParameters struct {
 
 	// [string] The name of the server.
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+
+	// Is capable of nic hot plug (no reboot required)
+	NicHotPlug *bool `json:"nicHotPlug,omitempty" tf:"nic_hot_plug,omitempty"`
+
+	// Is capable of nic hot unplug (no reboot required)
+	NicHotUnplug *bool `json:"nicHotUnplug,omitempty" tf:"nic_hot_unplug,omitempty"`
+
+	// Is capable of memory hot plug (no reboot required)
+	RAMHotPlug *bool `json:"ramHotPlug,omitempty" tf:"ram_hot_plug,omitempty"`
 
 	// Indicates if the image requires the legacy BIOS for compatibility or specific needs.
 	RequireLegacyBios *bool `json:"requireLegacyBios,omitempty" tf:"require_legacy_bios,omitempty"`
@@ -442,12 +460,15 @@ type GPUServerVolumeObservation struct {
 
 	Bus *string `json:"bus,omitempty" tf:"bus,omitempty"`
 
+	// Is capable of CPU hot plug (no reboot required)
 	CPUHotPlug *bool `json:"cpuHotPlug,omitempty" tf:"cpu_hot_plug,omitempty"`
 
 	DeviceNumber *float64 `json:"deviceNumber,omitempty" tf:"device_number,omitempty"`
 
+	// Is capable of Virt-IO drive hot plug (no reboot required)
 	DiscVirtioHotPlug *bool `json:"discVirtioHotPlug,omitempty" tf:"disc_virtio_hot_plug,omitempty"`
 
+	// Is capable of Virt-IO drive hot unplug (no reboot required). This works only for non-Windows virtual Machines.
 	DiscVirtioHotUnplug *bool `json:"discVirtioHotUnplug,omitempty" tf:"disc_virtio_hot_unplug,omitempty"`
 
 	DiskType *string `json:"diskType,omitempty" tf:"disk_type,omitempty"`
@@ -461,12 +482,15 @@ type GPUServerVolumeObservation struct {
 	// [string] The name of the server.
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
+	// Is capable of nic hot plug (no reboot required)
 	NicHotPlug *bool `json:"nicHotPlug,omitempty" tf:"nic_hot_plug,omitempty"`
 
+	// Is capable of nic hot unplug (no reboot required)
 	NicHotUnplug *bool `json:"nicHotUnplug,omitempty" tf:"nic_hot_unplug,omitempty"`
 
 	PciSlot *float64 `json:"pciSlot,omitempty" tf:"pci_slot,omitempty"`
 
+	// Is capable of memory hot plug (no reboot required)
 	RAMHotPlug *bool `json:"ramHotPlug,omitempty" tf:"ram_hot_plug,omitempty"`
 
 	// Indicates if the image requires the legacy BIOS for compatibility or specific needs.
@@ -489,6 +513,18 @@ type GPUServerVolumeParameters struct {
 	// +kubebuilder:validation:Optional
 	Bus *string `json:"bus,omitempty" tf:"bus,omitempty"`
 
+	// Is capable of CPU hot plug (no reboot required)
+	// +kubebuilder:validation:Optional
+	CPUHotPlug *bool `json:"cpuHotPlug,omitempty" tf:"cpu_hot_plug,omitempty"`
+
+	// Is capable of Virt-IO drive hot plug (no reboot required)
+	// +kubebuilder:validation:Optional
+	DiscVirtioHotPlug *bool `json:"discVirtioHotPlug,omitempty" tf:"disc_virtio_hot_plug,omitempty"`
+
+	// Is capable of Virt-IO drive hot unplug (no reboot required). This works only for non-Windows virtual Machines.
+	// +kubebuilder:validation:Optional
+	DiscVirtioHotUnplug *bool `json:"discVirtioHotUnplug,omitempty" tf:"disc_virtio_hot_unplug,omitempty"`
+
 	// If set to `true` will expose the serial id of the disk attached to the server. If set to `false` will not expose the serial id. Some operating systems or software solutions require the serial id to be exposed to work properly. Exposing the serial can influence licensed software (e.g. Windows) behavior
 	// +kubebuilder:validation:Optional
 	ExposeSerial *bool `json:"exposeSerial,omitempty" tf:"expose_serial,omitempty"`
@@ -500,6 +536,18 @@ type GPUServerVolumeParameters struct {
 	// [string] The name of the server.
 	// +kubebuilder:validation:Optional
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+
+	// Is capable of nic hot plug (no reboot required)
+	// +kubebuilder:validation:Optional
+	NicHotPlug *bool `json:"nicHotPlug,omitempty" tf:"nic_hot_plug,omitempty"`
+
+	// Is capable of nic hot unplug (no reboot required)
+	// +kubebuilder:validation:Optional
+	NicHotUnplug *bool `json:"nicHotUnplug,omitempty" tf:"nic_hot_unplug,omitempty"`
+
+	// Is capable of memory hot plug (no reboot required)
+	// +kubebuilder:validation:Optional
+	RAMHotPlug *bool `json:"ramHotPlug,omitempty" tf:"ram_hot_plug,omitempty"`
 
 	// Indicates if the image requires the legacy BIOS for compatibility or specific needs.
 	// +kubebuilder:validation:Optional

@@ -580,6 +580,17 @@ spec:
                         type: string
                       bus:
                         type: string
+                      cpuHotPlug:
+                        description: Is capable of CPU hot plug (no reboot required)
+                        type: boolean
+                      discVirtioHotPlug:
+                        description: Is capable of Virt-IO drive hot plug (no reboot
+                          required)
+                        type: boolean
+                      discVirtioHotUnplug:
+                        description: Is capable of Virt-IO drive hot unplug (no reboot
+                          required). This works only for non-Windows virtual Machines.
+                        type: boolean
                       diskType:
                         type: string
                       exposeSerial:
@@ -596,6 +607,15 @@ spec:
                       name:
                         description: '[string] The name of the server.'
                         type: string
+                      nicHotPlug:
+                        description: Is capable of nic hot plug (no reboot required)
+                        type: boolean
+                      nicHotUnplug:
+                        description: Is capable of nic hot unplug (no reboot required)
+                        type: boolean
+                      ramHotPlug:
+                        description: Is capable of memory hot plug (no reboot required)
+                        type: boolean
                       requireLegacyBios:
                         description: Indicates if the image requires the legacy BIOS
                           for compatibility or specific needs.
@@ -1146,6 +1166,17 @@ spec:
                         type: string
                       bus:
                         type: string
+                      cpuHotPlug:
+                        description: Is capable of CPU hot plug (no reboot required)
+                        type: boolean
+                      discVirtioHotPlug:
+                        description: Is capable of Virt-IO drive hot plug (no reboot
+                          required)
+                        type: boolean
+                      discVirtioHotUnplug:
+                        description: Is capable of Virt-IO drive hot unplug (no reboot
+                          required). This works only for non-Windows virtual Machines.
+                        type: boolean
                       diskType:
                         type: string
                       exposeSerial:
@@ -1162,6 +1193,15 @@ spec:
                       name:
                         description: '[string] The name of the server.'
                         type: string
+                      nicHotPlug:
+                        description: Is capable of nic hot plug (no reboot required)
+                        type: boolean
+                      nicHotUnplug:
+                        description: Is capable of nic hot unplug (no reboot required)
+                        type: boolean
+                      ramHotPlug:
+                        description: Is capable of memory hot plug (no reboot required)
+                        type: boolean
                       requireLegacyBios:
                         description: Indicates if the image requires the legacy BIOS
                           for compatibility or specific needs.
@@ -1488,12 +1528,17 @@ spec:
                       bus:
                         type: string
                       cpuHotPlug:
+                        description: Is capable of CPU hot plug (no reboot required)
                         type: boolean
                       deviceNumber:
                         type: number
                       discVirtioHotPlug:
+                        description: Is capable of Virt-IO drive hot plug (no reboot
+                          required)
                         type: boolean
                       discVirtioHotUnplug:
+                        description: Is capable of Virt-IO drive hot unplug (no reboot
+                          required). This works only for non-Windows virtual Machines.
                         type: boolean
                       diskType:
                         type: string
@@ -1512,12 +1557,15 @@ spec:
                         description: '[string] The name of the server.'
                         type: string
                       nicHotPlug:
+                        description: Is capable of nic hot plug (no reboot required)
                         type: boolean
                       nicHotUnplug:
+                        description: Is capable of nic hot unplug (no reboot required)
                         type: boolean
                       pciSlot:
                         type: number
                       ramHotPlug:
+                        description: Is capable of memory hot plug (no reboot required)
                         type: boolean
                       requireLegacyBios:
                         description: Indicates if the image requires the legacy BIOS

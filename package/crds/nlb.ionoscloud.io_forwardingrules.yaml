@@ -204,6 +204,7 @@ spec:
                       A name of that Network Load Balancer forwarding rule
                     type: string
                   networkloadbalancerId:
+                    description: '[string] Network Load Balancer''s UUID.'
                     type: string
                   networkloadbalancerIdRef:
                     description: Reference to a Networkloadbalancer in nlb to populate
@@ -480,6 +481,7 @@ spec:
                       A name of that Network Load Balancer forwarding rule
                     type: string
                   networkloadbalancerId:
+                    description: '[string] Network Load Balancer''s UUID.'
                     type: string
                   networkloadbalancerIdRef:
                     description: Reference to a Networkloadbalancer in nlb to populate
@@ -785,6 +787,7 @@ spec:
                       A name of that Network Load Balancer forwarding rule
                     type: string
                   networkloadbalancerId:
+                    description: '[string] Network Load Balancer''s UUID.'
                     type: string
                   protocol:
                     description: |-
