@@ -10,7 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
+	v2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 )
 
 type PostgresqlDatabaseInitParameters struct {
@@ -21,11 +21,11 @@ type PostgresqlDatabaseInitParameters struct {
 
 	// Reference to a PostgresqlCluster in postgresql to populate clusterId.
 	// +kubebuilder:validation:Optional
-	ClusterIDRef *v1.Reference `json:"clusterIdRef,omitempty" tf:"-"`
+	ClusterIDRef *v2.Reference `json:"clusterIdRef,omitempty" tf:"-"`
 
 	// Selector for a PostgresqlCluster in postgresql to populate clusterId.
 	// +kubebuilder:validation:Optional
-	ClusterIDSelector *v1.Selector `json:"clusterIdSelector,omitempty" tf:"-"`
+	ClusterIDSelector *v2.Selector `json:"clusterIdSelector,omitempty" tf:"-"`
 
 	// The location of the resource. This field should be used only if you are also using a file configuration and should not be configured otherwise.
 	Location *string `json:"location,omitempty" tf:"location,omitempty"`
@@ -67,11 +67,11 @@ type PostgresqlDatabaseParameters struct {
 
 	// Reference to a PostgresqlCluster in postgresql to populate clusterId.
 	// +kubebuilder:validation:Optional
-	ClusterIDRef *v1.Reference `json:"clusterIdRef,omitempty" tf:"-"`
+	ClusterIDRef *v2.Reference `json:"clusterIdRef,omitempty" tf:"-"`
 
 	// Selector for a PostgresqlCluster in postgresql to populate clusterId.
 	// +kubebuilder:validation:Optional
-	ClusterIDSelector *v1.Selector `json:"clusterIdSelector,omitempty" tf:"-"`
+	ClusterIDSelector *v2.Selector `json:"clusterIdSelector,omitempty" tf:"-"`
 
 	// The location of the resource. This field should be used only if you are also using a file configuration and should not be configured otherwise.
 	// +kubebuilder:validation:Optional
@@ -90,8 +90,8 @@ type PostgresqlDatabaseParameters struct {
 
 // PostgresqlDatabaseSpec defines the desired state of PostgresqlDatabase
 type PostgresqlDatabaseSpec struct {
-	v1.ResourceSpec `json:",inline"`
-	ForProvider     PostgresqlDatabaseParameters `json:"forProvider"`
+	v2.ClusterManagedResourceSpec `json:",inline"`
+	ForProvider                   PostgresqlDatabaseParameters `json:"forProvider"`
 	// THIS IS A BETA FIELD. It will be honored
 	// unless the Management Policies feature flag is disabled.
 	// InitProvider holds the same fields as ForProvider, with the exception
@@ -107,8 +107,8 @@ type PostgresqlDatabaseSpec struct {
 
 // PostgresqlDatabaseStatus defines the observed state of PostgresqlDatabase.
 type PostgresqlDatabaseStatus struct {
-	v1.ResourceStatus `json:",inline"`
-	AtProvider        PostgresqlDatabaseObservation `json:"atProvider,omitempty"`
+	v2.ManagedResourceStatus `json:",inline"`
+	AtProvider               PostgresqlDatabaseObservation `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true

@@ -10,8 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
-	v2 "github.com/crossplane/crossplane-runtime/v2/apis/common/v2"
+	v2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 )
 
 type ConnectionsInitParameters struct {
@@ -23,11 +22,11 @@ type ConnectionsInitParameters struct {
 
 	// Reference to a Datacenter in compute to populate datacenterId.
 	// +kubebuilder:validation:Optional
-	DatacenterIDRef *v1.NamespacedReference `json:"datacenterIdRef,omitempty" tf:"-"`
+	DatacenterIDRef *v2.NamespacedReference `json:"datacenterIdRef,omitempty" tf:"-"`
 
 	// Selector for a Datacenter in compute to populate datacenterId.
 	// +kubebuilder:validation:Optional
-	DatacenterIDSelector *v1.NamespacedSelector `json:"datacenterIdSelector,omitempty" tf:"-"`
+	DatacenterIDSelector *v2.NamespacedSelector `json:"datacenterIdSelector,omitempty" tf:"-"`
 
 	// [string] The numeric LAN ID within the data center.
 	// The numeric LAN ID within the data center.
@@ -36,11 +35,11 @@ type ConnectionsInitParameters struct {
 
 	// Reference to a Lan in compute to populate lanId.
 	// +kubebuilder:validation:Optional
-	LanIDRef *v1.NamespacedReference `json:"lanIdRef,omitempty" tf:"-"`
+	LanIDRef *v2.NamespacedReference `json:"lanIdRef,omitempty" tf:"-"`
 
 	// Selector for a Lan in compute to populate lanId.
 	// +kubebuilder:validation:Optional
-	LanIDSelector *v1.NamespacedSelector `json:"lanIdSelector,omitempty" tf:"-"`
+	LanIDSelector *v2.NamespacedSelector `json:"lanIdSelector,omitempty" tf:"-"`
 
 	// [string] Primary instance IP in CIDR notation.
 	// The IP address and subnet mask assigned to the primary instance in CIDR notation.
@@ -72,11 +71,11 @@ type ConnectionsParameters struct {
 
 	// Reference to a Datacenter in compute to populate datacenterId.
 	// +kubebuilder:validation:Optional
-	DatacenterIDRef *v1.NamespacedReference `json:"datacenterIdRef,omitempty" tf:"-"`
+	DatacenterIDRef *v2.NamespacedReference `json:"datacenterIdRef,omitempty" tf:"-"`
 
 	// Selector for a Datacenter in compute to populate datacenterId.
 	// +kubebuilder:validation:Optional
-	DatacenterIDSelector *v1.NamespacedSelector `json:"datacenterIdSelector,omitempty" tf:"-"`
+	DatacenterIDSelector *v2.NamespacedSelector `json:"datacenterIdSelector,omitempty" tf:"-"`
 
 	// [string] The numeric LAN ID within the data center.
 	// The numeric LAN ID within the data center.
@@ -86,11 +85,11 @@ type ConnectionsParameters struct {
 
 	// Reference to a Lan in compute to populate lanId.
 	// +kubebuilder:validation:Optional
-	LanIDRef *v1.NamespacedReference `json:"lanIdRef,omitempty" tf:"-"`
+	LanIDRef *v2.NamespacedReference `json:"lanIdRef,omitempty" tf:"-"`
 
 	// Selector for a Lan in compute to populate lanId.
 	// +kubebuilder:validation:Optional
-	LanIDSelector *v1.NamespacedSelector `json:"lanIdSelector,omitempty" tf:"-"`
+	LanIDSelector *v2.NamespacedSelector `json:"lanIdSelector,omitempty" tf:"-"`
 
 	// [string] Primary instance IP in CIDR notation.
 	// The IP address and subnet mask assigned to the primary instance in CIDR notation.
@@ -401,7 +400,7 @@ type PasswordInitParameters struct {
 
 	// [string] Sensitive. Hex-encoded SHA-256 hash (64 lowercase hex chars).
 	// The hex-encoded hash of the password.
-	HashSecretRef v1.LocalSecretKeySelector `json:"hashSecretRef" tf:"-"`
+	HashSecretRef v2.LocalSecretKeySelector `json:"hashSecretRef" tf:"-"`
 }
 
 type PasswordObservation struct {
@@ -421,7 +420,7 @@ type PasswordParameters struct {
 	// [string] Sensitive. Hex-encoded SHA-256 hash (64 lowercase hex chars).
 	// The hex-encoded hash of the password.
 	// +kubebuilder:validation:Optional
-	HashSecretRef v1.LocalSecretKeySelector `json:"hashSecretRef" tf:"-"`
+	HashSecretRef v2.LocalSecretKeySelector `json:"hashSecretRef" tf:"-"`
 }
 
 type RestoreFromSnapshotInitParameters struct {
@@ -526,8 +525,8 @@ type InMemoryDBClusterSpec struct {
 
 // InMemoryDBClusterStatus defines the observed state of InMemoryDBCluster.
 type InMemoryDBClusterStatus struct {
-	v1.ResourceStatus `json:",inline"`
-	AtProvider        InMemoryDBClusterObservation `json:"atProvider,omitempty"`
+	v2.ManagedResourceStatus `json:",inline"`
+	AtProvider               InMemoryDBClusterObservation `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true

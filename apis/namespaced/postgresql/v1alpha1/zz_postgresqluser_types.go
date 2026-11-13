@@ -10,8 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
-	v2 "github.com/crossplane/crossplane-runtime/v2/apis/common/v2"
+	v2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 )
 
 type PostgresqlUserInitParameters struct {
@@ -22,17 +21,17 @@ type PostgresqlUserInitParameters struct {
 
 	// Reference to a PostgresqlCluster in postgresql to populate clusterId.
 	// +kubebuilder:validation:Optional
-	ClusterIDRef *v1.NamespacedReference `json:"clusterIdRef,omitempty" tf:"-"`
+	ClusterIDRef *v2.NamespacedReference `json:"clusterIdRef,omitempty" tf:"-"`
 
 	// Selector for a PostgresqlCluster in postgresql to populate clusterId.
 	// +kubebuilder:validation:Optional
-	ClusterIDSelector *v1.NamespacedSelector `json:"clusterIdSelector,omitempty" tf:"-"`
+	ClusterIDSelector *v2.NamespacedSelector `json:"clusterIdSelector,omitempty" tf:"-"`
 
 	// The location of the resource. This field should be used only if you are also using a file configuration and should not be configured otherwise.
 	Location *string `json:"location,omitempty" tf:"location,omitempty"`
 
 	// [string] User password.
-	PasswordSecretRef v1.LocalSecretKeySelector `json:"passwordSecretRef" tf:"-"`
+	PasswordSecretRef v2.LocalSecretKeySelector `json:"passwordSecretRef" tf:"-"`
 
 	// [string] Used for authentication. Updates to the value of the field force the cluster to be re-created.
 	Username *string `json:"username,omitempty" tf:"username,omitempty"`
@@ -65,11 +64,11 @@ type PostgresqlUserParameters struct {
 
 	// Reference to a PostgresqlCluster in postgresql to populate clusterId.
 	// +kubebuilder:validation:Optional
-	ClusterIDRef *v1.NamespacedReference `json:"clusterIdRef,omitempty" tf:"-"`
+	ClusterIDRef *v2.NamespacedReference `json:"clusterIdRef,omitempty" tf:"-"`
 
 	// Selector for a PostgresqlCluster in postgresql to populate clusterId.
 	// +kubebuilder:validation:Optional
-	ClusterIDSelector *v1.NamespacedSelector `json:"clusterIdSelector,omitempty" tf:"-"`
+	ClusterIDSelector *v2.NamespacedSelector `json:"clusterIdSelector,omitempty" tf:"-"`
 
 	// The location of the resource. This field should be used only if you are also using a file configuration and should not be configured otherwise.
 	// +kubebuilder:validation:Optional
@@ -77,7 +76,7 @@ type PostgresqlUserParameters struct {
 
 	// [string] User password.
 	// +kubebuilder:validation:Optional
-	PasswordSecretRef v1.LocalSecretKeySelector `json:"passwordSecretRef" tf:"-"`
+	PasswordSecretRef v2.LocalSecretKeySelector `json:"passwordSecretRef" tf:"-"`
 
 	// [string] Used for authentication. Updates to the value of the field force the cluster to be re-created.
 	// +kubebuilder:validation:Optional
@@ -103,8 +102,8 @@ type PostgresqlUserSpec struct {
 
 // PostgresqlUserStatus defines the observed state of PostgresqlUser.
 type PostgresqlUserStatus struct {
-	v1.ResourceStatus `json:",inline"`
-	AtProvider        PostgresqlUserObservation `json:"atProvider,omitempty"`
+	v2.ManagedResourceStatus `json:",inline"`
+	AtProvider               PostgresqlUserObservation `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true

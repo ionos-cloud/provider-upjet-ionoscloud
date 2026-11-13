@@ -6,104 +6,104 @@
 
 package v1alpha1
 
-import xpv1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
+import xpv2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 
 // GetCondition of this DnsRecord.
-func (mg *DnsRecord) GetCondition(ct xpv1.ConditionType) xpv1.Condition {
+func (mg *DnsRecord) GetCondition(ct xpv2.ConditionType) xpv2.Condition {
 	return mg.Status.GetCondition(ct)
 }
 
 // GetDeletionPolicy of this DnsRecord.
-func (mg *DnsRecord) GetDeletionPolicy() xpv1.DeletionPolicy {
+func (mg *DnsRecord) GetDeletionPolicy() xpv2.DeletionPolicy {
 	return mg.Spec.DeletionPolicy
 }
 
 // GetManagementPolicies of this DnsRecord.
-func (mg *DnsRecord) GetManagementPolicies() xpv1.ManagementPolicies {
+func (mg *DnsRecord) GetManagementPolicies() xpv2.ManagementPolicies {
 	return mg.Spec.ManagementPolicies
 }
 
 // GetProviderConfigReference of this DnsRecord.
-func (mg *DnsRecord) GetProviderConfigReference() *xpv1.Reference {
+func (mg *DnsRecord) GetProviderConfigReference() *xpv2.Reference {
 	return mg.Spec.ProviderConfigReference
 }
 
 // GetWriteConnectionSecretToReference of this DnsRecord.
-func (mg *DnsRecord) GetWriteConnectionSecretToReference() *xpv1.SecretReference {
+func (mg *DnsRecord) GetWriteConnectionSecretToReference() *xpv2.SecretReference {
 	return mg.Spec.WriteConnectionSecretToReference
 }
 
 // SetConditions of this DnsRecord.
-func (mg *DnsRecord) SetConditions(c ...xpv1.Condition) {
+func (mg *DnsRecord) SetConditions(c ...xpv2.Condition) {
 	mg.Status.SetConditions(c...)
 }
 
 // SetDeletionPolicy of this DnsRecord.
-func (mg *DnsRecord) SetDeletionPolicy(r xpv1.DeletionPolicy) {
+func (mg *DnsRecord) SetDeletionPolicy(r xpv2.DeletionPolicy) {
 	mg.Spec.DeletionPolicy = r
 }
 
 // SetManagementPolicies of this DnsRecord.
-func (mg *DnsRecord) SetManagementPolicies(r xpv1.ManagementPolicies) {
+func (mg *DnsRecord) SetManagementPolicies(r xpv2.ManagementPolicies) {
 	mg.Spec.ManagementPolicies = r
 }
 
 // SetProviderConfigReference of this DnsRecord.
-func (mg *DnsRecord) SetProviderConfigReference(r *xpv1.Reference) {
+func (mg *DnsRecord) SetProviderConfigReference(r *xpv2.Reference) {
 	mg.Spec.ProviderConfigReference = r
 }
 
 // SetWriteConnectionSecretToReference of this DnsRecord.
-func (mg *DnsRecord) SetWriteConnectionSecretToReference(r *xpv1.SecretReference) {
+func (mg *DnsRecord) SetWriteConnectionSecretToReference(r *xpv2.SecretReference) {
 	mg.Spec.WriteConnectionSecretToReference = r
 }
 
 // GetCondition of this DnsZone.
-func (mg *DnsZone) GetCondition(ct xpv1.ConditionType) xpv1.Condition {
+func (mg *DnsZone) GetCondition(ct xpv2.ConditionType) xpv2.Condition {
 	return mg.Status.GetCondition(ct)
 }
 
 // GetDeletionPolicy of this DnsZone.
-func (mg *DnsZone) GetDeletionPolicy() xpv1.DeletionPolicy {
+func (mg *DnsZone) GetDeletionPolicy() xpv2.DeletionPolicy {
 	return mg.Spec.DeletionPolicy
 }
 
 // GetManagementPolicies of this DnsZone.
-func (mg *DnsZone) GetManagementPolicies() xpv1.ManagementPolicies {
+func (mg *DnsZone) GetManagementPolicies() xpv2.ManagementPolicies {
 	return mg.Spec.ManagementPolicies
 }
 
 // GetProviderConfigReference of this DnsZone.
-func (mg *DnsZone) GetProviderConfigReference() *xpv1.Reference {
+func (mg *DnsZone) GetProviderConfigReference() *xpv2.Reference {
 	return mg.Spec.ProviderConfigReference
 }
 
 // GetWriteConnectionSecretToReference of this DnsZone.
-func (mg *DnsZone) GetWriteConnectionSecretToReference() *xpv1.SecretReference {
+func (mg *DnsZone) GetWriteConnectionSecretToReference() *xpv2.SecretReference {
 	return mg.Spec.WriteConnectionSecretToReference
 }
 
 // SetConditions of this DnsZone.
-func (mg *DnsZone) SetConditions(c ...xpv1.Condition) {
+func (mg *DnsZone) SetConditions(c ...xpv2.Condition) {
 	mg.Status.SetConditions(c...)
 }
 
 // SetDeletionPolicy of this DnsZone.
-func (mg *DnsZone) SetDeletionPolicy(r xpv1.DeletionPolicy) {
+func (mg *DnsZone) SetDeletionPolicy(r xpv2.DeletionPolicy) {
 	mg.Spec.DeletionPolicy = r
 }
 
 // SetManagementPolicies of this DnsZone.
-func (mg *DnsZone) SetManagementPolicies(r xpv1.ManagementPolicies) {
+func (mg *DnsZone) SetManagementPolicies(r xpv2.ManagementPolicies) {
 	mg.Spec.ManagementPolicies = r
 }
 
 // SetProviderConfigReference of this DnsZone.
-func (mg *DnsZone) SetProviderConfigReference(r *xpv1.Reference) {
+func (mg *DnsZone) SetProviderConfigReference(r *xpv2.Reference) {
 	mg.Spec.ProviderConfigReference = r
 }
 
 // SetWriteConnectionSecretToReference of this DnsZone.
-func (mg *DnsZone) SetWriteConnectionSecretToReference(r *xpv1.SecretReference) {
+func (mg *DnsZone) SetWriteConnectionSecretToReference(r *xpv2.SecretReference) {
 	mg.Spec.WriteConnectionSecretToReference = r
 }

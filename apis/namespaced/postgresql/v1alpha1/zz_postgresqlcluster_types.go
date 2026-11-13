@@ -10,8 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
-	v2 "github.com/crossplane/crossplane-runtime/v2/apis/common/v2"
+	v2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 )
 
 type ConnectionPoolerInitParameters struct {
@@ -63,11 +62,11 @@ type ConnectionsInitParameters struct {
 
 	// Reference to a Datacenter in compute to populate datacenterId.
 	// +kubebuilder:validation:Optional
-	DatacenterIDRef *v1.NamespacedReference `json:"datacenterIdRef,omitempty" tf:"-"`
+	DatacenterIDRef *v2.NamespacedReference `json:"datacenterIdRef,omitempty" tf:"-"`
 
 	// Selector for a Datacenter in compute to populate datacenterId.
 	// +kubebuilder:validation:Optional
-	DatacenterIDSelector *v1.NamespacedSelector `json:"datacenterIdSelector,omitempty" tf:"-"`
+	DatacenterIDSelector *v2.NamespacedSelector `json:"datacenterIdSelector,omitempty" tf:"-"`
 
 	// [true] The LAN to connect your cluster to.
 	// The LAN to connect your cluster to.
@@ -76,11 +75,11 @@ type ConnectionsInitParameters struct {
 
 	// Reference to a Lan in compute to populate lanId.
 	// +kubebuilder:validation:Optional
-	LanIDRef *v1.NamespacedReference `json:"lanIdRef,omitempty" tf:"-"`
+	LanIDRef *v2.NamespacedReference `json:"lanIdRef,omitempty" tf:"-"`
 
 	// Selector for a Lan in compute to populate lanId.
 	// +kubebuilder:validation:Optional
-	LanIDSelector *v1.NamespacedSelector `json:"lanIdSelector,omitempty" tf:"-"`
+	LanIDSelector *v2.NamespacedSelector `json:"lanIdSelector,omitempty" tf:"-"`
 }
 
 type ConnectionsObservation struct {
@@ -121,11 +120,11 @@ type ConnectionsParameters struct {
 
 	// Reference to a Datacenter in compute to populate datacenterId.
 	// +kubebuilder:validation:Optional
-	DatacenterIDRef *v1.NamespacedReference `json:"datacenterIdRef,omitempty" tf:"-"`
+	DatacenterIDRef *v2.NamespacedReference `json:"datacenterIdRef,omitempty" tf:"-"`
 
 	// Selector for a Datacenter in compute to populate datacenterId.
 	// +kubebuilder:validation:Optional
-	DatacenterIDSelector *v1.NamespacedSelector `json:"datacenterIdSelector,omitempty" tf:"-"`
+	DatacenterIDSelector *v2.NamespacedSelector `json:"datacenterIdSelector,omitempty" tf:"-"`
 
 	// [true] The LAN to connect your cluster to.
 	// The LAN to connect your cluster to.
@@ -135,17 +134,17 @@ type ConnectionsParameters struct {
 
 	// Reference to a Lan in compute to populate lanId.
 	// +kubebuilder:validation:Optional
-	LanIDRef *v1.NamespacedReference `json:"lanIdRef,omitempty" tf:"-"`
+	LanIDRef *v2.NamespacedReference `json:"lanIdRef,omitempty" tf:"-"`
 
 	// Selector for a Lan in compute to populate lanId.
 	// +kubebuilder:validation:Optional
-	LanIDSelector *v1.NamespacedSelector `json:"lanIdSelector,omitempty" tf:"-"`
+	LanIDSelector *v2.NamespacedSelector `json:"lanIdSelector,omitempty" tf:"-"`
 }
 
 type CredentialsInitParameters struct {
 
 	// [string]
-	PasswordSecretRef v1.LocalSecretKeySelector `json:"passwordSecretRef" tf:"-"`
+	PasswordSecretRef v2.LocalSecretKeySelector `json:"passwordSecretRef" tf:"-"`
 
 	// [string] The username for the initial postgres user. Some system usernames are restricted (e.g. "postgres", "admin", "standby")
 	// the username for the initial postgres user. some system usernames are restricted (e.g. "postgres", "admin", "standby")
@@ -163,7 +162,7 @@ type CredentialsParameters struct {
 
 	// [string]
 	// +kubebuilder:validation:Optional
-	PasswordSecretRef v1.LocalSecretKeySelector `json:"passwordSecretRef" tf:"-"`
+	PasswordSecretRef v2.LocalSecretKeySelector `json:"passwordSecretRef" tf:"-"`
 
 	// [string] The username for the initial postgres user. Some system usernames are restricted (e.g. "postgres", "admin", "standby")
 	// the username for the initial postgres user. some system usernames are restricted (e.g. "postgres", "admin", "standby")
@@ -281,11 +280,11 @@ type PostgresqlClusterInitParameters struct {
 
 	// Reference to a Datacenter in compute to populate location.
 	// +kubebuilder:validation:Optional
-	LocationRef *v1.NamespacedReference `json:"locationRef,omitempty" tf:"-"`
+	LocationRef *v2.NamespacedReference `json:"locationRef,omitempty" tf:"-"`
 
 	// Selector for a Datacenter in compute to populate location.
 	// +kubebuilder:validation:Optional
-	LocationSelector *v1.NamespacedSelector `json:"locationSelector,omitempty" tf:"-"`
+	LocationSelector *v2.NamespacedSelector `json:"locationSelector,omitempty" tf:"-"`
 
 	// (Computed) A weekly 4 hour-long window, during which maintenance might occur
 	// a weekly 4 hour-long window, during which maintenance might occur
@@ -441,11 +440,11 @@ type PostgresqlClusterParameters struct {
 
 	// Reference to a Datacenter in compute to populate location.
 	// +kubebuilder:validation:Optional
-	LocationRef *v1.NamespacedReference `json:"locationRef,omitempty" tf:"-"`
+	LocationRef *v2.NamespacedReference `json:"locationRef,omitempty" tf:"-"`
 
 	// Selector for a Datacenter in compute to populate location.
 	// +kubebuilder:validation:Optional
-	LocationSelector *v1.NamespacedSelector `json:"locationSelector,omitempty" tf:"-"`
+	LocationSelector *v2.NamespacedSelector `json:"locationSelector,omitempty" tf:"-"`
 
 	// (Computed) A weekly 4 hour-long window, during which maintenance might occur
 	// a weekly 4 hour-long window, during which maintenance might occur
@@ -497,8 +496,8 @@ type PostgresqlClusterSpec struct {
 
 // PostgresqlClusterStatus defines the observed state of PostgresqlCluster.
 type PostgresqlClusterStatus struct {
-	v1.ResourceStatus `json:",inline"`
-	AtProvider        PostgresqlClusterObservation `json:"atProvider,omitempty"`
+	v2.ManagedResourceStatus `json:",inline"`
+	AtProvider               PostgresqlClusterObservation `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true

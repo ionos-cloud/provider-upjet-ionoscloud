@@ -10,8 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
-	v2 "github.com/crossplane/crossplane-runtime/v2/apis/common/v2"
+	v2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 )
 
 type KafkaTopicInitParameters struct {
@@ -23,11 +22,11 @@ type KafkaTopicInitParameters struct {
 
 	// Reference to a Kafka in kafka to populate clusterId.
 	// +kubebuilder:validation:Optional
-	ClusterIDRef *v1.NamespacedReference `json:"clusterIdRef,omitempty" tf:"-"`
+	ClusterIDRef *v2.NamespacedReference `json:"clusterIdRef,omitempty" tf:"-"`
 
 	// Selector for a Kafka in kafka to populate clusterId.
 	// +kubebuilder:validation:Optional
-	ClusterIDSelector *v1.NamespacedSelector `json:"clusterIdSelector,omitempty" tf:"-"`
+	ClusterIDSelector *v2.NamespacedSelector `json:"clusterIdSelector,omitempty" tf:"-"`
 
 	// [string] The location of the Kafka Cluster Topic. Possible values: de/fra, de/fra/1, de/fra/2, de/txl, fr/par, es/vit, gb/lhr, gb/bhx, us/las, us/mci, us/ewr. If this is not set and if no value is provided for the IONOS_API_URL env var, the default location will be: de/fra.
 	// The location of your Kafka Cluster Topic. Supported locations: de/fra, de/fra/1, de/fra/2, de/txl, fr/par, es/vit, gb/lhr, gb/bhx, us/las, us/mci, us/ewr
@@ -37,11 +36,11 @@ type KafkaTopicInitParameters struct {
 
 	// Reference to a Kafka in kafka to populate location.
 	// +kubebuilder:validation:Optional
-	LocationRef *v1.NamespacedReference `json:"locationRef,omitempty" tf:"-"`
+	LocationRef *v2.NamespacedReference `json:"locationRef,omitempty" tf:"-"`
 
 	// Selector for a Kafka in kafka to populate location.
 	// +kubebuilder:validation:Optional
-	LocationSelector *v1.NamespacedSelector `json:"locationSelector,omitempty" tf:"-"`
+	LocationSelector *v2.NamespacedSelector `json:"locationSelector,omitempty" tf:"-"`
 
 	// [string] Name of the Kafka Cluster.
 	// The name of your Kafka Cluster Topic. Must be 63 characters or less and must begin and end with an alphanumeric character (`[a-z0-9A-Z]`) with dashes (`-`), underscores (`_`), dots (`.`), and alphanumerics between.
@@ -124,11 +123,11 @@ type KafkaTopicParameters struct {
 
 	// Reference to a Kafka in kafka to populate clusterId.
 	// +kubebuilder:validation:Optional
-	ClusterIDRef *v1.NamespacedReference `json:"clusterIdRef,omitempty" tf:"-"`
+	ClusterIDRef *v2.NamespacedReference `json:"clusterIdRef,omitempty" tf:"-"`
 
 	// Selector for a Kafka in kafka to populate clusterId.
 	// +kubebuilder:validation:Optional
-	ClusterIDSelector *v1.NamespacedSelector `json:"clusterIdSelector,omitempty" tf:"-"`
+	ClusterIDSelector *v2.NamespacedSelector `json:"clusterIdSelector,omitempty" tf:"-"`
 
 	// [string] The location of the Kafka Cluster Topic. Possible values: de/fra, de/fra/1, de/fra/2, de/txl, fr/par, es/vit, gb/lhr, gb/bhx, us/las, us/mci, us/ewr. If this is not set and if no value is provided for the IONOS_API_URL env var, the default location will be: de/fra.
 	// The location of your Kafka Cluster Topic. Supported locations: de/fra, de/fra/1, de/fra/2, de/txl, fr/par, es/vit, gb/lhr, gb/bhx, us/las, us/mci, us/ewr
@@ -139,11 +138,11 @@ type KafkaTopicParameters struct {
 
 	// Reference to a Kafka in kafka to populate location.
 	// +kubebuilder:validation:Optional
-	LocationRef *v1.NamespacedReference `json:"locationRef,omitempty" tf:"-"`
+	LocationRef *v2.NamespacedReference `json:"locationRef,omitempty" tf:"-"`
 
 	// Selector for a Kafka in kafka to populate location.
 	// +kubebuilder:validation:Optional
-	LocationSelector *v1.NamespacedSelector `json:"locationSelector,omitempty" tf:"-"`
+	LocationSelector *v2.NamespacedSelector `json:"locationSelector,omitempty" tf:"-"`
 
 	// [string] Name of the Kafka Cluster.
 	// The name of your Kafka Cluster Topic. Must be 63 characters or less and must begin and end with an alphanumeric character (`[a-z0-9A-Z]`) with dashes (`-`), underscores (`_`), dots (`.`), and alphanumerics between.
@@ -198,8 +197,8 @@ type KafkaTopicSpec struct {
 
 // KafkaTopicStatus defines the observed state of KafkaTopic.
 type KafkaTopicStatus struct {
-	v1.ResourceStatus `json:",inline"`
-	AtProvider        KafkaTopicObservation `json:"atProvider,omitempty"`
+	v2.ManagedResourceStatus `json:",inline"`
+	AtProvider               KafkaTopicObservation `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true

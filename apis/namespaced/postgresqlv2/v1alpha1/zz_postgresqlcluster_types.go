@@ -10,8 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
-	v2 "github.com/crossplane/crossplane-runtime/v2/apis/common/v2"
+	v2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 )
 
 type BackupInitParameters struct {
@@ -58,11 +57,11 @@ type ConnectionsInitParameters struct {
 
 	// Reference to a Datacenter in compute to populate datacenterId.
 	// +kubebuilder:validation:Optional
-	DatacenterIDRef *v1.NamespacedReference `json:"datacenterIdRef,omitempty" tf:"-"`
+	DatacenterIDRef *v2.NamespacedReference `json:"datacenterIdRef,omitempty" tf:"-"`
 
 	// Selector for a Datacenter in compute to populate datacenterId.
 	// +kubebuilder:validation:Optional
-	DatacenterIDSelector *v1.NamespacedSelector `json:"datacenterIdSelector,omitempty" tf:"-"`
+	DatacenterIDSelector *v2.NamespacedSelector `json:"datacenterIdSelector,omitempty" tf:"-"`
 
 	// [string] The numeric LAN ID to connect your instance to.
 	// The numeric LAN ID to connect your instance to.
@@ -71,11 +70,11 @@ type ConnectionsInitParameters struct {
 
 	// Reference to a Lan in compute to populate lanId.
 	// +kubebuilder:validation:Optional
-	LanIDRef *v1.NamespacedReference `json:"lanIdRef,omitempty" tf:"-"`
+	LanIDRef *v2.NamespacedReference `json:"lanIdRef,omitempty" tf:"-"`
 
 	// Selector for a Lan in compute to populate lanId.
 	// +kubebuilder:validation:Optional
-	LanIDSelector *v1.NamespacedSelector `json:"lanIdSelector,omitempty" tf:"-"`
+	LanIDSelector *v2.NamespacedSelector `json:"lanIdSelector,omitempty" tf:"-"`
 
 	// [string] The IP and netmask that will be assigned to the cluster primary instance.
 	// The IP and netmask that will be assigned to the cluster primary instance.
@@ -107,11 +106,11 @@ type ConnectionsParameters struct {
 
 	// Reference to a Datacenter in compute to populate datacenterId.
 	// +kubebuilder:validation:Optional
-	DatacenterIDRef *v1.NamespacedReference `json:"datacenterIdRef,omitempty" tf:"-"`
+	DatacenterIDRef *v2.NamespacedReference `json:"datacenterIdRef,omitempty" tf:"-"`
 
 	// Selector for a Datacenter in compute to populate datacenterId.
 	// +kubebuilder:validation:Optional
-	DatacenterIDSelector *v1.NamespacedSelector `json:"datacenterIdSelector,omitempty" tf:"-"`
+	DatacenterIDSelector *v2.NamespacedSelector `json:"datacenterIdSelector,omitempty" tf:"-"`
 
 	// [string] The numeric LAN ID to connect your instance to.
 	// The numeric LAN ID to connect your instance to.
@@ -121,11 +120,11 @@ type ConnectionsParameters struct {
 
 	// Reference to a Lan in compute to populate lanId.
 	// +kubebuilder:validation:Optional
-	LanIDRef *v1.NamespacedReference `json:"lanIdRef,omitempty" tf:"-"`
+	LanIDRef *v2.NamespacedReference `json:"lanIdRef,omitempty" tf:"-"`
 
 	// Selector for a Lan in compute to populate lanId.
 	// +kubebuilder:validation:Optional
-	LanIDSelector *v1.NamespacedSelector `json:"lanIdSelector,omitempty" tf:"-"`
+	LanIDSelector *v2.NamespacedSelector `json:"lanIdSelector,omitempty" tf:"-"`
 
 	// [string] The IP and netmask that will be assigned to the cluster primary instance.
 	// The IP and netmask that will be assigned to the cluster primary instance.
@@ -141,7 +140,7 @@ type CredentialsInitParameters struct {
 
 	// [string] The password for the master database user.11+.
 	// The password for the master database user.
-	PasswordSecretRef v1.LocalSecretKeySelector `json:"passwordSecretRef" tf:"-"`
+	PasswordSecretRef v2.LocalSecretKeySelector `json:"passwordSecretRef" tf:"-"`
 
 	// [string] An arbitrary string (e.g.
 	// Arbitrary string incremented by the practitioner to trigger a password update when the write-only password field changes.
@@ -177,7 +176,7 @@ type CredentialsParameters struct {
 	// [string] The password for the master database user.11+.
 	// The password for the master database user.
 	// +kubebuilder:validation:Optional
-	PasswordSecretRef v1.LocalSecretKeySelector `json:"passwordSecretRef" tf:"-"`
+	PasswordSecretRef v2.LocalSecretKeySelector `json:"passwordSecretRef" tf:"-"`
 
 	// [string] An arbitrary string (e.g.
 	// Arbitrary string incremented by the practitioner to trigger a password update when the write-only password field changes.
@@ -316,11 +315,11 @@ type PostgresqlClusterInitParameters struct {
 
 	// Reference to a Datacenter in compute to populate location.
 	// +kubebuilder:validation:Optional
-	LocationRef *v1.NamespacedReference `json:"locationRef,omitempty" tf:"-"`
+	LocationRef *v2.NamespacedReference `json:"locationRef,omitempty" tf:"-"`
 
 	// Selector for a Datacenter in compute to populate location.
 	// +kubebuilder:validation:Optional
-	LocationSelector *v1.NamespacedSelector `json:"locationSelector,omitempty" tf:"-"`
+	LocationSelector *v2.NamespacedSelector `json:"locationSelector,omitempty" tf:"-"`
 
 	// (Computed)[bool] Enables or disables the collection and reporting of logs for observability of this cluster.
 	// Enables or disables the collection and reporting of logs for observability of this cluster.
@@ -446,11 +445,11 @@ type PostgresqlClusterParameters struct {
 
 	// Reference to a Datacenter in compute to populate location.
 	// +kubebuilder:validation:Optional
-	LocationRef *v1.NamespacedReference `json:"locationRef,omitempty" tf:"-"`
+	LocationRef *v2.NamespacedReference `json:"locationRef,omitempty" tf:"-"`
 
 	// Selector for a Datacenter in compute to populate location.
 	// +kubebuilder:validation:Optional
-	LocationSelector *v1.NamespacedSelector `json:"locationSelector,omitempty" tf:"-"`
+	LocationSelector *v2.NamespacedSelector `json:"locationSelector,omitempty" tf:"-"`
 
 	// (Computed)[bool] Enables or disables the collection and reporting of logs for observability of this cluster.
 	// Enables or disables the collection and reporting of logs for observability of this cluster.
@@ -540,8 +539,8 @@ type PostgresqlClusterSpec struct {
 
 // PostgresqlClusterStatus defines the observed state of PostgresqlCluster.
 type PostgresqlClusterStatus struct {
-	v1.ResourceStatus `json:",inline"`
-	AtProvider        PostgresqlClusterObservation `json:"atProvider,omitempty"`
+	v2.ManagedResourceStatus `json:",inline"`
+	AtProvider               PostgresqlClusterObservation `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true

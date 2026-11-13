@@ -10,8 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
-	v2 "github.com/crossplane/crossplane-runtime/v2/apis/common/v2"
+	v2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 )
 
 type GroupInitParameters struct {
@@ -127,11 +126,11 @@ type GroupInitParameters struct {
 
 	// References to User in compute to populate userIds.
 	// +kubebuilder:validation:Optional
-	UserIdsRefs []v1.NamespacedReference `json:"userIdsRefs,omitempty" tf:"-"`
+	UserIdsRefs []v2.NamespacedReference `json:"userIdsRefs,omitempty" tf:"-"`
 
 	// Selector for a list of User in compute to populate userIds.
 	// +kubebuilder:validation:Optional
-	UserIdsSelector *v1.NamespacedSelector `json:"userIdsSelector,omitempty" tf:"-"`
+	UserIdsSelector *v2.NamespacedSelector `json:"userIdsSelector,omitempty" tf:"-"`
 }
 
 type GroupObservation struct {
@@ -392,11 +391,11 @@ type GroupParameters struct {
 
 	// References to User in compute to populate userIds.
 	// +kubebuilder:validation:Optional
-	UserIdsRefs []v1.NamespacedReference `json:"userIdsRefs,omitempty" tf:"-"`
+	UserIdsRefs []v2.NamespacedReference `json:"userIdsRefs,omitempty" tf:"-"`
 
 	// Selector for a list of User in compute to populate userIds.
 	// +kubebuilder:validation:Optional
-	UserIdsSelector *v1.NamespacedSelector `json:"userIdsSelector,omitempty" tf:"-"`
+	UserIdsSelector *v2.NamespacedSelector `json:"userIdsSelector,omitempty" tf:"-"`
 }
 
 type UsersInitParameters struct {
@@ -440,8 +439,8 @@ type GroupSpec struct {
 
 // GroupStatus defines the observed state of Group.
 type GroupStatus struct {
-	v1.ResourceStatus `json:",inline"`
-	AtProvider        GroupObservation `json:"atProvider,omitempty"`
+	v2.ManagedResourceStatus `json:",inline"`
+	AtProvider               GroupObservation `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true

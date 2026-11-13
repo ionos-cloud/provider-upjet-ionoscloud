@@ -10,8 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
-	v2 "github.com/crossplane/crossplane-runtime/v2/apis/common/v2"
+	v2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 )
 
 type DistributionInitParameters struct {
@@ -23,11 +22,11 @@ type DistributionInitParameters struct {
 
 	// Reference to a Certificate in certificatemanager to populate certificateId.
 	// +kubebuilder:validation:Optional
-	CertificateIDRef *v1.NamespacedReference `json:"certificateIdRef,omitempty" tf:"-"`
+	CertificateIDRef *v2.NamespacedReference `json:"certificateIdRef,omitempty" tf:"-"`
 
 	// Selector for a Certificate in certificatemanager to populate certificateId.
 	// +kubebuilder:validation:Optional
-	CertificateIDSelector *v1.NamespacedSelector `json:"certificateIdSelector,omitempty" tf:"-"`
+	CertificateIDSelector *v2.NamespacedSelector `json:"certificateIdSelector,omitempty" tf:"-"`
 
 	// [string] The domain of the distribution.
 	// The domain of the distribution.
@@ -77,11 +76,11 @@ type DistributionParameters struct {
 
 	// Reference to a Certificate in certificatemanager to populate certificateId.
 	// +kubebuilder:validation:Optional
-	CertificateIDRef *v1.NamespacedReference `json:"certificateIdRef,omitempty" tf:"-"`
+	CertificateIDRef *v2.NamespacedReference `json:"certificateIdRef,omitempty" tf:"-"`
 
 	// Selector for a Certificate in certificatemanager to populate certificateId.
 	// +kubebuilder:validation:Optional
-	CertificateIDSelector *v1.NamespacedSelector `json:"certificateIdSelector,omitempty" tf:"-"`
+	CertificateIDSelector *v2.NamespacedSelector `json:"certificateIdSelector,omitempty" tf:"-"`
 
 	// [string] The domain of the distribution.
 	// The domain of the distribution.
@@ -271,8 +270,8 @@ type DistributionSpec struct {
 
 // DistributionStatus defines the observed state of Distribution.
 type DistributionStatus struct {
-	v1.ResourceStatus `json:",inline"`
-	AtProvider        DistributionObservation `json:"atProvider,omitempty"`
+	v2.ManagedResourceStatus `json:",inline"`
+	AtProvider               DistributionObservation `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true

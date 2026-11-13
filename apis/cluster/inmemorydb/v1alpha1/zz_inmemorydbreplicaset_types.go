@@ -10,7 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
+	v2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 )
 
 type ConnectionsInitParameters struct {
@@ -26,11 +26,11 @@ type ConnectionsInitParameters struct {
 
 	// Reference to a Datacenter in compute to populate datacenterId.
 	// +kubebuilder:validation:Optional
-	DatacenterIDRef *v1.Reference `json:"datacenterIdRef,omitempty" tf:"-"`
+	DatacenterIDRef *v2.Reference `json:"datacenterIdRef,omitempty" tf:"-"`
 
 	// Selector for a Datacenter in compute to populate datacenterId.
 	// +kubebuilder:validation:Optional
-	DatacenterIDSelector *v1.Selector `json:"datacenterIdSelector,omitempty" tf:"-"`
+	DatacenterIDSelector *v2.Selector `json:"datacenterIdSelector,omitempty" tf:"-"`
 
 	// [string] The numeric LAN ID to connect your instance to.
 	// The numeric LAN ID to connect your instance to.
@@ -39,11 +39,11 @@ type ConnectionsInitParameters struct {
 
 	// Reference to a Lan in compute to populate lanId.
 	// +kubebuilder:validation:Optional
-	LanIDRef *v1.Reference `json:"lanIdRef,omitempty" tf:"-"`
+	LanIDRef *v2.Reference `json:"lanIdRef,omitempty" tf:"-"`
 
 	// Selector for a Lan in compute to populate lanId.
 	// +kubebuilder:validation:Optional
-	LanIDSelector *v1.Selector `json:"lanIdSelector,omitempty" tf:"-"`
+	LanIDSelector *v2.Selector `json:"lanIdSelector,omitempty" tf:"-"`
 }
 
 type ConnectionsObservation struct {
@@ -76,11 +76,11 @@ type ConnectionsParameters struct {
 
 	// Reference to a Datacenter in compute to populate datacenterId.
 	// +kubebuilder:validation:Optional
-	DatacenterIDRef *v1.Reference `json:"datacenterIdRef,omitempty" tf:"-"`
+	DatacenterIDRef *v2.Reference `json:"datacenterIdRef,omitempty" tf:"-"`
 
 	// Selector for a Datacenter in compute to populate datacenterId.
 	// +kubebuilder:validation:Optional
-	DatacenterIDSelector *v1.Selector `json:"datacenterIdSelector,omitempty" tf:"-"`
+	DatacenterIDSelector *v2.Selector `json:"datacenterIdSelector,omitempty" tf:"-"`
 
 	// [string] The numeric LAN ID to connect your instance to.
 	// The numeric LAN ID to connect your instance to.
@@ -90,11 +90,11 @@ type ConnectionsParameters struct {
 
 	// Reference to a Lan in compute to populate lanId.
 	// +kubebuilder:validation:Optional
-	LanIDRef *v1.Reference `json:"lanIdRef,omitempty" tf:"-"`
+	LanIDRef *v2.Reference `json:"lanIdRef,omitempty" tf:"-"`
 
 	// Selector for a Lan in compute to populate lanId.
 	// +kubebuilder:validation:Optional
-	LanIDSelector *v1.Selector `json:"lanIdSelector,omitempty" tf:"-"`
+	LanIDSelector *v2.Selector `json:"lanIdSelector,omitempty" tf:"-"`
 }
 
 type CredentialsInitParameters struct {
@@ -105,7 +105,7 @@ type CredentialsInitParameters struct {
 
 	// [string] The password for a InMemoryDB user, this is a field that is marked as Sensitive.
 	// The password for a InMemoryDB user.
-	PlainTextPasswordSecretRef *v1.SecretKeySelector `json:"plainTextPasswordSecretRef,omitempty" tf:"-"`
+	PlainTextPasswordSecretRef *v2.SecretKeySelector `json:"plainTextPasswordSecretRef,omitempty" tf:"-"`
 
 	// [string] The username for the initial InMemoryDB user. Some system usernames are restricted (e.g. 'admin', 'standby').
 	// The username for the initial InMemoryDB user. Some system usernames are restricted (e.g. 'admin', 'standby').
@@ -133,7 +133,7 @@ type CredentialsParameters struct {
 	// [string] The password for a InMemoryDB user, this is a field that is marked as Sensitive.
 	// The password for a InMemoryDB user.
 	// +kubebuilder:validation:Optional
-	PlainTextPasswordSecretRef *v1.SecretKeySelector `json:"plainTextPasswordSecretRef,omitempty" tf:"-"`
+	PlainTextPasswordSecretRef *v2.SecretKeySelector `json:"plainTextPasswordSecretRef,omitempty" tf:"-"`
 
 	// [string] The username for the initial InMemoryDB user. Some system usernames are restricted (e.g. 'admin', 'standby').
 	// The username for the initial InMemoryDB user. Some system usernames are restricted (e.g. 'admin', 'standby').
@@ -147,7 +147,7 @@ type HashedPasswordInitParameters struct {
 	Algorithm *string `json:"algorithm,omitempty" tf:"algorithm,omitempty"`
 
 	// [string] The hashed password.
-	HashSecretRef v1.SecretKeySelector `json:"hashSecretRef" tf:"-"`
+	HashSecretRef v2.SecretKeySelector `json:"hashSecretRef" tf:"-"`
 }
 
 type HashedPasswordObservation struct {
@@ -164,7 +164,7 @@ type HashedPasswordParameters struct {
 
 	// [string] The hashed password.
 	// +kubebuilder:validation:Optional
-	HashSecretRef v1.SecretKeySelector `json:"hashSecretRef" tf:"-"`
+	HashSecretRef v2.SecretKeySelector `json:"hashSecretRef" tf:"-"`
 }
 
 type InMemoryDBReplicasetInitParameters struct {
@@ -197,11 +197,11 @@ type InMemoryDBReplicasetInitParameters struct {
 
 	// Reference to a Datacenter in compute to populate location.
 	// +kubebuilder:validation:Optional
-	LocationRef *v1.Reference `json:"locationRef,omitempty" tf:"-"`
+	LocationRef *v2.Reference `json:"locationRef,omitempty" tf:"-"`
 
 	// Selector for a Datacenter in compute to populate location.
 	// +kubebuilder:validation:Optional
-	LocationSelector *v1.Selector `json:"locationSelector,omitempty" tf:"-"`
+	LocationSelector *v2.Selector `json:"locationSelector,omitempty" tf:"-"`
 
 	// (Computed) A weekly 4 hour-long window, during which maintenance might occur.
 	// A weekly 4 hour-long window, during which maintenance might occur.
@@ -313,11 +313,11 @@ type InMemoryDBReplicasetParameters struct {
 
 	// Reference to a Datacenter in compute to populate location.
 	// +kubebuilder:validation:Optional
-	LocationRef *v1.Reference `json:"locationRef,omitempty" tf:"-"`
+	LocationRef *v2.Reference `json:"locationRef,omitempty" tf:"-"`
 
 	// Selector for a Datacenter in compute to populate location.
 	// +kubebuilder:validation:Optional
-	LocationSelector *v1.Selector `json:"locationSelector,omitempty" tf:"-"`
+	LocationSelector *v2.Selector `json:"locationSelector,omitempty" tf:"-"`
 
 	// (Computed) A weekly 4 hour-long window, during which maintenance might occur.
 	// A weekly 4 hour-long window, during which maintenance might occur.
@@ -421,8 +421,8 @@ type ResourcesParameters struct {
 
 // InMemoryDBReplicasetSpec defines the desired state of InMemoryDBReplicaset
 type InMemoryDBReplicasetSpec struct {
-	v1.ResourceSpec `json:",inline"`
-	ForProvider     InMemoryDBReplicasetParameters `json:"forProvider"`
+	v2.ClusterManagedResourceSpec `json:",inline"`
+	ForProvider                   InMemoryDBReplicasetParameters `json:"forProvider"`
 	// THIS IS A BETA FIELD. It will be honored
 	// unless the Management Policies feature flag is disabled.
 	// InitProvider holds the same fields as ForProvider, with the exception
@@ -438,8 +438,8 @@ type InMemoryDBReplicasetSpec struct {
 
 // InMemoryDBReplicasetStatus defines the observed state of InMemoryDBReplicaset.
 type InMemoryDBReplicasetStatus struct {
-	v1.ResourceStatus `json:",inline"`
-	AtProvider        InMemoryDBReplicasetObservation `json:"atProvider,omitempty"`
+	v2.ManagedResourceStatus `json:",inline"`
+	AtProvider               InMemoryDBReplicasetObservation `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true

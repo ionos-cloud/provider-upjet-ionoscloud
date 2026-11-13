@@ -10,8 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
-	v2 "github.com/crossplane/crossplane-runtime/v2/apis/common/v2"
+	v2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 )
 
 type ConnectionsInitParameters struct {
@@ -23,11 +22,11 @@ type ConnectionsInitParameters struct {
 
 	// Reference to a Datacenter in compute to populate datacenterId.
 	// +kubebuilder:validation:Optional
-	DatacenterIDRef *v1.NamespacedReference `json:"datacenterIdRef,omitempty" tf:"-"`
+	DatacenterIDRef *v2.NamespacedReference `json:"datacenterIdRef,omitempty" tf:"-"`
 
 	// Selector for a Datacenter in compute to populate datacenterId.
 	// +kubebuilder:validation:Optional
-	DatacenterIDSelector *v1.NamespacedSelector `json:"datacenterIdSelector,omitempty" tf:"-"`
+	DatacenterIDSelector *v2.NamespacedSelector `json:"datacenterIdSelector,omitempty" tf:"-"`
 
 	// [list of string] A list of IP addresses (with netmask, in CIDR notation) assigned to the cluster instances. The number of addresses must match the number of instances in the cluster. The range 10.208.0.0/12 is not available.
 	// A list of IP addresses (with netmask, in CIDR notation) assigned to the cluster instances. The number of addresses must match the number of instances in the cluster. The range 10.208.0.0/12 is not available.
@@ -40,11 +39,11 @@ type ConnectionsInitParameters struct {
 
 	// Reference to a Lan in compute to populate lanId.
 	// +kubebuilder:validation:Optional
-	LanIDRef *v1.NamespacedReference `json:"lanIdRef,omitempty" tf:"-"`
+	LanIDRef *v2.NamespacedReference `json:"lanIdRef,omitempty" tf:"-"`
 
 	// Selector for a Lan in compute to populate lanId.
 	// +kubebuilder:validation:Optional
-	LanIDSelector *v1.NamespacedSelector `json:"lanIdSelector,omitempty" tf:"-"`
+	LanIDSelector *v2.NamespacedSelector `json:"lanIdSelector,omitempty" tf:"-"`
 }
 
 type ConnectionsObservation struct {
@@ -72,11 +71,11 @@ type ConnectionsParameters struct {
 
 	// Reference to a Datacenter in compute to populate datacenterId.
 	// +kubebuilder:validation:Optional
-	DatacenterIDRef *v1.NamespacedReference `json:"datacenterIdRef,omitempty" tf:"-"`
+	DatacenterIDRef *v2.NamespacedReference `json:"datacenterIdRef,omitempty" tf:"-"`
 
 	// Selector for a Datacenter in compute to populate datacenterId.
 	// +kubebuilder:validation:Optional
-	DatacenterIDSelector *v1.NamespacedSelector `json:"datacenterIdSelector,omitempty" tf:"-"`
+	DatacenterIDSelector *v2.NamespacedSelector `json:"datacenterIdSelector,omitempty" tf:"-"`
 
 	// [list of string] A list of IP addresses (with netmask, in CIDR notation) assigned to the cluster instances. The number of addresses must match the number of instances in the cluster. The range 10.208.0.0/12 is not available.
 	// A list of IP addresses (with netmask, in CIDR notation) assigned to the cluster instances. The number of addresses must match the number of instances in the cluster. The range 10.208.0.0/12 is not available.
@@ -91,11 +90,11 @@ type ConnectionsParameters struct {
 
 	// Reference to a Lan in compute to populate lanId.
 	// +kubebuilder:validation:Optional
-	LanIDRef *v1.NamespacedReference `json:"lanIdRef,omitempty" tf:"-"`
+	LanIDRef *v2.NamespacedReference `json:"lanIdRef,omitempty" tf:"-"`
 
 	// Selector for a Lan in compute to populate lanId.
 	// +kubebuilder:validation:Optional
-	LanIDSelector *v1.NamespacedSelector `json:"lanIdSelector,omitempty" tf:"-"`
+	LanIDSelector *v2.NamespacedSelector `json:"lanIdSelector,omitempty" tf:"-"`
 }
 
 type CredentialsInitParameters struct {
@@ -106,7 +105,7 @@ type CredentialsInitParameters struct {
 
 	// [string] Sensitive. The password for the initial MongoDB user. Between 8 and 256 characters.
 	// The password for the initial MongoDB user. Between 8 and 256 characters.
-	PasswordSecretRef v1.LocalSecretKeySelector `json:"passwordSecretRef" tf:"-"`
+	PasswordSecretRef v2.LocalSecretKeySelector `json:"passwordSecretRef" tf:"-"`
 
 	// [string] The username of the initial MongoDB user. Between 2 and 16 characters, alphanumeric and underscores only. Some usernames are reserved for platform use.
 	// The username of the initial MongoDB user. Between 2 and 16 characters, containing only alphanumeric characters and underscores. Some usernames are reserved for platform use.
@@ -134,7 +133,7 @@ type CredentialsParameters struct {
 	// [string] Sensitive. The password for the initial MongoDB user. Between 8 and 256 characters.
 	// The password for the initial MongoDB user. Between 8 and 256 characters.
 	// +kubebuilder:validation:Optional
-	PasswordSecretRef v1.LocalSecretKeySelector `json:"passwordSecretRef" tf:"-"`
+	PasswordSecretRef v2.LocalSecretKeySelector `json:"passwordSecretRef" tf:"-"`
 
 	// [string] The username of the initial MongoDB user. Between 2 and 16 characters, alphanumeric and underscores only. Some usernames are reserved for platform use.
 	// The username of the initial MongoDB user. Between 2 and 16 characters, containing only alphanumeric characters and underscores. Some usernames are reserved for platform use.
@@ -578,8 +577,8 @@ type MongodbClusterSpec struct {
 
 // MongodbClusterStatus defines the observed state of MongodbCluster.
 type MongodbClusterStatus struct {
-	v1.ResourceStatus `json:",inline"`
-	AtProvider        MongodbClusterObservation `json:"atProvider,omitempty"`
+	v2.ManagedResourceStatus `json:",inline"`
+	AtProvider               MongodbClusterObservation `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true

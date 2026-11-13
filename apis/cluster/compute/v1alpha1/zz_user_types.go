@@ -10,7 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
+	v2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 )
 
 type UserInitParameters struct {
@@ -45,22 +45,22 @@ type UserInitParameters struct {
 
 	// References to Group in compute to populate groupIds.
 	// +kubebuilder:validation:Optional
-	GroupIdsRefs []v1.Reference `json:"groupIdsRefs,omitempty" tf:"-"`
+	GroupIdsRefs []v2.Reference `json:"groupIdsRefs,omitempty" tf:"-"`
 
 	// Selector for a list of Group in compute to populate groupIds.
 	// +kubebuilder:validation:Optional
-	GroupIdsSelector *v1.Selector `json:"groupIdsSelector,omitempty" tf:"-"`
+	GroupIdsSelector *v2.Selector `json:"groupIdsSelector,omitempty" tf:"-"`
 
 	// [string] A last name for the user.
 	LastName *string `json:"lastName,omitempty" tf:"last_name,omitempty"`
 
 	// [string] A password for the user.11 or higher, you can use password_wo instead of password to avoid storing the password in the state file.
 	// A password for the user.11 or higher, you can use `password_wo` instead of `password` to avoid storing the password in the state file.
-	PasswordSecretRef *v1.SecretKeySelector `json:"passwordSecretRef,omitempty" tf:"-"`
+	PasswordSecretRef *v2.SecretKeySelector `json:"passwordSecretRef,omitempty" tf:"-"`
 
 	// user password. This value is always marked as sensitive in the plan output, regardless of type. Additionally, write-only values are never stored to state. password_wo_version can be used to trigger an update and is required with this argument.15 and later, this may require additional configuration handling for certain scenarios.15 Upgrade Guide.
 	// Write-only attribute. Password for the user. To modify, must change the password_wo_version attribute.
-	PasswordWoSecretRef *v1.SecretKeySelector `json:"passwordWoSecretRef,omitempty" tf:"-"`
+	PasswordWoSecretRef *v2.SecretKeySelector `json:"passwordWoSecretRef,omitempty" tf:"-"`
 
 	// Used together with password_wo to trigger an update. Increment this value when an update to the password_wo is required.
 	// Version of the password_wo attribute. Must be incremented to apply changes to the password_wo attribute.
@@ -150,11 +150,11 @@ type UserParameters struct {
 
 	// References to Group in compute to populate groupIds.
 	// +kubebuilder:validation:Optional
-	GroupIdsRefs []v1.Reference `json:"groupIdsRefs,omitempty" tf:"-"`
+	GroupIdsRefs []v2.Reference `json:"groupIdsRefs,omitempty" tf:"-"`
 
 	// Selector for a list of Group in compute to populate groupIds.
 	// +kubebuilder:validation:Optional
-	GroupIdsSelector *v1.Selector `json:"groupIdsSelector,omitempty" tf:"-"`
+	GroupIdsSelector *v2.Selector `json:"groupIdsSelector,omitempty" tf:"-"`
 
 	// [string] A last name for the user.
 	// +kubebuilder:validation:Optional
@@ -163,12 +163,12 @@ type UserParameters struct {
 	// [string] A password for the user.11 or higher, you can use password_wo instead of password to avoid storing the password in the state file.
 	// A password for the user.11 or higher, you can use `password_wo` instead of `password` to avoid storing the password in the state file.
 	// +kubebuilder:validation:Optional
-	PasswordSecretRef *v1.SecretKeySelector `json:"passwordSecretRef,omitempty" tf:"-"`
+	PasswordSecretRef *v2.SecretKeySelector `json:"passwordSecretRef,omitempty" tf:"-"`
 
 	// user password. This value is always marked as sensitive in the plan output, regardless of type. Additionally, write-only values are never stored to state. password_wo_version can be used to trigger an update and is required with this argument.15 and later, this may require additional configuration handling for certain scenarios.15 Upgrade Guide.
 	// Write-only attribute. Password for the user. To modify, must change the password_wo_version attribute.
 	// +kubebuilder:validation:Optional
-	PasswordWoSecretRef *v1.SecretKeySelector `json:"passwordWoSecretRef,omitempty" tf:"-"`
+	PasswordWoSecretRef *v2.SecretKeySelector `json:"passwordWoSecretRef,omitempty" tf:"-"`
 
 	// Used together with password_wo to trigger an update. Increment this value when an update to the password_wo is required.
 	// Version of the password_wo attribute. Must be incremented to apply changes to the password_wo attribute.
@@ -178,8 +178,8 @@ type UserParameters struct {
 
 // UserSpec defines the desired state of User
 type UserSpec struct {
-	v1.ResourceSpec `json:",inline"`
-	ForProvider     UserParameters `json:"forProvider"`
+	v2.ClusterManagedResourceSpec `json:",inline"`
+	ForProvider                   UserParameters `json:"forProvider"`
 	// THIS IS A BETA FIELD. It will be honored
 	// unless the Management Policies feature flag is disabled.
 	// InitProvider holds the same fields as ForProvider, with the exception
@@ -195,8 +195,8 @@ type UserSpec struct {
 
 // UserStatus defines the observed state of User.
 type UserStatus struct {
-	v1.ResourceStatus `json:",inline"`
-	AtProvider        UserObservation `json:"atProvider,omitempty"`
+	v2.ManagedResourceStatus `json:",inline"`
+	AtProvider               UserObservation `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true

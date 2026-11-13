@@ -10,8 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
-	v2 "github.com/crossplane/crossplane-runtime/v2/apis/common/v2"
+	v2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 )
 
 type AutoScalingInitParameters struct {
@@ -62,11 +61,11 @@ type LansInitParameters struct {
 
 	// Reference to a Lan in compute to populate id.
 	// +kubebuilder:validation:Optional
-	IDRef *v1.NamespacedReference `json:"idRef,omitempty" tf:"-"`
+	IDRef *v2.NamespacedReference `json:"idRef,omitempty" tf:"-"`
 
 	// Selector for a Lan in compute to populate id.
 	// +kubebuilder:validation:Optional
-	IDSelector *v1.NamespacedSelector `json:"idSelector,omitempty" tf:"-"`
+	IDSelector *v2.NamespacedSelector `json:"idSelector,omitempty" tf:"-"`
 
 	// An array of additional LANs attached to worker nodes
 	// An array of additional LANs attached to worker nodes
@@ -103,11 +102,11 @@ type LansParameters struct {
 
 	// Reference to a Lan in compute to populate id.
 	// +kubebuilder:validation:Optional
-	IDRef *v1.NamespacedReference `json:"idRef,omitempty" tf:"-"`
+	IDRef *v2.NamespacedReference `json:"idRef,omitempty" tf:"-"`
 
 	// Selector for a Lan in compute to populate id.
 	// +kubebuilder:validation:Optional
-	IDSelector *v1.NamespacedSelector `json:"idSelector,omitempty" tf:"-"`
+	IDSelector *v2.NamespacedSelector `json:"idSelector,omitempty" tf:"-"`
 
 	// An array of additional LANs attached to worker nodes
 	// An array of additional LANs attached to worker nodes
@@ -148,11 +147,11 @@ type NodePoolInitParameters struct {
 
 	// Reference to a Datacenter in compute to populate datacenterId.
 	// +kubebuilder:validation:Optional
-	DatacenterIDRef *v1.NamespacedReference `json:"datacenterIdRef,omitempty" tf:"-"`
+	DatacenterIDRef *v2.NamespacedReference `json:"datacenterIdRef,omitempty" tf:"-"`
 
 	// Selector for a Datacenter in compute to populate datacenterId.
 	// +kubebuilder:validation:Optional
-	DatacenterIDSelector *v1.NamespacedSelector `json:"datacenterIdSelector,omitempty" tf:"-"`
+	DatacenterIDSelector *v2.NamespacedSelector `json:"datacenterIdSelector,omitempty" tf:"-"`
 
 	// [string] A k8s cluster's UUID
 	// The UUID of an existing kubernetes cluster
@@ -161,11 +160,11 @@ type NodePoolInitParameters struct {
 
 	// Reference to a Cluster in k8s to populate k8sClusterId.
 	// +kubebuilder:validation:Optional
-	K8SClusterIDRef *v1.NamespacedReference `json:"k8sClusterIdRef,omitempty" tf:"-"`
+	K8SClusterIDRef *v2.NamespacedReference `json:"k8sClusterIdRef,omitempty" tf:"-"`
 
 	// Selector for a Cluster in k8s to populate k8sClusterId.
 	// +kubebuilder:validation:Optional
-	K8SClusterIDSelector *v1.NamespacedSelector `json:"k8sClusterIdSelector,omitempty" tf:"-"`
+	K8SClusterIDSelector *v2.NamespacedSelector `json:"k8sClusterIdSelector,omitempty" tf:"-"`
 
 	// [string] The desired Kubernetes Version. For supported values, please check the API documentation. Downgrades are not supported. The provider will ignore downgrades of patch level.
 	// The desired Kubernetes Version. For supported values, please check the API documentation. Downgrades are not supported. The provider will ignore downgrades of patch level.
@@ -175,11 +174,11 @@ type NodePoolInitParameters struct {
 
 	// Reference to a Cluster in k8s to populate k8sVersion.
 	// +kubebuilder:validation:Optional
-	K8SVersionRef *v1.NamespacedReference `json:"k8sVersionRef,omitempty" tf:"-"`
+	K8SVersionRef *v2.NamespacedReference `json:"k8sVersionRef,omitempty" tf:"-"`
 
 	// Selector for a Cluster in k8s to populate k8sVersion.
 	// +kubebuilder:validation:Optional
-	K8SVersionSelector *v1.NamespacedSelector `json:"k8sVersionSelector,omitempty" tf:"-"`
+	K8SVersionSelector *v2.NamespacedSelector `json:"k8sVersionSelector,omitempty" tf:"-"`
 
 	// [map] A key/value map of labels
 	// +mapType=granular
@@ -393,11 +392,11 @@ type NodePoolParameters struct {
 
 	// Reference to a Datacenter in compute to populate datacenterId.
 	// +kubebuilder:validation:Optional
-	DatacenterIDRef *v1.NamespacedReference `json:"datacenterIdRef,omitempty" tf:"-"`
+	DatacenterIDRef *v2.NamespacedReference `json:"datacenterIdRef,omitempty" tf:"-"`
 
 	// Selector for a Datacenter in compute to populate datacenterId.
 	// +kubebuilder:validation:Optional
-	DatacenterIDSelector *v1.NamespacedSelector `json:"datacenterIdSelector,omitempty" tf:"-"`
+	DatacenterIDSelector *v2.NamespacedSelector `json:"datacenterIdSelector,omitempty" tf:"-"`
 
 	// [string] A k8s cluster's UUID
 	// The UUID of an existing kubernetes cluster
@@ -407,11 +406,11 @@ type NodePoolParameters struct {
 
 	// Reference to a Cluster in k8s to populate k8sClusterId.
 	// +kubebuilder:validation:Optional
-	K8SClusterIDRef *v1.NamespacedReference `json:"k8sClusterIdRef,omitempty" tf:"-"`
+	K8SClusterIDRef *v2.NamespacedReference `json:"k8sClusterIdRef,omitempty" tf:"-"`
 
 	// Selector for a Cluster in k8s to populate k8sClusterId.
 	// +kubebuilder:validation:Optional
-	K8SClusterIDSelector *v1.NamespacedSelector `json:"k8sClusterIdSelector,omitempty" tf:"-"`
+	K8SClusterIDSelector *v2.NamespacedSelector `json:"k8sClusterIdSelector,omitempty" tf:"-"`
 
 	// [string] The desired Kubernetes Version. For supported values, please check the API documentation. Downgrades are not supported. The provider will ignore downgrades of patch level.
 	// The desired Kubernetes Version. For supported values, please check the API documentation. Downgrades are not supported. The provider will ignore downgrades of patch level.
@@ -422,11 +421,11 @@ type NodePoolParameters struct {
 
 	// Reference to a Cluster in k8s to populate k8sVersion.
 	// +kubebuilder:validation:Optional
-	K8SVersionRef *v1.NamespacedReference `json:"k8sVersionRef,omitempty" tf:"-"`
+	K8SVersionRef *v2.NamespacedReference `json:"k8sVersionRef,omitempty" tf:"-"`
 
 	// Selector for a Cluster in k8s to populate k8sVersion.
 	// +kubebuilder:validation:Optional
-	K8SVersionSelector *v1.NamespacedSelector `json:"k8sVersionSelector,omitempty" tf:"-"`
+	K8SVersionSelector *v2.NamespacedSelector `json:"k8sVersionSelector,omitempty" tf:"-"`
 
 	// [map] A key/value map of labels
 	// +kubebuilder:validation:Optional
@@ -590,8 +589,8 @@ type NodePoolSpec struct {
 
 // NodePoolStatus defines the observed state of NodePool.
 type NodePoolStatus struct {
-	v1.ResourceStatus `json:",inline"`
-	AtProvider        NodePoolObservation `json:"atProvider,omitempty"`
+	v2.ManagedResourceStatus `json:",inline"`
+	AtProvider               NodePoolObservation `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true

@@ -10,8 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
-	v2 "github.com/crossplane/crossplane-runtime/v2/apis/common/v2"
+	v2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 )
 
 type VCPUServerInitParameters struct {
@@ -35,11 +34,11 @@ type VCPUServerInitParameters struct {
 
 	// Reference to a Datacenter in compute to populate datacenterId.
 	// +kubebuilder:validation:Optional
-	DatacenterIDRef *v1.NamespacedReference `json:"datacenterIdRef,omitempty" tf:"-"`
+	DatacenterIDRef *v2.NamespacedReference `json:"datacenterIdRef,omitempty" tf:"-"`
 
 	// Selector for a Datacenter in compute to populate datacenterId.
 	// +kubebuilder:validation:Optional
-	DatacenterIDSelector *v1.NamespacedSelector `json:"datacenterIdSelector,omitempty" tf:"-"`
+	DatacenterIDSelector *v2.NamespacedSelector `json:"datacenterIdSelector,omitempty" tf:"-"`
 
 	// (Computed) The associated firewall rules.
 	FirewallruleIds []*string `json:"firewallruleIds,omitempty" tf:"firewallrule_ids,omitempty"`
@@ -52,7 +51,7 @@ type VCPUServerInitParameters struct {
 	ImageName *string `json:"imageName,omitempty" tf:"image_name,omitempty"`
 
 	// [string] The password for the image.
-	ImagePasswordSecretRef *v1.LocalSecretKeySelector `json:"imagePasswordSecretRef,omitempty" tf:"-"`
+	ImagePasswordSecretRef *v2.LocalSecretKeySelector `json:"imagePasswordSecretRef,omitempty" tf:"-"`
 
 	// A label can be seen as an object with only two required fields: key and value, both of the string type. Please check the example presented above to see how a label can be used in the plan. A server can have multiple labels.
 	Label []VCPUServerLabelInitParameters `json:"label,omitempty" tf:"label,omitempty"`
@@ -85,11 +84,11 @@ type VCPUServerInitParameters struct {
 
 	// References to NSG in compute to populate securityGroupsIds.
 	// +kubebuilder:validation:Optional
-	SecurityGroupsIdsRefs []v1.NamespacedReference `json:"securityGroupsIdsRefs,omitempty" tf:"-"`
+	SecurityGroupsIdsRefs []v2.NamespacedReference `json:"securityGroupsIdsRefs,omitempty" tf:"-"`
 
 	// Selector for a list of NSG in compute to populate securityGroupsIds.
 	// +kubebuilder:validation:Optional
-	SecurityGroupsIdsSelector *v1.NamespacedSelector `json:"securityGroupsIdsSelector,omitempty" tf:"-"`
+	SecurityGroupsIdsSelector *v2.NamespacedSelector `json:"securityGroupsIdsSelector,omitempty" tf:"-"`
 
 	// Sets the power state of the vcpu server. Possible values: `RUNNING` or `SHUTOFF`.
 	VMState *string `json:"vmState,omitempty" tf:"vm_state,omitempty"`
@@ -231,11 +230,11 @@ type VCPUServerNicInitParameters struct {
 
 	// Reference to a Lan in compute to populate lan.
 	// +kubebuilder:validation:Optional
-	LanRef *v1.NamespacedReference `json:"lanRef,omitempty" tf:"-"`
+	LanRef *v2.NamespacedReference `json:"lanRef,omitempty" tf:"-"`
 
 	// Selector for a Lan in compute to populate lan.
 	// +kubebuilder:validation:Optional
-	LanSelector *v1.NamespacedSelector `json:"lanSelector,omitempty" tf:"-"`
+	LanSelector *v2.NamespacedSelector `json:"lanSelector,omitempty" tf:"-"`
 
 	Mac *string `json:"mac,omitempty" tf:"mac,omitempty"`
 
@@ -250,11 +249,11 @@ type VCPUServerNicInitParameters struct {
 
 	// References to NSG in compute to populate securityGroupsIds.
 	// +kubebuilder:validation:Optional
-	SecurityGroupsIdsRefs []v1.NamespacedReference `json:"securityGroupsIdsRefs,omitempty" tf:"-"`
+	SecurityGroupsIdsRefs []v2.NamespacedReference `json:"securityGroupsIdsRefs,omitempty" tf:"-"`
 
 	// Selector for a list of NSG in compute to populate securityGroupsIds.
 	// +kubebuilder:validation:Optional
-	SecurityGroupsIdsSelector *v1.NamespacedSelector `json:"securityGroupsIdsSelector,omitempty" tf:"-"`
+	SecurityGroupsIdsSelector *v2.NamespacedSelector `json:"securityGroupsIdsSelector,omitempty" tf:"-"`
 }
 
 type VCPUServerNicObservation struct {
@@ -341,11 +340,11 @@ type VCPUServerNicParameters struct {
 
 	// Reference to a Lan in compute to populate lan.
 	// +kubebuilder:validation:Optional
-	LanRef *v1.NamespacedReference `json:"lanRef,omitempty" tf:"-"`
+	LanRef *v2.NamespacedReference `json:"lanRef,omitempty" tf:"-"`
 
 	// Selector for a Lan in compute to populate lan.
 	// +kubebuilder:validation:Optional
-	LanSelector *v1.NamespacedSelector `json:"lanSelector,omitempty" tf:"-"`
+	LanSelector *v2.NamespacedSelector `json:"lanSelector,omitempty" tf:"-"`
 
 	// +kubebuilder:validation:Optional
 	Mac *string `json:"mac,omitempty" tf:"mac,omitempty"`
@@ -363,11 +362,11 @@ type VCPUServerNicParameters struct {
 
 	// References to NSG in compute to populate securityGroupsIds.
 	// +kubebuilder:validation:Optional
-	SecurityGroupsIdsRefs []v1.NamespacedReference `json:"securityGroupsIdsRefs,omitempty" tf:"-"`
+	SecurityGroupsIdsRefs []v2.NamespacedReference `json:"securityGroupsIdsRefs,omitempty" tf:"-"`
 
 	// Selector for a list of NSG in compute to populate securityGroupsIds.
 	// +kubebuilder:validation:Optional
-	SecurityGroupsIdsSelector *v1.NamespacedSelector `json:"securityGroupsIdsSelector,omitempty" tf:"-"`
+	SecurityGroupsIdsSelector *v2.NamespacedSelector `json:"securityGroupsIdsSelector,omitempty" tf:"-"`
 }
 
 type VCPUServerObservation struct {
@@ -490,11 +489,11 @@ type VCPUServerParameters struct {
 
 	// Reference to a Datacenter in compute to populate datacenterId.
 	// +kubebuilder:validation:Optional
-	DatacenterIDRef *v1.NamespacedReference `json:"datacenterIdRef,omitempty" tf:"-"`
+	DatacenterIDRef *v2.NamespacedReference `json:"datacenterIdRef,omitempty" tf:"-"`
 
 	// Selector for a Datacenter in compute to populate datacenterId.
 	// +kubebuilder:validation:Optional
-	DatacenterIDSelector *v1.NamespacedSelector `json:"datacenterIdSelector,omitempty" tf:"-"`
+	DatacenterIDSelector *v2.NamespacedSelector `json:"datacenterIdSelector,omitempty" tf:"-"`
 
 	// (Computed) The associated firewall rules.
 	// +kubebuilder:validation:Optional
@@ -511,7 +510,7 @@ type VCPUServerParameters struct {
 
 	// [string] The password for the image.
 	// +kubebuilder:validation:Optional
-	ImagePasswordSecretRef *v1.LocalSecretKeySelector `json:"imagePasswordSecretRef,omitempty" tf:"-"`
+	ImagePasswordSecretRef *v2.LocalSecretKeySelector `json:"imagePasswordSecretRef,omitempty" tf:"-"`
 
 	// A label can be seen as an object with only two required fields: key and value, both of the string type. Please check the example presented above to see how a label can be used in the plan. A server can have multiple labels.
 	// +kubebuilder:validation:Optional
@@ -552,11 +551,11 @@ type VCPUServerParameters struct {
 
 	// References to NSG in compute to populate securityGroupsIds.
 	// +kubebuilder:validation:Optional
-	SecurityGroupsIdsRefs []v1.NamespacedReference `json:"securityGroupsIdsRefs,omitempty" tf:"-"`
+	SecurityGroupsIdsRefs []v2.NamespacedReference `json:"securityGroupsIdsRefs,omitempty" tf:"-"`
 
 	// Selector for a list of NSG in compute to populate securityGroupsIds.
 	// +kubebuilder:validation:Optional
-	SecurityGroupsIdsSelector *v1.NamespacedSelector `json:"securityGroupsIdsSelector,omitempty" tf:"-"`
+	SecurityGroupsIdsSelector *v2.NamespacedSelector `json:"securityGroupsIdsSelector,omitempty" tf:"-"`
 
 	// Sets the power state of the vcpu server. Possible values: `RUNNING` or `SHUTOFF`.
 	// +kubebuilder:validation:Optional
@@ -708,8 +707,8 @@ type VCPUServerSpec struct {
 
 // VCPUServerStatus defines the observed state of VCPUServer.
 type VCPUServerStatus struct {
-	v1.ResourceStatus `json:",inline"`
-	AtProvider        VCPUServerObservation `json:"atProvider,omitempty"`
+	v2.ManagedResourceStatus `json:",inline"`
+	AtProvider               VCPUServerObservation `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true

@@ -10,8 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
-	v2 "github.com/crossplane/crossplane-runtime/v2/apis/common/v2"
+	v2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 )
 
 type MongodbUserInitParameters struct {
@@ -22,17 +21,17 @@ type MongodbUserInitParameters struct {
 
 	// Reference to a MongodbCluster in mongodb to populate clusterId.
 	// +kubebuilder:validation:Optional
-	ClusterIDRef *v1.NamespacedReference `json:"clusterIdRef,omitempty" tf:"-"`
+	ClusterIDRef *v2.NamespacedReference `json:"clusterIdRef,omitempty" tf:"-"`
 
 	// Selector for a MongodbCluster in mongodb to populate clusterId.
 	// +kubebuilder:validation:Optional
-	ClusterIDSelector *v1.NamespacedSelector `json:"clusterIdSelector,omitempty" tf:"-"`
+	ClusterIDSelector *v2.NamespacedSelector `json:"clusterIdSelector,omitempty" tf:"-"`
 
 	// The location of the resource. This field should be used only if you are also using a file configuration and should not be configured otherwise.
 	Location *string `json:"location,omitempty" tf:"location,omitempty"`
 
 	// [string] User password. Updates to the value of the field force the cluster to be re-created.
-	PasswordSecretRef v1.LocalSecretKeySelector `json:"passwordSecretRef" tf:"-"`
+	PasswordSecretRef v2.LocalSecretKeySelector `json:"passwordSecretRef" tf:"-"`
 
 	// [string] a list of mongodb user roles. Updates to the value of the field force the cluster to be re-created.
 	Roles []RolesInitParameters `json:"roles,omitempty" tf:"roles,omitempty"`
@@ -67,11 +66,11 @@ type MongodbUserParameters struct {
 
 	// Reference to a MongodbCluster in mongodb to populate clusterId.
 	// +kubebuilder:validation:Optional
-	ClusterIDRef *v1.NamespacedReference `json:"clusterIdRef,omitempty" tf:"-"`
+	ClusterIDRef *v2.NamespacedReference `json:"clusterIdRef,omitempty" tf:"-"`
 
 	// Selector for a MongodbCluster in mongodb to populate clusterId.
 	// +kubebuilder:validation:Optional
-	ClusterIDSelector *v1.NamespacedSelector `json:"clusterIdSelector,omitempty" tf:"-"`
+	ClusterIDSelector *v2.NamespacedSelector `json:"clusterIdSelector,omitempty" tf:"-"`
 
 	// The location of the resource. This field should be used only if you are also using a file configuration and should not be configured otherwise.
 	// +kubebuilder:validation:Optional
@@ -79,7 +78,7 @@ type MongodbUserParameters struct {
 
 	// [string] User password. Updates to the value of the field force the cluster to be re-created.
 	// +kubebuilder:validation:Optional
-	PasswordSecretRef v1.LocalSecretKeySelector `json:"passwordSecretRef" tf:"-"`
+	PasswordSecretRef v2.LocalSecretKeySelector `json:"passwordSecretRef" tf:"-"`
 
 	// [string] a list of mongodb user roles. Updates to the value of the field force the cluster to be re-created.
 	// +kubebuilder:validation:Optional
@@ -141,8 +140,8 @@ type MongodbUserSpec struct {
 
 // MongodbUserStatus defines the observed state of MongodbUser.
 type MongodbUserStatus struct {
-	v1.ResourceStatus `json:",inline"`
-	AtProvider        MongodbUserObservation `json:"atProvider,omitempty"`
+	v2.ManagedResourceStatus `json:",inline"`
+	AtProvider               MongodbUserObservation `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true

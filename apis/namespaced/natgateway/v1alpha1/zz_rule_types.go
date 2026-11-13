@@ -10,8 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
-	v2 "github.com/crossplane/crossplane-runtime/v2/apis/common/v2"
+	v2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 )
 
 type RuleInitParameters struct {
@@ -22,11 +21,11 @@ type RuleInitParameters struct {
 
 	// Reference to a Datacenter in compute to populate datacenterId.
 	// +kubebuilder:validation:Optional
-	DatacenterIDRef *v1.NamespacedReference `json:"datacenterIdRef,omitempty" tf:"-"`
+	DatacenterIDRef *v2.NamespacedReference `json:"datacenterIdRef,omitempty" tf:"-"`
 
 	// Selector for a Datacenter in compute to populate datacenterId.
 	// +kubebuilder:validation:Optional
-	DatacenterIDSelector *v1.NamespacedSelector `json:"datacenterIdSelector,omitempty" tf:"-"`
+	DatacenterIDSelector *v2.NamespacedSelector `json:"datacenterIdSelector,omitempty" tf:"-"`
 
 	Location *string `json:"location,omitempty" tf:"location,omitempty"`
 
@@ -40,11 +39,11 @@ type RuleInitParameters struct {
 
 	// Reference to a Natgateway in natgateway to populate natgatewayId.
 	// +kubebuilder:validation:Optional
-	NatgatewayIDRef *v1.NamespacedReference `json:"natgatewayIdRef,omitempty" tf:"-"`
+	NatgatewayIDRef *v2.NamespacedReference `json:"natgatewayIdRef,omitempty" tf:"-"`
 
 	// Selector for a Natgateway in natgateway to populate natgatewayId.
 	// +kubebuilder:validation:Optional
-	NatgatewayIDSelector *v1.NamespacedSelector `json:"natgatewayIdSelector,omitempty" tf:"-"`
+	NatgatewayIDSelector *v2.NamespacedSelector `json:"natgatewayIdSelector,omitempty" tf:"-"`
 
 	// [string] Protocol of the NAT gateway rule. Defaults to ALL. If protocol is 'ICMP' then targetPortRange start and end cannot be set.
 	// Protocol of the NAT gateway rule. Defaults to ALL. If protocol is 'ICMP' then targetPortRange start and end cannot be set.
@@ -121,11 +120,11 @@ type RuleParameters struct {
 
 	// Reference to a Datacenter in compute to populate datacenterId.
 	// +kubebuilder:validation:Optional
-	DatacenterIDRef *v1.NamespacedReference `json:"datacenterIdRef,omitempty" tf:"-"`
+	DatacenterIDRef *v2.NamespacedReference `json:"datacenterIdRef,omitempty" tf:"-"`
 
 	// Selector for a Datacenter in compute to populate datacenterId.
 	// +kubebuilder:validation:Optional
-	DatacenterIDSelector *v1.NamespacedSelector `json:"datacenterIdSelector,omitempty" tf:"-"`
+	DatacenterIDSelector *v2.NamespacedSelector `json:"datacenterIdSelector,omitempty" tf:"-"`
 
 	// +kubebuilder:validation:Optional
 	Location *string `json:"location,omitempty" tf:"location,omitempty"`
@@ -142,11 +141,11 @@ type RuleParameters struct {
 
 	// Reference to a Natgateway in natgateway to populate natgatewayId.
 	// +kubebuilder:validation:Optional
-	NatgatewayIDRef *v1.NamespacedReference `json:"natgatewayIdRef,omitempty" tf:"-"`
+	NatgatewayIDRef *v2.NamespacedReference `json:"natgatewayIdRef,omitempty" tf:"-"`
 
 	// Selector for a Natgateway in natgateway to populate natgatewayId.
 	// +kubebuilder:validation:Optional
-	NatgatewayIDSelector *v1.NamespacedSelector `json:"natgatewayIdSelector,omitempty" tf:"-"`
+	NatgatewayIDSelector *v2.NamespacedSelector `json:"natgatewayIdSelector,omitempty" tf:"-"`
 
 	// [string] Protocol of the NAT gateway rule. Defaults to ALL. If protocol is 'ICMP' then targetPortRange start and end cannot be set.
 	// Protocol of the NAT gateway rule. Defaults to ALL. If protocol is 'ICMP' then targetPortRange start and end cannot be set.
@@ -233,8 +232,8 @@ type RuleSpec struct {
 
 // RuleStatus defines the observed state of Rule.
 type RuleStatus struct {
-	v1.ResourceStatus `json:",inline"`
-	AtProvider        RuleObservation `json:"atProvider,omitempty"`
+	v2.ManagedResourceStatus `json:",inline"`
+	AtProvider               RuleObservation `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true

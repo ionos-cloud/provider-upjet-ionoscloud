@@ -154,6 +154,22 @@ spec:
                             type: string
                         type: object
                     type: object
+                  versioningConfiguration:
+                    description: |-
+                      [block] A block of versioning_configuration as defined below.
+                      The versioning configuration of the bucket.
+                    properties:
+                      mfaDelete:
+                        description: |-
+                          [string] Specifies whether MFA delete is enabled or not. Can be Enabled or Disabled.
+                          The MFA delete status of the bucket.
+                        type: string
+                      status:
+                        description: |-
+                          [string] The versioning state of the bucket. Can be Enabled or Suspended.
+                          The versioning status of the bucket.
+                        type: string
+                    type: object
                 type: object
               initProvider:
                 description: |-
@@ -248,6 +264,22 @@ spec:
                             - IfNotPresent
                             type: string
                         type: object
+                    type: object
+                  versioningConfiguration:
+                    description: |-
+                      [block] A block of versioning_configuration as defined below.
+                      The versioning configuration of the bucket.
+                    properties:
+                      mfaDelete:
+                        description: |-
+                          [string] Specifies whether MFA delete is enabled or not. Can be Enabled or Disabled.
+                          The MFA delete status of the bucket.
+                        type: string
+                      status:
+                        description: |-
+                          [string] The versioning state of the bucket. Can be Enabled or Suspended.
+                          The versioning status of the bucket.
+                        type: string
                     type: object
                 type: object
               managementPolicies:
@@ -411,6 +443,13 @@ spec:
                 x-kubernetes-list-map-keys:
                 - type
                 x-kubernetes-list-type: map
+              lastHandledReconcileAt:
+                description: |-
+                  LastHandledReconcileAt holds the value of the most recent
+                  reconcile-requested-at annotation token that the controller has
+                  processed. Users can compare this to the annotation to determine
+                  whether a reconcile request has been handled.
+                type: string
               observedGeneration:
                 description: |-
                   ObservedGeneration is the latest metadata.generation

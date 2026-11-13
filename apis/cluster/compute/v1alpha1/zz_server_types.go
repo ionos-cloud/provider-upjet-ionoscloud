@@ -10,7 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
+	v2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 )
 
 type LabelInitParameters struct {
@@ -74,11 +74,11 @@ type ServerInitParameters struct {
 
 	// Reference to a Datacenter in compute to populate datacenterId.
 	// +kubebuilder:validation:Optional
-	DatacenterIDRef *v1.Reference `json:"datacenterIdRef,omitempty" tf:"-"`
+	DatacenterIDRef *v2.Reference `json:"datacenterIdRef,omitempty" tf:"-"`
 
 	// Selector for a Datacenter in compute to populate datacenterId.
 	// +kubebuilder:validation:Optional
-	DatacenterIDSelector *v1.Selector `json:"datacenterIdSelector,omitempty" tf:"-"`
+	DatacenterIDSelector *v2.Selector `json:"datacenterIdSelector,omitempty" tf:"-"`
 
 	// (Computed) The associated firewall rules.
 	FirewallruleIds []*string `json:"firewallruleIds,omitempty" tf:"firewallrule_ids,omitempty"`
@@ -91,7 +91,7 @@ type ServerInitParameters struct {
 	ImageName *string `json:"imageName,omitempty" tf:"image_name,omitempty"`
 
 	// [string] Required if ssh_key_path is not provided.
-	ImagePasswordSecretRef *v1.SecretKeySelector `json:"imagePasswordSecretRef,omitempty" tf:"-"`
+	ImagePasswordSecretRef *v2.SecretKeySelector `json:"imagePasswordSecretRef,omitempty" tf:"-"`
 
 	// [set] A label can be seen as an object with only two required fields: key and value, both of the string type. Please check the example presented above to see how a label can be used in the plan. A server can have multiple labels.
 	Label []LabelInitParameters `json:"label,omitempty" tf:"label,omitempty"`
@@ -128,11 +128,11 @@ type ServerInitParameters struct {
 
 	// References to NSG in compute to populate securityGroupsIds.
 	// +kubebuilder:validation:Optional
-	SecurityGroupsIdsRefs []v1.Reference `json:"securityGroupsIdsRefs,omitempty" tf:"-"`
+	SecurityGroupsIdsRefs []v2.Reference `json:"securityGroupsIdsRefs,omitempty" tf:"-"`
 
 	// Selector for a list of NSG in compute to populate securityGroupsIds.
 	// +kubebuilder:validation:Optional
-	SecurityGroupsIdsSelector *v1.Selector `json:"securityGroupsIdsSelector,omitempty" tf:"-"`
+	SecurityGroupsIdsSelector *v2.Selector `json:"securityGroupsIdsSelector,omitempty" tf:"-"`
 
 	// [string] The UUID of the template for creating a CUBE server; the available templates for CUBE servers can be found on the templates resource
 	TemplateUUID *string `json:"templateUuid,omitempty" tf:"template_uuid,omitempty"`
@@ -268,11 +268,11 @@ type ServerNicInitParameters struct {
 
 	// Reference to a Lan in compute to populate lan.
 	// +kubebuilder:validation:Optional
-	LanRef *v1.Reference `json:"lanRef,omitempty" tf:"-"`
+	LanRef *v2.Reference `json:"lanRef,omitempty" tf:"-"`
 
 	// Selector for a Lan in compute to populate lan.
 	// +kubebuilder:validation:Optional
-	LanSelector *v1.Selector `json:"lanSelector,omitempty" tf:"-"`
+	LanSelector *v2.Selector `json:"lanSelector,omitempty" tf:"-"`
 
 	Mac *string `json:"mac,omitempty" tf:"mac,omitempty"`
 
@@ -287,11 +287,11 @@ type ServerNicInitParameters struct {
 
 	// References to NSG in compute to populate securityGroupsIds.
 	// +kubebuilder:validation:Optional
-	SecurityGroupsIdsRefs []v1.Reference `json:"securityGroupsIdsRefs,omitempty" tf:"-"`
+	SecurityGroupsIdsRefs []v2.Reference `json:"securityGroupsIdsRefs,omitempty" tf:"-"`
 
 	// Selector for a list of NSG in compute to populate securityGroupsIds.
 	// +kubebuilder:validation:Optional
-	SecurityGroupsIdsSelector *v1.Selector `json:"securityGroupsIdsSelector,omitempty" tf:"-"`
+	SecurityGroupsIdsSelector *v2.Selector `json:"securityGroupsIdsSelector,omitempty" tf:"-"`
 }
 
 type ServerNicObservation struct {
@@ -380,11 +380,11 @@ type ServerNicParameters struct {
 
 	// Reference to a Lan in compute to populate lan.
 	// +kubebuilder:validation:Optional
-	LanRef *v1.Reference `json:"lanRef,omitempty" tf:"-"`
+	LanRef *v2.Reference `json:"lanRef,omitempty" tf:"-"`
 
 	// Selector for a Lan in compute to populate lan.
 	// +kubebuilder:validation:Optional
-	LanSelector *v1.Selector `json:"lanSelector,omitempty" tf:"-"`
+	LanSelector *v2.Selector `json:"lanSelector,omitempty" tf:"-"`
 
 	// +kubebuilder:validation:Optional
 	Mac *string `json:"mac,omitempty" tf:"mac,omitempty"`
@@ -402,11 +402,11 @@ type ServerNicParameters struct {
 
 	// References to NSG in compute to populate securityGroupsIds.
 	// +kubebuilder:validation:Optional
-	SecurityGroupsIdsRefs []v1.Reference `json:"securityGroupsIdsRefs,omitempty" tf:"-"`
+	SecurityGroupsIdsRefs []v2.Reference `json:"securityGroupsIdsRefs,omitempty" tf:"-"`
 
 	// Selector for a list of NSG in compute to populate securityGroupsIds.
 	// +kubebuilder:validation:Optional
-	SecurityGroupsIdsSelector *v1.Selector `json:"securityGroupsIdsSelector,omitempty" tf:"-"`
+	SecurityGroupsIdsSelector *v2.Selector `json:"securityGroupsIdsSelector,omitempty" tf:"-"`
 }
 
 type ServerObservation struct {
@@ -558,11 +558,11 @@ type ServerParameters struct {
 
 	// Reference to a Datacenter in compute to populate datacenterId.
 	// +kubebuilder:validation:Optional
-	DatacenterIDRef *v1.Reference `json:"datacenterIdRef,omitempty" tf:"-"`
+	DatacenterIDRef *v2.Reference `json:"datacenterIdRef,omitempty" tf:"-"`
 
 	// Selector for a Datacenter in compute to populate datacenterId.
 	// +kubebuilder:validation:Optional
-	DatacenterIDSelector *v1.Selector `json:"datacenterIdSelector,omitempty" tf:"-"`
+	DatacenterIDSelector *v2.Selector `json:"datacenterIdSelector,omitempty" tf:"-"`
 
 	// (Computed) The associated firewall rules.
 	// +kubebuilder:validation:Optional
@@ -579,7 +579,7 @@ type ServerParameters struct {
 
 	// [string] Required if ssh_key_path is not provided.
 	// +kubebuilder:validation:Optional
-	ImagePasswordSecretRef *v1.SecretKeySelector `json:"imagePasswordSecretRef,omitempty" tf:"-"`
+	ImagePasswordSecretRef *v2.SecretKeySelector `json:"imagePasswordSecretRef,omitempty" tf:"-"`
 
 	// [set] A label can be seen as an object with only two required fields: key and value, both of the string type. Please check the example presented above to see how a label can be used in the plan. A server can have multiple labels.
 	// +kubebuilder:validation:Optional
@@ -625,11 +625,11 @@ type ServerParameters struct {
 
 	// References to NSG in compute to populate securityGroupsIds.
 	// +kubebuilder:validation:Optional
-	SecurityGroupsIdsRefs []v1.Reference `json:"securityGroupsIdsRefs,omitempty" tf:"-"`
+	SecurityGroupsIdsRefs []v2.Reference `json:"securityGroupsIdsRefs,omitempty" tf:"-"`
 
 	// Selector for a list of NSG in compute to populate securityGroupsIds.
 	// +kubebuilder:validation:Optional
-	SecurityGroupsIdsSelector *v1.Selector `json:"securityGroupsIdsSelector,omitempty" tf:"-"`
+	SecurityGroupsIdsSelector *v2.Selector `json:"securityGroupsIdsSelector,omitempty" tf:"-"`
 
 	// [string] The UUID of the template for creating a CUBE server; the available templates for CUBE servers can be found on the templates resource
 	// +kubebuilder:validation:Optional
@@ -667,7 +667,7 @@ type ServerVolumeInitParameters struct {
 	ExposeSerial *bool `json:"exposeSerial,omitempty" tf:"expose_serial,omitempty"`
 
 	// [string] Required if ssh_key_path is not provided.
-	ImagePasswordSecretRef *v1.SecretKeySelector `json:"imagePasswordSecretRef,omitempty" tf:"-"`
+	ImagePasswordSecretRef *v2.SecretKeySelector `json:"imagePasswordSecretRef,omitempty" tf:"-"`
 
 	// [string] Sets the OS type of the server.
 	LicenceType *string `json:"licenceType,omitempty" tf:"licence_type,omitempty"`
@@ -775,7 +775,7 @@ type ServerVolumeParameters struct {
 
 	// [string] Required if ssh_key_path is not provided.
 	// +kubebuilder:validation:Optional
-	ImagePasswordSecretRef *v1.SecretKeySelector `json:"imagePasswordSecretRef,omitempty" tf:"-"`
+	ImagePasswordSecretRef *v2.SecretKeySelector `json:"imagePasswordSecretRef,omitempty" tf:"-"`
 
 	// [string] Sets the OS type of the server.
 	// +kubebuilder:validation:Optional
@@ -810,8 +810,8 @@ type ServerVolumeParameters struct {
 
 // ServerSpec defines the desired state of Server
 type ServerSpec struct {
-	v1.ResourceSpec `json:",inline"`
-	ForProvider     ServerParameters `json:"forProvider"`
+	v2.ClusterManagedResourceSpec `json:",inline"`
+	ForProvider                   ServerParameters `json:"forProvider"`
 	// THIS IS A BETA FIELD. It will be honored
 	// unless the Management Policies feature flag is disabled.
 	// InitProvider holds the same fields as ForProvider, with the exception
@@ -827,8 +827,8 @@ type ServerSpec struct {
 
 // ServerStatus defines the observed state of Server.
 type ServerStatus struct {
-	v1.ResourceStatus `json:",inline"`
-	AtProvider        ServerObservation `json:"atProvider,omitempty"`
+	v2.ManagedResourceStatus `json:",inline"`
+	AtProvider               ServerObservation `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true

@@ -10,8 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
-	v2 "github.com/crossplane/crossplane-runtime/v2/apis/common/v2"
+	v2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 )
 
 type SnapshotInitParameters struct {
@@ -26,11 +25,11 @@ type SnapshotInitParameters struct {
 
 	// Reference to a Datacenter in compute to populate datacenterId.
 	// +kubebuilder:validation:Optional
-	DatacenterIDRef *v1.NamespacedReference `json:"datacenterIdRef,omitempty" tf:"-"`
+	DatacenterIDRef *v2.NamespacedReference `json:"datacenterIdRef,omitempty" tf:"-"`
 
 	// Selector for a Datacenter in compute to populate datacenterId.
 	// +kubebuilder:validation:Optional
-	DatacenterIDSelector *v1.NamespacedSelector `json:"datacenterIdSelector,omitempty" tf:"-"`
+	DatacenterIDSelector *v2.NamespacedSelector `json:"datacenterIdSelector,omitempty" tf:"-"`
 
 	// (Computed)[string] Human readable description
 	// Human readable description
@@ -77,11 +76,11 @@ type SnapshotInitParameters struct {
 
 	// Reference to a Volume in compute to populate volumeId.
 	// +kubebuilder:validation:Optional
-	VolumeIDRef *v1.NamespacedReference `json:"volumeIdRef,omitempty" tf:"-"`
+	VolumeIDRef *v2.NamespacedReference `json:"volumeIdRef,omitempty" tf:"-"`
 
 	// Selector for a Volume in compute to populate volumeId.
 	// +kubebuilder:validation:Optional
-	VolumeIDSelector *v1.NamespacedSelector `json:"volumeIdSelector,omitempty" tf:"-"`
+	VolumeIDSelector *v2.NamespacedSelector `json:"volumeIdSelector,omitempty" tf:"-"`
 }
 
 type SnapshotObservation struct {
@@ -167,11 +166,11 @@ type SnapshotParameters struct {
 
 	// Reference to a Datacenter in compute to populate datacenterId.
 	// +kubebuilder:validation:Optional
-	DatacenterIDRef *v1.NamespacedReference `json:"datacenterIdRef,omitempty" tf:"-"`
+	DatacenterIDRef *v2.NamespacedReference `json:"datacenterIdRef,omitempty" tf:"-"`
 
 	// Selector for a Datacenter in compute to populate datacenterId.
 	// +kubebuilder:validation:Optional
-	DatacenterIDSelector *v1.NamespacedSelector `json:"datacenterIdSelector,omitempty" tf:"-"`
+	DatacenterIDSelector *v2.NamespacedSelector `json:"datacenterIdSelector,omitempty" tf:"-"`
 
 	// (Computed)[string] Human readable description
 	// Human readable description
@@ -230,11 +229,11 @@ type SnapshotParameters struct {
 
 	// Reference to a Volume in compute to populate volumeId.
 	// +kubebuilder:validation:Optional
-	VolumeIDRef *v1.NamespacedReference `json:"volumeIdRef,omitempty" tf:"-"`
+	VolumeIDRef *v2.NamespacedReference `json:"volumeIdRef,omitempty" tf:"-"`
 
 	// Selector for a Volume in compute to populate volumeId.
 	// +kubebuilder:validation:Optional
-	VolumeIDSelector *v1.NamespacedSelector `json:"volumeIdSelector,omitempty" tf:"-"`
+	VolumeIDSelector *v2.NamespacedSelector `json:"volumeIdSelector,omitempty" tf:"-"`
 }
 
 // SnapshotSpec defines the desired state of Snapshot
@@ -256,8 +255,8 @@ type SnapshotSpec struct {
 
 // SnapshotStatus defines the observed state of Snapshot.
 type SnapshotStatus struct {
-	v1.ResourceStatus `json:",inline"`
-	AtProvider        SnapshotObservation `json:"atProvider,omitempty"`
+	v2.ManagedResourceStatus `json:",inline"`
+	AtProvider               SnapshotObservation `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true

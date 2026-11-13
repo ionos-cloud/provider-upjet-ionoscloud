@@ -10,7 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
+	v2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 )
 
 type ClientGroupsInitParameters struct {
@@ -106,11 +106,11 @@ type NFSShareInitParameters struct {
 
 	// Reference to a NFSCluster in nfs to populate clusterId.
 	// +kubebuilder:validation:Optional
-	ClusterIDRef *v1.Reference `json:"clusterIdRef,omitempty" tf:"-"`
+	ClusterIDRef *v2.Reference `json:"clusterIdRef,omitempty" tf:"-"`
 
 	// Selector for a NFSCluster in nfs to populate clusterId.
 	// +kubebuilder:validation:Optional
-	ClusterIDSelector *v1.Selector `json:"clusterIdSelector,omitempty" tf:"-"`
+	ClusterIDSelector *v2.Selector `json:"clusterIdSelector,omitempty" tf:"-"`
 
 	// The group ID that will own the exported directory. If not set, anonymous (512) will be used.
 	// The group ID that will own the exported directory. If not set, **anonymous** (`512`) will be used.
@@ -184,11 +184,11 @@ type NFSShareParameters struct {
 
 	// Reference to a NFSCluster in nfs to populate clusterId.
 	// +kubebuilder:validation:Optional
-	ClusterIDRef *v1.Reference `json:"clusterIdRef,omitempty" tf:"-"`
+	ClusterIDRef *v2.Reference `json:"clusterIdRef,omitempty" tf:"-"`
 
 	// Selector for a NFSCluster in nfs to populate clusterId.
 	// +kubebuilder:validation:Optional
-	ClusterIDSelector *v1.Selector `json:"clusterIdSelector,omitempty" tf:"-"`
+	ClusterIDSelector *v2.Selector `json:"clusterIdSelector,omitempty" tf:"-"`
 
 	// The group ID that will own the exported directory. If not set, anonymous (512) will be used.
 	// The group ID that will own the exported directory. If not set, **anonymous** (`512`) will be used.
@@ -218,8 +218,8 @@ type NFSShareParameters struct {
 
 // NFSShareSpec defines the desired state of NFSShare
 type NFSShareSpec struct {
-	v1.ResourceSpec `json:",inline"`
-	ForProvider     NFSShareParameters `json:"forProvider"`
+	v2.ClusterManagedResourceSpec `json:",inline"`
+	ForProvider                   NFSShareParameters `json:"forProvider"`
 	// THIS IS A BETA FIELD. It will be honored
 	// unless the Management Policies feature flag is disabled.
 	// InitProvider holds the same fields as ForProvider, with the exception
@@ -235,8 +235,8 @@ type NFSShareSpec struct {
 
 // NFSShareStatus defines the observed state of NFSShare.
 type NFSShareStatus struct {
-	v1.ResourceStatus `json:",inline"`
-	AtProvider        NFSShareObservation `json:"atProvider,omitempty"`
+	v2.ManagedResourceStatus `json:",inline"`
+	AtProvider               NFSShareObservation `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true

@@ -10,8 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
-	v2 "github.com/crossplane/crossplane-runtime/v2/apis/common/v2"
+	v2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 )
 
 type ConditionsInitParameters struct {
@@ -222,11 +221,11 @@ type LoadbalancerForwardingruleInitParameters struct {
 
 	// Reference to a Loadbalancer in alb to populate applicationLoadbalancerId.
 	// +kubebuilder:validation:Optional
-	ApplicationLoadbalancerIDRef *v1.NamespacedReference `json:"applicationLoadbalancerIdRef,omitempty" tf:"-"`
+	ApplicationLoadbalancerIDRef *v2.NamespacedReference `json:"applicationLoadbalancerIdRef,omitempty" tf:"-"`
 
 	// Selector for a Loadbalancer in alb to populate applicationLoadbalancerId.
 	// +kubebuilder:validation:Optional
-	ApplicationLoadbalancerIDSelector *v1.NamespacedSelector `json:"applicationLoadbalancerIdSelector,omitempty" tf:"-"`
+	ApplicationLoadbalancerIDSelector *v2.NamespacedSelector `json:"applicationLoadbalancerIdSelector,omitempty" tf:"-"`
 
 	// [int] The maximum time in milliseconds to wait for the client to acknowledge or send data; default is 50,000 (50 seconds).
 	// The maximum time in milliseconds to wait for the client to acknowledge or send data; default is 50,000 (50 seconds).
@@ -238,11 +237,11 @@ type LoadbalancerForwardingruleInitParameters struct {
 
 	// Reference to a Datacenter in compute to populate datacenterId.
 	// +kubebuilder:validation:Optional
-	DatacenterIDRef *v1.NamespacedReference `json:"datacenterIdRef,omitempty" tf:"-"`
+	DatacenterIDRef *v2.NamespacedReference `json:"datacenterIdRef,omitempty" tf:"-"`
 
 	// Selector for a Datacenter in compute to populate datacenterId.
 	// +kubebuilder:validation:Optional
-	DatacenterIDSelector *v1.NamespacedSelector `json:"datacenterIdSelector,omitempty" tf:"-"`
+	DatacenterIDSelector *v2.NamespacedSelector `json:"datacenterIdSelector,omitempty" tf:"-"`
 
 	// [list] Array of items in that collection
 	// Array of items in that collection
@@ -277,11 +276,11 @@ type LoadbalancerForwardingruleInitParameters struct {
 
 	// References to Certificate in certificatemanager to populate serverCertificates.
 	// +kubebuilder:validation:Optional
-	ServerCertificatesRefs []v1.NamespacedReference `json:"serverCertificatesRefs,omitempty" tf:"-"`
+	ServerCertificatesRefs []v2.NamespacedReference `json:"serverCertificatesRefs,omitempty" tf:"-"`
 
 	// Selector for a list of Certificate in certificatemanager to populate serverCertificates.
 	// +kubebuilder:validation:Optional
-	ServerCertificatesSelector *v1.NamespacedSelector `json:"serverCertificatesSelector,omitempty" tf:"-"`
+	ServerCertificatesSelector *v2.NamespacedSelector `json:"serverCertificatesSelector,omitempty" tf:"-"`
 }
 
 type LoadbalancerForwardingruleObservation struct {
@@ -337,11 +336,11 @@ type LoadbalancerForwardingruleParameters struct {
 
 	// Reference to a Loadbalancer in alb to populate applicationLoadbalancerId.
 	// +kubebuilder:validation:Optional
-	ApplicationLoadbalancerIDRef *v1.NamespacedReference `json:"applicationLoadbalancerIdRef,omitempty" tf:"-"`
+	ApplicationLoadbalancerIDRef *v2.NamespacedReference `json:"applicationLoadbalancerIdRef,omitempty" tf:"-"`
 
 	// Selector for a Loadbalancer in alb to populate applicationLoadbalancerId.
 	// +kubebuilder:validation:Optional
-	ApplicationLoadbalancerIDSelector *v1.NamespacedSelector `json:"applicationLoadbalancerIdSelector,omitempty" tf:"-"`
+	ApplicationLoadbalancerIDSelector *v2.NamespacedSelector `json:"applicationLoadbalancerIdSelector,omitempty" tf:"-"`
 
 	// [int] The maximum time in milliseconds to wait for the client to acknowledge or send data; default is 50,000 (50 seconds).
 	// The maximum time in milliseconds to wait for the client to acknowledge or send data; default is 50,000 (50 seconds).
@@ -355,11 +354,11 @@ type LoadbalancerForwardingruleParameters struct {
 
 	// Reference to a Datacenter in compute to populate datacenterId.
 	// +kubebuilder:validation:Optional
-	DatacenterIDRef *v1.NamespacedReference `json:"datacenterIdRef,omitempty" tf:"-"`
+	DatacenterIDRef *v2.NamespacedReference `json:"datacenterIdRef,omitempty" tf:"-"`
 
 	// Selector for a Datacenter in compute to populate datacenterId.
 	// +kubebuilder:validation:Optional
-	DatacenterIDSelector *v1.NamespacedSelector `json:"datacenterIdSelector,omitempty" tf:"-"`
+	DatacenterIDSelector *v2.NamespacedSelector `json:"datacenterIdSelector,omitempty" tf:"-"`
 
 	// [list] Array of items in that collection
 	// Array of items in that collection
@@ -401,11 +400,11 @@ type LoadbalancerForwardingruleParameters struct {
 
 	// References to Certificate in certificatemanager to populate serverCertificates.
 	// +kubebuilder:validation:Optional
-	ServerCertificatesRefs []v1.NamespacedReference `json:"serverCertificatesRefs,omitempty" tf:"-"`
+	ServerCertificatesRefs []v2.NamespacedReference `json:"serverCertificatesRefs,omitempty" tf:"-"`
 
 	// Selector for a list of Certificate in certificatemanager to populate serverCertificates.
 	// +kubebuilder:validation:Optional
-	ServerCertificatesSelector *v1.NamespacedSelector `json:"serverCertificatesSelector,omitempty" tf:"-"`
+	ServerCertificatesSelector *v2.NamespacedSelector `json:"serverCertificatesSelector,omitempty" tf:"-"`
 }
 
 // LoadbalancerForwardingruleSpec defines the desired state of LoadbalancerForwardingrule
@@ -427,8 +426,8 @@ type LoadbalancerForwardingruleSpec struct {
 
 // LoadbalancerForwardingruleStatus defines the observed state of LoadbalancerForwardingrule.
 type LoadbalancerForwardingruleStatus struct {
-	v1.ResourceStatus `json:",inline"`
-	AtProvider        LoadbalancerForwardingruleObservation `json:"atProvider,omitempty"`
+	v2.ManagedResourceStatus `json:",inline"`
+	AtProvider               LoadbalancerForwardingruleObservation `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true

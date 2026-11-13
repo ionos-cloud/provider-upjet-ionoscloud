@@ -10,8 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
-	v2 "github.com/crossplane/crossplane-runtime/v2/apis/common/v2"
+	v2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 )
 
 type AutoCertificateProviderInitParameters struct {
@@ -95,7 +94,7 @@ type ExternalAccountBindingInitParameters struct {
 
 	// [string] The key secret of the external account binding
 	// The secret of the external account binding
-	KeySecretSecretRef v1.LocalSecretKeySelector `json:"keySecretSecretRef" tf:"-"`
+	KeySecretSecretRef v2.LocalSecretKeySelector `json:"keySecretSecretRef" tf:"-"`
 }
 
 type ExternalAccountBindingObservation struct {
@@ -115,7 +114,7 @@ type ExternalAccountBindingParameters struct {
 	// [string] The key secret of the external account binding
 	// The secret of the external account binding
 	// +kubebuilder:validation:Optional
-	KeySecretSecretRef v1.LocalSecretKeySelector `json:"keySecretSecretRef" tf:"-"`
+	KeySecretSecretRef v2.LocalSecretKeySelector `json:"keySecretSecretRef" tf:"-"`
 }
 
 // AutoCertificateProviderSpec defines the desired state of AutoCertificateProvider
@@ -137,8 +136,8 @@ type AutoCertificateProviderSpec struct {
 
 // AutoCertificateProviderStatus defines the observed state of AutoCertificateProvider.
 type AutoCertificateProviderStatus struct {
-	v1.ResourceStatus `json:",inline"`
-	AtProvider        AutoCertificateProviderObservation `json:"atProvider,omitempty"`
+	v2.ManagedResourceStatus `json:",inline"`
+	AtProvider               AutoCertificateProviderObservation `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true

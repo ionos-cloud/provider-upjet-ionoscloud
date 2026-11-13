@@ -2,13 +2,11 @@ package cluster
 
 import (
 	"github.com/ionos-cloud/provider-upjet-ionoscloud/config/cluster/alb"
-	"github.com/ionos-cloud/provider-upjet-ionoscloud/config/cluster/apigateway"
 	"github.com/ionos-cloud/provider-upjet-ionoscloud/config/cluster/asg"
 	"github.com/ionos-cloud/provider-upjet-ionoscloud/config/cluster/cdn"
 	"github.com/ionos-cloud/provider-upjet-ionoscloud/config/cluster/certificatemanager"
 	"github.com/ionos-cloud/provider-upjet-ionoscloud/config/cluster/compute"
 	"github.com/ionos-cloud/provider-upjet-ionoscloud/config/cluster/containerregistry"
-	"github.com/ionos-cloud/provider-upjet-ionoscloud/config/cluster/dataplatform"
 	"github.com/ionos-cloud/provider-upjet-ionoscloud/config/cluster/dns"
 	"github.com/ionos-cloud/provider-upjet-ionoscloud/config/cluster/inmemorydb"
 	"github.com/ionos-cloud/provider-upjet-ionoscloud/config/cluster/ipsec"
@@ -27,13 +25,11 @@ import (
 
 func init() {
 	ProviderConfiguration.AddConfig(alb.Configure)
-	ProviderConfiguration.AddConfig(apigateway.Configure)
 	ProviderConfiguration.AddConfig(asg.Configure)
 	ProviderConfiguration.AddConfig(cdn.Configure)
 	ProviderConfiguration.AddConfig(certificatemanager.Configure)
 	ProviderConfiguration.AddConfig(compute.Configure)
 	ProviderConfiguration.AddConfig(containerregistry.Configure)
-	ProviderConfiguration.AddConfig(dataplatform.Configure)
 	ProviderConfiguration.AddConfig(dns.Configure)
 	ProviderConfiguration.AddConfig(inmemorydb.Configure)
 	ProviderConfiguration.AddConfig(ipsec.Configure)

@@ -10,8 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
-	v2 "github.com/crossplane/crossplane-runtime/v2/apis/common/v2"
+	v2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 )
 
 type AutoscalingGroupInitParameters struct {
@@ -22,11 +21,11 @@ type AutoscalingGroupInitParameters struct {
 
 	// Reference to a Datacenter in compute to populate datacenterId.
 	// +kubebuilder:validation:Optional
-	DatacenterIDRef *v1.NamespacedReference `json:"datacenterIdRef,omitempty" tf:"-"`
+	DatacenterIDRef *v2.NamespacedReference `json:"datacenterIdRef,omitempty" tf:"-"`
 
 	// Selector for a Datacenter in compute to populate datacenterId.
 	// +kubebuilder:validation:Optional
-	DatacenterIDSelector *v1.NamespacedSelector `json:"datacenterIdSelector,omitempty" tf:"-"`
+	DatacenterIDSelector *v2.NamespacedSelector `json:"datacenterIdSelector,omitempty" tf:"-"`
 
 	// The maximum value for the number of replicas on a VM Auto Scaling Group. Must be >= 0 and <= 200. Will be enforced for both automatic and manual changes.
 	MaxReplicaCount *float64 `json:"maxReplicaCount,omitempty" tf:"max_replica_count,omitempty"`
@@ -77,11 +76,11 @@ type AutoscalingGroupParameters struct {
 
 	// Reference to a Datacenter in compute to populate datacenterId.
 	// +kubebuilder:validation:Optional
-	DatacenterIDRef *v1.NamespacedReference `json:"datacenterIdRef,omitempty" tf:"-"`
+	DatacenterIDRef *v2.NamespacedReference `json:"datacenterIdRef,omitempty" tf:"-"`
 
 	// Selector for a Datacenter in compute to populate datacenterId.
 	// +kubebuilder:validation:Optional
-	DatacenterIDSelector *v1.NamespacedSelector `json:"datacenterIdSelector,omitempty" tf:"-"`
+	DatacenterIDSelector *v2.NamespacedSelector `json:"datacenterIdSelector,omitempty" tf:"-"`
 
 	// The maximum value for the number of replicas on a VM Auto Scaling Group. Must be >= 0 and <= 200. Will be enforced for both automatic and manual changes.
 	// +kubebuilder:validation:Optional
@@ -287,11 +286,11 @@ type NicInitParameters struct {
 
 	// Reference to a Lan in compute to populate lan.
 	// +kubebuilder:validation:Optional
-	LanRef *v1.NamespacedReference `json:"lanRef,omitempty" tf:"-"`
+	LanRef *v2.NamespacedReference `json:"lanRef,omitempty" tf:"-"`
 
 	// Selector for a Lan in compute to populate lan.
 	// +kubebuilder:validation:Optional
-	LanSelector *v1.NamespacedSelector `json:"lanSelector,omitempty" tf:"-"`
+	LanSelector *v2.NamespacedSelector `json:"lanSelector,omitempty" tf:"-"`
 
 	// Name for this replica NIC.
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
@@ -356,11 +355,11 @@ type NicParameters struct {
 
 	// Reference to a Lan in compute to populate lan.
 	// +kubebuilder:validation:Optional
-	LanRef *v1.NamespacedReference `json:"lanRef,omitempty" tf:"-"`
+	LanRef *v2.NamespacedReference `json:"lanRef,omitempty" tf:"-"`
 
 	// Selector for a Lan in compute to populate lan.
 	// +kubebuilder:validation:Optional
-	LanSelector *v1.NamespacedSelector `json:"lanSelector,omitempty" tf:"-"`
+	LanSelector *v2.NamespacedSelector `json:"lanSelector,omitempty" tf:"-"`
 
 	// Name for this replica NIC.
 	// +kubebuilder:validation:Optional
@@ -628,11 +627,11 @@ type TargetGroupInitParameters struct {
 
 	// Reference to a TargetGroup in alb to populate targetGroupId.
 	// +kubebuilder:validation:Optional
-	TargetGroupIDRef *v1.NamespacedReference `json:"targetGroupIdRef,omitempty" tf:"-"`
+	TargetGroupIDRef *v2.NamespacedReference `json:"targetGroupIdRef,omitempty" tf:"-"`
 
 	// Selector for a TargetGroup in alb to populate targetGroupId.
 	// +kubebuilder:validation:Optional
-	TargetGroupIDSelector *v1.NamespacedSelector `json:"targetGroupIdSelector,omitempty" tf:"-"`
+	TargetGroupIDSelector *v2.NamespacedSelector `json:"targetGroupIdSelector,omitempty" tf:"-"`
 
 	// The weight for the target group.
 	Weight *float64 `json:"weight,omitempty" tf:"weight,omitempty"`
@@ -663,11 +662,11 @@ type TargetGroupParameters struct {
 
 	// Reference to a TargetGroup in alb to populate targetGroupId.
 	// +kubebuilder:validation:Optional
-	TargetGroupIDRef *v1.NamespacedReference `json:"targetGroupIdRef,omitempty" tf:"-"`
+	TargetGroupIDRef *v2.NamespacedReference `json:"targetGroupIdRef,omitempty" tf:"-"`
 
 	// Selector for a TargetGroup in alb to populate targetGroupId.
 	// +kubebuilder:validation:Optional
-	TargetGroupIDSelector *v1.NamespacedSelector `json:"targetGroupIdSelector,omitempty" tf:"-"`
+	TargetGroupIDSelector *v2.NamespacedSelector `json:"targetGroupIdSelector,omitempty" tf:"-"`
 
 	// The weight for the target group.
 	// +kubebuilder:validation:Optional
@@ -694,7 +693,7 @@ type VolumeInitParameters struct {
 	ImageAlias *string `json:"imageAlias,omitempty" tf:"image_alias,omitempty"`
 
 	// Image password for this replica volume.
-	ImagePasswordSecretRef *v1.LocalSecretKeySelector `json:"imagePasswordSecretRef,omitempty" tf:"-"`
+	ImagePasswordSecretRef *v2.LocalSecretKeySelector `json:"imagePasswordSecretRef,omitempty" tf:"-"`
 
 	// Name for this replica volume.
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
@@ -771,7 +770,7 @@ type VolumeParameters struct {
 
 	// Image password for this replica volume.
 	// +kubebuilder:validation:Optional
-	ImagePasswordSecretRef *v1.LocalSecretKeySelector `json:"imagePasswordSecretRef,omitempty" tf:"-"`
+	ImagePasswordSecretRef *v2.LocalSecretKeySelector `json:"imagePasswordSecretRef,omitempty" tf:"-"`
 
 	// Name for this replica volume.
 	// +kubebuilder:validation:Optional
@@ -812,8 +811,8 @@ type AutoscalingGroupSpec struct {
 
 // AutoscalingGroupStatus defines the observed state of AutoscalingGroup.
 type AutoscalingGroupStatus struct {
-	v1.ResourceStatus `json:",inline"`
-	AtProvider        AutoscalingGroupObservation `json:"atProvider,omitempty"`
+	v2.ManagedResourceStatus `json:",inline"`
+	AtProvider               AutoscalingGroupObservation `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true

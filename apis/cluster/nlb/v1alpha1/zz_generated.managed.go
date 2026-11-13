@@ -6,104 +6,104 @@
 
 package v1alpha1
 
-import xpv1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
+import xpv2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 
 // GetCondition of this Forwardingrule.
-func (mg *Forwardingrule) GetCondition(ct xpv1.ConditionType) xpv1.Condition {
+func (mg *Forwardingrule) GetCondition(ct xpv2.ConditionType) xpv2.Condition {
 	return mg.Status.GetCondition(ct)
 }
 
 // GetDeletionPolicy of this Forwardingrule.
-func (mg *Forwardingrule) GetDeletionPolicy() xpv1.DeletionPolicy {
+func (mg *Forwardingrule) GetDeletionPolicy() xpv2.DeletionPolicy {
 	return mg.Spec.DeletionPolicy
 }
 
 // GetManagementPolicies of this Forwardingrule.
-func (mg *Forwardingrule) GetManagementPolicies() xpv1.ManagementPolicies {
+func (mg *Forwardingrule) GetManagementPolicies() xpv2.ManagementPolicies {
 	return mg.Spec.ManagementPolicies
 }
 
 // GetProviderConfigReference of this Forwardingrule.
-func (mg *Forwardingrule) GetProviderConfigReference() *xpv1.Reference {
+func (mg *Forwardingrule) GetProviderConfigReference() *xpv2.Reference {
 	return mg.Spec.ProviderConfigReference
 }
 
 // GetWriteConnectionSecretToReference of this Forwardingrule.
-func (mg *Forwardingrule) GetWriteConnectionSecretToReference() *xpv1.SecretReference {
+func (mg *Forwardingrule) GetWriteConnectionSecretToReference() *xpv2.SecretReference {
 	return mg.Spec.WriteConnectionSecretToReference
 }
 
 // SetConditions of this Forwardingrule.
-func (mg *Forwardingrule) SetConditions(c ...xpv1.Condition) {
+func (mg *Forwardingrule) SetConditions(c ...xpv2.Condition) {
 	mg.Status.SetConditions(c...)
 }
 
 // SetDeletionPolicy of this Forwardingrule.
-func (mg *Forwardingrule) SetDeletionPolicy(r xpv1.DeletionPolicy) {
+func (mg *Forwardingrule) SetDeletionPolicy(r xpv2.DeletionPolicy) {
 	mg.Spec.DeletionPolicy = r
 }
 
 // SetManagementPolicies of this Forwardingrule.
-func (mg *Forwardingrule) SetManagementPolicies(r xpv1.ManagementPolicies) {
+func (mg *Forwardingrule) SetManagementPolicies(r xpv2.ManagementPolicies) {
 	mg.Spec.ManagementPolicies = r
 }
 
 // SetProviderConfigReference of this Forwardingrule.
-func (mg *Forwardingrule) SetProviderConfigReference(r *xpv1.Reference) {
+func (mg *Forwardingrule) SetProviderConfigReference(r *xpv2.Reference) {
 	mg.Spec.ProviderConfigReference = r
 }
 
 // SetWriteConnectionSecretToReference of this Forwardingrule.
-func (mg *Forwardingrule) SetWriteConnectionSecretToReference(r *xpv1.SecretReference) {
+func (mg *Forwardingrule) SetWriteConnectionSecretToReference(r *xpv2.SecretReference) {
 	mg.Spec.WriteConnectionSecretToReference = r
 }
 
 // GetCondition of this Networkloadbalancer.
-func (mg *Networkloadbalancer) GetCondition(ct xpv1.ConditionType) xpv1.Condition {
+func (mg *Networkloadbalancer) GetCondition(ct xpv2.ConditionType) xpv2.Condition {
 	return mg.Status.GetCondition(ct)
 }
 
 // GetDeletionPolicy of this Networkloadbalancer.
-func (mg *Networkloadbalancer) GetDeletionPolicy() xpv1.DeletionPolicy {
+func (mg *Networkloadbalancer) GetDeletionPolicy() xpv2.DeletionPolicy {
 	return mg.Spec.DeletionPolicy
 }
 
 // GetManagementPolicies of this Networkloadbalancer.
-func (mg *Networkloadbalancer) GetManagementPolicies() xpv1.ManagementPolicies {
+func (mg *Networkloadbalancer) GetManagementPolicies() xpv2.ManagementPolicies {
 	return mg.Spec.ManagementPolicies
 }
 
 // GetProviderConfigReference of this Networkloadbalancer.
-func (mg *Networkloadbalancer) GetProviderConfigReference() *xpv1.Reference {
+func (mg *Networkloadbalancer) GetProviderConfigReference() *xpv2.Reference {
 	return mg.Spec.ProviderConfigReference
 }
 
 // GetWriteConnectionSecretToReference of this Networkloadbalancer.
-func (mg *Networkloadbalancer) GetWriteConnectionSecretToReference() *xpv1.SecretReference {
+func (mg *Networkloadbalancer) GetWriteConnectionSecretToReference() *xpv2.SecretReference {
 	return mg.Spec.WriteConnectionSecretToReference
 }
 
 // SetConditions of this Networkloadbalancer.
-func (mg *Networkloadbalancer) SetConditions(c ...xpv1.Condition) {
+func (mg *Networkloadbalancer) SetConditions(c ...xpv2.Condition) {
 	mg.Status.SetConditions(c...)
 }
 
 // SetDeletionPolicy of this Networkloadbalancer.
-func (mg *Networkloadbalancer) SetDeletionPolicy(r xpv1.DeletionPolicy) {
+func (mg *Networkloadbalancer) SetDeletionPolicy(r xpv2.DeletionPolicy) {
 	mg.Spec.DeletionPolicy = r
 }
 
 // SetManagementPolicies of this Networkloadbalancer.
-func (mg *Networkloadbalancer) SetManagementPolicies(r xpv1.ManagementPolicies) {
+func (mg *Networkloadbalancer) SetManagementPolicies(r xpv2.ManagementPolicies) {
 	mg.Spec.ManagementPolicies = r
 }
 
 // SetProviderConfigReference of this Networkloadbalancer.
-func (mg *Networkloadbalancer) SetProviderConfigReference(r *xpv1.Reference) {
+func (mg *Networkloadbalancer) SetProviderConfigReference(r *xpv2.Reference) {
 	mg.Spec.ProviderConfigReference = r
 }
 
 // SetWriteConnectionSecretToReference of this Networkloadbalancer.
-func (mg *Networkloadbalancer) SetWriteConnectionSecretToReference(r *xpv1.SecretReference) {
+func (mg *Networkloadbalancer) SetWriteConnectionSecretToReference(r *xpv2.SecretReference) {
 	mg.Spec.WriteConnectionSecretToReference = r
 }

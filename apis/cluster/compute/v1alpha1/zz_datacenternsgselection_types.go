@@ -10,7 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
+	v2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 )
 
 type DatacenterNSGSelectionInitParameters struct {
@@ -22,11 +22,11 @@ type DatacenterNSGSelectionInitParameters struct {
 
 	// Reference to a Datacenter in compute to populate datacenterId.
 	// +kubebuilder:validation:Optional
-	DatacenterIDRef *v1.Reference `json:"datacenterIdRef,omitempty" tf:"-"`
+	DatacenterIDRef *v2.Reference `json:"datacenterIdRef,omitempty" tf:"-"`
 
 	// Selector for a Datacenter in compute to populate datacenterId.
 	// +kubebuilder:validation:Optional
-	DatacenterIDSelector *v1.Selector `json:"datacenterIdSelector,omitempty" tf:"-"`
+	DatacenterIDSelector *v2.Selector `json:"datacenterIdSelector,omitempty" tf:"-"`
 
 	// The location of the resource. This field should be used only if you are also using a file configuration and should not be configured otherwise.
 	Location *string `json:"location,omitempty" tf:"location,omitempty"`
@@ -38,11 +38,11 @@ type DatacenterNSGSelectionInitParameters struct {
 
 	// Reference to a NSG in compute to populate nsgId.
 	// +kubebuilder:validation:Optional
-	NsgIDRef *v1.Reference `json:"nsgIdRef,omitempty" tf:"-"`
+	NsgIDRef *v2.Reference `json:"nsgIdRef,omitempty" tf:"-"`
 
 	// Selector for a NSG in compute to populate nsgId.
 	// +kubebuilder:validation:Optional
-	NsgIDSelector *v1.Selector `json:"nsgIdSelector,omitempty" tf:"-"`
+	NsgIDSelector *v2.Selector `json:"nsgIdSelector,omitempty" tf:"-"`
 }
 
 type DatacenterNSGSelectionObservation struct {
@@ -71,11 +71,11 @@ type DatacenterNSGSelectionParameters struct {
 
 	// Reference to a Datacenter in compute to populate datacenterId.
 	// +kubebuilder:validation:Optional
-	DatacenterIDRef *v1.Reference `json:"datacenterIdRef,omitempty" tf:"-"`
+	DatacenterIDRef *v2.Reference `json:"datacenterIdRef,omitempty" tf:"-"`
 
 	// Selector for a Datacenter in compute to populate datacenterId.
 	// +kubebuilder:validation:Optional
-	DatacenterIDSelector *v1.Selector `json:"datacenterIdSelector,omitempty" tf:"-"`
+	DatacenterIDSelector *v2.Selector `json:"datacenterIdSelector,omitempty" tf:"-"`
 
 	// The location of the resource. This field should be used only if you are also using a file configuration and should not be configured otherwise.
 	// +kubebuilder:validation:Optional
@@ -89,17 +89,17 @@ type DatacenterNSGSelectionParameters struct {
 
 	// Reference to a NSG in compute to populate nsgId.
 	// +kubebuilder:validation:Optional
-	NsgIDRef *v1.Reference `json:"nsgIdRef,omitempty" tf:"-"`
+	NsgIDRef *v2.Reference `json:"nsgIdRef,omitempty" tf:"-"`
 
 	// Selector for a NSG in compute to populate nsgId.
 	// +kubebuilder:validation:Optional
-	NsgIDSelector *v1.Selector `json:"nsgIdSelector,omitempty" tf:"-"`
+	NsgIDSelector *v2.Selector `json:"nsgIdSelector,omitempty" tf:"-"`
 }
 
 // DatacenterNSGSelectionSpec defines the desired state of DatacenterNSGSelection
 type DatacenterNSGSelectionSpec struct {
-	v1.ResourceSpec `json:",inline"`
-	ForProvider     DatacenterNSGSelectionParameters `json:"forProvider"`
+	v2.ClusterManagedResourceSpec `json:",inline"`
+	ForProvider                   DatacenterNSGSelectionParameters `json:"forProvider"`
 	// THIS IS A BETA FIELD. It will be honored
 	// unless the Management Policies feature flag is disabled.
 	// InitProvider holds the same fields as ForProvider, with the exception
@@ -115,8 +115,8 @@ type DatacenterNSGSelectionSpec struct {
 
 // DatacenterNSGSelectionStatus defines the observed state of DatacenterNSGSelection.
 type DatacenterNSGSelectionStatus struct {
-	v1.ResourceStatus `json:",inline"`
-	AtProvider        DatacenterNSGSelectionObservation `json:"atProvider,omitempty"`
+	v2.ManagedResourceStatus `json:",inline"`
+	AtProvider               DatacenterNSGSelectionObservation `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true

@@ -6,104 +6,104 @@
 
 package v1alpha1
 
-import xpv1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
+import xpv2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 
 // GetCondition of this VpnWireguardGateway.
-func (mg *VpnWireguardGateway) GetCondition(ct xpv1.ConditionType) xpv1.Condition {
+func (mg *VpnWireguardGateway) GetCondition(ct xpv2.ConditionType) xpv2.Condition {
 	return mg.Status.GetCondition(ct)
 }
 
 // GetDeletionPolicy of this VpnWireguardGateway.
-func (mg *VpnWireguardGateway) GetDeletionPolicy() xpv1.DeletionPolicy {
+func (mg *VpnWireguardGateway) GetDeletionPolicy() xpv2.DeletionPolicy {
 	return mg.Spec.DeletionPolicy
 }
 
 // GetManagementPolicies of this VpnWireguardGateway.
-func (mg *VpnWireguardGateway) GetManagementPolicies() xpv1.ManagementPolicies {
+func (mg *VpnWireguardGateway) GetManagementPolicies() xpv2.ManagementPolicies {
 	return mg.Spec.ManagementPolicies
 }
 
 // GetProviderConfigReference of this VpnWireguardGateway.
-func (mg *VpnWireguardGateway) GetProviderConfigReference() *xpv1.Reference {
+func (mg *VpnWireguardGateway) GetProviderConfigReference() *xpv2.Reference {
 	return mg.Spec.ProviderConfigReference
 }
 
 // GetWriteConnectionSecretToReference of this VpnWireguardGateway.
-func (mg *VpnWireguardGateway) GetWriteConnectionSecretToReference() *xpv1.SecretReference {
+func (mg *VpnWireguardGateway) GetWriteConnectionSecretToReference() *xpv2.SecretReference {
 	return mg.Spec.WriteConnectionSecretToReference
 }
 
 // SetConditions of this VpnWireguardGateway.
-func (mg *VpnWireguardGateway) SetConditions(c ...xpv1.Condition) {
+func (mg *VpnWireguardGateway) SetConditions(c ...xpv2.Condition) {
 	mg.Status.SetConditions(c...)
 }
 
 // SetDeletionPolicy of this VpnWireguardGateway.
-func (mg *VpnWireguardGateway) SetDeletionPolicy(r xpv1.DeletionPolicy) {
+func (mg *VpnWireguardGateway) SetDeletionPolicy(r xpv2.DeletionPolicy) {
 	mg.Spec.DeletionPolicy = r
 }
 
 // SetManagementPolicies of this VpnWireguardGateway.
-func (mg *VpnWireguardGateway) SetManagementPolicies(r xpv1.ManagementPolicies) {
+func (mg *VpnWireguardGateway) SetManagementPolicies(r xpv2.ManagementPolicies) {
 	mg.Spec.ManagementPolicies = r
 }
 
 // SetProviderConfigReference of this VpnWireguardGateway.
-func (mg *VpnWireguardGateway) SetProviderConfigReference(r *xpv1.Reference) {
+func (mg *VpnWireguardGateway) SetProviderConfigReference(r *xpv2.Reference) {
 	mg.Spec.ProviderConfigReference = r
 }
 
 // SetWriteConnectionSecretToReference of this VpnWireguardGateway.
-func (mg *VpnWireguardGateway) SetWriteConnectionSecretToReference(r *xpv1.SecretReference) {
+func (mg *VpnWireguardGateway) SetWriteConnectionSecretToReference(r *xpv2.SecretReference) {
 	mg.Spec.WriteConnectionSecretToReference = r
 }
 
 // GetCondition of this VpnWireguardPeer.
-func (mg *VpnWireguardPeer) GetCondition(ct xpv1.ConditionType) xpv1.Condition {
+func (mg *VpnWireguardPeer) GetCondition(ct xpv2.ConditionType) xpv2.Condition {
 	return mg.Status.GetCondition(ct)
 }
 
 // GetDeletionPolicy of this VpnWireguardPeer.
-func (mg *VpnWireguardPeer) GetDeletionPolicy() xpv1.DeletionPolicy {
+func (mg *VpnWireguardPeer) GetDeletionPolicy() xpv2.DeletionPolicy {
 	return mg.Spec.DeletionPolicy
 }
 
 // GetManagementPolicies of this VpnWireguardPeer.
-func (mg *VpnWireguardPeer) GetManagementPolicies() xpv1.ManagementPolicies {
+func (mg *VpnWireguardPeer) GetManagementPolicies() xpv2.ManagementPolicies {
 	return mg.Spec.ManagementPolicies
 }
 
 // GetProviderConfigReference of this VpnWireguardPeer.
-func (mg *VpnWireguardPeer) GetProviderConfigReference() *xpv1.Reference {
+func (mg *VpnWireguardPeer) GetProviderConfigReference() *xpv2.Reference {
 	return mg.Spec.ProviderConfigReference
 }
 
 // GetWriteConnectionSecretToReference of this VpnWireguardPeer.
-func (mg *VpnWireguardPeer) GetWriteConnectionSecretToReference() *xpv1.SecretReference {
+func (mg *VpnWireguardPeer) GetWriteConnectionSecretToReference() *xpv2.SecretReference {
 	return mg.Spec.WriteConnectionSecretToReference
 }
 
 // SetConditions of this VpnWireguardPeer.
-func (mg *VpnWireguardPeer) SetConditions(c ...xpv1.Condition) {
+func (mg *VpnWireguardPeer) SetConditions(c ...xpv2.Condition) {
 	mg.Status.SetConditions(c...)
 }
 
 // SetDeletionPolicy of this VpnWireguardPeer.
-func (mg *VpnWireguardPeer) SetDeletionPolicy(r xpv1.DeletionPolicy) {
+func (mg *VpnWireguardPeer) SetDeletionPolicy(r xpv2.DeletionPolicy) {
 	mg.Spec.DeletionPolicy = r
 }
 
 // SetManagementPolicies of this VpnWireguardPeer.
-func (mg *VpnWireguardPeer) SetManagementPolicies(r xpv1.ManagementPolicies) {
+func (mg *VpnWireguardPeer) SetManagementPolicies(r xpv2.ManagementPolicies) {
 	mg.Spec.ManagementPolicies = r
 }
 
 // SetProviderConfigReference of this VpnWireguardPeer.
-func (mg *VpnWireguardPeer) SetProviderConfigReference(r *xpv1.Reference) {
+func (mg *VpnWireguardPeer) SetProviderConfigReference(r *xpv2.Reference) {
 	mg.Spec.ProviderConfigReference = r
 }
 
 // SetWriteConnectionSecretToReference of this VpnWireguardPeer.
-func (mg *VpnWireguardPeer) SetWriteConnectionSecretToReference(r *xpv1.SecretReference) {
+func (mg *VpnWireguardPeer) SetWriteConnectionSecretToReference(r *xpv2.SecretReference) {
 	mg.Spec.WriteConnectionSecretToReference = r
 }

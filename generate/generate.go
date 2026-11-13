@@ -12,8 +12,8 @@ Copyright 2021 Upbound Inc.
 
 // Remove generated files
 
-//go:generate bash -c "find . -iname 'zz_*' ! -iname 'zz_generated.managed*.go' -delete"
-//go:generate bash -c "find . -type d -empty -delete"
+//go:generate bash -c "find ../apis -iname 'zz_*' ! -iname 'zz_generated.managed*.go' -delete"
+//go:generate bash -c "find ../apis -type d -empty -delete"
 //go:generate bash -c "find ../internal -iname 'zz_*' -delete"
 //go:generate bash -c "find ../internal -type d -empty -delete"
 //go:generate rm -rf ../examples-generated

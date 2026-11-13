@@ -2,13 +2,11 @@ package namespaced
 
 import (
 	"github.com/ionos-cloud/provider-upjet-ionoscloud/config/namespaced/alb"
-	"github.com/ionos-cloud/provider-upjet-ionoscloud/config/namespaced/apigateway"
 	"github.com/ionos-cloud/provider-upjet-ionoscloud/config/namespaced/asg"
 	"github.com/ionos-cloud/provider-upjet-ionoscloud/config/namespaced/cdn"
 	"github.com/ionos-cloud/provider-upjet-ionoscloud/config/namespaced/certificatemanager"
 	"github.com/ionos-cloud/provider-upjet-ionoscloud/config/namespaced/compute"
 	"github.com/ionos-cloud/provider-upjet-ionoscloud/config/namespaced/containerregistry"
-	"github.com/ionos-cloud/provider-upjet-ionoscloud/config/namespaced/dataplatform"
 	"github.com/ionos-cloud/provider-upjet-ionoscloud/config/namespaced/dns"
 	"github.com/ionos-cloud/provider-upjet-ionoscloud/config/namespaced/inmemorydb"
 	"github.com/ionos-cloud/provider-upjet-ionoscloud/config/namespaced/ipsec"
@@ -27,13 +25,11 @@ import (
 
 func init() {
 	ProviderConfiguration.AddConfig(alb.Configure)
-	ProviderConfiguration.AddConfig(apigateway.Configure)
 	ProviderConfiguration.AddConfig(asg.Configure)
 	ProviderConfiguration.AddConfig(cdn.Configure)
 	ProviderConfiguration.AddConfig(certificatemanager.Configure)
 	ProviderConfiguration.AddConfig(compute.Configure)
 	ProviderConfiguration.AddConfig(containerregistry.Configure)
-	ProviderConfiguration.AddConfig(dataplatform.Configure)
 	ProviderConfiguration.AddConfig(dns.Configure)
 	ProviderConfiguration.AddConfig(inmemorydb.Configure)
 	ProviderConfiguration.AddConfig(ipsec.Configure)

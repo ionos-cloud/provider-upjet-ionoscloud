@@ -10,7 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
+	v2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 )
 
 type BucketCorsConfigurationInitParameters struct {
@@ -22,11 +22,11 @@ type BucketCorsConfigurationInitParameters struct {
 
 	// Reference to a Bucket in objectstorage to populate bucket.
 	// +kubebuilder:validation:Optional
-	BucketRef *v1.Reference `json:"bucketRef,omitempty" tf:"-"`
+	BucketRef *v2.Reference `json:"bucketRef,omitempty" tf:"-"`
 
 	// Selector for a Bucket in objectstorage to populate bucket.
 	// +kubebuilder:validation:Optional
-	BucketSelector *v1.Selector `json:"bucketSelector,omitempty" tf:"-"`
+	BucketSelector *v2.Selector `json:"bucketSelector,omitempty" tf:"-"`
 
 	// [block] A block of cors_rule as defined below.
 	// A configuration for Cross-Origin Resource Sharing (CORS).
@@ -57,11 +57,11 @@ type BucketCorsConfigurationParameters struct {
 
 	// Reference to a Bucket in objectstorage to populate bucket.
 	// +kubebuilder:validation:Optional
-	BucketRef *v1.Reference `json:"bucketRef,omitempty" tf:"-"`
+	BucketRef *v2.Reference `json:"bucketRef,omitempty" tf:"-"`
 
 	// Selector for a Bucket in objectstorage to populate bucket.
 	// +kubebuilder:validation:Optional
-	BucketSelector *v1.Selector `json:"bucketSelector,omitempty" tf:"-"`
+	BucketSelector *v2.Selector `json:"bucketSelector,omitempty" tf:"-"`
 
 	// [block] A block of cors_rule as defined below.
 	// A configuration for Cross-Origin Resource Sharing (CORS).
@@ -170,8 +170,8 @@ type CorsRuleParameters struct {
 
 // BucketCorsConfigurationSpec defines the desired state of BucketCorsConfiguration
 type BucketCorsConfigurationSpec struct {
-	v1.ResourceSpec `json:",inline"`
-	ForProvider     BucketCorsConfigurationParameters `json:"forProvider"`
+	v2.ClusterManagedResourceSpec `json:",inline"`
+	ForProvider                   BucketCorsConfigurationParameters `json:"forProvider"`
 	// THIS IS A BETA FIELD. It will be honored
 	// unless the Management Policies feature flag is disabled.
 	// InitProvider holds the same fields as ForProvider, with the exception
@@ -187,8 +187,8 @@ type BucketCorsConfigurationSpec struct {
 
 // BucketCorsConfigurationStatus defines the observed state of BucketCorsConfiguration.
 type BucketCorsConfigurationStatus struct {
-	v1.ResourceStatus `json:",inline"`
-	AtProvider        BucketCorsConfigurationObservation `json:"atProvider,omitempty"`
+	v2.ManagedResourceStatus `json:",inline"`
+	AtProvider               BucketCorsConfigurationObservation `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true

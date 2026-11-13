@@ -10,8 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
-	v2 "github.com/crossplane/crossplane-runtime/v2/apis/common/v2"
+	v2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 )
 
 type BackupInitParameters struct {
@@ -58,11 +57,11 @@ type ConnectionsInitParameters struct {
 
 	// Reference to a Datacenter in compute to populate datacenterId.
 	// +kubebuilder:validation:Optional
-	DatacenterIDRef *v1.NamespacedReference `json:"datacenterIdRef,omitempty" tf:"-"`
+	DatacenterIDRef *v2.NamespacedReference `json:"datacenterIdRef,omitempty" tf:"-"`
 
 	// Selector for a Datacenter in compute to populate datacenterId.
 	// +kubebuilder:validation:Optional
-	DatacenterIDSelector *v1.NamespacedSelector `json:"datacenterIdSelector,omitempty" tf:"-"`
+	DatacenterIDSelector *v2.NamespacedSelector `json:"datacenterIdSelector,omitempty" tf:"-"`
 
 	// [string] The numeric LAN ID to connect your instance to.
 	// The numeric LAN ID to connect your instance to.
@@ -71,11 +70,11 @@ type ConnectionsInitParameters struct {
 
 	// Reference to a Lan in compute to populate lanId.
 	// +kubebuilder:validation:Optional
-	LanIDRef *v1.NamespacedReference `json:"lanIdRef,omitempty" tf:"-"`
+	LanIDRef *v2.NamespacedReference `json:"lanIdRef,omitempty" tf:"-"`
 
 	// Selector for a Lan in compute to populate lanId.
 	// +kubebuilder:validation:Optional
-	LanIDSelector *v1.NamespacedSelector `json:"lanIdSelector,omitempty" tf:"-"`
+	LanIDSelector *v2.NamespacedSelector `json:"lanIdSelector,omitempty" tf:"-"`
 
 	// [string] The IP address and netmask of the cluster's primary instance, in CIDR notation.
 	// The IP address and netmask of the cluster's primary instance, in CIDR notation.
@@ -107,11 +106,11 @@ type ConnectionsParameters struct {
 
 	// Reference to a Datacenter in compute to populate datacenterId.
 	// +kubebuilder:validation:Optional
-	DatacenterIDRef *v1.NamespacedReference `json:"datacenterIdRef,omitempty" tf:"-"`
+	DatacenterIDRef *v2.NamespacedReference `json:"datacenterIdRef,omitempty" tf:"-"`
 
 	// Selector for a Datacenter in compute to populate datacenterId.
 	// +kubebuilder:validation:Optional
-	DatacenterIDSelector *v1.NamespacedSelector `json:"datacenterIdSelector,omitempty" tf:"-"`
+	DatacenterIDSelector *v2.NamespacedSelector `json:"datacenterIdSelector,omitempty" tf:"-"`
 
 	// [string] The numeric LAN ID to connect your instance to.
 	// The numeric LAN ID to connect your instance to.
@@ -121,11 +120,11 @@ type ConnectionsParameters struct {
 
 	// Reference to a Lan in compute to populate lanId.
 	// +kubebuilder:validation:Optional
-	LanIDRef *v1.NamespacedReference `json:"lanIdRef,omitempty" tf:"-"`
+	LanIDRef *v2.NamespacedReference `json:"lanIdRef,omitempty" tf:"-"`
 
 	// Selector for a Lan in compute to populate lanId.
 	// +kubebuilder:validation:Optional
-	LanIDSelector *v1.NamespacedSelector `json:"lanIdSelector,omitempty" tf:"-"`
+	LanIDSelector *v2.NamespacedSelector `json:"lanIdSelector,omitempty" tf:"-"`
 
 	// [string] The IP address and netmask of the cluster's primary instance, in CIDR notation.
 	// The IP address and netmask of the cluster's primary instance, in CIDR notation.
@@ -141,7 +140,7 @@ type CredentialsInitParameters struct {
 
 	// [string] Sensitive. The password for the initial MariaDB user.
 	// The password for the initial MariaDB user.
-	PasswordSecretRef v1.LocalSecretKeySelector `json:"passwordSecretRef" tf:"-"`
+	PasswordSecretRef v2.LocalSecretKeySelector `json:"passwordSecretRef" tf:"-"`
 
 	// [string] The username of the initial MariaDB user.
 	// The username of the initial MariaDB user.
@@ -169,7 +168,7 @@ type CredentialsParameters struct {
 	// [string] Sensitive. The password for the initial MariaDB user.
 	// The password for the initial MariaDB user.
 	// +kubebuilder:validation:Optional
-	PasswordSecretRef v1.LocalSecretKeySelector `json:"passwordSecretRef" tf:"-"`
+	PasswordSecretRef v2.LocalSecretKeySelector `json:"passwordSecretRef" tf:"-"`
 
 	// [string] The username of the initial MariaDB user.
 	// The username of the initial MariaDB user.
@@ -481,8 +480,8 @@ type MariadbClusterSpec struct {
 
 // MariadbClusterStatus defines the observed state of MariadbCluster.
 type MariadbClusterStatus struct {
-	v1.ResourceStatus `json:",inline"`
-	AtProvider        MariadbClusterObservation `json:"atProvider,omitempty"`
+	v2.ManagedResourceStatus `json:",inline"`
+	AtProvider               MariadbClusterObservation `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true

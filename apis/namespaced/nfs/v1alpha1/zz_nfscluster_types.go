@@ -10,8 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
-	v2 "github.com/crossplane/crossplane-runtime/v2/apis/common/v2"
+	v2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 )
 
 type ConnectionsInitParameters struct {
@@ -23,11 +22,11 @@ type ConnectionsInitParameters struct {
 
 	// Reference to a Datacenter in compute to populate datacenterId.
 	// +kubebuilder:validation:Optional
-	DatacenterIDRef *v1.NamespacedReference `json:"datacenterIdRef,omitempty" tf:"-"`
+	DatacenterIDRef *v2.NamespacedReference `json:"datacenterIdRef,omitempty" tf:"-"`
 
 	// Selector for a Datacenter in compute to populate datacenterId.
 	// +kubebuilder:validation:Optional
-	DatacenterIDSelector *v1.NamespacedSelector `json:"datacenterIdSelector,omitempty" tf:"-"`
+	DatacenterIDSelector *v2.NamespacedSelector `json:"datacenterIdSelector,omitempty" tf:"-"`
 
 	// The IP address and prefix of the Network File Storage cluster. The IP address can be either IPv4 or IPv6. The IP address has to be given with CIDR notation.
 	// The IP address and subnet for your instance.
@@ -40,11 +39,11 @@ type ConnectionsInitParameters struct {
 
 	// Reference to a Lan in compute to populate lan.
 	// +kubebuilder:validation:Optional
-	LanRef *v1.NamespacedReference `json:"lanRef,omitempty" tf:"-"`
+	LanRef *v2.NamespacedReference `json:"lanRef,omitempty" tf:"-"`
 
 	// Selector for a Lan in compute to populate lan.
 	// +kubebuilder:validation:Optional
-	LanSelector *v1.NamespacedSelector `json:"lanSelector,omitempty" tf:"-"`
+	LanSelector *v2.NamespacedSelector `json:"lanSelector,omitempty" tf:"-"`
 }
 
 type ConnectionsObservation struct {
@@ -72,11 +71,11 @@ type ConnectionsParameters struct {
 
 	// Reference to a Datacenter in compute to populate datacenterId.
 	// +kubebuilder:validation:Optional
-	DatacenterIDRef *v1.NamespacedReference `json:"datacenterIdRef,omitempty" tf:"-"`
+	DatacenterIDRef *v2.NamespacedReference `json:"datacenterIdRef,omitempty" tf:"-"`
 
 	// Selector for a Datacenter in compute to populate datacenterId.
 	// +kubebuilder:validation:Optional
-	DatacenterIDSelector *v1.NamespacedSelector `json:"datacenterIdSelector,omitempty" tf:"-"`
+	DatacenterIDSelector *v2.NamespacedSelector `json:"datacenterIdSelector,omitempty" tf:"-"`
 
 	// The IP address and prefix of the Network File Storage cluster. The IP address can be either IPv4 or IPv6. The IP address has to be given with CIDR notation.
 	// The IP address and subnet for your instance.
@@ -91,11 +90,11 @@ type ConnectionsParameters struct {
 
 	// Reference to a Lan in compute to populate lan.
 	// +kubebuilder:validation:Optional
-	LanRef *v1.NamespacedReference `json:"lanRef,omitempty" tf:"-"`
+	LanRef *v2.NamespacedReference `json:"lanRef,omitempty" tf:"-"`
 
 	// Selector for a Lan in compute to populate lan.
 	// +kubebuilder:validation:Optional
-	LanSelector *v1.NamespacedSelector `json:"lanSelector,omitempty" tf:"-"`
+	LanSelector *v2.NamespacedSelector `json:"lanSelector,omitempty" tf:"-"`
 }
 
 type NFSClusterInitParameters struct {
@@ -225,8 +224,8 @@ type NFSClusterSpec struct {
 
 // NFSClusterStatus defines the observed state of NFSCluster.
 type NFSClusterStatus struct {
-	v1.ResourceStatus `json:",inline"`
-	AtProvider        NFSClusterObservation `json:"atProvider,omitempty"`
+	v2.ManagedResourceStatus `json:",inline"`
+	AtProvider               NFSClusterObservation `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true

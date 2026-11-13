@@ -10,8 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
-	v2 "github.com/crossplane/crossplane-runtime/v2/apis/common/v2"
+	v2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 )
 
 type UnitInitParameters struct {
@@ -26,7 +25,7 @@ type UnitInitParameters struct {
 
 	// [string] The desired password for the Backup Unit
 	// The password you want assigned to the backup unit.
-	PasswordSecretRef v1.LocalSecretKeySelector `json:"passwordSecretRef" tf:"-"`
+	PasswordSecretRef v2.LocalSecretKeySelector `json:"passwordSecretRef" tf:"-"`
 }
 
 type UnitObservation struct {
@@ -61,7 +60,7 @@ type UnitParameters struct {
 	// [string] The desired password for the Backup Unit
 	// The password you want assigned to the backup unit.
 	// +kubebuilder:validation:Optional
-	PasswordSecretRef v1.LocalSecretKeySelector `json:"passwordSecretRef" tf:"-"`
+	PasswordSecretRef v2.LocalSecretKeySelector `json:"passwordSecretRef" tf:"-"`
 }
 
 // UnitSpec defines the desired state of Unit
@@ -83,8 +82,8 @@ type UnitSpec struct {
 
 // UnitStatus defines the observed state of Unit.
 type UnitStatus struct {
-	v1.ResourceStatus `json:",inline"`
-	AtProvider        UnitObservation `json:"atProvider,omitempty"`
+	v2.ManagedResourceStatus `json:",inline"`
+	AtProvider               UnitObservation `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true

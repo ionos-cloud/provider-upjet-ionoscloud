@@ -10,7 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
+	v2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 )
 
 type BucketObjectLockConfigurationInitParameters struct {
@@ -22,11 +22,11 @@ type BucketObjectLockConfigurationInitParameters struct {
 
 	// Reference to a Bucket in objectstorage to populate bucket.
 	// +kubebuilder:validation:Optional
-	BucketRef *v1.Reference `json:"bucketRef,omitempty" tf:"-"`
+	BucketRef *v2.Reference `json:"bucketRef,omitempty" tf:"-"`
 
 	// Selector for a Bucket in objectstorage to populate bucket.
 	// +kubebuilder:validation:Optional
-	BucketSelector *v1.Selector `json:"bucketSelector,omitempty" tf:"-"`
+	BucketSelector *v2.Selector `json:"bucketSelector,omitempty" tf:"-"`
 
 	// [Optional] The object lock configuration status of the bucket. Must be Enabled.
 	// Specifies whether Object Lock is enabled for the bucket.
@@ -62,11 +62,11 @@ type BucketObjectLockConfigurationParameters struct {
 
 	// Reference to a Bucket in objectstorage to populate bucket.
 	// +kubebuilder:validation:Optional
-	BucketRef *v1.Reference `json:"bucketRef,omitempty" tf:"-"`
+	BucketRef *v2.Reference `json:"bucketRef,omitempty" tf:"-"`
 
 	// Selector for a Bucket in objectstorage to populate bucket.
 	// +kubebuilder:validation:Optional
-	BucketSelector *v1.Selector `json:"bucketSelector,omitempty" tf:"-"`
+	BucketSelector *v2.Selector `json:"bucketSelector,omitempty" tf:"-"`
 
 	// [Optional] The object lock configuration status of the bucket. Must be Enabled.
 	// Specifies whether Object Lock is enabled for the bucket.
@@ -138,8 +138,8 @@ type DefaultRetentionParameters struct {
 
 // BucketObjectLockConfigurationSpec defines the desired state of BucketObjectLockConfiguration
 type BucketObjectLockConfigurationSpec struct {
-	v1.ResourceSpec `json:",inline"`
-	ForProvider     BucketObjectLockConfigurationParameters `json:"forProvider"`
+	v2.ClusterManagedResourceSpec `json:",inline"`
+	ForProvider                   BucketObjectLockConfigurationParameters `json:"forProvider"`
 	// THIS IS A BETA FIELD. It will be honored
 	// unless the Management Policies feature flag is disabled.
 	// InitProvider holds the same fields as ForProvider, with the exception
@@ -155,8 +155,8 @@ type BucketObjectLockConfigurationSpec struct {
 
 // BucketObjectLockConfigurationStatus defines the observed state of BucketObjectLockConfiguration.
 type BucketObjectLockConfigurationStatus struct {
-	v1.ResourceStatus `json:",inline"`
-	AtProvider        BucketObjectLockConfigurationObservation `json:"atProvider,omitempty"`
+	v2.ManagedResourceStatus `json:",inline"`
+	AtProvider               BucketObjectLockConfigurationObservation `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true
