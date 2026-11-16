@@ -3,6 +3,7 @@
 All notable changes to this project will be documented in this file.
 
 ## [Unreleased]
+- Security: the `tofu` binary (and `terraform` symlink) in the provider image is now built from the OpenTofu v1.13.2 source with `golang.org/x/net` bumped to v0.62.0 (CVE-2026-78663) instead of shipping the prebuilt release binary, which embeds x/net v0.57.0 (also in v1.13.9)
 - Bumped upjet to v2.5.1 (crossplane-runtime v2.4.0): `BucketVersioning` `versioningConfiguration` and `BucketServerSideEncryptionConfiguration` `rule[].applyServerSideEncryptionByDefault` can now be set in `spec.forProvider` (they were generated into `status.atProvider` only); removed the API Gateway and Data Platform CRDs, which had no controllers since the Terraform provider dropped these resources; bumped Go to 1.26.11, `github.com/getkin/kin-openapi` to v0.149.0 and `golang.org/x/net` to v0.62.0 to fix CVEs (GO-2026-6859, GO-2026-6795)
 - Updated Terraform provider to v6.7.41 (hot-plug flags on volumes are now settable)
 

@@ -1,4 +1,25 @@
-# Builder stage: assembles the provider binary, OpenTofu, and the native
+# OpenTofu stage: the prebuilt upstream release binaries embed a vulnerable
+# golang.org/x/net (CVE-2026-78663, fixed in v0.60.0), so tofu is built from the
+# tagged source with golang.org/x/net bumped. Go >= the go directive of
+# OpenTofu's go.mod (1.27.3 for v1.13.x) is required.
+FROM harbor.infra.cluster.ionos.com/imagefactory-public/golang:1.27.4-alpine3.24@sha256:6bfa00585349de2003a3adb23491d08b0b1d2e7eb6fb3d7248967d1a4ae7a654 AS tofu-builder
+RUN apk --no-cache add git
+
+ARG TARGETOS
+ARG TARGETARCH
+ARG OPENTOFU_VERSION
+ARG GOLANG_X_NET_VERSION=v0.62.0
+
+# The version.dev=no ldflag mirrors OpenTofu's release build (no "-dev" suffix).
+RUN git clone --depth 1 --branch v${OPENTOFU_VERSION} https://github.com/opentofu/opentofu /src/opentofu \
+  && cd /src/opentofu \
+  && go get golang.org/x/net@${GOLANG_X_NET_VERSION} \
+  && go mod tidy \
+  && CGO_ENABLED=0 GOOS=${TARGETOS} GOARCH=${TARGETARCH} go build -trimpath \
+    -ldflags "-s -w -X github.com/opentofu/opentofu/version.dev=no" \
+    -o /out/tofu ./cmd/tofu
+
+# Builder stage: assembles the provider binary, OpenTofu (built above), and the native
 # Terraform provider plugin. Needs a shell/unzip, so it stays off the final
 # (distroless, shell-less) runtime image.
 FROM harbor.infra.cluster.ionos.com/imagefactory-public/alpine:3.24@sha256:abef013291641fbe7099aa145d0a64e9561e443596ad4bf9bff9acd93f64be6d AS builder
@@ -23,14 +44,12 @@ ENV PLUGIN_DIR=/terraform/provider-mirror/registry.opentofu.org/${TERRAFORM_PROV
 RUN mkdir -p ${PLUGIN_DIR}
 
 ADD "bin/${TARGETOS}_${TARGETARCH}/provider" /usr/local/bin/provider
-ADD https://github.com/opentofu/opentofu/releases/download/v${OPENTOFU_VERSION}/tofu_${OPENTOFU_VERSION}_${TARGETOS}_${TARGETARCH}.zip /tmp
+COPY --from=tofu-builder /out/tofu /usr/local/bin/tofu
 ADD ${TERRAFORM_PROVIDER_DOWNLOAD_URL_PREFIX}/${TERRAFORM_PROVIDER_DOWNLOAD_NAME}_${TERRAFORM_PROVIDER_VERSION}_${TARGETOS}_${TARGETARCH}.zip /tmp
 
 RUN chmod +x /usr/local/bin/provider \
-  && unzip /tmp/tofu_${OPENTOFU_VERSION}_${TARGETOS}_${TARGETARCH}.zip -d /usr/local/bin \
   && chmod +x /usr/local/bin/tofu \
   && ln -s /usr/local/bin/tofu /usr/local/bin/terraform \
-  && rm /tmp/tofu_${OPENTOFU_VERSION}_${TARGETOS}_${TARGETARCH}.zip \
   && unzip /tmp/${TERRAFORM_PROVIDER_DOWNLOAD_NAME}_${TERRAFORM_PROVIDER_VERSION}_${TARGETOS}_${TARGETARCH}.zip -d ${PLUGIN_DIR} \
   && chmod +x ${PLUGIN_DIR}/* \
   && rm /tmp/${TERRAFORM_PROVIDER_DOWNLOAD_NAME}_${TERRAFORM_PROVIDER_VERSION}_${TARGETOS}_${TARGETARCH}.zip \
