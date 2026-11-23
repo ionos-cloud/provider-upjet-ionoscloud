@@ -34,6 +34,7 @@ kubectl apply -f examples/install.yaml
 | Resource   | Guide                                             |
 |------------|---------------------------------------------------|
 | PostgreSQL | [v1 to v2](docs/Migration-PostgreSQL-v1-to-v2.md) |
+| MongoDB    | [v1 to v2](docs/Migration-MongoDB-v1-to-v2.md)    |
 
 #### The API reference can be checked [here](https://marketplace.upbound.io/providers/ionos-cloud/provider-upjet-ionoscloud/latest).
 
