@@ -4,6 +4,9 @@
 PROJECT_NAME ?= provider-upjet-ionoscloud
 PROJECT_REPO ?= github.com/ionos-cloud/$(PROJECT_NAME)
 
+# Only used at code-generation time (`make generate`) to dump the provider
+# schema into config/schema.json. OpenTofu is not shipped in the provider image
+# and is not used at runtime: all resources are reconciled in-process.
 export OPENTOFU_VERSION ?= 1.13.10
 
 export TERRAFORM_PROVIDER_SOURCE ?= ionos-cloud/ionoscloud
