@@ -4,7 +4,7 @@
 PROJECT_NAME ?= provider-upjet-ionoscloud
 PROJECT_REPO ?= github.com/ionos-cloud/$(PROJECT_NAME)
 
-export OPENTOFU_VERSION ?= 1.13.2
+export OPENTOFU_VERSION ?= 1.13.10
 
 export TERRAFORM_PROVIDER_SOURCE ?= ionos-cloud/ionoscloud
 export TERRAFORM_PROVIDER_REPO ?= https://github.com/ionos-cloud/terraform-provider-ionoscloud
