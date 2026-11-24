@@ -110,17 +110,23 @@ Record this ID — it's the actual IONOS Cloud cluster ID and will become the
 
 ### 2. Orphan the old v1 resource
 
+Before proceeding, verify that the running provider has management-policy
+support enabled. It defaults to enabled, but `ENABLE_MANAGEMENT_POLICIES=false`
+or a disabling command-line flag can turn it off. Do not continue while it is
+disabled: the orphaning patch and Observe-only import below require this support.
+
 Exclude `Delete` from `spec.managementPolicies` on the v1 `MongodbCluster` so
 deleting the CR later does **not** delete the real cluster:
 
 ```shell
 kubectl patch mongodbcluster.mongodb.ionoscloud.io example \
-  --type=merge -p '{"spec":{"managementPolicies":["Observe","Create","Update","LateInitialize"]}}'
+  --type=merge -p '{"spec":{"managementPolicies":["Observe"]}}'
 ```
 
-This is a full replacement of the list (a merge patch doesn't merge arrays
-element-by-element), so it includes every action from the schema default
-(`["*"]`) except `Delete`.
+This replaces the policy list with `Observe` only, preventing new create,
+update, and delete operations from the v1 controller. Wait for v1 to reconcile
+with this policy and for any in-flight operation to finish before applying or
+enabling writes on the v2 resource.
 
 ### 3. Author the new v2 resource
 
@@ -156,10 +162,10 @@ spec:
     storageType: HDD
     instances: 3
     connections:
-      - cidrList:
-          - 192.168.1.108/24
-          - 192.168.1.109/24
-          - 192.168.1.110/24
+        cidrList:
+            - 192.168.1.108/24
+            - 192.168.1.109/24
+            - 192.168.1.110/24
         datacenterIdSelector:
           matchLabels:
             testing.upbound.io/example-name: datacenter_example
@@ -167,7 +173,7 @@ spec:
           matchLabels:
             testing.upbound.io/example-name: lan_example
     maintenanceWindow:
-      - dayOfTheWeek: Sunday
+        dayOfTheWeek: Sunday
         time: "09:00:00"
     locationSelector:
       matchLabels:
@@ -188,7 +194,7 @@ spec:
     name: MongoDB_cluster
     version: "7.0"
     edition: ENTERPRISE # was lower-case in v1
-    location: de/txl # literal; v2 has no locationSelector/locationRef
+    location: gb/bhx # literal; v2 has no locationSelector/locationRef
     instances:
       cores: 1
       ram: 8 # MB -> GB
@@ -254,7 +260,7 @@ will read the live cluster and populate `status.atProvider` for you — in the
        crossplane.io/external-name: "7cf6b0b3-3edb-4e78-a039-4c5cef3d81ac" # cluster ID from step 1
    spec:
      managementPolicies: ["Observe"]
-     forProvider: { location: de/txl } # location must match the cluster's actual location
+     forProvider: { location: gb/bhx } # location must match the cluster's actual location
    ```
 
    `Observe` skips the usual required-field validation on `forProvider` (e.g.
@@ -288,11 +294,12 @@ will read the live cluster and populate `status.atProvider` for you — in the
    UUIDs, not as selectors or references. If you want to use a selector or
    reference, you will need to manually set that in the spec.
 
-3. Copy the `jq` output into `spec.forProvider`. `status.atProvider` never
-   contains write-only fields, so you still need to set `credentials.username`,
-   `credentials.database`, and `credentials.passwordSecretRef` yourself (from
-   what you already know about the cluster) — these aren't observable and won't
-   appear under `status.atProvider` regardless of the `jq` filter.
+3. Copy the `jq` output into `spec.forProvider`. `status.atProvider.credentials`
+   includes `username` and `database`, so (when the API returns them) the `jq`
+   output already carries those under `credentials` and you don't need to
+   re-type them. The only piece `status.atProvider` never contains is the
+   write-only password, so you just need to add `credentials.passwordSecretRef`
+   yourself — pointing at a `Secret` with the cluster's existing password.
 
 4. Re-apply the manifest with the populated `spec.forProvider` from step 3,
    still with `managementPolicies: ["Observe"]`. This has to happen *before*
@@ -375,9 +382,8 @@ reconcile against the same, unchanged cluster ID.
   `status.atProvider` and correct the mismatched field.
 - **`retentionDays` rejected**: `snapshot.retentionDays` only accepts a fixed
   set of values (`3`, `4`, `5`, `6`, `7`, `15`, `30`, `60`, `90`, `120`,
-  `180`, `360`). Pick the nearest allowed value.
+  `180`, `360`).
 - **Old v1 resource deleted the real cluster**: this means `Delete` wasn't
   excluded from `spec.managementPolicies` (or the patch wasn't applied) before
   deletion. There is no way to recover a deleted cluster through Crossplane —
   restore from a snapshot via `restoreFromSnapshot` if one exists.
-```
