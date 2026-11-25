@@ -8,6 +8,8 @@ import (
 	"io"
 	"os"
 	"path/filepath"
+	"runtime/debug"
+	"strings"
 	"time"
 
 	xpcontroller "github.com/crossplane/crossplane-runtime/v2/pkg/controller"
@@ -37,6 +39,28 @@ import (
 	"github.com/ionos-cloud/provider-upjet-ionoscloud/internal/features"
 )
 
+const terraformProviderModule = "github.com/ionos-cloud/terraform-provider-ionoscloud/v6"
+
+// compiledProviderVersion returns the version (without the "v" prefix) of the
+// terraform-provider-ionoscloud module linked into this binary, or "unknown"
+// if the build info is unavailable.
+func compiledProviderVersion() string {
+	bi, ok := debug.ReadBuildInfo()
+	if !ok {
+		return "unknown"
+	}
+	for _, dep := range bi.Deps {
+		if dep.Path != terraformProviderModule {
+			continue
+		}
+		if dep.Replace != nil && dep.Replace.Version != "" {
+			dep = dep.Replace
+		}
+		return strings.TrimPrefix(dep.Version, "v")
+	}
+	return "unknown"
+}
+
 func main() {
 	var (
 		app                     = kingpin.New(filepath.Base(os.Args[0]), "Terraform based Crossplane provider for Artifactory").DefaultEnvars()
@@ -47,9 +71,14 @@ func main() {
 		leaderElection          = app.Flag("leader-election", "Use leader election for the controller manager.").Short('l').Default("false").OverrideDefaultFromEnvar("LEADER_ELECTION").Bool()
 		maxReconcileRate        = app.Flag("max-reconcile-rate", "The global maximum rate per second at which resources may be checked for drift from the desired state.").Default("10").Int()
 
-		terraformVersion = app.Flag("terraform-version", "OpenTofu version.").Envar("TERRAFORM_VERSION").Default("1.12.4").String()
+		// No Terraform/OpenTofu CLI runs (all resources are reconciled in-process), so this
+		// is only reported in the User-Agent. Default to upjet's own no-fork marker (the same
+		// value upjet sends for Plugin Framework resources) instead of a fake CLI version.
+		terraformVersion = app.Flag("terraform-version", "Value reported as the Terraform version in API User-Agents. No Terraform/OpenTofu CLI is used.").Envar("TERRAFORM_VERSION").Default("crossTF000").String()
 		providerSource   = app.Flag("terraform-provider-source", "Terraform provider source.").Envar("TERRAFORM_PROVIDER_SOURCE").Default("ionos-cloud/ionoscloud").String()
-		providerVersion  = app.Flag("terraform-provider-version", "Terraform provider version.").Envar("TERRAFORM_PROVIDER_VERSION").Default("6.7.12").String()
+		// Defaults to the terraform-provider-ionoscloud module version compiled into this
+		// binary (from go.mod), so the version reported in User-Agents cannot drift.
+		providerVersion = app.Flag("terraform-provider-version", "Terraform provider version reported in API User-Agents. Defaults to the version compiled in.").Envar("TERRAFORM_PROVIDER_VERSION").Default(compiledProviderVersion()).String()
 
 		enableManagementPolicies = app.Flag("enable-management-policies", "Enable support for Management Policies.").Default("true").Envar("ENABLE_MANAGEMENT_POLICIES").Bool()
 	)
