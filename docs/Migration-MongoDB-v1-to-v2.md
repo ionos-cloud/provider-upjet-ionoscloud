@@ -43,14 +43,16 @@ Because of this, the `credentials` block is **entirely new in v2** — there is
 nothing in the v1 `MongodbCluster` to translate it from, so you always author
 it by hand during the migration (see the field mapping and walkthrough below).
 
-If you have `MongodbUser` resources, there is currently no way to represent
-them under the v2 CRD. Options:
+The v1 API is being removed entirely, and v2
+has no equivalent, so **MongoDB users can no longer be managed through this
+provider.**
 
-- Leave those `MongodbUser` v1 resources in place, pointed at the (now
-  v2-managed) cluster via `clusterId`/`clusterIdRef` — they will keep
-  reconciling against the same cluster, since the cluster ID doesn't change.
-- Manage additional users directly with `mongosh` or another MongoDB client
-  outside of Crossplane, until a v2 equivalent CRD exists.
+Your existing database users are **not** deleted — they remain on the cluster.
+From now on, manage them directly
+against the database with `mongosh` or another MongoDB client, outside of
+Crossplane. See [Remove the old v1 resource](#5-remove-the-old-v1-resource)
+for how to clean up any leftover `MongodbUser` CRs without touching the real
+users.
 
 ## Field mapping
 
@@ -363,10 +365,20 @@ kubectl delete mongodbcluster.mongodb.ionoscloud.io example
 Because it was orphaned in step 2, this only removes the Kubernetes object —
 the underlying cluster keeps running, now managed solely by the v2 resource.
 
-If you also had `MongodbUser` resources for this cluster and want to keep
-managing those users through Crossplane, leave them in place (see
-[Known limitations](#known-limitations)) — do not delete them, as they still
-reconcile against the same, unchanged cluster ID.
+If you also had `MongodbUser` resources for this cluster, note that users can no
+longer be managed through Crossplane (see [Known limitations](#known-limitations))
+— you now manage them directly in MongoDB. To remove a leftover `MongodbUser` CR
+**without deleting the real database user**, orphan it first (same pattern as the
+cluster in step 2), then delete the Kubernetes object:
+
+```shell
+kubectl patch mongodbuser.mongodb.ionoscloud.io example-user \
+  --type=merge -p '{"spec":{"managementPolicies":["Observe","Create","Update","LateInitialize"]}}'
+kubectl delete mongodbuser.mongodb.ionoscloud.io example-user
+```
+
+If you instead delete a `MongodbUser` CR that still has `Delete` in its
+`spec.managementPolicies`, Crossplane will drop the actual database user.
 
 ## Troubleshooting
 
